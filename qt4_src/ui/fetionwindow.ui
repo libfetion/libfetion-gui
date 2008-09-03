@@ -1,0 +1,405 @@
+<ui version="4.0" >
+ <class>FetionWindow</class>
+ <widget class="QMainWindow" name="FetionWindow" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>242</width>
+    <height>543</height>
+   </rect>
+  </property>
+  <property name="minimumSize" >
+   <size>
+    <width>242</width>
+    <height>543</height>
+   </size>
+  </property>
+  <property name="maximumSize" >
+   <size>
+    <width>242</width>
+    <height>543</height>
+   </size>
+  </property>
+  <property name="windowTitle" >
+   <string>Linux_Fetion</string>
+  </property>
+  <property name="styleSheet" >
+   <string>QMainWindow {
+ 
+background-color:rgb(246,243,243);
+
+}
+</string>
+  </property>
+  <widget class="QWidget" name="centralwidget" >
+   <widget class="QTreeWidget" name="view" >
+    <property name="geometry" >
+     <rect>
+      <x>4</x>
+      <y>133</y>
+      <width>231</width>
+      <height>361</height>
+     </rect>
+    </property>
+    <property name="contextMenuPolicy" >
+     <enum>Qt::DefaultContextMenu</enum>
+    </property>
+    <property name="styleSheet" >
+     <string>QTreeView {
+      border-width: 2px;
+      border-style: solid;
+      border-radius: 5px;
+      border-color:rgb(205,205,205);
+} 
+  </string>
+    </property>
+    <column>
+     <property name="text" >
+      <string/>
+     </property>
+    </column>
+   </widget>
+   <widget class="QLabelMouse" name="UI_Portrait" >
+    <property name="geometry" >
+     <rect>
+      <x>1</x>
+      <y>5</y>
+      <width>90</width>
+      <height>90</height>
+     </rect>
+    </property>
+    <property name="cursor" >
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="toolTip" >
+     <string>changed personal state</string>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+    <property name="pixmap" >
+     <pixmap/>
+    </property>
+   </widget>
+   <widget class="QLabelMouse" name="UI_ImpresaBK" >
+    <property name="geometry" >
+     <rect>
+      <x>91</x>
+      <y>30</y>
+      <width>151</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+    <property name="pixmap" >
+     <pixmap/>
+    </property>
+   </widget>
+   <widget class="QLineEditFocus" name="UI_Impresa" >
+    <property name="geometry" >
+     <rect>
+      <x>104</x>
+      <y>61</y>
+      <width>121</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font" >
+     <font/>
+    </property>
+    <property name="styleSheet" >
+     <string>QLineEdit {
+      border-width: 0px;
+      border-style: solid;
+      border-radius: 0px;
+  } </string>
+    </property>
+    <property name="maxLength" >
+     <number>256</number>
+    </property>
+   </widget>
+   <widget class="QLabelMouse" name="UI_NiceName" >
+    <property name="geometry" >
+     <rect>
+      <x>96</x>
+      <y>16</y>
+      <width>131</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font" >
+     <font/>
+    </property>
+    <property name="cursor" >
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="text" >
+     <string>libfetion(在线)</string>
+    </property>
+   </widget>
+   <widget class="QLabelMouse" name="UI_AddFriend" >
+    <property name="geometry" >
+     <rect>
+      <x>2</x>
+      <y>95</y>
+      <width>36</width>
+      <height>36</height>
+     </rect>
+    </property>
+    <property name="cursor" >
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="toolTip" >
+     <string>add friends</string>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+    <property name="pixmap" >
+     <pixmap/>
+    </property>
+    <property name="openExternalLinks" >
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabelMouse" name="UI_SearchBK" >
+    <property name="geometry" >
+     <rect>
+      <x>36</x>
+      <y>87</y>
+      <width>204</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+    <property name="pixmap" >
+     <pixmap/>
+    </property>
+   </widget>
+   <widget class="QLineEditFocus" name="UI_Search" >
+    <property name="geometry" >
+     <rect>
+      <x>47</x>
+      <y>102</y>
+      <width>161</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font" >
+     <font/>
+    </property>
+    <property name="toolTip" >
+     <string>search your friends</string>
+    </property>
+    <property name="styleSheet" >
+     <string>QLineEdit {
+      border-width: 0px;
+      border-style: solid;
+      border-radius: 0px;
+  } </string>
+    </property>
+    <property name="maxLength" >
+     <number>20</number>
+    </property>
+   </widget>
+   <widget class="QTreeWidget" name="search" >
+    <property name="enabled" >
+     <bool>true</bool>
+    </property>
+    <property name="geometry" >
+     <rect>
+      <x>5</x>
+      <y>134</y>
+      <width>231</width>
+      <height>361</height>
+     </rect>
+    </property>
+    <property name="contextMenuPolicy" >
+     <enum>Qt::DefaultContextMenu</enum>
+    </property>
+    <property name="styleSheet" >
+     <string>QTreeView {
+      border-width: 2px;
+      border-style: solid;
+      border-radius: 5px;
+      border-color:rgb(205,205,205);
+} 
+  </string>
+    </property>
+    <column>
+     <property name="text" >
+      <string/>
+     </property>
+    </column>
+   </widget>
+   <widget class="QLabel" name="LibFetion_image" >
+    <property name="geometry" >
+     <rect>
+      <x>4</x>
+      <y>501</y>
+      <width>151</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEditFocus" name="UI_Edit_NiceName" >
+    <property name="geometry" >
+     <rect>
+      <x>96</x>
+      <y>11</y>
+      <width>113</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="toolTip" >
+     <string/>
+    </property>
+    <property name="styleSheet" >
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="version" >
+    <property name="geometry" >
+     <rect>
+      <x>180</x>
+      <y>503</y>
+      <width>54</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="layoutDirection" >
+     <enum>Qt::RightToLeft</enum>
+    </property>
+    <property name="text" >
+     <string>Version</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar" >
+   <property name="geometry" >
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>242</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="buddyMenu" >
+    <property name="styleSheet" >
+     <string/>
+    </property>
+    <property name="title" >
+     <string>buddy</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuAbout" >
+    <property name="styleSheet" >
+     <string/>
+    </property>
+    <property name="title" >
+     <string>about</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuSetting" >
+    <property name="styleSheet" >
+     <string/>
+    </property>
+    <property name="title" >
+     <string>setting</string>
+    </property>
+   </widget>
+   <addaction name="buddyMenu" />
+   <addaction name="menuSetting" />
+   <addaction name="menuAbout" />
+  </widget>
+  <action name="exitAction" >
+   <property name="text" >
+    <string>E&amp;xit</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl+Q</string>
+   </property>
+  </action>
+  <action name="actionAbout" >
+   <property name="text" >
+    <string>About libfetion</string>
+   </property>
+  </action>
+  <action name="actionPrefercres" >
+   <property name="text" >
+    <string>Prefercres</string>
+   </property>
+  </action>
+  <action name="actionOnline" >
+   <property name="icon" >
+    <iconset/>
+   </property>
+   <property name="text" >
+    <string>online</string>
+   </property>
+  </action>
+  <action name="actionOffline" >
+   <property name="icon" >
+    <iconset/>
+   </property>
+   <property name="text" >
+    <string>offline</string>
+   </property>
+  </action>
+  <action name="actionBusy" >
+   <property name="icon" >
+    <iconset/>
+   </property>
+   <property name="text" >
+    <string>busy</string>
+   </property>
+  </action>
+  <action name="actionAway" >
+   <property name="icon" >
+    <iconset/>
+   </property>
+   <property name="text" >
+    <string>away</string>
+   </property>
+  </action>
+  <action name="actionSend_to_self" >
+   <property name="text" >
+    <string>send to self</string>
+   </property>
+  </action>
+  <action name="actionAbout_fetion" >
+   <property name="text" >
+    <string>about fetion</string>
+   </property>
+  </action>
+  <action name="actionCheck_updata" >
+   <property name="text" >
+    <string>check updata</string>
+   </property>
+  </action>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QLineEditFocus</class>
+   <extends>QLineEdit</extends>
+   <header>fxLineEditFocus.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QLabelMouse</class>
+   <extends>QLabel</extends>
+   <header>fxLableMouse.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="../fetion.qrc" />
+ </resources>
+ <connections/>
+</ui>
