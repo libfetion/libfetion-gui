@@ -1,0 +1,190 @@
+/***************************************************************************
+ *   Copyright (C) 2008 by DDD                                          *
+ *   dedodong@163.com                                                     *
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 2 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *                                                                         *
+ *   This program is distributed in the hope that it will be useful,       *
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
+ *   GNU General Public License for more details.                          *
+ *                                                                         *
+ *   You should have received a copy of the GNU General Public License     *
+ *   along with this program; if not, write to the                         *
+ *   Free Software Foundation, Inc.,                                       *
+ *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
+ ***************************************************************************/
+#include <QLabel>
+#include <QtGui>
+
+
+#include "fxshowAccountInfo.h"
+
+FxShowAccountInfo::FxShowAccountInfo(const Fetion_Account *account, QWidget *parent)
+    : QDialog(parent)
+{
+	setupUi(this);
+	m_account = account;
+	connect(pushButton, SIGNAL(clicked()), this, SLOT(chang_localname()));
+	setShowInfo();
+	char * showname = fx_get_account_show_name(account, FALSE);
+	QString show_name = QString::fromUtf8(showname);
+	if(showname)
+		free(showname);
+	QString title = tr("see") + show_name + tr("info "); 
+	this->setWindowTitle(title);
+}
+
+FxShowAccountInfo::~FxShowAccountInfo()
+{
+
+}
+
+void FxShowAccountInfo::chang_localname()
+{
+	fx_set_buddyinfo(m_account->id, loacl_name->text().toUtf8().data(), NULL, NULL); 
+}
+
+void FxShowAccountInfo::setShowInfo()
+{
+	if(!m_account)
+		return;
+
+	loacl_name->setText(QString::fromUtf8(m_account->local_name));
+
+	bool hP = false;
+	if(m_account->personal)
+		hP = true;
+	QString info;
+
+ 
+ 	
+	info += tr("mobile_no:");
+	if(hP)
+		info += "<b style=\"color:red; \">" + 
+			QString::fromUtf8(m_account->personal->mobile_no) 
+			+"</b>";
+	else 
+		{
+			if (!fx_is_pc_user_by_account(m_account)){
+					long head, body;
+			int prefix = 0;
+			head = m_account->id / (100000000); // 8 -> 10 	
+			body = m_account->id % (100000000);
+			switch(head)
+			{
+				case 11:
+					prefix = 157;
+					break;
+				case 12:
+					prefix = 158;
+					break;
+				case 13:
+					prefix = 159;
+					break;
+				default:
+					//14-19
+					prefix = 130+ head%10;
+					break;
+			}
+			char mobile_no[12];
+			sprintf(mobile_no, "%d%08ld", prefix, body);
+			mobile_no[11] = '\0';
+			info += "<b style=\"color:red; \">"+QString(mobile_no) + "</b>"; 
+		}
+
+		info += "<b style=\"color:red; \"> </b>"; 
+	}
+
+	AcInfo->append(info);
+
+if (!fx_is_pc_user_by_account(m_account)){
+	info = tr("fetion_no:");
+	info += "<b style=\"color:red; \"> </b>";
+	AcInfo->append(info);
+} else {
+	info = tr("fetion_no:");
+	info += "<b style=\"color:red; \">"+QString("%1").arg(m_account->id)+"</b>";
+	AcInfo->append(info);
+	}
+
+	//AcInfo->append(<b style=\"color:red; \">" + tr("personal infomation")+"</b>");
+
+	info = tr("nickname:");
+	if(hP)
+		info += "<b style=\"color:red; \">" + 
+			QString::fromUtf8(m_account->personal->nickname) 
+			+"</b>";
+	else 
+		info += "<b style=\"color:red; \"> </b>"; 
+	AcInfo->append(info);
+
+	info = tr("name:");
+	if(hP)
+		info += "<b style=\"color:red; \">" + 
+			QString::fromUtf8(m_account->personal->name) 
+			+"</b>";
+	else 
+		info += "<b style=\"color:red; \"> </b>"; 
+	AcInfo->append(info);
+
+	info = tr("gender:");
+	if(hP)
+		switch(m_account->personal->gender)
+		{
+			case 2:
+				info += "<b style=\"color:red; \">" + tr("girl") +"</b>";
+				break;
+			case 1:
+				info += "<b style=\"color:red; \">" + tr("boy") +"</b>";
+				break;
+			case 0:
+				info += "<b style=\"color:red; \">" + tr("unknow") +"</b>";
+				break;
+		}
+	else
+		info += "<b style=\"color:red; \">" + tr("unknow") +"</b>";
+	AcInfo->append(info);
+#if 0
+	info = tr("province:");
+	if(hP)
+		info += "<b style=\"color:red; \">" + 
+			QString::fromUtf8(m_account->personal->province) 
+			+"</b>";
+	else 
+		info += "<b style=\"color:red; \"> </b>"; 
+	AcInfo->append(info);
+
+	info = tr("city");
+	if(hP)
+		info += "<b style=\"color:red; \">" + 
+			QString::fromUtf8(m_account->personal->city) 
+			+"</b>";
+	else 
+		info += "<b style=\"color:red; \"> </b>"; 
+	AcInfo->append(info);
+#endif
+
+	info = tr("impresa:");
+	if(hP)
+		info += "<b style=\"color:red; \">" + 
+			QString::fromUtf8(m_account->personal->impresa) 
+			+"</b>";
+	else 
+		info += "<b style=\"color:red; \"> </b>"; 
+	AcInfo->append(info);
+  
+	if(!hP) //not have the extern info
+		return;
+#if 0
+	AcInfo->append(<b style=\"color:red; \">" + tr("extern infomation") + "</b>");
+	info = tr("impresa:");
+	info += "<b style=\"color:red; \">" + 
+		QString::fromUtf8(m_account->personal->impresa) 
+		+"</b>";
+	AcInfo->append(info);
+#endif
+}
