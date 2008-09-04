@@ -76,13 +76,19 @@ void FxShowAccountInfo::setShowInfo()
 			body = m_account->id % (100000000);
 			switch(head)
 			{
+				case 10:
+					prefix = 150;
+					break;
 				case 11:
-					prefix = 157;
+					prefix = 151;
 					break;
 				case 12:
-					prefix = 158;
+					prefix = 157;
 					break;
 				case 13:
+					prefix = 158;
+					break;
+				case 20:
 					prefix = 159;
 					break;
 				default:
