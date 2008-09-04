@@ -26,10 +26,7 @@
 
 #define AUTOLG   "autologin021"
 #define SERVERADD   "cacheserveradd"
-#define MUTE   "mute"
-#define AUTOSHOWMSG   "autoshowmsg"
 #define PROXY   "proxy"
-#define CATSMS   "catsms"
 #define ACINFO   "acinfo"
 
 #define SQL_MAXLEN 1024*3
@@ -226,7 +223,6 @@ bool isAutoLogin(char** id, char** pwd, int* loginState)
 	} 
 
 	sqlite3_free_table(result);
-	//destoy_db();
 	return res; 
 }
 
@@ -241,7 +237,6 @@ void disAutoLogin()
 
 	//exec the delete table sql
 	sqlite3_exec(pdb, sql, 0, 0, 0); 
-	//destoy_db();
 }
 
 bool setAutoLogin(const char* id, const char*pwd, int login_state)
@@ -267,7 +262,6 @@ bool setAutoLogin(const char* id, const char*pwd, int login_state)
 		free(en_id);
 	if (en_pwd)
 		free(en_pwd);
-	//destoy_db();
 	return true;
 }
 
@@ -310,7 +304,6 @@ void disProxy()
 
 	//exec the delete table sql
 	sqlite3_exec(pdb, sql, 0, 0, 0); 
-	//destoy_db();
 }
 
 bool isSetProxy(PROXY_ITEM *proxy_item)
@@ -386,7 +379,6 @@ bool setProxy(PROXY_ITEM *proxy_item)
 			proxy_item->name?proxy_item->name:"10", proxy_item->pwd?proxy_item->pwd:"10");
 	sqlite3_exec(pdb, sql, 0, 0, 0);
 
-	//destoy_db();
 	return true;
 }
 

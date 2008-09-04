@@ -232,32 +232,20 @@ background-color:rgb(246,243,243);
     <property name="text" >
      <string>online</string>
     </property>
-    <property name="icon" >
-     <iconset>image/online/online.gif</iconset>
-    </property>
    </item>
    <item>
     <property name="text" >
      <string>offline</string>
-    </property>
-    <property name="icon" >
-     <iconset>image/online/offline.gif</iconset>
     </property>
    </item>
    <item>
     <property name="text" >
      <string>away</string>
     </property>
-    <property name="icon" >
-     <iconset>image/online/away.gif</iconset>
-    </property>
    </item>
    <item>
     <property name="text" >
      <string>busy</string>
-    </property>
-    <property name="icon" >
-     <iconset>image/online/busy.gif</iconset>
     </property>
    </item>
   </widget>
