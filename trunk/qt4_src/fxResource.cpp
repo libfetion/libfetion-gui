@@ -1,6 +1,6 @@
 /***************************************************************************
- *   Copyright (C) 2008 by DDD                                          *
- *   dedodong@163.com                                                     *
+ *   Copyright (C) 2008 by DDD                                             *
+ *   dedodong@163.com                                                      *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -25,40 +25,28 @@
 #include <fcntl.h>
 #endif
 
-#if 0
-#define FOLDERNAME    "image"
-
-#ifdef WIN32
-#else
-#include <sys/types.h>
-#include <pwd.h>
-#define MAX_PATH 512 
-char IMAGEFILEPATH [MAX_PATH + 1];
-#endif
-#endif
-
 QString SoundPath()
 {
 #ifdef WIN32
 	return "./sound";
 #else //linux
-	static QString path;
+	static QString soundpath;
 	static bool init = false;
 	FILE* fp;
 
 	if(init)
-		return path;
+		return soundpath;
 
 	  if ((fp = fopen("./sound/msg.wav", "r")))
 	  {
 		  fclose (fp);
-		  path = "./sound";
+		  soundpath = "./sound";
 	  }	
 	  else
-		  path = "/usr/share/libfetion/sound";
+		  soundpath = "/usr/share/libfetion/sound";
 
 	init = true;
-	return path;
+	return soundpath;
 #endif
 }
 
@@ -83,7 +71,6 @@ void playSound(SOUND_TYPE type)
 	switch(type)
 	{
 		case MSG_SOUND:
-			//execPlaySound(SoundPath() +"/msg.wav");
 			execPlaySound (Settings::instance().MsgRingPath());
 			break;
 		case ONLINE_SOUND:
@@ -94,28 +81,29 @@ void playSound(SOUND_TYPE type)
 			break;
 	}
 }
+
 QString ImagePath()
 {
 #ifdef WIN32
 	return "./image";
 #else //linux
-	static QString path;
+	static QString imagepath;
 	static bool init = false;
 	FILE* fp;
 
 	if(init)
-		return path;
+		return imagepath;
 
 	  if ((fp = fopen("./image/online/offline.gif", "r")))
 	  {
 		  fclose (fp);
-		  path = "./image";
+		  imagepath = "./image";
 	  }	
 	  else
-		  path = "/usr/share/libfetion/image";
+		  imagepath = "/usr/share/libfetion/image";
 
 	init = true;
-	return path;
+	return imagepath;
 #endif
 }
 
@@ -135,12 +123,6 @@ QPixmap getOnlineStatusIcon(int status)
 			return QPixmap(ImagePath() + "/online/waiting.gif");
 		case FX_STATUS_REFUSE:   //the account is refuse make friends with you
 			return QPixmap(ImagePath() + "/online/refuse.gif");
-#if 0
-		case 1:
-			return QPixmap(ImagePath() + "/online/online.gif");
-		case 2:
-			return QPixmap(ImagePath() + "/online/friends.gif");
-#endif
 		case FX_STATUS_OFFLINE:
 			return QPixmap(ImagePath() + "/online/offline.gif");
 		case FX_STATUS_DINNER:
@@ -187,14 +169,6 @@ QPixmap getSysTrayIcon(int status)
 	}
 	return QPixmap(ImagePath() + "/systray/busy.gif");
 }
-
-
-#if 0
-id table
-    QAction *IMBuddyAct;           01
-    QAction *SMSBuddyAct;          02
-    QAction *GetInfoBuddyAct;      03
-#endif
 
 QPixmap getMenuIcon(int menuID)
 {
@@ -313,13 +287,10 @@ QPixmap getPortraitImage()
 #endif
 }
 
-
 QPixmap getAddImage()
 {
 	return QPixmap(ImagePath() + "/theme/addfrined.gif");
 }
-
-
 
 QPixmap getImpresaBKImage()
 {
@@ -331,18 +302,15 @@ QPixmap getSearchBKImage()
 	return QPixmap(ImagePath() + "/theme/search.gif");
 }
 
-
 QPixmap getLibFetionImage()
 {
 	return QPixmap(ImagePath() + "/theme/LibFetion.gif");
 }
 
-
 QPixmap getLogion_InImage()
 {
 	return QPixmap(ImagePath() + "/theme/Logion_In.gif");
 }
-
 
 QPixmap getLogin_CancelImage()
 {
