@@ -267,6 +267,7 @@ bool Settings::setEnableGetMsgHotKey(bool enable)
 		setGetMsgHotKey(m_GetMsgHotKey, m_GetMsgHotKeyMod, false);
 
 	setValue("EnableGetMsgHotKey", m_isEnableGetMsgHotKey);
+	return true;
 }
 
 bool Settings::setGetMsgHotKey(QChar keyValue, Qt::KeyboardModifiers keyMod, bool isRegister)
