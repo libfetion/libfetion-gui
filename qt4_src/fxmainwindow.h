@@ -49,6 +49,7 @@ public:
 	void addNewMsgCount(bool isQunMsg = false);
 	void subNewMsgCount(bool isQunMsg = false);
 
+	void UpdateSkins();
 
 protected:
 #if WIN32
@@ -203,13 +204,13 @@ private:
 	void init_slot_signal();
 
 private:
+	int newVersion;
 	int new_msg_count;
 	int new_qun_msg_count;
 	int fx_status;
 	bool isHaveTray;
 	bool isQuit;
 	bool isBreakOut;
-	int newVersion;
 	QString m_impresa;
     BuddyOpt *buddyopt; 
 	FxMsgWindow *msgwin;
@@ -220,18 +221,15 @@ private:
 	QSystemTrayIcon *trayIcon;
 	QMenu *trayIconMenu;
 	QMenu *reloginTrayMenu;
-	QMenu *buddySetStatusMenu;
 	QMenu *traySetStatusMenu;
+	QMenu *buddySetStatusMenu;
 	QMenu *msgHistroyMenu;
-
-    QLabel *infoLabel;
 
     QAction *personlInfoAct;
     QAction *addBuddyAct;
     QAction *sendselfAct;
     QAction *sendgroupsmsAct;
     QAction *exitAct;
-    QAction *aboutQtAct;
 
     QAction *ReNameBuddyAct;
     QAction *IMBuddyAct;

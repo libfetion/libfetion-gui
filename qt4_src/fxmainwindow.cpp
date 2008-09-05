@@ -176,18 +176,22 @@ void FxMainWindow::handleFx_Sys_Event(int message, WPARAM wParam, LPARAM lParam)
 }
 
 FxMainWindow::FxMainWindow(QWidget *parent)
-:QMainWindow(parent)
+	:QMainWindow(parent)
+	,trayIcon(NULL)
+	,traySetStatusMenu(NULL)
+	,buddySetStatusMenu(NULL)
+	,msgHistroyMenu(NULL)
 {
 	setupUi(this);
 	newVersion = 0;
 	new_msg_count = 0;
 	new_qun_msg_count = 0;
-	tmp_addBuddy = NULL;
 	fx_status = NO_SET;
 	isQuit = false;
 	isBreakOut = false;
 	isHaveminimized = false;
 	isNeedRecordWinPos = false;
+	tmp_addBuddy = NULL;
 
     init_UI();
 	initAllActions();
@@ -2190,3 +2194,92 @@ void FxMainWindow::initTrayIcon()
 	}
 }
 
+void FxMainWindow::UpdateSkins()
+{
+	msgwin->UpdateSkins();
+
+	setWindowIcon(getSysTrayIcon(1));
+	LibFetion_image->setPixmap(getLibFetionImage());
+	UI_Portrait->setPixmap(getPortraitImage());
+	UI_ImpresaBK->setPixmap(getImpresaBKImage());
+	UI_SearchBK->setPixmap(getSearchBKImage());
+	UI_AddFriend->setPixmap(getAddImage());
+
+	if (trayIcon)
+		trayIcon->setIcon(getSysTrayIcon (fx_get_user_state()));
+	if (traySetStatusMenu)
+		traySetStatusMenu->setIcon (getOnlineStatusIcon(fx_get_user_state()));
+	if (buddySetStatusMenu)
+		buddySetStatusMenu->setIcon (getOnlineStatusIcon(fx_get_user_state()));
+	if (msgHistroyMenu) 
+		msgHistroyMenu->setIcon(getMenuIcon(HistoryIcon));
+
+	personlInfoAct->setIcon(getMenuIcon(GetInfoBuddyIcon));
+	addBuddyAct->setIcon(getMenuIcon(AddBuddyIcon));
+	sendselfAct->setIcon(getMenuIcon(SMSBuddyIcon));
+	sendgroupsmsAct->setIcon(getMenuIcon(SMSBuddyIcon));
+	exitAct->setIcon(getMenuIcon(ExitIcon));
+
+
+	ReNameBuddyAct->setIcon(getMenuIcon(ReNameBuddyIcon));
+	IMBuddyAct->setIcon(getMenuIcon(IMBuddyIcon));
+	SMSBuddyAct->setIcon(getMenuIcon(SMSBuddyIcon));
+	GetInfoBuddyAct->setIcon(getMenuIcon(GetInfoBuddyIcon));
+	RefreshInfoBuddyAct->setIcon(getMenuIcon(RefreshBuddyIcon));
+	DeleteBuddyAct->setIcon(getMenuIcon(DeleteBuddyIcon));
+	AddBlackBuddyAct->setIcon(getMenuIcon(BackInBuddyIcon));
+	RemoveBlackBuddyAct->setIcon(getMenuIcon(RemoveBlackIcon));
+
+	OnlineAct->setIcon(getOnlineStatusIcon(FX_STATUS_ONLINE));
+	OfflineAct->setIcon(getOnlineStatusIcon(FX_STATUS_OFFLINE));
+	BusyAct->setIcon(getOnlineStatusIcon(FX_STATUS_BUSY));
+	AwayAct->setIcon(getOnlineStatusIcon(FX_STATUS_AWAY));
+
+	if (fx_get_user_refuse_sms_day()) //is get from libfetion..	
+	{
+		refuseSMSAct->setIcon(getMenuIcon(ApplyIcon));
+		acceptSMSAct->setIcon(QPixmap());
+	} else { 
+		acceptSMSAct->setIcon(getMenuIcon(ApplyIcon));
+		refuseSMSAct->setIcon(QPixmap());
+	}
+
+	addBuddyAct->setIcon(getMenuIcon(AddBuddyIcon));
+	AddGroupAct->setIcon(getMenuIcon(AddGroupIcon));
+	DeleteGroupAct->setIcon(getMenuIcon(DeleteGroupIcon));
+	ReNameGroupAct->setIcon(getMenuIcon(ReNameGroupIcon));
+
+	IMQunAct->setIcon(getMenuIcon(IMBuddyIcon));
+	SMSQunAct->setIcon(getMenuIcon(SMSBuddyIcon));
+	GetInfoQunAct->setIcon(getMenuIcon(GetInfoBuddyIcon));
+
+	if (Settings::instance().isEnableLongSMS())
+		SetLongSMSAct->setIcon(getMenuIcon(ApplyIcon));
+	else 
+		SetLongSMSAct->setIcon(getMenuIcon(CancelIcon));
+
+	//SetUndgeMsgAct;
+	SaveMsgHistroyAct->setIcon(getMenuIcon(HistoryIcon));
+	CleanMsgHistroyAct->setIcon(getMenuIcon(HistoryIcon));
+	ConfigAppAct->setIcon(getMenuIcon(OptionsIcon));
+
+	CheckNewVersionAct->setIcon(getMenuIcon(AboutIcon));
+	ReportBugAct->setIcon(getMenuIcon(AboutIcon));
+	AboutLibFetionAct->setIcon(getMenuIcon(AboutIcon));
+	AboutCMAct->setIcon(getMenuIcon(AboutIcon));
+
+	if (isAutoLogin(NULL, NULL, NULL))
+		AutoLoginAct->setIcon(getMenuIcon(ApplyIcon));
+	else 
+		AutoLoginAct->setIcon(getMenuIcon(CancelIcon));
+
+	if (Settings::instance().isMute())
+		MuteAct->setIcon(getMenuIcon(ApplyIcon));
+	else 
+		MuteAct->setIcon(getMenuIcon(CancelIcon));
+
+	if (Settings::instance().isAutoShowMsg())
+		IsAutoShowMsgAct->setIcon(getMenuIcon(ApplyIcon));
+	else 
+		IsAutoShowMsgAct->setIcon(getMenuIcon(CancelIcon));
+}

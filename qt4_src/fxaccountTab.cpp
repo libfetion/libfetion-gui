@@ -26,64 +26,20 @@
 
 AccountTab::AccountTab(qlonglong id, FxMyTabWidget *parent, bool awaySendSms)
     : QWidget(parent)
+	, account_id(id)
+	, isAwaySendSMS(awaySendSms)
+	, tabWidget(parent)
+	, flick_flag(FALSE)
+	, mainWind(NULL)
 {
 	setupUi(this);
-
-	TB_FACE->setPixmap (getFaceIcon()); 
-	TB_CHANGEMOD->setPixmap (getChangeSendModIcon()); 
-	TB_Histroy->setPixmap (getHistoryIcon()); 
-	TB_Send->setPixmap (getSendIcon()); 
-
 	setWindowFlags(Qt::FramelessWindowHint);
-	tabWidget = parent;
-	isAwaySendSMS = awaySendSms;
-	account_id = id;
-	flick_flag = FALSE;
-	mainWind = NULL;
-
-	if (account_id == SYSTEM_ID)
-	{
-		account_name = tr("sys message");
-		m_account = NULL;
-	} else { 
-		if(account_id == (qlonglong)strtol(fx_get_usr_uid(), NULL, 10) )
-		{
-			isSendToSelf = true;
-			account_name = tr("send to self");
-			m_account = NULL;
-		} else {
-			isSendToSelf = false;
-
-			m_account = fx_get_account_by_id(account_id);
-			//begin a dialog init, if the account is mobile, this function will do nothing...
-			if (!isAwaySendSMS)
-				fx_begin_dialog (account_id, NULL, NULL); 
-			char * showname = fx_get_account_show_name(m_account, FALSE);
-			account_name = QString::fromUtf8(showname);
-			if(showname)
-				free(showname);
-		}
-	} //(account_id == SYSTEM_ID)
-
 
 	msgSend = this;
 	msgSend->MsgEdit->installEventFilter(this);
-
 	msgSend->MsgBrowser->setText("");
 
-	connect(TB_CHANGEMOD, SIGNAL(clicked()), this, SLOT(changeSendModle()));
-	connect(TB_Send, SIGNAL(clicked()), this, SLOT(SendMsg()));
-	connect(TB_Histroy, SIGNAL(clicked()), this, SLOT(ShowHistroy()));
-	connect(TB_FACE, SIGNAL(clicked()), this, SLOT(ShowFaces()));
-
-	connect(MsgEdit, SIGNAL(textChanged()), this, SLOT(ChangeInputNM()));
-
-	connect(&flickTimer, SIGNAL(timeout()), this, SLOT(flickerTab()));
-	
-	setSendModle(isAwaySendSMS);
-
-	if (account_id == SYSTEM_ID)
-		msgSend->MsgEdit->setEnabled(false);
+	init();
 }
 
 AccountTab::~AccountTab()
@@ -152,11 +108,10 @@ void AccountTab::setSendModle(bool isSMS)
 
 void AccountTab::ShowHistroy()
 {
-	if (m_account)
-	{
-		FxShowHistory * histroy = new FxShowHistory (m_account->id, mainWind);
-		histroy->show();
-	}
+	if (!m_account)
+		return;
+	FxShowHistory * histroy = new FxShowHistory (m_account->id, mainWind);
+	histroy->show();
 }
 
 
@@ -254,7 +209,6 @@ void AccountTab::SendMsg()
 	/*
 	char *msgcontent = msg.toUtf8().data();
 	int msg_len = strlen(msgcontent);
-
 */
 	//send message to the account...
 	bool sendFlag = false;
@@ -323,11 +277,6 @@ void AccountTab::startFlickerTab()
 		mainWind->addNewMsgCount();
 }
 
-void AccountTab::setMainWind( FxMainWindow *mainW)
-{
-	mainWind = mainW;
-}
-
 void AccountTab::endFlickerTab()
 {
 	if (flickTimer.isActive())
@@ -351,7 +300,6 @@ void AccountTab::flickerTab()
 		endFlickerTab();
 		return;
 	}
-	
 
 	tabWidget->setTabIcon(tabWidget->indexOf(this), getFlickIcon(flick_flag)); 
 	flick_flag = !flick_flag;
@@ -361,11 +309,6 @@ void AccountTab::resizeEvent (QResizeEvent * event)
 {
 	QWidget::resizeEvent (event);
 //	tabWidget->resize(event->size());
-}
-
-void AccountTab::ChangeInputNM()
-{
-	changeTableInputNM();
 }
 
 void AccountTab::changeTableInputNM()
@@ -389,4 +332,57 @@ void AccountTab::changeTableInputNM()
 	}
 	else
 		input_nm->setText(""); 
+}
+
+void AccountTab::UpdateSkins()
+{
+	TB_FACE->setPixmap (getFaceIcon()); 
+	TB_CHANGEMOD->setPixmap (getChangeSendModIcon()); 
+	TB_Histroy->setPixmap (getHistoryIcon()); 
+	TB_Send->setPixmap (getSendIcon()); 
+}
+
+void AccountTab::init()
+{
+	UpdateSkins();
+	init_slot();
+
+	if (account_id == SYSTEM_ID)
+	{
+		account_name = tr("sys message");
+		m_account = NULL;
+	} else { 
+		if(account_id == (qlonglong)strtol(fx_get_usr_uid(), NULL, 10) )
+		{
+			isSendToSelf = true;
+			account_name = tr("send to self");
+			m_account = NULL;
+		} else {
+			isSendToSelf = false;
+
+			m_account = fx_get_account_by_id(account_id);
+			//begin a dialog init, if the account is mobile, this function will do nothing...
+			if (!isAwaySendSMS)
+				fx_begin_dialog (account_id, NULL, NULL); 
+			char * showname = fx_get_account_show_name(m_account, FALSE);
+			account_name = QString::fromUtf8(showname);
+			if(showname)
+				free(showname);
+		}
+	} //(account_id == SYSTEM_ID)
+
+	setSendModle(isAwaySendSMS);
+
+	if (account_id == SYSTEM_ID)
+		msgSend->MsgEdit->setEnabled(false);
+}
+void AccountTab::init_slot()
+{
+	connect(TB_CHANGEMOD, SIGNAL(clicked()), this, SLOT(changeSendModle()));
+	connect(TB_Send, SIGNAL(clicked()), this, SLOT(SendMsg()));
+	connect(TB_Histroy, SIGNAL(clicked()), this, SLOT(ShowHistroy()));
+	connect(TB_FACE, SIGNAL(clicked()), this, SLOT(ShowFaces()));
+	connect(MsgEdit, SIGNAL(textChanged()), this, SLOT(changeTableInputNM()));
+	connect(&flickTimer, SIGNAL(timeout()), this, SLOT(flickerTab()));
+
 }
