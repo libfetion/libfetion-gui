@@ -34,6 +34,8 @@
 #define	CURRENT_VERSION	81
 #define VERSION_NO "v0.8.1"
 
+#define MAXSMSLENGTH 180 
+
 #define CONFFILENAME    "libfetion.conf"
 #define DBNAME    "libfx.db"
 #define MAC_OS 0
