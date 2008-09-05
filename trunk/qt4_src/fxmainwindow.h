@@ -212,8 +212,6 @@ private:
 	bool isQuit;
 	bool isBreakOut;
 	QString m_impresa;
-    BuddyOpt *buddyopt; 
-	FxMsgWindow *msgwin;
 	FxAddBuddy *tmp_addBuddy;  //save the tmp addbuddy handle
 
 	QVector<int> timeOutMsgVector; //stroe the timeout msg.
@@ -273,6 +271,8 @@ private:
 	QTimer trayFlickTimer;
 	QTimer reloginTimer;
 
+    BuddyOpt *buddyopt; 
+	FxMsgWindow *msgwin;
 public:
     QAction *AutoLoginAct;
     QAction *MuteAct;

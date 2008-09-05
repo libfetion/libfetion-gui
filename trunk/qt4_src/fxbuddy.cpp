@@ -74,8 +74,14 @@ void BuddyOpt::freeAllGroupdata()
 	for(int i =0;  i< GroupCount; i++)
 	{
 		groupItem = RootItem->child(i);
-		if(!groupItem && isQunItem(groupItem) )
+		if (!groupItem)
 			continue;
+
+		if (isQunItem(groupItem))
+		{
+			freeAllQundata(groupItem);
+			continue;
+		}
 
 		//free all account data of this group
 		freeAllAccountdata(groupItem);    
@@ -95,10 +101,10 @@ void BuddyOpt::freeAllAccountdata(QTreeWidgetItem *groupItem)
 {
 	if (!groupItem)
 		return;
-	int itemCounts = groupItem-> childCount();
+	int itemCounts = groupItem->childCount();
 	QTreeWidgetItem *tmpItem = NULL;
 
-	for(int i =0;  i< itemCounts; i++)
+	for(int i = 0; i < itemCounts; i++)
 	{
 		tmpItem = groupItem->child(i);
 		if(!tmpItem)
@@ -108,12 +114,32 @@ void BuddyOpt::freeAllAccountdata(QTreeWidgetItem *groupItem)
 #else
 		Account_Info *ac_info =tmpItem->data(0, Qt::UserRole).value<Account_Info*>() ;
 #endif
-
-
 		if(ac_info )
 			delete ac_info;
 	}
+}
 
+void BuddyOpt::freeAllQundata(QTreeWidgetItem *groupItem)
+{
+	if (!groupItem)
+		return;
+
+	int itemCounts = groupItem->childCount();
+	QTreeWidgetItem *tmpItem = NULL;
+
+	for(int i = 0; i < itemCounts; i++)
+	{
+		tmpItem = groupItem->child(i);
+		if(!tmpItem)
+			continue;
+#if MS_VC6
+		Qun_Info *qun_info = (Qun_Info*)(tmpItem->data(0, Qt::UserRole).toUInt());
+#else
+		Qun_Info *qun_info = tmpItem->data(0, Qt::UserRole).value<Qun_Info*>() ;
+#endif
+		if (qun_info)
+			delete qun_info;
+	}
 }
 
 void BuddyOpt::addQunToTree()
@@ -154,7 +180,6 @@ void BuddyOpt::addQunToTree()
 		}
 		tmp_qun = d_list_next(tmp_qun);
 	}
-
 }
 
 bool BuddyOpt::isQunItem(QTreeWidgetItem *item) 
@@ -217,7 +242,7 @@ void BuddyOpt::delAccount_direct(qlonglong uid)
 	for(int i =0;  i< GroupCount; i++)
 	{
 		groupItem = RootItem->child(i);
-		if(!groupItem && isQunItem(groupItem) )
+		if (!groupItem || isQunItem(groupItem) )
 			continue;
 		int itemCounts = groupItem-> childCount();
 		QTreeWidgetItem *tmpItem = NULL;
@@ -336,7 +361,7 @@ void BuddyOpt::delGroup(qlonglong id)
 	for(int i =0;  i< GroupCount; i++)
 	{
 		groupItem = RootItem->child(i);
-		if(!groupItem && isQunItem(groupItem) )
+		if(!groupItem || isQunItem(groupItem) )
 			continue;
 
 #if MS_VC6
@@ -616,7 +641,7 @@ QTreeWidgetItem* BuddyOpt::findGroupItemByID(int group_id)
 	for(int i =0;  i< GroupCount; i++)
 	{
 		groupItem = RootItem->child(i);
-		if(!groupItem && isQunItem(groupItem) )
+		if (!groupItem || isQunItem(groupItem) )
 			continue;
 
 #if MS_VC6
@@ -862,4 +887,74 @@ void BuddyOpt::updateStyles(QTreeWidgetItem *item, int column)
         }
     }
 	emit m_itemChanged();
+}
+
+
+
+void BuddyOpt::UpdateSkins()
+{
+	QTreeWidgetItem *RootItem = this->treeWidget->invisibleRootItem();
+	if(!RootItem)
+		return ;
+
+	QTreeWidgetItem *groupItem = NULL;
+	int GroupCount = RootItem-> childCount ();
+
+	for(int i =0;  i< GroupCount; i++)
+	{
+		groupItem = RootItem->child(i);
+		if (!groupItem)
+			continue;
+
+		if (isQunItem(groupItem))
+		{
+			UpdateSkinsForQun(groupItem);    
+			continue;
+		}
+
+		//update all account icon for this group
+		UpdateSkinsForAccount(groupItem);    
+	}
+}
+
+void BuddyOpt::UpdateSkinsForAccount(QTreeWidgetItem *groupItem)
+{
+	if (!groupItem)
+		return;
+
+	int itemCounts = groupItem->childCount();
+	QTreeWidgetItem *tmpItem = NULL;
+
+	for(int i = 0; i < itemCounts; i++)
+	{
+		tmpItem = groupItem->child(i);
+		if(!tmpItem)
+			continue;
+#if MS_VC6
+		Account_Info *ac_info =(Account_Info*)(tmpItem->data(0, Qt::UserRole).toUInt());
+#else
+		Account_Info *ac_info =tmpItem->data(0, Qt::UserRole).value<Account_Info*>() ;
+#endif
+		if (!ac_info)
+			continue;
+
+		tmpItem->setIcon(0, getOnlineStatusIcon(ac_info->onlinestate));
+	}
+}
+
+void BuddyOpt::UpdateSkinsForQun(QTreeWidgetItem *groupItem)
+{
+	if (!groupItem)
+		return;
+
+	QTreeWidgetItem *tmpItem = NULL;
+	int itemCounts = groupItem->childCount();
+
+	for(int i = 0; i < itemCounts; i++)
+	{
+		tmpItem = groupItem->child(i);
+		if (!tmpItem)
+			continue;
+		tmpItem->setIcon(0, getQunIcon());
+	}
 }
