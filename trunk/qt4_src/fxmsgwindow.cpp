@@ -65,7 +65,7 @@ FxMsgWindow::FxMsgWindow(QWidget *parent)
 	pal.setColor(QPalette::Active, QPalette::Button, pal.color(QPalette::Active, QPalette::Window));
 	pal.setColor(QPalette::Disabled, QPalette::Button, pal.color(QPalette::Disabled, QPalette::Window));
 	pal.setColor(QPalette::Inactive, QPalette::Button, pal.color(QPalette::Inactive, QPalette::Window));
-	QToolButton *closeTabButton = new QToolButton(tabWidget);
+	closeTabButton = new QToolButton(tabWidget);
 	closeTabButton->setAutoRaise(true);
 	closeTabButton->setEnabled(true);
 	closeTabButton->setPalette(pal);
@@ -74,13 +74,7 @@ FxMsgWindow::FxMsgWindow(QWidget *parent)
 	closeTabButton->setIcon(getCloseTabImage());
 	connect(closeTabButton, SIGNAL(clicked()), this, SLOT(closeTab()));
 	closeTabButton->setToolTip(tr("close current Tab"));
-#if 0
-#if MAC_OS
-	tabWidget->setGeometry (0,0,342,405);
-#else
-	tabWidget->setGeometry (0,0,321,385);
-#endif
-#endif
+
 	connect(tabWidget, SIGNAL( currentChanged(int) ), this, SLOT( currentChangedName(int) ));
 	connect(tabWidget, SIGNAL( mouseDblClick(int) ), this, SLOT( closeTabWid(int) ));
 
@@ -361,7 +355,7 @@ void FxMsgWindow::closeEvent(QCloseEvent *event)
 		event->ignore();
 }
 
-void FxMsgWindow::moveEvent(QMoveEvent * event)
+void FxMsgWindow::moveEvent(QMoveEvent *event)
 {
 	Settings::instance().setMsgWinPos(pos());
 }
@@ -452,4 +446,9 @@ void FxMsgWindow::showFaces()
 	inputFace->setFocus();
 	//inputFace->setWindowState(Qt::WindowActive);
 	//inputFace->grabMouse() ;
+}
+
+void FxMsgWindow::UpdateSkins()
+{
+	closeTabButton->setIcon(getCloseTabImage());
 }

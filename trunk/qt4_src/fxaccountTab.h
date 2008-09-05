@@ -29,15 +29,6 @@
 
 #define SYSTEM_ID 10000
 class FxMainWindow;
-#if 0
-class MsgSend : public QWidget, public Ui::MsgSend
-{
-    Q_OBJECT
-public:
-    MsgSend(QWidget *parent = 0);
-    ~MsgSend();
-};
-#endif
 
 class AccountTab : public QWidget, public Ui::MsgSend
 {
@@ -51,6 +42,7 @@ public:
 	qlonglong account_id;
 	QString account_name;
 
+	void UpdateSkins();
 	void startFlickerTab();
 	void endFlickerTab();
 	bool isAwaySendSMS;
@@ -58,11 +50,10 @@ public:
 	//MsgSend *msgSend;
 	AccountTab * msgSend;
 
+	void setMainWind( FxMainWindow *wind) {mainWind = wind;}
 	void setSendModle(bool isSMS);
-	void setMainWind( FxMainWindow *mainW);
 	void handle_alt_num( QKeyEvent *keyEvent);
 
-	void changeTableInputNM();
 
 private slots:
 	void flickerTab();
@@ -70,10 +61,12 @@ private slots:
 	void SendMsg();
 	void ShowHistroy();
 	void ShowFaces();
-	void ChangeInputNM();
+	void changeTableInputNM();
 
 protected:
 	void resizeEvent ( QResizeEvent * event ) ;
+	void init();
+	void init_slot();
 
 private:
 	bool isSendToSelf;

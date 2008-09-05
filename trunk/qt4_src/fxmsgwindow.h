@@ -62,6 +62,7 @@ public:
 	QList<FxQunWindow *> qunWindow;
 	FxQunWindow *findQunWindow(qlonglong qun_id);
 
+	void UpdateSkins();
 protected:
 	void closeEvent(QCloseEvent *event);
 	void moveEvent(QMoveEvent * event);
@@ -78,6 +79,7 @@ private:
 	bool isQuit;
 	QTimer *timer;
 	FxMainWindow *mainwindow;
+	QToolButton *closeTabButton;
 };
 
 
