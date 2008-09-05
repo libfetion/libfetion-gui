@@ -37,6 +37,7 @@
 QString conf_filename()
 {
 	char* CONF_FILE = (char*) malloc(sizeof(char)*(512));
+	memset(CONF_FILE, 0, 512);
 
 	#ifdef WIN32
 	#else

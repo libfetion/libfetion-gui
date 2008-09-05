@@ -112,6 +112,7 @@ bool init_db()
 		return true;
 	
 	char* DBFILEPATH = (char*) malloc(sizeof(char)*(MAX_PATH+1));
+	memset(DBFILEPATH, 0, MAX_PATH+1);
 
 #ifdef WIN32
 #else

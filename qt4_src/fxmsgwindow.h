@@ -78,7 +78,6 @@ private:
 	void init();
 	void init_inputFace();
 	void init_UI();
-	bool isVerifiedAccount(qlonglong account_id);
 	void exec_autoRelpy(QTextEdit* msgBrowser, qlonglong account_id, QString msg);
 
 private:

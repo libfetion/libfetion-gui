@@ -351,42 +351,11 @@ void FxMsgWindow::addQunWin(qlonglong qun_id, bool isSendSms)
  	qun->activateWindow();
 }
 
-bool FxMsgWindow::isVerifiedAccount(qlonglong account_id)
-{
-	if (fx_is_InBlacklist_by_id(account_id))
-	{
-		QMessageBox::information(this->parentWidget(),
-				tr("can't send mseeage to he"), 
-				tr("it have be added in blacklist by you") );
-		return true;
-	}
-
-	int	authed = fx_is_authed_by_id(account_id);
-
-	if (authed == AUTH_WAIT )
-	{
-		QMessageBox::information(this->parentWidget(),
-				tr("can't send mseeage to he"), 
-				tr("wait auth to add friend") );
-		return true;
-	}
-
-	if (authed == AUTH_REFUS)
-	{
-		QMessageBox::information(this->parentWidget(),
-				tr("can't send mseeage to he"), 
-				tr("was refused to add friend") );
-		return true;
-	}
-
-	return false;
-}
-
 void FxMsgWindow::addAccount(qlonglong account_id, bool isSendSms)
 {
-//	if (!isVerifiedAccount(account_id))
-//		return;
 
+/******************************************************/
+//**********************VerifiedAccount****************/
 	if (fx_is_InBlacklist_by_id(account_id))
 	{
 		QMessageBox::information(this->parentWidget(),
@@ -412,11 +381,11 @@ void FxMsgWindow::addAccount(qlonglong account_id, bool isSendSms)
 				tr("was refused to add friend") );
 		return;
 	}
+/******************************************************/
 
 	//first find is have the instance of the account_id, if have show it, and return.
 	//then create a new instance of this account_id, and add to the tabwidget.
 	AccountTab *accountTab = findFromMsgWindow(tabWidget, account_id);
-
 	if (!accountTab)
 	{
 		accountTab = new AccountTab(account_id, tabWidget, isSendSms);
