@@ -43,43 +43,51 @@ class FxMsgWindow : public QMainWindow, public Ui::MsgWindow
 public:
     FxMsgWindow(QWidget *parent = 0);
     ~FxMsgWindow();
+	void setMainWind(FxMainWindow *wind) { m_mainwindow = wind;}
+	void UpdateSkins();
+
+public:
+	void showFaces();
+	void msg_exit();
+
 	void addAccount(qlonglong account_id, bool isSendSms = false);
 	void haveNewMessage(qlonglong account_id);
 	bool addMessage(QString msg, qlonglong account_id, bool iscomeing_msg = false);
 
-	void msg_exit();
-	void setMainWind(FxMainWindow *mainwindow);
-
-	void exec_autoRelpy(QTextEdit* msgBrowser, qlonglong account_id, QString msg);
 	void addQunWin(qlonglong qun_id, bool isSendSms = false);
 	void haveQunMessage(qlonglong qun_id);
 	bool addQunMessage(QString msg, qlonglong qun_id, qlonglong sender, bool iscomeing_msg = false);
 
-	void showFaces();
-
-	FxInputFace  *inputFace;
-	
-	QList<FxQunWindow *> qunWindow;
 	FxQunWindow *findQunWindow(qlonglong qun_id);
 
-	void UpdateSkins();
 protected:
 	void closeEvent(QCloseEvent *event);
 	void moveEvent(QMoveEvent * event);
 	void resizeEvent ( QResizeEvent * event ) ;
 
+
 public slots:
 	void currentChangedName(int index); 
+	void setCurrentTabTitle(AccountTab *accountTab); 
 	void closeTabWid(int index);
 	void closeTab();
 
 signals:
 
 private:
-	bool isQuit;
+	void init();
+	void init_inputFace();
+	void init_UI();
+	bool isVerifiedAccount(qlonglong account_id);
+	void exec_autoRelpy(QTextEdit* msgBrowser, qlonglong account_id, QString msg);
+
+private:
+	bool m_willQuit;
 	QTimer *timer;
-	FxMainWindow *mainwindow;
+	FxMainWindow *m_mainwindow;
 	QToolButton *closeTabButton;
+	FxInputFace  *inputFace;
+	QList<FxQunWindow *> qunWindow;
 };
 
 

@@ -33,10 +33,8 @@ inline AccountTab *findFromMsgWindow(QTabWidget * tabWidget, qlonglong ac_id)
 	for(int i = 0; i< tabCount; i++)
 	{
 		ac_tab = (AccountTab *) tabWidget->widget(i); 
-		if(ac_tab) {
-			if(ac_tab->account_id == ac_id)
-				return ac_tab;
-		}
+		if(ac_tab && ac_tab->account_id == ac_id)
+			return ac_tab;
 	}
 	return NULL;
 }
@@ -46,9 +44,23 @@ FxMsgWindow::FxMsgWindow(QWidget *parent)
     : QMainWindow(parent)
 {
 	setupUi(this);
-	mainwindow = NULL;
-	isQuit = false;
+	m_mainwindow = NULL;
+	m_willQuit = false;
+	closeTabButton = NULL;
 
+	init();
+}
+void FxMsgWindow::init()
+{
+	init_inputFace();
+	init_UI();
+
+	connect(tabWidget, SIGNAL( currentChanged(int) ), this, SLOT( currentChangedName(int) ));
+	connect(tabWidget, SIGNAL( mouseDblClick(int) ), this, SLOT( closeTabWid(int) ));
+}
+
+void FxMsgWindow::init_inputFace()
+{
 	inputFace = new FxInputFace(this);
 	QPalette pal;
 	pal.setBrush(QPalette::Window,QBrush(getInputFaceIcon()));
@@ -56,15 +68,16 @@ FxMsgWindow::FxMsgWindow(QWidget *parent)
 	inputFace->setMsgWindow(this);
 	inputFace->setGeometry (QCursor::pos().x(), QCursor::pos().y(), 320, 261);
 	inputFace->setWindowFlags(Qt::Dialog| Qt::FramelessWindowHint);
-	
-	//tabWidget = new FxMyTabWidget(this);
-	tabWidget->setParent(this);
-	tabWidget->clear();
+}
 
+void FxMsgWindow::init_UI()
+{
+	QPalette pal;
 	pal = palette();
 	pal.setColor(QPalette::Active, QPalette::Button, pal.color(QPalette::Active, QPalette::Window));
 	pal.setColor(QPalette::Disabled, QPalette::Button, pal.color(QPalette::Disabled, QPalette::Window));
 	pal.setColor(QPalette::Inactive, QPalette::Button, pal.color(QPalette::Inactive, QPalette::Window));
+
 	closeTabButton = new QToolButton(tabWidget);
 	closeTabButton->setAutoRaise(true);
 	closeTabButton->setEnabled(true);
@@ -75,40 +88,38 @@ FxMsgWindow::FxMsgWindow(QWidget *parent)
 	connect(closeTabButton, SIGNAL(clicked()), this, SLOT(closeTab()));
 	closeTabButton->setToolTip(tr("close current Tab"));
 
-	connect(tabWidget, SIGNAL( currentChanged(int) ), this, SLOT( currentChangedName(int) ));
-	connect(tabWidget, SIGNAL( mouseDblClick(int) ), this, SLOT( closeTabWid(int) ));
+	tabWidget->setParent(this);
+	tabWidget->clear();
 
 	move(Settings::instance().MsgWinPos());
 	resize(Settings::instance().MsgWinSize());
 }
 
-void FxMsgWindow::setMainWind(FxMainWindow *mainW)
-{
-	this->mainwindow = mainW;
-}
-
 void FxMsgWindow::currentChangedName(int index)
 {
-/*	if(tabWidget->currentIndex() == index)
-		return;
-	*/
+	/*	if(tabWidget->currentIndex() == index)
+		return; */
 	AccountTab *accountTab = (AccountTab *) tabWidget->widget (index); 
-	if (accountTab)
-	{
-		accountTab->endFlickerTab();
-		QString title = tr("with") + accountTab->account_name + tr("chating... "); 
-		this->setWindowTitle(title);
-
-		int online_state ;
-		if(!fx_is_pc_user_by_account(accountTab->m_account))
-			online_state = -1;
-		else
-		online_state = fx_get_online_status_by_account(accountTab->m_account);
-		//	online_state = fx_is_on_line_by_account(accountTab->m_account);
-
-		this->setWindowIcon (getOnlineStatusIcon(online_state));
-	}
+	setCurrentTabTitle(accountTab); 
 }	
+
+void FxMsgWindow::setCurrentTabTitle(AccountTab *accountTab)
+{
+	if (!accountTab)
+		return;
+
+	accountTab->endFlickerTab();
+	QString title = tr("with") + accountTab->account_name + tr("chating... "); 
+	this->setWindowTitle(title);
+
+	int online_state;
+	if (!fx_is_pc_user_by_account(accountTab->m_account))
+		online_state = -1;
+	else
+		online_state = fx_get_online_status_by_account(accountTab->m_account);
+
+	this->setWindowIcon (getOnlineStatusIcon(online_state));
+}
 
 void FxMsgWindow::closeTab()
 {
@@ -121,10 +132,10 @@ void FxMsgWindow::closeTabWid(int index)
 
 	tabWidget->removeTab (index);
 	//if the tabWidget have no tab, hide it..
-	if(tabWidget->count() <= 0)
+	if (tabWidget->count() <= 0)
 		this->hide();
 
-	if(accountTab)
+	if (accountTab)
 		delete accountTab;
 }
 
@@ -140,7 +151,8 @@ FxQunWindow* FxMsgWindow::findQunWindow(qlonglong qun_id)
 bool FxMsgWindow::addQunMessage(QString msg, qlonglong qun_id, qlonglong sender, bool iscoming_msg)
 {
 	FxQunWindow	*qunW = findQunWindow(qun_id);
-	if(!qunW)	{
+	if (!qunW)
+	{
 		qunW = new FxQunWindow(qun_id, this);
 		qunWindow.append(qunW);
 	}
@@ -175,7 +187,8 @@ bool FxMsgWindow::addQunMessage(QString msg, qlonglong qun_id, qlonglong sender,
 
 bool FxMsgWindow::addMessage(QString msg, qlonglong account_id,  bool iscoming_msg)
 {
-	if (fx_is_qun_by_id(account_id)) {
+	if (fx_is_qun_by_id(account_id))
+	{
 		addQunMessage(msg, account_id, 0L, true);
 		return true;
 	}
@@ -185,26 +198,14 @@ bool FxMsgWindow::addMessage(QString msg, qlonglong account_id,  bool iscoming_m
 	if (!accountTab)
 	{
 		accountTab = new AccountTab(account_id, tabWidget);
-		accountTab->setMainWind( this->mainwindow );
+		accountTab->setMainWind( this->m_mainwindow );
 		tabWidget->addTab( accountTab, accountTab->account_name);
 	}
 
 	if (!this->isVisible())
 	{
 		tabWidget->setCurrentWidget(accountTab);
-		QString title = tr("with") + accountTab->account_name + tr("chating... "); 
-		this->setWindowTitle(title);
-
-		int online_state ;
-		if (!accountTab->m_account)
-			online_state = -1;
-		else
-			if (!fx_is_pc_user_by_account(accountTab->m_account))
-				online_state = -1;
-			else
-				online_state = fx_get_online_status_by_account(accountTab->m_account);
-
-		this->setWindowIcon (getOnlineStatusIcon(online_state));
+		setCurrentTabTitle(accountTab); 
 
 		if (Settings::instance().isAutoShowMsg())
 		{
@@ -213,11 +214,8 @@ bool FxMsgWindow::addMessage(QString msg, qlonglong account_id,  bool iscoming_m
 			this->setFocus();
 			accountTab->msgSend->MsgEdit->setFocus();
 		}
-
 	}
 	
-	//int indexOf();
-
 	QString str; 
 	QString show_msg; 
 	if(iscoming_msg) {
@@ -241,7 +239,7 @@ bool FxMsgWindow::addMessage(QString msg, qlonglong account_id,  bool iscoming_m
 		}
 	}
 
-	QTextEdit * msgBrowser = accountTab->msgSend->MsgBrowser;
+	QTextEdit *msgBrowser = accountTab->msgSend->MsgBrowser;
 	msgBrowser->append(show_msg);
 	msgBrowser->moveCursor(QTextCursor::End);
 
@@ -294,7 +292,6 @@ void FxMsgWindow::exec_autoRelpy(QTextEdit* msgBrowser, qlonglong account_id, QS
 	QString str = head+ msg;
 	show_msg = show_msg.fromUtf8(str.toUtf8().data());
 
-
 	//show the send reslut to the browser...
 	msgBrowser->append(show_msg);
 
@@ -305,38 +302,24 @@ void FxMsgWindow::haveQunMessage(qlonglong qun_id)
 {
 	if (!Settings::instance().isMute())
 		playSound(MSG_SOUND);
-	Fetion_MSG * fxMsg = fx_get_msg(qun_id);
-	if(!fxMsg)
-		return;
-	long sender = fxMsg->ext_id;
 
-	QString newmsg = fxgui_handle_newMsg(fxMsg);
-#if 0
-	QString newmsg ;
-	char *msg = fx_simple_paser_msg(fxMsg->message); 
-	newmsg = newmsg.fromUtf8(msg);
-	if(msg)
-		free(msg);
-#endif
-	addQunMessage(newmsg, qun_id, sender, true);
-	fx_destroy_msg (fxMsg);
+	Fetion_MSG * fxMsg = fx_get_msg(qun_id);
+	if (!fxMsg)
+		return;
+
+	long sender = fxMsg->ext_id;
+	addQunMessage(fxgui_handle_newMsg(fxMsg), qun_id, sender, true);
+	fx_destroy_msg(fxMsg);
 }
 
 void FxMsgWindow::haveNewMessage(qlonglong account_id)
 {
 	Fetion_MSG * fxMsg = fx_get_msg(account_id);
-	if(!fxMsg)
+	if (!fxMsg)
 		return;
-#if 0
-	char *msg = fx_simple_paser_msg(fxMsg->message); 
-	QString newmsg = newmsg.fromUtf8(msg);
-	addMessage(newmsg, account_id, true);
-	if(msg)
-		free(msg);
-#else
-	QString newmsg = fxgui_handle_newMsg(fxMsg);
-	addMessage(newmsg, account_id, true);
-#endif
+
+	addMessage(fxgui_handle_newMsg(fxMsg), account_id, true);
+
 	fx_destroy_msg (fxMsg);
 }
 
@@ -349,7 +332,7 @@ void FxMsgWindow::resizeEvent (QResizeEvent * event)
 void FxMsgWindow::closeEvent(QCloseEvent *event)
 {
 	hide();
-	if(isQuit)
+	if(m_willQuit)
 		event->accept();
 	else
 		event->ignore();
@@ -363,7 +346,8 @@ void FxMsgWindow::moveEvent(QMoveEvent *event)
 void FxMsgWindow::addQunWin(qlonglong qun_id, bool isSendSms)
 {
 	FxQunWindow	*qun = findQunWindow(qun_id);
-	if(!qun) {
+	if (!qun)
+	{
 		qun = new FxQunWindow(qun_id, this, isSendSms);
 		qunWindow.append(qun);
 	}
@@ -371,53 +355,58 @@ void FxMsgWindow::addQunWin(qlonglong qun_id, bool isSendSms)
  	qun->activateWindow();
 }
 
-void FxMsgWindow::addAccount(qlonglong account_id, bool isSendSms)
+bool FxMsgWindow::isVerifiedAccount(qlonglong account_id)
 {
-	if ( fx_is_InBlacklist_by_id(account_id) ) {
-		QMessageBox::information(this->parentWidget(), tr("can't send mseeage to he"), 
+	if (fx_is_InBlacklist_by_id(account_id))
+	{
+		QMessageBox::information(this->parentWidget(),
+				tr("can't send mseeage to he"), 
 				tr("it have be added in blacklist by you") );
-		return ;
+		return true;
 	}
 
 	int	authed = fx_is_authed_by_id(account_id);
 
-	if( authed == AUTH_WAIT ){
-		QMessageBox::information(this->parentWidget(), tr("can't send mseeage to he"), 
+	if (authed == AUTH_WAIT )
+	{
+		QMessageBox::information(this->parentWidget(),
+				tr("can't send mseeage to he"), 
 				tr("wait auth to add friend") );
-		return ;
+		return true;
 	}
 
-	if( authed == AUTH_REFUS){
-		QMessageBox::information(this->parentWidget(), tr("can't send mseeage to he"), 
+	if (authed == AUTH_REFUS)
+	{
+		QMessageBox::information(this->parentWidget(),
+				tr("can't send mseeage to he"), 
 				tr("was refused to add friend") );
-		return ;
+		return true;
 	}
+
+	return false;
+}
+
+void FxMsgWindow::addAccount(qlonglong account_id, bool isSendSms)
+{
+	if (!isVerifiedAccount(account_id))
+		return;
 	//first find is have the instance of the account_id, if have show it, and return.
 	//then create a new instance of this account_id, and add to the tabwidget.
 	AccountTab *accountTab = findFromMsgWindow(tabWidget, account_id);
 
-	if(!accountTab)
+	if (!accountTab)
 	{
 		accountTab = new AccountTab(account_id, tabWidget, isSendSms);
-		accountTab->setMainWind( this->mainwindow );
+		accountTab->setMainWind( this->m_mainwindow );
 		tabWidget->addTab( accountTab, accountTab->account_name);
 	}
 
 	tabWidget->setCurrentWidget(accountTab);
-	QString title = tr("with") + accountTab->account_name + tr("chating... "); 
-	//QString title = QString::fromUtf8("ä¸?) + accountTab->account_name + QString::fromUtf8("èŠå¤©ä¸?..");
-	this->setWindowTitle(title);
-
-	int online_state ;
-	if(!fx_is_pc_user_by_account(accountTab->m_account))
-		online_state = -1;
-	else
-		online_state = fx_get_online_status_by_account(accountTab->m_account);
-
-	this->setWindowIcon (getOnlineStatusIcon(online_state));
+	setCurrentTabTitle(accountTab); 
 
 	if (!this->isVisible ())
 		this->show();
+
 	this->activateWindow();
 	this->setWindowState(Qt::WindowNoState);
 
@@ -434,7 +423,7 @@ FxMsgWindow::~FxMsgWindow()
 
 void FxMsgWindow::msg_exit()
 {
-	isQuit = true;
+	m_willQuit = true;
 	close();
 }
 
@@ -450,5 +439,6 @@ void FxMsgWindow::showFaces()
 
 void FxMsgWindow::UpdateSkins()
 {
-	closeTabButton->setIcon(getCloseTabImage());
+	if (closeTabButton)
+		closeTabButton->setIcon(getCloseTabImage());
 }
