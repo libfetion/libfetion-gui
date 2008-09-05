@@ -132,15 +132,15 @@ void FxSendGroupSMS::ChangechooseNM()
 void FxSendGroupSMS::ChangeInputNM()
 {
 	QString msg = MsgEdit->toPlainText();
-	if (msg.size() > 180)
+	if (msg.size() > MAXSMSLENGTH)
 	{
-		msg = msg.left(180);
+		msg = msg.left(MAXSMSLENGTH);
 		MsgEdit->setPlainText(msg);
 		MsgEdit->moveCursor(QTextCursor::End);
 	}
 
 	QString txt = tr("you can input [") 
-		+ QString("%1").arg(180 - msg.size()) 
+		+ QString("%1").arg(MAXSMSLENGTH - msg.size()) 
 		+ tr("] character");
 
 	input_nm->setText(txt); 
