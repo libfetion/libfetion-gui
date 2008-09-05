@@ -2197,6 +2197,7 @@ void FxMainWindow::initTrayIcon()
 void FxMainWindow::UpdateSkins()
 {
 	msgwin->UpdateSkins();
+	buddyopt->UpdateSkins();
 
 	setWindowIcon(getSysTrayIcon(1));
 	LibFetion_image->setPixmap(getLibFetionImage());

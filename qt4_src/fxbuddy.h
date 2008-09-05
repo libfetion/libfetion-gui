@@ -32,11 +32,14 @@ class BuddyOpt : public QObject
 		BuddyOpt(QTreeWidget * Widget, bool isMainView = true);
 		~BuddyOpt();
 
+		void UpdateSkins();
+
 		int  markedCount;
 		bool isQunItem(QTreeWidgetItem *); 
 		
 		void freeAllGroupdata();    
 		void freeAllAccountdata(QTreeWidgetItem *);    
+		void freeAllQundata(QTreeWidgetItem *);    
 		void addGroupToTree();    
 		void addAccountToTree();  
 		void addQunToTree();
@@ -61,9 +64,13 @@ class BuddyOpt : public QObject
 
 signals:
 		void m_itemChanged();
+
 private slots:
 		void updateStyles(QTreeWidgetItem *item, int column);
-	private:
+private:
+		void UpdateSkinsForAccount(QTreeWidgetItem *groupItem);    
+		void UpdateSkinsForQun(QTreeWidgetItem *groupItem);    
+private:
 		QTreeWidgetItem* findAccountItem(const Fetion_Account *account);
 		QTreeWidgetItem* findAccountItemFromGroup(QTreeWidgetItem *groupItem, const Fetion_Account *account);
 		QTreeWidget *treeWidget;
