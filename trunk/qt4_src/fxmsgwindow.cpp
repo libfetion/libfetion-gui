@@ -82,6 +82,7 @@ void FxMsgWindow::init_UI()
 	closeTabButton->setAutoRaise(true);
 	closeTabButton->setEnabled(true);
 	closeTabButton->setPalette(pal);
+
 	tabWidget->setCornerWidget(closeTabButton, Qt::TopRightCorner);
 	closeTabButton->setCursor(Qt::ArrowCursor);
 	closeTabButton->setIcon(getCloseTabImage());
@@ -233,10 +234,7 @@ bool FxMsgWindow::addMessage(QString msg, qlonglong account_id,  bool iscoming_m
 		bool tmp = selectSystemMsg (strtol (fx_get_usr_uid(), NULL, 10),
 				SYSTEM_ID, show_msg.toUtf8().data());
 		if (tmp)
-		{
-			printf("this system message have ok \n");
 			return true;
-		}
 	}
 
 	QTextEdit *msgBrowser = accountTab->msgSend->MsgBrowser;
@@ -245,10 +243,8 @@ bool FxMsgWindow::addMessage(QString msg, qlonglong account_id,  bool iscoming_m
 
 	saveHistroyMsg(strtol(fx_get_usr_uid(), NULL, 10), account_id, show_msg.toUtf8().data(), NULL);
 
-	if (Settings::instance().isAutoReply())
-	{
+	if (Settings::instance().isAutoReply() && iscoming_msg)
 		exec_autoRelpy(msgBrowser, account_id, Settings::instance().getAutoReply());
-	}
 
 	accountTab->startFlickerTab();
 
@@ -388,8 +384,35 @@ bool FxMsgWindow::isVerifiedAccount(qlonglong account_id)
 
 void FxMsgWindow::addAccount(qlonglong account_id, bool isSendSms)
 {
-	if (!isVerifiedAccount(account_id))
+//	if (!isVerifiedAccount(account_id))
+//		return;
+
+	if (fx_is_InBlacklist_by_id(account_id))
+	{
+		QMessageBox::information(this->parentWidget(),
+				tr("can't send mseeage to he"), 
+				tr("it have be added in blacklist by you") );
 		return;
+	}
+
+	int	authed = fx_is_authed_by_id(account_id);
+
+	if (authed == AUTH_WAIT )
+	{
+		QMessageBox::information(this->parentWidget(),
+				tr("can't send mseeage to he"), 
+				tr("wait auth to add friend") );
+		return;
+	}
+
+	if (authed == AUTH_REFUS)
+	{
+		QMessageBox::information(this->parentWidget(),
+				tr("can't send mseeage to he"), 
+				tr("was refused to add friend") );
+		return;
+	}
+
 	//first find is have the instance of the account_id, if have show it, and return.
 	//then create a new instance of this account_id, and add to the tabwidget.
 	AccountTab *accountTab = findFromMsgWindow(tabWidget, account_id);
@@ -404,7 +427,7 @@ void FxMsgWindow::addAccount(qlonglong account_id, bool isSendSms)
 	tabWidget->setCurrentWidget(accountTab);
 	setCurrentTabTitle(accountTab); 
 
-	if (!this->isVisible ())
+	if (!this->isVisible())
 		this->show();
 
 	this->activateWindow();
