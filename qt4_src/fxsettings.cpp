@@ -121,7 +121,7 @@ void Settings::init_setting()
 	m_SendMultMsgWinPos = value("SendMultMsgWinPos", QPoint(dt_size.width()/3, dt_size.height()/3)).toPoint();
 	m_SendMultMsgWinSize = value("SendMultMsgWinSize", QSize(400, 400)).toSize();
 
-	m_GetMsgHotKey = value("GetMsgHotKey", 'a').toChar();
+	m_GetMsgHotKey = value("GetMsgHotKey", 'x').toChar();
 	m_GetMsgHotKeyMod = (Qt::KeyboardModifiers)value("GetMsgHotKeyMod", (qlonglong)(Qt::ControlModifier|Qt::AltModifier)).toLongLong();
 
 	m_isRegistedGetMsgHotKey = false;
