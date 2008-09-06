@@ -66,7 +66,7 @@ void FxSendGroupSMS::SendMsg()
 		return;
 	}	
 
-	if ( buddyopt->markedCount >32 )
+	if ( buddyopt->markedCount > 32 )
 	{
 		MsgBrowser->append("<b style=\"color:red;\">" +  tr("the receier numbers are must less  32") + "</b><br>");
 		return;
@@ -78,6 +78,23 @@ void FxSendGroupSMS::SendMsg()
 	int GroupCount = RootItem-> childCount ();
 	QTreeWidgetItem *groupItem = NULL;
 
+	QString sendMsg = msg;
+
+	QString show_msg;
+	QString head = "<b style=\"color:rgb(0,0,255);\">"+tr("group send:(")+ 
+		QDateTime::currentDateTime().toString(tr("hh:mm:ss")) + "--" +
+		QDateTime::currentDateTime().toString(tr("yyyy-MM-dd")) +
+		")</b><br>";
+
+	msg.replace(QString("<"), QString("&lt;"));
+	msg.replace(QString(">"), QString("&gt;"));
+	msg.replace(QString("\n"), QString("<br>"));
+	msg = fxgui_to_faces(msg);
+
+	show_msg = show_msg.fromUtf8((head+ msg).toUtf8().data());
+	MsgBrowser->append(show_msg);
+
+	//send qun sms message...
 	for(int i =0;  i< GroupCount; i++)
 	{
 		groupItem = RootItem->child(i);
@@ -96,26 +113,12 @@ void FxSendGroupSMS::SendMsg()
 #else
 			Account_Info *ac_info =tmpItem->data(0, Qt::UserRole).value<Account_Info*>() ;
 #endif
-		//	printf("%d \n", ac_info->accountID);
-			fx_send_sms(ac_info->accountID, msg.toUtf8().data(), NULL, NULL);   
+			fx_send_sms(ac_info->accountID, sendMsg.toUtf8().data(), NULL, NULL);   
 		}
 	}
 
-
-	QString show_msg;
-	QString head = "<b style=\"color:rgb(0,0,255);\">"+tr("group send:(")+ 
-		QDateTime::currentDateTime().toString(tr("hh:mm:ss")) + "--" +
-		QDateTime::currentDateTime().toString(tr("yyyy-MM-dd")) +
-		")</b><br>";
-
-	msg.replace(QString("<"), QString("&lt;"));
-	msg.replace(QString(">"), QString("&gt;"));
-	msg.replace(QString("\n"), QString("<br>"));
-	msg = fxgui_to_faces(msg);
-
-	show_msg = show_msg.fromUtf8((head+ msg).toUtf8().data());
-	MsgBrowser->append(show_msg);
-
+	MsgBrowser->append(tr("send group sms ok"));
+	
 	//clean the send edit
 	MsgEdit->setText("");
 }
