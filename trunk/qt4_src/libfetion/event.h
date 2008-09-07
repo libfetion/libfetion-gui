@@ -1,7 +1,7 @@
 /**
 * \file event.h
 * \author dengdd <dedodong@163.com>
-* \date 2008/1/1
+* \date 2008/8/28
 * 
 * This file includes fetion event definitions
 * by libfetion.
@@ -334,14 +334,14 @@ extern "C" {
 * \brief a dialog send message ok
 *
 */
-#define FX_DIA_SEND_OK           FX_EVENT_BASE + 0x0032//发送消息成功
+#define FX_DIA_SEND_OK           FX_EVENT_BASE + 0x0034//发送消息成功
 
 /**
 * \def FX_DIA_SEND_FAIL
 * \brief a dialog send message fail
 *
 */
-#define FX_DIA_SEND_FAIL         FX_EVENT_BASE + 0x0033//发送消息失败
+#define FX_DIA_SEND_FAIL         FX_EVENT_BASE + 0x0035//发送消息失败
 
 
 /**
@@ -349,7 +349,7 @@ extern "C" {
 * \brief a dialog send message timeout
 *
 */
-#define FX_DIA_SEND_TIMEOUT      FX_EVENT_BASE + 0x0034//发送消息失败
+#define FX_DIA_SEND_TIMEOUT      FX_EVENT_BASE + 0x0036//发送消息失败
 
 
 /**
@@ -357,7 +357,7 @@ extern "C" {
 * \brief a dialog unkown error message
 *
 */
-#define FX_DIA_UNKOWN_ERROR      FX_EVENT_BASE + 0x0035//发送消息未知错误. this message may be noever happened.
+#define FX_DIA_UNKOWN_ERROR      FX_EVENT_BASE + 0x0037//发送消息未知错误. this message may be noever happened.
 
 /** @} end of dialog_event */
 
@@ -769,7 +769,7 @@ extern "C" {
 * wParam is F_FILE_INFO 
 * lParam is uid
 */
-#define FX_RECEIVE_FILE  FX_EVENT_BASE + 0x0085 
+#define FX_RECEIVE_FILE  FX_EVENT_BASE + 0x0087 
 
 /**
 * \def FX_CURRENT_VERSION
@@ -777,7 +777,7 @@ extern "C" {
 *
 * \param wParam The current version value.
 */ 
-#define FX_CURRENT_VERSION  FX_EVENT_BASE + 0x0086 
+#define FX_CURRENT_VERSION  FX_EVENT_BASE + 0x0088 
 /** @} end of system_misc_event */
 
 /**
