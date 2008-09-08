@@ -50,6 +50,7 @@ HEADERS       =  \
 				 fxsendGroupSMS.h \
 				 fxsettings.h \
 				 fxconfigDlg.h \
+				 fxskinmanage.h \
 				 ./sqlite/sqlite3.h
 
 
@@ -77,6 +78,7 @@ SOURCES       =  \
 				fxsendGroupSMS.cpp \
 				fxsettings.cpp \
 				fxconfigDlg.cpp \
+				fxskinmanage.cpp \
 				./sqlite/sqlite3.c
 
 FORMS         =  \

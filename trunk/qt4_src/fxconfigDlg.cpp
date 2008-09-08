@@ -226,7 +226,7 @@ void FxConfigDia::slot_LimitReplyMsgLenth()
 
 void FxConfigDia::slot_DefaultRing()
 {
-	QString defaultPath = SoundPath() +"/msg.wav";
+	QString defaultPath = defaultSoundPath() +"/msg.wav";
 	RingFile->setText(defaultPath);
 	Settings::instance().setMsgRingPath(defaultPath);
 }

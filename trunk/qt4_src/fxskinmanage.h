@@ -17,86 +17,13 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#ifndef FXAPPCONFIG_H 
-#define FXAPPCONFIG_H 
+#ifndef _FX_SKIN_MANAGE_H
+#define _FX_SKIN_MANAGE_H
+#include "appconfig.h"
 
 
-#include <QMainWindow>
-#include <QTreeWidget>
-#include <qobject.h>
-#include <libfetion/libfetion.h>
-#include "fxResource.h"
-#include "fxdb.h"
-#include "fxsettings.h"
-#include "fxuitl.h"
+bool setSkins(QString skin);
+QString SkinPath();
 
-#define BUILD_DATE	20080828
-#define	CURRENT_VERSION	81
-#define VERSION_NO "v0.8.1"
-
-#define MAXSMSLENGTH 180 
-
-#define CONFFILENAME    "libfetion.conf"
-#define DBNAME    "libfx.db"
-#define MAC_OS 0
-
-#ifdef WIN32 
-#pragma comment(lib, "./lib/LibFetion.lib") 
-#endif
-
-//#define WIN32  0
-#define MS_VC6 0
-#ifndef MS_VC6
-#ifdef WIN32 
-
-#if _MSC_VER < 1300  //vc6 complile 
-#define MS_VC6 1
-#else  //vc7 up 
-#define MS_VC6 0
-#endif
-#else //linux platform
-#define MS_VC6 0
-#endif //#ifdef WIN32 
-#endif //#ifndef MS_VC6
-
-#define NO_SET  0
-#define NET_ERR 1
-#define NEW_MSG 2
-#define SYS_DeRegist 3
-#define SYS_RELOGIN 4
-
-typedef struct _Group_Info
-{
-	QString groupName;
-	qlonglong groupID;
-	int online_no;
-}Group_Info;
-
-typedef struct _Account_Info
-{
-	QString accountName;
-	qlonglong accountID;
-	int onlinestate;
-}Account_Info;
-
-typedef struct _Qun_Info
-{
-	QString qunName;
-	qlonglong qunID;
-}Qun_Info;
-
-typedef struct _Skin_Info
-{
-	QString name;
-	QString author;
-	QString describe;
-}Skin_Info;
-
-#if MS_VC6
-#else
-Q_DECLARE_METATYPE(Group_Info *);
-Q_DECLARE_METATYPE(Account_Info *);
-Q_DECLARE_METATYPE(Qun_Info *);
-#endif
-
+QList<Skin_Info *> *searchAllSkins();
 #endif
