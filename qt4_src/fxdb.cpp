@@ -287,7 +287,7 @@ char *getCacheServerAdd(const char* id)
 
 	if(nrow) {
 		proxy = (char*)malloc(strlen(result[1])+1);
-		memset(proxy, 0, result[1]+1);
+		memset(proxy, 0, strlen(result[1])+1);
 		strcpy(proxy,result[1]);
 	}
 

@@ -25,62 +25,14 @@
 
 FxLoginWindow::FxLoginWindow(QWidget *parent)
     : QDialog(parent)
+	, user_id(NULL)
+	, user_pwd(NULL)
+	, proxy(NULL)
+	, willLogin(true)
 {
-	user_id = NULL;
-	user_pwd = NULL;
-
-	proxy = new FxProxy(this);
-	proxy->hide();
-
     setupUi(this);
-
-	this->installEventFilter(this);
-
-	loginState->setStyleSheet("background-color: rgb(246,243,243)");
-	//BT_Login_Ok->setStyleSheet("background-color: rgb(246,243,243)");
-
-	{
-		loginState->setItemIcon(0, getOnlineStatusIcon(FX_STATUS_ONLINE));
-		loginState->setItemIcon(1, getOnlineStatusIcon(FX_STATUS_OFFLINE));
-		loginState->setItemIcon(2, getOnlineStatusIcon(FX_STATUS_AWAY));
-		loginState->setItemIcon(3, getOnlineStatusIcon(FX_STATUS_BUSY));
-	}
-
-	set_login_button_state(true);
-
-	login_image->setPixmap(getLoginImage());
-	LibFetion_image->setPixmap(getLibFetionImage());
-	
-//	Login_State->setText("test version for v 0.2.0");
-
-	connect(BT_Login_Ok, SIGNAL(clicked()), this, SLOT(BT_Login_clicked()));
-	//connect(BT_Login_Cancel, SIGNAL(clicked()), this, SLOT(Cancel_logwin()));
-	connect(this, SIGNAL(signal_enableLoginBT()), this, SLOT(slots_enableLonginBT()) );
-
- 
-
-	//connect(Net_Setting, SIGNAL(clicked()), this, SLOT(Setting()));
-	connect(Net_Setting, SIGNAL(linkActivated(const QString &)), this, SLOT(Setting(const QString &)));
-
-	connect(&loginTimer, SIGNAL(timeout()), this, SLOT(login_timer()));
-
-	QRegExp rx_port("[0-9]{0,11}");
-	QValidator *validator_port = new QRegExpValidator(rx_port, this);
-	ED_Fetion_ID->setValidator(validator_port);
-	
-    this->setWindowIcon(getSysTrayIcon(0));
-    //this->setWindowIcon(getSysTrayIcon(FX_STATUS_AWAY));
-
-	//set auto login 
-	int state_tmp = 0;
-	if (isAutoLogin(&user_id, &user_pwd, &state_tmp) && user_id) 
-	{
-		remPWD->setCheckState(Qt::Checked);
-		ED_Fetion_ID->setText (QString::fromUtf8(user_id));
-		ED_Fetion_Pwd->setText (QString::fromUtf8(user_pwd));
-		loginState->setCurrentIndex(state_tmp);
-		login();
-	}
+	init();
+	checkAutoLogin();
 }
 
 FxLoginWindow::~FxLoginWindow()
@@ -370,4 +322,62 @@ bool FxLoginWindow::eventFilter(QObject *target, QEvent *event)
     return QObject::eventFilter(target, event);
 }
 
+void FxLoginWindow::init()
+{
+	proxy = new FxProxy(this);
+	proxy->hide();
+
+	this->installEventFilter(this);
+
+	QRegExp rx_port("[0-9]{0,11}");
+	QValidator *validator_port = new QRegExpValidator(rx_port, this);
+	ED_Fetion_ID->setValidator(validator_port);
+
+	set_login_button_state(true);
+
+	//Login_State->setText("test version for v 0.2.0");
+	connect(BT_Login_Ok, SIGNAL(clicked()), this, SLOT(BT_Login_clicked()));
+	connect(this, SIGNAL(signal_enableLoginBT()), this, SLOT(slots_enableLonginBT()) );
+	connect(Net_Setting, SIGNAL(linkActivated(const QString &)), this, SLOT(Setting(const QString &)));
+	connect(&loginTimer, SIGNAL(timeout()), this, SLOT(login_timer()));
+
+	UpdateSkins();
+}
+
+void FxLoginWindow::checkAutoLogin()
+{
+	//set auto login 
+	int state_tmp = 0;
+	if (isAutoLogin(&user_id, &user_pwd, &state_tmp) && user_id) 
+	{
+		remPWD->setCheckState(Qt::Checked);
+		ED_Fetion_ID->setText (QString::fromUtf8(user_id));
+		ED_Fetion_Pwd->setText (QString::fromUtf8(user_pwd));
+		loginState->setCurrentIndex(state_tmp);
+		login();
+	}
+}
+
+void FxLoginWindow::UpdateSkins()
+{
+	loginState->setStyleSheet("background-color: rgb(246,243,243)");
+
+	loginState->setItemIcon(0, getOnlineStatusIcon(FX_STATUS_ONLINE));
+	loginState->setItemIcon(1, getOnlineStatusIcon(FX_STATUS_OFFLINE));
+	loginState->setItemIcon(2, getOnlineStatusIcon(FX_STATUS_AWAY));
+	loginState->setItemIcon(3, getOnlineStatusIcon(FX_STATUS_BUSY));
+
+	login_image->setPixmap(getLoginImage());
+	LibFetion_image->setPixmap(getLibFetionImage());
+
+	if (willLogin) {
+		BT_Login_Ok->setText(tr("login"));
+		BT_Login_Ok->setPixmap(getLogion_InImage());
+	} else {
+		BT_Login_Ok->setText(tr("cancel"));
+		BT_Login_Ok->setPixmap(getLogin_CancelImage());
+	}
+
+    this->setWindowIcon(getSysTrayIcon(0));
+}
 
