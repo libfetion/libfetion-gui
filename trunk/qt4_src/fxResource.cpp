@@ -29,7 +29,8 @@
 QString defaultSkinPath()
 {
 #ifdef WIN32
-	return "./image";
+	return "./skins/defaule/image";
+	
 #else //linux
 	static QString imagepath;
 	static bool init = false;
@@ -38,13 +39,13 @@ QString defaultSkinPath()
 	if(init)
 		return imagepath;
 
-	  if ((fp = fopen("./image/online/offline.gif", "r")))
+	  if ((fp = fopen("./skins/defaule/image/online/offline.gif", "r")))
 	  {
 		  fclose (fp);
-		  imagepath = "./image";
+		  imagepath = "./skins/defaule/image";
 	  }	
 	  else
-		  imagepath = "/usr/share/libfetion/image";
+		  imagepath = "/usr/share/libfetion/skins/defaule/image";
 
 	init = true;
 	return imagepath;
