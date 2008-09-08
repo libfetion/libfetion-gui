@@ -25,7 +25,7 @@
 #include <fcntl.h>
 #endif
 
-QString SoundPath()
+QString defaultSoundPath()
 {
 #ifdef WIN32
 	return "./sound";
@@ -74,10 +74,10 @@ void playSound(SOUND_TYPE type)
 			execPlaySound (Settings::instance().MsgRingPath());
 			break;
 		case ONLINE_SOUND:
-			execPlaySound(SoundPath() +"/online.wav");
+			execPlaySound(defaultSoundPath() +"/online.wav");
 			break;
 		case SYS_SOUND:
-			execPlaySound(SoundPath() +"/sys.wav");
+			execPlaySound(defaultSoundPath() +"/sys.wav");
 			break;
 	}
 }

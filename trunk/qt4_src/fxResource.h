@@ -28,7 +28,7 @@ typedef enum {
 	SYS_SOUND 
 } SOUND_TYPE;
 
-QString SoundPath();
+QString defaultSoundPath();
 void playSound(SOUND_TYPE type);
 void execPlaySound(QString file);
 
