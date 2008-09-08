@@ -665,7 +665,7 @@ bool selectSystemMsg(long usr, long uid, const char* msg)
 	int nrow, ncol;
 	char* perrmsg;
 	char **result;
-	int len_msg = strlen(msg);
+	long len_msg = strlen(msg);
 
 	//fixme: here is simple to compile of the msg's len...
 	//maybe it is not very good, but for system message(not important) it is enough..
@@ -773,7 +773,7 @@ void saveAccountToDB(Fetion_Account *account, long usr)
 	showname = fx_get_account_show_name(account, TRUE);
 	// insert data to databse 
 	memset(sql, 0, SQL_MAXLEN);
-	sprintf(sql,"insert into fxACINFO%ldusr values(\"%ld\", \"%ld\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\")", 
+	sprintf(sql,"insert into fxACINFO%ldusr values(\"%ld\", \"%d\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\")", 
 		usr, uid, online_state, mobilenm, local_name, nickname, impresa, showname);
 
 	sqlite3_exec(pdb, sql, 0, 0, 0); 
