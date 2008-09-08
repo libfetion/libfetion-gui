@@ -108,7 +108,7 @@ void Settings::init_setting()
 	m_isAutoReply = value("AutoReply", false).toBool();
 	m_replyMsg = value("ReplyMsg", QObject::tr("I'll be back soon")).toString();
 
-	m_MsgRingPath = value("MsgRingPath", SoundPath() +"/msg.wav").toString();
+	m_MsgRingPath = value("MsgRingPath", defaultSoundPath() +"/msg.wav").toString();
 
 	QSize dt_size =	QApplication::desktop()->size();
 
