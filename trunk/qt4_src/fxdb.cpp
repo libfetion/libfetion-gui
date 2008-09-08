@@ -287,6 +287,7 @@ char *getCacheServerAdd(const char* id)
 
 	if(nrow) {
 		proxy = (char*)malloc(strlen(result[1])+1);
+		memset(proxy, 0, result[1]+1);
 		strcpy(proxy,result[1]);
 	}
 
@@ -484,6 +485,7 @@ void saveHistroyMsg(long usr, long uid, const char* msg, const char* date)
 	//memset(sql, 0, sql_maxlen);
 	int len = strlen(base64_msg)+100;
 	char *sql = (char*)malloc(sizeof(char)*len);
+	memset(sql, 0, len);
 
 	if (!date)
 		sprintf(sql,"insert into fx%ldusr values(\"%ld\",\"%s\",\"%d\",datetime(CURRENT_TIMESTAMP,'localtime'))",
@@ -564,6 +566,7 @@ int type = 5 //all
 char *create_sql_for_histroy(long usr, long uid, HISTORY_DATE type)
 {
 	char *sql = (char*)malloc(sizeof(char)*1024);
+	memset(sql, 0, 1024);
 	switch(type)
 	{
 		case TODAY_HISTORY:
