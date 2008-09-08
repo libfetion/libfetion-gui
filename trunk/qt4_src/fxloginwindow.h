@@ -34,15 +34,17 @@ class FxLoginWindow : public QDialog, public Ui::Fetion_Login
 public:
     FxLoginWindow(QWidget *parent = 0);
     ~FxLoginWindow();
-	bool eventFilter(QObject *target, QEvent *event);
-	void setLogingState(char *ch);
-	void LoginOK();
-	void enableLoginBT();
 
-	void login();
-	void Cancel_logwin();
+	void init();
+	void checkAutoLogin();
+
+	void LoginOK();
+
+	void enableLoginBT();
+	void UpdateSkins();
 
 protected:
+	bool eventFilter(QObject *target, QEvent *event);
 
 private slots:
 	void BT_Login_clicked();
@@ -56,11 +58,16 @@ signals:
 
 private:
 	void set_login_button_state(bool state);
+	void login();
+	void Cancel_logwin();
+	void setLogingState(char *ch);
+
+private:
 	char *user_id;
 	char *user_pwd;
-	bool willLogin;
-	QTimer loginTimer;
 	FxProxy *proxy; 
+	QTimer loginTimer;
+	bool willLogin;
 };
 
 #endif
