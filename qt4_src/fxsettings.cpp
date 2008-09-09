@@ -27,6 +27,7 @@
 #include <QStandardItem>
 #include "fxsettings.h"
 #include "fxmainwindow.h"
+#include "fxskinmanage.h"
 
 #ifdef WIN32
 #else
