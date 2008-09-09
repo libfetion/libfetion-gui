@@ -20,14 +20,23 @@
 
 #include "fxskinmanage.h"
 
-QString SkinPath()
+//the skin path is stored in the settings
+QString getSkinPath()
 {
-	return defaultSkinPath();
+	return	Settings::instance().SkinPath();
 }
 
-bool setSkins(QString skin)
+QString getSkinName()
 {
-	return true;
+	return	Settings::instance().SkinName();
+}
+
+bool setSkins(QString skinPath, QString skinName)
+{
+	//here checking the skins is usable
+	//
+	Settings::instance().setSkins(skinPath, skinName);
+	return	true;
 }
 
 static void get_skin_search_result(QList<Skin_Info *>  *items)

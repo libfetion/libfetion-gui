@@ -114,35 +114,35 @@ QPixmap getOnlineStatusIcon(int status)
 	switch(status)
 	{
 		case 0:  //pc offline
-			return QPixmap(SkinPath() + "/online/offline.gif");
+			return QPixmap(getSkinPath() + "/online/offline.gif");
 
 		case FX_STATUS_BLACK:
-			return QPixmap(SkinPath() + "/online/black.gif");
+			return QPixmap(getSkinPath() + "/online/black.gif");
 
 		case FX_STATUS_MOBILE: //mobile user
-			return QPixmap(SkinPath() + "/online/mobile.gif");
+			return QPixmap(getSkinPath() + "/online/mobile.gif");
 		case FX_STATUS_WAITING_AUTH:  //the account waiting   
-			return QPixmap(SkinPath() + "/online/waiting.gif");
+			return QPixmap(getSkinPath() + "/online/waiting.gif");
 		case FX_STATUS_REFUSE:   //the account is refuse make friends with you
-			return QPixmap(SkinPath() + "/online/refuse.gif");
+			return QPixmap(getSkinPath() + "/online/refuse.gif");
 		case FX_STATUS_OFFLINE:
-			return QPixmap(SkinPath() + "/online/offline.gif");
+			return QPixmap(getSkinPath() + "/online/offline.gif");
 		case FX_STATUS_DINNER:
-			return QPixmap(SkinPath() + "/online/dinner.gif");
+			return QPixmap(getSkinPath() + "/online/dinner.gif");
 		case FX_STATUS_AWAY:
-			return QPixmap(SkinPath() + "/online/away.gif");
+			return QPixmap(getSkinPath() + "/online/away.gif");
 		case FX_STATUS_ONLINE:
-			return QPixmap(SkinPath() + "/online/online.gif");
+			return QPixmap(getSkinPath() + "/online/online.gif");
 		case FX_STATUS_PHONE:
-			return QPixmap(SkinPath() + "/online/phone.gif");
+			return QPixmap(getSkinPath() + "/online/phone.gif");
 		case FX_STATUS_BUSY:
-			return QPixmap(SkinPath() + "/online/busy.gif");
+			return QPixmap(getSkinPath() + "/online/busy.gif");
 		case FX_STATUS_MEETING :
-			return QPixmap(SkinPath() + "/online/meeting.gif");
+			return QPixmap(getSkinPath() + "/online/meeting.gif");
 		case FX_STATUS_EXTENDED_AWAY:
-			return QPixmap(SkinPath() + "/online/extnded_away.gif");
+			return QPixmap(getSkinPath() + "/online/extnded_away.gif");
 		case FX_STATUS_NUM_PRIMITIVES:
-			return QPixmap(SkinPath() + "/online/num_primitives.gif");
+			return QPixmap(getSkinPath() + "/online/num_primitives.gif");
 	}
 
 	return QPixmap();
@@ -153,23 +153,23 @@ QPixmap getSysTrayIcon(int status)
 	switch(status)
 	{
 	case 0:  //no login
-		return QPixmap(SkinPath() + "/systray/offline.gif");		
+		return QPixmap(getSkinPath() + "/systray/offline.gif");		
 	case 1: //login
 	case FX_STATUS_ONLINE:
-		return QPixmap(SkinPath() + "/systray/online.gif");
+		return QPixmap(getSkinPath() + "/systray/online.gif");
 	case FX_STATUS_OFFLINE:
-		return QPixmap(SkinPath() + "/systray/hide.gif");
+		return QPixmap(getSkinPath() + "/systray/hide.gif");
 	case FX_STATUS_DINNER:
 	case FX_STATUS_AWAY:
 	case FX_STATUS_MEETING :
 	case FX_STATUS_EXTENDED_AWAY:
 	case FX_STATUS_NUM_PRIMITIVES:
-		return QPixmap(SkinPath() + "/systray/away.gif");
+		return QPixmap(getSkinPath() + "/systray/away.gif");
 	case FX_STATUS_PHONE:
 	case FX_STATUS_BUSY:
-		return QPixmap(SkinPath() + "/systray/busy.gif");
+		return QPixmap(getSkinPath() + "/systray/busy.gif");
 	}
-	return QPixmap(SkinPath() + "/systray/busy.gif");
+	return QPixmap(getSkinPath() + "/systray/busy.gif");
 }
 
 QPixmap getMenuIcon(int menuID)
@@ -177,101 +177,101 @@ QPixmap getMenuIcon(int menuID)
 	switch(menuID)
 	{
 		case IMBuddyIcon:  //IM
-			return QPixmap(SkinPath() + "/menu/im.gif");
+			return QPixmap(getSkinPath() + "/menu/im.gif");
 		case SMSBuddyIcon: //SMS
-			return QPixmap(SkinPath() + "/menu/sms.gif");
+			return QPixmap(getSkinPath() + "/menu/sms.gif");
 		case GetInfoBuddyIcon: //GetInfo
-			return QPixmap(SkinPath() + "/menu/profile.gif");
+			return QPixmap(getSkinPath() + "/menu/profile.gif");
 		case ReNameBuddyIcon: //rename
-			return QPixmap(SkinPath() + "/menu/edit.gif");
+			return QPixmap(getSkinPath() + "/menu/edit.gif");
 		case AddBuddyIcon:
-			return QPixmap(SkinPath() + "/menu/addfriend.gif");
+			return QPixmap(getSkinPath() + "/menu/addfriend.gif");
 		case AboutIcon:
-			return QPixmap(SkinPath() + "/menu/about.gif");
+			return QPixmap(getSkinPath() + "/menu/about.gif");
 		case ExitIcon:
-			return QPixmap(SkinPath() + "/menu/exit.gif");
+			return QPixmap(getSkinPath() + "/menu/exit.gif");
 		case ApplyIcon:
 		case RemoveBlackIcon:
-			return QPixmap(SkinPath() + "/menu/apply.gif");
+			return QPixmap(getSkinPath() + "/menu/apply.gif");
 		case CancelIcon:
-			return QPixmap(SkinPath() + "/menu/cancel.gif");
+			return QPixmap(getSkinPath() + "/menu/cancel.gif");
 		case SetImpresaIcon:
-			return QPixmap(SkinPath() + "/menu/edit.gif");
+			return QPixmap(getSkinPath() + "/menu/edit.gif");
 		case AddGroupIcon:
-			return QPixmap(SkinPath() + "/menu/addqun.gif");
+			return QPixmap(getSkinPath() + "/menu/addqun.gif");
 		case BackInBuddyIcon:
-			return QPixmap(SkinPath() + "/menu/backlist.gif");
+			return QPixmap(getSkinPath() + "/menu/backlist.gif");
 		case DeleteBuddyIcon:
-			return QPixmap(SkinPath() + "/menu/delete.gif");
+			return QPixmap(getSkinPath() + "/menu/delete.gif");
 		case MoveIcon:
-			return QPixmap(SkinPath() + "/menu/move.gif");
+			return QPixmap(getSkinPath() + "/menu/move.gif");
 		case RefreshBuddyIcon:
-			return QPixmap(SkinPath() + "/menu/refresh.gif");
+			return QPixmap(getSkinPath() + "/menu/refresh.gif");
 		case OptionsIcon:
-			return QPixmap(SkinPath() + "/menu/options.gif");
+			return QPixmap(getSkinPath() + "/menu/options.gif");
 		case HistoryIcon:
-			return QPixmap(SkinPath() + "/menu/history.gif");
+			return QPixmap(getSkinPath() + "/menu/history.gif");
 	}
 	return QPixmap();
 }
 
 QPixmap getQunIcon()
 {
-	return QPixmap(SkinPath() + "/misc/qun.gif");
+	return QPixmap(getSkinPath() + "/misc/qun.gif");
 }
 
 QPixmap getBT_SMSIcon()
 {
-	return QPixmap(SkinPath() + "/misc/bt_sms.gif");
+	return QPixmap(getSkinPath() + "/misc/bt_sms.gif");
 }
 
 QPixmap getFlickIcon(bool flag)
 {
 	if(flag)
-		return QPixmap(SkinPath() + "/systray/online.gif");
+		return QPixmap(getSkinPath() + "/systray/online.gif");
 	else
-		return QPixmap(SkinPath() + "/systray/online_flick.gif");
+		return QPixmap(getSkinPath() + "/systray/online_flick.gif");
 }
 
 QPixmap getInputFaceIcon()
 {
-	return QPixmap(SkinPath() + "/misc/input_face.gif");
+	return QPixmap(getSkinPath() + "/misc/input_face.gif");
 }
 
 QPixmap getFaceIcon()
 {
-	return QPixmap(SkinPath() + "/misc/tool_face.gif");
+	return QPixmap(getSkinPath() + "/misc/tool_face.gif");
 }
 
 QPixmap getSendIcon()
 {
-	return QPixmap(SkinPath() + "/theme/send_button.gif");
+	return QPixmap(getSkinPath() + "/theme/send_button.gif");
 }
 
 QPixmap getHistoryIcon()
 {
-	return QPixmap(SkinPath() + "/theme/history.gif");
+	return QPixmap(getSkinPath() + "/theme/history.gif");
 }
 
 QPixmap getChangeSendModIcon()
 {
-	return QPixmap(SkinPath() + "/theme/change_send_mode.gif");
+	return QPixmap(getSkinPath() + "/theme/change_send_mode.gif");
 }
 
 QPixmap getCloseTabImage()
 {
-	return QPixmap(SkinPath() + "/theme/closetab.gif");
+	return QPixmap(getSkinPath() + "/theme/closetab.gif");
 }
 
 QPixmap getLoginImage()
 {
 #if MAC_OS //Mac OS X platfrom
-	return QPixmap(SkinPath() + "/theme/login_image-mac.gif");
+	return QPixmap(getSkinPath() + "/theme/login_image-mac.gif");
 #else
 	#ifdef WIN32 //windows platfrom
-		return QPixmap(SkinPath() + "/theme/login_image-win.gif");
+		return QPixmap(getSkinPath() + "/theme/login_image-win.gif");
 	#else //linux platfrom
-		return QPixmap(SkinPath() + "/theme/login_image-linux.gif");
+		return QPixmap(getSkinPath() + "/theme/login_image-linux.gif");
 	#endif
 #endif
 }
@@ -279,42 +279,42 @@ QPixmap getLoginImage()
 QPixmap getPortraitImage()
 {
 #if MAC_OS //Mac OS X platfrom
-	return QPixmap(SkinPath() + "/theme/portrait-mac.gif");
+	return QPixmap(getSkinPath() + "/theme/portrait-mac.gif");
 #else
 	#ifdef WIN32 //windows platfrom
-		return QPixmap(SkinPath() + "/theme/portrait-win.gif");
+		return QPixmap(getSkinPath() + "/theme/portrait-win.gif");
 	#else //linux platfrom
-		return QPixmap(SkinPath() + "/theme/portrait-linux.gif");
+		return QPixmap(getSkinPath() + "/theme/portrait-linux.gif");
 	#endif
 #endif
 }
 
 QPixmap getAddImage()
 {
-	return QPixmap(SkinPath() + "/theme/addfrined.gif");
+	return QPixmap(getSkinPath() + "/theme/addfrined.gif");
 }
 
 QPixmap getImpresaBKImage()
 {
-	return QPixmap(SkinPath() + "/theme/impresabk.gif");
+	return QPixmap(getSkinPath() + "/theme/impresabk.gif");
 }
 
 QPixmap getSearchBKImage()
 {
-	return QPixmap(SkinPath() + "/theme/search.gif");
+	return QPixmap(getSkinPath() + "/theme/search.gif");
 }
 
 QPixmap getLibFetionImage()
 {
-	return QPixmap(SkinPath() + "/theme/LibFetion.gif");
+	return QPixmap(getSkinPath() + "/theme/LibFetion.gif");
 }
 
 QPixmap getLogion_InImage()
 {
-	return QPixmap(SkinPath() + "/theme/Logion_In.gif");
+	return QPixmap(getSkinPath() + "/theme/Logion_In.gif");
 }
 
 QPixmap getLogin_CancelImage()
 {
-	return QPixmap(SkinPath() + "/theme/Login_Cancel.gif");
+	return QPixmap(getSkinPath() + "/theme/Login_Cancel.gif");
 }
