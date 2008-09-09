@@ -37,6 +37,8 @@ extern "C" {
 			void setUser(long uid);
 			void setMainWindow(FxMainWindow *mainwind) { m_mainwind = mainwind; }
 
+			void setSkins(QString m_skinPath, QString m_skinName);
+
 			void setAutoLogin(bool isAutoLogin);
 			bool isAutoLogin() const { return m_isAutoLogin; }
 
@@ -92,6 +94,8 @@ extern "C" {
 			QChar GetMsgHotKey(){ return m_GetMsgHotKey; }
 			Qt::KeyboardModifiers GetMsgHotKeyMod(){ return m_GetMsgHotKeyMod; }
 			
+			QString SkinPath() { return m_skinPath; }
+			QString SkinName() { return m_skinName; }
 		private:
 			void init_setting();
 
@@ -106,6 +110,9 @@ extern "C" {
 			bool m_isStartHide : 1;
 			bool m_isAutoReply : 1;
 			
+			QString m_skinPath;
+			QString m_skinName;
+
 			QString m_replyMsg;
 			QString m_MsgRingPath;
 			

@@ -69,6 +69,9 @@ Settings::Settings(const QString & fileName, Format format)
 	m_uid = 0L;
 	m_mainwind = NULL;
 	m_isAutoLogin = ::isAutoLogin(NULL, NULL, NULL);
+
+	m_skinPath = value("SkinPath", defaultSkinPath()).toString();
+	m_skinName = value("SkinName", QObject::tr("default")).toString();
 }
 
 Settings::~Settings()
@@ -85,6 +88,20 @@ void Settings::setUser(long uid)
 	m_uid = uid;
 	beginGroup(QString("%1").arg(m_uid));
 	init_setting();
+}
+
+void Settings::setSkins(QString skinPath, QString skinName)
+{
+	if (m_uid)
+		endGroup();
+
+	m_skinPath = skinPath;
+	m_skinName = skinName;
+	setValue("SkinPath", m_skinPath);
+	setValue("SkinName", m_skinName);
+
+	if (m_uid)
+		beginGroup(QString("%1").arg(m_uid));
 }
 
 void Settings::init_setting()
