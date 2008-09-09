@@ -357,11 +357,11 @@ void BuddyOpt::delGroup(qlonglong id)
 		return ;
 
 	QTreeWidgetItem *groupItem = NULL;
-	int GroupCount = RootItem-> childCount ();
+	int GroupCount = RootItem->childCount ();
 	for(int i =0;  i< GroupCount; i++)
 	{
 		groupItem = RootItem->child(i);
-		if(!groupItem || isQunItem(groupItem) )
+		if (!groupItem || isQunItem(groupItem) )
 			continue;
 
 #if MS_VC6
@@ -375,6 +375,7 @@ void BuddyOpt::delGroup(qlonglong id)
 			freeAllAccountdata(groupItem);    
 			delete group_info;
 			RootItem->removeChild(groupItem); 
+			return;
 		}
 	}
 
@@ -485,8 +486,10 @@ void BuddyOpt::addAccountToGroup(const Fetion_Account *account, QString & name, 
 #else
 	Group_Info *group_info = groupItem->data(0, Qt::UserRole).value<Group_Info *>();
 #endif
+	if (!group_info)
+		return;
 
-	if(fx_is_on_line_by_account (account))
+	if (fx_is_on_line_by_account (account))
 	{
 		groupItem->removeChild(accountItem);
 		groupItem->insertChild(group_info->online_no, accountItem);
@@ -513,12 +516,12 @@ QString BuddyOpt::createAccountTipsInfo(const Fetion_Account *account)
 	QString tips;
 	QString tmp;
 	bool hP = false;
-	if(account->personal)
+	if (account->personal)
 		hP = true;
 
 	QString info;
 	info += tr("mobile_no:");
-	if(hP)
+	if (hP)
 	{
 		tmp = QString::fromUtf8(account->personal->mobile_no);
 		if (!tmp.isEmpty())
@@ -526,9 +529,7 @@ QString BuddyOpt::createAccountTipsInfo(const Fetion_Account *account)
 			info += "<b style=\"color:red; \">" + tmp +"</b>";
 			tips += info +"<br>";
 		}
-	}
-	else 
-	{
+	} else {
 		if (!fx_is_pc_user_by_account(account)){
 			long head, body;
 			int prefix = 0;
@@ -633,7 +634,7 @@ void BuddyOpt::setTipsOfAccount(QTreeWidgetItem *accountItem, const Fetion_Accou
 QTreeWidgetItem* BuddyOpt::findGroupItemByID(int group_id)
 {
 	QTreeWidgetItem *RootItem = this->treeWidget->invisibleRootItem();
-	if(!RootItem)
+	if (!RootItem)
 		return NULL;
 
 	int GroupCount = RootItem-> childCount ();
@@ -661,7 +662,7 @@ QTreeWidgetItem* BuddyOpt::findGroupItemByID(int group_id)
 
 QTreeWidgetItem* BuddyOpt::findAccountItemFromGroup(QTreeWidgetItem *groupItem, const Fetion_Account *account)
 {
-	if(!groupItem || !account)
+	if (!groupItem || !account)
 		return NULL;
 
 	QTreeWidgetItem *tmpItem = NULL;
@@ -671,14 +672,14 @@ QTreeWidgetItem* BuddyOpt::findAccountItemFromGroup(QTreeWidgetItem *groupItem, 
 	for(int i =0;  i< itemCounts; i++)
 	{
 		tmpItem = groupItem->child(i);
-		if(!tmpItem)
+		if (!tmpItem)
 			continue;
 #if MS_VC6
 		Account_Info *ac_info =(Account_Info*)(tmpItem->data(0, Qt::UserRole).toUInt());
 #else
 		Account_Info *ac_info =tmpItem->data(0, Qt::UserRole).value<Account_Info*>() ;
 #endif
-		if(ac_info && account_id == ac_info->accountID)
+		if (ac_info && account_id == ac_info->accountID)
 			return tmpItem;
 	}
 	return NULL;
@@ -686,17 +687,14 @@ QTreeWidgetItem* BuddyOpt::findAccountItemFromGroup(QTreeWidgetItem *groupItem, 
 
 QTreeWidgetItem* BuddyOpt::findAccountItem(const Fetion_Account *account)
 {
-	if(!account)
+	if (!account)
 		return NULL;
 	int	group_no = fx_get_account_group_id(account) ;
-	if(group_no <= 0)
+	if (group_no <= 0)
 		group_no = 0;
 
 	QTreeWidgetItem* groupItem = findGroupItemByID(group_no);
-	QTreeWidgetItem *accountItem = findAccountItemFromGroup(groupItem, account);
-	if(accountItem)
-		return accountItem;
-	return NULL;
+	return findAccountItemFromGroup(groupItem, account);
 }
 
 static bool isonline(int state)
@@ -719,10 +717,10 @@ static bool isonline(int state)
 //       is 1 add the online number
 bool BuddyOpt::isOnlineStateChanged(int old_state, int new_state, int* state)
 {
-	if(old_state == new_state)
+	if (old_state == new_state)
 		return false;
 
-	if( isonline(old_state))  //old_state is online state
+	if (isonline(old_state))  //old_state is online state
 	{
 		if( !isonline(new_state)) { //new state is offline state
 			*state = 0;
@@ -740,7 +738,7 @@ bool BuddyOpt::isOnlineStateChanged(int old_state, int new_state, int* state)
 void BuddyOpt::updateAccountInfo(qlonglong account_id)
 {
 	const Fetion_Account * account = fx_get_account_by_id (account_id);
-	if(!account)
+	if (!account)
 		return;
 
 	QTreeWidgetItem* accountItem = findAccountItem(account);
@@ -757,7 +755,7 @@ void BuddyOpt::updateAccountInfo(qlonglong account_id)
 
 	char * showname = fx_get_account_show_name(account, TRUE);
 	QString show_name = QString::fromUtf8(showname);
-	if(showname)
+	if (showname)
 		free(showname);
 
 #if MS_VC6
@@ -765,7 +763,7 @@ void BuddyOpt::updateAccountInfo(qlonglong account_id)
 #else
 	Account_Info *ac_info = accountItem->data(0, Qt::UserRole).value<Account_Info*>() ;
 #endif
-	if(!ac_info)
+	if (!ac_info)
 		return;
 	ac_info->accountName = show_name;
 
@@ -785,14 +783,14 @@ void BuddyOpt::updateAccountInfo(qlonglong account_id)
 			group_no = 0;
 
 		QTreeWidgetItem* groupItem = findGroupItemByID(group_no);
-		if(groupItem)
+		if (groupItem)
 		{
 #if MS_VC6
 	Group_Info *group_info =(Group_Info *)( groupItem->data(0, Qt::UserRole).toUInt() );
 #else
 	Group_Info *group_info = groupItem->data(0, Qt::UserRole).value<Group_Info *>();
 #endif
-	if(!group_info)
+	if (!group_info)
 		return ;
 	groupItem->removeChild(accountItem);
 	
