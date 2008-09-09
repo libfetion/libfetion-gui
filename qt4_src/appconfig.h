@@ -90,6 +90,7 @@ typedef struct _Skin_Info
 	QString name;
 	QString author;
 	QString describe;
+	QString skinpath;
 }Skin_Info;
 
 #if MS_VC6

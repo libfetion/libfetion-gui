@@ -27,7 +27,6 @@ QString SkinPath()
 
 bool setSkins(QString skin)
 {
-
 	return true;
 }
 
@@ -38,6 +37,7 @@ static void get_skin_search_result(QList<Skin_Info *>  *items)
 	Skin_Info->name;
 	Skin_Info->author;
 	Skin_Info->describe;
+	Skin_Info->skinpath;
 	items->append(accountItem);
 #endif
 }
