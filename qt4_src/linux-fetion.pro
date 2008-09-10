@@ -1,6 +1,7 @@
 TEMPLATE      = app 
 
 win32 {
+	QT += xml
     TARGET = LibFx
     CONFIG += static 
     QTPLUGIN     += qgif 
@@ -17,8 +18,9 @@ mac {
 }
 
 !win32 {
+	QT += xml
 	TARGET = linux-fetion
-LIBS +=  -lcurl -lssl ./lib/libfetion_32.a
+		LIBS +=  -lcurl -lssl ./lib/libfetion_32.a
 }
 
 
