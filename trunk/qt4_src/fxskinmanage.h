@@ -26,4 +26,5 @@ QString getSkinName();
 bool setSkins(QString skinPath, QString skinName);
 
 QList<Skin_Info *> *searchAllSkins();
+void get_skin_search_result(QList<Skin_Info *>  *items, QString path);
 #endif

@@ -19,6 +19,8 @@
  ***************************************************************************/
 
 #include "fxskinmanage.h"
+#include <QDir>
+#include <QtXml/QDomDocument>
 
 //the skin path is stored in the settings
 QString getSkinPath()
@@ -39,21 +41,58 @@ bool setSkins(QString skinPath, QString skinName)
 	return	true;
 }
 
-static void get_skin_search_result(QList<Skin_Info *>  *items)
+Skin_Info *get_skininfo(QString skinpath)
 {
-#if 0
+	QDomDocument doc("xml");
+	QFile file(skinpath + SKIN_CONFG_FILE); 
+
+	if (!file.open(QIODevice::ReadOnly))
+		return NULL;
+
+	if (!doc.setContent(&file)) 
+	{
+		file.close();
+		return NULL;
+	}
+	file.close();
+
 	Skin_Info *sk_info = new Skin_Info;
-	Skin_Info->name;
-	Skin_Info->author;
-	Skin_Info->describe;
-	Skin_Info->skinpath;
-	items->append(accountItem);
+	sk_info->name = doc.documentElement().attribute("name", "unset");
+	sk_info->author = doc.documentElement().attribute("author", "unset");
+	sk_info->describe = doc.documentElement().attribute("describe", "unset");
+	sk_info->skinpath = skinpath;
+#if 0
+	qDebug(sk_info->name.toUtf8().data());
+	qDebug(sk_info->author.toUtf8().data());
+	qDebug(sk_info->describe.toUtf8().data());
+	qDebug(sk_info->skinpath.toUtf8().data());
 #endif
+	return sk_info;
+}
+
+void get_skin_search_result(QList<Skin_Info *>  *items, QString path)
+{
+	QDir d(path);
+	if (!d.exists())
+		return;
+
+	d.setFilter(QDir::Dirs);
+	QStringList dirlist = d.entryList();
+
+	for (QStringList::Iterator it = dirlist.begin(); it != dirlist.end(); ++it)
+	{
+		QString tmpPath = d.path() +"/"+ (*it);
+		qDebug(tmpPath.toUtf8().data());
+
+		Skin_Info *sk_info = get_skininfo(tmpPath);
+		if (sk_info && items)
+			items->append(sk_info);
+	}
 }
 
 QList<Skin_Info *> *searchAllSkins()
 {
 	QList<Skin_Info *> *items = new QList<Skin_Info *>;
-	get_skin_search_result(items);
+	get_skin_search_result(items, "./skins");
 	return items;
 }

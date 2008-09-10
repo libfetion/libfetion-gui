@@ -38,6 +38,7 @@
 
 #define CONFFILENAME    "libfetion.conf"
 #define DBNAME    "libfx.db"
+#define SKIN_CONFG_FILE    "/skin.xml"
 #define MAC_OS 0
 
 #ifdef WIN32 
