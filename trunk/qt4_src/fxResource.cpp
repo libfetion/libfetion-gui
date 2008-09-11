@@ -26,10 +26,10 @@
 #include <fcntl.h>
 #endif
 
-QString defaultSkinPath()
+QString SkinPath()
 {
 #ifdef WIN32
-	return "./skins/defaule";
+	return "./skins";
 	
 #else //linux
 	static QString imagepath;
@@ -42,14 +42,19 @@ QString defaultSkinPath()
 	  if ((fp = fopen("./skins/defaule/online/offline.gif", "r")))
 	  {
 		  fclose (fp);
-		  imagepath = "./skins/defaule";
+		  imagepath = "./skins";
 	  }	
 	  else
-		  imagepath = "/usr/share/libfetion/skins/defaule";
+		  imagepath = "/usr/share/libfetion/skins";
 
 	init = true;
 	return imagepath;
 #endif
+}
+
+QString defaultSkinPath()
+{
+	return SkinPath() + "/defaule";
 }
 
 QString defaultSoundPath()

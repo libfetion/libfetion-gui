@@ -93,6 +93,6 @@ void get_skin_search_result(QList<Skin_Info *>  *items, QString path)
 QList<Skin_Info *> *searchAllSkins()
 {
 	QList<Skin_Info *> *items = new QList<Skin_Info *>;
-	get_skin_search_result(items, "./skins");
+	get_skin_search_result(items, SkinPath());
 	return items;
 }
