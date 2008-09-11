@@ -354,7 +354,10 @@ void FxLoginWindow::checkAutoLogin()
 		ED_Fetion_ID->setText (QString::fromUtf8(user_id));
 		ED_Fetion_Pwd->setText (QString::fromUtf8(user_pwd));
 		loginState->setCurrentIndex(state_tmp);
-		login();
+
+		//here check is have one instance for auto login
+		if (!m_Instance::isHaveInstance())
+			login();
 	}
 }
 
