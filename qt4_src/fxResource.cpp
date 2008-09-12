@@ -216,6 +216,8 @@ QPixmap getMenuIcon(int menuID)
 			return QPixmap(getSkinPath() + "/menu/options.gif");
 		case HistoryIcon:
 			return QPixmap(getSkinPath() + "/menu/history.gif");
+		case SkinIcon:
+			return QPixmap(getSkinPath() + "/menu/skin.gif");
 	}
 	return QPixmap();
 }

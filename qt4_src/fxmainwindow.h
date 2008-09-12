@@ -77,6 +77,7 @@ protected:
 	void showBuddyMenu();
 	void showQunMenu();
 	void createGroupMenu(QMenu *groupMenu);		
+	void createSkinMenu(QMenu *skinMenu);		
 
 	Account_Info *getAc_InfoOfCurrentItem();
 	Group_Info *getGp_InfoOfCurrentItem();
@@ -139,6 +140,8 @@ private slots:
 	void slot_reName_buddy(int, int, qlonglong);
 	void slot_updateSmsDay(int);
 
+	void slot_ShowSkinMenu() { createSkinMenu(skinMenu); }
+
     void renameBuddy();
     void imBuddy();
     void smsBuddy();
@@ -186,6 +189,7 @@ private slots:
 	void UI_enable_search();
 
 	void moveGroupMenutriggered(QAction *action);
+	void skinMenutriggered(QAction *);
 	void SearcheditingFinished();
 	void SearchtextChanged (const QString &text);
 	void showNiceNameEdit();
@@ -222,6 +226,7 @@ private:
 	QMenu *traySetStatusMenu;
 	QMenu *buddySetStatusMenu;
 	QMenu *msgHistroyMenu;
+	QMenu *skinMenu;
 
     QAction *personlInfoAct;
     QAction *addBuddyAct;

@@ -36,7 +36,7 @@
 #include "fxrefuseSMS.h"
 #include "fxsendGroupSMS.h"
 #include "fxconfigDlg.h"
-
+#include "fxskinmanage.h"
 
 void  Sys_EventListener (int message, WPARAM wParam, LPARAM lParam, void* args)
 {
@@ -181,6 +181,7 @@ FxMainWindow::FxMainWindow(QWidget *parent)
 	,traySetStatusMenu(NULL)
 	,buddySetStatusMenu(NULL)
 	,msgHistroyMenu(NULL)
+	,skinMenu(NULL)
 {
 	setupUi(this);
 	newVersion = 0;
@@ -933,6 +934,43 @@ void FxMainWindow::moveGroupMenutriggered(QAction *action)
 	fx_move_group_buddy_by_id(ac_info->accountID, group_id, NULL, NULL);
 }
 
+void FxMainWindow::createSkinMenu(QMenu *skinMenu)
+{
+	if (!skinMenu)
+		return;
+
+	skinMenu->clear();
+
+	QList<Skin_Info *> * skinlist = searchAllSkins();
+	if (skinlist == NULL)
+		return;
+
+	for (QList<Skin_Info *>::Iterator it = skinlist->begin(); 
+			it != skinlist->end(); ++it)
+	{
+		Skin_Info *sk_info = (*it);
+		QAction *action = new QAction(sk_info->name, this);
+
+		if (sk_info->name == getSkinName() && sk_info->skinpath == getSkinPath())
+			action->setIcon(getMenuIcon(ApplyIcon));
+		else 
+			action->setIcon(getMenuIcon(CancelIcon));
+
+		QVariant Var((int)sk_info);
+		action->setData(Var);
+		skinMenu->addAction(action);
+	}
+	connect(skinMenu, SIGNAL(triggered(QAction *)), this, SLOT(skinMenutriggered(QAction *)));
+	connect(skinMenu, SIGNAL(aboutToShow()), this, SLOT(slot_ShowSkinMenu()));
+}
+
+void FxMainWindow::skinMenutriggered(QAction *action)
+{
+	Skin_Info *sk_info = (Skin_Info *)(action->data().toInt());
+	setSkins(sk_info->skinpath, sk_info->name);
+	this->UpdateSkins();
+}
+
 void FxMainWindow::searchaccountDoubleClicked (QTreeWidgetItem * item, int column )
 {
 	if(item == 0)
@@ -1464,10 +1502,14 @@ void FxMainWindow::createMenu()
 	//menuSetting->addAction (SetImpresaAct); 
 	menuSetting->addAction (AutoLoginAct); 
 	menuSetting->addAction (MuteAct); 
-	menuSetting->addAction (IsAutoShowMsgAct); 
+	//menuSetting->addAction (IsAutoShowMsgAct); 
 	//menuSetting->addAction (SetUndgeMsgAct); 
 	//menuSetting->addAction (SetLongSMSAct); 
 	
+	skinMenu = menuSetting->addMenu(tr("skins"));
+	skinMenu->setIcon(getMenuIcon(SkinIcon));
+	createSkinMenu(skinMenu);
+
 	msgHistroyMenu = menuSetting->addMenu(tr("msghistroy"));
 	msgHistroyMenu->setIcon(getMenuIcon(HistoryIcon));
 	msgHistroyMenu->addAction (SaveMsgHistroyAct); 
@@ -2214,6 +2256,8 @@ void FxMainWindow::UpdateSkins()
 		buddySetStatusMenu->setIcon (getOnlineStatusIcon(fx_get_user_state()));
 	if (msgHistroyMenu) 
 		msgHistroyMenu->setIcon(getMenuIcon(HistoryIcon));
+	if (skinMenu) 
+		skinMenu->setIcon(getMenuIcon(SkinIcon));
 
 	personlInfoAct->setIcon(getMenuIcon(GetInfoBuddyIcon));
 	addBuddyAct->setIcon(getMenuIcon(AddBuddyIcon));
