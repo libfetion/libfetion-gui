@@ -82,7 +82,7 @@ void get_skin_search_result(QList<Skin_Info *>  *items, QString path)
 	for (QStringList::Iterator it = dirlist.begin(); it != dirlist.end(); ++it)
 	{
 		QString tmpPath = d.path() +"/"+ (*it);
-		qDebug(tmpPath.toUtf8().data());
+		//qDebug(tmpPath.toUtf8().data());
 
 		Skin_Info *sk_info = get_skininfo(tmpPath);
 		if (sk_info && items)
