@@ -1764,7 +1764,7 @@ void FxMainWindow::renameGroup()
 	bool ok;
 	QString text = QInputDialog::getText(this, tr("renameGroup"),
 			tr("please input new group name"), QLineEdit::Normal,
-			"", &ok);
+			group_info->groupName, &ok);
 	if (ok && !text.isEmpty())
 		fx_rename_buddylist(group_info->groupID, text.toUtf8().data(), NULL, NULL); 
 }
@@ -1778,7 +1778,7 @@ void FxMainWindow::renameBuddy()
 	bool ok;
 	QString text = QInputDialog::getText(this, tr("renamebudd"),
 			tr("please input new buddy name"), QLineEdit::Normal,
-			"", &ok);
+			ac_info->accountName, &ok);
 	if (ok && !text.isEmpty())
 		fx_set_buddyinfo(ac_info->accountID, text.toUtf8().data(), NULL, NULL); 
 }

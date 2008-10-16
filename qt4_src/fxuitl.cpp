@@ -27,8 +27,24 @@
  *
  ***************************************************************************/
 #include "fxuitl.h"
+/* 
+ * Copyright (C) 2008
+ * 
+ * An instance check class used in libfetion for Mac/Linux/Windows.
+ *
+ * Author: YongLi(liyong03@gmail.com)
+ */
 
-#if WIN32
+#ifndef WIN32 
+	#include <errno.h>
+	#include <signal.h>
+	#include <stdio.h>
+	#include <sys/sem.h>
+	#include <sys/shm.h>
+	#include <sys/stat.h>
+#else
+	#include <iostream>
+	using namespace std;
 #include <windows.h>
 #define hotkey_id 1
 static int QtModToWinMod(Qt::KeyboardModifiers keyMod)

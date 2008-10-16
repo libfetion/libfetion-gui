@@ -2,11 +2,11 @@ TEMPLATE      = app
 
 win32 {
 	QT += xml
-    TARGET = LibFx
-    CONFIG += static 
-    QTPLUGIN     += qgif 
+  TARGET = LibFx
+  CONFIG += static 
+  QTPLUGIN     += qgif 
 	RC_FILE = ./misc/libfetion.rc 
-	LIBS += qgif.lib ./lib/libcurl_imp.lib ./lib/pthreadVC2.lib
+	LIBS += qgif.lib ./lib/libcurl_imp.lib
 }
 
 mac {

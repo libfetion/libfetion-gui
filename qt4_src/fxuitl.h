@@ -30,27 +30,7 @@ bool UnRegistHotkey(QWidget *window, QChar keyValue, Qt::KeyboardModifiers keyMo
 QString fxgui_handle_newMsg(Fetion_MSG *fxMsg);
 QString fxgui_to_faces(QString newmsg);
 
-/* 
- * Copyright (C) 2008
- * 
- * An instance check class used in libfetion for Mac/Linux/Windows.
- *
- * Author: YongLi(liyong03@gmail.com)
- */
 
-#pragma once
-#ifndef WIN32 
-	#include <errno.h>
-	#include <signal.h>
-	#include <stdio.h>
-	#include <sys/sem.h>
-	#include <sys/shm.h>
-	#include <sys/stat.h>
-#else
-	#include <Windows.h>
-	#include <iostream>
-	using namespace std;
-#endif
 
 #define PERM 	(S_IRUSR | S_IWUSR)
 //#define KEY 	36264
