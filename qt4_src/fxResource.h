@@ -79,6 +79,9 @@ QPixmap getImpresaBKImage(); //this function is get the mood background picture
 QPixmap getSearchBKImage(); //this function is get the Search background picture
 QPixmap getAddImage(); //this function is get the add picture
 
+QPixmap getBTSettingImage(); //this function is get the setting button's picture
+QPixmap getBTSendSelfImage(); //this function is get the send self button's picture
+
 
 QPixmap getLibFetionImage();
 QPixmap getLogion_InImage();

@@ -1225,6 +1225,8 @@ void FxMainWindow::init_UI()
 	UI_ImpresaBK->setPixmap (getImpresaBKImage());
 	UI_SearchBK->setPixmap (getSearchBKImage());
 	UI_AddFriend->setPixmap (getAddImage());
+	UI_BT_SETTING->setPixmap(getBTSettingImage());
+	UI_BT_SENDSELF->setPixmap(getBTSendSelfImage());
 
 	UI_Search->setText(tr("search friends..."));
 	UI_Edit_NiceName->setText(QString::fromUtf8(fx_get_usr_show_name()));
@@ -1537,6 +1539,9 @@ void FxMainWindow::init_slot_signal()
 	connect(UI_Search, SIGNAL(clicked ()), 
 			this, SLOT(UI_enable_search()));
 
+
+	connect(UI_BT_SETTING, SIGNAL(clicked ()), this, SLOT(showConfigDlg()));
+	connect(UI_BT_SENDSELF, SIGNAL(clicked ()), this, SLOT(sendself()));
 	connect(UI_AddFriend, SIGNAL(clicked ()), this, SLOT(addBuddy()));
 	connect(UI_Portrait, SIGNAL(clicked ()), this, SLOT(showPortrait()));
 	connect(UI_NiceName, SIGNAL(clicked ()), this, SLOT(showNiceNameEdit()));
@@ -2247,6 +2252,9 @@ void FxMainWindow::UpdateSkins()
 	UI_ImpresaBK->setPixmap(getImpresaBKImage());
 	UI_SearchBK->setPixmap(getSearchBKImage());
 	UI_AddFriend->setPixmap(getAddImage());
+
+	UI_BT_SETTING->setPixmap(getBTSettingImage());
+	UI_BT_SENDSELF->setPixmap(getBTSendSelfImage());
 
 	if (trayIcon)
 		trayIcon->setIcon(getSysTrayIcon (fx_get_user_state()));

@@ -296,6 +296,16 @@ QPixmap getPortraitImage()
 #endif
 }
 
+QPixmap getBTSettingImage()
+{
+	return QPixmap(getSkinPath() + "/theme/bt_setting.gif");
+}
+
+QPixmap getBTSendSelfImage()
+{
+	return QPixmap(getSkinPath() + "/theme/bt_sendself.gif");
+}
+
 QPixmap getAddImage()
 {
 	return QPixmap(getSkinPath() + "/theme/addfrined.gif");
