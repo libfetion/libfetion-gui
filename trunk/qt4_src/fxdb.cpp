@@ -951,7 +951,7 @@ void qt_debug(char* fmt, ...)
 
 #ifdef	WIN32
 
-#if 1
+#if 0
  static int isInit = 0;
  if (!isInit)
   {
