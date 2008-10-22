@@ -22,11 +22,8 @@
 
 
 #include "fxaddBuddyWindow.h"
-FxAddBuddy::FxAddBuddy(QWidget *parent)
-    : QDialog(parent)
+void FxAddBuddy::init()
 {
-	setupUi(this);
-
 	init_groupItem();
     ED_usr_name->setMaxLength(10);
 
@@ -48,6 +45,24 @@ FxAddBuddy::FxAddBuddy(QWidget *parent)
 
 	connect(buttonBox, SIGNAL(accepted()), this, SLOT(addfrined()));
 	connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+}
+
+FxAddBuddy::FxAddBuddy(QWidget *parent)
+    : QDialog(parent)
+{
+	setupUi(this);
+	init();
+}
+
+FxAddBuddy::FxAddBuddy(QString id, bool ismobile/* = false*/, QWidget *parent/* = 0 */)
+{
+	setupUi(this);
+	init();
+
+	if (ismobile)
+		ED_mobile->setText(id);
+	else
+		ED_fetionID->setText(id);
 }
 
 FxAddBuddy::~FxAddBuddy()
