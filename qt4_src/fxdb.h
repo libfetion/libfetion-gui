@@ -19,6 +19,7 @@
  ***************************************************************************/
 #ifndef FXDB_H
 #define FXDB_H
+#include "appconfig.h"
 #include <stdio.h>
 
 #if WIN32

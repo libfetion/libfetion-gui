@@ -30,11 +30,13 @@ class FxAddBuddy : public QDialog, public Ui::AddBuddyDia
     Q_OBJECT
 public:
    FxAddBuddy(QWidget *parent = 0);
+   FxAddBuddy(QString id, bool ismobile = false, QWidget *parent = 0);
     ~FxAddBuddy();
 	void setChanged();
 	void init_groupItem();
 
 private slots:
+	void init();
 	void getPersInfo();
 	void newgroup();
 	void mobileRB();

@@ -1,7 +1,7 @@
 /**
  * \file libfetion.h
  * \author dengdd <dedodong@163.com>
- * \date 2008/1/1
+ * \date 2008/8/28
  * 
  * This file includes necessary interfaces of libfetion.
  *
@@ -1483,6 +1483,18 @@ FX_EXPORT int fx_test_network(PROXY_ITEM *item, EventListener func, void *args);
 */
 FX_EXPORT char* fx_simple_paser_msg(const char * msg);
 
+/**
+  * \fn char* fx_get_original_ID(long id)
+  * \brief get the original id of the user.
+  *
+  * if the user is pc user, it will return the fetion id. 
+  * if the user is the mobile user, it will return the user's mobile. 
+  *
+  * \param msg The original msg.
+  *
+  * \return the no format message, return NULL if the msg is wrong format.
+*/
+FX_EXPORT char* fx_get_original_ID(long id);
 /** @} end of fetion_misc */
 
 #ifdef __cplusplus 

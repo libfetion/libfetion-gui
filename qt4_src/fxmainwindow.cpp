@@ -488,15 +488,20 @@ void FxMainWindow::minimizedWind()
 	if (!isHaveminimized)
 	{
 		isHaveminimized = true;
+		
+		#ifdef WIN32
 		this->setWindowState(Qt::WindowMinimized);
-	} else {
-		minimizedTimer.stop();
-		this->setWindowState(Qt::WindowNoState);
+		#endif
 
+	} else {
+		#ifdef WIN32
+		this->setWindowState(Qt::WindowNoState);
 		//registed the hot key, when the mainwindow is created, and can get the winId
 		if (Settings::instance().isEnableGetMsgHotKey())
 			Settings::instance().setGetMsgHotKey(Settings::instance().GetMsgHotKey(), Settings::instance().GetMsgHotKeyMod());
+		#endif
 
+		minimizedTimer.stop();
 		if (Settings::instance().isStartHide())
 			this->hide();
 		else

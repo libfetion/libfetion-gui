@@ -63,7 +63,8 @@ public:
 protected:
 	void closeEvent(QCloseEvent *event);
 	void moveEvent(QMoveEvent * event);
-	void resizeEvent ( QResizeEvent * event ) ;
+	void resizeEvent ( QResizeEvent * event);
+	void addBuddy(qlonglong account_id);
 
 
 public slots:

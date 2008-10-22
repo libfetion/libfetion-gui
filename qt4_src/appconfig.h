@@ -41,24 +41,21 @@
 #define SKIN_CONFG_FILE    "/skin.xml"
 #define MAC_OS 0
 
+
 #ifdef WIN32 
 #pragma comment(lib, "./lib/LibFetion.lib") 
 #endif
 
-//#define WIN32  0
-#define MS_VC6 0
-#ifndef MS_VC6
 #ifdef WIN32 
-
 #if _MSC_VER < 1300  //vc6 complile 
-#define MS_VC6 1
+#define MS_VC6 1 //now vc6 is no support...
 #else  //vc7 up 
 #define MS_VC6 0
 #endif
 #else //linux platform
 #define MS_VC6 0
 #endif //#ifdef WIN32 
-#endif //#ifndef MS_VC6
+
 
 #define NO_SET  0
 #define NET_ERR 1

@@ -21,9 +21,12 @@
 #include <QtGui>
 #include <QTextEdit>
 
+#include "fxmainwindow.h"
 #include "fxmsgwindow.h"
 #include "fxuitl.h"
+#include "fxaddBuddyWindow.h"
 
+#define MAXNICELENGTH 8
 //find is have the ac_id
 inline AccountTab *findFromMsgWindow(QTabWidget * tabWidget, qlonglong ac_id)
 {
@@ -351,6 +354,33 @@ void FxMsgWindow::addQunWin(qlonglong qun_id, bool isSendSms)
  	qun->activateWindow();
 }
 
+void FxMsgWindow::addBuddy(qlonglong account_id)
+{
+	QString id;
+	bool ismobile = false;
+	if (fx_is_pc_user_by_id (account_id))
+	{
+		id = QString("%1").arg(account_id);
+		ismobile = false;
+	} else {
+		char* mobile_no = fx_get_original_ID(account_id);
+		id = QString(mobile_no); 
+		free(mobile_no);
+		mobile_no = NULL;
+
+		ismobile = true;
+	}
+
+	m_mainwindow->show();
+	FxAddBuddy *tmp_addBuddy = new FxAddBuddy(id, ismobile, m_mainwindow);
+	tmp_addBuddy->exec();
+	//fix a bug when addbuddy show, and mainwindow is hide, quit the addbuddy, 
+	//mainwindows will quit too.
+	m_mainwindow->show(); 
+	delete tmp_addBuddy;
+	tmp_addBuddy = NULL;
+}
+
 void FxMsgWindow::addAccount(qlonglong account_id, bool isSendSms)
 {
 
@@ -371,6 +401,7 @@ void FxMsgWindow::addAccount(qlonglong account_id, bool isSendSms)
 		QMessageBox::information(this->parentWidget(),
 				tr("can't send mseeage to he"), 
 				tr("wait auth to add friend") );
+		addBuddy(account_id);
 		return;
 	}
 
@@ -379,6 +410,7 @@ void FxMsgWindow::addAccount(qlonglong account_id, bool isSendSms)
 		QMessageBox::information(this->parentWidget(),
 				tr("can't send mseeage to he"), 
 				tr("was refused to add friend") );
+		addBuddy(account_id);
 		return;
 	}
 /******************************************************/
@@ -390,7 +422,11 @@ void FxMsgWindow::addAccount(qlonglong account_id, bool isSendSms)
 	{
 		accountTab = new AccountTab(account_id, tabWidget, isSendSms);
 		accountTab->setMainWind( this->m_mainwindow );
-		tabWidget->addTab( accountTab, accountTab->account_name);
+		QString ac_name = accountTab->account_name;
+		//here handle the ac_name is length. if too long ,using ...repleace.
+		if (ac_name.size() > MAXNICELENGTH)
+			ac_name = ac_name.left(MAXNICELENGTH -3) + QString("...");
+		tabWidget->addTab( accountTab, ac_name);
 	}
 
 	tabWidget->setCurrentWidget(accountTab);

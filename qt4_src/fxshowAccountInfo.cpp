@@ -70,37 +70,11 @@ void FxShowAccountInfo::setShowInfo()
 	else 
 		{
 			if (!fx_is_pc_user_by_account(m_account)){
-					long head, body;
-			int prefix = 0;
-			head = m_account->id / (100000000); // 8 -> 10 	
-			body = m_account->id % (100000000);
-			switch(head)
-			{
-				case 10:
-					prefix = 150;
-					break;
-				case 11:
-					prefix = 151;
-					break;
-				case 12:
-					prefix = 157;
-					break;
-				case 13:
-					prefix = 158;
-					break;
-				case 20:
-					prefix = 159;
-					break;
-				default:
-					//14-19
-					prefix = 130+ head%10;
-					break;
+				char* mobile_no = fx_get_original_ID(m_account->id);
+				info += "<b style=\"color:red; \">"+QString(mobile_no) + "</b>"; 
+				free(mobile_no);
+				mobile_no = NULL;
 			}
-			char mobile_no[12];
-			sprintf(mobile_no, "%d%08ld", prefix, body);
-			mobile_no[11] = '\0';
-			info += "<b style=\"color:red; \">"+QString(mobile_no) + "</b>"; 
-		}
 
 		info += "<b style=\"color:red; \"> </b>"; 
 	}
