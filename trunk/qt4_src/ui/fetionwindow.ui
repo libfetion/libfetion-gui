@@ -295,7 +295,7 @@ background-color:rgb(246,243,243);
      <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="toolTip" >
-     <string>add friends</string>
+     <string>setting</string>
     </property>
     <property name="text" >
      <string/>
@@ -320,7 +320,7 @@ background-color:rgb(246,243,243);
      <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="toolTip" >
-     <string>add friends</string>
+     <string>send to self</string>
     </property>
     <property name="text" >
      <string/>
