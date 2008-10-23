@@ -398,19 +398,25 @@ void FxMsgWindow::addAccount(qlonglong account_id, bool isSendSms)
 
 	if (authed == AUTH_WAIT )
 	{
+		#if 0
 		QMessageBox::information(this->parentWidget(),
 				tr("can't send mseeage to he"), 
 				tr("wait auth to add friend") );
+		#else
 		addBuddy(account_id);
+		#endif
 		return;
 	}
 
 	if (authed == AUTH_REFUS)
 	{
+		#if 0
 		QMessageBox::information(this->parentWidget(),
 				tr("can't send mseeage to he"), 
 				tr("was refused to add friend") );
+		#else
 		addBuddy(account_id);
+		#endif
 		return;
 	}
 /******************************************************/
