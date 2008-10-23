@@ -212,6 +212,10 @@ FxMainWindow::FxMainWindow(QWidget *parent)
 	tm->setText(0, "haha");
 #endif
 	
+	
+//it is may be waste some network res
+	fx_updata_account_info_all();
+	
 	minimizedTimer.start(100);
 }
 
