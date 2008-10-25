@@ -182,6 +182,8 @@ FxMainWindow::FxMainWindow(QWidget *parent)
 	,buddySetStatusMenu(NULL)
 	,msgHistroyMenu(NULL)
 	,skinMenu(NULL)
+	,traySendSmsMenu(NULL)
+	,optSendSmsMenu(NULL)
 {
 	setupUi(this);
 	newVersion = 0;
@@ -1467,7 +1469,6 @@ void FxMainWindow::initAllActions()
 
 void FxMainWindow::createMenu()
 {
-	QMenu *sendSmsMenu; //tmp menu of send sms
 	reloginTrayMenu = new QMenu(this);
 	reloginTrayMenu->addAction(exitAct);
 
@@ -1479,10 +1480,11 @@ void FxMainWindow::createMenu()
 	traySetStatusMenu->addAction(BusyAct);
 	traySetStatusMenu->addAction(AwayAct);
 
-	sendSmsMenu  = trayIconMenu->addMenu(tr("sendsms"));
-	sendSmsMenu->setIcon(getMenuIcon(SMSBuddyIcon));
-	sendSmsMenu->addAction(sendselfAct);
-	sendSmsMenu->addAction(sendgroupsmsAct);
+	
+	traySendSmsMenu  = trayIconMenu->addMenu(tr("sendsms"));
+	traySendSmsMenu->setIcon(getMenuIcon(SMSBuddyIcon));
+	traySendSmsMenu->addAction(sendselfAct);
+	traySendSmsMenu->addAction(sendgroupsmsAct);
 	trayIconMenu->addAction(addBuddyAct); 
 	trayIconMenu->addAction(personlInfoAct); 
 
@@ -1500,10 +1502,10 @@ void FxMainWindow::createMenu()
 	buddySetStatusMenu->addAction(refuseSMSAct);
 
 	buddyMenu->addMenu(buddySetStatusMenu );
-	sendSmsMenu  = buddyMenu->addMenu(tr("sendsms"));
-	sendSmsMenu->setIcon(getMenuIcon(SMSBuddyIcon));
-	sendSmsMenu->addAction(sendselfAct);
-	sendSmsMenu->addAction(sendgroupsmsAct);
+	optSendSmsMenu = buddyMenu->addMenu(tr("sendsms"));
+	optSendSmsMenu->setIcon(getMenuIcon(SMSBuddyIcon));
+	optSendSmsMenu->addAction(sendselfAct);
+	optSendSmsMenu->addAction(sendgroupsmsAct);
 	buddyMenu->addAction(addBuddyAct); 
 	buddyMenu->addAction(personlInfoAct); 
 
@@ -2275,6 +2277,12 @@ void FxMainWindow::UpdateSkins()
 		msgHistroyMenu->setIcon(getMenuIcon(HistoryIcon));
 	if (skinMenu) 
 		skinMenu->setIcon(getMenuIcon(SkinIcon));
+	if (traySendSmsMenu)
+		traySendSmsMenu->setIcon(getMenuIcon(SMSBuddyIcon));
+	if (optSendSmsMenu)
+		optSendSmsMenu->setIcon(getMenuIcon(SMSBuddyIcon));
+
+	
 
 	personlInfoAct->setIcon(getMenuIcon(GetInfoBuddyIcon));
 	addBuddyAct->setIcon(getMenuIcon(AddBuddyIcon));
