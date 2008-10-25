@@ -227,6 +227,8 @@ private:
 	QMenu *buddySetStatusMenu;
 	QMenu *msgHistroyMenu;
 	QMenu *skinMenu;
+	QMenu *traySendSmsMenu; //tray menu of send sms
+	QMenu *optSendSmsMenu; //opt menu of send sms
 
     QAction *personlInfoAct;
     QAction *addBuddyAct;
