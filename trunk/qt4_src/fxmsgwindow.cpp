@@ -430,8 +430,11 @@ void FxMsgWindow::addAccount(qlonglong account_id, bool isSendSms)
 		accountTab->setMainWind( this->m_mainwindow );
 		QString ac_name = accountTab->account_name;
 		//here handle the ac_name is length. if too long ,using ...repleace.
+		
+		ac_name = ac_name + "            "; //bad coding, here is ensure the ac_name is leng is longer than the MAXNICELENGTH.
 		if (ac_name.size() > MAXNICELENGTH)
 			ac_name = ac_name.left(MAXNICELENGTH -3) + QString("...");
+			
 		tabWidget->addTab( accountTab, ac_name);
 	}
 
