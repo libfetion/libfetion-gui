@@ -94,11 +94,12 @@ bool UnRegistHotkey(QWidget *window, QChar keyValue, Qt::KeyboardModifiers keyMo
 	return false;
 #endif
 }
+
 //fixme: this function should move to fxResource..
 QString FxFacePath()
 {
 #ifdef WIN32
-	return "./image/faces";
+	return "./faces_image";
 #else //linux
 	static QString path;
 	static bool init = false;
@@ -107,13 +108,13 @@ QString FxFacePath()
 	if(init)
 		return path;
 
-	  if ((fp = fopen("./image/faces/1.gif", "r")))
+	  if ((fp = fopen("./faces_image/1.gif", "r")))
 	  {
 		  fclose (fp);
-		  path = "./image/faces";
+		  path = "./image_faces";
 	  }	
 	  else
-		  path = "/usr/share/libfetion/image/faces";
+		  path = "/usr/share/libfetion/faces_image";
 
 	init = true;
 	return path;
