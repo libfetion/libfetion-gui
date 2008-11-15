@@ -39,7 +39,7 @@ QString SkinPath()
 	if(init)
 		return imagepath;
 
-	  if ((fp = fopen("./skins/defaule/online/offline.gif", "r")))
+	  if ((fp = fopen("./skins/default/online/offline.gif", "r")))
 	  {
 		  fclose (fp);
 		  imagepath = "./skins";
@@ -54,7 +54,7 @@ QString SkinPath()
 
 QString defaultSkinPath()
 {
-	return SkinPath() + "/defaule";
+	return SkinPath() + "/default";
 }
 
 QString defaultSoundPath()

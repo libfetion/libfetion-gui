@@ -947,6 +947,7 @@ void FxMainWindow::moveGroupMenutriggered(QAction *action)
 
 void FxMainWindow::createSkinMenu(QMenu *skinMenu)
 {
+	//fixme: here have a big bug.. 
 	if (!skinMenu)
 		return;
 
@@ -971,6 +972,9 @@ void FxMainWindow::createSkinMenu(QMenu *skinMenu)
 		action->setData(Var);
 		skinMenu->addAction(action);
 	}
+
+	//fixme: here need to releas the skinlist!!! note: not release the sk_info
+
 	connect(skinMenu, SIGNAL(triggered(QAction *)), this, SLOT(skinMenutriggered(QAction *)));
 	connect(skinMenu, SIGNAL(aboutToShow()), this, SLOT(slot_ShowSkinMenu()));
 }
