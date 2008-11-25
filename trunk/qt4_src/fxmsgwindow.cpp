@@ -27,6 +27,7 @@
 #include "fxaddBuddyWindow.h"
 
 #define MAXNICELENGTH 8
+static QString CropTabName(QString orig_name); 
 //find is have the ac_id
 inline AccountTab *findFromMsgWindow(QTabWidget * tabWidget, qlonglong ac_id)
 {
@@ -203,7 +204,7 @@ bool FxMsgWindow::addMessage(QString msg, qlonglong account_id,  bool iscoming_m
 	{
 		accountTab = new AccountTab(account_id, tabWidget);
 		accountTab->setMainWind( this->m_mainwindow );
-		tabWidget->addTab( accountTab, accountTab->account_name);
+		tabWidget->addTab(accountTab, CropTabName(accountTab->account_name));
 	}
 
 	if (!this->isVisible())
@@ -428,14 +429,7 @@ void FxMsgWindow::addAccount(qlonglong account_id, bool isSendSms)
 	{
 		accountTab = new AccountTab(account_id, tabWidget, isSendSms);
 		accountTab->setMainWind( this->m_mainwindow );
-		QString ac_name = accountTab->account_name;
-		//here handle the ac_name is length. if too long ,using ...repleace.
-		
-		ac_name = ac_name + "            "; //bad coding, here is ensure the ac_name is leng is longer than the MAXNICELENGTH.
-		if (ac_name.size() > MAXNICELENGTH)
-			ac_name = ac_name.left(MAXNICELENGTH -3) + QString("...");
-			
-		tabWidget->addTab( accountTab, ac_name);
+		tabWidget->addTab(accountTab, CropTabName(accountTab->account_name));
 	}
 
 	tabWidget->setCurrentWidget(accountTab);
@@ -478,4 +472,13 @@ void FxMsgWindow::UpdateSkins()
 {
 	if (closeTabButton)
 		closeTabButton->setIcon(getCloseTabImage());
+}
+
+static QString CropTabName(QString orig_name) 
+{
+    QString new_name = orig_name;
+    //here handle the ac_name is length. if too long ,using ...repleace.
+    if (new_name.size() > MAXNICELENGTH)
+        new_name = new_name.left(MAXNICELENGTH -3) + QString("...");
+    return new_name;
 }
