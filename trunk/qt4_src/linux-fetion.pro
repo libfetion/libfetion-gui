@@ -1,26 +1,26 @@
 TEMPLATE      = app 
 
 win32 {
-	QT += xml
-  TARGET = LibFx
-  CONFIG += static 
-  QTPLUGIN     += qgif 
-	RC_FILE = ./misc/libfetion.rc 
-	LIBS += qgif.lib ./lib/libcurl_imp.lib
-}
-
-mac {
-    CONFIG += static 
-    QTPLUGIN += qgif 
-    TARGET = mac_fetion
-    ICON = ./misc/mac_fetion.icns
-    QMAKE_INFO_PLIST = ./misc/mac_fetion.plist
+	QT 		 += xml
+  	TARGET    = LibFx
+  	CONFIG   += static 
+  	QTPLUGIN += qgif 
+	RC_FILE   = ./misc/libfetion.rc 
+	LIBS  	 += qgif.lib ./lib/libcurl_imp.lib
 }
 
 !win32 {
-	QT += xml
-	TARGET = linux-fetion
-		LIBS +=  -lcurl -lssl ./lib/libfetion_32.a
+	QT 		 += xml
+	TARGET    = linux-fetion
+	LIBS 	 +=  -lcurl -lssl ./lib/libfetion_32.a
+}
+
+mac {
+    CONFIG 	 += static 
+    QTPLUGIN += qgif 
+    TARGET    = Mac-Fetion
+    ICON      = ./misc/mac_fetion.icns
+    QMAKE_INFO_PLIST = ./misc/mac_fetion.plist
 }
 
 
