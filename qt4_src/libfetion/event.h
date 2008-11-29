@@ -322,8 +322,8 @@ extern "C" {
 #define FX_DIA_BG_FAIL           FX_EVENT_BASE + 0x0032//begin dialog fail
 
 /**
-* \def FX_DIA_BG_FAIL
-* \brief a dialog begin fail 
+* \def FX_DIA_BG_TIMEOUT
+* \brief a dialog begin timeout 
 *
 */
 #define FX_DIA_BG_TIMEOUT        FX_EVENT_BASE + 0x0033//begin dialog timeout
