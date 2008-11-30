@@ -1,0 +1,173 @@
+<ui version="4.0" >
+ <class>MsgSend</class>
+ <widget class="QWidget" name="MsgSend" >
+  <property name="windowModality" >
+   <enum>Qt::NonModal</enum>
+  </property>
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>504</width>
+    <height>319</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>messageSend</string>
+  </property>
+  <property name="styleSheet" >
+   <string/>
+  </property>
+  <layout class="QVBoxLayout" >
+   <item>
+    <widget class="QLabel" name="Ac_Status" >
+     <property name="frameShape" >
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <property name="text" >
+      <string/>
+     </property>
+     <property name="textFormat" >
+      <enum>Qt::RichText</enum>
+     </property>
+     <property name="wordWrap" >
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QTextEdit" name="MsgBrowser" >
+     <property name="focusPolicy" >
+      <enum>Qt::ClickFocus</enum>
+     </property>
+     <property name="styleSheet" >
+      <string/>
+     </property>
+     <property name="lineWidth" >
+      <number>2</number>
+     </property>
+     <property name="verticalScrollBarPolicy" >
+      <enum>Qt::ScrollBarAlwaysOn</enum>
+     </property>
+     <property name="autoFormatting" >
+      <set>QTextEdit::AutoAll</set>
+     </property>
+     <property name="tabChangesFocus" >
+      <bool>false</bool>
+     </property>
+     <property name="undoRedoEnabled" >
+      <bool>true</bool>
+     </property>
+     <property name="readOnly" >
+      <bool>true</bool>
+     </property>
+     <property name="html" >
+      <string>&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
+p, li { white-space: pre-wrap; }
+&lt;/style>&lt;/head>&lt;body style=" font-family:'宋体'; font-size:9pt; font-weight:400; font-style:normal;">
+&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Sans Serif';">&lt;/p>
+&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Sans Serif';">&lt;/p>&lt;/body>&lt;/html></string>
+     </property>
+     <property name="overwriteMode" >
+      <bool>true</bool>
+     </property>
+     <property name="textInteractionFlags" >
+      <set>Qt::TextSelectableByMouse</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" >
+     <item>
+      <widget class="QLabelMouse" name="TB_CHANGEMOD" >
+       <property name="toolTip" >
+        <string>change send mode</string>
+       </property>
+       <property name="text" >
+        <string>Change send mode</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabelMouse" name="TB_Histroy" >
+       <property name="toolTip" >
+        <string>look histroy</string>
+       </property>
+       <property name="text" >
+        <string>histroy</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer>
+       <property name="orientation" >
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" >
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QLabel" name="input_nm" >
+       <property name="text" >
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabelMouse" name="TB_Send" >
+       <property name="text" >
+        <string>send</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabelMouse" name="TB_FACE" >
+       <property name="text" >
+        <string>Face</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QTextEdit" name="MsgEdit" >
+     <property name="sizePolicy" >
+      <sizepolicy vsizetype="Maximum" hsizetype="Expanding" >
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="maximumSize" >
+      <size>
+       <width>16777215</width>
+       <height>100</height>
+      </size>
+     </property>
+     <property name="styleSheet" >
+      <string/>
+     </property>
+     <property name="tabChangesFocus" >
+      <bool>false</bool>
+     </property>
+     <property name="acceptRichText" >
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QLabelMouse</class>
+   <extends>QLabel</extends>
+   <header>fxLableMouse.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

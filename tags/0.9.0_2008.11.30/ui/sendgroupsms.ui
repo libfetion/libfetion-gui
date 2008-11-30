@@ -1,0 +1,147 @@
+<ui version="4.0" >
+ <class>SendGroupSMS</class>
+ <widget class="QMainWindow" name="SendGroupSMS" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>448</width>
+    <height>293</height>
+   </rect>
+  </property>
+  <property name="minimumSize" >
+   <size>
+    <width>448</width>
+    <height>293</height>
+   </size>
+  </property>
+  <property name="maximumSize" >
+   <size>
+    <width>448</width>
+    <height>293</height>
+   </size>
+  </property>
+  <property name="windowTitle" >
+   <string>SendQunMsg</string>
+  </property>
+  <property name="styleSheet" >
+   <string>QMainWindow {
+ 
+background-color:rgb(246,243,243);
+
+}</string>
+  </property>
+  <widget class="QWidget" name="centralwidget" >
+   <widget class="QTreeWidget" name="view" >
+    <property name="geometry" >
+     <rect>
+      <x>-1</x>
+      <y>1</y>
+      <width>191</width>
+      <height>291</height>
+     </rect>
+    </property>
+    <property name="selectionMode" >
+     <enum>QAbstractItemView::ExtendedSelection</enum>
+    </property>
+    <column>
+     <property name="text" >
+      <string>1</string>
+     </property>
+    </column>
+   </widget>
+   <widget class="QTextEdit" name="MsgEdit" >
+    <property name="geometry" >
+     <rect>
+      <x>194</x>
+      <y>151</y>
+      <width>251</width>
+      <height>111</height>
+     </rect>
+    </property>
+    <property name="sizePolicy" >
+     <sizepolicy vsizetype="Maximum" hsizetype="Expanding" >
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="maximumSize" >
+     <size>
+      <width>16777215</width>
+      <height>16777215</height>
+     </size>
+    </property>
+    <property name="tabChangesFocus" >
+     <bool>false</bool>
+    </property>
+    <property name="acceptRichText" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="TB_Send" >
+    <property name="geometry" >
+     <rect>
+      <x>363</x>
+      <y>265</y>
+      <width>80</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string>SendSMS</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="input_nm" >
+    <property name="geometry" >
+     <rect>
+      <x>197</x>
+      <y>269</y>
+      <width>161</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+   </widget>
+   <widget class="QTextBrowser" name="MsgBrowser" >
+    <property name="geometry" >
+     <rect>
+      <x>194</x>
+      <y>28</y>
+      <width>251</width>
+      <height>111</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="Line" name="line" >
+    <property name="geometry" >
+     <rect>
+      <x>190</x>
+      <y>135</y>
+      <width>251</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="orientation" >
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lb_choseUser" >
+    <property name="geometry" >
+     <rect>
+      <x>206</x>
+      <y>4</y>
+      <width>231</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

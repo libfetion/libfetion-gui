@@ -1,0 +1,374 @@
+<ui version="4.0" >
+ <class>Fetion_Login</class>
+ <widget class="QDialog" name="Fetion_Login" >
+  <property name="windowModality" >
+   <enum>Qt::NonModal</enum>
+  </property>
+  <property name="enabled" >
+   <bool>true</bool>
+  </property>
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>238</width>
+    <height>455</height>
+   </rect>
+  </property>
+  <property name="minimumSize" >
+   <size>
+    <width>238</width>
+    <height>455</height>
+   </size>
+  </property>
+  <property name="maximumSize" >
+   <size>
+    <width>238</width>
+    <height>455</height>
+   </size>
+  </property>
+  <property name="font" >
+   <font/>
+  </property>
+  <property name="contextMenuPolicy" >
+   <enum>Qt::NoContextMenu</enum>
+  </property>
+  <property name="windowTitle" >
+   <string comment="登录" >login_fetion</string>
+  </property>
+  <property name="styleSheet" >
+   <string>QDialog {
+ 
+background-color:rgb(246,243,243);
+
+}
+</string>
+  </property>
+  <property name="sizeGripEnabled" >
+   <bool>false</bool>
+  </property>
+  <property name="modal" >
+   <bool>false</bool>
+  </property>
+  <widget class="QLineEdit" name="ED_Fetion_Pwd" >
+   <property name="geometry" >
+    <rect>
+     <x>7</x>
+     <y>251</y>
+     <width>221</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet" >
+    <string>QLineEdit {
+      border-width: 1px;
+      border-style: solid;
+      border-radius: 4px;
+  } </string>
+   </property>
+   <property name="echoMode" >
+    <enum>QLineEdit::Password</enum>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="ED_Fetion_ID" >
+   <property name="geometry" >
+    <rect>
+     <x>7</x>
+     <y>190</y>
+     <width>221</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet" >
+    <string>QLineEdit {
+      border-width: 1px;
+      border-style: solid;
+      border-radius: 4px;
+  } </string>
+   </property>
+   <property name="maxLength" >
+    <number>11</number>
+   </property>
+   <property name="echoMode" >
+    <enum>QLineEdit::Normal</enum>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label" >
+   <property name="geometry" >
+    <rect>
+     <x>8</x>
+     <y>169</y>
+     <width>161</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>mobile number or fetion uid</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2" >
+   <property name="geometry" >
+    <rect>
+     <x>8</x>
+     <y>230</y>
+     <width>131</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="layoutDirection" >
+    <enum>Qt::LeftToRight</enum>
+   </property>
+   <property name="text" >
+    <string>please input password</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="About_cmm" >
+   <property name="geometry" >
+    <rect>
+     <x>87</x>
+     <y>434</y>
+     <width>138</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font" >
+    <font/>
+   </property>
+   <property name="focusPolicy" >
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="layoutDirection" >
+    <enum>Qt::RightToLeft</enum>
+   </property>
+   <property name="text" >
+    <string>&lt;a href="http://www.fetion.com.cn">about China mobile fetion&lt;/a></string>
+   </property>
+   <property name="textFormat" >
+    <enum>Qt::RichText</enum>
+   </property>
+   <property name="openExternalLinks" >
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="About_linux" >
+   <property name="geometry" >
+    <rect>
+     <x>133</x>
+     <y>416</y>
+     <width>91</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="font" >
+    <font/>
+   </property>
+   <property name="focusPolicy" >
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="layoutDirection" >
+    <enum>Qt::RightToLeft</enum>
+   </property>
+   <property name="text" >
+    <string>&lt;a href="http://www.libfetion.cn">about libfetion&lt;/a></string>
+   </property>
+   <property name="textFormat" >
+    <enum>Qt::RichText</enum>
+   </property>
+   <property name="openExternalLinks" >
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="Login_State" >
+   <property name="geometry" >
+    <rect>
+     <x>90</x>
+     <y>290</y>
+     <width>141</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="toolTip" >
+    <string/>
+   </property>
+   <property name="layoutDirection" >
+    <enum>Qt::RightToLeft</enum>
+   </property>
+   <property name="text" >
+    <string/>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="remPWD" >
+   <property name="geometry" >
+    <rect>
+     <x>151</x>
+     <y>348</y>
+     <width>81</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="layoutDirection" >
+    <enum>Qt::LeftToRight</enum>
+   </property>
+   <property name="styleSheet" >
+    <string/>
+   </property>
+   <property name="text" >
+    <string>remember password</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="loginState" >
+   <property name="geometry" >
+    <rect>
+     <x>8</x>
+     <y>310</y>
+     <width>121</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet" >
+    <string/>
+   </property>
+   <item>
+    <property name="text" >
+     <string>online</string>
+    </property>
+   </item>
+   <item>
+    <property name="text" >
+     <string>offline</string>
+    </property>
+   </item>
+   <item>
+    <property name="text" >
+     <string>away</string>
+    </property>
+   </item>
+   <item>
+    <property name="text" >
+     <string>busy</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QLabel" name="label_4" >
+   <property name="geometry" >
+    <rect>
+     <x>133</x>
+     <y>398</y>
+     <width>91</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font" >
+    <font/>
+   </property>
+   <property name="layoutDirection" >
+    <enum>Qt::RightToLeft</enum>
+   </property>
+   <property name="text" >
+    <string>&lt;a href="http://www.libfetion.cn/bbs">report bugs&lt;/a></string>
+   </property>
+   <property name="textFormat" >
+    <enum>Qt::RichText</enum>
+   </property>
+   <property name="openExternalLinks" >
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_5" >
+   <property name="geometry" >
+    <rect>
+     <x>9</x>
+     <y>290</y>
+     <width>71</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Login states</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="Net_Setting" >
+   <property name="geometry" >
+    <rect>
+     <x>134</x>
+     <y>380</y>
+     <width>91</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="palette" >
+    <palette>
+     <active/>
+     <inactive/>
+     <disabled/>
+    </palette>
+   </property>
+   <property name="font" >
+    <font/>
+   </property>
+   <property name="layoutDirection" >
+    <enum>Qt::RightToLeft</enum>
+   </property>
+   <property name="text" >
+    <string>&lt;a href="http://www.libfetion.cn">Network Setting&lt;/a></string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="login_image" >
+   <property name="geometry" >
+    <rect>
+     <x>-10</x>
+     <y>0</y>
+     <width>251</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string/>
+   </property>
+   <property name="pixmap" >
+    <pixmap/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="LibFetion_image" >
+   <property name="geometry" >
+    <rect>
+     <x>10</x>
+     <y>433</y>
+     <width>101</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabelMouse" name="BT_Login_Ok" >
+   <property name="geometry" >
+    <rect>
+     <x>146</x>
+     <y>310</y>
+     <width>80</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>login</string>
+   </property>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QLabelMouse</class>
+   <extends>QLabel</extends>
+   <header>fxLableMouse.h</header>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>ED_Fetion_ID</tabstop>
+  <tabstop>ED_Fetion_Pwd</tabstop>
+  <tabstop>loginState</tabstop>
+  <tabstop>remPWD</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

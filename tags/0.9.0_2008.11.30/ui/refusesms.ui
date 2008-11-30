@@ -1,0 +1,191 @@
+<ui version="4.0" >
+ <class>refuseSMSDia</class>
+ <widget class="QDialog" name="refuseSMSDia" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>263</width>
+    <height>202</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Dialog</string>
+  </property>
+  <property name="styleSheet" >
+   <string>QDialog {
+background-color:rgb(246,243,243);
+}</string>
+  </property>
+  <widget class="QDialogButtonBox" name="buttonBox" >
+   <property name="geometry" >
+    <rect>
+     <x>90</x>
+     <y>160</y>
+     <width>166</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="orientation" >
+    <enum>Qt::Horizontal</enum>
+   </property>
+   <property name="standardButtons" >
+    <set>QDialogButtonBox::Cancel|QDialogButtonBox::NoButton|QDialogButtonBox::Ok</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="Test_Show" >
+   <property name="geometry" >
+    <rect>
+     <x>191</x>
+     <y>7</y>
+     <width>71</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string/>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="RB_24" >
+   <property name="geometry" >
+    <rect>
+     <x>10</x>
+     <y>97</y>
+     <width>89</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>24 hours</string>
+   </property>
+   <property name="checked" >
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="RB_3D" >
+   <property name="geometry" >
+    <rect>
+     <x>130</x>
+     <y>97</y>
+     <width>89</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>3 days</string>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="RB_1W" >
+   <property name="geometry" >
+    <rect>
+     <x>10</x>
+     <y>127</y>
+     <width>89</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>one week</string>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="RB_FE" >
+   <property name="geometry" >
+    <rect>
+     <x>130</x>
+     <y>127</y>
+     <width>89</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>forever</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label" >
+   <property name="geometry" >
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>241</width>
+     <height>71</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
+p, li { white-space: pre-wrap; }
+&lt;/style>&lt;/head>&lt;body style=" font-family:'宋体'; font-size:9pt; font-weight:400; font-style:normal;">
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">&lt;span style=" font-family:'Sans Serif';">You can let fetion over a period of time does not send  messages to your phone, but does  fetion  can still receive  messages, you want this time is&lt;/span>&lt;/p>&lt;/body>&lt;/html></string>
+   </property>
+   <property name="textFormat" >
+    <enum>Qt::RichText</enum>
+   </property>
+   <property name="scaledContents" >
+    <bool>true</bool>
+   </property>
+   <property name="wordWrap" >
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="Line" name="line" >
+   <property name="geometry" >
+    <rect>
+     <x>0</x>
+     <y>80</y>
+     <width>261</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="orientation" >
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="Line" name="line_2" >
+   <property name="geometry" >
+    <rect>
+     <x>0</x>
+     <y>147</y>
+     <width>261</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="orientation" >
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>refuseSMSDia</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>refuseSMSDia</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>316</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
