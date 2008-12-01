@@ -968,7 +968,7 @@ void FxMainWindow::createSkinMenu(QMenu *skinMenu)
 		else 
 			action->setIcon(getMenuIcon(CancelIcon));
 
-		QVariant Var((int)sk_info);
+		QVariant Var((uint)sk_info);
 		action->setData(Var);
 		skinMenu->addAction(action);
 	}
@@ -981,7 +981,7 @@ void FxMainWindow::createSkinMenu(QMenu *skinMenu)
 
 void FxMainWindow::skinMenutriggered(QAction *action)
 {
-	Skin_Info *sk_info = (Skin_Info *)(action->data().toInt());
+	Skin_Info *sk_info = (Skin_Info *)(action->data().toUInt());
 	setSkins(sk_info->skinpath, sk_info->name);
 	this->UpdateSkins();
 }
