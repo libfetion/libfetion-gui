@@ -216,7 +216,7 @@ FxMainWindow::FxMainWindow(QWidget *parent)
 	
 	
 //it is may be waste some network res
-	fx_updata_account_info_all();
+//fx_updata_account_info_all();  //this function will make a error memory.
 	
 	minimizedTimer.start(100);
 }
@@ -968,7 +968,12 @@ void FxMainWindow::createSkinMenu(QMenu *skinMenu)
 		else 
 			action->setIcon(getMenuIcon(CancelIcon));
 
+#if MS_VC6
 		QVariant Var((uint)sk_info);
+#else
+		QVariant Var;
+		Var.setValue (sk_info); 
+#endif
 		action->setData(Var);
 		skinMenu->addAction(action);
 	}
@@ -981,7 +986,13 @@ void FxMainWindow::createSkinMenu(QMenu *skinMenu)
 
 void FxMainWindow::skinMenutriggered(QAction *action)
 {
+#if MS_VC6
 	Skin_Info *sk_info = (Skin_Info *)(action->data().toUInt());
+#else
+	Skin_Info *sk_info = action->data().value<Skin_Info*>() ;
+#endif
+			if (!sk_info)
+			return;
 	setSkins(sk_info->skinpath, sk_info->name);
 	this->UpdateSkins();
 }
