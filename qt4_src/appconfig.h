@@ -98,6 +98,7 @@ typedef struct _Skin_Info
 Q_DECLARE_METATYPE(Group_Info *);
 Q_DECLARE_METATYPE(Account_Info *);
 Q_DECLARE_METATYPE(Qun_Info *);
+Q_DECLARE_METATYPE(Skin_Info *);
 #endif
 
 #endif
