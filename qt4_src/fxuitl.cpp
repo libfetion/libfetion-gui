@@ -79,7 +79,7 @@ bool RegistHotkey(QWidget *window, QChar keyValue, Qt::KeyboardModifiers keyMod)
 	WId w_handle = window?window->winId():0;
 	int modifiy = QtModToWinMod(keyMod);
 	return RegisterHotKey(w_handle, hotkey_id, modifiy, VkKeyScan(keyValue.toAscii()));
-#else //liunx or mac os not imple...
+#else //liunx or mac os are not implement...
 	return false;
 #endif
 
@@ -111,7 +111,7 @@ QString FxFacePath()
 	  if ((fp = fopen("./faces_image/1.gif", "r")))
 	  {
 		  fclose (fp);
-		  path = "./image_faces";
+		  path = "./faces_image";
 	  }	
 	  else
 		  path = "/usr/share/libfetion/faces_image";
@@ -123,9 +123,9 @@ QString FxFacePath()
 
 QString fxgui_handle_newMsg(Fetion_MSG *fxMsg)
 {
-	//note: the fetion msg has two format : text/plain and text/html-fragment.
+	//note: there are two formats of the fetion msg: text/plain and text/html-fragment.
 	//text/plain  is sended from mobile client.
-	//text/html-fragment is sended from pc client, so it have html format.
+	//text/html-fragment is sended from pc client, and it is the xml format.
 	if (!fxMsg)
 		return "";
 	QString newmsg;
