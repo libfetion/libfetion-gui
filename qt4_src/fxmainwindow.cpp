@@ -2320,7 +2320,7 @@ void FxMainWindow::UpdateSkins()
 	BusyAct->setIcon(getOnlineStatusIcon(FX_STATUS_BUSY));
 	AwayAct->setIcon(getOnlineStatusIcon(FX_STATUS_AWAY));
 
-	if (fx_get_user_refuse_sms_day()) //is get from libfetion..	
+	if (fx_get_user_refuse_sms_day()) //was got from libfetion..	
 	{
 		refuseSMSAct->setIcon(getMenuIcon(ApplyIcon));
 		acceptSMSAct->setIcon(QPixmap());
