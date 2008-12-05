@@ -32,9 +32,9 @@ static QString CropTabName(QString orig_name);
 inline AccountTab *findFromMsgWindow(QTabWidget * tabWidget, qlonglong ac_id)
 {
 	AccountTab *ac_tab = NULL;
-	int tabCount = tabWidget->count ();
+	int tabCount = tabWidget->count();
 
-	for(int i = 0; i< tabCount; i++)
+	for(int i = 0; i < tabCount; i++)
 	{
 		ac_tab = (AccountTab *) tabWidget->widget(i); 
 		if(ac_tab && ac_tab->account_id == ac_id)
@@ -470,6 +470,15 @@ void FxMsgWindow::showFaces()
 
 void FxMsgWindow::UpdateSkins()
 {
+    AccountTab *ac_tab = NULL;
+	int tabCount = tabWidget->count();
+    for(int i = 0; i < tabCount; i++)
+    {
+        ac_tab = (AccountTab *) tabWidget->widget(i); 
+        if(ac_tab)
+            ac_tab->UpdateSkins();
+    }
+
 	if (closeTabButton)
 		closeTabButton->setIcon(getCloseTabImage());
 }
