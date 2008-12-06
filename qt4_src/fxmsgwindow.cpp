@@ -155,6 +155,9 @@ FxQunWindow* FxMsgWindow::findQunWindow(qlonglong qun_id)
 
 bool FxMsgWindow::addQunMessage(QString msg, qlonglong qun_id, qlonglong sender, bool iscoming_msg)
 {
+	if (!Settings::instance().isMute())
+		playSound(MSG_SOUND);
+
 	FxQunWindow	*qunW = findQunWindow(qun_id);
 	if (!qunW)
 	{
@@ -300,9 +303,6 @@ void FxMsgWindow::exec_autoRelpy(QTextEdit* msgBrowser, qlonglong account_id, QS
 
 void FxMsgWindow::haveQunMessage(qlonglong qun_id)
 {
-	if (!Settings::instance().isMute())
-		playSound(MSG_SOUND);
-
 	Fetion_MSG * fxMsg = fx_get_msg(qun_id);
 	if (!fxMsg)
 		return;
@@ -470,6 +470,7 @@ void FxMsgWindow::showFaces()
 
 void FxMsgWindow::UpdateSkins()
 {
+
     AccountTab *ac_tab = NULL;
 	int tabCount = tabWidget->count();
     for(int i = 0; i < tabCount; i++)
@@ -478,6 +479,10 @@ void FxMsgWindow::UpdateSkins()
         if(ac_tab)
             ac_tab->UpdateSkins();
     }
+
+	//update the chart windows icon
+	ac_tab = (AccountTab *) tabWidget->widget (tabWidget->currentIndex());
+	setCurrentTabTitle(ac_tab); 
 
 	if (closeTabButton)
 		closeTabButton->setIcon(getCloseTabImage());
