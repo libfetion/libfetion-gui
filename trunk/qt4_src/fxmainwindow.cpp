@@ -468,6 +468,9 @@ void FxMainWindow::handleFx_relogin_Event(int message, WPARAM wParam, LPARAM lPa
 			}
 			if (reloginTimer.isActive())
 				reloginTimer.stop();
+
+			//set the fetion system msg call back function
+			fx_set_system_msg_cb (Sys_EventListener, this);
 			break;
 	}
 }
