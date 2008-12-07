@@ -228,7 +228,7 @@ void FxLoginWindow::LoginOK()
 
 void FxLoginWindow::login()
 {
-#if 0
+#if DEBUG_GUI 
 	LoginOK();
 	return ;
 #endif

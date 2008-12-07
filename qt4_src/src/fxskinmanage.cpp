@@ -82,7 +82,7 @@ void get_skin_search_result(QList<Skin_Info *>  *items, QString path)
 	for (QStringList::Iterator it = dirlist.begin(); it != dirlist.end(); ++it)
 	{
 		QString tmpPath = d.path() +"/"+ (*it);
-		//qDebug(tmpPath.toUtf8().data());
+		qDebug(tmpPath.toUtf8().data());
 
 		Skin_Info *sk_info = get_skininfo(tmpPath);
 		if (sk_info && items)
@@ -90,9 +90,15 @@ void get_skin_search_result(QList<Skin_Info *>  *items, QString path)
 	}
 }
 
+static QList<Skin_Info *> *g_skinlist = NULL;
+
 QList<Skin_Info *> *searchAllSkins()
 {
-	QList<Skin_Info *> *items = new QList<Skin_Info *>;
-	get_skin_search_result(items, SkinPath());
-	return items;
+	if (g_skinlist == NULL)
+		g_skinlist = new QList<Skin_Info *>;
+	else
+		g_skinlist->clear();
+
+	get_skin_search_result(g_skinlist, SkinPath());
+	return g_skinlist;
 }

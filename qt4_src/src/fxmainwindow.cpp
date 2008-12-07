@@ -207,11 +207,11 @@ FxMainWindow::FxMainWindow(QWidget *parent)
 
 	//save the account info to db, 
 	//will a bug: when the account is changed, but the db info maybe not changed follow
-#if 1
-	saveAccountInfo();
-#else
+#if DEBUG_GUI
 	QTreeWidgetItem * tm = new QTreeWidgetItem(view, 0);
 	tm->setText(0, "haha");
+#else
+	saveAccountInfo();
 #endif
 	
 	
@@ -948,13 +948,13 @@ void FxMainWindow::moveGroupMenutriggered(QAction *action)
 	fx_move_group_buddy_by_id(ac_info->accountID, group_id, NULL, NULL);
 }
 
-void FxMainWindow::createSkinMenu(QMenu *skinMenu)
+void FxMainWindow::createSkinMenu(QMenu *sub_skinMenu)
 {
 	//fixme: here have a big bug.. 
-	if (!skinMenu)
+	if (!sub_skinMenu)
 		return;
 
-	skinMenu->clear();
+	sub_skinMenu->clear();
 
 	QList<Skin_Info *> * skinlist = searchAllSkins();
 	if (skinlist == NULL)
@@ -965,6 +965,9 @@ void FxMainWindow::createSkinMenu(QMenu *skinMenu)
 	{
 		Skin_Info *sk_info = (*it);
 		QAction *action = new QAction(sk_info->name, this);
+
+	qDebug(sk_info->name.toUtf8().data());
+	qDebug(sk_info->skinpath.toUtf8().data());
 
 		if (sk_info->name == getSkinName() && sk_info->skinpath == getSkinPath())
 			action->setIcon(getMenuIcon(ApplyIcon));
@@ -978,13 +981,12 @@ void FxMainWindow::createSkinMenu(QMenu *skinMenu)
 		Var.setValue (sk_info); 
 #endif
 		action->setData(Var);
-		skinMenu->addAction(action);
+		sub_skinMenu->addAction(action);
 	}
 
 	//fixme: here need to releas the skinlist!!! note: not release the sk_info
-
-	connect(skinMenu, SIGNAL(triggered(QAction *)), this, SLOT(skinMenutriggered(QAction *)));
-	connect(skinMenu, SIGNAL(aboutToShow()), this, SLOT(slot_ShowSkinMenu()));
+	connect(sub_skinMenu, SIGNAL(triggered(QAction *)), this, SLOT(skinMenutriggered(QAction *)));
+//	connect(sub_skinMenu, SIGNAL(aboutToShow()), this, SLOT(slot_ShowSkinMenu()));
 }
 
 void FxMainWindow::skinMenutriggered(QAction *action)
@@ -994,8 +996,8 @@ void FxMainWindow::skinMenutriggered(QAction *action)
 #else
 	Skin_Info *sk_info = action->data().value<Skin_Info*>() ;
 #endif
-			if (!sk_info)
-			return;
+	if (!sk_info)
+		return;
 	setSkins(sk_info->skinpath, sk_info->name);
 	this->UpdateSkins();
 }
@@ -1220,10 +1222,10 @@ void FxMainWindow::trayIconActivated(QSystemTrayIcon::ActivationReason reason)
 void FxMainWindow::init_UI()
 {
 	Settings::instance().setMainWindow(this);
-#if 1
-	Settings::instance().setUser((qlonglong)strtol(fx_get_usr_uid(), NULL, 10));
-#else
+#if DEBUG_GUI 
 	Settings::instance().setUser(1000);
+#else
+	Settings::instance().setUser((qlonglong)strtol(fx_get_usr_uid(), NULL, 10));
 #endif
 
 	if (Settings::instance().isMainWindowTopHint())
