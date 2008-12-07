@@ -72,7 +72,7 @@ Settings::Settings(const QString & fileName, Format format)
 	m_isAutoLogin = ::isAutoLogin(NULL, NULL, NULL);
 
 	m_skinPath = value("SkinPath", defaultSkinPath()).toString();
-	m_skinName = value("SkinName", QObject::tr("default")).toString();
+	m_skinName = value("SkinName", "default").toString();
 }
 
 Settings::~Settings()
