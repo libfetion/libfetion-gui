@@ -1,5 +1,6 @@
 TEMPLATE      = app 
 
+
 win32 {
 	QT 		 += xml
   	TARGET    = LibFx
@@ -23,8 +24,14 @@ mac {
     QMAKE_INFO_PLIST = ./misc/mac_fetion.plist
 }
 
-
 TRANSLATIONS    = fetion_utf8_CN.ts
+
+QMAKE_CXXFLAGS = -I./src -I./.ui
+
+OBJECTS_DIR = ./.tmp
+MOC_DIR = ./.moc
+UI_HEADERS_DIR = ./.ui
+
 
 HEADERS       =  \
 				 ./src/appconfig.h \
