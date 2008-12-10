@@ -50,6 +50,7 @@ public:
 	void subNewMsgCount(bool isQunMsg = false);
 
 	void UpdateSkins();
+	void UpdateSkinsMenu();
 
 protected:
 #if WIN32
@@ -106,6 +107,7 @@ signals:
 	void signal_UpdateSmsDay(int);
 
 private slots:
+	void checkSkinPath();
 	void minimizedWind();
 	void flickerTray();
 	void relogin_fetion();
@@ -274,6 +276,7 @@ private:
 
     bool isNeedRecordWinPos;
     bool isHaveminimized;
+  QTimer checkSkinsTimer;
 	QTimer minimizedTimer;
 	QTimer trayFlickTimer;
 	QTimer reloginTimer;

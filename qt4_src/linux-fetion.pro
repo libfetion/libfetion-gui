@@ -26,7 +26,7 @@ mac {
 
 TRANSLATIONS    = fetion_utf8_CN.ts
 
-QMAKE_CXXFLAGS = -I./src -I./.ui
+QMAKE_CXXFLAGS = -I./ -I./src -I./.ui
 
 OBJECTS_DIR = ./.tmp
 MOC_DIR = ./.moc

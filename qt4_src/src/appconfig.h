@@ -41,7 +41,7 @@
 #define SKIN_CONFG_FILE    "/skin.xml"
 #define MAC_OS 0
 
-#define DEBUG_GUI 1
+#define DEBUG_GUI 0
 
 #ifdef WIN32 
 #pragma comment(lib, "./lib/LibFetion.lib")  

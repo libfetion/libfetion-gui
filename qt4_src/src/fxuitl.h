@@ -42,6 +42,8 @@ int addCount();
 int reduceCount();
 int detachandremove( void *shmaddr);
 
+int check_dir_state(const char *path);
+
 class m_Instance
 {
 	m_Instance();
