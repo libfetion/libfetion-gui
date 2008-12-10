@@ -181,7 +181,7 @@ QString fxgui_to_faces(QString newmsg)
 	newmsg.replace("(@)","<img src='"+FxFacePath()+"/22.gif'>");
 
 	//linux
-	//newmsg.replace("(&amp;)","<img sr/***************************************c='"+FxFacePath()+"/23.gif'>");
+	//newmsg.replace("(&amp;)","<img src='"+FxFacePath()+"/23.gif'>");
 	//官方
 	newmsg.replace("(&)","<img src='"+FxFacePath()+"/23.gif'>");
 

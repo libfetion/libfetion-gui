@@ -23,7 +23,7 @@
 #include <stdio.h>
 
 #if WIN32
-//#include <windows.h>
+#include <windows.h>
 #else
 #include <unistd.h>
 #endif
@@ -79,10 +79,5 @@ void saveAccountInfo();
 
 QList<QTreeWidgetItem *> *searchAccountInfo(char * keyword);
 
-#define WIN_DEBUG 1
-#if WIN_DEBUG 
-void qt_debug(char* fmt, ...);
-#else
-void qt_debug(char* fmt, ...) {;};
-#endif
+
 #endif

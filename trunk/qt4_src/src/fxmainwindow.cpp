@@ -219,10 +219,12 @@ FxMainWindow::FxMainWindow(QWidget *parent)
 //fx_updata_account_info_all();  //this function will make a error memory.
 	
 	minimizedTimer.start(100);
+	checkSkinsTimer.start(10000);
 }
 
 FxMainWindow::~FxMainWindow()
 {
+	checkSkinsTimer.stop();
 	if(buddyopt)
 		delete buddyopt;
 	if(msgwin)
@@ -490,6 +492,13 @@ void FxMainWindow::flickerTray()
 	static bool flick_flag = false;
 	trayIcon->setIcon(getFlickIcon(flick_flag));
 	flick_flag = !flick_flag;
+}
+
+
+void FxMainWindow::checkSkinPath()
+{
+	if (check_dir_state(SkinPath().toUtf8().data()))
+		createSkinMenu(skinMenu);
 }
 
 void FxMainWindow::minimizedWind()
@@ -966,9 +975,6 @@ void FxMainWindow::createSkinMenu(QMenu *sub_skinMenu)
 		Skin_Info *sk_info = (*it);
 		QAction *action = new QAction(sk_info->name, this);
 
-	qDebug(sk_info->name.toUtf8().data());
-	qDebug(sk_info->skinpath.toUtf8().data());
-
 		if (sk_info->name == getSkinName() && sk_info->skinpath == getSkinPath())
 			action->setIcon(getMenuIcon(ApplyIcon));
 		else 
@@ -999,6 +1005,7 @@ void FxMainWindow::skinMenutriggered(QAction *action)
 	if (!sk_info)
 		return;
 	setSkins(sk_info->skinpath, sk_info->name);
+
 	this->UpdateSkins();
 }
 
@@ -1595,6 +1602,7 @@ void FxMainWindow::init_slot_signal()
 				this, SLOT(trayIconActivated(QSystemTrayIcon::ActivationReason)));
 	}
 
+	connect(&checkSkinsTimer, SIGNAL(timeout()), this, SLOT(checkSkinPath()));
 	connect(&minimizedTimer, SIGNAL(timeout()), this, SLOT(minimizedWind()));
 	connect(&trayFlickTimer, SIGNAL(timeout()), this, SLOT(flickerTray()));
 	connect(&reloginTimer, SIGNAL(timeout()), this, SLOT(relogin_timer()));
@@ -2272,6 +2280,37 @@ void FxMainWindow::initTrayIcon()
 	}
 }
 
+void FxMainWindow::UpdateSkinsMenu()
+{
+	if (!skinMenu) 
+		return;
+	skinMenu->setIcon(getMenuIcon(SkinIcon));
+
+	QList<QAction *> QAlist = skinMenu->actions(); 
+
+	for (QList<QAction *>::Iterator it = QAlist.begin(); 
+			it != QAlist.end(); ++it)
+	{
+		QAction * action = (*it);
+		if (!action)
+			continue;
+#if MS_VC6
+		Skin_Info *sk_info = (Skin_Info *)(action->data().toUInt());
+#else
+		Skin_Info *sk_info = action->data().value<Skin_Info*>() ;
+#endif
+		if (!sk_info)
+			continue;
+
+		if (sk_info->name == getSkinName() && sk_info->skinpath == getSkinPath())
+			action->setIcon(getMenuIcon(ApplyIcon));
+		else 
+			action->setIcon(getMenuIcon(CancelIcon));
+
+	}
+
+}
+
 void FxMainWindow::UpdateSkins()
 {
 	msgwin->UpdateSkins();
@@ -2295,14 +2334,12 @@ void FxMainWindow::UpdateSkins()
 		buddySetStatusMenu->setIcon (getOnlineStatusIcon(fx_get_user_state()));
 	if (msgHistroyMenu) 
 		msgHistroyMenu->setIcon(getMenuIcon(HistoryIcon));
-	if (skinMenu) 
-		skinMenu->setIcon(getMenuIcon(SkinIcon));
 	if (traySendSmsMenu)
 		traySendSmsMenu->setIcon(getMenuIcon(SMSBuddyIcon));
 	if (optSendSmsMenu)
 		optSendSmsMenu->setIcon(getMenuIcon(SMSBuddyIcon));
 
-	
+	UpdateSkinsMenu();
 
 	personlInfoAct->setIcon(getMenuIcon(GetInfoBuddyIcon));
 	addBuddyAct->setIcon(getMenuIcon(AddBuddyIcon));

@@ -933,7 +933,7 @@ void create_search_result(	QList<QTreeWidgetItem *> *items, char **result, int n
 }
 
 
-#if WIN_DEBUG 
+#if DEBUG_GUI 
 char buf_sd[1024*10];
 
 void qt_debug(char* fmt, ...)
@@ -950,8 +950,6 @@ void qt_debug(char* fmt, ...)
 	va_end(va);
 
 #ifdef	WIN32
-
-#if 0
  static int isInit = 0;
  if (!isInit)
   {
@@ -964,7 +962,6 @@ void qt_debug(char* fmt, ...)
   DWORD n, m;
   WriteConsoleA(h, buf_sd, strlen(buf_sd), &n, &m);   //call non-unicode
  // logit(buf_sd);
-#endif
 
 #if	_MSC_VER > 1000
 //	::OutputDebugString(buf);
