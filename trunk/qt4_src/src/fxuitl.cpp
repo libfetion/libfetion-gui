@@ -181,7 +181,7 @@ QString fxgui_to_faces(QString newmsg)
 	newmsg.replace("(@)","<img src='"+FxFacePath()+"/22.gif'>");
 
 	//linux
-	//newmsg.replace("(&amp;)","<img src='"+FxFacePath()+"/23.gif'>");
+	//newmsg.replace("(&amp;)","<img sr/***************************************c='"+FxFacePath()+"/23.gif'>");
 	//官方
 	newmsg.replace("(&)","<img src='"+FxFacePath()+"/23.gif'>");
 
@@ -368,3 +368,67 @@ int m_Instance::isHaveInstance()
 		return 0;
 }
 
+
+
+
+/* 
+ * Copyright (C) 2008
+ * 
+ * A Directory Modifly State Checker used in libfetion for Mac/Linux/Windows.
+ *
+ * Author: YY(51test2003@gmail.com)
+ */
+ 
+ 
+ 
+#include <stdio.h>
+#include <sys/stat.h> 
+
+#ifdef WIN32
+#include <windows.h>
+#else
+#include <time.h>
+#endif
+
+int check_dir_state(const char *path)
+{
+	static time_t mtime = 0;
+	struct stat state;
+	if(stat(path, &state) == -1)					/* System call failed. Treat as be modified.*/
+			return 1;
+	if(mtime == 0)												/* Initialize the default timestamp*/
+	{
+		mtime = state.st_mtime;
+	}
+	if(mtime != state.st_mtime)						/* Directory was modified*/
+	{
+		//printf("Modyfied.\n");
+		mtime = state.st_mtime;
+		return 1;
+	}
+	
+	return 0;
+}
+
+
+
+/***************************************
+ 
+int check_dir_state(const char *path)
+{
+	HANDLE hDir;
+	hDir = CreateFile(path, GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ|FILE_SHARE_DELETE, NULL, OPEN_EXISTING, FILE_FLAG_BACKUP_SEMANTICS, NULL); 
+	FILETIME tempLastWriteTime;	
+	BOOL retval = GetFileTime(hDir, NULL, NULL, &tempLastWriteTime); 
+	if(*(ULARGE_INTEGER*)&lastWriteTime == 0)
+	{
+		lastWriteTime = tempLastWriteTime;
+	}	
+	if(CompareFileTime(&lastWriteTime, &tempLastWriteTime) != 0)
+	{
+		printf("Modyfied.\n");
+		lastWriteTime = tempLastWriteTime;
+		return 1;
+	}	
+}
+***************************************/
