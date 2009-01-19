@@ -308,7 +308,7 @@ QPixmap getBTSendSelfImage()
 
 QPixmap getAddImage()
 {
-	return QPixmap(getSkinPath() + "/theme/addfrined.gif");
+	return QPixmap(getSkinPath() + "/theme/addfriend.gif");
 }
 
 QPixmap getImpresaBKImage()

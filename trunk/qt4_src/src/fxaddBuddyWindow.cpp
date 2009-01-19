@@ -43,7 +43,7 @@ void FxAddBuddy::init()
 	connect(RB_mobile, SIGNAL(clicked()), this, SLOT(mobileRB()));
 	connect(RB_fetionID, SIGNAL(clicked()), this, SLOT(fetionRB()));
 
-	connect(buttonBox, SIGNAL(accepted()), this, SLOT(addfrined()));
+	connect(buttonBox, SIGNAL(accepted()), this, SLOT(addfriend()));
 	connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
 }
 
@@ -70,7 +70,7 @@ FxAddBuddy::~FxAddBuddy()
 
 }
 
-void FxAddBuddy::addfrined()
+void FxAddBuddy::addfriend()
 {
 	bool ismobile = false;
 	if( RB_mobile->isChecked () ) {

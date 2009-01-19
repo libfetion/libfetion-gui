@@ -41,7 +41,7 @@ private slots:
 	void newgroup();
 	void mobileRB();
 	void fetionRB();
-	void addfrined();
+	void addfriend();
 private:
 	Fetion_Account *m_account;
 };
