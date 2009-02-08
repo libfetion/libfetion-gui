@@ -1,4 +1,4 @@
-#summary One-sentence summary of this page.
+#summary note of committing your codes to svn.
 #labels Phase-Implementation
 
 = Introduction =
