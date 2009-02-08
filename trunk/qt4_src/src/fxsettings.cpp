@@ -182,7 +182,7 @@ void Settings::setMainWindowTopHint(bool isMainWindowTopHint)
 	if (m_mainwind)	
 	{
 		if (m_isMainWindowTopHint)
-			m_mainwind->setWindowFlags(Qt::WindowStaysOnTopHint);
+			m_mainwind->setWindowFlags(m_mainwind->windowFlags() | Qt::WindowStaysOnTopHint);
 		else
 			m_mainwind->setWindowFlags(m_mainwind->windowFlags() ^ Qt::WindowStaysOnTopHint);
 		m_mainwind->show();

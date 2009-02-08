@@ -200,6 +200,13 @@ void AccountTab::handle_alt_num( QKeyEvent *keyEvent)
 	tabWidget->setCurrentIndex(index -1); 
 }
 
+void AccountTab::SendNudge()
+{
+	if (!fx_is_pc_user_by_id(account_id)) 
+		return;
+	fx_send_nudge(account_id);
+}
+
 void AccountTab::SendMsg()
 {
 	QString msg = msgSend->MsgEdit->toPlainText();
@@ -338,8 +345,9 @@ void AccountTab::UpdateSkins()
 {
 	TB_FACE->setPixmap (getFaceIcon()); 
 	TB_CHANGEMOD->setPixmap (getChangeSendModIcon()); 
-	TB_Histroy->setPixmap (getHistoryIcon()); 
-	TB_Send->setPixmap (getSendIcon()); 
+	TB_NUDGE->setPixmap (getNudgeIcon()); 
+	TB_HISTROY->setPixmap (getHistoryIcon()); 
+	TB_SEND->setPixmap (getSendIcon()); 
 }
 
 void AccountTab::init()
@@ -379,8 +387,9 @@ void AccountTab::init()
 void AccountTab::init_slot()
 {
 	connect(TB_CHANGEMOD, SIGNAL(clicked()), this, SLOT(changeSendModle()));
-	connect(TB_Send, SIGNAL(clicked()), this, SLOT(SendMsg()));
-	connect(TB_Histroy, SIGNAL(clicked()), this, SLOT(ShowHistroy()));
+	connect(TB_HISTROY, SIGNAL(clicked()), this, SLOT(ShowHistroy()));
+	connect(TB_NUDGE, SIGNAL(clicked()), this, SLOT(SendNudge()));
+	connect(TB_SEND, SIGNAL(clicked()), this, SLOT(SendMsg()));
 	connect(TB_FACE, SIGNAL(clicked()), this, SLOT(ShowFaces()));
 	connect(MsgEdit, SIGNAL(textChanged()), this, SLOT(changeTableInputNM()));
 	connect(&flickTimer, SIGNAL(timeout()), this, SLOT(flickerTab()));

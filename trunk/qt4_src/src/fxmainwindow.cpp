@@ -159,6 +159,10 @@ void FxMainWindow::handleFx_Sys_Event(int message, WPARAM wParam, LPARAM lParam)
 			emit signal_set_nickname_ok();
 			break;
 
+		case FX_NUDGE_MESSAGE:
+			emit signal_receive_nudge((qlonglong)lParam);
+			break;
+
 		default:
 			break;
 
@@ -602,6 +606,11 @@ void FxMainWindow::slot_SystemNetErr(int err)
 	fx_status = SYS_RELOGIN;
 	if (isHaveTray)  
 		trayIcon->setIcon (getSysTrayIcon(0));
+}
+
+void FxMainWindow::slot_receive_nudge(qlonglong who)
+{
+
 }
 
 void FxMainWindow::slot_DeRegistered()
@@ -1635,6 +1644,8 @@ void FxMainWindow::init_slot_signal()
 	connect(this, SIGNAL(signal_del_buddy(int, int, qlonglong)), 
 			this, SLOT( slot_del_buddy(int, int, qlonglong)) );
 	connect(this, SIGNAL(signal_set_nickname_ok()), this, SLOT(setUINiceName()));
+	connect(this, SIGNAL(signal_receive_nudge(qlonglong)), 
+			this, SLOT( slot_receive_nudge(qlonglong)));
 	connect(this, SIGNAL(signal_set_state(int)), 
 			this, SLOT( slot_set_state(int)) );
 	connect(this, SIGNAL(signal_add_group(int, int, qlonglong)), 

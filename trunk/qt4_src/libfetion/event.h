@@ -243,15 +243,15 @@ extern "C" {
 #define FX_SYS_MESSAGE            FX_EVENT_BASE + 0x0012
 
 /**
-* \def FX_UNDGE_MESSAGE
-* \brief a undge message received
+* \def FX_NUDGE_MESSAGE
+* \brief a nudge message received
 *
-* This message is posted when the client receive a undge message..
+* This message is posted when the client receive a nudge message..
  *
  * \param lParam The message sender.
 * 
 */
-#define FX_UNDGE_MESSAGE           FX_EVENT_BASE + 0x0013
+#define FX_NUDGE_MESSAGE           FX_EVENT_BASE + 0x0013
 /** @} end of recv_msg_event */
 
 

@@ -956,7 +956,7 @@ FX_EXPORT int fx_is_authed_by_id(long id);
   * \return AUTH_OK if account is auth,  AUTH_REFUS if it auth refus, 
   * AUTH_WAIT if it not decide.
 */
-FX_EXPORT int fx_is_authed_by_account(Fetion_Account *account);
+FX_EXPORT int fx_is_authed_by_account(const Fetion_Account *account);
 
 /**
   * \fn BOOL fx_is_InBlacklist_by_id(const long id)
@@ -1370,7 +1370,7 @@ FX_EXPORT int fx_removefrom_blacklist_by_uri(const char* uri, EventListener func
   * \brief send a nudge 
   *
   * 
-  * this function should send by 5 minute pre time . or it will return FALSE, and the receicer must be online.
+  * this function should send by 20 second pre time . or it will return FALSE, and the receicer must be online.
   *
   * \param who which one you want to send.
   *

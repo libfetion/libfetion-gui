@@ -42,9 +42,10 @@ QPixmap getBT_SMSIcon();
 
 QPixmap getInputFaceIcon(); //this function is get the inputFace dialog is background picture
 QPixmap getFaceIcon(); //this function is get the face toolbutton is picture
-QPixmap getSendIcon(); //this function is get the face toolbutton is picture
-QPixmap getHistoryIcon(); //this function is get the face toolbutton is picture
-QPixmap getChangeSendModIcon(); //this function is get the face toolbutton is picture
+QPixmap getSendIcon(); //this function is get the send toolbutton is picture
+QPixmap getNudgeIcon(); //this function is get the nudge toolbutton is picture
+QPixmap getHistoryIcon(); //this function is get the history toolbutton is picture
+QPixmap getChangeSendModIcon(); //this function is get the change_send_mod toolbutton is picture
 
 QPixmap getFlickIcon(bool flag);
 
