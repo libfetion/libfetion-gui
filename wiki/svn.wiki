@@ -1,4 +1,4 @@
-#summary note of committing your codes to svn.
+#summary notice about committing your codes to svn .
 #labels Phase-Implementation
 
 = Introduction =
