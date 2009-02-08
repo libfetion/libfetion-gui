@@ -50,6 +50,7 @@ public:
 	void showFaces();
 	void msg_exit();
 
+	void nudge_flicker();
 	void addAccount(qlonglong account_id, bool isSendSms = false);
 	void haveNewMessage(qlonglong account_id);
 	bool addMessage(QString msg, qlonglong account_id, bool iscomeing_msg = false);

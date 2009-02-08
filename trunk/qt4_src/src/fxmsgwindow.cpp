@@ -458,6 +458,11 @@ void FxMsgWindow::msg_exit()
 	close();
 }
 
+void FxMsgWindow::nudge_flicker()
+{
+
+}
+
 void FxMsgWindow::showFaces()
 {
 	inputFace->setGeometry (QCursor::pos().x() - 320,

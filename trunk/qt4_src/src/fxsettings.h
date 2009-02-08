@@ -41,6 +41,9 @@ extern "C" {
 			QString SkinPath() { return m_skinPath; }
 			QString SkinName() { return m_skinName; }
 
+			void setDisableNudge(bool isDisableNudge);
+			bool isDisableNudge() const { return m_DisableNudge; }
+
 			void setAutoLogin(bool isAutoLogin);
 			bool isAutoLogin() const { return m_isAutoLogin; }
 
@@ -100,6 +103,7 @@ extern "C" {
 			void init_setting();
 
 		private:
+			bool m_DisableNudge : 1;
 			bool m_isAutoLogin : 1;
 			bool m_isMainWindowTopHint : 1;
 			bool m_isEnableLongSMS : 1;
