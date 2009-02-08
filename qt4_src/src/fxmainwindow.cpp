@@ -608,9 +608,13 @@ void FxMainWindow::slot_SystemNetErr(int err)
 		trayIcon->setIcon (getSysTrayIcon(0));
 }
 
-void FxMainWindow::slot_receive_nudge(qlonglong who)
+void FxMainWindow::slot_receive_nudge(qlonglong account_id)
 {
+	QString nudgemsg = "<b style=\"color:rgb(170,0,255);\">" +tr("send a nudge to you") + "</b>";
+	msgwin->addMessage(nudgemsg, account_id);
 
+	if (!Settings::instance().isDisableNudge())
+		msgwin->nudge_flicker();
 }
 
 void FxMainWindow::slot_DeRegistered()

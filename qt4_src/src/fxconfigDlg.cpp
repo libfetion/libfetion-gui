@@ -47,6 +47,11 @@ void FxConfigDia::closeEvent(QCloseEvent *event)
 
 void FxConfigDia::init_state()
 {
+	if (Settings::instance().isDisableNudge())
+		CB_DisableNudge->setCheckState(Qt::Checked);
+	else
+		CB_DisableNudge->setCheckState(Qt::Unchecked);
+
 	if (Settings::instance().isMainWindowTopHint())
 		CB_MainTopHit->setCheckState(Qt::Checked);
 	else
@@ -122,6 +127,7 @@ void FxConfigDia::init_connect()
 		connect(BT_TestRing, SIGNAL(clicked ()), this, SLOT(slot_TestRing()));
 		connect(BT_RingDefault, SIGNAL(clicked ()), this, SLOT(slot_DefaultRing()));
 
+		connect(CB_DisableNudge, SIGNAL(clicked ()), this, SLOT(slot_DisableNudge()));
 		connect(CB_MainTopHit, SIGNAL(clicked ()), this, SLOT(slot_MainTopHit()));
 		connect(CB_MainStartHide, SIGNAL(clicked ()),	this, SLOT(slot_MainStartHide()));
 		connect(CB_RemberPwd, SIGNAL(clicked ()), this, SLOT(slot_RemberPwd()));
@@ -135,6 +141,12 @@ void FxConfigDia::init_connect()
 		connect(RB_EnterSend, SIGNAL(clicked ()), this, SLOT(slot_SendMode()));
 		connect(RB_CtrlEnterSend, SIGNAL(clicked ()), this, SLOT(slot_SendMode()));
 		connect(CB_EnableHotKey, SIGNAL(clicked ()), this, SLOT(slot_EnableHotKey()));
+}
+
+void FxConfigDia::slot_DisableNudge()
+{
+	bool state = ! Settings::instance().isDisableNudge();
+	Settings::instance().setDisableNudge(state);
 }
 
 void FxConfigDia::slot_MainTopHit()

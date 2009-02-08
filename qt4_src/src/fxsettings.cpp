@@ -107,6 +107,8 @@ void Settings::setSkins(QString skinPath, QString skinName)
 
 void Settings::init_setting()
 {
+
+	m_DisableNudge = value("DisableNudge",  false).toBool(); 
 	m_isMute = value("Mute",  false).toBool(); 
 	m_isEnterSend = value("EnterSend", true).toBool();
 	m_isStartHide = value("StartHide", false).toBool();
@@ -145,6 +147,13 @@ void Settings::init_setting()
 	m_isRegistedGetMsgHotKey = false;
 	m_isEnableGetMsgHotKey = value("EnableGetMsgHotKey", true).toBool();
 
+}
+
+
+void Settings::setDisableNudge(bool isDisableNudge)
+{
+	m_DisableNudge = isDisableNudge; 
+	setValue("DisableNudge", m_DisableNudge);
 }
 
 void Settings::setAutoLogin(bool isAutoLogin)

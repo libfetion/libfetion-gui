@@ -32,6 +32,7 @@ public:
     ~FxConfigDia();
 	bool eventFilter(QObject *target, QEvent *event);
 private slots:
+	void slot_DisableNudge();
 	void slot_MainTopHit();
 	void slot_AutoShowMsg();
 	void slot_RemberPwd();
