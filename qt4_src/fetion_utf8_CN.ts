@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS><TS version="1.1" language="zh_CN">
+<defaultcodec></defaultcodec>
 <context>
     <name>AccountTab</name>
     <message>
@@ -1232,7 +1233,7 @@ background-color:rgb(246,243,243);
     <message>
         <location filename="fxmainwindow.cpp" line="2143"/>
         <source>&lt;br&gt;This application is based on LibFetion library to writing, for more infomation access&lt;a href=&quot;http://www.libfetion.cn&quot;&gt; www.libfetion.cn &lt;/a&gt; &lt;br&gt;Copyright @ 2008 &lt;b&gt; &lt;a href=&quot;mailto:dedodong@163.com&quot;&gt;DDD&lt;/a&gt; (dedodong@163.com)&lt;/b&gt;. All Rights reserved.</source>
-        <translation> &lt;br&gt;本应用程序是基于LibFetion库编写的, 了解更多请访问&lt;a href=&quot;http://www.libfetion.cn&quot;&gt; www.libfetion.cn &lt;/a&gt;&lt;br&gt;Copyright @ 2008 &lt;b&gt; &lt;a href=&quot;mailto:dedodong@163.com&quot;&gt;DDD&lt;/a&gt; (dedodong@163.com)&lt;/b&gt;. All Rights reserved. </translation>
+        <translation> &lt;br&gt;本应用程序基于LibFetion库编写, 了解更多请访问&lt;a href=&quot;http://www.libfetion.cn&quot;&gt; www.libfetion.cn &lt;/a&gt;&lt;br&gt;Copyright @ 2008 &lt;b&gt; &lt;a href=&quot;mailto:dedodong@163.com&quot;&gt;DDD&lt;/a&gt; (dedodong@163.com)&lt;/b&gt;.&lt;br&gt; All Rights Reserved. </translation>
     </message>
     <message>
         <location filename="fxmainwindow.cpp" line="2141"/>

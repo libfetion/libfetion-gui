@@ -95,6 +95,7 @@ signals:
 	void signal_SysDialogMsg(int, int, qlonglong);
 	void signal_SystemNetErr(int);
 	void signal_DeRegistered();
+	void signal_receive_nudge(qlonglong);
 	void signal_reName_group(int, int, qlonglong);
 	void signal_reName_buddy(int, int, qlonglong);
 	void signal_add_group(int, int, qlonglong);
@@ -131,6 +132,7 @@ private slots:
 	void slot_SysDialogMsg (int, int, qlonglong);
 	void slot_SystemNetErr (int);
 	void slot_DeRegistered ();
+	void slot_receive_nudge(qlonglong);
 
 	void slot_del_buddy(int, int, qlonglong);
 	void slot_add_buddy(int, int, qlonglong);

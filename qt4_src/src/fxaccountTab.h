@@ -58,6 +58,7 @@ public:
 private slots:
 	void flickerTab();
 	void changeSendModle();
+	void SendNudge();
 	void SendMsg();
 	void ShowHistroy();
 	void ShowFaces();

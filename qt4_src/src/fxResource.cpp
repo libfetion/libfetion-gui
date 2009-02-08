@@ -250,6 +250,11 @@ QPixmap getFaceIcon()
 	return QPixmap(getSkinPath() + "/misc/tool_face.gif");
 }
 
+QPixmap getNudgeIcon()
+{
+	return QPixmap(getSkinPath() + "/theme/nudge_button.gif");
+}
+
 QPixmap getSendIcon()
 {
 	return QPixmap(getSkinPath() + "/theme/send_button.gif");
