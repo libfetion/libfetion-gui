@@ -1370,7 +1370,7 @@ FX_EXPORT int fx_removefrom_blacklist_by_uri(const char* uri, EventListener func
   * \brief send a nudge 
   *
   * 
-  * this function should send by 20 second pre time . or it will return FALSE, and the receicer must be online.
+  * this function should send by 10 second pre time . or it will return FALSE, and the receicer must be online.
   *
   * \param who which one you want to send.
   *

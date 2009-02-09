@@ -202,9 +202,24 @@ void AccountTab::handle_alt_num( QKeyEvent *keyEvent)
 
 void AccountTab::SendNudge()
 {
-	if (!fx_is_pc_user_by_id(account_id)) 
-		return;
-	fx_send_nudge(account_id);
+	QString str; 
+	if (!fx_is_pc_user_by_id(account_id) || !fx_is_on_line_by_id(account_id))
+	{
+		str = tr("you couldn't send nudge to him");
+		goto quit_sendNudge;
+	}
+
+	if (fx_send_nudge(account_id))
+	{
+		str = tr("send nudge ok");
+		((FxMsgWindow *)(tabWidget->parentWidget()))->nudge_shake();
+	}
+	else
+		str = tr("you couldn't send nudge frequently");
+
+quit_sendNudge:
+	str = str.fromUtf8(str.toUtf8().data());
+	msgSend->MsgBrowser->append(str);
 }
 
 void AccountTab::SendMsg()

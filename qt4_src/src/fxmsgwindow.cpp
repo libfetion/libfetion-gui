@@ -26,6 +26,16 @@
 #include "fxuitl.h"
 #include "fxaddBuddyWindow.h"
 
+
+#define SHAKE_DISTANCE 10
+#define SHAKE_CYCLE 9
+//msec
+#define SHAKE_DURATION 800
+
+//msec
+#define SHAKE_TIMER_UPDATE 57
+
+
 #define MAXNICELENGTH 8
 static QString CropTabName(QString orig_name); 
 //find is have the ac_id
@@ -51,6 +61,7 @@ FxMsgWindow::FxMsgWindow(QWidget *parent)
 	m_mainwindow = NULL;
 	m_willQuit = false;
 	closeTabButton = NULL;
+    m_isNudgeShake = false;
 
 	init();
 }
@@ -61,6 +72,7 @@ void FxMsgWindow::init()
 
 	connect(tabWidget, SIGNAL( currentChanged(int) ), this, SLOT( currentChangedName(int) ));
 	connect(tabWidget, SIGNAL( mouseDblClick(int) ), this, SLOT( closeTabWid(int) ));
+	connect(&nudge_timer, SIGNAL(timeout()), this, SLOT(slot_do_shake()));
 }
 
 void FxMsgWindow::init_inputFace()
@@ -340,6 +352,9 @@ void FxMsgWindow::closeEvent(QCloseEvent *event)
 
 void FxMsgWindow::moveEvent(QMoveEvent *event)
 {
+	//when it is shaking, we don't recode the pos of window.
+	if (m_isNudgeShake)
+		return;
 	Settings::instance().setMsgWinPos(pos());
 }
 
@@ -458,9 +473,41 @@ void FxMsgWindow::msg_exit()
 	close();
 }
 
-void FxMsgWindow::nudge_flicker()
-{
+#include<math.h> 
 
+static int libfetion_shake_stamp = 0;
+void FxMsgWindow::slot_do_shake()
+{
+	libfetion_shake_stamp += SHAKE_TIMER_UPDATE;
+	if (libfetion_shake_stamp >= SHAKE_DURATION)
+	{
+		m_isNudgeShake = false;
+		libfetion_shake_stamp = 0;
+		nudge_timer.stop();
+		move(Settings::instance().MsgWinPos());
+	}
+
+	double waveOffset = (double)(libfetion_shake_stamp % SHAKE_CYCLE)/SHAKE_CYCLE;
+
+	double TWO_PI = 3.14 * 2.0;
+	double angleX = waveOffset * TWO_PI;
+	double angleY = waveOffset * TWO_PI;
+
+	//fix: should we need sin()? it will spent lots of cpus on it.
+	int shakenX = (int) ((sin(angleX) * SHAKE_DISTANCE) + Settings::instance().MsgWinPos().x());
+	int shakenY = (int) ((sin(angleY) * SHAKE_DISTANCE) + Settings::instance().MsgWinPos().y());
+	move(shakenX ,shakenY);
+
+}
+void FxMsgWindow::nudge_shake()
+{
+	show();
+	//if have a new nudge recive, we extend the shake time.
+	libfetion_shake_stamp = 0;
+	if (nudge_timer.isActive())
+		return;
+	nudge_timer.start(SHAKE_TIMER_UPDATE);
+	m_isNudgeShake = true;
 }
 
 void FxMsgWindow::showFaces()
