@@ -39,7 +39,7 @@
         <translation type="obsolete">发送失败:</translation>
     </message>
     <message>
-        <location filename="src/fxaccountTab.cpp" line="366"/>
+        <location filename="src/fxaccountTab.cpp" line="378"/>
         <source>send to self</source>
         <translation>给自己发短信</translation>
     </message>
@@ -49,22 +49,22 @@
         <translation>发送短信到自己手机上</translation>
     </message>
     <message>
-        <location filename="src/fxaccountTab.cpp" line="249"/>
+        <location filename="src/fxaccountTab.cpp" line="261"/>
         <source>Me:(</source>
         <translation>Me:(</translation>
     </message>
     <message>
-        <location filename="src/fxaccountTab.cpp" line="254"/>
+        <location filename="src/fxaccountTab.cpp" line="266"/>
         <source>hh:mm:ss</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="src/fxaccountTab.cpp" line="254"/>
+        <location filename="src/fxaccountTab.cpp" line="266"/>
         <source>send fail:(</source>
         <translation>发送失败:(</translation>
     </message>
     <message>
-        <location filename="src/fxaccountTab.cpp" line="360"/>
+        <location filename="src/fxaccountTab.cpp" line="372"/>
         <source>sys message</source>
         <translation>系统消息</translation>
     </message>
@@ -74,12 +74,12 @@
         <translation>查看系统消息</translation>
     </message>
     <message>
-        <location filename="src/fxaccountTab.cpp" line="335"/>
+        <location filename="src/fxaccountTab.cpp" line="347"/>
         <source>you can input</source>
         <translation>您还能输入[</translation>
     </message>
     <message>
-        <location filename="src/fxaccountTab.cpp" line="336"/>
+        <location filename="src/fxaccountTab.cpp" line="348"/>
         <source>character</source>
         <translation>]个字符</translation>
     </message>
@@ -89,9 +89,24 @@
         <translation>已离线，不能立即收到您的消息。 您发送的消息将被保存下来并延迟发送</translation>
     </message>
     <message>
-        <location filename="src/fxaccountTab.cpp" line="255"/>
+        <location filename="src/fxaccountTab.cpp" line="267"/>
         <source>yyyy-MM-dd</source>
         <translation></translation>
+    </message>
+    <message>
+        <location filename="src/fxaccountTab.cpp" line="208"/>
+        <source>you couldn&apos;t send nudge to him</source>
+        <translation>不能给对方发送窗口闪屏</translation>
+    </message>
+    <message>
+        <location filename="src/fxaccountTab.cpp" line="213"/>
+        <source>send nudge ok</source>
+        <translation>发送窗口闪屏成功</translation>
+    </message>
+    <message>
+        <location filename="src/fxaccountTab.cpp" line="215"/>
+        <source>you couldn&apos;t send nudge frequently</source>
+        <translation>不能频繁发送窗口闪屏</translation>
     </message>
 </context>
 <context>
@@ -1318,63 +1333,63 @@ background-color:rgb(246,243,243);
     <message>
         <location filename="src/fxmainwindow.cpp" line="613"/>
         <source>send a nudge to you</source>
-        <translation>给您发送窗口闪屏</translation>
+        <translation> 您收到窗口闪屏~~</translation>
     </message>
 </context>
 <context>
     <name>FxMsgWindow</name>
     <message>
-        <location filename="src/fxmsgwindow.cpp" line="117"/>
+        <location filename="src/fxmsgwindow.cpp" line="129"/>
         <source>with</source>
         <translation>与</translation>
     </message>
     <message>
-        <location filename="src/fxmsgwindow.cpp" line="117"/>
+        <location filename="src/fxmsgwindow.cpp" line="129"/>
         <source>chating... </source>
         <translation>聊天中...</translation>
     </message>
     <message>
-        <location filename="src/fxmsgwindow.cpp" line="416"/>
+        <location filename="src/fxmsgwindow.cpp" line="431"/>
         <source>can&apos;t send mseeage to he</source>
         <translation>不能给对方发信息</translation>
     </message>
     <message>
-        <location filename="src/fxmsgwindow.cpp" line="405"/>
+        <location filename="src/fxmsgwindow.cpp" line="420"/>
         <source>wait auth to add friend</source>
         <translation>等待对方确定加你好友</translation>
     </message>
     <message>
-        <location filename="src/fxmsgwindow.cpp" line="417"/>
+        <location filename="src/fxmsgwindow.cpp" line="432"/>
         <source>was refused to add friend</source>
         <translation>对方拒绝加你为好友</translation>
     </message>
     <message>
-        <location filename="src/fxmsgwindow.cpp" line="394"/>
+        <location filename="src/fxmsgwindow.cpp" line="409"/>
         <source>it have be added in blacklist by you</source>
         <translation>该好友已被你加入黑名单，不能给对方发送消息</translation>
     </message>
     <message>
-        <location filename="src/fxmsgwindow.cpp" line="286"/>
+        <location filename="src/fxmsgwindow.cpp" line="298"/>
         <source>hh:mm:ss</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="src/fxmsgwindow.cpp" line="287"/>
+        <location filename="src/fxmsgwindow.cpp" line="299"/>
         <source>yyyy-MM-dd</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="src/fxmsgwindow.cpp" line="94"/>
+        <location filename="src/fxmsgwindow.cpp" line="106"/>
         <source>close current Tab</source>
         <translation>关闭当前标签</translation>
     </message>
     <message>
-        <location filename="src/fxmsgwindow.cpp" line="281"/>
+        <location filename="src/fxmsgwindow.cpp" line="293"/>
         <source>Me:(</source>
         <translation>Me:(</translation>
     </message>
     <message>
-        <location filename="src/fxmsgwindow.cpp" line="286"/>
+        <location filename="src/fxmsgwindow.cpp" line="298"/>
         <source>send fail:(</source>
         <translation>发送失败:(</translation>
     </message>
@@ -2325,7 +2340,7 @@ background-color:rgb(246,243,243);
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/fxmsgwindow.cpp" line="267"/>
+        <location filename="src/fxmsgwindow.cpp" line="279"/>
         <source>(LibFetion auto reply msg)</source>
         <translation>(LibFetion 自动回复)</translation>
     </message>

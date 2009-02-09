@@ -614,7 +614,7 @@ void FxMainWindow::slot_receive_nudge(qlonglong account_id)
 	msgwin->addMessage(nudgemsg, account_id);
 
 	if (!Settings::instance().isDisableNudge())
-		msgwin->nudge_flicker();
+		msgwin->nudge_shake();
 }
 
 void FxMainWindow::slot_DeRegistered()
@@ -1249,7 +1249,7 @@ void FxMainWindow::init_UI()
 #endif
 
 	if (Settings::instance().isMainWindowTopHint())
-		this->setWindowFlags(Qt::WindowStaysOnTopHint);
+		this->setWindowFlags(this->windowFlags() | Qt::WindowStaysOnTopHint);
 	else
 		this->setWindowFlags(this->windowFlags() ^ Qt::WindowStaysOnTopHint);
 

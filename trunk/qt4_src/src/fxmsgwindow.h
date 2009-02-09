@@ -33,6 +33,7 @@
 #include "fxqunwindow.h"
 #include "fxInputFace.h"
 
+
 class FxMainWindow;
 
 //class FxMsgWindow : public QDialog, public Ui::MsgWindow
@@ -50,7 +51,7 @@ public:
 	void showFaces();
 	void msg_exit();
 
-	void nudge_flicker();
+	void nudge_shake();
 	void addAccount(qlonglong account_id, bool isSendSms = false);
 	void haveNewMessage(qlonglong account_id);
 	bool addMessage(QString msg, qlonglong account_id, bool iscomeing_msg = false);
@@ -73,6 +74,7 @@ public slots:
 	void setCurrentTabTitle(AccountTab *accountTab); 
 	void closeTabWid(int index);
 	void closeTab();
+	void slot_do_shake();
 
 signals:
 
@@ -85,6 +87,8 @@ private:
 private:
 	bool m_willQuit;
 	QTimer *timer;
+	QTimer nudge_timer;
+	bool m_isNudgeShake;
 	FxMainWindow *m_mainwindow;
 	QToolButton *closeTabButton;
 	FxInputFace  *inputFace;
