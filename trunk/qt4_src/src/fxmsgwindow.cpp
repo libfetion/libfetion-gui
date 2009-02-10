@@ -501,11 +501,16 @@ void FxMsgWindow::slot_do_shake()
 }
 void FxMsgWindow::nudge_shake()
 {
-	show();
 	//if have a new nudge recive, we extend the shake time.
 	libfetion_shake_stamp = 0;
 	if (nudge_timer.isActive())
 		return;
+
+	this->show();
+	this->activateWindow();
+	this->setWindowState(Qt::WindowNoState) ;
+	this->setFocus();
+
 	nudge_timer.start(SHAKE_TIMER_UPDATE);
 	m_isNudgeShake = true;
 }
