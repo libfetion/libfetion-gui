@@ -51,7 +51,7 @@ HEADERS       =  \
 				 ./src/fxshowHistory.h \
 				 ./src/fxverifyAccount.h \
 				 ./src/fxInputFace.h \
-				 ./src/fxuitl.h \
+				 ./src/fxutil.h \
 				 ./src/fxproxy.h \
 				 ./src/fxLableMouse.h \
 				 ./src/fxLineEditFocus.h \
@@ -81,7 +81,7 @@ SOURCES       =  \
 				./src/fxshowHistory.cpp \
 				./src/fxverifyAccount.cpp \
 				./src/fxInputFace.cpp \
-				./src/fxuitl.cpp \
+				./src/fxutil.cpp \
 				./src/fxproxy.cpp \
 				./src/fxrefuseSMS.cpp \
 				./src/fxsendGroupSMS.cpp \

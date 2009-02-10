@@ -23,7 +23,7 @@
 
 #include "fxmainwindow.h"
 #include "fxmsgwindow.h"
-#include "fxuitl.h"
+#include "fxutil.h"
 #include "fxaddBuddyWindow.h"
 
 

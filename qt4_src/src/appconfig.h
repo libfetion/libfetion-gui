@@ -28,7 +28,7 @@
 #include "fxResource.h"
 #include "fxdb.h"
 #include "fxsettings.h"
-#include "fxuitl.h"
+#include "fxutil.h"
 
 #define BUILD_DATE	20081213
 #define	CURRENT_VERSION	91
