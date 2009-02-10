@@ -218,6 +218,7 @@ void AccountTab::SendNudge()
 		str = tr("you couldn't send nudge frequently");
 
 quit_sendNudge:
+	str = "<b style=\"color:rgb(250,0,255);\">" + str + "</b><br>";
 	str = str.fromUtf8(str.toUtf8().data());
 	msgSend->MsgBrowser->append(str);
 }
