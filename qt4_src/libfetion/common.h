@@ -1,7 +1,7 @@
 /**
 * \file common.h
 * \author dengdd <dedodong@163.com>
-* \date 2008/1/1
+* \date 2009/2/11
 * 
 * This file includes macro definitions and typedefs that commonly used by libfetion.
 *
@@ -23,7 +23,11 @@ This file is part of libfetion, a cross-operating-system library to operate Chin
 #include "event.h"
 
 #ifdef WIN32
-#include "../build/config-win32.h"
+	#ifdef _WIN32_WCE
+		#include "../build/config-winCE.h"
+	#else
+		#include "../build/config-win32.h"
+	#endif 
 #else //no WIN32
 #include "../fxconfig.h"
 #endif  //end #ifdef WIN32

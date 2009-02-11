@@ -1,7 +1,7 @@
 /**
  * \file datastruct.h
  * \author dengdd <dedodong@163.com>
- * \date 2008/1/1
+ * \date 2009/2/11
  * 
  * This file includes necessary struct define of libfetion.
  *
@@ -120,13 +120,15 @@ void     d_list_pop_allocator           (void);
  * \sa fx_get_msg
  */
 typedef struct _fetion_msg {
-    /** The send account 's uid. */
+	/** The send account 's uid. */
 	long uid;
-    /** The message content. */
+	/** The message content. */
 	char *message;
-    /** The message format. */
+	/** The message format. */
 	char *msgformat;
-    /** Just using in qun, this id show sended of qun. */
+	/** Thu, 20 Dec 2007 13:29:23 GMT. */
+	char *msgtime;
+	/** Just using in qun, this id show sended of qun. */
 	long ext_id;
 }Fetion_MSG;
 
