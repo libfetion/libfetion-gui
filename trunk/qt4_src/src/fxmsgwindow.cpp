@@ -185,11 +185,15 @@ bool FxMsgWindow::addQunMessage(QString msg, qlonglong qun_id, qlonglong sender,
 	QString str; 
 	QString show_msg; 
 	if(iscoming_msg) {
+		/*
 		str = "<b style=\"color:rgb(0,85,0);\">"+ 
 			qunW->getSenderName(sender) +"("+
 			QDateTime::currentDateTime().toString(tr("hh:mm:ss")) + "--" +
 			QDateTime::currentDateTime().toString(tr("yyyy-MM-dd")) +
 			"):</b><br>"+ msg;
+			*/
+		str = "<b style=\"color:rgb(0,85,0);\">"+ 
+			qunW->getSenderName(sender) + msg;
 		show_msg= show_msg.fromUtf8(str.toUtf8().data()); 
 	} else {
 		show_msg= msg; 
@@ -239,10 +243,13 @@ bool FxMsgWindow::addMessage(QString msg, qlonglong account_id,  bool iscoming_m
 	QString str; 
 	QString show_msg; 
 	if(iscoming_msg) {
-		str ="<b style=\"color:rgb(0,85,0);\">"+ accountTab->account_name + "("+
+	/*	
+	str ="<b style=\"color:rgb(0,85,0);\">"+ accountTab->account_name + "("+
 			QDateTime::currentDateTime().toString(tr("hh:mm:ss")) + "--" +
 			QDateTime::currentDateTime().toString(tr("yyyy-MM-dd")) +
 			"):</b><br>" + msg;
+			*/
+		str ="<b style=\"color:rgb(0,85,0);\">"+ accountTab->account_name + msg;
 		show_msg= show_msg.fromUtf8(str.toUtf8().data()); 
 	} else {
 		show_msg= show_msg.fromUtf8(msg.toUtf8().data()); 

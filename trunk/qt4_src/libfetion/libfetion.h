@@ -1,7 +1,7 @@
 /**
  * \file libfetion.h
  * \author dengdd <dedodong@163.com>
- * \date 2008/8/28
+ * \date 2009/2/11
  * 
  * This file includes necessary interfaces of libfetion.
  *

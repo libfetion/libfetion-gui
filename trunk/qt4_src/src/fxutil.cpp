@@ -144,7 +144,9 @@ QString fxgui_handle_newMsg(Fetion_MSG *fxMsg)
 			free(msg);
 	}
 	newmsg.replace(QString("\n"), QString("<br>"));
-	return fxgui_to_faces(newmsg);
+	newmsg = fxgui_to_faces(newmsg);
+	newmsg =  "(" + fxgui_format_time(fxMsg->msgtime) + "):</b><br>" + newmsg; 
+	return newmsg;
 }
 
 QString fxgui_to_faces(QString newmsg)
@@ -215,6 +217,11 @@ QString fxgui_to_faces(QString newmsg)
 	newmsg.replace(":)","<img src='"+FxFacePath()+"/1.gif'>");
 
 	return newmsg;
+}
+
+QString fxgui_format_time(QString stamp)
+{
+	return QString();
 }
 
 /* 
