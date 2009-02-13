@@ -219,9 +219,69 @@ QString fxgui_to_faces(QString newmsg)
 	return newmsg;
 }
 
+QString change_month_format(QString month)
+{
+	if (month == "Jan")
+		return "01";
+	else if (month == "Feb")
+		return "02";
+	else if (month == "Mar")
+		return "03";
+	else if (month == "Apr")
+		return "04";
+	else if (month == "May")
+		return "05";
+	else if (month == "Jun")
+		return "06";
+	else if (month == "Jul")
+		return "07";
+	else if (month == "Aug")
+		return "08";
+	else if (month == "Sep")
+		return "09";
+	else if (month == "Oct")
+		return "10";
+	else if (month == "Nov")
+		return "11";
+	else if (month == "Dec")
+		return "12";
+	else
+		return "";
+}
+
+QString format_msg_stamp(QString stamp)
+{
+	QString dateTime;
+	bool formatRight;
+	QRegExp regexp("\\s(\\d{2})\\s(\\w{3})\\s(\\d{4})\\s((\\d{2}):(\\d{2}):(\\d{2}))\\s(\\w{3})");
+
+	if (regexp.indexIn(stamp) !=- 1)
+	{
+		QStringList list = regexp.capturedTexts();
+		formatRight = TRUE;
+	}
+	else
+		formatRight = FALSE;
+
+	QString day,month,year;
+	QString time;
+	day = regexp.cap(1);
+	month = regexp.cap(2);
+	month = change_month_format(month);
+	year = regexp.cap(3);
+	time = regexp.cap(4);
+
+	if (formatRight)
+		dateTime = time + "--" + year+ "-" + month + "-" + day;
+	else
+		dateTime = "";
+
+	return dateTime;
+}
+
 QString fxgui_format_time(QString stamp)
 {
-	return QString();
+	return format_msg_stamp(stamp);
 }
 
 /* 
