@@ -29,8 +29,6 @@ bool RegistHotkey(QWidget *window, QChar keyValue, Qt::KeyboardModifiers keyMod)
 bool UnRegistHotkey(QWidget *window, QChar keyValue, Qt::KeyboardModifiers keyMod);
 QString fxgui_handle_newMsg(Fetion_MSG *fxMsg);
 QString fxgui_to_faces(QString newmsg);
-QString change_month_format(QString month);
-QString format_msg_stamp(QString stamp);
 QString fxgui_format_time(QString stamp);
 
 
