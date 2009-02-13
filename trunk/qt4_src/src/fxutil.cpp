@@ -27,6 +27,7 @@
  *
  ***************************************************************************/
 #include "fxutil.h"
+#include <QDateTime>
 /* 
  * Copyright (C) 2008
  * 
@@ -145,7 +146,13 @@ QString fxgui_handle_newMsg(Fetion_MSG *fxMsg)
 	}
 	newmsg.replace(QString("\n"), QString("<br>"));
 	newmsg = fxgui_to_faces(newmsg);
-	newmsg =  "(" + fxgui_format_time(fxMsg->msgtime) + "):</b><br>" + newmsg; 
+#if USING_SERVER_TIME 
+	newmsg = "(" + fxgui_format_time(fxMsg->msgtime) + "):</b><br>" + newmsg; 
+#else
+	newmsg = "(" + QDateTime::currentDateTime().toString("hh:mm:ss") 
+		+ "--" + QDateTime::currentDateTime().toString("yyyy-MM-dd") 
+		+ "):</b><br>" + newmsg; 
+#endif
 	return newmsg;
 }
 
