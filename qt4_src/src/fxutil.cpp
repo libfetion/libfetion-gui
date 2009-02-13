@@ -219,37 +219,7 @@ QString fxgui_to_faces(QString newmsg)
 	return newmsg;
 }
 
-QString change_month_format(QString month)
-{
-	if (month == "Jan")
-		return "01";
-	else if (month == "Feb")
-		return "02";
-	else if (month == "Mar")
-		return "03";
-	else if (month == "Apr")
-		return "04";
-	else if (month == "May")
-		return "05";
-	else if (month == "Jun")
-		return "06";
-	else if (month == "Jul")
-		return "07";
-	else if (month == "Aug")
-		return "08";
-	else if (month == "Sep")
-		return "09";
-	else if (month == "Oct")
-		return "10";
-	else if (month == "Nov")
-		return "11";
-	else if (month == "Dec")
-		return "12";
-	else
-		return "";
-}
-
-QString format_msg_stamp(QString stamp)
+QString fxgui_format_time(QString stamp)
 {
 	QString dateTime;
 	bool formatRight;
@@ -267,7 +237,32 @@ QString format_msg_stamp(QString stamp)
 	QString time;
 	day = regexp.cap(1);
 	month = regexp.cap(2);
-	month = change_month_format(month);
+	if (month == "Jan")
+		month = "01";
+	else if (month == "Feb")
+		month = "02";
+	else if (month == "Mar")
+		month = "03";
+	else if (month == "Apr")
+		month = "04";
+	else if (month == "May")
+		month = "05";
+	else if (month == "Jun")
+		month = "06";
+	else if (month == "Jul")
+		month = "07";
+	else if (month == "Aug")
+		month = "08";
+	else if (month == "Sep")
+		month = "09";
+	else if (month == "Oct")
+		month = "10";
+	else if (month == "Nov")
+		month = "11";
+	else if (month == "Dec")
+		month = "12";
+	else
+		month = "";
 	year = regexp.cap(3);
 	time = regexp.cap(4);
 
@@ -277,11 +272,6 @@ QString format_msg_stamp(QString stamp)
 		dateTime = "";
 
 	return dateTime;
-}
-
-QString fxgui_format_time(QString stamp)
-{
-	return format_msg_stamp(stamp);
 }
 
 /* 
