@@ -40,6 +40,7 @@
 #define DBNAME    "libfx.db"
 #define SKIN_CONFG_FILE    "/skin.xml"
 #define MAC_OS 0
+#define USING_SERVER_TIME 0
 
 #define DEBUG_GUI 0
 
