@@ -2425,3 +2425,24 @@ void FxMainWindow::UpdateSkins()
 	else 
 		IsAutoShowMsgAct->setIcon(getMenuIcon(CancelIcon));
 }
+
+void FxMainWindow::SetAllFont(QFont font)
+{
+	this->setFont(font);
+	msgwin->SetAllFont(font);
+
+	UI_Search->setFont(font);
+	UI_Edit_NiceName->setFont(font);
+	UI_Impresa->setFont(font);
+	UI_NiceName->setFont(font);
+	version->setFont(font);
+
+    view->setFont(font);
+    search->setFont(font);
+
+    buddyMenu->setFont(font);
+    menuSetting->setFont(font);
+    menuAbout->setFont(font);
+
+	this->repaint();
+}

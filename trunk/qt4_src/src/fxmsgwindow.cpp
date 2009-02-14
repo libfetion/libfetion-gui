@@ -534,7 +534,6 @@ void FxMsgWindow::showFaces()
 
 void FxMsgWindow::UpdateSkins()
 {
-
     AccountTab *ac_tab = NULL;
 	int tabCount = tabWidget->count();
     for(int i = 0; i < tabCount; i++)
@@ -550,6 +549,23 @@ void FxMsgWindow::UpdateSkins()
 
 	if (closeTabButton)
 		closeTabButton->setIcon(getCloseTabImage());
+}
+
+void FxMsgWindow::SetAllFont(QFont font)
+{
+	this->setFont(font);
+	tabWidget->setFont(font);
+
+    AccountTab *ac_tab = NULL;
+	int tabCount = tabWidget->count();
+    for(int i = 0; i < tabCount; i++)
+    {
+        ac_tab = (AccountTab *) tabWidget->widget(i); 
+        if(ac_tab)
+            ac_tab->SetAllFont(font);
+    }
+
+   this->repaint();
 }
 
 static QString CropTabName(QString orig_name) 

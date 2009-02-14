@@ -141,6 +141,8 @@ void FxConfigDia::init_connect()
 		connect(RB_EnterSend, SIGNAL(clicked ()), this, SLOT(slot_SendMode()));
 		connect(RB_CtrlEnterSend, SIGNAL(clicked ()), this, SLOT(slot_SendMode()));
 		connect(CB_EnableHotKey, SIGNAL(clicked ()), this, SLOT(slot_EnableHotKey()));
+		connect(BT_SetFont, SIGNAL(clicked ()), this, SLOT(slot_SetFont()));
+		connect(BT_SetDefaultFont, SIGNAL(clicked ()), this, SLOT(slot_SetDefaultFont()));
 }
 
 void FxConfigDia::slot_DisableNudge()
@@ -271,6 +273,62 @@ void FxConfigDia::slot_EnableHotKey()
 		hotKey->setDisabled(false);
 	else
 		hotKey->setDisabled(true);
+}
+
+void FxConfigDia::slot_SetFont()
+{
+	bool ok;
+	QFont font = QFontDialog::getFont(&ok,
+					Settings::instance().getCurrentFont(), this);
+	if (ok)
+		SetAllFont(font);
+}
+
+void FxConfigDia::slot_SetDefaultFont()
+{
+	SetAllFont( Settings::instance().getSyetemDefualFont() );
+}
+
+void FxConfigDia::SetAllFont(QFont font)
+{
+	Settings::instance().setFont(font); 
+	QApplication::setFont(font);
+
+	this->setFont(font);
+
+	if (mainwind)
+		mainwind->SetAllFont(font);
+
+
+	{ //update current dialog contorl font. very bad code, haha
+    groupBox->setFont(font);
+    RingFile->setFont(font);
+    BT_ChangeRing->setFont(font);
+    BT_TestRing->setFont(font);
+    BT_RingDefault->setFont(font);
+    groupBox_2->setFont(font);
+    MsgAutoRelpy->setFont(font);
+    CB_AutoReply->setFont(font);
+    groupBox_3->setFont(font);
+    RB_EnterSend->setFont(font);
+    RB_CtrlEnterSend->setFont(font);
+    groupBox_4->setFont(font);
+    CB_MainTopHit->setFont(font);
+    CB_AutoShowMsg->setFont(font);
+    CB_RemberPwd->setFont(font);
+    CB_MainStartHide->setFont(font);
+    CB_Mute->setFont(font);
+    CB_LongMsg->setFont(font);
+    CB_DisableNudge->setFont(font);
+    BT_SetDefaultFont->setFont(font);
+    BT_SetFont->setFont(font);
+    groupBox_5->setFont(font);
+    hotKey->setFont(font);
+    CB_EnableHotKey->setFont(font);
+    registedHotKeyState->setFont(font);
+	}
+
+	this->repaint();
 }
 
 bool FxConfigDia::eventFilter(QObject *target, QEvent *event)

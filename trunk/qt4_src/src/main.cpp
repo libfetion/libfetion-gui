@@ -78,7 +78,8 @@ int main(int argc, char *argv[])
 	translator.load( "fetion_utf8_CN", translatorPath() );
 	app.installTranslator( &translator );
 
-	Settings::instance();
+	Settings::instance().setSyetemDefualFont( QApplication::font() );
+	app.setFont(Settings::instance().getCurrentFont());
 	FxMain *mainWin = new FxMain;
 
 	QObject::connect(&app, SIGNAL(lastWindowClosed()), &app, SLOT(quit()));
