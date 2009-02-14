@@ -90,6 +90,12 @@ extern "C" {
 			void setSendMultMsgWinSize(QSize size);
 			QSize SendMultMsgWinSize(){ return m_SendMultMsgWinSize; }
 
+			void setFont(QFont font); 
+			QFont getCurrentFont(){ return m_CurrentFont; }
+
+			void setSyetemDefualFont(QFont font){ m_DefaultFont = font; }
+			QFont getSyetemDefualFont(){ return m_DefaultFont; }
+
 			bool setEnableGetMsgHotKey(bool enable);
 			bool setGetMsgHotKey(QChar keyvalue, Qt::KeyboardModifiers keyMod, bool isRegister = true);
 
@@ -133,6 +139,9 @@ extern "C" {
 			bool m_isRegistedGetMsgHotKey : 1;
 			QChar m_GetMsgHotKey;
 			Qt::KeyboardModifiers m_GetMsgHotKeyMod;
+
+			QFont m_CurrentFont;
+			QFont m_DefaultFont;
 
 			long m_uid;
 			FxMainWindow *m_mainwind;

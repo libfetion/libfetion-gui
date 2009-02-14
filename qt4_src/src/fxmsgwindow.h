@@ -46,6 +46,7 @@ public:
     ~FxMsgWindow();
 	void setMainWind(FxMainWindow *wind) { m_mainwindow = wind;}
 	void UpdateSkins();
+	void SetAllFont(QFont font);
 
 public:
 	void showFaces();

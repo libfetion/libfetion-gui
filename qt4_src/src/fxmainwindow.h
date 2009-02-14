@@ -51,6 +51,7 @@ public:
 
 	void UpdateSkins();
 	void UpdateSkinsMenu();
+	void SetAllFont(QFont font);
 
 protected:
 #if WIN32

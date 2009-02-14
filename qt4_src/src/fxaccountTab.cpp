@@ -366,6 +366,19 @@ void AccountTab::UpdateSkins()
 	TB_SEND->setPixmap (getSendIcon()); 
 }
 
+void AccountTab::SetAllFont(QFont font)
+{
+	this->setFont(font);
+
+	MsgEdit->setFont(font);
+	MsgBrowser->setFont(font);
+
+	Ac_Status->setFont(font);
+
+	input_nm->setFont(font);
+	this->repaint();
+}
+
 void AccountTab::init()
 {
 	UpdateSkins();

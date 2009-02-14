@@ -31,6 +31,7 @@ public:
     FxConfigDia(FxMainWindow *wind, QWidget *parent = 0);
     ~FxConfigDia();
 	bool eventFilter(QObject *target, QEvent *event);
+	void SetAllFont(QFont font);
 private slots:
 	void slot_DisableNudge();
 	void slot_MainTopHit();
@@ -46,6 +47,8 @@ private slots:
 	void slot_ChangeRing();
 	void slot_DefaultRing();
 	void slot_EnableHotKey();
+	void slot_SetFont();
+	void slot_SetDefaultFont();
 protected:
 	void closeEvent(QCloseEvent *event);
 	void init_state();

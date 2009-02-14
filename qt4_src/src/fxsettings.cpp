@@ -73,6 +73,8 @@ Settings::Settings(const QString & fileName, Format format)
 
 	m_skinPath = value("SkinPath", defaultSkinPath()).toString();
 	m_skinName = value("SkinName", "default").toString();
+
+	m_CurrentFont = value("AppFont",QFont()).value<QFont>();
 }
 
 Settings::~Settings()
@@ -89,6 +91,17 @@ void Settings::setUser(long uid)
 	m_uid = uid;
 	beginGroup(QString("%1").arg(m_uid));
 	init_setting();
+}
+void Settings::setFont(QFont font) 
+{
+	if (m_uid)
+		endGroup();
+
+	m_CurrentFont = font;
+	setValue("AppFont", m_CurrentFont);
+
+	if (m_uid)
+		beginGroup(QString("%1").arg(m_uid));
 }
 
 void Settings::setSkins(QString skinPath, QString skinName)

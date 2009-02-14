@@ -39,7 +39,7 @@
         <translation type="obsolete">发送失败:</translation>
     </message>
     <message>
-        <location filename="src/fxaccountTab.cpp" line="378"/>
+        <location filename="src/fxaccountTab.cpp" line="395"/>
         <source>send to self</source>
         <translation>给自己发短信</translation>
     </message>
@@ -49,22 +49,22 @@
         <translation>发送短信到自己手机上</translation>
     </message>
     <message>
-        <location filename="src/fxaccountTab.cpp" line="261"/>
+        <location filename="src/fxaccountTab.cpp" line="265"/>
         <source>Me:(</source>
         <translation>Me:(</translation>
     </message>
     <message>
-        <location filename="src/fxaccountTab.cpp" line="266"/>
+        <location filename="src/fxaccountTab.cpp" line="270"/>
         <source>hh:mm:ss</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="src/fxaccountTab.cpp" line="266"/>
+        <location filename="src/fxaccountTab.cpp" line="270"/>
         <source>send fail:(</source>
         <translation>发送失败:(</translation>
     </message>
     <message>
-        <location filename="src/fxaccountTab.cpp" line="372"/>
+        <location filename="src/fxaccountTab.cpp" line="389"/>
         <source>sys message</source>
         <translation>系统消息</translation>
     </message>
@@ -74,12 +74,12 @@
         <translation>查看系统消息</translation>
     </message>
     <message>
-        <location filename="src/fxaccountTab.cpp" line="347"/>
+        <location filename="src/fxaccountTab.cpp" line="351"/>
         <source>you can input</source>
         <translation>您还能输入[</translation>
     </message>
     <message>
-        <location filename="src/fxaccountTab.cpp" line="348"/>
+        <location filename="src/fxaccountTab.cpp" line="352"/>
         <source>character</source>
         <translation>]个字符</translation>
     </message>
@@ -89,7 +89,7 @@
         <translation>已离线，不能立即收到您的消息。 您发送的消息将被保存下来并延迟发送</translation>
     </message>
     <message>
-        <location filename="src/fxaccountTab.cpp" line="267"/>
+        <location filename="src/fxaccountTab.cpp" line="271"/>
         <source>yyyy-MM-dd</source>
         <translation></translation>
     </message>
@@ -99,12 +99,12 @@
         <translation>不能给对方发送窗口闪屏</translation>
     </message>
     <message>
-        <location filename="src/fxaccountTab.cpp" line="213"/>
+        <location filename="src/fxaccountTab.cpp" line="214"/>
         <source>send nudge ok</source>
         <translation>发送窗口闪屏成功</translation>
     </message>
     <message>
-        <location filename="src/fxaccountTab.cpp" line="215"/>
+        <location filename="src/fxaccountTab.cpp" line="218"/>
         <source>you couldn&apos;t send nudge frequently</source>
         <translation>不能频繁发送窗口闪屏</translation>
     </message>
@@ -338,7 +338,7 @@ background-color:rgb(246,243,243);
         <translation>恢复</translation>
     </message>
     <message>
-        <location filename="src/ui/configdia.ui" line="286"/>
+        <location filename="src/ui/configdia.ui" line="312"/>
         <source>get message(only on windows)</source>
         <translation>提取消息(仅限于Windows系统)</translation>
     </message>
@@ -348,7 +348,7 @@ background-color:rgb(246,243,243);
         <translation type="obsolete">默认热键</translation>
     </message>
     <message>
-        <location filename="src/ui/configdia.ui" line="308"/>
+        <location filename="src/ui/configdia.ui" line="334"/>
         <source>using hot key</source>
         <translation>使用热键</translation>
     </message>
@@ -361,6 +361,16 @@ background-color:rgb(246,243,243);
         <location filename="src/ui/configdia.ui" line="272"/>
         <source>disable nudge</source>
         <translation>屏蔽窗口抖动</translation>
+    </message>
+    <message>
+        <location filename="src/ui/configdia.ui" line="285"/>
+        <source>default font</source>
+        <translation>缺省字体</translation>
+    </message>
+    <message>
+        <location filename="src/ui/configdia.ui" line="298"/>
+        <source>set font</source>
+        <translation>设置字体</translation>
     </message>
 </context>
 <context>
@@ -655,17 +665,17 @@ background-color:rgb(246,243,243);
 <context>
     <name>FxConfigDia</name>
     <message>
-        <location filename="src/fxconfigDlg.cpp" line="255"/>
+        <location filename="src/fxconfigDlg.cpp" line="257"/>
         <source>get ring file</source>
         <translation>获取铃声文件</translation>
     </message>
     <message>
-        <location filename="src/fxconfigDlg.cpp" line="257"/>
+        <location filename="src/fxconfigDlg.cpp" line="259"/>
         <source>Ring Files (*.wav);;All Files (*)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="src/fxconfigDlg.cpp" line="362"/>
+        <location filename="src/fxconfigDlg.cpp" line="420"/>
         <source>registed fail</source>
         <translation>注册失败</translation>
     </message>
@@ -1349,32 +1359,32 @@ background-color:rgb(246,243,243);
         <translation>聊天中...</translation>
     </message>
     <message>
-        <location filename="src/fxmsgwindow.cpp" line="431"/>
+        <location filename="src/fxmsgwindow.cpp" line="438"/>
         <source>can&apos;t send mseeage to he</source>
         <translation>不能给对方发信息</translation>
     </message>
     <message>
-        <location filename="src/fxmsgwindow.cpp" line="420"/>
+        <location filename="src/fxmsgwindow.cpp" line="427"/>
         <source>wait auth to add friend</source>
         <translation>等待对方确定加你好友</translation>
     </message>
     <message>
-        <location filename="src/fxmsgwindow.cpp" line="432"/>
+        <location filename="src/fxmsgwindow.cpp" line="439"/>
         <source>was refused to add friend</source>
         <translation>对方拒绝加你为好友</translation>
     </message>
     <message>
-        <location filename="src/fxmsgwindow.cpp" line="409"/>
+        <location filename="src/fxmsgwindow.cpp" line="416"/>
         <source>it have be added in blacklist by you</source>
         <translation>该好友已被你加入黑名单，不能给对方发送消息</translation>
     </message>
     <message>
-        <location filename="src/fxmsgwindow.cpp" line="298"/>
+        <location filename="src/fxmsgwindow.cpp" line="305"/>
         <source>hh:mm:ss</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="src/fxmsgwindow.cpp" line="299"/>
+        <location filename="src/fxmsgwindow.cpp" line="306"/>
         <source>yyyy-MM-dd</source>
         <translation></translation>
     </message>
@@ -1384,12 +1394,12 @@ background-color:rgb(246,243,243);
         <translation>关闭当前标签</translation>
     </message>
     <message>
-        <location filename="src/fxmsgwindow.cpp" line="293"/>
+        <location filename="src/fxmsgwindow.cpp" line="300"/>
         <source>Me:(</source>
         <translation>Me:(</translation>
     </message>
     <message>
-        <location filename="src/fxmsgwindow.cpp" line="298"/>
+        <location filename="src/fxmsgwindow.cpp" line="305"/>
         <source>send fail:(</source>
         <translation>发送失败:(</translation>
     </message>
@@ -1824,7 +1834,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="src/ui/msgsend.ui" line="104"/>
         <source>nudge</source>
-        <translation type="unfinished"></translation>
+        <translation>闪屏</translation>
     </message>
 </context>
 <context>
@@ -2340,12 +2350,12 @@ background-color:rgb(246,243,243);
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/fxmsgwindow.cpp" line="279"/>
+        <location filename="src/fxmsgwindow.cpp" line="286"/>
         <source>(LibFetion auto reply msg)</source>
         <translation>(LibFetion 自动回复)</translation>
     </message>
     <message>
-        <location filename="src/fxsettings.cpp" line="129"/>
+        <location filename="src/fxsettings.cpp" line="142"/>
         <source>I&apos;ll be back soon</source>
         <translation>马上回来</translation>
     </message>
