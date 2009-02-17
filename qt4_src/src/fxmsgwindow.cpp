@@ -20,6 +20,7 @@
 #include <QLabel>
 #include <QtGui>
 #include <QTextEdit>
+#include <math.h> 
 
 #include "fxmainwindow.h"
 #include "fxmsgwindow.h"
@@ -352,7 +353,13 @@ void FxMsgWindow::closeEvent(QCloseEvent *event)
 {
 	hide();
 	if(m_willQuit)
+	{
+		int size = qunWindow.size();
+		for(int i = 0; i< size; i++ )
+			qunWindow.at(i)->qun_exit();
+
 		event->accept();
+	}
 	else
 		event->ignore();
 }
@@ -469,9 +476,6 @@ void FxMsgWindow::addAccount(qlonglong account_id, bool isSendSms)
 
 FxMsgWindow::~FxMsgWindow()
 {
-	int size = qunWindow.size();
-	for(int i = 0; i< size; i++ )
-		qunWindow.at(i)->qun_exit();
 }
 
 void FxMsgWindow::msg_exit()
@@ -480,7 +484,6 @@ void FxMsgWindow::msg_exit()
 	close();
 }
 
-#include<math.h> 
 
 static int libfetion_shake_stamp = 0;
 void FxMsgWindow::slot_do_shake()
