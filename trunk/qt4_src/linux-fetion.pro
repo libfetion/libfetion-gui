@@ -10,7 +10,7 @@ win32 {
 	LIBS  	 += qgif.lib ./lib/libcurl_imp.lib
 }
 
-!win32 {
+!win32&&!mac {
 	QT 		 += xml
 	TARGET    = linux-fetion
 	LIBS 	 +=  -lcurl -lssl ./lib/libfetion_32.a
@@ -22,11 +22,13 @@ mac {
     TARGET    = Mac-Fetion
     ICON      = ./misc/mac_fetion.icns
     QMAKE_INFO_PLIST = ./misc/mac_fetion.plist
+	LIBS 	 +=  -lcurl -lssl ./lib/libfetion_mac.a
+	QMAKE_CXXFLAGS += -DMAC_OS=1
 }
 
 TRANSLATIONS    = fetion_utf8_CN.ts
 
-QMAKE_CXXFLAGS = -I./ -I./src -I./.ui
+QMAKE_CXXFLAGS += -I./ -I./src -I./.ui
 
 OBJECTS_DIR = ./.tmp
 MOC_DIR = ./.moc
