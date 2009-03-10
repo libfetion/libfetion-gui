@@ -1834,10 +1834,15 @@ void FxMainWindow::renameBuddy()
 	if(!ac_info)
 		return;
 
+	char* showname = fx_get_account_show_name(fx_get_account_by_id(ac_info->accountID), FALSE);
+	QString account_name = QString::fromUtf8(showname);
+	if(showname)
+		free(showname);
+
 	bool ok;
 	QString text = QInputDialog::getText(this, tr("renamebudd"),
 			tr("please input new buddy name"), QLineEdit::Normal,
-			ac_info->accountName, &ok);
+			account_name, &ok);
 	if (ok && !text.isEmpty())
 		fx_set_buddyinfo(ac_info->accountID, text.toUtf8().data(), NULL, NULL); 
 }
