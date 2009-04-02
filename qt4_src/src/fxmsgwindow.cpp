@@ -212,12 +212,6 @@ bool FxMsgWindow::addQunMessage(QString msg, qlonglong qun_id, qlonglong sender,
 
 bool FxMsgWindow::addMessage(QString msg, qlonglong account_id,  bool iscoming_msg)
 {
-	if (fx_is_qun_by_id(account_id))
-	{
-		addQunMessage(msg, account_id, 0L, true);
-		return true;
-	}
-
 	AccountTab *accountTab = findFromMsgWindow(tabWidget, account_id);
 
 	if (!accountTab)
@@ -338,7 +332,10 @@ void FxMsgWindow::haveNewMessage(qlonglong account_id)
 	if (!fxMsg)
 		return;
 
-	addMessage(fxgui_handle_newMsg(fxMsg), account_id, true);
+    if (fxMsg->ext_id != 0)
+        addQunMessage(fxgui_handle_newMsg(fxMsg), account_id, 0L, true);
+    else
+        addMessage(fxgui_handle_newMsg(fxMsg), account_id, true);
 
 	fx_destroy_msg (fxMsg);
 }

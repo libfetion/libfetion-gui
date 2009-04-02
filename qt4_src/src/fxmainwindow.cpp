@@ -656,7 +656,6 @@ void FxMainWindow::handle_sendmsg(int msgflag, int fx_msg, qlonglong account_id)
 				if (timeOutMsgVector.at(i) == fx_msg)
 				{
 					newmsg = "<b style=\"color:rgb(170,0,255);\">" +tr("auto resend ok:") + "</b>" + newmsg.fromUtf8(msg);
-					msgwin->addMessage(newmsg, account_id);
 					timeOutMsgVector.remove(i);
 					break;
 				}
@@ -670,7 +669,6 @@ void FxMainWindow::handle_sendmsg(int msgflag, int fx_msg, qlonglong account_id)
 				}
 			}
 			newmsg = "<b style=\"color:red;\">"+tr("send fail:") +"</b>"+ newmsg.fromUtf8(msg);
-			msgwin->addMessage(newmsg, account_id);
 			break;
 
 		case MSG_FAIL_LIMIT:
@@ -681,55 +679,63 @@ void FxMainWindow::handle_sendmsg(int msgflag, int fx_msg, qlonglong account_id)
 				}
 			}
 			newmsg = "<b style=\"color:red;\">"+tr("send sms fail by limit:") +"</b>"+ newmsg.fromUtf8(msg);
-			msgwin->addMessage(newmsg, account_id);
 			break;
 		case MSG_TIMEOUT:
 			timeOutMsgVector.append(fx_msg); // add the msg to vector
 			newmsg = "<b style=\"color:rgb(170,0,255);\">" +tr("send timeout:") +"</b>" + newmsg.fromUtf8(msg)+"<br><b style=\"color:rgb(170,0,255);\">" +tr("will auto resend")+"</b>";
-			msgwin->addMessage(newmsg, account_id);
 			break;
 	}
 
+    if (fxMsg->ext_id != 0)
+        msgwin->addQunMessage(newmsg, account_id, 0L, true);
+    else
+        msgwin->addMessage(newmsg, account_id);
+
 	if(msg)
 		free(msg);
-
 }
+
 void FxMainWindow::slot_SysDialogMsg (int message, int fx_msg, qlonglong who)
 {
+    int msgflag; 
+
+    if (!fx_msg)
+        return;
+
 	switch(message)
 	{
 		case FX_SMS_OK: 
 		case FX_DIA_SEND_OK: 
 		case FX_QUN_SEND_OK: 
-		case FX_QUN_SMS_OK: 
-			handle_sendmsg( MSG_OK, fx_msg, who);
-			if(!fx_msg)
-				return;
-			fx_destroy_msg((Fetion_MSG *)fx_msg);
-			break;
+        case FX_QUN_SMS_OK: 
+            msgflag = MSG_OK;
+            break;
+
 		case FX_SMS_FAIL: 
 		case FX_DIA_SEND_FAIL: 
 		case FX_QUN_SEND_FAIL: 
 		case FX_QUN_SMS_FAIL: 
-			handle_sendmsg( MSG_FAIL, fx_msg, who);
-			if(!fx_msg)
-				return;
-			fx_destroy_msg((Fetion_MSG *)fx_msg);
-			break;
+            msgflag = MSG_FAIL;
+            break;
+
 		case FX_SMS_TIMEOUT: 
 		case FX_DIA_SEND_TIMEOUT: 
 		case FX_QUN_SEND_TIMEOUT: 
 		case FX_QUN_SMS_TIMEOUT: 
-			handle_sendmsg( MSG_TIMEOUT, fx_msg, who);
-			//time out should not to destroy msg, beacuse the system will resend by itself..
+            msgflag = MSG_TIMEOUT;
 			break;
 
-		case FX_SMS_FAIL_LIMIT: 
-		case FX_QUN_SMS_FAIL_LIMIT: 
-			handle_sendmsg( MSG_FAIL_LIMIT , fx_msg, who);
-			fx_destroy_msg((Fetion_MSG *)fx_msg);
-			break;
+        case FX_SMS_FAIL_LIMIT: 
+        case FX_QUN_SMS_FAIL_LIMIT: 
+            msgflag = MSG_FAIL_LIMIT;
+            break;
 	}
+
+    handle_sendmsg(msgflag, fx_msg, who);
+
+    //time out should not to destroy msg, beacuse the system will resend by itself..
+    if (msgflag != MSG_TIMEOUT)
+        fx_destroy_msg((Fetion_MSG *)fx_msg);
 }
 
 void FxMainWindow::slot_reName_group (int, int newname, qlonglong id)

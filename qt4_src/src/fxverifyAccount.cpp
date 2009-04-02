@@ -28,7 +28,7 @@ FxVerifyAccount::FxVerifyAccount(FxMainWindow *wind ,char*uri, char*desc, QWidge
 {
 	setupUi(this);
 
-	mainwind= wind;
+	mainwind = wind;
 	m_uri = uri;
 	m_desc = QString::fromUtf8(desc);
 	init_groupItem();
