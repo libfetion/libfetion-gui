@@ -530,37 +530,12 @@ QString BuddyOpt::createAccountTipsInfo(const Fetion_Account *account)
 			tips += info +"<br>";
 		}
 	} else {
-		if (!fx_is_pc_user_by_account(account)){
-			long head, body;
-			int prefix = 0;
-			head = account->id / (100000000); // 8 -> 10 	
-			body = account->id % (100000000);
-			switch(head)
-			{
-				case 10:
-					prefix = 150;
-					break;
-				case 11:
-					prefix = 151;
-					break;
-				case 12:
-					prefix = 157;
-					break;
-				case 13:
-					prefix = 158;
-					break;
-				case 20:
-					prefix = 159;
-					break;
-				default:
-					//14-19
-					prefix = 130+ head%10;
-					break;
-			}
-			char mobile_no[12];
-			sprintf(mobile_no, "%d%08ld", prefix, body);
-			mobile_no[11] = '\0';
+		if (!fx_is_pc_user_by_account(account))
+		{
+			char *mobile_no = fx_get_original_ID(account->id);
 			info += "<b style=\"color:red; \">"+QString(mobile_no) + "</b>"; 
+			if (mobile_no)
+				free(mobile_no);
 		}
 
 		info += "<b style=\"color:red; \"> </b>"; 
