@@ -45,6 +45,7 @@
 
 #ifdef WIN32 
 #pragma comment(lib, "./lib/LibFetion.lib")  
+#pragma comment(lib, "./lib/libcurl_imp.lib")  
 #pragma comment(lib, "Ws2_32.lib") 
 #pragma comment(lib, "user32.lib")
 #endif
