@@ -568,7 +568,7 @@ void FxMainWindow::haveNewSysMessage(qlonglong sys_id)
 		return;
 
 	QString newmsg ;
-	char *msg = fx_simple_paser_msg(fxMsg->message); 
+	char *msg = fx_msg_qt_format(fxMsg->message); 
 	newmsg = newmsg.fromUtf8(msg);
 
 	QSystemTrayIcon::MessageIcon icon = QSystemTrayIcon::MessageIcon(1);
@@ -646,7 +646,7 @@ void FxMainWindow::handle_sendmsg(int msgflag, int fx_msg, qlonglong account_id)
 
 	int i = 0;
 	Fetion_MSG *fxMsg = (Fetion_MSG *) fx_msg;
-	char *msg = fx_simple_paser_msg(fxMsg->message); 
+	char *msg = fx_msg_qt_format(fxMsg->message); 
 	QString newmsg;
 
 	switch(msgflag)

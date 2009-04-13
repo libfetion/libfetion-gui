@@ -1474,14 +1474,27 @@ FX_EXPORT int fx_test_network(PROXY_ITEM *item, EventListener func, void *args);
 */
 
 /**
-  * \fn char* fx_simple_paser_msg(const char * msg)
-  * \brief simple paser the msg, filter the <Font></Font> tags. 
+  * \fn char* fx_msg_no_format(const char * msg)
+  * \brief simple paser the msg, remove the <Font></Font> tags. 
   *
   * \param msg The original msg.
   *
-  * \return the no format message, return NULL if the msg is wrong format.
+  * \return the no format message when it is a correct msg,
+  * or return original msg.
 */
-FX_EXPORT char* fx_simple_paser_msg(const char * msg);
+FX_EXPORT char* fx_msg_no_format(const char * msg);
+
+/**
+  * \fn char* fx_msg_qt_format(const char * msg)
+  * \brief transform msg format to qt support. 
+  *
+  * \param msg The original msg.
+  *
+  * \return the msg which 's format was supported by QT GUI when it is 
+  * a correct msg, or return original msg  if the msg is no format.
+  * 
+*/
+FX_EXPORT char* fx_msg_qt_format(const char * msg);
 
 /**
   * \fn char* fx_get_original_ID(long id)

@@ -139,7 +139,7 @@ QString fxgui_handle_newMsg(Fetion_MSG *fxMsg)
 	} else { //message from pc  text/html-fragment
 
 		//here imple the font type and size.
-		char *msg = fx_simple_paser_msg(fxMsg->message); 
+		char *msg = fx_msg_qt_format(fxMsg->message); 
 		newmsg = newmsg.fromUtf8(msg);
 		if(msg)
 			free(msg);
