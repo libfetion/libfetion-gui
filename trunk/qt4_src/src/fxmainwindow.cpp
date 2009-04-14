@@ -1307,7 +1307,7 @@ void FxMainWindow::init_UI()
 
 	msgwin = new FxMsgWindow(0);
 	msgwin->setMainWind(this);
-	//fx_updata_account_info_all();
+	fx_updata_account_info_all();
 	//****************************************************//
 }
 void FxMainWindow::initAllActions()
