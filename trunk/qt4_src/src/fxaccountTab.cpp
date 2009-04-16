@@ -49,7 +49,7 @@ AccountTab::~AccountTab()
 
 void AccountTab::setSendModle(bool isSMS)
 {
-	isAwaySendSMS = isSMS;
+//	isAwaySendSMS = isSMS; /*fix bug issue 37*/
 
 	if (account_id == SYSTEM_ID)
 	{
@@ -81,27 +81,27 @@ void AccountTab::setSendModle(bool isSMS)
 	}
 
 	QString status;
-	if(isAwaySendSMS) {
-		
-		if(fx_get_refuse_sms_day(m_account) > 0)
-			status =account_name + tr(" are offline, can't receive you sms immediately, your msg will saved and send later");
-		else
-			status =tr("your message will send to") + account_name + tr(" 's mobile");
+    if (isSMS)
+    {
+        if(fx_get_refuse_sms_day(m_account) > 0)
+            status =account_name + tr(" are offline, can't receive you sms immediately, your msg will saved and send later");
+        else
+            status =tr("your message will send to") + account_name + tr(" 's mobile");
 
-		msgSend->Ac_Status->setText(status); 
-	} else {
+        msgSend->Ac_Status->setText(status); 
+    } else {
 
-		if(fx_is_on_line_by_account (m_account)) {
-			status = account_name + tr("are online, you message will send to his PC");
-			msgSend->Ac_Status->setText(status); 
-		} else {
-			if(fx_get_refuse_sms_day(m_account) > 0)
-				status =account_name + tr(" are offline, can't receive you sms immediately, your msg will saved and send later");
-			else
-				status = account_name + tr("are offline, your message will send to his mobile"); 
-			msgSend->Ac_Status->setText(status); 
-		} //end of !fx_is_on_line_by_account (m_account)) 
-	} //end of !isAwaySendSMS
+        if(fx_is_on_line_by_account (m_account)) {
+            status = account_name + tr("are online, you message will send to his PC");
+            msgSend->Ac_Status->setText(status); 
+        } else {
+            if(fx_get_refuse_sms_day(m_account) > 0)
+                status =account_name + tr(" are offline, can't receive you sms immediately, your msg will saved and send later");
+            else
+                status = account_name + tr("are offline, your message will send to his mobile"); 
+            msgSend->Ac_Status->setText(status); 
+        } //end of !fx_is_on_line_by_account (m_account)) 
+    } //end of !
 
 	changeTableInputNM();
 }
