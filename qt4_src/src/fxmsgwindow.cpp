@@ -168,6 +168,9 @@ FxQunWindow* FxMsgWindow::findQunWindow(qlonglong qun_id)
 
 bool FxMsgWindow::addQunMessage(QString msg, qlonglong qun_id, qlonglong sender, bool iscoming_msg)
 {
+	if (msg.isEmpty())
+		return false;
+
 	if (!Settings::instance().isMute())
 		playSound(MSG_SOUND);
 
@@ -212,6 +215,9 @@ bool FxMsgWindow::addQunMessage(QString msg, qlonglong qun_id, qlonglong sender,
 
 bool FxMsgWindow::addMessage(QString msg, qlonglong account_id,  bool iscoming_msg)
 {
+	if (msg.isEmpty())
+		return false;
+
 	AccountTab *accountTab = findFromMsgWindow(tabWidget, account_id);
 
 	if (!accountTab)
