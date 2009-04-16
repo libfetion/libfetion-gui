@@ -21,6 +21,7 @@
 #define _FX_SKIN_MANAGE_H
 #include "appconfig.h"
 
+bool validateSkinPath(QString skinPath);
 QString getSkinPath();
 QString getSkinName();
 bool setSkins(QString skinPath, QString skinName);

@@ -41,13 +41,23 @@ bool setSkins(QString skinPath, QString skinName)
 	return	true;
 }
 
-Skin_Info *get_skininfo(QString skinpath)
+bool validateSkinPath(QString skinPath)
+{
+    bool ret = false;
+    QFile file(skinPath + SKIN_CONFG_FILE); 
+    ret = file.open(QIODevice::ReadOnly);
+    file.close();
+
+    return ret;
+}
+
+Skin_Info *get_skininfo(QString skinPath)
 {
 	QDomDocument doc("xml");
-	QFile file(skinpath + SKIN_CONFG_FILE); 
 
-	if (!file.open(QIODevice::ReadOnly))
-		return NULL;
+    QFile file(skinPath + SKIN_CONFG_FILE); 
+    if (!file.open(QIODevice::ReadOnly))
+        return NULL;
 
 	if (!doc.setContent(&file)) 
 	{
@@ -60,7 +70,7 @@ Skin_Info *get_skininfo(QString skinpath)
 	sk_info->name = doc.documentElement().attribute("name", "unset");
 	sk_info->author = doc.documentElement().attribute("author", "unset");
 	sk_info->describe = doc.documentElement().attribute("describe", "unset");
-	sk_info->skinpath = skinpath;
+	sk_info->skinpath = skinPath;
 #if 0
 	qDebug(sk_info->name.toUtf8().data());
 	qDebug(sk_info->author.toUtf8().data());

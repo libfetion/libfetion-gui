@@ -74,6 +74,13 @@ Settings::Settings(const QString & fileName, Format format)
 	m_skinPath = value("SkinPath", defaultSkinPath()).toString();
 	m_skinName = value("SkinName", "default").toString();
 
+    //check the skinPath is correct. if not correct, set default skin to app.
+    if (!validateSkinPath(m_skinPath))
+    {
+        m_skinPath = defaultSkinPath();
+        m_skinName = "default";
+    }
+
 	m_CurrentFont = value("AppFont",QFont()).value<QFont>();
 }
 
