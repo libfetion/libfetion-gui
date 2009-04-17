@@ -30,9 +30,9 @@
 #include "fxsettings.h"
 #include "fxutil.h"
 
-#define BUILD_DATE	20090214
-#define	CURRENT_VERSION	92
-#define VERSION_NO "v0.9.2"
+#define BUILD_DATE	20090417
+#define	CURRENT_VERSION	93
+#define VERSION_NO "v0.9.3"
 
 #define MAXSMSLENGTH 180 
 
