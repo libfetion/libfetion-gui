@@ -20,8 +20,8 @@ mac {
     TARGET    = Mac-Fetion
     ICON      = ./misc/mac_fetion.icns
     QMAKE_INFO_PLIST = ./misc/mac_fetion.plist
-	LIBS 	 +=  -lcurl -lssl ./lib/libfetion_mac.a
-	QMAKE_CXXFLAGS += -DMAC_OS=1
+    LIBS 	 =  -lcurl -lssl ./lib/libfetion_mac.a
+    QMAKE_CXXFLAGS += -DMAC_OS=1
 }
 
 TRANSLATIONS    = fetion_utf8_CN.ts
