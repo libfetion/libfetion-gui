@@ -56,9 +56,10 @@ inline AccountTab *findFromMsgWindow(QTabWidget * tabWidget, qlonglong ac_id)
 
 
 FxMsgWindow::FxMsgWindow(QWidget *parent)
-    : QMainWindow(parent)
+    : FxWidget(parent)
 {
-	setupUi(this);
+	setupUi(contentWidget);
+	setObjectName("ChatWindow");
 	m_mainwindow = NULL;
 	m_willQuit = false;
 	closeTabButton = NULL;
@@ -78,7 +79,7 @@ void FxMsgWindow::init()
 
 void FxMsgWindow::init_inputFace()
 {
-	inputFace = new FxInputFace(this);
+	inputFace = new FxInputFace(contentWidget);
 	QPalette pal;
 	pal.setBrush(QPalette::Window,QBrush(getInputFaceIcon()));
 	inputFace->setPalette(pal);
@@ -95,18 +96,18 @@ void FxMsgWindow::init_UI()
 	pal.setColor(QPalette::Disabled, QPalette::Button, pal.color(QPalette::Disabled, QPalette::Window));
 	pal.setColor(QPalette::Inactive, QPalette::Button, pal.color(QPalette::Inactive, QPalette::Window));
 
-	closeTabButton = new QToolButton(tabWidget);
-	closeTabButton->setAutoRaise(true);
-	closeTabButton->setEnabled(true);
-	closeTabButton->setPalette(pal);
+	//closeTabButton = new QToolButton(tabWidget);
+	//closeTabButton->setAutoRaise(true);
+	//closeTabButton->setEnabled(true);
+	//closeTabButton->setPalette(pal);
 
-	tabWidget->setCornerWidget(closeTabButton, Qt::TopRightCorner);
-	closeTabButton->setCursor(Qt::ArrowCursor);
-	closeTabButton->setIcon(getCloseTabImage());
-	connect(closeTabButton, SIGNAL(clicked()), this, SLOT(closeTab()));
-	closeTabButton->setToolTip(tr("close current Tab"));
+	//tabWidget->setCornerWidget(closeTabButton, Qt::TopRightCorner);
+	//closeTabButton->setCursor(Qt::ArrowCursor);
+	//closeTabButton->setIcon(getCloseTabImage());
+	//connect(closeTabButton, SIGNAL(clicked()), this, SLOT(closeTab()));
+	//closeTabButton->setToolTip(tr("close current Tab"));
 
-	tabWidget->setParent(this);
+	tabWidget->setParent(contentWidget);
 	tabWidget->clear();
 
 	move(Settings::instance().MsgWinPos());
@@ -147,14 +148,18 @@ void FxMsgWindow::closeTab()
 void FxMsgWindow::closeTabWid(int index)
 {
 	AccountTab *accountTab = (AccountTab *) tabWidget->widget(index); 
-
+qDebug()<<"closing index:"<<index<<"\n";
 	tabWidget->removeTab (index);
 	//if the tabWidget have no tab, hide it..
 	if (tabWidget->count() <= 0)
 		this->hide();
 
+	// there's warning:
+	// QObject do not delete object, 'MsgEdit', during its event handler!
+	//if (accountTab)
+	//	delete accountTab;
 	if (accountTab)
-		delete accountTab;
+		accountTab->deleteLater();
 }
 
 FxQunWindow* FxMsgWindow::findQunWindow(qlonglong qun_id)
@@ -217,7 +222,6 @@ bool FxMsgWindow::addMessage(QString msg, qlonglong account_id,  bool iscoming_m
 {
 	if (msg.isEmpty())
 		return false;
-
 	AccountTab *accountTab = findFromMsgWindow(tabWidget, account_id);
 
 	if (!accountTab)
@@ -350,6 +354,7 @@ void FxMsgWindow::resizeEvent (QResizeEvent * event)
 {
 	Settings::instance().setMsgWinSize(size());
 	tabWidget->resize(event->size());
+	FxWidget::resizeEvent(event);
 }
 
 void FxMsgWindow::closeEvent(QCloseEvent *event)
@@ -529,10 +534,12 @@ void FxMsgWindow::nudge_shake()
 }
 
 void FxMsgWindow::showFaces()
-{
+{	
 	inputFace->setGeometry (QCursor::pos().x() - 320,
 			QCursor::pos().y() - 261, 320, 261);
+	qDebug()<<"y:"<<inputFace->geometry().y()<<"\n";
 	inputFace->show();
+	qDebug()<<"z:"<<inputFace->geometry().y()<<"\n";
 	inputFace->setFocus();
 	//inputFace->setWindowState(Qt::WindowActive);
 	//inputFace->grabMouse() ;
@@ -559,6 +566,7 @@ void FxMsgWindow::UpdateSkins()
 
 void FxMsgWindow::SetAllFont(QFont font)
 {
+/*
 	this->setFont(font);
 	tabWidget->setFont(font);
 
@@ -572,6 +580,7 @@ void FxMsgWindow::SetAllFont(QFont font)
     }
 
    this->repaint();
+*/
 }
 
 static QString CropTabName(QString orig_name) 

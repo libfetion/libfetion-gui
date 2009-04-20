@@ -33,11 +33,13 @@
 #include "fxqunwindow.h"
 #include "fxInputFace.h"
 
+#include "fxwidget.h"
+using namespace fxgui;
 
 class FxMainWindow;
 
 //class FxMsgWindow : public QDialog, public Ui::MsgWindow
-class FxMsgWindow : public QMainWindow, public Ui::MsgWindow
+class FxMsgWindow : public FxWidget, public Ui::MsgWindow
 {
     Q_OBJECT
 
