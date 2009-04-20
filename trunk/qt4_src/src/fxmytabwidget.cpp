@@ -37,7 +37,18 @@ bool FxMyTabWidget::eventFilter(QObject *target, QEvent *event)
 		if (keyEvent->key() == Qt::Key_W && 
 		(keyEvent->modifiers() == Qt::AltModifier || keyEvent->modifiers() == Qt::ControlModifier )
 		) {
-			((FxMsgWindow *)(this->parentWidget()))->closeTabWid(currentIndex()); 
+				qDebug()<<"begin";
+			// @TO FIX
+			FxMsgWindow *_tmp=0;
+			QWidget *_pre = this;
+			while(_tmp == 0 && _pre!=0){
+				qDebug()<<"*]";
+				QWidget *_pre = dynamic_cast<QWidget *> (_pre->parent());
+				_tmp = dynamic_cast<FxMsgWindow *>(_pre);
+			}
+			qDebug()<<"\n";
+			_tmp->closeTabWid(currentIndex());
+			//((FxMsgWindow *)(this->parentWidget()->parentWidget() ))->closeTabWid(currentIndex()); 
 			return true;
 		}
 
@@ -48,7 +59,9 @@ bool FxMyTabWidget::eventFilter(QObject *target, QEvent *event)
 			{
 				if (Actab->msgSend->MsgEdit->toPlainText().isEmpty())
 				{
-					((FxMsgWindow *)(this->parentWidget()))->hide();
+					
+					// @TO FIX
+					( (FxMsgWindow *)( this->parentWidget()->parentWidget() ) )->hide();
 					return true;
 				}
 			}
