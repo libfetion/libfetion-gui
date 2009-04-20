@@ -31,9 +31,8 @@ QTreeView::branch:has-children:open{
 fxgui--FxWidget fxgui--FxWidgetTitleBar Label{
 	padding:20px;
 }
- 
-/* stile not work now */
-fxgui--FxWidget:active{
+
+#loginWindow{
 	background-origin:padding;
 	qproperty-background:url(./skin1/mainpanel_window_windowbkg.bmp);
 	qproperty-scaleLeft:65;
@@ -41,7 +40,7 @@ fxgui--FxWidget:active{
 	qproperty-scaleTop:135;
 	qproperty-scaleBottom:58;
 }
-fxgui--FxWidget:!active{
+#mainWindow{
 	background-origin:padding;
 	qproperty-background:url(./skin1/mainpanel_window_windowbkg.bmp);
 	qproperty-scaleLeft:65;
