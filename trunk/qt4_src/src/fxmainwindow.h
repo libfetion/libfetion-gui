@@ -29,13 +29,15 @@
 #include "fxmsgwindow.h"
 #include "fxaddBuddyWindow.h"
 
+#include "fxwidget.h"
+using namespace fxgui;
 
 class QAction;
 class QActionGroup;
 class QLabel;
 class QMenu;
 
-class FxMainWindow : public QMainWindow, public Ui::FetionWindow
+class FxMainWindow : public FxWidget, public Ui::FetionWindow
 {
     Q_OBJECT
 
@@ -290,6 +292,10 @@ public:
     QAction *AutoLoginAct;
     QAction *MuteAct;
 	QAction *IsAutoShowMsgAct;
+	
+	QMenu *buddyMenu;
+	QMenu *menuSetting;
+	QMenu *menuAbout;
 };
 
 #endif

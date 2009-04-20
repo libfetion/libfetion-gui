@@ -26,8 +26,10 @@
 
 #include "ui_login_window.h"
 #include "fxproxy.h"
+#include "fxwidget.h"
+using namespace fxgui;
 
-class FxLoginWindow : public QDialog, public Ui::Fetion_Login
+class FxLoginWindow : public FxWidget, public Ui::Fetion_Login
 {
     Q_OBJECT
 
