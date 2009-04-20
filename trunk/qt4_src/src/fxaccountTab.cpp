@@ -117,7 +117,8 @@ void AccountTab::ShowHistroy()
 
 void AccountTab::ShowFaces()
 {
-	((FxMsgWindow *)(tabWidget->parentWidget()))->showFaces();
+	// @TO FIX
+	((FxMsgWindow *)(tabWidget->parentWidget()->parentWidget()))->showFaces();
 }
 
 void AccountTab::changeSendModle()
@@ -151,7 +152,8 @@ bool AccountTab::eventFilter(QObject *target, QEvent *event)
 			if (keyEvent->key() == Qt::Key_W && 
 		(keyEvent->modifiers() == Qt::AltModifier || keyEvent->modifiers() == Qt::ControlModifier )) 
 			{
-				((FxMsgWindow *)(tabWidget->parentWidget()))->closeTabWid(tabWidget->currentIndex()); 
+				//@To FIX
+				((FxMsgWindow *)(tabWidget->parentWidget()->parentWidget()))->closeTabWid(tabWidget->currentIndex()); 
 				return true;
 			}
 
@@ -159,7 +161,8 @@ bool AccountTab::eventFilter(QObject *target, QEvent *event)
 			{
 				if (msgSend->MsgEdit->toPlainText().isEmpty())
 				{
-					((FxMsgWindow *)(tabWidget->parentWidget()))->hide();
+					//@TO FIX
+					((FxMsgWindow *)(tabWidget->parentWidget()->parentWidget()))->hide();
 					return true;
 				}
 			}
@@ -212,7 +215,7 @@ void AccountTab::SendNudge()
 	if (fx_send_nudge(account_id))
 	{
 		str = tr("send nudge ok");
-		((FxMsgWindow *)(tabWidget->parentWidget()))->nudge_shake();
+		((FxMsgWindow *)(tabWidget->parentWidget()->parentWidget()))->nudge_shake();
 	}
 	else
 		str = tr("you couldn't send nudge frequently");
@@ -294,7 +297,7 @@ void AccountTab::startFlickerTab()
 	if (flickTimer.isActive())
 		return;
 
-	QApplication::alert(tabWidget->parentWidget());
+	QApplication::alert(tabWidget->parentWidget()->parentWidget());
 	flickTimer.start(400);
 	if(mainWind)
 		mainWind->addNewMsgCount();
