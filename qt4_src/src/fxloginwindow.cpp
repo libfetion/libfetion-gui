@@ -24,13 +24,13 @@
 #include "fxloginwindow.h"
 
 FxLoginWindow::FxLoginWindow(QWidget *parent)
-    : QDialog(parent)
+    : FxWidget(parent)
 	, user_id(NULL)
 	, user_pwd(NULL)
 	, proxy(NULL)
 	, willLogin(true)
 {
-    setupUi(this);
+    setupUi(contentWidget);
 	init();
 	checkAutoLogin();
 }
@@ -101,6 +101,8 @@ void FxLoginWindow::setLogingState(char *ch)
 
 void  My_EventListener (int message, WPARAM wParam, LPARAM lParam, void* args)
 {
+	Q_UNUSED(wParam);
+	Q_UNUSED(lParam);
 	FxLoginWindow *loginDlg = NULL;
 
 	if(!args)

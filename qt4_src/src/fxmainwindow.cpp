@@ -180,7 +180,7 @@ void FxMainWindow::handleFx_Sys_Event(int message, WPARAM wParam, LPARAM lParam)
 }
 
 FxMainWindow::FxMainWindow(QWidget *parent)
-	:QMainWindow(parent)
+	:FxWidget(parent)
 	,trayIcon(NULL)
 	,traySetStatusMenu(NULL)
 	,buddySetStatusMenu(NULL)
@@ -189,7 +189,7 @@ FxMainWindow::FxMainWindow(QWidget *parent)
 	,traySendSmsMenu(NULL)
 	,optSendSmsMenu(NULL)
 {
-	setupUi(this);
+	setupUi(contentWidget);
 	newVersion = 0;
 	new_msg_count = 0;
 	new_qun_msg_count = 0;
@@ -201,6 +201,7 @@ FxMainWindow::FxMainWindow(QWidget *parent)
 	tmp_addBuddy = NULL;
 
     init_UI();
+    setAutoHide(true);
 	initAllActions();
 	createMenu();
 	initTrayIcon();
@@ -303,6 +304,7 @@ void FxMainWindow::SearcheditingFinished ()
 
 void FxMainWindow::SearchtextChanged (const QString &text)
 {
+	Q_UNUSED(text);
 	QString content = UI_Search->text();
 	if (content.isEmpty() || content == tr("search friends..."))
 	{
@@ -446,6 +448,8 @@ void FxMainWindow::relogin_fetion()
 
 void FxMainWindow::handleFx_relogin_Event(int message, WPARAM wParam, LPARAM lParam)
 {
+	Q_UNUSED(wParam);
+	Q_UNUSED(lParam);
 	switch(message)
 	{
 		case FX_LOGIN_URI_ERROR:
@@ -556,12 +560,14 @@ void FxMainWindow::haveAddAccountAppMessage(char* uri, char*desc)
 
 void FxMainWindow::haveMoveGroupMessage(qlonglong account_id, int group_id) 
 {
+	Q_UNUSED(group_id);
 	buddyopt->delAccount_direct(account_id);  
 	buddyopt->addAccountToGroup(fx_get_account_by_id (account_id));
 }
 
 void FxMainWindow::haveNewSysMessage(qlonglong sys_id)
 {
+	Q_UNUSED(sys_id);
 #if 0 //not using system message
 	Fetion_MSG * fxMsg = fx_get_msg(sys_id);
 	if(!fxMsg)
@@ -598,6 +604,7 @@ void FxMainWindow::updateAccountInfo(qlonglong account_id)
 
 void FxMainWindow::slot_SystemNetErr(int err)
 {
+	Q_UNUSED(err);
 	relogin_fetion();
 
 	if (fx_status == SYS_RELOGIN)
@@ -697,7 +704,7 @@ void FxMainWindow::handle_sendmsg(int msgflag, int fx_msg, qlonglong account_id)
 
 void FxMainWindow::slot_SysDialogMsg (int message, int fx_msg, qlonglong who)
 {
-    int msgflag; 
+    int msgflag=0; 
 
     if (!fx_msg)
         return;
@@ -767,7 +774,7 @@ void FxMainWindow::slot_reName_group (int, int newname, qlonglong id)
 	QString groupShowName = group_info->groupName+ online;
 #else
 	char *online= NULL;
-	asprintf(&online, "(%d/%d)", group_info->online_no, groupItem->childCount());
+	(void)asprintf(&online, "(%d/%d)", group_info->online_no, groupItem->childCount());
 	QString groupShowName = group_info->groupName+ online;
 	if(online)
 		free(online);
@@ -948,7 +955,10 @@ void FxMainWindow::createGroupMenu(QMenu *groupMenu)
 {
 	Group_Info *groupinfo = NULL; 
 	Fetion_Group *group = NULL;
-
+	
+	Q_UNUSED(groupinfo);
+	Q_UNUSED(group);
+	
 	DList *tmp_group = (DList *)fx_get_group();
 	while(tmp_group)
 	{
@@ -1030,6 +1040,7 @@ void FxMainWindow::skinMenutriggered(QAction *action)
 
 void FxMainWindow::searchaccountDoubleClicked (QTreeWidgetItem * item, int column )
 {
+	Q_UNUSED(column);
 	if(item == 0)
 		return;
 
@@ -1095,12 +1106,12 @@ bool FxMainWindow::event( QEvent * event )
 		QWindowStateChangeEvent *mEvent = (QWindowStateChangeEvent *)event;
 		if( mEvent->oldState() == Qt::WindowNoState)
 		{
-			QMainWindow::event(event);
+			FxWidget::event(event);
 			hide();
 			return true;
 		}
 	}
-	return QMainWindow::event(event);
+	return FxWidget::event(event);
 }
 #endif
 
@@ -1161,6 +1172,7 @@ void FxMainWindow::closeEvent(QCloseEvent *event)
 
 void FxMainWindow::moveEvent(QMoveEvent * event)
 {
+	Q_UNUSED(event);
 	if (isNeedRecordWinPos)
 		Settings::instance().setMainWinPos(pos());
 }
@@ -1515,6 +1527,12 @@ void FxMainWindow::initAllActions()
 
 void FxMainWindow::createMenu()
 {
+	QMenu *mainMenu = new QMenu(btnMenu);
+	buddyMenu = mainMenu->addMenu(tr("buddy"));
+	menuSetting = mainMenu->addMenu(tr("settings"));
+	menuAbout = mainMenu->addMenu(tr("about"));
+	btnMenu->setMenu(mainMenu);
+	
 	reloginTrayMenu = new QMenu(this);
 	reloginTrayMenu->addAction(exitAct);
 
