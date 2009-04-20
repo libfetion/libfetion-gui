@@ -1,0 +1,232 @@
+
+#ChatWindow{
+	background-origin:padding;
+	qproperty-background:url(./skin1/ChatFrame_Window_windowBkg.bmp);
+	/* 以下为9宫缩放的4个参数,类似于css3里的 borderImage，不
+过QT并非所有窗体都支持borderImage,且borderImage里要在border上放按钮我还没找
+到方法...这个的具体实现我解决了。提供的背景图不需要固定尺寸，只需要
+提供上，下两段及相关的切割数字即可
+ ______________________
+ |      |          |   |
+ |  
+
+*/
+	qproperty-scaleLeft:16;
+	qproperty-scaleRight:1;
+	qproperty-scaleTop:90;
+	qproperty-scaleBottom:16;
+	
+}
+
+/* 好友列表树相关样式 */
+QTreeView::branch:has-children:closed{
+	border-image: none;
+    image: url(./skin1/fold_up.png);
+}
+QTreeView::branch:has-children:open{
+ 	border-image: none;
+ 	image: url(./skin1/fold_down.png);
+ }
+
+fxgui--FxWidget fxgui--FxWidgetTitleBar Label{
+	padding:20px;
+}
+ 
+/* stile not work now */
+fxgui--FxWidget:active{
+	background-origin:padding;
+	qproperty-background:url(./skin1/mainpanel_window_windowbkg.bmp);
+	qproperty-scaleLeft:65;
+	qproperty-scaleRight:130;
+	qproperty-scaleTop:135;
+	qproperty-scaleBottom:58;
+}
+fxgui--FxWidget:!active{
+	background-origin:padding;
+	qproperty-background:url(./skin1/mainpanel_window_windowbkg.bmp);
+	qproperty-scaleLeft:65;
+	qproperty-scaleRight:130;
+	qproperty-scaleTop:135;
+	qproperty-scaleBottom:58;
+}
+
+/* 状态 */
+#userstatus{
+	background-color:rgba(0,0,0,0%);
+}
+#userstatus QAbstractItemView {
+	border:2px solid darkgray;
+	background:#34f343;
+	selection-background-color:red;
+}
+#userstatus QAbstractItemView::item {
+	color:blue;
+	background:#0ff;
+	border:1px solid red;
+	selection-background-color:red;
+}
+
+
+/* 心情短语 */
+#impression,QLineEdit{
+	background-color:rgba(240,255,255,0%);
+}
+QLineEdit{
+	border:none;
+}
+QLineEdit:hover{
+	/*border:dashed;*/
+	/*background:url(./skin1/icon.png);*/
+	background-color:rgba(240,255,255,10%);
+}
+QLineEdit::focus{
+	border:solid;
+	/*background-image:url(./skin1/icon.png);*/
+	background-color:pallet(button);
+}
+#impression:hover{
+	border:1px dashed blue;
+	/*border-image:url(./skin1/All_button_pushedAction_sb1_background_T0.bmp) 4 4 4 4;*/
+}
+
+
+
+
+
+
+/* 搜索好友按钮 */
+#btnSearch{
+	padding:0;
+	margin:0;
+	border:none;
+	border-image:url(./skin1/main_tab_down.bmp);
+
+}
+
+/* 添加好友按钮 */
+#btnAddFriend{
+	padding:0;
+	margin:0;
+	border:none;
+	border-image:url(./skin1/main_tab_down.bmp);
+}
+#btnAddFriend:hover{
+	border:none;
+	border-image:url(./skin1/main_tab_down.bmp);
+}
+#btnAddFriend:pressed{
+	border:none;
+	border-image:url(./skin1/main_tab_down.bmp);
+}
+
+/* portrait 头像*/
+/* 备注：往后版本如果下载用户定义的头像，则此属性的CSS将不提供修改或背景默认指向指定路径 */
+#portrait{
+	border-image:url(./skin1/MainPanel_MainHeadImage_mouseOnDraw.png) 0 0 0 0;
+	background-repeat:repeat-none;
+	background-image:url(./skin1/Bomb.jpg);
+	background-position: center center;
+	width:66;
+	height:66;
+}
+/* 主窗口标题 */
+fxgui--FxWidget{
+	qproperty-windowTitle:"small fetion---default-style";
+}
+/* 当前窗口有焦点时 */
+fxgui--FxWidget QLabel#title:active{
+	/*color:#0022ee;*/
+	border-top:5px;
+	border-bottom:5px;
+	font-weight:normal;
+	font-family:"Arial";
+	margin-left:14px;
+	background:url(./skin1/MainPanel_MainFrameTitle_file.png)center  right;
+	background-repeat:repeat-none;
+}
+/* 当前窗口无焦点时*/
+fxgui--FxWidget QLabel#title:!active{
+	/*color:#0022ee;*/
+	font-weight:bolder;
+	font-family:"Arial";
+	font-size:16px;
+	background:url(./skin1/MainPanel_MainFrameTitleNoActivate_file.png)center  right;
+	background-repeat:repeat-none;
+}
+
+/* icon */
+#icon{
+	border-image:url(./skin1/icon.png);
+}
+
+/* min button*/
+QPushButton#btnMinimize{
+    border: none;
+    border-image: url(./skin1/minimizebutton_normalBackground.bmp);
+}
+QPushButton{
+	width:27px;
+	height:23px;
+	margin:0;
+	padding:0;
+}
+QPushButton#btnMinimize:hover{
+	margin:0;
+	padding:0;
+	border-image: url(./skin1/minimizebutton_highlightBackground.bmp);
+}
+QPushButton#btnMinimize:pressed{
+	border-image: url(./skin1/minimizebutton_pushedBackground.bmp);
+}
+/* max button*/
+
+QPushButton#btnMaximize:checked{
+	border:none;
+	border-image: url(./skin1/maximizebutton_normalBackground2.bmp);
+}
+QPushButton#btnMaximize:checked:hover{
+	border:none;
+    border-image: url(./skin1/maximizebutton_highlightBackground2.bmp);
+}
+QPushButton#btnMaximize:checked:pressed{
+	border:none;
+    border-image: url(./skin1/maximizebutton_pushedBackground2.bmp);
+}
+
+/* normal button */
+QPushButton#btnMaximize{
+	border:none;
+	border-image: url(./skin1/maximizebutton_normalBackground.bmp);
+}
+QPushButton#btnMaximize:hover{
+	border:none;
+    border-image: url(./skin1/maximizebutton_highlightBackground.bmp);
+}
+QPushButton#btnMaximize:pressed{
+	border:none;
+    border-image: url(./skin1/maximizebutton_pushedBackground.bmp);
+}
+
+/* close button */
+QPushButton#btnClose{
+    border: none;
+    border-image: url(./skin1/closebuttonBackground_background.bmp);
+}
+QPushButton#btnClose:hover{
+	border-image: url(./skin1/closebuttonBackground_foreground.bmp);
+}
+QPushButton#btnClose:pressed{
+	border-image: url(./skin1/closebutton_pushedAction_sb1_background_T0.bmp);
+}
+
+/* menu button */
+QToolButton#btnMenu{
+    border: none;
+    border-image: url(./skin1/All_button_pushedAction_sb1_background_T0.bmp);
+}
+QToolButton#btnMenu:hover{
+	border-image: url(./skin1/main_tab_down.bmp);
+}
+QToolButton#btnMenu:pressed{
+	border-image: url(./skin1/All_MainPanel_TabButtonBase_pushedBackground2.bmp);
+}
