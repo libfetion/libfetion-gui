@@ -15,7 +15,7 @@
 namespace fxgui{
 
 FxWidget::FxWidget(QWidget *parent,Qt::WindowFlags flag):QWidget(parent,flag){
-	
+
 	bgScaleLeft=65;
 	bgScaleRight=130;
 	bgScaleBottom=58;
@@ -76,6 +76,7 @@ FxWidget::FxWidget(QWidget *parent,Qt::WindowFlags flag):QWidget(parent,flag){
 	setContentsMargins(3,0,3,3);
 	QWidget::setLayout(_mainLayout);
 	orientSize = size();
+	updateWindowPositionType();
 	//_mainLayout->setSizeConstraint(QLayout::SetNoConstraint);
 	//setMinimumSize(100,22);
 	//setSizePolicy(QSizePolicy(QSizePolicy::Ignored,QSizePolicy::Minimum));
@@ -161,6 +162,8 @@ void FxWidget::turnBackNormal(){
 void FxWidget::hideToTopBottom(){
 	titleBar->setSizePolicy(QSizePolicy(QSizePolicy::Ignored,QSizePolicy::Ignored));
 	contentWidget->setSizePolicy(QSizePolicy(QSizePolicy::Ignored,QSizePolicy::Ignored));
+	//sideBarRL->setSizePolicy(QSizePolicy(QSizePolicy::Ignored,QSizePolicy::Ignored));
+	//sideBarTB->setSizePolicy(QSizePolicy(QSizePolicy::Expanding,QSizePolicy::Ignored));
 	titleBar->hide();
 	contentWidget->hide();
 	sideBarRL->hide();
@@ -173,6 +176,8 @@ void FxWidget::hideToTopBottom(){
 void FxWidget::hideToLeftRight(){
 	titleBar->setSizePolicy(QSizePolicy(QSizePolicy::Ignored,QSizePolicy::Ignored));
 	contentWidget->setSizePolicy(QSizePolicy(QSizePolicy::Ignored,QSizePolicy::Ignored));
+	//sideBarTB->setSizePolicy(QSizePolicy(QSizePolicy::Ignored,QSizePolicy::Ignored));
+	//sideBarRL->setSizePolicy(QSizePolicy(QSizePolicy::Ignored,QSizePolicy::Expanding));
 	titleBar->hide();
 	contentWidget->hide();
 	sideBarTB->hide();
@@ -187,7 +192,7 @@ void FxWidget::onDoubleClicked(bool checked){
 	if(!checked){
 		this->showNormal();
 	}else{
-		this->showMaximized();
+		this->showFullScreen();
 	}
 	Q_UNUSED(checked); // avoid compiler's warnning
 
@@ -240,7 +245,7 @@ void FxWidget::leaveEvent(QEvent* event){
 	switch(positionState){
 		case WP_NORMAL:return;break;
 		case WP_LEFT:
-			//move(0,y());
+			move(0,y());
 			orientSize = size();
 			positionState |= WP_HIDDEN;
 			hideToLeftRight();
@@ -256,7 +261,7 @@ void FxWidget::leaveEvent(QEvent* event){
 			//resize(5,height());
 			break;
 		case WP_TOP:
-			//move(x(),0);
+			move(x(),0);
 			orientSize = size();
 			positionState |= WP_HIDDEN;
 			//setMask(QRegion(0,0,width(),3));

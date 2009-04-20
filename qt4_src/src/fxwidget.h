@@ -27,7 +27,7 @@ class FxWidget:public QWidget{
 	
 	//Q_PROPERTY(QPixmap hiddenBar WRITE setHiddenBar)
 public:
-	FxWidget(QWidget *parent=0,Qt::WindowFlags flag=(Qt::Window | Qt::FramelessWindowHint) );
+	FxWidget(QWidget *parent=0,Qt::WindowFlags flag=( Qt::Window | Qt::FramelessWindowHint | Qt::WindowSystemMenuHint) );
 public:
 signals:
 	void triggleMaximizeAndNormal();
@@ -73,7 +73,7 @@ public slots:
 		_autoHide = autoHide;
 		if(_autoHide){
 			setWindowFlags( windowFlags() | Qt::WindowStaysOnTopHint);
-			if( isVisible() ){
+			if( !isVisible() ){
 				show();
 			}
 			updateWindowPositionType();

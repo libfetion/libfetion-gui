@@ -53,7 +53,8 @@ void FxWidgetTitleBar::on_btnMaximize_clicked(bool checked){
 	if(!checked){
 		_parent->showNormal();
 	}else{
-		_parent->showMaximized();
+		//_parent->showMaximized();
+		_parent->showFullScreen();
 	}
 	Q_UNUSED(checked); // avoid compiler's warnning
 }
