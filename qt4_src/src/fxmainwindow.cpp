@@ -189,6 +189,7 @@ FxMainWindow::FxMainWindow(QWidget *parent)
 	,traySendSmsMenu(NULL)
 	,optSendSmsMenu(NULL)
 {
+	setObjectName("mainWindow");
 	setupUi(contentWidget);
 	newVersion = 0;
 	new_msg_count = 0;

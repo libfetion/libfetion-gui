@@ -30,6 +30,7 @@ FxLoginWindow::FxLoginWindow(QWidget *parent)
 	, proxy(NULL)
 	, willLogin(true)
 {
+	setObjectName("loginWindow");
     setupUi(contentWidget);
 	init();
 	checkAutoLogin();
