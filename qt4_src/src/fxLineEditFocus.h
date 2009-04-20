@@ -20,6 +20,7 @@ void    mousePressEvent ( QMouseEvent * event )
 	{ 
 		//	QLineEdit::mousePressEvent (event); 
 		emit clicked(); 
+		Q_UNUSED(event);
 		return;
 	}
 
