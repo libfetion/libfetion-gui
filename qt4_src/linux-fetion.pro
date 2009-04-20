@@ -60,6 +60,10 @@ HEADERS       =  \
 				 ./src/fxsettings.h \
 				 ./src/fxconfigDlg.h \
 				 ./src/fxskinmanage.h \
+           	     ./src/fxwidget.h \
+           	     ./src/fxwidgettitlebar.h \
+                 ./src/qlayoutengine_p.h \
+                 ./src/qwidgetresizehandler_p.h \
 				 ./src/sqlite/sqlite3.h
 
 
@@ -88,6 +92,10 @@ SOURCES       =  \
 				./src/fxsettings.cpp \
 				./src/fxconfigDlg.cpp \
 				./src/fxskinmanage.cpp \
+                ./src/fxwidget.cpp \
+                ./src/fxwidgettitlebar.cpp \
+                ./src/qlayoutengine.cpp \
+                ./src/qwidgetresizehandler.cpp \
 				./src/sqlite/sqlite3.c
 
 FORMS         =  \
