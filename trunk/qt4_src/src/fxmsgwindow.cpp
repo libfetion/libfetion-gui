@@ -96,16 +96,25 @@ void FxMsgWindow::init_UI()
 	pal.setColor(QPalette::Disabled, QPalette::Button, pal.color(QPalette::Disabled, QPalette::Window));
 	pal.setColor(QPalette::Inactive, QPalette::Button, pal.color(QPalette::Inactive, QPalette::Window));
 
-	//closeTabButton = new QToolButton(tabWidget);
-	//closeTabButton->setAutoRaise(true);
-	//closeTabButton->setEnabled(true);
-	//closeTabButton->setPalette(pal);
+#ifdef WIN32 
+    //here add qt4.5 coder for windows!!
+#else
 
-	//tabWidget->setCornerWidget(closeTabButton, Qt::TopRightCorner);
-	//closeTabButton->setCursor(Qt::ArrowCursor);
-	//closeTabButton->setIcon(getCloseTabImage());
-	//connect(closeTabButton, SIGNAL(clicked()), this, SLOT(closeTab()));
-	//closeTabButton->setToolTip(tr("close current Tab"));
+#if MAC_OS
+    //here add qt4.5 coder for mac!!
+#else
+    closeTabButton = new QToolButton(tabWidget);
+    closeTabButton->setAutoRaise(true);
+    closeTabButton->setEnabled(true);
+    closeTabButton->setPalette(pal);
+
+    tabWidget->setCornerWidget(closeTabButton, Qt::TopRightCorner);
+    closeTabButton->setCursor(Qt::ArrowCursor);
+    closeTabButton->setIcon(getCloseTabImage());
+    connect(closeTabButton, SIGNAL(clicked()), this, SLOT(closeTab()));
+    closeTabButton->setToolTip(tr("close current Tab"));
+#endif //end MAC_OS
+#endif //end WIN32
 
 	tabWidget->setParent(contentWidget);
 	tabWidget->clear();
@@ -566,7 +575,6 @@ void FxMsgWindow::UpdateSkins()
 
 void FxMsgWindow::SetAllFont(QFont font)
 {
-/*
 	this->setFont(font);
 	tabWidget->setFont(font);
 
@@ -580,7 +588,6 @@ void FxMsgWindow::SetAllFont(QFont font)
     }
 
    this->repaint();
-*/
 }
 
 static QString CropTabName(QString orig_name) 
