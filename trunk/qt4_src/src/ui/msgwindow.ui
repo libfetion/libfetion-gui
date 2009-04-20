@@ -1,47 +1,22 @@
 <ui version="4.0" >
  <class>MsgWindow</class>
- <widget class="QMainWindow" name="MsgWindow" >
+ <widget class="QWidget" name="MsgWindow" >
   <property name="geometry" >
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>399</width>
-    <height>274</height>
+    <width>397</width>
+    <height>275</height>
    </rect>
   </property>
-  <property name="minimumSize" >
-   <size>
-    <width>399</width>
-    <height>274</height>
-   </size>
-  </property>
-  <property name="maximumSize" >
-   <size>
-    <width>16777215</width>
-    <height>16777215</height>
-   </size>
-  </property>
   <property name="windowTitle" >
-   <string>MainWindow</string>
+   <string>Form</string>
   </property>
-  <property name="styleSheet" >
-   <string>QMainWindow {
-background-color:rgb(246,243,243);
-}
-</string>
-  </property>
-  <widget class="QWidget" name="centralwidget" >
-   <widget class="FxMyTabWidget" name="tabWidget" >
-    <property name="geometry" >
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>221</width>
-      <height>251</height>
-     </rect>
-    </property>
-    <property name="styleSheet" >
-     <string>QTabWidget {
+  <layout class="QVBoxLayout" name="verticalLayout" >
+   <item>
+    <widget class="FxMyTabWidget" name="tabWidget" >
+     <property name="styleSheet" >
+      <string notr="true" >QTabWidget {
 background-color:rgb(246,243,243);
 }
 QTabWidget::pane { /* The tab widget frame */
@@ -90,22 +65,23 @@ QTabWidget::pane { /* The tab widget frame */
      QTabBar::tab:only-one {
          margin: 0; /* if there is only one tab, we don't want overlapping margins */
      } </string>
-    </property>
-    <property name="currentIndex" >
-     <number>0</number>
-    </property>
-    <widget class="QWidget" name="tab" >
-     <attribute name="title" >
-      <string>Tab 1</string>
-     </attribute>
+     </property>
+     <property name="currentIndex" >
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="tab" >
+      <attribute name="title" >
+       <string>Tab 1</string>
+      </attribute>
+     </widget>
+     <widget class="QWidget" name="tab_2" >
+      <attribute name="title" >
+       <string>Tab 2</string>
+      </attribute>
+     </widget>
     </widget>
-    <widget class="QWidget" name="tab_2" >
-     <attribute name="title" >
-      <string>Tab 2</string>
-     </attribute>
-    </widget>
-   </widget>
-  </widget>
+   </item>
+  </layout>
  </widget>
  <customwidgets>
   <customwidget>
