@@ -155,7 +155,12 @@ fxgui--FxWidget QLabel#title:!active{
 
 /* icon */
 #icon{
-	border-image:url(./skin1/icon.png);
+	width:27px;
+	height:20px;
+	border:none;
+	margin:0;
+	padding:0;
+	/*border-image:url(./skin1/icon.png);*/
 }
 
 /* min button*/
