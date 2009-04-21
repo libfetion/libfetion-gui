@@ -8,8 +8,8 @@ FxWidgetTitleBar::FxWidgetTitleBar(FxWidget* parent):QWidget(parent),_parent(par
 	QHBoxLayout *layout = new QHBoxLayout();
 	setLayout(layout);
 		
-	QPushButton *icon = new QPushButton();
-	icon->resize(10,10);
+	//QPushButton *icon = new QPushButton();
+	icon = new QToolButton(this);
 	icon->setObjectName("icon");
 	title = new QLabel();
 	title->setObjectName("title");
@@ -23,7 +23,7 @@ FxWidgetTitleBar::FxWidgetTitleBar(FxWidget* parent):QWidget(parent),_parent(par
 	QPushButton *btnClose = new QPushButton();
 	btnClose->setObjectName("btnClose");
 
-	//layout->addWidget(icon);
+	layout->addWidget(icon);
 	layout->addWidget(title);
 	layout->addWidget(btnMinimize);
 	layout->addWidget(btnMaximize);
@@ -60,6 +60,9 @@ void FxWidgetTitleBar::on_btnMaximize_clicked(bool checked){
 }
 void FxWidgetTitleBar::on_btnClose_clicked(){
 	_parent->close();
+}
+void FxWidgetTitleBar::setWindowIcon(const QIcon& _icon){
+	icon->setIcon(_icon);
 }
 //slots on titlebar END	
 

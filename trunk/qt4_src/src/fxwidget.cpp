@@ -87,7 +87,11 @@ void FxWidget::setLayout(QLayout *layout){
 }
 void FxWidget::setWindowTitle(const QString &title){
 	titleBar->setWindowTitle(title);
-	//QWidget::setWindowTitle(title);
+	QWidget::setWindowTitle(title);
+}
+void FxWidget::setWindowIcon(const QIcon & icon){
+	titleBar->setWindowIcon(icon);
+	QWidget::setWindowIcon(icon);
 }
 void FxWidget::resizeEvent(QResizeEvent *event){
 	QWidget::resizeEvent(event);

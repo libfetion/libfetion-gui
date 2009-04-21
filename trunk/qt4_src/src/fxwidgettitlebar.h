@@ -20,9 +20,11 @@ public:
 	//   for convenience of showMaximized & showNormal
 	QPushButton *btnMaximize;
 	void setWindowTitle(const QString&title);
+	void setWindowIcon(const QIcon&icon);
 private:
 	FxWidget *_parent;
 	QLabel *title;
+	QToolButton *icon;
 };
 
 }
