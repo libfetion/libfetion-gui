@@ -601,6 +601,7 @@ void FxMainWindow::haveNewQunMessage(qlonglong qun_id)
 void FxMainWindow::updateAccountInfo(qlonglong account_id)
 {
 	buddyopt->updateAccountInfo(account_id);
+    msgwin->updateAccountInfo(account_id);
 }
 
 void FxMainWindow::slot_SystemNetErr(int err)
