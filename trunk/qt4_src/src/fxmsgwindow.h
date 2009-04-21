@@ -65,6 +65,7 @@ public:
 
 	FxQunWindow *findQunWindow(qlonglong qun_id);
 
+    void updateAccountInfo(qlonglong account_id);
 protected:
 	void closeEvent(QCloseEvent *event);
 	void moveEvent(QMoveEvent * event);
@@ -73,7 +74,7 @@ protected:
 
 
 public slots:
-	void currentChangedName(int index); 
+	void currentChangedTab(int index); 
 	void setCurrentTabTitle(AccountTab *accountTab); 
 	void closeTabWid(int index);
 	void closeTab();

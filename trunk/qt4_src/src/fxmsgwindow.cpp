@@ -72,7 +72,7 @@ void FxMsgWindow::init()
 	init_inputFace();
 	init_UI();
 
-	connect(tabWidget, SIGNAL( currentChanged(int) ), this, SLOT( currentChangedName(int) ));
+	connect(tabWidget, SIGNAL( currentChanged(int) ), this, SLOT( currentChangedTab(int) ));
 	connect(tabWidget, SIGNAL( mouseDblClick(int) ), this, SLOT( closeTabWid(int) ));
 	connect(&nudge_timer, SIGNAL(timeout()), this, SLOT(slot_do_shake()));
 }
@@ -123,7 +123,7 @@ void FxMsgWindow::init_UI()
 	resize(Settings::instance().MsgWinSize());
 }
 
-void FxMsgWindow::currentChangedName(int index)
+void FxMsgWindow::currentChangedTab(int index)
 {
 	/*	if(tabWidget->currentIndex() == index)
 		return; */
@@ -590,6 +590,23 @@ void FxMsgWindow::SetAllFont(QFont font)
    this->repaint();
 }
 
+void FxMsgWindow::updateAccountInfo(qlonglong account_id)
+{
+    // get the current tab
+    AccountTab *accountTab = (AccountTab *) tabWidget->widget (tabWidget->currentIndex());
+    if (!accountTab)
+        return;
+
+    //we just update the accountTab's ICON
+    if (accountTab->account_id != account_id)
+        return;
+
+    //update
+    setCurrentTabTitle(accountTab);
+
+    //fix me: should we need to update the info of AccountTab's "Ac_Status" 
+}
+
 static QString CropTabName(QString orig_name) 
 {
     QString new_name = orig_name;
@@ -598,3 +615,4 @@ static QString CropTabName(QString orig_name)
         new_name = new_name.left(MAXNICELENGTH -3) + QString("...");
     return new_name;
 }
+
