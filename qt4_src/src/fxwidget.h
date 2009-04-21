@@ -64,6 +64,7 @@ public:
 	void setBgScaleTop(int p){bgScaleTop = p;}
 	void setLayout(QLayout*);
 	void setWindowTitle(const QString & title);
+	void setWindowIcon(const QIcon & icon);
 	bool isAutoHide()const{return _autoHide;}
 public:
 	FxWidgetTitleBar *titleBar;
