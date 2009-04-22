@@ -1526,6 +1526,7 @@ void FxMainWindow::createMenu()
 	buddyMenu = mainMenu->addMenu(tr("buddy"));
 	menuSetting = mainMenu->addMenu(tr("settings"));
 	menuAbout = mainMenu->addMenu(tr("about"));
+	mainMenu->addAction(exitAct);
 	btnMenu->setMenu(mainMenu);
 	
 	reloginTrayMenu = new QMenu(this);
@@ -1568,8 +1569,10 @@ void FxMainWindow::createMenu()
 	buddyMenu->addAction(addBuddyAct); 
 	buddyMenu->addAction(personlInfoAct); 
 
+#if 0
 	buddyMenu->addSeparator();
 	buddyMenu->addAction(exitAct);
+#endif
 
 	//menuSetting->addAction (SetImpresaAct); 
 	menuSetting->addAction (AutoLoginAct); 
