@@ -70,6 +70,10 @@ public:
 	FxWidgetTitleBar *titleBar;
 	QWidget *contentWidget;
 public slots:
+#if MAC_OS
+    //on mac platform, we didn't support autohide function
+    void setAutoHide(bool autoHide=true){}
+#else
 	void setAutoHide(bool autoHide=true){
 		_autoHide = autoHide;
 		if(_autoHide){
@@ -80,6 +84,7 @@ public slots:
 			updateWindowPositionType();
 		}
 	}
+#endif
 	void turnBackNormal();
 	void hideToTopBottom();
 	void hideToLeftRight();
