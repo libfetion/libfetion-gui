@@ -20,7 +20,7 @@ FxWidget::FxWidget(QWidget *parent,Qt::WindowFlags flag):QWidget(parent,flag){
 	bgScaleRight=130;
 	bgScaleBottom=58;
 	bgScaleTop=135;
-	
+	showForFlag = false;
 	_autoHide = false;
 
 	// for "editable label"
@@ -153,6 +153,13 @@ void FxWidget::turnBackNormal(){
 	//_mainLayout->addWidget(contentWidget,1,0);
 	//_mainLayout->removeWidget(sideBarRL);
 	//_mainLayout->removeWidget(sideBarTB);
+	
+	showForFlag = true;
+	setWindowFlags(orientFlags);
+	show();
+	activateWindow();
+	showForFlag = false;
+	
 	titleBar->show();
 	contentWidget->show();
 	sideBarRL->hide();
@@ -164,6 +171,14 @@ void FxWidget::turnBackNormal(){
 }
 
 void FxWidget::hideToTopBottom(){
+
+	// @TO FIX @ hideToLeftRight Copy&paste style coding
+	showForFlag = true;
+	orientFlags = windowFlags();
+	setWindowFlags( windowFlags() | Qt::WindowStaysOnTopHint);
+	show();
+	showForFlag = false;
+	
 	titleBar->setSizePolicy(QSizePolicy(QSizePolicy::Ignored,QSizePolicy::Ignored));
 	contentWidget->setSizePolicy(QSizePolicy(QSizePolicy::Ignored,QSizePolicy::Ignored));
 	//sideBarRL->setSizePolicy(QSizePolicy(QSizePolicy::Ignored,QSizePolicy::Ignored));
@@ -178,6 +193,14 @@ void FxWidget::hideToTopBottom(){
 	//_mainLayout->removeWidget(contentWidget);
 }
 void FxWidget::hideToLeftRight(){
+
+	// @TO FIX @ hideToTopBottom Copy&paste style coding
+	showForFlag = true;
+	orientFlags = windowFlags();
+	setWindowFlags( windowFlags() | Qt::WindowStaysOnTopHint);
+	show();
+	showForFlag = false;
+	
 	titleBar->setSizePolicy(QSizePolicy(QSizePolicy::Ignored,QSizePolicy::Ignored));
 	contentWidget->setSizePolicy(QSizePolicy(QSizePolicy::Ignored,QSizePolicy::Ignored));
 	//sideBarTB->setSizePolicy(QSizePolicy(QSizePolicy::Ignored,QSizePolicy::Ignored));
@@ -290,9 +313,10 @@ void FxWidget::enterEvent(QEvent*){
 	if(!_autoHide || isMaximized()){
 		return;
 	}
-	if( positionState & WP_NORMAL ){
+	if( showForFlag ||  ( positionState & WP_NORMAL) ){
 		return;
 	}
+	//showForFlag = true;
 	//setWindowFlags(Qt::Window);
 	//centralwidget->show();
 	//menubar->show();
@@ -321,7 +345,21 @@ void FxWidget::enterEvent(QEvent*){
 	}
 	qDebug()<<x()<<y()<<width()<<height()<<"\n";
 }
-
-
+void FxWidget::setAutoHide(bool autoHide){
+	_autoHide = autoHide;
+	if(_autoHide){
+		//setWindowFlags( windowFlags() | Qt::WindowStaysOnTopHint);
+		//if( !isVisible() ){
+		//	show();
+		//}
+		updateWindowPositionType();
+	}
+}
+void FxWidget::setWindowFlags ( Qt::WindowFlags type ){
+	QWidget::setWindowFlags(type);
+	if(showForFlag)
+		return;
+	orientFlags = type;
+}
 
 }// namespace fxgui
