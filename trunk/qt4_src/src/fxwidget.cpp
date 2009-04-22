@@ -20,7 +20,7 @@ FxWidget::FxWidget(QWidget *parent,Qt::WindowFlags flag):QWidget(parent,flag){
 	bgScaleRight=130;
 	bgScaleBottom=58;
 	bgScaleTop=135;
-	showForFlag = false;
+	
 	_autoHide = false;
 
 	// for "editable label"
@@ -65,7 +65,7 @@ FxWidget::FxWidget(QWidget *parent,Qt::WindowFlags flag):QWidget(parent,flag){
 	//sideBarRL->setMaximumHeight(3);//@To FIX  magic number
 	sideBarTB->setObjectName("sideBarTB");
 	sideBarRL->setObjectName("sideBarRL");
-	_mainLayout->addWidget(sideBarRL,0,0,-1,1);
+	_mainLayout->addWidget(sideBarRL,0,0,2,1);
 	_mainLayout->addWidget(sideBarTB,2,0);
 	sideBarRL->hide();
 	sideBarTB->hide();
@@ -76,7 +76,6 @@ FxWidget::FxWidget(QWidget *parent,Qt::WindowFlags flag):QWidget(parent,flag){
 	setContentsMargins(3,0,3,3);
 	QWidget::setLayout(_mainLayout);
 	orientSize = size();
-	orientFlags = windowFlags();
 	updateWindowPositionType();
 	//_mainLayout->setSizeConstraint(QLayout::SetNoConstraint);
 	//setMinimumSize(100,22);
@@ -154,26 +153,17 @@ void FxWidget::turnBackNormal(){
 	//_mainLayout->addWidget(contentWidget,1,0);
 	//_mainLayout->removeWidget(sideBarRL);
 	//_mainLayout->removeWidget(sideBarTB);
-
-	//仅当处于非可隐藏位置重置
-	//showForFlag = true;
-	//setWindowFlags(orientFlags);
-	//show();
-	//activateWindow();
-	//showForFlag = false;
-		
 	titleBar->show();
 	contentWidget->show();
 	sideBarRL->hide();
 	sideBarTB->hide();
-
 	/*
 	titleBar->show();
 	contentWidget->show();
 	*/
 }
 
-void FxWidget::hideToTopBottom(){	
+void FxWidget::hideToTopBottom(){
 	titleBar->setSizePolicy(QSizePolicy(QSizePolicy::Ignored,QSizePolicy::Ignored));
 	contentWidget->setSizePolicy(QSizePolicy(QSizePolicy::Ignored,QSizePolicy::Ignored));
 	//sideBarRL->setSizePolicy(QSizePolicy(QSizePolicy::Ignored,QSizePolicy::Ignored));
@@ -186,16 +176,8 @@ void FxWidget::hideToTopBottom(){
 	//_mainLayout->removeWidget(sideBarRL);
 	//_mainLayout->removeWidget(titleBar);
 	//_mainLayout->removeWidget(contentWidget);
-	
-	// @TO FIX @ hideToLeftRight Copy&paste style coding
-	showForFlag = true;
-	//orientFlags = windowFlags();
-	setWindowFlags( windowFlags() | Qt::WindowStaysOnTopHint);
-	show();
-	showForFlag = false;
 }
 void FxWidget::hideToLeftRight(){
-
 	titleBar->setSizePolicy(QSizePolicy(QSizePolicy::Ignored,QSizePolicy::Ignored));
 	contentWidget->setSizePolicy(QSizePolicy(QSizePolicy::Ignored,QSizePolicy::Ignored));
 	//sideBarTB->setSizePolicy(QSizePolicy(QSizePolicy::Ignored,QSizePolicy::Ignored));
@@ -208,13 +190,6 @@ void FxWidget::hideToLeftRight(){
 	//_mainLayout->removeWidget(sideBarTB);
 	//_mainLayout->removeWidget(titleBar);
 	//_mainLayout->removeWidget(contentWidget);
-	
-	// @TO FIX @ hideToTopBottom Copy&paste style coding
-	showForFlag = true;
-	//orientFlags = windowFlags();
-	setWindowFlags( windowFlags() | Qt::WindowStaysOnTopHint);
-	show();
-	showForFlag = false;
 }
 void FxWidget::onDoubleClicked(bool checked){
 //@TO BE FIXED make sure checked=maximized for css
@@ -249,14 +224,8 @@ void FxWidget::updateWindowPositionType(){
 		positionState = WP_TOP;
 		return;
 	}
-	if( y()+S >= ( (QApplication::desktop()->height())-height() ) ){
+	if( y()+S >= ( (QApplication::desktop()->height())-height() ) )
 		positionState = WP_BOTTOM;
-		return;
-	}
-	showForFlag = true;
-	setWindowFlags(orientFlags);
-	show();
-	showForFlag = false;
 }
 
 void FxWidget::moveEvent(QMoveEvent *event){
@@ -313,7 +282,7 @@ void FxWidget::leaveEvent(QEvent* event){
 			break;
 		default:break;
 	}
-	//qDebug()<<x()<<y()<<width()<<height()<<"\n";
+	qDebug()<<x()<<y()<<width()<<height()<<"\n";
 }
 void FxWidget::enterEvent(QEvent*){
 	qDebug()<<x()<<y()<<width()<<height()<<"\n";
@@ -324,7 +293,6 @@ void FxWidget::enterEvent(QEvent*){
 	if( positionState & WP_NORMAL ){
 		return;
 	}
-	//showForFlag = true;
 	//setWindowFlags(Qt::Window);
 	//centralwidget->show();
 	//menubar->show();
@@ -353,29 +321,7 @@ void FxWidget::enterEvent(QEvent*){
 	}
 	qDebug()<<x()<<y()<<width()<<height()<<"\n";
 }
-void FxWidget::setAutoHide(bool autoHide){
-	_autoHide = autoHide;
-	if(_autoHide){
-		//setWindowFlags( windowFlags() | Qt::WindowStaysOnTopHint);
-		//if( !isVisible() ){
-		//	show();
-		//}
-		updateWindowPositionType();
-	}
-}
-void FxWidget::setWindowFlags ( Qt::WindowFlags type ){
-	if(showForFlag){
-		QWidget::setWindowFlags(type);
-		return;
-	}
-	orientFlags = type;
-	if( (positionState & WP_HIDDEN) &&
-	 	!(type & Qt::WindowStaysOnTopHint) ){
-		//正在隐藏,不允许重置staysOntopHint,将之保存于orientFlags
-		QWidget::setWindowFlags(type ^ Qt::WindowStaysOnTopHint);
-	}else{
-		QWidget::setWindowFlags(type);
-	}
-}
+
+
 
 }// namespace fxgui
