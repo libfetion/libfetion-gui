@@ -39,7 +39,6 @@ protected:
 	void moveEvent(QMoveEvent *event);
 	void updateWindowPositionType();
 private:
-	Qt::WindowFlags orientFlags;
 	QPushButton *btnMaximize;
 	QGridLayout *_mainLayout;
 	QLabel *sideBarRL;  // sideBar right 
@@ -56,7 +55,6 @@ private:
 	};
 	int positionState;
 	QSize orientSize;
-	bool showForFlag;// hack for mac
 public:
 	//void setHiddenBar(QPixmap pix); use css instead
 	void setBackground(QPixmap pix);
@@ -68,12 +66,20 @@ public:
 	void setWindowTitle(const QString & title);
 	void setWindowIcon(const QIcon & icon);
 	bool isAutoHide()const{return _autoHide;}
-	void setWindowFlags ( Qt::WindowFlags type );
 public:
 	FxWidgetTitleBar *titleBar;
 	QWidget *contentWidget;
 public slots:
-	void setAutoHide(bool autoHide=true);
+	void setAutoHide(bool autoHide=true){
+		_autoHide = autoHide;
+		if(_autoHide){
+			setWindowFlags( windowFlags() | Qt::WindowStaysOnTopHint);
+			if( !isVisible() ){
+				show();
+			}
+			updateWindowPositionType();
+		}
+	}
 	void turnBackNormal();
 	void hideToTopBottom();
 	void hideToLeftRight();
