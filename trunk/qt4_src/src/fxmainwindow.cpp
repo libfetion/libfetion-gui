@@ -1268,13 +1268,6 @@ void FxMainWindow::init_UI()
 	Settings::instance().setUser((qlonglong)strtol(fx_get_usr_uid(), NULL, 10));
 #endif
 
-	if (Settings::instance().isMainWindowTopHint())
-		this->setWindowFlags(this->windowFlags() | Qt::WindowStaysOnTopHint);
-	else
-		this->setWindowFlags(this->windowFlags() ^ Qt::WindowStaysOnTopHint);
-
-	//remove the maximizeButtonHint
-	this->setWindowFlags( windowFlags() ^ Qt::WindowMaximizeButtonHint);
 
 #if WIN32
 	setWindowTitle(QString::fromUtf8(fx_get_usr_show_name()) + "--Win Fetion");
