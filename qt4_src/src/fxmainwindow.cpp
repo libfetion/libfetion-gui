@@ -1100,26 +1100,6 @@ void FxMainWindow::accountDoubleClicked ( QTreeWidgetItem * item, int)
 
 
 #if WIN32
-#else
-bool FxMainWindow::event( QEvent * event )
-{
-/* //for new UI, we shouldn't do anything about the QEvent::WindowStateChange.
-	if( event->type() == QEvent::WindowStateChange) 
-	{
-		QWindowStateChangeEvent *mEvent = (QWindowStateChangeEvent *)event;
-		if( mEvent->oldState() == Qt::WindowNoState)
-		{
-			FxWidget::event(event);
-			hide();
-			return true;
-		}
-	}
-*/
-	return FxWidget::event(event);
-}
-#endif
-
-#if WIN32
 #include <windows.h>
 bool FxMainWindow::winEvent(MSG *msg, long *result)
 {
@@ -1157,6 +1137,23 @@ bool FxMainWindow::winEvent(MSG *msg, long *result)
 	}
 
 	return false;
+}
+#else
+bool FxMainWindow::event( QEvent * event )
+{
+/* //for new UI, we shouldn't do anything about the QEvent::WindowStateChange.
+	if( event->type() == QEvent::WindowStateChange) 
+	{
+		QWindowStateChangeEvent *mEvent = (QWindowStateChangeEvent *)event;
+		if( mEvent->oldState() == Qt::WindowNoState)
+		{
+			FxWidget::event(event);
+			hide();
+			return true;
+		}
+	}
+*/
+	return FxWidget::event(event);
 }
 #endif
 
