@@ -201,8 +201,8 @@ FxMainWindow::FxMainWindow(QWidget *parent)
 	isNeedRecordWinPos = false;
 	tmp_addBuddy = NULL;
 
-    init_UI();
-    setAutoHide(true);
+	init_UI();
+	setAutoHide(true);
 	initAllActions();
 	createMenu();
 	initTrayIcon();
@@ -380,9 +380,7 @@ bool FxMainWindow::showNewMsgDlg()
 	if (new_msg_count > 0)
 	{
 		subNewMsgCount();
-		msgwin->show();
-		msgwin->activateWindow();
-//		msgwin->setWindowState(Qt::WindowNoState) ;
+		msgwin->showNormal();
 		return true;
 	}
 
@@ -517,7 +515,7 @@ void FxMainWindow::minimizedWind()
 		isHaveminimized = true;
 		
 		#ifdef WIN32
-		this->setWindowState(Qt::WindowMinimized);
+		this->showMinimized();
 		#endif
 
 	} else {
@@ -527,12 +525,11 @@ void FxMainWindow::minimizedWind()
 		if (Settings::instance().isEnableGetMsgHotKey())
 			Settings::instance().setGetMsgHotKey(Settings::instance().GetMsgHotKey(), Settings::instance().GetMsgHotKeyMod());
 		#endif
-
+		this->showNormal();
 		minimizedTimer.stop();
 		if (Settings::instance().isStartHide())
 			this->hide();
-		else
-			this->show();
+		
 		move(Settings::instance().MainWinPos());
 		isNeedRecordWinPos = true;
 	}
@@ -1113,26 +1110,8 @@ bool FxMainWindow::winEvent(MSG *msg, long *result)
 			return true;
 
 		trayMessageClicked();
-
-        if (!this->isVisible())
-            this->setVisible(true);
-
-        this->activateWindow();			
-
-/*
-		if (this->isVisible() && windowState() != Qt::WindowNoState)
-		{
-			this->activateWindow();			
-			setWindowState ( Qt::WindowNoState);
-		}
-
-		if (!this->isVisible())
-		{
-			this->setVisible(true);
-			this->activateWindow();			
-			setWindowState (Qt::WindowNoState);
-		}
-*/
+        this->showNormal();	
+        		
 		return true;
 	}
 
@@ -1226,12 +1205,8 @@ void FxMainWindow::trayIconActivated(QSystemTrayIcon::ActivationReason reason)
 			trayMessageClicked();
 
 #if MAC_OS
-			this->setVisible( !this->isVisible());
-			if(this->isVisible())
-			{
-				this->activateWindow();			
-//				setWindowState (Qt::WindowNoState ) ;
-			}
+				this->showNormal();	
+			
 #endif
 			break;
 
@@ -1242,27 +1217,7 @@ void FxMainWindow::trayIconActivated(QSystemTrayIcon::ActivationReason reason)
 				return;
 
 			trayMessageClicked();
-
-            if (!this->isVisible())
-                this->setVisible(true);
-
-            this->activateWindow();			
-/*
-			if ( this->isVisible() && windowState() != Qt::WindowNoState )
-			{
-				this->activateWindow();			
-				setWindowState ( Qt::WindowNoState ) ;
-				return;
-			}
-
-			this->setVisible( !this->isVisible());
-			if(this->isVisible())
-			{
-				this->activateWindow();			
-				setWindowState ( Qt::WindowNoState ) ;
-			}
-*/
-
+            this->showNormal();
 			break;
 		case QSystemTrayIcon::MiddleClick:
 			break;
@@ -1903,8 +1858,7 @@ void FxMainWindow::getInfoQun()
 	if(!qun_info)
 		return;
 
-	this->setVisible( true);
-	this->activateWindow();
+	this->showNormal();
 	QDialog *window = new QDialog(this);
 	window->setWindowTitle(tr("see qun info"));
 
@@ -2151,8 +2105,7 @@ void FxMainWindow::setPersonalInfo(QTextEdit *AcInfo, const Fetion_Personal *per
 
 void FxMainWindow::personlInfo()
 {
-	this->setVisible( true);
-	this->activateWindow();
+	this->showNormal();
 	QDialog *window = new QDialog(this);
 	window->setWindowTitle(tr("see personal info"));
 
