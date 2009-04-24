@@ -382,7 +382,7 @@ bool FxMainWindow::showNewMsgDlg()
 		subNewMsgCount();
 		msgwin->show();
 		msgwin->activateWindow();
-		msgwin->setWindowState(Qt::WindowNoState) ;
+//		msgwin->setWindowState(Qt::WindowNoState) ;
 		return true;
 	}
 
@@ -522,7 +522,7 @@ void FxMainWindow::minimizedWind()
 
 	} else {
 		#ifdef WIN32
-		this->setWindowState(Qt::WindowNoState);
+//		this->setWindowState(Qt::WindowNoState);
 		//registed the hot key, when the mainwindow is created, and can get the winId
 		if (Settings::instance().isEnableGetMsgHotKey())
 			Settings::instance().setGetMsgHotKey(Settings::instance().GetMsgHotKey(), Settings::instance().GetMsgHotKeyMod());
@@ -1103,6 +1103,7 @@ void FxMainWindow::accountDoubleClicked ( QTreeWidgetItem * item, int)
 #else
 bool FxMainWindow::event( QEvent * event )
 {
+/* //for new UI, we shouldn't do anything about the QEvent::WindowStateChange.
 	if( event->type() == QEvent::WindowStateChange) 
 	{
 		QWindowStateChangeEvent *mEvent = (QWindowStateChangeEvent *)event;
@@ -1113,6 +1114,7 @@ bool FxMainWindow::event( QEvent * event )
 			return true;
 		}
 	}
+*/
 	return FxWidget::event(event);
 }
 #endif
@@ -1132,6 +1134,12 @@ bool FxMainWindow::winEvent(MSG *msg, long *result)
 
 		trayMessageClicked();
 
+        if (!this->isVisible())
+            this->setVisible(true);
+
+        this->activateWindow();			
+
+/*
 		if (this->isVisible() && windowState() != Qt::WindowNoState)
 		{
 			this->activateWindow();			
@@ -1144,6 +1152,7 @@ bool FxMainWindow::winEvent(MSG *msg, long *result)
 			this->activateWindow();			
 			setWindowState (Qt::WindowNoState);
 		}
+*/
 		return true;
 	}
 
@@ -1224,7 +1233,7 @@ void FxMainWindow::trayIconActivated(QSystemTrayIcon::ActivationReason reason)
 			if(this->isVisible())
 			{
 				this->activateWindow();			
-				setWindowState (Qt::WindowNoState ) ;
+//				setWindowState (Qt::WindowNoState ) ;
 			}
 #endif
 			break;
@@ -1237,6 +1246,11 @@ void FxMainWindow::trayIconActivated(QSystemTrayIcon::ActivationReason reason)
 
 			trayMessageClicked();
 
+            if (!this->isVisible())
+                this->setVisible(true);
+
+            this->activateWindow();			
+/*
 			if ( this->isVisible() && windowState() != Qt::WindowNoState )
 			{
 				this->activateWindow();			
@@ -1250,6 +1264,7 @@ void FxMainWindow::trayIconActivated(QSystemTrayIcon::ActivationReason reason)
 				this->activateWindow();			
 				setWindowState ( Qt::WindowNoState ) ;
 			}
+*/
 
 			break;
 		case QSystemTrayIcon::MiddleClick:

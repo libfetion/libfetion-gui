@@ -197,7 +197,7 @@ bool FxMsgWindow::addQunMessage(QString msg, qlonglong qun_id, qlonglong sender,
 
 	qunW->show();
 	qunW->activateWindow();
-	qunW->setWindowState ( Qt::WindowNoState ) ;
+//	qunW->setWindowState ( Qt::WindowNoState ) ;
 	qunW->MsgEdit->setFocus();
 
 	QString str; 
@@ -248,7 +248,8 @@ bool FxMsgWindow::addMessage(QString msg, qlonglong account_id,  bool iscoming_m
 		if (Settings::instance().isAutoShowMsg())
 		{
 			this->show();
-			this->setWindowState(Qt::WindowNoState) ;
+            this->activateWindow();
+//			this->setWindowState(Qt::WindowNoState) ;
 			this->setFocus();
 			accountTab->msgSend->MsgEdit->setFocus();
 		}
@@ -485,7 +486,7 @@ void FxMsgWindow::addAccount(qlonglong account_id, bool isSendSms)
 		this->show();
 
 	this->activateWindow();
-	this->setWindowState(Qt::WindowNoState);
+//	this->setWindowState(Qt::WindowNoState);
 
 	accountTab->setSendModle(isSendSms);
 	accountTab->msgSend->MsgEdit->setFocus();
@@ -535,7 +536,7 @@ void FxMsgWindow::nudge_shake()
 
 	this->show();
 	this->activateWindow();
-	this->setWindowState(Qt::WindowNoState) ;
+//	this->setWindowState(Qt::WindowNoState) ;
 	this->setFocus();
 
 	nudge_timer.start(SHAKE_TIMER_UPDATE);
