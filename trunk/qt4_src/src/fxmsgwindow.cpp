@@ -195,9 +195,7 @@ bool FxMsgWindow::addQunMessage(QString msg, qlonglong qun_id, qlonglong sender,
 		qunWindow.append(qunW);
 	}
 
-	qunW->show();
-	qunW->activateWindow();
-//	qunW->setWindowState ( Qt::WindowNoState ) ;
+	qunW->showNormal();
 	qunW->MsgEdit->setFocus();
 
 	QString str; 
@@ -247,9 +245,7 @@ bool FxMsgWindow::addMessage(QString msg, qlonglong account_id,  bool iscoming_m
 
 		if (Settings::instance().isAutoShowMsg())
 		{
-			this->show();
-            this->activateWindow();
-//			this->setWindowState(Qt::WindowNoState) ;
+			this->showNormal();
 			this->setFocus();
 			accountTab->msgSend->MsgEdit->setFocus();
 		}
@@ -398,8 +394,7 @@ void FxMsgWindow::addQunWin(qlonglong qun_id, bool isSendSms)
 		qun = new FxQunWindow(qun_id, this, isSendSms);
 		qunWindow.append(qun);
 	}
-	qun->show();
- 	qun->activateWindow();
+	qun->showNormal();
 }
 
 void FxMsgWindow::addBuddy(qlonglong account_id)
@@ -482,11 +477,7 @@ void FxMsgWindow::addAccount(qlonglong account_id, bool isSendSms)
 	tabWidget->setCurrentWidget(accountTab);
 	setCurrentTabTitle(accountTab); 
 
-	if (!this->isVisible())
-		this->show();
-
-	this->activateWindow();
-//	this->setWindowState(Qt::WindowNoState);
+	this->showNormal();
 
 	accountTab->setSendModle(isSendSms);
 	accountTab->msgSend->MsgEdit->setFocus();
@@ -534,9 +525,8 @@ void FxMsgWindow::nudge_shake()
 	if (nudge_timer.isActive())
 		return;
 
-	this->show();
-	this->activateWindow();
-//	this->setWindowState(Qt::WindowNoState) ;
+	this->showNormal();
+	
 	this->setFocus();
 
 	nudge_timer.start(SHAKE_TIMER_UPDATE);
