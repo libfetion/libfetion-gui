@@ -262,7 +262,7 @@ void FxWidget::leaveEvent(QEvent* event){
 			positionState |= WP_HIDDEN;
 			hideToLeftRight();
 			move(QApplication::desktop()->width()-8,y());
-			//resize(5,height());
+			resize(5,height());
 			break;
 		case WP_TOP:
 			move(x(),0);
