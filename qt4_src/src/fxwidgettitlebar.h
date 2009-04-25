@@ -21,10 +21,12 @@ public:
 	QPushButton *btnMaximize;
 	void setWindowTitle(const QString&title);
 	void setWindowIcon(const QIcon&icon);
+	void setMinimizetoHide(bool minimizetoHide) {_isminimizetoHide = minimizetoHide;}
 private:
 	FxWidget *_parent;
 	QLabel *title;
 	QToolButton *icon;
+	bool _isminimizetoHide;
 };
 
 }

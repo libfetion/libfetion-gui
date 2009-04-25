@@ -202,6 +202,7 @@ FxMainWindow::FxMainWindow(QWidget *parent)
 	tmp_addBuddy = NULL;
 
 	init_UI();
+	setMinimizetoHide(true);
 	setAutoHide(true);
 	initAllActions();
 	createMenu();
