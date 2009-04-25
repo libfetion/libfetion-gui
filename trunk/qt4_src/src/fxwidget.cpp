@@ -82,6 +82,12 @@ FxWidget::FxWidget(QWidget *parent,Qt::WindowFlags flag):QWidget(parent,flag){
 	//setSizePolicy(QSizePolicy(QSizePolicy::Ignored,QSizePolicy::Minimum));
 	
 }
+
+void FxWidget::setMinimizetoHide(bool minimizetoHide){
+	if (titleBar)
+		titleBar->setMinimizetoHide(minimizetoHide); 
+}
+
 void FxWidget::setLayout(QLayout *layout){
 	contentWidget->setLayout(layout);
 }

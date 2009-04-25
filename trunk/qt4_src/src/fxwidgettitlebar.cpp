@@ -8,6 +8,7 @@ FxWidgetTitleBar::FxWidgetTitleBar(FxWidget* parent):QWidget(parent),_parent(par
 	QHBoxLayout *layout = new QHBoxLayout();
 	setLayout(layout);
 		
+	_isminimizetoHide = false;
 	//QPushButton *icon = new QPushButton();
 	icon = new QToolButton(this);
 	icon->setObjectName("icon");
@@ -46,15 +47,18 @@ void FxWidgetTitleBar::setWindowTitle(const QString& text){
 	this->title->setText(text);
 }
 void FxWidgetTitleBar::on_btnMinimize_clicked(){
-	_parent->showMinimized();// or should be hide as some application presented?
+	if (!_isminimizetoHide)
+		_parent->showMinimized();// or should be hide as some application presented?
+	else
+		_parent->hide();// or should be hide as some application presented?
 }
 void FxWidgetTitleBar::on_btnMaximize_clicked(bool checked){
 //@TO BE FIXED make sure checked=maximized for css
 	if(!checked){
 		_parent->showNormal();
 	}else{
-		//_parent->showMaximized();
-		_parent->showFullScreen();
+		_parent->showMaximized();
+		//_parent->showFullScreen();
 	}
 	Q_UNUSED(checked); // avoid compiler's warnning
 }

@@ -56,6 +56,7 @@ private:
 	int positionState;
 	QSize orientSize;
 public:
+	void setMinimizetoHide(bool minimizetoHide = false);
 	//void setHiddenBar(QPixmap pix); use css instead
 	void setBackground(QPixmap pix);
 	void setBgScaleLeft(int p){bgScaleLeft = p;}
