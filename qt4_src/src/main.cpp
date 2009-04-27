@@ -48,24 +48,6 @@ Q_IMPORT_PLUGIN(qgif)
 	#endif
 #endif
 
-
-QString translatorPath()
-{
-#ifdef WIN32
-	return ".";
-#else
-	FILE* fp;
-
-	if ((fp = fopen("./fetion_utf8_CN.qm", "r"))) {
-		fclose (fp);
-		return ".";
-	}	
-	else
-		return "/usr/share/libfetion";
-#endif
-}
-
-
 int main(int argc, char *argv[])
 {
 	if(!fx_init()) {
@@ -78,7 +60,7 @@ int main(int argc, char *argv[])
 	QCoreApplication::addLibraryPath(QCoreApplication::applicationDirPath()); 
 
 	QTranslator translator;
-	translator.load( "fetion_utf8_CN", translatorPath() );
+	translator.load( "fetion_utf8_CN", defaultResPath());
 	app.installTranslator( &translator );
 
 	Settings::instance().setSyetemDefualFont( QApplication::font() );

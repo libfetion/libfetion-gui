@@ -26,30 +26,35 @@
 #include <fcntl.h>
 #endif
 
-QString SkinPath()
+QString defaultResPath()
 {
 #ifdef WIN32
-	return "./skins";
-	
+	return ".";
 #else //linux
-	static QString imagepath;
+	static QString defaultResPath;
 	static bool init = false;
 	FILE* fp;
 
 	if(init)
-		return imagepath;
+		return defaultResPath;
 
-	  if ((fp = fopen("./skins/default/online/offline.gif", "r")))
+    //here we set the CREDITS.txt as an identifying item
+	  if ((fp = fopen("./CREDITS.txt", "r")))
 	  {
 		  fclose (fp);
-		  imagepath = "./skins";
+		  defaultResPath = ".";
 	  }	
 	  else
-		  imagepath = "/usr/share/libfetion/skins";
+		  defaultResPath = "/usr/share/libfetion";
 
 	init = true;
-	return imagepath;
+	return defaultResPath;
 #endif
+}
+
+QString SkinPath()
+{
+    return defaultResPath() + "/skins";
 }
 
 QString defaultSkinPath()
@@ -59,27 +64,7 @@ QString defaultSkinPath()
 
 QString defaultSoundPath()
 {
-#ifdef WIN32
-	return "./sound";
-#else //linux
-	static QString soundpath;
-	static bool init = false;
-	FILE* fp;
-
-	if(init)
-		return soundpath;
-
-	  if ((fp = fopen("./sound/msg.wav", "r")))
-	  {
-		  fclose (fp);
-		  soundpath = "./sound";
-	  }	
-	  else
-		  soundpath = "/usr/share/libfetion/sound";
-
-	init = true;
-	return soundpath;
-#endif
+    return defaultResPath() + "sound";
 }
 
 void execPlaySound(QString music)
