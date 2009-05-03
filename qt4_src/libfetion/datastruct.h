@@ -1,13 +1,13 @@
 /**
  * \file datastruct.h
  * \author dengdd <dedodong@163.com>
- * \date 2009/2/11
+ * \date 2009/4/24
  * 
  * This file includes necessary struct define of libfetion.
  *
  \verbatim
 
-    Copyright (C) 2008 dengdd.
+    Copyright (C) 2009 dengdd.
 
     All rights reserved by dengdd.
 
@@ -131,6 +131,37 @@ typedef struct _fetion_msg {
 	/** Just using in qun, this id show sended of qun. */
 	long ext_id;
 }Fetion_MSG;
+
+/**
+ *  * The fetion schedule sms structure.
+ *   *
+ *    * \sa fx_get_schedule_sms
+ *     */
+
+typedef struct _fetion_schedule_sms {
+	/** schedule_sms id. */
+	int id;
+	/** schedule_sms version. */
+	int version;
+	/** schedule_sms send_time. */
+	char* send_time;
+	/** schedule_sms contain. */
+	char* message;
+	/** schedule_sms receiver list.
+	 *
+	 * DList * tmp = receivers;
+	 * while (tmp)
+	 * {
+	 *  if (tmp->data);
+	 *		printf("%d \n", (int)tmp->data);
+	 *    tmp = d_list_next(tmp);
+	 * }
+	 *
+	 * */
+	DList* receivers; 
+}Fetion_Schedule_SMS;
+
+
 
 /**
  * The proxy type.
