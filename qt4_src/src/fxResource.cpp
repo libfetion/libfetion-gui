@@ -64,7 +64,7 @@ QString defaultSkinPath()
 
 QString defaultSoundPath()
 {
-    return defaultResPath() + "sound";
+    return defaultResPath() + "/sound";
 }
 
 void execPlaySound(QString music)
