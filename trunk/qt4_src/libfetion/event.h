@@ -178,6 +178,20 @@ extern "C" {
 */
 #define FX_LOGIN_SERVER_REFUSE       FX_EVENT_SPARE  + 0x0003
 
+/**
+* \def FX_LOGIN_GSML_OK
+* \brief login state is fetion get schedule sms list ok  
+* 
+*/
+#define FX_LOGIN_GSML_OK       FX_EVENT_SPARE  + 0x0004
+
+/**
+* \def FX_LOGIN_GSML_FAIL
+* \brief login state is fetion get schedule sms list fail  
+* 
+*/
+#define FX_LOGIN_GSML_FAIL       FX_EVENT_SPARE  + 0x0005
+
 /** @} end of login_event */
 
 	
@@ -724,6 +738,49 @@ extern "C" {
 #define FX_REMOVE_BLACKLIST_TIMEOUT  FX_EVENT_BASE + 0x0076 
 
 /**
+* \def FX_SET_SCH_SMS_FAIL
+* \brief fetion set schedule sms fail. 
+*
+*/
+#define	FX_SET_SCH_SMS_FAIL  FX_EVENT_BASE + 0x0077
+
+
+/**
+* \def FX_SET_SCH_SMS_OK
+* \brief fetion set schedule sms ok. 
+*
+*/
+#define	FX_SET_SCH_SMS_OK  FX_EVENT_BASE + 0x0078 
+
+/**
+* \def FX_SET_SCH_SMS_TIMEOUT
+* \brief fetion set schedule sms timeout. 
+*
+*/
+#define FX_SET_SCH_SMS_TIMEOUT  FX_EVENT_BASE + 0x0079
+
+/**
+* \def FX_DEL_SCH_SMS_FAIL
+* \brief fetion delete schedule sms fail. 
+*
+*/
+#define FX_DEL_SCH_SMS_FAIL  FX_EVENT_BASE + 0x007A
+
+/**
+* \def FX_DEL_SCH_SMS_OK
+* \brief fetion delete schedule sms ok. 
+*
+*/
+#define FX_DEL_SCH_SMS_OK  FX_EVENT_BASE + 0x007B
+
+/**
+* \def FX_DEL_SCH_SMS_TIMEOUT
+* \brief fetion delete schedule sms timeout. 
+*
+*/
+#define FX_DEL_SCH_SMS_TIMEOUT  FX_EVENT_BASE + 0x007C
+
+/**
 * \def FX_DEL_BUDDY_OK
 * \brief fetion delete friend ok. 
 *
@@ -778,6 +835,8 @@ extern "C" {
 * \param wParam The current version value.
 */ 
 #define FX_CURRENT_VERSION  FX_EVENT_BASE + 0x0088 
+
+
 /** @} end of system_misc_event */
 
 /**

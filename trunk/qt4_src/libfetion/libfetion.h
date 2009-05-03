@@ -107,6 +107,12 @@ extern "C" {
 	/** @} end of send_dialog_fetion_functions */
 
 	/**
+	 * \defgroup schedule_sms_fetion_functions Schedule SMS Function 
+	 * @{
+	 */
+	/** @} end of schedule_sms_fetion_functions */
+
+	/**
 	 * \defgroup get_or_set_user_info  Get Or Set User Info
 	 * @{
 	 */
@@ -597,6 +603,94 @@ FX_EXPORT void fx_end_dialog(long who);
 
 
 /** @} end of send_dialog_fetion_functions */
+
+/**
+* \addtogroup schedule_sms_fetion_functions  
+* @{
+*/
+/**
+  * \fn  const DList *fx_data_get_smlist(void)
+  * \brief get all the fetion's schedule sms info
+  *
+  * this function will return a list which store the schedule sms info
+  *
+  * \return a dlist value if successfully, otherwise return NULL..
+  *
+  *
+  *
+  ** A template to get all schedule sms info from the dlis struct
+  * \code
+  * 
+  * Fetion_Schedule_SMS *sch_sms = NULL;
+  *	DList *tmp = (DList *)fx_get_group();
+  *
+  *	while(tmp)
+  *	{
+  * 	sch_sms = (Fetion_Schedule_SMS *) tmp->data;
+  *		if(sch_sms) {
+  *         // do something to access this structure...	
+  *		}
+  *		tmp = d_list_next(tmp);
+  *	}
+  * \endcode
+  *
+  *
+  * \sa Fetion_Schedule_SMS DList 
+  */
+FX_EXPORT const DList *fx_data_get_smlist(void);
+
+/**
+  * \fn const Fetion_Schedule_SMS* fx_get_schedulesms_by_id(int id)
+  * \brief get an schedule sms structure by schedue_sms_id
+  *
+  * this function will return an schedule sms structure by schedue_sms_id
+  *
+  * \return a vaild value if successfully, otherwise return NULL..
+  *
+  *
+  * the id you can got it by fx_data_get_smlist,
+  * or the paramter of fx_set_schedule_sms's message
+  *
+  *
+  * \sa Fetion_Schedule_SMS fx_data_get_smlist 
+  */
+FX_EXPORT const Fetion_Schedule_SMS* fx_get_schedulesms_by_id(int id);
+
+/**
+  * \fn int fx_set_schedule_sms(const DList* receiver, const char *msg, const char *send_time, EventListener func, void *args)
+  * \brief set an schedule sms 
+  *
+  * \param receiver a dlist of the receivers who you want to send sms.
+  * \param msg The content which you want to send.
+  * \param send_time The time when which you want to send. format: "2009-04-22 16:15:00"
+  *
+  * \return ..
+  *
+  */
+FX_EXPORT int fx_set_schedule_sms(const DList* receiver, const char *msg, const char *send_time, EventListener func, void *args);
+
+/**
+  * \fn int fx_delete_schedule_sms(int sms_id, EventListener func, void *args)
+  * \brief delete an schedule sms 
+  *
+  * \param sms_id The id which you want to delete the schedule sms.
+  *
+  * \return ..
+  *
+  */
+FX_EXPORT int fx_delete_schedule_sms(int sms_id, EventListener func, void *args);
+
+/**
+  * \fn char *fx_covert_schedule_receiver_to_string(DList * receiver)
+  * \brief covert schedule receiver to string from DList
+  *
+  * \param receiver The DList point of the schedule sms.
+  *
+  * \return a string of receiver name..
+  *
+  */
+FX_EXPORT char *fx_covert_schedule_receiver_to_string(DList * receiver);
+/** @} end of schedule_sms_fetion_functions */
 
 /**
 * \addtogroup get_or_set_user_info  
