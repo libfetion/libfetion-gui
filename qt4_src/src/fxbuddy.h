@@ -54,6 +54,7 @@ class BuddyOpt : public QObject
 		void addAccountToGroup(const Fetion_Account *account); 
 		void addAccountToGroup(const Fetion_Account *account, QString & name, int online_state, int group ); 
 
+		Account_Info *fetchNoUpdateAccount();
 		void updateAccountInfo(qlonglong account_id);
 		QString createAccountTipsInfo(const Fetion_Account *account);
 		void setTipsOfAccount(QTreeWidgetItem *accountItem, const Fetion_Account *account);

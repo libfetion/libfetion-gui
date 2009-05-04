@@ -116,6 +116,7 @@ private slots:
 	void flickerTray();
 	void relogin_fetion();
 	void relogin_timer();
+    void updataAccountInfo_timer();
 	void tmp_exit();
 	void personlInfo();
 	void addBuddy();
@@ -281,10 +282,11 @@ private:
 
     bool isNeedRecordWinPos;
     bool isHaveminimized;
-  QTimer checkSkinsTimer;
-	QTimer minimizedTimer;
-	QTimer trayFlickTimer;
-	QTimer reloginTimer;
+    QTimer checkSkinsTimer;
+    QTimer minimizedTimer;
+    QTimer trayFlickTimer;
+    QTimer reloginTimer;
+    QTimer updataAccountInfoTimer;
 
     BuddyOpt *buddyopt; 
 	FxMsgWindow *msgwin;

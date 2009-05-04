@@ -79,6 +79,7 @@ typedef struct _Account_Info
 	QString accountName;
 	qlonglong accountID;
 	int onlinestate;
+    bool haveUpdate;
 }Account_Info;
 
 typedef struct _Qun_Info

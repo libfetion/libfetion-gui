@@ -460,6 +460,7 @@ void BuddyOpt::addAccountToGroup(const Fetion_Account *account, QString & name, 
 	ac_info->accountName = name;
 	ac_info->accountID = account->id;
 	ac_info->onlinestate = online_state;
+    ac_info->haveUpdate = false;
 
 	QTreeWidgetItem *accountItem = new QTreeWidgetItem;
 
@@ -930,4 +931,39 @@ void BuddyOpt::UpdateSkinsForQun(QTreeWidgetItem *groupItem)
 			continue;
 		tmpItem->setIcon(0, getQunIcon());
 	}
+}
+
+Account_Info *BuddyOpt::fetchNoUpdateAccount()
+{
+	QTreeWidgetItem *RootItem = this->treeWidget->invisibleRootItem();
+	if(!RootItem)
+		return NULL;
+
+	int GroupCount = RootItem-> childCount ();
+	QTreeWidgetItem *groupItem = NULL;
+	for(int i =0;  i< GroupCount; i++)
+	{
+		groupItem = RootItem->child(i);
+		if (!groupItem || isQunItem(groupItem) )
+			continue;
+		int itemCounts = groupItem-> childCount();
+		QTreeWidgetItem *tmpItem = NULL;
+		for(int i =0;  i< itemCounts; i++)
+		{
+			tmpItem = groupItem->child(i);
+			if(!tmpItem)
+				continue;
+#if MS_VC6
+			Account_Info *ac_info =(Account_Info*)(tmpItem->data(0, Qt::UserRole).toUInt());
+#else
+			Account_Info *ac_info =tmpItem->data(0, Qt::UserRole).value<Account_Info*>() ;
+#endif
+			if (!ac_info)
+				continue;
+            if(!ac_info->haveUpdate)
+                return ac_info;
+		}
+	}
+
+    return NULL;
 }

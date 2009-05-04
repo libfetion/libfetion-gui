@@ -221,12 +221,9 @@ FxMainWindow::FxMainWindow(QWidget *parent)
 	saveAccountInfo();
 #endif
 	
-	
-//it is may be waste some network res
-//fx_updata_account_info_all();  //this function will make a error memory.
-	
 	minimizedTimer.start(100);
 	checkSkinsTimer.start(10000);
+	updataAccountInfoTimer.start(2000);
 }
 
 FxMainWindow::~FxMainWindow()
@@ -494,6 +491,15 @@ void FxMainWindow::relogin_timer()
 	   */
 }
 
+void FxMainWindow::updataAccountInfo_timer()
+{
+    Account_Info* account = buddyopt->fetchNoUpdateAccount();
+    if (!account)
+        updataAccountInfoTimer.stop();
+
+    fx_updata_account_info_by_id(account->accountID);
+    account->haveUpdate = true;
+}
 
 void FxMainWindow::flickerTray()
 {
@@ -1282,7 +1288,6 @@ void FxMainWindow::init_UI()
 
 	msgwin = new FxMsgWindow(0);
 	msgwin->setMainWind(this);
-	fx_updata_account_info_all();
 	//****************************************************//
 }
 void FxMainWindow::initAllActions()
@@ -1609,6 +1614,8 @@ void FxMainWindow::init_slot_signal()
 	connect(&minimizedTimer, SIGNAL(timeout()), this, SLOT(minimizedWind()));
 	connect(&trayFlickTimer, SIGNAL(timeout()), this, SLOT(flickerTray()));
 	connect(&reloginTimer, SIGNAL(timeout()), this, SLOT(relogin_timer()));
+    connect(&updataAccountInfoTimer, SIGNAL(timeout()), 
+            this, SLOT(updataAccountInfo_timer()));
 	connect(search, SIGNAL(itemDoubleClicked (QTreeWidgetItem* , int) ), 
 			this, SLOT(searchaccountDoubleClicked ( QTreeWidgetItem *, int)));
 	connect(view, SIGNAL(itemDoubleClicked (QTreeWidgetItem* , int) ), 
