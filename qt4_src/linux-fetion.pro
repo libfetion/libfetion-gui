@@ -57,13 +57,14 @@ HEADERS       =  \
 				 ./src/fxLineEditFocus.h \
 				 ./src/fxrefuseSMS.h \
 				 ./src/fxsendGroupSMS.h \
+				 ./src/fxscheduleSmsManage.h \
 				 ./src/fxsettings.h \
 				 ./src/fxconfigDlg.h \
 				 ./src/fxskinmanage.h \
-           	     ./src/fxwidget.h \
-           	     ./src/fxwidgettitlebar.h \
-                 ./src/qlayoutengine_p.h \
-                 ./src/qwidgetresizehandler_p.h \
+         ./src/fxwidget.h \
+         ./src/fxwidgettitlebar.h \
+         ./src/qlayoutengine_p.h \
+         ./src/qwidgetresizehandler_p.h \
 				 ./src/sqlite/sqlite3.h
 
 
@@ -89,13 +90,14 @@ SOURCES       =  \
 				./src/fxproxy.cpp \
 				./src/fxrefuseSMS.cpp \
 				./src/fxsendGroupSMS.cpp \
+				./src/fxscheduleSmsManage.cpp \
 				./src/fxsettings.cpp \
 				./src/fxconfigDlg.cpp \
 				./src/fxskinmanage.cpp \
-                ./src/fxwidget.cpp \
-                ./src/fxwidgettitlebar.cpp \
-                ./src/qlayoutengine.cpp \
-                ./src/qwidgetresizehandler.cpp \
+        ./src/fxwidget.cpp \
+        ./src/fxwidgettitlebar.cpp \
+        ./src/qlayoutengine.cpp \
+        ./src/qwidgetresizehandler.cpp \
 				./src/sqlite/sqlite3.c
 
 FORMS         =  \
@@ -110,5 +112,6 @@ FORMS         =  \
 				./src/ui/addBuddy.ui \
 				./src/ui/proxy.ui \
 				./src/ui/sendgroupsms.ui \
+				./src/ui/scheduleSms/scheduleSMSManage.ui \
 				./src/ui/refusesms.ui \
 				./src/ui/configdia.ui
