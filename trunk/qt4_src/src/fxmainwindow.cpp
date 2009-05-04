@@ -37,6 +37,7 @@
 #include "fxsendGroupSMS.h"
 #include "fxconfigDlg.h"
 #include "fxskinmanage.h"
+#include "fxscheduleSmsManage.h"
 
 void  Sys_EventListener (int message, WPARAM wParam, LPARAM lParam, void* args)
 {
@@ -1295,6 +1296,10 @@ void FxMainWindow::init_UI()
 }
 void FxMainWindow::initAllActions()
 {
+	Schedule_SMS_Act = new QAction(tr("schedulesms"), this);
+	//Schedule_SMS_Act->setIcon(getOnlineStatusIcon(FX_STATUS_ONLINE));
+	connect(Schedule_SMS_Act, SIGNAL(triggered()), this, SLOT(schedule_SMS()));
+	
 	OnlineAct = new QAction(tr("online"), this);
 	OnlineAct->setIcon(getOnlineStatusIcon(FX_STATUS_ONLINE));
 	connect(OnlineAct, SIGNAL(triggered()), this, SLOT(setOnlineStatus()));
@@ -1502,6 +1507,7 @@ void FxMainWindow::createMenu()
 	buddyMenu = mainMenu->addMenu(tr("buddy"));
 	menuSetting = mainMenu->addMenu(tr("settings"));
 	menuAbout = mainMenu->addMenu(tr("about"));
+	mainMenu->addSeparator();
 	mainMenu->addAction(exitAct);
 	btnMenu->setMenu(mainMenu);
 	
@@ -1521,6 +1527,7 @@ void FxMainWindow::createMenu()
 	traySendSmsMenu->setIcon(getMenuIcon(SMSBuddyIcon));
 	traySendSmsMenu->addAction(sendselfAct);
 	traySendSmsMenu->addAction(sendgroupsmsAct);
+	trayIconMenu->addAction(Schedule_SMS_Act);
 	trayIconMenu->addAction(addBuddyAct); 
 	trayIconMenu->addAction(personlInfoAct); 
 
@@ -1542,6 +1549,7 @@ void FxMainWindow::createMenu()
 	optSendSmsMenu->setIcon(getMenuIcon(SMSBuddyIcon));
 	optSendSmsMenu->addAction(sendselfAct);
 	optSendSmsMenu->addAction(sendgroupsmsAct);
+	buddyMenu->addAction(Schedule_SMS_Act);
 	buddyMenu->addAction(addBuddyAct); 
 	buddyMenu->addAction(personlInfoAct); 
 
@@ -1666,6 +1674,12 @@ void FxMainWindow::init_slot_signal()
 			this, SLOT( slot_updateSmsDay(int) ) );
 
 
+}
+
+void FxMainWindow::schedule_SMS()
+{
+	FxScheduleSMSManage *schedule_sms = new FxScheduleSMSManage(this, this);
+	schedule_sms->show();	
 }
 
 void FxMainWindow::showPortrait()

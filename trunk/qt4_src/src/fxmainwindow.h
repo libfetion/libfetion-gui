@@ -208,6 +208,7 @@ private slots:
 	void showPortrait();
 	void setUINiceName();
 
+	void schedule_SMS();
 private:
     void init_UI();
     void initAllActions();
@@ -238,6 +239,7 @@ private:
 	QMenu *traySendSmsMenu; //tray menu of send sms
 	QMenu *optSendSmsMenu; //opt menu of send sms
 
+	QAction *Schedule_SMS_Act;
     QAction *personlInfoAct;
     QAction *addBuddyAct;
     QAction *sendselfAct;
