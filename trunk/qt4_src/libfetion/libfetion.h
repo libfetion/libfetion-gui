@@ -622,7 +622,7 @@ FX_EXPORT void fx_end_dialog(long who);
   * \code
   * 
   * Fetion_Schedule_SMS *sch_sms = NULL;
-  *	DList *tmp = (DList *)fx_get_group();
+  *	DList *tmp = (DList *)fx_get_smlist();
   *
   *	while(tmp)
   *	{
