@@ -18,12 +18,74 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 #include <QSound>
+#include <QFile>
 #include "fxResource.h"
 #include "fxskinmanage.h"
 
 #ifdef WIN32
 #else
 #include <fcntl.h>
+#include <sys/types.h>
+#include <pwd.h>
+#endif
+
+
+#include <QDebug>
+
+
+#ifdef WIN32
+#else
+QString currentUserPath()
+{ 
+    static QString currentUserPath;
+    static bool init = false;
+    if (init)
+        return currentUserPath;
+
+    char* CONF_FILE = (char*) malloc(sizeof(char)*(512));
+    memset(CONF_FILE, 0, 512);
+
+    struct passwd *pwd;
+    if ((pwd = getpwuid (geteuid ())) != NULL) {
+        strcpy (CONF_FILE, pwd->pw_dir);
+        if (CONF_FILE[ strlen(CONF_FILE) - 1] != '/')
+            strcat (CONF_FILE, "/");
+        strcat (CONF_FILE, ".");
+    }
+    currentUserPath = CONF_FILE ;
+    free(CONF_FILE);
+
+    init = true;
+    return currentUserPath;
+}
+
+void moveOldConfigFile()
+{
+    bool done = false;
+    if (done)
+        return;
+
+    done = true;
+
+    QString cmd;
+    //create the .libfetion folder
+    cmd = "mkdir -p " + currentUserPath() + "/.libfetion" + "&";
+    system(cmd.toStdString().c_str());
+
+    //move old config file to .libfetion folder
+    if (QFile::exists(currentUserPath() + DBNAME) && !QFile::exists(chatDBFile()))
+    {
+        cmd = "mv " + currentUserPath()+"/."DBNAME"  " + chatDBFile() +"&";
+        system(cmd.toStdString().c_str());
+    }
+
+    if (QFile::exists(currentUserPath()+"/."CONFFILENAME) && !QFile::exists(configFile()))
+    {
+        cmd = "mv " + currentUserPath()+"/."CONFFILENAME"  " + configFile() +"&";
+        system(cmd.toStdString().c_str());
+    }
+}
+
 #endif
 
 QString defaultResPath()
@@ -50,6 +112,25 @@ QString defaultResPath()
 	init = true;
 	return defaultResPath;
 #endif
+}
+
+QString dataResPath()
+{
+#ifdef WIN32
+	return ".";
+#else //linux
+    return currentUserPath() + "/.libfetion" ;
+#endif
+}
+
+QString configFile()
+{
+    return dataResPath() + "/"CONFFILENAME;
+}
+
+QString chatDBFile()
+{
+	return dataResPath() + "/"DBNAME;
 }
 
 QString SkinPath()

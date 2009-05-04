@@ -23,6 +23,7 @@
 
 #include <QTextStream>
 #include <QFile>
+#include "fxResource.h" 
 
 #define AUTOLG   "autologin021"
 #define SERVERADD   "cacheserveradd"
@@ -31,13 +32,6 @@
 
 #define SQL_MAXLEN 1024*3
 #define MAX_PATH 512
-
-
-#ifdef WIN32
-#else
-#include <sys/types.h>
-#include <pwd.h>
-#endif
 
 
 /********************************
@@ -110,30 +104,12 @@ bool init_db()
 
 	if (pdb)
 		return true;
-	
-	char* DBFILEPATH = (char*) malloc(sizeof(char)*(MAX_PATH+1));
-	memset(DBFILEPATH, 0, MAX_PATH+1);
-
-#ifdef WIN32
-#else
-	struct passwd *pwd;
-	if ((pwd = getpwuid (geteuid ())) != NULL) {
-		strcpy (DBFILEPATH, pwd->pw_dir);
-		if (DBFILEPATH[ strlen(DBFILEPATH) - 1] != '/')
-			strcat (DBFILEPATH, "/");
-		strcat (DBFILEPATH, ".");
-	}
-#endif
-	strcat (DBFILEPATH, DBNAME);
-
 
 	//open db
-	if (sqlite3_open(DBFILEPATH, &pdb )!= SQLITE_OK ) {
+	if (sqlite3_open(chatDBFile().toUtf8().data(), &pdb )!= SQLITE_OK ) {
 		pdb = NULL;
 		return false ;
 	}
-
-	delete DBFILEPATH;
 
 	// Are there DBTABLE ? if not, create it.
 	memset(sql, 0, SQL_MAXLEN);

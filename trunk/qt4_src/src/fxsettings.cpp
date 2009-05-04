@@ -29,38 +29,9 @@
 #include "fxmainwindow.h"
 #include "fxskinmanage.h"
 
-#ifdef WIN32
-#else
-#include <sys/types.h>
-#include <pwd.h>
-#endif
-
-QString conf_filename()
-{
-	char* CONF_FILE = (char*) malloc(sizeof(char)*(512));
-	memset(CONF_FILE, 0, 512);
-
-	#ifdef WIN32
-	#else
-	struct passwd *pwd;
-	if ((pwd = getpwuid (geteuid ())) != NULL) {
-		strcpy (CONF_FILE, pwd->pw_dir);
-		if (CONF_FILE[ strlen(CONF_FILE) - 1] != '/')
-			strcat (CONF_FILE, "/");
-		strcat (CONF_FILE, ".");
-	}
-#endif
-	strcat (CONF_FILE, CONFFILENAME);
-
-	QString res = CONF_FILE;
-	delete CONF_FILE;
-
-	return res;
-}
-
 Settings& Settings::instance()
 {
-	static Settings instance(conf_filename(), QSettings::IniFormat);
+	static Settings instance(configFile(), QSettings::IniFormat);
 	return instance;
 }
 

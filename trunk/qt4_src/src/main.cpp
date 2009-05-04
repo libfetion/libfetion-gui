@@ -56,6 +56,12 @@ int main(int argc, char *argv[])
 	}
 	init_db();
 
+#ifdef WIN32
+#else
+    //compatible old app's config file
+    moveOldConfigFile();
+#endif
+
 	QApplication app(argc, argv);
 	QCoreApplication::addLibraryPath(QCoreApplication::applicationDirPath()); 
 

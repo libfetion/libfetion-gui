@@ -28,6 +28,13 @@ typedef enum {
 	SYS_SOUND 
 } SOUND_TYPE;
 
+#ifdef WIN32
+#else
+void moveOldConfigFile();
+#endif
+QString dataResPath();
+QString configFile();
+QString chatDBFile();
 QString defaultResPath();
 QString SkinPath();
 QString defaultSkinPath();
