@@ -495,7 +495,10 @@ void FxMainWindow::updataAccountInfo_timer()
 {
     Account_Info* account = buddyopt->fetchNoUpdateAccount();
     if (!account)
+    {
         updataAccountInfoTimer.stop();
+        return;
+    }
 
     fx_updata_account_info_by_id(account->accountID);
     account->haveUpdate = true;
