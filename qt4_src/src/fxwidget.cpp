@@ -275,8 +275,8 @@ void FxWidget::beginAutoHide(){
 			orientSize = size();
 			positionState |= WP_HIDDEN;
 			hideToLeftRight();
-			move(QApplication::desktop()->width()-8,y());
 			resize(5,height());
+			move(QApplication::desktop()->width()-8,y());
 			break;
 		case WP_TOP:
 			move(x(),0);
