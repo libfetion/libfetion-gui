@@ -29,6 +29,8 @@ class FxWidget:public QWidget{
 public:
 	FxWidget(QWidget *parent=0,Qt::WindowFlags flag=( Qt::Window | Qt::FramelessWindowHint | Qt::WindowSystemMenuHint) );
 public:
+    void beginAutoHide();
+    void endAutoHide();
 signals:
 	void triggleMaximizeAndNormal();
 protected:
