@@ -38,6 +38,7 @@
 #include "fxconfigDlg.h"
 #include "fxskinmanage.h"
 #include "fxscheduleSmsManage.h"
+#include "fxscheduleSms.h"
 #include "LibFetionEventHandle.cpp"
 
 FxMainWindow::FxMainWindow(QWidget *parent)
@@ -1543,8 +1544,11 @@ void FxMainWindow::init_slot_signal()
 
 void FxMainWindow::schedule_SMS()
 {
+	FxScheduleSMS * test = new FxScheduleSMS(this, this);
+	test->show();
+
 	FxScheduleSMSManage *schedule_sms = new FxScheduleSMSManage(this, this);
-	schedule_sms->show();	
+	schedule_sms->show();
 }
 
 void FxMainWindow::showPortrait()
