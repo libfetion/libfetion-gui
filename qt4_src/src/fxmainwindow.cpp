@@ -84,7 +84,7 @@ FxMainWindow::FxMainWindow(QWidget *parent)
 	
 	minimizedTimer.start(100);
 	checkSkinsTimer.start(10000);
-	updataAccountInfoTimer.start(2000);
+	updateAccountInfoTimer.start(2000);
 }
 
 FxMainWindow::~FxMainWindow()
@@ -352,16 +352,16 @@ void FxMainWindow::relogin_timer()
 	   */
 }
 
-void FxMainWindow::updataAccountInfo_timer()
+void FxMainWindow::updateAccountInfo_timer()
 {
     Account_Info* account = buddyopt->fetchNoUpdateAccount();
     if (!account)
     {
-        updataAccountInfoTimer.stop();
+        updateAccountInfoTimer.stop();
         return;
     }
 
-    fx_updata_account_info_by_id(account->accountID);
+    fx_update_account_info_by_id(account->accountID);
     account->haveUpdate = true;
 }
 
@@ -1335,9 +1335,9 @@ void FxMainWindow::initAllActions()
 	GetInfoBuddyAct->setIcon(getMenuIcon(GetInfoBuddyIcon));
 	connect(GetInfoBuddyAct, SIGNAL(triggered()), this, SLOT(getInfoBuddy()));
 
-	RefreshInfoBuddyAct = new QAction(tr("updata info buddy"), this);
+	RefreshInfoBuddyAct = new QAction(tr("update info buddy"), this);
 	RefreshInfoBuddyAct->setIcon(getMenuIcon(RefreshBuddyIcon));
-	connect(RefreshInfoBuddyAct, SIGNAL(triggered()), this, SLOT(updataInfoBuddy()));
+	connect(RefreshInfoBuddyAct, SIGNAL(triggered()), this, SLOT(updateInfoBuddy()));
 
 
 
@@ -1490,8 +1490,8 @@ void FxMainWindow::init_slot_signal()
 	connect(&minimizedTimer, SIGNAL(timeout()), this, SLOT(minimizedWind()));
 	connect(&trayFlickTimer, SIGNAL(timeout()), this, SLOT(flickerTray()));
 	connect(&reloginTimer, SIGNAL(timeout()), this, SLOT(relogin_timer()));
-    connect(&updataAccountInfoTimer, SIGNAL(timeout()), 
-            this, SLOT(updataAccountInfo_timer()));
+    connect(&updateAccountInfoTimer, SIGNAL(timeout()), 
+            this, SLOT(updateAccountInfo_timer()));
 	connect(search, SIGNAL(itemDoubleClicked (QTreeWidgetItem* , int) ), 
 			this, SLOT(searchaccountDoubleClicked ( QTreeWidgetItem *, int)));
 	connect(view, SIGNAL(itemDoubleClicked (QTreeWidgetItem* , int) ), 
@@ -1797,13 +1797,13 @@ void FxMainWindow::getInfoBuddy()
 	delete showInfo;
 }
 
-void FxMainWindow::updataInfoBuddy()
+void FxMainWindow::updateInfoBuddy()
 {
 	Account_Info *ac_info =getAc_InfoOfCurrentItem();
 	if(!ac_info)
 		return;
 
-	fx_updata_account_info_by_id (ac_info->accountID);
+	fx_update_account_info_by_id (ac_info->accountID);
 }
 
 void FxMainWindow::deleteBuddy()

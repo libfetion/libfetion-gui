@@ -1142,25 +1142,14 @@ FX_EXPORT int fx_get_online_status_by_account(const Fetion_Account * account);
 FX_EXPORT int fx_get_refuse_sms_day(const Fetion_Account *account);
 
 /**
-  * \fn fx_updata_account_info_by_id(long id)
-  * \brief updata the account info which uid 's the gived id
+  * \fn fx_update_account_info_by_id(long id)
+  * \brief update the account info which uid 's the gived id
   *
   * \sa 
   *
-  * \after invoke this function, if updata OK, you will receice a message of ..
+  * \after invoke this function, if update OK, you will receice a message of ..
 */
-FX_EXPORT void fx_updata_account_info_by_id(long id);
-
-
-/**
-  * \fn fx_updata_account_info_all()
-  * \brief updata all the account info
-  *
-  * \sa 
-  *
-  * \after invoke this function, if updata OK, you will receice a message of ..
-*/
-FX_EXPORT void fx_updata_account_info_all();
+FX_EXPORT void fx_update_account_info_by_id(long id);
 
 
 /**

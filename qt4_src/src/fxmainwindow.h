@@ -116,7 +116,7 @@ private slots:
 	void flickerTray();
 	void relogin_fetion();
 	void relogin_timer();
-    void updataAccountInfo_timer();
+    void updateAccountInfo_timer();
 	void tmp_exit();
 	void personlInfo();
 	void addBuddy();
@@ -154,7 +154,7 @@ private slots:
     void imBuddy();
     void smsBuddy();
     void getInfoBuddy();
-    void updataInfoBuddy();
+    void updateInfoBuddy();
     void deleteBuddy();
     void addBlackBuddy();
 
@@ -288,7 +288,7 @@ private:
     QTimer minimizedTimer;
     QTimer trayFlickTimer;
     QTimer reloginTimer;
-    QTimer updataAccountInfoTimer;
+    QTimer updateAccountInfoTimer;
 
     BuddyOpt *buddyopt; 
 	FxMsgWindow *msgwin;
