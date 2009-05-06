@@ -1089,6 +1089,11 @@ void FxMainWindow::trayIconActivated(QSystemTrayIcon::ActivationReason reason)
 
 			trayMessageClicked();
             this->showNormal();
+
+            //special handle for autohide, we double click the trayIcon.
+            this->clearFocus();
+            this->endAutoHide();
+            // end the special handle
 			break;
 		case QSystemTrayIcon::MiddleClick:
 			break;

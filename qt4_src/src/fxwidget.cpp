@@ -242,12 +242,20 @@ void FxWidget::moveEvent(QMoveEvent *event){
 	updateWindowPositionType();
 }
 void FxWidget::leaveEvent(QEvent* event){
+	Q_UNUSED(event);
+    beginAutoHide();
+}
+
+void FxWidget::enterEvent(QEvent*){
+    endAutoHide();
+}
+
+void FxWidget::beginAutoHide(){
 	// the magic number 5 should be a const value --by iptton
 	//if(positionState == WP_NORMAL)return;
 	//setWindowFlags(Qt::FramelessWindowHint);
 	//centralwidget->hide();
 	//menubar->hide();
-	Q_UNUSED(event);
 	if(!_autoHide || isMaximized()){
 		return;
 	}
@@ -290,7 +298,8 @@ void FxWidget::leaveEvent(QEvent* event){
 	}
 	qDebug()<<x()<<y()<<width()<<height()<<"\n";
 }
-void FxWidget::enterEvent(QEvent*){
+void FxWidget::endAutoHide(){
+
 	qDebug()<<x()<<y()<<width()<<height()<<"\n";
 
 	if(!_autoHide || isMaximized()){
