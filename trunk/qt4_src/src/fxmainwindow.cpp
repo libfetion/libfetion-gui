@@ -91,8 +91,8 @@ FxMainWindow::FxMainWindow(QWidget *parent)
 FxMainWindow::~FxMainWindow()
 {
 	checkSkinsTimer.stop();
-	if(buddyopt)
-		delete buddyopt;
+	if(buddyMge)
+		delete buddyMge;
 	if(msgwin)
 		delete msgwin;
 }
@@ -355,7 +355,7 @@ void FxMainWindow::relogin_timer()
 
 void FxMainWindow::updateAccountInfo_timer()
 {
-    Account_Info* account = buddyopt->fetchNoUpdateAccount();
+    Account_Info* account = buddyMge->fetchNoUpdateAccount();
     if (!account)
     {
         updateAccountInfoTimer.stop();
@@ -428,12 +428,6 @@ void FxMainWindow::haveAddAccountAppMessage(char* uri, char*desc)
 	verifyAccount->show();
 }
 
-void FxMainWindow::haveMoveGroupMessage(qlonglong account_id, int group_id) 
-{
-	Q_UNUSED(group_id);
-	buddyopt->delAccount_direct(account_id);  
-	buddyopt->addAccountToGroup(fx_get_account_by_id (account_id));
-}
 
 void FxMainWindow::haveNewSysMessage(qlonglong sys_id)
 {
@@ -465,12 +459,6 @@ void FxMainWindow::haveNewMessage(qlonglong account_id)
 void FxMainWindow::haveNewQunMessage(qlonglong qun_id)
 {
 	msgwin->haveQunMessage(qun_id);
-}
-
-void FxMainWindow::updateAccountInfo(qlonglong account_id)
-{
-	buddyopt->updateAccountInfo(account_id);
-    msgwin->updateAccountInfo(account_id);
 }
 
 void FxMainWindow::slot_SystemNetErr(int err)
@@ -616,78 +604,6 @@ void FxMainWindow::slot_SysDialogMsg (int message, int fx_msg, qlonglong who)
         fx_destroy_msg((Fetion_MSG *)fx_msg);
 }
 
-void FxMainWindow::slot_reName_group (int, int newname, qlonglong id)
-{
-	QTreeWidgetItem * groupItem = buddyopt->findGroupItemByID(id);
-	if(!groupItem) {
-		if(newname)
-			free((char*)newname);
-		return;
-	}	
-
-#if MS_VC6
-	Group_Info *group_info =(Group_Info *)( groupItem->data(0, Qt::UserRole).toUInt() );
-#else
-	Group_Info *group_info = groupItem->data(0, Qt::UserRole).value<Group_Info *>();
-#endif
-
-	if(!group_info)	{
-		if(newname)
-			free((char*)newname);
-		return;
-	}
-
-	group_info->groupName = QString::fromUtf8((char*)newname);
-
-#ifdef WIN32
-	char online[30];
-	_snprintf (online, sizeof(online)-1, "(%d/%d)", group_info->online_no, groupItem->childCount());
-	QString groupShowName = group_info->groupName+ online;
-#else
-	char *online= NULL;
-	(void)asprintf(&online, "(%d/%d)", group_info->online_no, groupItem->childCount());
-	QString groupShowName = group_info->groupName+ online;
-	if(online)
-		free(online);
-#endif
-	groupItem->setText(0, groupShowName);
-
-	if(newname)
-		free((char*)newname);
-}
-
-
-void FxMainWindow::slot_add_buddy (int , int , qlonglong id)
-{
-	buddyopt->delAccount(id);  
-	buddyopt->addAccountToGroup (fx_get_account_by_id(id) );
-}
-
-void FxMainWindow::slot_reName_buddy (int , int newname, qlonglong id)
-{
-	if(newname)
-		free((char*)newname);
-	updateAccountInfo(id);
-}
-
-void FxMainWindow::slot_add_group (int, int newname, qlonglong id)
-{
-	if(tmp_addBuddy) {
-		QVariant Var((int)id);
-		tmp_addBuddy->CB_group->addItem(QString::fromUtf8((char*)newname), Var);
-	}
-
-	buddyopt->addGroup((const char*) newname, id);
-
-	if(newname)
-		free((char*)newname);
-}
-
-void FxMainWindow::slot_del_buddy (int, int, qlonglong id)
-{
-	buddyopt->delAccount(id);    
-}
-
 void FxMainWindow::slot_set_state(int state)
 {
 	setUINiceName();
@@ -701,13 +617,6 @@ void FxMainWindow::slot_set_state(int state)
 		trayIcon->setIcon(getSysTrayIcon (state));
 }
 
-void FxMainWindow::slot_del_group (int, int newname, qlonglong id)
-{
-	buddyopt->delGroup(id);    
-	if(newname)
-		free((char*)newname);
-}
-
 void FxMainWindow::slot_updateSmsDay(int day)
 {
 	if (day)
@@ -718,143 +627,6 @@ void FxMainWindow::slot_updateSmsDay(int day)
 		acceptSMSAct->setIcon(getMenuIcon(ApplyIcon));
 		refuseSMSAct->setIcon(QPixmap());
 	}
-}
-
-void FxMainWindow::showQunWindow(qlonglong qun_id)
-{
-	msgwin->addQunWin(qun_id);
-}
-
-void FxMainWindow::showMsgWindow(qlonglong account_id)
-{
-	msgwin->addAccount(account_id);
-}
-
-void FxMainWindow::accountPressed ( QTreeWidgetItem * item, int)
-{
-	if(item == 0)
-		return;
-
-	if (qApp->mouseButtons() == Qt::RightButton )
-	{
-		if(item->parent()) //it is a account or qun
-		{
-			if(	buddyopt->isQunItem(item->parent()) ) //test if it is a qun
-				showQunMenu();
-			else
-				showBuddyMenu();
-		}
-		else
-			if(!buddyopt->isQunItem(item))
-				showGroupMenu();
-	}
-}
-
-void FxMainWindow::showQunMenu()
-{
-	QPoint pos;
-	QMenu menu(this);
-
-	menu.addAction(IMQunAct);
-	menu.addAction(SMSQunAct);
-	menu.addAction(GetInfoQunAct);
-
-	//menu.popup(QCursor::pos());
-	menu.exec(QCursor::pos());
-}
-
-void FxMainWindow::showGroupMenu()
-{
-	QPoint pos;
-	QMenu menu(this);
-
-	menu.addAction(AddGroupAct);
-	menu.addAction(DeleteGroupAct);
-	menu.addAction(ReNameGroupAct);
-
-	menu.exec(QCursor::pos());
-	//menu.popup(QCursor::pos());
-}
-
-void FxMainWindow::showBuddyMenu()
-{
-	Account_Info *ac_info =getAc_InfoOfCurrentItem();
-	if(!ac_info)
-		return;
-
-	QPoint pos;
-	QMenu menu(this);
-
-	//if in blacklist, show remove from the blacklist
-	if ( !fx_is_InBlacklist_by_id(ac_info->accountID) ) {
-		menu.addAction(IMBuddyAct);
-		menu.addAction(SMSBuddyAct);
-
-		menu.addSeparator();
-
-		menu.addAction(ReNameBuddyAct);
-		menu.addAction(GetInfoBuddyAct);
-		menu.addAction(RefreshInfoBuddyAct);
-
-		QMenu *groupMenu = menu.addMenu(tr("move group"));
-		{
-			groupMenu->setIcon(getMenuIcon(MoveIcon));
-			createGroupMenu(groupMenu);		
-		}
-
-		menu.addSeparator();
-		menu.addAction(DeleteBuddyAct);
-		menu.addAction(AddBlackBuddyAct);
-	} else {
-		menu.addAction(ReNameBuddyAct);
-		menu.addAction(GetInfoBuddyAct);
-		menu.addAction(RefreshInfoBuddyAct);
-
-		QMenu *groupMenu = menu.addMenu(tr("move group"));
-		{
-			createGroupMenu(groupMenu);		
-		}
-		menu.addSeparator();
-		menu.addAction(DeleteBuddyAct);
-		menu.addAction(RemoveBlackBuddyAct);
-	}
-	menu.exec(QCursor::pos());
-	//menu.popup(QCursor::pos());
-}
-
-void FxMainWindow::createGroupMenu(QMenu *groupMenu)
-{
-	Group_Info *groupinfo = NULL; 
-	Fetion_Group *group = NULL;
-	
-	Q_UNUSED(groupinfo);
-	Q_UNUSED(group);
-	
-	DList *tmp_group = (DList *)fx_get_group();
-	while(tmp_group)
-	{
-		group = (Fetion_Group *) tmp_group->data;
-		if(group) {
-			QAction *action = new QAction(QString::fromUtf8(group->name), this);
-			action->setIcon(getQunIcon());
-			QVariant Var((int) group->id);
-			action->setData(Var);
-			groupMenu->addAction(action);
-		}
-		tmp_group = d_list_next(tmp_group);
-	}
-	connect(groupMenu, SIGNAL(triggered(QAction *)), this, SLOT(moveGroupMenutriggered(QAction *)));
-}
-
-void FxMainWindow::moveGroupMenutriggered(QAction *action)
-{
-	int group_id = action->data().toInt();
-
-	Account_Info *ac_info =getAc_InfoOfCurrentItem();
-	if(!ac_info)
-		return;
-
-	fx_move_group_buddy_by_id(ac_info->accountID, group_id, NULL, NULL);
 }
 
 void FxMainWindow::createSkinMenu(QMenu *sub_skinMenu)
@@ -912,61 +684,9 @@ void FxMainWindow::skinMenutriggered(QAction *action)
 void FxMainWindow::searchaccountDoubleClicked (QTreeWidgetItem * item, int column )
 {
 	Q_UNUSED(column);
-	if(item == 0)
-		return;
-
-	if(	buddyopt->isQunItem(item->parent()) ) //test if it is a qun
-	{
-#if MS_VC6
-		Qun_Info *qun_info =(Qun_Info*)(item->data(0, Qt::UserRole).toUInt());
-#else
-		Qun_Info *qun_info =item->data(0, Qt::UserRole).value<Qun_Info*>();
-#endif
-		if(qun_info)
-			showQunWindow(qun_info->qunID);
-	}
-	else
-	{
-#if MS_VC6
-		Account_Info *ac_info =(Account_Info*)(item->data(0, Qt::UserRole).toUInt());
-#else
-		Account_Info *ac_info =item->data(0, Qt::UserRole).value<Account_Info*>();
-#endif
-		if(ac_info)
-			showMsgWindow(ac_info->accountID);
-	}
+    if (buddyMge)
+        buddyMge->handleAccountDoubleClicked(item);
 }
-
-void FxMainWindow::accountDoubleClicked ( QTreeWidgetItem * item, int)
-{
-	if(item == 0)
-		return;
-
-	if(item->parent()) //it is a account
-	{
-		if(	buddyopt->isQunItem(item->parent()) ) //test if it is a qun
-		{
-#if MS_VC6
-			Qun_Info *qun_info =(Qun_Info*)(item->data(0, Qt::UserRole).toUInt());
-#else
-			Qun_Info *qun_info =item->data(0, Qt::UserRole).value<Qun_Info*>();
-#endif
-			if(qun_info)
-				showQunWindow(qun_info->qunID);
-		}
-		else
-		{
-#if MS_VC6
-			Account_Info *ac_info =(Account_Info*)(item->data(0, Qt::UserRole).toUInt());
-#else
-			Account_Info *ac_info =item->data(0, Qt::UserRole).value<Account_Info*>();
-#endif
-			if(ac_info)
-				showMsgWindow(ac_info->accountID);
-		}
-	}
-}
-
 
 #if WIN32
 #include <windows.h>
@@ -1149,7 +869,7 @@ void FxMainWindow::init_UI()
 	view->setRootIsDecorated(true);
 
 	//add all account to main view
-	buddyopt = new BuddyOpt(view);
+	buddyMge = new BuddyMge(view, this);
 
 	//init search control
 	search->header()->setHidden(1);
@@ -1308,63 +1028,6 @@ void FxMainWindow::initAllActions()
 	connect(ConfigAppAct, SIGNAL(triggered()), this, SLOT(showConfigDlg()));
 
 
-	AddGroupAct = new QAction(tr("add group"), this);
-	AddGroupAct->setIcon(getMenuIcon(AddGroupIcon));
-	connect(AddGroupAct, SIGNAL(triggered()), this, SLOT(addGroup()));
-
-	DeleteGroupAct = new QAction(tr("delete group"), this);
-	DeleteGroupAct->setIcon(getMenuIcon(DeleteGroupIcon));
-	connect(DeleteGroupAct, SIGNAL(triggered()), this, SLOT(deleteGroup()));
-
-	ReNameGroupAct = new QAction(tr("rename group"), this);
-	ReNameGroupAct->setIcon(getMenuIcon(ReNameGroupIcon));
-	connect(ReNameGroupAct, SIGNAL(triggered()), this, SLOT(renameGroup()));
-
-	ReNameBuddyAct = new QAction(tr("rename buddy"), this);
-	ReNameBuddyAct->setIcon(getMenuIcon(ReNameBuddyIcon));
-	connect(ReNameBuddyAct, SIGNAL(triggered()), this, SLOT(renameBuddy()));
-
-	IMBuddyAct = new QAction(tr("im buddy"), this);
-	IMBuddyAct->setIcon(getMenuIcon(IMBuddyIcon));
-	connect(IMBuddyAct, SIGNAL(triggered()), this, SLOT(imBuddy()));
-
-	SMSBuddyAct = new QAction(tr("sms buddy"), this);
-	SMSBuddyAct->setIcon(getMenuIcon(SMSBuddyIcon));
-	connect(SMSBuddyAct, SIGNAL(triggered()), this, SLOT(smsBuddy()));
-
-	GetInfoBuddyAct = new QAction(tr("get info buddy"), this);
-	GetInfoBuddyAct->setIcon(getMenuIcon(GetInfoBuddyIcon));
-	connect(GetInfoBuddyAct, SIGNAL(triggered()), this, SLOT(getInfoBuddy()));
-
-	RefreshInfoBuddyAct = new QAction(tr("update info buddy"), this);
-	RefreshInfoBuddyAct->setIcon(getMenuIcon(RefreshBuddyIcon));
-	connect(RefreshInfoBuddyAct, SIGNAL(triggered()), this, SLOT(updateInfoBuddy()));
-
-
-
-	DeleteBuddyAct = new QAction(tr("delete buddy"), this);
-	DeleteBuddyAct->setIcon(getMenuIcon(DeleteBuddyIcon));
-	connect(DeleteBuddyAct, SIGNAL(triggered()), this, SLOT(deleteBuddy()));
-
-	AddBlackBuddyAct = new QAction(tr("add to black list"), this);
-	AddBlackBuddyAct->setIcon(getMenuIcon(BackInBuddyIcon));
-	connect(AddBlackBuddyAct, SIGNAL(triggered()), this, SLOT(addBlackBuddy()));
-
-	RemoveBlackBuddyAct = new QAction(tr("remove frome black list"), this);
-	RemoveBlackBuddyAct->setIcon(getMenuIcon(RemoveBlackIcon));
-	connect(RemoveBlackBuddyAct, SIGNAL(triggered()), this, SLOT(removeBlackBuddy()));
-
-	IMQunAct = new QAction(tr("im qun"), this);
-	IMQunAct->setIcon(getMenuIcon(IMBuddyIcon));
-	connect(IMQunAct, SIGNAL(triggered()), this, SLOT(imQun()));
-
-	SMSQunAct = new QAction(tr("sms qun"), this);
-	SMSQunAct->setIcon(getMenuIcon(SMSBuddyIcon));
-	connect(SMSQunAct, SIGNAL(triggered()), this, SLOT(smsQun()));
-
-	GetInfoQunAct = new QAction(tr("getinfo qun"), this);
-	GetInfoQunAct->setIcon(getMenuIcon(GetInfoBuddyIcon));
-	connect(GetInfoQunAct, SIGNAL(triggered()), this, SLOT(getInfoQun()));
 }
 
 void FxMainWindow::createMenu()
@@ -1481,65 +1144,70 @@ void FxMainWindow::init_slot_signal()
 	connect(UI_Search, SIGNAL(textChanged (const QString &) ), this, SLOT(SearchtextChanged (const QString &)));
 
 
-	if(isHaveTray) { 
-		connect(trayIcon, SIGNAL(messageClicked()), this, SLOT(trayMessageClicked()));
-		connect(trayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
-				this, SLOT(trayIconActivated(QSystemTrayIcon::ActivationReason)));
-	}
+    if(isHaveTray)
+    { 
+        connect(trayIcon, SIGNAL(messageClicked()),
+                this, SLOT(trayMessageClicked()));
+        connect(trayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
+                this, SLOT(trayIconActivated(QSystemTrayIcon::ActivationReason)));
+    }
 
-	connect(&checkSkinsTimer, SIGNAL(timeout()), this, SLOT(checkSkinPath()));
-	connect(&minimizedTimer, SIGNAL(timeout()), this, SLOT(minimizedWind()));
-	connect(&trayFlickTimer, SIGNAL(timeout()), this, SLOT(flickerTray()));
-	connect(&reloginTimer, SIGNAL(timeout()), this, SLOT(relogin_timer()));
+
+    connect(&checkSkinsTimer, SIGNAL(timeout()),
+            this, SLOT(checkSkinPath()));
+    connect(&minimizedTimer, SIGNAL(timeout()), 
+            this, SLOT(minimizedWind()));
+    connect(&trayFlickTimer, SIGNAL(timeout()), 
+            this, SLOT(flickerTray()));
+    connect(&reloginTimer, SIGNAL(timeout()),
+            this, SLOT(relogin_timer()));
     connect(&updateAccountInfoTimer, SIGNAL(timeout()), 
             this, SLOT(updateAccountInfo_timer()));
+
+
+
+	connect(this, SIGNAL(signal_UpdateSmsDay(int) ), 
+			this, SLOT( slot_updateSmsDay(int) ) );
 	connect(search, SIGNAL(itemDoubleClicked (QTreeWidgetItem* , int) ), 
 			this, SLOT(searchaccountDoubleClicked ( QTreeWidgetItem *, int)));
-	connect(view, SIGNAL(itemDoubleClicked (QTreeWidgetItem* , int) ), 
-			this, SLOT(accountDoubleClicked ( QTreeWidgetItem *, int)));
-	connect(view, SIGNAL(itemPressed (QTreeWidgetItem* , int) ), 
-			this, SLOT(accountPressed ( QTreeWidgetItem *, int)));
 	connect(this, SIGNAL(signal_Current_Version(int)), 
 			this, SLOT( haveCurrentVersionMessage(int) ) );
 	connect(this, SIGNAL(signal_AddAccountApp(char*, char*)), 
 			this, SLOT( haveAddAccountAppMessage(char*, char*) ) );
-	connect(this, SIGNAL(signal_MoveGroup(qlonglong, int)), 
-			this, SLOT( haveMoveGroupMessage(qlonglong, int) ) );
 	connect(this, SIGNAL(signal_NewSysMsg(qlonglong) ), 
 			this, SLOT( haveNewSysMessage(qlonglong) ) );
 	connect(this, SIGNAL(signal_NewMsg(qlonglong) ), 
 			this, SLOT( haveNewMessage(qlonglong) ) );
 	connect(this, SIGNAL(signal_NewQunMsg(qlonglong) ), 
 			this, SLOT( haveNewQunMessage(qlonglong) ) );
-	connect(this, SIGNAL(signal_UpdateAcInfo(qlonglong) ), 
-			this, SLOT( updateAccountInfo(qlonglong) ) );
 	connect(this, SIGNAL(signal_SysDialogMsg(int, int, qlonglong)), 
 			this, SLOT( slot_SysDialogMsg(int, int, qlonglong)) );
 	connect(this, SIGNAL(signal_SystemNetErr(int)), 
 			this, SLOT( slot_SystemNetErr(int)) );
 	connect(this, SIGNAL(signal_DeRegistered()), 
 			this, SLOT( slot_DeRegistered()) );
-	connect(this, SIGNAL(signal_del_buddy(int, int, qlonglong)), 
-			this, SLOT( slot_del_buddy(int, int, qlonglong)) );
 	connect(this, SIGNAL(signal_set_nickname_ok()), this, SLOT(setUINiceName()));
 	connect(this, SIGNAL(signal_receive_nudge(qlonglong)), 
 			this, SLOT( slot_receive_nudge(qlonglong)));
 	connect(this, SIGNAL(signal_set_state(int)), 
 			this, SLOT( slot_set_state(int)) );
+
 	connect(this, SIGNAL(signal_add_group(int, int, qlonglong)), 
-			this, SLOT( slot_add_group(int, int, qlonglong)) );
+			buddyMge, SLOT( slot_add_group(int, int, qlonglong)) );
 	connect(this, SIGNAL(signal_del_group(int, int, qlonglong)), 
-			this, SLOT( slot_del_group(int, int, qlonglong)) );
+			buddyMge, SLOT( slot_del_group(int, int, qlonglong)) );
 	connect(this, SIGNAL(signal_reName_group(int, int, qlonglong)), 
-			this, SLOT( slot_reName_group(int, int, qlonglong)) );
+			buddyMge, SLOT( slot_reName_group(int, int, qlonglong)) );
 	connect(this, SIGNAL(signal_reName_buddy(int, int, qlonglong)), 
-			this, SLOT( slot_reName_buddy(int, int, qlonglong)) );
+			buddyMge, SLOT( slot_reName_buddy(int, int, qlonglong)) );
 	connect(this, SIGNAL(signal_add_buddy(int, int, qlonglong)), 
-			this, SLOT( slot_add_buddy(int, int, qlonglong)) );
-	connect(this, SIGNAL(signal_UpdateSmsDay(int) ), 
-			this, SLOT( slot_updateSmsDay(int) ) );
-
-
+			buddyMge, SLOT( slot_add_buddy(int, int, qlonglong)) );
+	connect(this, SIGNAL(signal_del_buddy(int, int, qlonglong)), 
+			buddyMge, SLOT( slot_del_buddy(int, int, qlonglong)) );
+	connect(this, SIGNAL(signal_UpdateAcInfo(qlonglong) ), 
+			buddyMge, SLOT( updateAccountInfo(qlonglong) ) );
+	connect(this, SIGNAL(signal_MoveGroup(qlonglong, int)), 
+			buddyMge, SLOT( slot_MoveGroup(qlonglong, int) ) );
 }
 
 void FxMainWindow::schedule_SMS()
@@ -1597,52 +1265,6 @@ void FxMainWindow::about()
 				"menu-bar menus and context menus."));
 }
 
-Account_Info* FxMainWindow::getAc_InfoOfCurrentItem()
-{
-	QTreeWidgetItem *item = view->currentItem ();
-	if(!item)
-		return NULL;
-	if(!item->parent()) //it is a account
-		return NULL;
-#if MS_VC6
-	Account_Info *ac_info =(Account_Info*)(item->data(0, Qt::UserRole).toUInt());
-#else
-	Account_Info *ac_info =item->data(0, Qt::UserRole).value<Account_Info*>();
-#endif
-	return ac_info;
-}
-
-Group_Info* FxMainWindow::getGp_InfoOfCurrentItem()
-{
-	QTreeWidgetItem *item = view->currentItem ();
-	if(!item)
-		return NULL;
-
-	if(item->parent()) //it is a account
-		return NULL;
-
-#if MS_VC6
-	Group_Info *group_info =(Group_Info *)(item->data(0, Qt::UserRole).toUInt() );
-#else
-	Group_Info *group_info = item->data(0, Qt::UserRole).value<Group_Info*>();
-#endif
-	return group_info;
-}
-
-Qun_Info* FxMainWindow::getQun_InfoOfCurrentItem()
-{
-	QTreeWidgetItem *item = view->currentItem ();
-	if(!item)
-		return NULL;
-	if(!item->parent()) 
-		return NULL;
-#if MS_VC6
-	Qun_Info *qun_info =(Qun_Info*)(item->data(0, Qt::UserRole).toUInt());
-#else
-	Qun_Info *qun_info =item->data(0, Qt::UserRole).value<Qun_Info*>();
-#endif
-	return qun_info;
-}
 
 void FxMainWindow::setImpresa()
 {
@@ -1659,194 +1281,6 @@ void FxMainWindow::setImpresa()
 	}
 
 	setUINiceName();
-}
-
-void FxMainWindow::addGroup()
-{
-	bool ok;
-	QString text = QInputDialog::getText(this, tr("addGroup"),
-			tr("please input group name"), QLineEdit::Normal,
-			"", &ok);
-	if (ok && !text.isEmpty())
-		fx_add_buddylist(text.toUtf8().data(), NULL, NULL); 
-}
-
-void FxMainWindow::deleteGroup()
-{
-	QTreeWidgetItem *item = view->currentItem ();
-	if(!item)
-		return;
-
-	if(item->childCount() > 0)
-	{
-		QMessageBox::warning(this, tr("can not delete group"), tr("group is not null"),QMessageBox::Yes);
-		return;	
-	}
-
-	Group_Info* group_info = getGp_InfoOfCurrentItem();
-	if(!group_info)
-		return;
-
-
-	QString msg = tr("are you sure to delete group") + group_info->groupName;
-
-	int ret = QMessageBox::warning(this, tr("delete group"), msg,
-			QMessageBox::Yes, QMessageBox::Cancel);
-
-	if (ret == QMessageBox::Yes)
-		fx_delete_buddylist(group_info->groupID, NULL, NULL);
-}
-
-void FxMainWindow::renameGroup()
-{
-	Group_Info* group_info = getGp_InfoOfCurrentItem();
-	if(!group_info)
-		return;
-
-	bool ok;
-	QString text = QInputDialog::getText(this, tr("renameGroup"),
-			tr("please input new group name"), QLineEdit::Normal,
-			group_info->groupName, &ok);
-	if (ok && !text.isEmpty())
-		fx_rename_buddylist(group_info->groupID, text.toUtf8().data(), NULL, NULL); 
-}
-
-void FxMainWindow::renameBuddy()
-{
-	Account_Info *ac_info =getAc_InfoOfCurrentItem();
-	if(!ac_info)
-		return;
-
-	char* showname = fx_get_account_show_name(fx_get_account_by_id(ac_info->accountID), FALSE);
-	QString account_name = QString::fromUtf8(showname);
-	if(showname)
-		free(showname);
-
-	bool ok;
-	QString text = QInputDialog::getText(this, tr("renamebudd"),
-			tr("please input new buddy name"), QLineEdit::Normal,
-			account_name, &ok);
-	if (ok && !text.isEmpty())
-		fx_set_buddyinfo(ac_info->accountID, text.toUtf8().data(), NULL, NULL); 
-}
-
-void FxMainWindow::imQun()
-{
-	Qun_Info* qun_info = getQun_InfoOfCurrentItem();
-	if(!qun_info)
-		return;
-	msgwin->addQunWin(qun_info->qunID);
-}
-
-void FxMainWindow::smsQun()
-{
-	Qun_Info* qun_info = getQun_InfoOfCurrentItem();
-	if(!qun_info)
-		return;
-	msgwin->addQunWin(qun_info->qunID, true);
-}
-
-void FxMainWindow::getInfoQun()
-{
-	Qun_Info* qun_info = getQun_InfoOfCurrentItem();
-	if(!qun_info)
-		return;
-
-	this->showNormal();
-	QDialog *window = new QDialog(this);
-	window->setWindowTitle(tr("see qun info"));
-
-	QTextEdit *AcInfo = new QTextEdit(window);
-	QDialogButtonBox *buttonBox = new QDialogButtonBox(window);
-	buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
-
-	QVBoxLayout *layout = new QVBoxLayout;
-	layout->addWidget(AcInfo);
-	layout->addWidget(buttonBox);
-	window->setLayout(layout);
-	setQunInfo(AcInfo, qun_info->qunID);
-	connect(buttonBox, SIGNAL(accepted()), window, SLOT(accept()));
-	connect(buttonBox, SIGNAL(rejected()), window, SLOT(reject()));
-	window->exec();
-	delete window;
-}
-
-void FxMainWindow::imBuddy()
-{
-	Account_Info *ac_info =getAc_InfoOfCurrentItem();
-	if(!ac_info)
-		return;
-	showMsgWindow(ac_info->accountID);
-	//msgwin->addAccount(ac_info->accountID);
-}
-
-void FxMainWindow::smsBuddy()
-{
-	Account_Info *ac_info =getAc_InfoOfCurrentItem();
-	if(!ac_info)
-		return;
-
-	msgwin->addAccount(ac_info->accountID, true);
-}
-
-void FxMainWindow::getInfoBuddy()
-{
-	Account_Info *ac_info =getAc_InfoOfCurrentItem();
-	if(!ac_info) return;
-	const Fetion_Account *account =fx_get_account_by_id(ac_info->accountID);
-	if(!account) return;
-
-	FxShowAccountInfo * showInfo = new FxShowAccountInfo(account, this); 
-	showInfo->exec();
-	delete showInfo;
-}
-
-void FxMainWindow::updateInfoBuddy()
-{
-	Account_Info *ac_info =getAc_InfoOfCurrentItem();
-	if(!ac_info)
-		return;
-
-	fx_update_account_info_by_id (ac_info->accountID);
-}
-
-void FxMainWindow::deleteBuddy()
-{
-	Account_Info *ac_info =getAc_InfoOfCurrentItem();
-	if(!ac_info)
-		return;
-	QString msg = tr("are you sure to delete buddy")+ ac_info->accountName;
-	int ret = QMessageBox::warning(this, tr("delete buddy"),msg,
-			QMessageBox::Yes,QMessageBox::Cancel);
-
-	if (ret == QMessageBox::Yes)
-	{
-		msg = tr("delete buddy can not stop it send message to you,") + "\r\n" +
-			tr("shoud you want to add it to blacklist") ;
-		ret = QMessageBox::warning(this, tr("add to black"),msg,
-				QMessageBox::Yes,QMessageBox::Cancel);
-		if(ret == QMessageBox::Yes)
-			fx_addto_blacklist_by_id(ac_info->accountID, NULL, NULL);
-
-		fx_delete_buddy_by_id(ac_info->accountID, NULL, NULL);
-	}
-}
-
-void FxMainWindow::addBlackBuddy()
-{
-	Account_Info *ac_info =getAc_InfoOfCurrentItem();
-	if(!ac_info)
-		return;
-	fx_addto_blacklist_by_id(ac_info->accountID, NULL, NULL);
-}
-
-void FxMainWindow::removeBlackBuddy()
-{
-	Account_Info *ac_info =getAc_InfoOfCurrentItem();
-	if(!ac_info)
-		return;
-
-	fx_removefrom_blacklist_by_id(ac_info->accountID, NULL, NULL);
 }
 
 void FxMainWindow::tmp_exit()
@@ -1887,40 +1321,6 @@ void FxMainWindow::setrefuseSMS()
 	delete xx;
 }
 
-void FxMainWindow::setQunInfo(QTextEdit *AcInfo, qlonglong qun_id)
-{
-	QString info;
-	Fetion_QunInfo *quninfo = NULL;
-	const Fetion_Qun *fx_qun = fx_get_qun_by_id(qun_id);
-	if(fx_qun)
-		quninfo = fx_qun->quninfo;
-
-	if (!quninfo)
-	{
-		AcInfo->append(tr("qun name:"));
-		AcInfo->append(tr("qun introduce:"));
-		AcInfo->append(tr("qun bulletin:"));
-		return;
-	}
-
-	info = tr("qun name:");
-	info += "<b style=\"color:red; \">" + 
-		QString::fromUtf8(quninfo->name) 
-		+"</b>";
-	AcInfo->append(info);
-
-	info = tr("qun introduce:");
-	info += "<b style=\"color:red; \">" + 
-		QString::fromUtf8(quninfo->introduce) 
-		+"</b>";
-	AcInfo->append(info);
-
-	info = tr("qun bulletin:");
-	info += "<b style=\"color:red; \">" + 
-		QString::fromUtf8(quninfo->bulletin) 
-		+"</b>";
-	AcInfo->append(info);
-}
 
 void FxMainWindow::setPersonalInfo(QTextEdit *AcInfo, const Fetion_Personal *personal)
 {
@@ -2215,7 +1615,7 @@ void FxMainWindow::UpdateSkinsMenu()
 void FxMainWindow::UpdateSkins()
 {
 	msgwin->UpdateSkins();
-	buddyopt->UpdateSkins();
+	buddyMge->UpdateSkins();
 
 	setWindowIcon(getSysTrayIcon(1));
 	LibFetion_image->setPixmap(getLibFetionImage());
@@ -2249,14 +1649,6 @@ void FxMainWindow::UpdateSkins()
 	exitAct->setIcon(getMenuIcon(ExitIcon));
 
 
-	ReNameBuddyAct->setIcon(getMenuIcon(ReNameBuddyIcon));
-	IMBuddyAct->setIcon(getMenuIcon(IMBuddyIcon));
-	SMSBuddyAct->setIcon(getMenuIcon(SMSBuddyIcon));
-	GetInfoBuddyAct->setIcon(getMenuIcon(GetInfoBuddyIcon));
-	RefreshInfoBuddyAct->setIcon(getMenuIcon(RefreshBuddyIcon));
-	DeleteBuddyAct->setIcon(getMenuIcon(DeleteBuddyIcon));
-	AddBlackBuddyAct->setIcon(getMenuIcon(BackInBuddyIcon));
-	RemoveBlackBuddyAct->setIcon(getMenuIcon(RemoveBlackIcon));
 
 	OnlineAct->setIcon(getOnlineStatusIcon(FX_STATUS_ONLINE));
 	OfflineAct->setIcon(getOnlineStatusIcon(FX_STATUS_OFFLINE));
@@ -2271,15 +1663,6 @@ void FxMainWindow::UpdateSkins()
 		acceptSMSAct->setIcon(getMenuIcon(ApplyIcon));
 		refuseSMSAct->setIcon(QPixmap());
 	}
-
-	addBuddyAct->setIcon(getMenuIcon(AddBuddyIcon));
-	AddGroupAct->setIcon(getMenuIcon(AddGroupIcon));
-	DeleteGroupAct->setIcon(getMenuIcon(DeleteGroupIcon));
-	ReNameGroupAct->setIcon(getMenuIcon(ReNameGroupIcon));
-
-	IMQunAct->setIcon(getMenuIcon(IMBuddyIcon));
-	SMSQunAct->setIcon(getMenuIcon(SMSBuddyIcon));
-	GetInfoQunAct->setIcon(getMenuIcon(GetInfoBuddyIcon));
 
 	if (Settings::instance().isEnableLongSMS())
 		SetLongSMSAct->setIcon(getMenuIcon(ApplyIcon));
@@ -2316,6 +1699,8 @@ void FxMainWindow::SetAllFont(QFont font)
 {
 	this->setFont(font);
 	msgwin->SetAllFont(font);
+
+	addBuddyAct->setIcon(getMenuIcon(AddBuddyIcon));
 
 	UI_Search->setFont(font);
 	UI_Edit_NiceName->setFont(font);

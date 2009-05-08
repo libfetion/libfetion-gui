@@ -26,6 +26,7 @@
 
 #include "ui_fetionwindow.h"
 #include "fxbuddy.h"
+#include "fxbuddyManage.h"
 #include "fxmsgwindow.h"
 #include "fxaddBuddyWindow.h"
 
@@ -63,8 +64,6 @@ protected:
 #endif
 	void closeEvent(QCloseEvent *event);
 	void moveEvent(QMoveEvent * event);
-	void showMsgWindow(qlonglong account_id);
-	void showQunWindow(qlonglong qun_id);
 
 	void startFlickerTray();
 	void endFlickerTray();
@@ -72,20 +71,11 @@ protected:
 	//this function will beremoved in later version
 	void setPersonalInfo(QTextEdit *AcInfo, const Fetion_Personal *personal);
 
-	//this function will beremoved in later version
-	void setQunInfo(QTextEdit *AcInfo, qlonglong qun_id);
 
 	bool showNewMsgDlg();
 
-	void showGroupMenu();
-	void showBuddyMenu();
-	void showQunMenu();
-	void createGroupMenu(QMenu *groupMenu);		
 	void createSkinMenu(QMenu *skinMenu);		
 
-	Account_Info *getAc_InfoOfCurrentItem();
-	Group_Info *getGp_InfoOfCurrentItem();
-	Qun_Info* getQun_InfoOfCurrentItem();
 
 signals:
 	void signal_Current_Version(int);
@@ -123,52 +113,28 @@ private slots:
 	void sendself();
 	void sendgroupsms();
 	void about();
-	void accountDoubleClicked (QTreeWidgetItem * item, int column );
-	void accountPressed (QTreeWidgetItem * item, int column );
 	void searchaccountDoubleClicked (QTreeWidgetItem * item, int column );
 	void haveCurrentVersionMessage(int);
 	void haveAddAccountAppMessage(char* uri, char*desc);
-	void haveMoveGroupMessage(qlonglong account_id, int group_id); 
 	void haveNewSysMessage (qlonglong sys_id);
 	void haveNewMessage (qlonglong account_id);
 	void haveNewQunMessage (qlonglong account_id);
-	void updateAccountInfo (qlonglong account_id);
 	void slot_SysDialogMsg (int, int, qlonglong);
 	void slot_SystemNetErr (int);
 	void slot_DeRegistered ();
 	void slot_receive_nudge(qlonglong);
 
-	void slot_del_buddy(int, int, qlonglong);
-	void slot_add_buddy(int, int, qlonglong);
 	void slot_set_state(int);
 
-	void slot_add_group(int, int, qlonglong);
-	void slot_del_group(int, int, qlonglong);
-	void slot_reName_group(int, int, qlonglong);
-	void slot_reName_buddy(int, int, qlonglong);
 	void slot_updateSmsDay(int);
 
 	void slot_ShowSkinMenu() { createSkinMenu(skinMenu); }
 
-    void renameBuddy();
-    void imBuddy();
-    void smsBuddy();
-    void getInfoBuddy();
-    void updateInfoBuddy();
-    void deleteBuddy();
-    void addBlackBuddy();
 
-    void removeBlackBuddy();
 
     void setImpresa();
 
-    void addGroup();
-    void deleteGroup();
-    void renameGroup();
 
-    void imQun();
-    void smsQun();
-    void getInfoQun();
 
 	void checkNewVersion();
 	void reportBugAct();
@@ -196,7 +162,6 @@ private slots:
 	void UI_enable_impresa();
 	void UI_enable_search();
 
-	void moveGroupMenutriggered(QAction *action);
 	void skinMenutriggered(QAction *);
 	void SearcheditingFinished();
 	void SearchtextChanged (const QString &text);
@@ -225,7 +190,6 @@ private:
 	bool isQuit;
 	bool isBreakOut;
 	QString m_impresa;
-	FxAddBuddy *tmp_addBuddy;  //save the tmp addbuddy handle
 
 	QVector<int> timeOutMsgVector; //stroe the timeout msg.
 
@@ -246,16 +210,6 @@ private:
     QAction *sendgroupsmsAct;
     QAction *exitAct;
 
-    QAction *ReNameBuddyAct;
-    QAction *IMBuddyAct;
-    QAction *SMSBuddyAct;
-    QAction *GetInfoBuddyAct;
-    QAction *RefreshInfoBuddyAct;
-    QAction *DeleteBuddyAct;
-    QAction *AddBlackBuddyAct;
-
-    QAction *RemoveBlackBuddyAct;
-
     QAction *OnlineAct;
     QAction *OfflineAct;
     QAction *BusyAct;
@@ -263,13 +217,6 @@ private:
     QAction *acceptSMSAct;
 	QAction *refuseSMSAct;
 
-    QAction *AddGroupAct;
-    QAction *DeleteGroupAct;
-    QAction *ReNameGroupAct;
-
-    QAction *IMQunAct;
-    QAction *SMSQunAct;
-    QAction *GetInfoQunAct;
 
 	QAction *SetLongSMSAct;
 	QAction *SetUndgeMsgAct;
@@ -290,9 +237,10 @@ private:
     QTimer reloginTimer;
     QTimer updateAccountInfoTimer;
 
-    BuddyOpt *buddyopt; 
-	FxMsgWindow *msgwin;
+    BuddyMge *buddyMge; 
 public:
+	FxAddBuddy *tmp_addBuddy;  //save the tmp addbuddy handle
+	FxMsgWindow *msgwin;
     QAction *AutoLoginAct;
     QAction *MuteAct;
 	QAction *IsAutoShowMsgAct;
