@@ -39,6 +39,7 @@ HEADERS       =  \
 				 ./src/fxmainwindow.h \ 
 				 ./src/fxloginwindow.h \
 				 ./src/fxbuddy.h \
+                 ./src/fxbuddyManage.h \
 				 ./src/fxmsgwindow.h \
 				 ./src/fxaccountTab.h \
 				 ./src/fxmytabwidget.h \
@@ -74,7 +75,8 @@ SOURCES       =  \
 				./src/fxmain.cpp \
 				./src/fxloginwindow.cpp \
 				./src/fxmainwindow.cpp \
-				./src/fxbuddy.cpp \
+                ./src/fxbuddy.cpp \
+                ./src/fxbuddyManage.cpp \
 				./src/fxmsgwindow.cpp \
 				./src/fxaccountTab.cpp \
 				./src/fxmytabwidget.cpp \
