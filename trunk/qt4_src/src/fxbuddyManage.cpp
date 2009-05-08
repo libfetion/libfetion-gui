@@ -184,6 +184,8 @@ void BuddyMge::slot_accountPressed ( QTreeWidgetItem * item, int)
 	if(item == 0)
 		return;
 
+    getMainWindow()->setAutoHide(false);
+
 	if (qApp->mouseButtons() == Qt::RightButton )
 	{
 		if(item->parent()) //it is a account or qun
@@ -197,6 +199,8 @@ void BuddyMge::slot_accountPressed ( QTreeWidgetItem * item, int)
 			if(!buddyopt->isQunItem(item))
 				showGroupMenu();
 	}
+
+    getMainWindow()->setAutoHide(true);
 }
 
 void BuddyMge::showQunMenu()
