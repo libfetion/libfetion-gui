@@ -76,6 +76,11 @@ void FxScheduleSMS::moveEvent(QMoveEvent * event)
 
 void FxScheduleSMS::SendMsg()
 {
+
+	QString time;
+	time = dateEdit->date().toString("yyyy-MM-dd") +" "+ timeEdit->time().toString("hh:mm")+":00";
+
+	//QMessageBox::about(this, tr("About Menu"),time);
 	QString msg = MsgEdit->toPlainText();
 	if (msg.isEmpty())
 	{
@@ -143,7 +148,10 @@ void FxScheduleSMS::SendMsg()
 		}
 	}
 
-	if (!fx_set_schedule_sms(receiver, sendMsg.toUtf8().data(), "2009-05-19 07:55:00", NULL, NULL))
+
+
+
+	if (!fx_set_schedule_sms(receiver, sendMsg.toUtf8().data(), time.toUtf8().data(), NULL, NULL))
 		MsgBrowser->append(tr("send schedule sms failure"));
 	else
 		MsgBrowser->append(tr("sending schedule sms "));
