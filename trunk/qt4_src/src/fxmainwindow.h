@@ -56,6 +56,8 @@ public:
 	void UpdateSkinsMenu();
 	void SetAllFont(QFont font);
 
+    FxAddBuddy * getTmpAddBuddyWindow() {return tmp_addBuddy;}  //save the tmp addbuddy handle
+    FxMsgWindow * getMsgWindow() {return msgwin;}
 protected:
 #if WIN32
     virtual bool winEvent(MSG *msg, long *result);
@@ -237,10 +239,10 @@ private:
     QTimer reloginTimer;
     QTimer updateAccountInfoTimer;
 
+    FxAddBuddy *tmp_addBuddy;  //save the tmp addbuddy handle
+    FxMsgWindow *msgwin;
     BuddyMge *buddyMge; 
 public:
-	FxAddBuddy *tmp_addBuddy;  //save the tmp addbuddy handle
-	FxMsgWindow *msgwin;
     QAction *AutoLoginAct;
     QAction *MuteAct;
 	QAction *IsAutoShowMsgAct;
