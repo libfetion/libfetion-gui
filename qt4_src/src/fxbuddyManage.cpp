@@ -128,7 +128,7 @@ void BuddyMge::initAllActions()
 FxMsgWindow *BuddyMge::getMsgWindow()
 {
     if (getMainWindow())
-        return getMainWindow()->msgwin;
+        return getMainWindow()->getMsgWindow();
     return NULL;
 } 
 
@@ -326,10 +326,10 @@ void BuddyMge::updateAccountInfo(qlonglong account_id)
 
 void BuddyMge::slot_add_group(int, int newname, qlonglong id)
 {
-    //fix me _mainwindow->tmp_addBuddy
-    if(getMainWindow()->tmp_addBuddy) {
+    //fix me _mainwindow->tmp_addBuddy, this is a bad code
+    if(getMainWindow()->getTmpAddBuddyWindow()) {
         QVariant Var((int)id);
-        getMainWindow()->tmp_addBuddy->CB_group->addItem(QString::fromUtf8((char*)newname), Var);
+        getMainWindow()->getTmpAddBuddyWindow()->CB_group->addItem(QString::fromUtf8((char*)newname), Var);
     }
 
 	buddyopt->addGroup((const char*) newname, id);
