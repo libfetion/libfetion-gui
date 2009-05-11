@@ -1,105 +1,102 @@
+/*****************************
+一般情况下以#开头的标记，如 QPushButton#btnClose 也可以直接用 #btnClose，效果一样。
 
-#ChatWindow{
+
+九宫格四个参数属性为： qproperty-scaleLeft   qproperty-scaleRight qproperty-scaleTop qproperty-scaleBottom
+图为：                         qproperty-background
+
+主窗口的id为 mainWindow
+
+
+******************************/
+
+/*  设置所有窗口的缺省背景(目前只支持主窗口，登陆窗口及聊天窗口) ，如第一个规则设定了聊天窗口的背景。 */
+fxgui--FxWidget{
 	background-origin:padding;
-	qproperty-background:url(./skin1/ChatFrame_Window_windowBkg.bmp);
+	qproperty-background:url(./skin1/panda_mainWin.bmp);
+	qproperty-scaleLeft:82;
+	qproperty-scaleRight:30;
+	qproperty-scaleTop:145;
+	qproperty-scaleBottom:30;
+}
+
+/* 
+聊天界面背景设置 
+若要独立设置主窗口背景可将 ChatWindow换为 mainWindow
+登陆窗口为 loginWindow
+*/
+#ChatWindow{
+	qproperty-background:url(./skin1/panda_mainWin.bmp);
 	/* 以下为9宫缩放的4个参数,类似于css3里的 borderImage，不
 过QT并非所有窗体都支持borderImage,且borderImage里要在border上放按钮我还没找
 到方法...这个的具体实现我解决了。提供的背景图不需要固定尺寸，只需要
 提供上，下两段及相关的切割数字即可
- ______________________
- |      |          |   |
- |  
-
 */
-	qproperty-scaleLeft:16;
-	qproperty-scaleRight:1;
-	qproperty-scaleTop:90;
-	qproperty-scaleBottom:16;
+	qproperty-scaleLeft:82;
+	qproperty-scaleRight:30;
+	qproperty-scaleTop:142;
+	qproperty-scaleBottom:30;
 	
 }
 
+
 /* 好友列表树相关样式 */
+
+/*  好友列表树关闭时的背景图 */
 QTreeView::branch:has-children:closed{
 	border-image: none;
     image: url(./skin1/fold_up.png);
 }
+/* 好友列表树打开时的背景图 */
 QTreeView::branch:has-children:open{
  	border-image: none;
  	image: url(./skin1/fold_down.png);
  }
 
-fxgui--FxWidget fxgui--FxWidgetTitleBar Label{
-	padding:20px;
+
+/*  去掉好友列表的虚线 */
+QTreeView::branch:!has-children {
+    border:none;
 }
 
-#loginWindow{
-	background-origin:padding;
-	qproperty-background:url(./skin1/mainpanel_window_windowbkg.bmp);
-	qproperty-scaleLeft:65;
-	qproperty-scaleRight:130;
-	qproperty-scaleTop:135;
-	qproperty-scaleBottom:58;
+/* 好友列表中鼠标经过时的背景渐变  */
+QTreeView::item:hover {
+   background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #e7effd, stop: 1 #cbdaf1);
+   border: 1px solid #bfcde4;
 }
-#mainWindow{
-	background-origin:padding;
-	qproperty-background:url(./skin1/mainpanel_window_windowbkg.bmp);
-	qproperty-scaleLeft:65;
-	qproperty-scaleRight:130;
-	qproperty-scaleTop:135;
-	qproperty-scaleBottom:58;
+/* 好友列表被选中元素 有焦点时 背景渐变 */
+QTreeView::item:selected:active{
+   background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #6ea1f1, stop: 1 #567dbc);
+}
+/* 好友列表被选中元素 无焦点时 背景渐变 */
+QTreeView::item:selected:!active {
+   background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #6b9be8, stop: 1 #577fbf);
 }
 
-/* 状态 */
-#userstatus{
-	background-color:rgba(0,0,0,0%);
-}
-#userstatus QAbstractItemView {
-	border:2px solid darkgray;
-	background:#34f343;
-	selection-background-color:red;
-}
-#userstatus QAbstractItemView::item {
-	color:blue;
-	background:#0ff;
-	border:1px solid red;
-	selection-background-color:red;
-}
-
-
-/* 心情短语 */
-#impression,QLineEdit{
-	background-color:rgba(240,255,255,0%);
-}
+/* 输入框背景透明 */
 QLineEdit{
-	border:none;
+	background-color:rgba(240,255,255,0%); 
+	border:2px solid darkgray;
 }
+/* 输入框有鼠标经过时背景色变化 */
 QLineEdit:hover{
-	/*border:dashed;*/
-	/*background:url(./skin1/icon.png);*/
 	background-color:rgba(240,255,255,10%);
 }
+/* 输入框有焦点时(可接收输入时) 背景色，这里用了QT的pallet，也可以设置确定的颜色，用rgb 或rgba都可以*/
 QLineEdit::focus{
-	border:solid;
-	/*background-image:url(./skin1/icon.png);*/
+	border:2px solid darkgray;
 	background-color:pallet(button);
 }
+
+/* 心情短语 非编辑状态 鼠标经过时背景，这里原代码还有个BUG，主窗口RESIZE后要点中心情短语的文字才可以进入编辑状态 */
 #impression:hover{
-	border:1px dashed blue;
-	/*border-image:url(./skin1/All_button_pushedAction_sb1_background_T0.bmp) 4 4 4 4;*/
-}
-
-
-
-
-
-
-/* 搜索好友按钮 */
-#btnSearch{
-	padding:0;
-	margin:0;
 	border:none;
-	border-image:url(./skin1/main_tab_down.bmp);
-
+	border-image:url(./skin1/All_button_pushedAction_sb1_background_T0.bmp) 4 4 4 4;
+}
+/* 心情短语 编辑状态  */
+#impression QLineEdit:focus{
+	border:solid;
+	border:2px solid darkgray;
 }
 
 /* 添加好友按钮 */
@@ -107,7 +104,7 @@ QLineEdit::focus{
 	padding:0;
 	margin:0;
 	border:none;
-	border-image:url(./skin1/main_tab_down.bmp);
+	border-image: url(./skin1/All_button_pushedAction_sb1_background_T0.bmp);
 }
 #btnAddFriend:hover{
 	border:none;
@@ -115,117 +112,92 @@ QLineEdit::focus{
 }
 #btnAddFriend:pressed{
 	border:none;
-	border-image:url(./skin1/main_tab_down.bmp);
+	border-image: url(./skin1/All_MainPanel_TabButtonBase_pushedBackground2.bmp);
 }
 
 /* portrait 头像*/
 /* 备注：往后版本如果下载用户定义的头像，则此属性的CSS将不提供修改或背景默认指向指定路径 */
 #portrait{
-	border-image:url(./skin1/MainPanel_MainHeadImage_mouseOnDraw.png) 0 0 0 0;
+	border-image:url(./skin1/MainPanel_MainHeadImage_mouseOnDraw.png) 0 0 0 0;/* 这个是头像的边框，注意，边框的显示要求头像周围是透明的 */
 	background-repeat:repeat-none;
 	background-image:url(./skin1/Bomb.jpg);
 	background-position: center center;
 	width:66;
 	height:66;
 }
-/* 主窗口标题 */
+/* 主窗口标题，这个没多大作用*/
 fxgui--FxWidget{
 	qproperty-windowTitle:"small fetion---default-style";
 }
-/* 当前窗口有焦点时 */
-fxgui--FxWidget QLabel#title:active{
-	/*color:#0022ee;*/
+
+
+/*
+设置窗口界面标题左边距，这个是为了我改PANDA的皮肤时没把 LibFetion字样去掉才移动窗口标题
+为美观也可以分别对margin padding的top left right bottom 进行设置
+*/
+fxgui--FxWidget QLabel#title{
 	border-top:5px;
 	border-bottom:5px;
-	font-weight:normal;
-	font-family:"Arial";
-	margin-left:14px;
-	background:url(./skin1/MainPanel_MainFrameTitle_file.png)center  right;
-	background-repeat:repeat-none;
+	margin-left:80px;
+
+}
+/* 当前窗口有焦点时，标题的样式 */
+fxgui--FxWidget QLabel#title:active{
+	color:red;
+	font-family:"Nina";
 }
 /* 当前窗口无焦点时*/
 fxgui--FxWidget QLabel#title:!active{
-	/*color:#0022ee;*/
-	font-weight:bolder;
+	color:#00ff00;
 	font-family:"Arial";
-	font-size:16px;
-	background:url(./skin1/MainPanel_MainFrameTitleNoActivate_file.png)center  right;
-	background-repeat:repeat-none;
 }
 
-/* icon */
-#icon{
-	width:27px;
-	height:20px;
-	border:none;
-	margin:0;
-	padding:0;
-	/*border-image:url(./skin1/icon.png);*/
-}
-
-/* min button*/
+/* 所有窗口的最小化按钮的三个状态图片*/
 QPushButton#btnMinimize{
     border: none;
-    border-image: url(./skin1/minimizebutton_normalBackground.bmp);
+    border-image: url(./skin1/panda_minBtn.bmp);
+	margin-top:2px;
 }
 QPushButton{
-	width:27px;
-	height:23px;
+	width:20px;
+	height:32px;
 	margin:0;
 	padding:0;
 }
 QPushButton#btnMinimize:hover{
 	margin:0;
 	padding:0;
-	border-image: url(./skin1/minimizebutton_highlightBackground.bmp);
+	border-image: url(./skin1/panda_minBtn_hover.bmp);
+	margin-top:2px;
 }
 QPushButton#btnMinimize:pressed{
-	border-image: url(./skin1/minimizebutton_pushedBackground.bmp);
-}
-/* max button*/
-
-QPushButton#btnMaximize:checked{
-	border:none;
-	border-image: url(./skin1/maximizebutton_normalBackground2.bmp);
-}
-QPushButton#btnMaximize:checked:hover{
-	border:none;
-    border-image: url(./skin1/maximizebutton_highlightBackground2.bmp);
-}
-QPushButton#btnMaximize:checked:pressed{
-	border:none;
-    border-image: url(./skin1/maximizebutton_pushedBackground2.bmp);
+	border-image: url(./skin1/panda_minBtn_pressed.bmp);
+	margin-top:2px;
 }
 
-/* normal button */
-QPushButton#btnMaximize{
-	border:none;
-	border-image: url(./skin1/maximizebutton_normalBackground.bmp);
-}
-QPushButton#btnMaximize:hover{
-	border:none;
-    border-image: url(./skin1/maximizebutton_highlightBackground.bmp);
-}
-QPushButton#btnMaximize:pressed{
-	border:none;
-    border-image: url(./skin1/maximizebutton_pushedBackground.bmp);
-}
-
-/* close button */
+/* 所有窗口的关闭按钮的三个状态图片*/
 QPushButton#btnClose{
     border: none;
-    border-image: url(./skin1/closebuttonBackground_background.bmp);
+    border-image: url(./skin1/panda_closeBtn.bmp);
+	margin-top:2px;
 }
 QPushButton#btnClose:hover{
-	border-image: url(./skin1/closebuttonBackground_foreground.bmp);
+	border-image: url(./skin1/panda_closeBtn.bmp);
+	margin-top:2px;
 }
 QPushButton#btnClose:pressed{
-	border-image: url(./skin1/closebutton_pushedAction_sb1_background_T0.bmp);
+	border-image: url(./skin1/panda_closeBtn.bmp);
+	margin-top:2px;
 }
 
-/* menu button */
+
 QToolButton#btnMenu{
-    border: none;
+	border:none;
+	qproperty-shortcut:"CTRL+A"; /* 设置快捷键(需在主窗口为当前窗口时才有效) */
+}
+
+/* 主窗口底部“MENU”按钮的三个状态图片*/
+QToolButton#btnMenu{
     border-image: url(./skin1/All_button_pushedAction_sb1_background_T0.bmp);
 }
 QToolButton#btnMenu:hover{
@@ -233,4 +205,31 @@ QToolButton#btnMenu:hover{
 }
 QToolButton#btnMenu:pressed{
 	border-image: url(./skin1/All_MainPanel_TabButtonBase_pushedBackground2.bmp);
+}
+
+/* 主窗口底部“给自已发短信”按钮的三个状态图片*/
+QToolButton#btnSendSelf{
+    border-image: url(./skin1/All_button_pushedAction_sb1_background_T0.bmp);
+}
+QToolButton#btnSendSelf:hover{
+	border-image: url(./skin1/main_tab_down.bmp);
+}
+QToolButton#btnSendSelf:pressed{
+	border-image: url(./skin1/All_MainPanel_TabButtonBase_pushedBackground2.bmp);
+}
+
+/* 主窗口底部“设置”按钮的三个状态图片*/
+QToolButton#btnSettings{
+    border-image: url(./skin1/All_button_pushedAction_sb1_background_T0.bmp);
+}
+QToolButton#btnSettings:hover{
+	border-image: url(./skin1/main_tab_down.bmp);
+}
+QToolButton#btnSettings:pressed{
+	border-image: url(./skin1/All_MainPanel_TabButtonBase_pushedBackground2.bmp);
+}
+
+/* 以下可忽略 */
+#icon{
+	border:none;
 }
