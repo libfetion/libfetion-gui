@@ -167,13 +167,12 @@ private slots:
 	void skinMenutriggered(QAction *);
 	void SearcheditingFinished();
 	void SearchtextChanged (const QString &text);
-	void showNiceNameEdit();
-	void changeNiceName();
-	void changeImpresa();
+	void changeNickName(QString);
+	void changeImpresa(QString);
 	void ImpresaFocusIn();
 	void SearchFocusIn();
 	void showPortrait();
-	void setUINiceName();
+	void setUINickName();
 
 	void schedule_SMS();
 private:
