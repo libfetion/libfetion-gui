@@ -134,4 +134,3 @@ private:
 }// end  namespace fxgui 
 #endif
 
-
