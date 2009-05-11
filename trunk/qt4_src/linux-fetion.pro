@@ -67,6 +67,8 @@ HEADERS       =  \
            	     ./src/fxwidgettitlebar.h \
                  ./src/qlayoutengine_p.h \
                  ./src/qwidgetresizehandler_p.h \
+                 ./src/fxusertree.h \
+				 ./src/fxeditablelabel.h \
 				 ./src/sqlite/sqlite3.h
 
 
