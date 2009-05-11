@@ -99,17 +99,15 @@ FxMainWindow::~FxMainWindow()
 
 void FxMainWindow::UI_enable_impresa()
 {
-	UI_Impresa->setDisabled (false);
-	UI_Impresa->setFocus ();
 }
 
 void FxMainWindow::UI_enable_search()
 {
-	UI_Search->setDisabled (false);
-	UI_Search->setFocus ();
+	//mainUserListStack->setCurrentWidget(search);
+	mainUserListStack->setCurrentIndex(1);
 }
 
-void FxMainWindow::setUINiceName()
+void FxMainWindow::setUINickName()
 {
 	QString impresa; 
 	if (fx_data_get_PersonalInfo())
@@ -117,14 +115,10 @@ void FxMainWindow::setUINiceName()
 
 	if (impresa.isEmpty())
 	{
-		UI_Impresa->setToolTip (NULL);
 		impresa = tr("please input impresa...");
 	}
 	
-	UI_Impresa->setText(impresa);
-	UI_Impresa->setToolTip(impresa);
-
-	UI_Impresa->setCursorPosition (0);
+	impression->setText(impresa);
 	m_impresa = impresa;
 	
 	QString state;
@@ -148,16 +142,16 @@ void FxMainWindow::setUINiceName()
 	//if (name.size >12)
 	QString showstr= name + "(" +state + ")";
 
-	UI_NiceName->setText (showstr);
+	nickname->setText (showstr);
 }
 
 void FxMainWindow::SearcheditingFinished ()
 {
-	QString text = UI_Search->text();
+	QString text = lineSearch->text();
 	if (text.isEmpty())
 	{
-		UI_Search->setText(tr("search friends..."));
-		UI_Search->setCursorPosition (0);
+		lineSearch->setText(tr("search friends..."));
+		lineSearch->setCursorPosition (0);
 		//show mian tree list
 	}
 //	UI_Search->setDisabled (true);
@@ -166,40 +160,37 @@ void FxMainWindow::SearcheditingFinished ()
 void FxMainWindow::SearchtextChanged (const QString &text)
 {
 	Q_UNUSED(text);
-	QString content = UI_Search->text();
+	QString content = lineSearch->text();
 	if (content.isEmpty() || content == tr("search friends..."))
 	{
-		search->hide();
-		view->show();
+		//mainUserListStack->setCurrentWidget(view);
+		mainUserListStack->setCurrentIndex(0);
 		return;
 	}
 	
-	view->hide(); //hide mian tree list 
-	
+	//mainUserListStack->setCurrentWidget(search);
+	mainUserListStack->setCurrentIndex(1);
 	search->clear();
-	QList<QTreeWidgetItem *>  *items = searchAccountInfo(content.toUtf8().data());
+	QList<QTreeWidgetItem *>  *items = searchAccountInfo(text.toUtf8().data());
 	search->insertTopLevelItems(0, *items);
-	search->show();
 }
 
-void FxMainWindow::changeNiceName()
+void FxMainWindow::changeNickName(QString text)
 {
-	UI_Edit_NiceName->hide();
-	QString text = UI_Edit_NiceName->text();
+	// the check below isn't need . It's check on the FxEditableLabel
 	if (text != QString::fromUtf8(fx_get_usr_show_name()))
 		fx_set_user_nickname(text.toUtf8().data(), NULL, NULL); 
 }
 
-void FxMainWindow::changeImpresa()
+void FxMainWindow::changeImpresa(QString text)
 {
-	QString text = UI_Impresa->text();
+	// the check below isn't need
 	if (text == m_impresa)
 		return;
 
 	if (text.isEmpty())
 	{
-		UI_Impresa->setText(tr("please input impresa..."));
-		UI_Impresa->setCursorPosition (0);
+		impression->setText(tr("please input impresa..."));
 		text = tr("please input impresa...");
 		
 		if (m_impresa != tr("please input impresa..."))
@@ -208,20 +199,19 @@ void FxMainWindow::changeImpresa()
 	else
 		fx_set_user_impresa(text.toUtf8().data(), NULL, NULL); 
 
-	UI_Impresa->setToolTip (text);
 	m_impresa = text;
 }
 
 void FxMainWindow::SearchFocusIn ()
 {
-	if (UI_Search->text() == tr("search friends...") )
-		UI_Search->setText("");
+	if (lineSearch->text() == tr("search friends...") )
+		lineSearch->setText("");
 }
 
 void FxMainWindow::ImpresaFocusIn ()
 {
-	if (UI_Impresa->text() == tr("please input impresa...") )
-		UI_Impresa->setText("");
+	if (impression->text() == tr("please input impresa...") )
+		impression->setText("");
 }
 
 void FxMainWindow::addNewMsgCount(bool isQunMsg)
@@ -606,7 +596,7 @@ void FxMainWindow::slot_SysDialogMsg (int message, int fx_msg, qlonglong who)
 
 void FxMainWindow::slot_set_state(int state)
 {
-	setUINiceName();
+	setUINickName();
 
 	if (traySetStatusMenu)
 		traySetStatusMenu->setIcon (getOnlineStatusIcon(state));
@@ -848,18 +838,16 @@ void FxMainWindow::init_UI()
 
 	//UI set all images of main windows
 	//****************************************************/
-	LibFetion_image->setPixmap(getLibFetionImage());
-	UI_Portrait->setPixmap (getPortraitImage());
-	UI_ImpresaBK->setPixmap (getImpresaBKImage());
-	UI_SearchBK->setPixmap (getSearchBKImage());
-	UI_AddFriend->setPixmap (getAddImage());
-	UI_BT_SETTING->setPixmap(getBTSettingImage());
-	UI_BT_SENDSELF->setPixmap(getBTSendSelfImage());
+	//@TO FIX 
+	// should not appeared here!
+	portrait->setIcon(getPortraitImage());
+	btnAddFriend->setIcon(getAddImage());
+	btnSettings->setIcon(getBTSettingImage());
+	btnSendSelf->setIcon(getBTSendSelfImage());
 
-	UI_Search->setText(tr("search friends..."));
-	UI_Edit_NiceName->setText(QString::fromUtf8(fx_get_usr_show_name()));
-	UI_Edit_NiceName->hide();
-	setUINiceName();
+	lineSearch->setText(tr("search friends..."));
+	nickname->setText(QString::fromUtf8(fx_get_usr_show_name()));
+	setUINickName();
 	version->setText(VERSION_NO);
 	///****************************************************/
 
@@ -874,7 +862,9 @@ void FxMainWindow::init_UI()
 	//init search control
 	search->header()->setHidden(1);
 	search->setRootIsDecorated(true);
-	search->hide();
+
+	//mainUserListStack->setCurrentWidget(view);
+	mainUserListStack->setCurrentIndex(0);
 
 	msgwin = new FxMsgWindow(0);
 	msgwin->setMainWind(this);
@@ -1114,34 +1104,24 @@ void FxMainWindow::createMenu()
 void FxMainWindow::init_slot_signal()
 {
 
-#if 0	
-	connect(UI_ImpresaBK, SIGNAL(clicked ()),
-			this, SLOT(UI_enable_impresa()));
-	connect(UI_SearchBK, SIGNAL(clicked ()), 
-			this, SLOT(UI_enable_search()));
-#endif
-	connect(UI_Impresa, SIGNAL(clicked ()),
-			this, SLOT(UI_enable_impresa()));
-	connect(UI_Search, SIGNAL(clicked ()), 
+	connect(lineSearch, SIGNAL(clicked ()), 
 			this, SLOT(UI_enable_search()));
 
 
-	connect(UI_BT_SETTING, SIGNAL(clicked ()), this, SLOT(showConfigDlg()));
-	connect(UI_BT_SENDSELF, SIGNAL(clicked ()), this, SLOT(sendself()));
-	connect(UI_AddFriend, SIGNAL(clicked ()), this, SLOT(addBuddy()));
-	connect(UI_Portrait, SIGNAL(clicked ()), this, SLOT(showPortrait()));
-	connect(UI_NiceName, SIGNAL(clicked ()), this, SLOT(showNiceNameEdit()));
+	connect(btnSettings, SIGNAL(clicked ()), this, SLOT(showConfigDlg()));
+	connect(btnSendSelf, SIGNAL(clicked ()), this, SLOT(sendself()));
+	connect(btnAddFriend, SIGNAL(clicked ()), this, SLOT(addBuddy()));
+	connect(portrait, SIGNAL(clicked ()), this, SLOT(showPortrait()));
 
-	connect(UI_Edit_NiceName, SIGNAL(editingFinished ()), this, SLOT(changeNiceName ()));
-	connect(UI_Edit_NiceName, SIGNAL(outfocus ()), UI_Edit_NiceName, SLOT(hide ()));
+	connect(nickname, SIGNAL(textChanged(QString)), this, SLOT(changeNickName (QString)));
 
-	connect(UI_Impresa, SIGNAL(editingFinished ()), this, SLOT(changeImpresa ()));
-	connect(UI_Search, SIGNAL(editingFinished ()), this, SLOT(SearcheditingFinished ()));
+	connect(impression, SIGNAL(textChanged(QString)), this, SLOT(changeImpresa(QString)));
+	connect(lineSearch, SIGNAL(editingFinished ()), this, SLOT(SearcheditingFinished ()));
 
-	connect(UI_Impresa, SIGNAL(infocus ()), this, SLOT(ImpresaFocusIn ()));
-	connect(UI_Search, SIGNAL(infocus ()), this, SLOT(SearchFocusIn ()));
+	connect(impression, SIGNAL(infocus ()), this, SLOT(ImpresaFocusIn ()));
+	connect(lineSearch, SIGNAL(infocus ()), this, SLOT(SearchFocusIn ()));
 
-	connect(UI_Search, SIGNAL(textChanged (const QString &) ), this, SLOT(SearchtextChanged (const QString &)));
+	connect(lineSearch, SIGNAL(textChanged (const QString &) ), this, SLOT(SearchtextChanged (const QString &)));
 
 
     if(isHaveTray)
@@ -1186,7 +1166,7 @@ void FxMainWindow::init_slot_signal()
 			this, SLOT( slot_SystemNetErr(int)) );
 	connect(this, SIGNAL(signal_DeRegistered()), 
 			this, SLOT( slot_DeRegistered()) );
-	connect(this, SIGNAL(signal_set_nickname_ok()), this, SLOT(setUINiceName()));
+	connect(this, SIGNAL(signal_set_nickname_ok()), this, SLOT(setUINickName()));
 	connect(this, SIGNAL(signal_receive_nudge(qlonglong)), 
 			this, SLOT( slot_receive_nudge(qlonglong)));
 	connect(this, SIGNAL(signal_set_state(int)), 
@@ -1224,12 +1204,6 @@ void FxMainWindow::showPortrait()
 	buddySetStatusMenu->exec(QCursor::pos());
 }
 
-void FxMainWindow::showNiceNameEdit()
-{
-	UI_Edit_NiceName->setText(QString::fromUtf8(fx_get_usr_show_name()));
-	UI_Edit_NiceName->show();
-	UI_Edit_NiceName->setFocus();
-}
 
 void FxMainWindow::addBuddy()
 {
@@ -1280,7 +1254,7 @@ void FxMainWindow::setImpresa()
 			fx_set_user_impresa(text.toUtf8().data(), NULL, NULL); 
 	}
 
-	setUINiceName();
+	setUINickName();
 }
 
 void FxMainWindow::tmp_exit()
@@ -1618,14 +1592,11 @@ void FxMainWindow::UpdateSkins()
 	buddyMge->UpdateSkins();
 
 	setWindowIcon(getSysTrayIcon(1));
-	LibFetion_image->setPixmap(getLibFetionImage());
-	UI_Portrait->setPixmap(getPortraitImage());
-	UI_ImpresaBK->setPixmap(getImpresaBKImage());
-	UI_SearchBK->setPixmap(getSearchBKImage());
-	UI_AddFriend->setPixmap(getAddImage());
+	portrait->setIcon(getPortraitImage());
+	btnAddFriend->setIcon(getAddImage());
 
-	UI_BT_SETTING->setPixmap(getBTSettingImage());
-	UI_BT_SENDSELF->setPixmap(getBTSendSelfImage());
+	btnSettings->setIcon(getBTSettingImage());
+	btnSendSelf->setIcon(getBTSendSelfImage());
 
 	if (trayIcon)
 		trayIcon->setIcon(getSysTrayIcon (fx_get_user_state()));
@@ -1700,12 +1671,13 @@ void FxMainWindow::SetAllFont(QFont font)
 	this->setFont(font);
 	msgwin->SetAllFont(font);
 
+	// ???
 	addBuddyAct->setIcon(getMenuIcon(AddBuddyIcon));
 
-	UI_Search->setFont(font);
-	UI_Edit_NiceName->setFont(font);
-	UI_Impresa->setFont(font);
-	UI_NiceName->setFont(font);
+	lineSearch->setFont(font);
+	nickname->setFont(font);
+	impression->setFont(font);
+	version->setFont(font);
 	version->setFont(font);
 
     view->setFont(font);
