@@ -1,5 +1,5 @@
-#ifndef FXUSERTREE_H_
-#define FXUSERTREE_H_
+#ifndef FXEDITABLELABEL_H_
+#define FXEDITABLELABEL_H_
 
 #include <QStackedWidget>
 #include <QLabel>
