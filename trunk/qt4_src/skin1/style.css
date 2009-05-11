@@ -152,7 +152,8 @@ fxgui--FxWidget QLabel#title:!active{
 	font-family:"Arial";
 }
 
-/* 所有窗口的最小化按钮的三个状态图片*/
+/* 所有窗口的最小化按钮的三个状态图片 */
+
 QPushButton#btnMinimize{
     border: none;
     border-image: url(./skin1/panda_minBtn.bmp);
@@ -174,8 +175,7 @@ QPushButton#btnMinimize:pressed{
 	border-image: url(./skin1/panda_minBtn_pressed.bmp);
 	margin-top:2px;
 }
-
-/* 所有窗口的关闭按钮的三个状态图片*/
+/* 所有窗口的关闭按钮的三个状态图片 */
 QPushButton#btnClose{
     border: none;
     border-image: url(./skin1/panda_closeBtn.bmp);
@@ -190,13 +190,12 @@ QPushButton#btnClose:pressed{
 	margin-top:2px;
 }
 
-
 QToolButton#btnMenu{
 	border:none;
 	qproperty-shortcut:"CTRL+A"; /* 设置快捷键(需在主窗口为当前窗口时才有效) */
 }
 
-/* 主窗口底部“MENU”按钮的三个状态图片*/
+/* 主窗口底部“MENU”按钮的三个状态图片 */
 QToolButton#btnMenu{
     border-image: url(./skin1/All_button_pushedAction_sb1_background_T0.bmp);
 }
@@ -207,7 +206,7 @@ QToolButton#btnMenu:pressed{
 	border-image: url(./skin1/All_MainPanel_TabButtonBase_pushedBackground2.bmp);
 }
 
-/* 主窗口底部“给自已发短信”按钮的三个状态图片*/
+/* 主窗口底部“给自已发短信”按钮的三个状态图片 */
 QToolButton#btnSendSelf{
     border-image: url(./skin1/All_button_pushedAction_sb1_background_T0.bmp);
 }
@@ -218,7 +217,7 @@ QToolButton#btnSendSelf:pressed{
 	border-image: url(./skin1/All_MainPanel_TabButtonBase_pushedBackground2.bmp);
 }
 
-/* 主窗口底部“设置”按钮的三个状态图片*/
+/* 主窗口底部“设置”按钮的三个状态图片 */
 QToolButton#btnSettings{
     border-image: url(./skin1/All_button_pushedAction_sb1_background_T0.bmp);
 }
