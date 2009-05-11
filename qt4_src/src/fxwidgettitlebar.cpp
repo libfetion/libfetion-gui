@@ -27,7 +27,7 @@ FxWidgetTitleBar::FxWidgetTitleBar(FxWidget* parent):QWidget(parent),_parent(par
 	layout->addWidget(icon);
 	layout->addWidget(title);
 	layout->addWidget(btnMinimize);
-	layout->addWidget(btnMaximize);
+	//layout->addWidget(btnMaximize);
 	layout->addWidget(btnClose);
 	
 	layout->setSpacing(0);
