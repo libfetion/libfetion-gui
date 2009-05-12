@@ -9,6 +9,16 @@
 
 
 ******************************/
+/*
+#mainWindow{
+	background-origin:padding;
+	qproperty-background:url(./skin1/background.png);
+	qproperty-scaleLeft:82;
+	qproperty-scaleRight:30;
+	qproperty-scaleTop:145;
+	qproperty-scaleBottom:30;	
+}
+*/
 
 /*  设置所有窗口的缺省背景(目前只支持主窗口，登陆窗口及聊天窗口) ，如第一个规则设定了聊天窗口的背景。 */
 fxgui--FxWidget{
@@ -19,7 +29,6 @@ fxgui--FxWidget{
 	qproperty-scaleTop:145;
 	qproperty-scaleBottom:30;
 }
-
 /* 
 聊天界面背景设置 
 若要独立设置主窗口背景可将 ChatWindow换为 mainWindow
@@ -228,7 +237,78 @@ QToolButton#btnSettings:pressed{
 	border-image: url(./skin1/All_MainPanel_TabButtonBase_pushedBackground2.bmp);
 }
 
+
 /* 以下可忽略 */
 #icon{
 	border:none;
 }
+
+ QMenu{
+   background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 #6b9be8, stop: 0.3 #6b9be8,stop: 0.3 #f77fbf, stop: 1 #f77fbf);
+ }
+
+ QMenu::item {
+     padding: 2px 25px 2px 20px;
+     border: 1px solid transparent; /* reserve space for selection border */
+ }
+
+ QMenu::item:selected {
+     border-color: darkblue;
+     background: rgba(100, 100, 100, 150);
+ }
+
+ QMenu::icon:checked { /* appearance of a 'checked' icon */
+     background: gray;
+     border: 1px inset gray;
+     position: absolute;
+     top: 1px;
+     right: 1px;
+     bottom: 1px;
+     left: 1px;
+ }
+
+ QMenu::separator {
+     height: 2px;
+     background: lightblue;
+     margin-left: 10px;
+     margin-right: 5px;
+ }
+
+ QMenu::indicator {
+     width: 13px;
+     height: 13px;
+ }
+
+ /* non-exclusive indicator = check box style indicator (see QActionGroup::setExclusive) */
+ QMenu::indicator:non-exclusive:unchecked {
+     image: url(:/images/checkbox_unchecked.png);
+ }
+
+ QMenu::indicator:non-exclusive:unchecked:selected {
+     image: url(:/images/checkbox_unchecked_hover.png);
+ }
+
+ QMenu::indicator:non-exclusive:checked {
+     image: url(:/images/checkbox_checked.png);
+ }
+
+ QMenu::indicator:non-exclusive:checked:selected {
+     image: url(:/images/checkbox_checked_hover.png);
+ }
+
+ /* exclusive indicator = radio button style indicator (see QActionGroup::setExclusive) */
+ QMenu::indicator:exclusive:unchecked {
+     image: url(:/images/radiobutton_unchecked.png);
+ }
+
+ QMenu::indicator:exclusive:unchecked:selected {
+     image: url(:/images/radiobutton_unchecked_hover.png);
+ }
+
+ QMenu::indicator:exclusive:checked {
+     image: url(:/images/radiobutton_checked.png);
+ }
+
+ QMenu::indicator:exclusive:checked:selected {
+     image: url(:/images/radiobutton_checked_hover.png);
+ }
