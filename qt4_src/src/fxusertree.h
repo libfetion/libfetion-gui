@@ -2,6 +2,7 @@
 #define FXUSERTREE_H_
 
 #include <QTreeWidget>
+//#include "fxusertreeitem.h"
 namespace fxgui{// begin namesapce fxgui
 
 class FxUserTree: public QTreeWidget
@@ -41,6 +42,9 @@ private slots:
 	*/
 		if(previous){
 			if(previous->parent()){// has a treewidgetitem as parent. not a folder
+				//FxUserTreeItemWidget * item = dynamic_cast<FxUserTreeItemWidget*>(itemWidget(previous,0));
+				//if(item)
+				//	item->setState(FxUserTreeItemWidget::STATE_NORMAL);
 				//QPushButton *b1 = dynamic_cast<QPushButton*>(itemWidget(previous,0));
 				//b1->setText("normal");
 				previous->setSizeHint(0,normalSize);
@@ -48,6 +52,9 @@ private slots:
 		}
 		if(current){
 			if(current->parent()){// has a treewidgetitem as parent. not a folder
+				//FxUserTreeItemWidget * item = dynamic_cast<FxUserTreeItemWidget*>(itemWidget(current,0));
+				//if(item)
+				//	item->setState(FxUserTreeItemWidget::STATE_SELECTED);
 				//QPushButton *b2 = dynamic_cast<QPushButton*>(itemWidget(current,0));
 				//b2->setText("clicked");
 				current->setSizeHint(0,clickedSize);
