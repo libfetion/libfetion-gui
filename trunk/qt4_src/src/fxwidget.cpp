@@ -71,16 +71,11 @@ FxWidget::FxWidget(QWidget *parent,Qt::WindowFlags flag):QWidget(parent,flag){
 	sideBarTB->hide();
 	
 	_mainLayout->setSpacing(0);
-	//connect(this,SIGNAL(triggleMaximizeAndNormal(bool)),this,SLOT(onDoubleClicked(bool)));
 	_mainLayout->setMargin(0);
 	setContentsMargins(3,0,3,3);
 	QWidget::setLayout(_mainLayout);
 	orientSize = size();
-	updateWindowPositionType();
-	//_mainLayout->setSizeConstraint(QLayout::SetNoConstraint);
-	//setMinimumSize(100,22);
-	//setSizePolicy(QSizePolicy(QSizePolicy::Ignored,QSizePolicy::Minimum));
-	
+	updateWindowPositionType();	
 }
 
 void FxWidget::setMinimizetoHide(bool minimizetoHide){
@@ -106,96 +101,63 @@ void FxWidget::resizeEvent(QResizeEvent *event){
 		setBackground(backgroundPixmap);
 }
 void FxWidget::mouseDoubleClickEvent(QMouseEvent *event){
-	qDebug()<<"double clicked\n";
 	Q_UNUSED(event);
 	emit triggleMaximizeAndNormal();
 }
 
 void FxWidget::setBackground(QPixmap pix){
-	//qDebug()<<"setBackgruond\n";
 	QPalette palette;
-       backgroundPixmap = pix;
-       QImage image = pix.toImage();//("./skin1/mainpanel_window_windowbkg.bmp");
-       //int left=65,right=130,bottom=58,top=135;
-       int left=bgScaleLeft,right=bgScaleRight,bottom=bgScaleBottom,top=bgScaleTop;
-       //    qDebug()<<widthTop<<heightTop;
-       QPixmap bgTop(width(),height());
-       QPainter painter(&bgTop);
+    backgroundPixmap = pix;
+    QImage image = pix.toImage();
+    int left=bgScaleLeft,right=bgScaleRight,bottom=bgScaleBottom,top=bgScaleTop;
+    QPixmap bgTop(width(),height());
+    QPainter painter(&bgTop);
+    // top
+    painter.drawImage(0,0,image,0,0,left,top);
+    painter.drawImage(left,0,image.copy(left,0,image.width()-left-right,image.height()).scaled(width()-left-right,image.height()),0,0,width()-left-right,top);
+    painter.drawImage(width()-right,0,image,image.width()-right,0,right,top);
 
-       // top
-       painter.drawImage(0,0,image,0,0,left,top);
-       painter.drawImage(left,0,image.copy(left,0,image.width()-left-right,image.height()).scaled(width()-left-right,image.height()),0,0,width()-left-right,top);
-       painter.drawImage(width()-right,0,image,image.width()-right,0,right,top);
-   
-       //middle
-       QImage image2=image.copy(0,top,image.width(),image.height()-top-bottom).scaled(image.width(),height()-top-bottom);
-       painter.drawImage(0,top,image2,0,0,left,height()-top-bottom);
-       painter.drawImage(left,top,image2.copy(left,0,image.width()-left-right,image2.height()).scaled(width()-left-right,height()-top-bottom),0,0,width()-left-right,height()-top-bottom);
-       painter.drawImage(width()-right,top,image2,image2.width()-right,0,right,height()-bottom-top);
-   //    painter.drawPixmap(0,top,QPixmap(width(),height()-top-bottom),0,top,width(),height()-top-bottom);
-   
-       //bottom
-       int bottomSrcY=image.height()-bottom;
-       int bottomDesY=height()-bottom;
-       painter.drawImage(0,bottomDesY,image,0,bottomSrcY,left,bottom);
-       painter.drawImage(left,bottomDesY,image.copy(left,0,image.width()-right-left,image.height()).scaled(width()-left-right,image.height()),0,bottomSrcY,width()-left-right,bottom);
-       painter.drawImage(width()-right,bottomDesY,image,image.width()-right,bottomSrcY,right,bottom);
-   
-   
-   //    painter.drawPixmap(0,0,bgTop);
-   //    palette.setBrush(ui->topFrame->backgroundRole(),QBrush(QPixmap("./skin1/mainpanel_window_windowbkg.bmp")));
-       palette.setBrush(this->backgroundRole(),QBrush(bgTop));
-       this->setPalette(palette);
-   //    ui->topFrame->setPalette(palette);
-   //    QPalette palette2;
-   //    palette2.setBrush(this->backgroundRole(),QBrush(image));
-   //    this->setPalette(palette2);
-   }
+    //middle
+    QImage image2=image.copy(0,top,image.width(),image.height()-top-bottom).scaled(image.width(),height()-top-bottom);
+    painter.drawImage(0,top,image2,0,0,left,height()-top-bottom);
+    painter.drawImage(left,top,image2.copy(left,0,image.width()-left-right,image2.height()).scaled(width()-left-right,height()-top-bottom),0,0,width()-left-right,height()-top-bottom);
+    painter.drawImage(width()-right,top,image2,image2.width()-right,0,right,height()-bottom-top);
+ 
+    //bottom
+    int bottomSrcY=image.height()-bottom;
+    int bottomDesY=height()-bottom;
+    painter.drawImage(0,bottomDesY,image,0,bottomSrcY,left,bottom);
+    painter.drawImage(left,bottomDesY,image.copy(left,0,image.width()-right-left,image.height()).scaled(width()-left-right,image.height()),0,bottomSrcY,width()-left-right,bottom);
+    painter.drawImage(width()-right,bottomDesY,image,image.width()-right,bottomSrcY,right,bottom);
+
+    palette.setBrush(this->backgroundRole(),QBrush(bgTop));
+    this->setPalette(palette);
+}
 
 void FxWidget::turnBackNormal(){
 	titleBar->setSizePolicy(QSizePolicy(QSizePolicy::Expanding,QSizePolicy::Fixed));
 	contentWidget->setSizePolicy(QSizePolicy(QSizePolicy::Preferred,QSizePolicy::Preferred));
-	//_mainLayout->addWidget(titleBar,0,0);
-	//_mainLayout->addWidget(contentWidget,1,0);
-	//_mainLayout->removeWidget(sideBarRL);
-	//_mainLayout->removeWidget(sideBarTB);
 	titleBar->show();
 	contentWidget->show();
 	sideBarRL->hide();
 	sideBarTB->hide();
-	/*
-	titleBar->show();
-	contentWidget->show();
-	*/
 }
 
 void FxWidget::hideToTopBottom(){
 	titleBar->setSizePolicy(QSizePolicy(QSizePolicy::Ignored,QSizePolicy::Ignored));
 	contentWidget->setSizePolicy(QSizePolicy(QSizePolicy::Ignored,QSizePolicy::Ignored));
-	//sideBarRL->setSizePolicy(QSizePolicy(QSizePolicy::Ignored,QSizePolicy::Ignored));
-	//sideBarTB->setSizePolicy(QSizePolicy(QSizePolicy::Expanding,QSizePolicy::Ignored));
 	titleBar->hide();
 	contentWidget->hide();
 	sideBarRL->hide();
 	sideBarTB->show();
-	//_mainLayout->addWidget(sideBarTB,0,0);
-	//_mainLayout->removeWidget(sideBarRL);
-	//_mainLayout->removeWidget(titleBar);
-	//_mainLayout->removeWidget(contentWidget);
 }
 void FxWidget::hideToLeftRight(){
 	titleBar->setSizePolicy(QSizePolicy(QSizePolicy::Ignored,QSizePolicy::Ignored));
 	contentWidget->setSizePolicy(QSizePolicy(QSizePolicy::Ignored,QSizePolicy::Ignored));
-	//sideBarTB->setSizePolicy(QSizePolicy(QSizePolicy::Ignored,QSizePolicy::Ignored));
-	//sideBarRL->setSizePolicy(QSizePolicy(QSizePolicy::Ignored,QSizePolicy::Expanding));
 	titleBar->hide();
 	contentWidget->hide();
 	sideBarTB->hide();
 	sideBarRL->show();
-	//_mainLayout->addWidget(sideBarRL,0,0);
-	//_mainLayout->removeWidget(sideBarTB);
-	//_mainLayout->removeWidget(titleBar);
-	//_mainLayout->removeWidget(contentWidget);
 }
 void FxWidget::onDoubleClicked(bool checked){
 //@TO BE FIXED make sure checked=maximized for css
@@ -209,9 +171,6 @@ void FxWidget::onDoubleClicked(bool checked){
 }
 void FxWidget::updateWindowPositionType(){
 	int S=3;// should be const..
-	//if (isNeedRecordWinPos)
-	//	Settings::instance().setMainWinPos(pos());
-	//qDebug()<<"move "<<x()<<","<<y()<<"\n"<<int(positionState)<<"\n";
 
 	//@TO FIX
 	//   在需要自动隐藏的位置最小化则，恢复时不会自动隐藏(因为只有leaveEvent才会触发隐藏(需要在恢复窗口时也判断)
@@ -296,12 +255,8 @@ void FxWidget::beginAutoHide(){
 			break;
 		default:break;
 	}
-	qDebug()<<x()<<y()<<width()<<height()<<"\n";
 }
 void FxWidget::endAutoHide(){
-
-	qDebug()<<x()<<y()<<width()<<height()<<"\n";
-
 	if(!_autoHide || isMaximized()){
 		return;
 	}
@@ -334,7 +289,6 @@ void FxWidget::endAutoHide(){
 			break;
 		default:break;
 	}
-	qDebug()<<x()<<y()<<width()<<height()<<"\n";
 }
 
 
