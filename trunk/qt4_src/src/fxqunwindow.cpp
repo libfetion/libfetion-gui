@@ -17,16 +17,8 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-
 #include <QtGui>
-#include <QStandardItemModel>
-#include <QModelIndex>
-#include <QTreeView>
-#include <QListView>
-#include <QHeaderView>
-#include <QStandardItem>
 
-#include "appconfig.h"
 #include "fxqunwindow.h"
 #include "fxshowHistory.h"
 

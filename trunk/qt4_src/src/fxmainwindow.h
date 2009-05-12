@@ -22,7 +22,6 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QTreeWidget>
 
 #include "ui_fetionwindow.h"
 #include "fxbuddy.h"
@@ -47,7 +46,6 @@ public:
 	~FxMainWindow();
 	void handleFx_Sys_Event(int message, WPARAM wParam, LPARAM lParam);
 	void handleFx_relogin_Event(int message, WPARAM wParam, LPARAM lParam);
-	void handle_sendmsg(int msgflag, int fx_msg, qlonglong who);
 
 	void addNewMsgCount(bool isQunMsg = false);
 	void subNewMsgCount(bool isQunMsg = false);
@@ -118,10 +116,6 @@ private slots:
 	void searchaccountDoubleClicked (QTreeWidgetItem * item, int column );
 	void haveCurrentVersionMessage(int);
 	void haveAddAccountAppMessage(char* uri, char*desc);
-	void haveNewSysMessage (qlonglong sys_id);
-	void haveNewMessage (qlonglong account_id);
-	void haveNewQunMessage (qlonglong account_id);
-	void slot_SysDialogMsg (int, int, qlonglong);
 	void slot_SystemNetErr (int);
 	void slot_DeRegistered ();
 	void slot_receive_nudge(qlonglong);
@@ -192,7 +186,6 @@ private:
 	bool isBreakOut;
 	QString m_impresa;
 
-	QVector<int> timeOutMsgVector; //stroe the timeout msg.
 
 	QSystemTrayIcon *trayIcon;
 	QMenu *trayIconMenu;

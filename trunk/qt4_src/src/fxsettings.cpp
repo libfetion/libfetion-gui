@@ -18,13 +18,6 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include <QtGui>
-#include <QStandardItemModel>
-#include <QModelIndex>
-#include <QTreeView>
-#include <QListView>
-#include <QHeaderView>
-#include <QStandardItem>
 #include "fxsettings.h"
 #include "fxmainwindow.h"
 #include "fxskinmanage.h"

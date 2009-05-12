@@ -17,9 +17,6 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#include <QLabel>
-#include <QtGui>
-
 #include "fxsendGroupSMS.h"
 FxSendGroupSMS::FxSendGroupSMS(FxMainWindow * wind,QWidget *parent)
     : QMainWindow(parent)
@@ -48,6 +45,7 @@ FxSendGroupSMS::~FxSendGroupSMS()
 
 void FxSendGroupSMS::moveEvent(QMoveEvent * event)
 {
+	Q_UNUSED(event);
 	Settings::instance().setSendMultMsgWinPos(pos());
 }
 

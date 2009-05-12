@@ -17,30 +17,10 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-
-#include <QtGui>
-#include <QStandardItemModel>
-#include <QModelIndex>
-#include <QTreeView>
-#include <QListView>
-#include <QHeaderView>
-#include <QStandardItem>
-
-
 #include <assert.h>
-#include "appconfig.h"
 #include "fxbuddyManage.h"
 #include "fxmainwindow.h"
-#include "fxloginwindow.h"
 #include "fxshowAccountInfo.h"
-#include "fxqunwindow.h"
-#include "fxverifyAccount.h"
-#include "fxrefuseSMS.h"
-#include "fxsendGroupSMS.h"
-#include "fxconfigDlg.h"
-#include "fxskinmanage.h"
-#include "fxscheduleSmsManage.h"
-#include "fxscheduleSms.h"
 
 BuddyMge::BuddyMge(QTreeWidget * widget, FxMainWindow *wind)
 {

@@ -18,15 +18,6 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include <QtGui>
-#include <QStandardItemModel>
-#include <QModelIndex>
-#include <QTreeView>
-#include <QListView>
-#include <QHeaderView>
-#include <QStandardItem>
-
-
 #include "appconfig.h"
 #include "fxmainwindow.h"
 #include "fxloginwindow.h"
@@ -419,38 +410,6 @@ void FxMainWindow::haveAddAccountAppMessage(char* uri, char*desc)
 }
 
 
-void FxMainWindow::haveNewSysMessage(qlonglong sys_id)
-{
-	Q_UNUSED(sys_id);
-#if 0 //not using system message
-	Fetion_MSG * fxMsg = fx_get_msg(sys_id);
-	if(!fxMsg)
-		return;
-
-	QString newmsg ;
-	char *msg = fx_msg_qt_format(fxMsg->message); 
-	newmsg = newmsg.fromUtf8(msg);
-
-	QSystemTrayIcon::MessageIcon icon = QSystemTrayIcon::MessageIcon(1);
-	trayIcon->showMessage(tr("sys message"), newmsg, 
-			icon, 5*1000);
-
-	fx_destroy_msg (fxMsg);
-	if(msg)
-		free(msg);
-#endif
-}
-
-void FxMainWindow::haveNewMessage(qlonglong account_id)
-{
-	msgwin->haveNewMessage(account_id);
-}
-
-void FxMainWindow::haveNewQunMessage(qlonglong qun_id)
-{
-	msgwin->haveQunMessage(qun_id);
-}
-
 void FxMainWindow::slot_SystemNetErr(int err)
 {
 	Q_UNUSED(err);
@@ -488,110 +447,6 @@ void FxMainWindow::slot_DeRegistered()
 		isQuit = true;
 		close();
 	}
-}
-
-#define MSG_OK       1
-#define MSG_FAIL     2
-#define MSG_TIMEOUT  3
-#define MSG_FAIL_LIMIT  4
-
-void FxMainWindow::handle_sendmsg(int msgflag, int fx_msg, qlonglong account_id)
-{
-	if(!fx_msg)
-		return;
-
-	int i = 0;
-	Fetion_MSG *fxMsg = (Fetion_MSG *) fx_msg;
-	char *msg = fx_msg_qt_format(fxMsg->message); 
-	QString newmsg;
-
-	switch(msgflag)
-	{
-		case MSG_OK:
-			for (i = 0; i < timeOutMsgVector.size(); ++i) {
-				if (timeOutMsgVector.at(i) == fx_msg)
-				{
-					newmsg = "<b style=\"color:rgb(170,0,255);\">" +tr("auto resend ok:") + "</b>" + newmsg.fromUtf8(msg);
-					timeOutMsgVector.remove(i);
-					break;
-				}
-			}
-			break;
-		case MSG_FAIL:
-			for (i = 0; i < timeOutMsgVector.size(); ++i) {
-				if (timeOutMsgVector.at(i) == fx_msg)	{
-					timeOutMsgVector.remove(i);
-					break;
-				}
-			}
-			newmsg = "<b style=\"color:red;\">"+tr("send fail:") +"</b>"+ newmsg.fromUtf8(msg);
-			break;
-
-		case MSG_FAIL_LIMIT:
-			for (i = 0; i < timeOutMsgVector.size(); ++i) {
-				if (timeOutMsgVector.at(i) == fx_msg)	{
-					timeOutMsgVector.remove(i);
-					break;
-				}
-			}
-			newmsg = "<b style=\"color:red;\">"+tr("send sms fail by limit:") +"</b>"+ newmsg.fromUtf8(msg);
-			break;
-		case MSG_TIMEOUT:
-			timeOutMsgVector.append(fx_msg); // add the msg to vector
-			newmsg = "<b style=\"color:rgb(170,0,255);\">" +tr("send timeout:") +"</b>" + newmsg.fromUtf8(msg)+"<br><b style=\"color:rgb(170,0,255);\">" +tr("will auto resend")+"</b>";
-			break;
-	}
-
-    if (fxMsg->ext_id != 0)
-        msgwin->addQunMessage(newmsg, account_id, 0L, true);
-    else
-        msgwin->addMessage(newmsg, account_id);
-
-	if(msg)
-		free(msg);
-}
-
-void FxMainWindow::slot_SysDialogMsg (int message, int fx_msg, qlonglong who)
-{
-    int msgflag=0; 
-
-    if (!fx_msg)
-        return;
-
-	switch(message)
-	{
-		case FX_SMS_OK: 
-		case FX_DIA_SEND_OK: 
-		case FX_QUN_SEND_OK: 
-        case FX_QUN_SMS_OK: 
-            msgflag = MSG_OK;
-            break;
-
-		case FX_SMS_FAIL: 
-		case FX_DIA_SEND_FAIL: 
-		case FX_QUN_SEND_FAIL: 
-		case FX_QUN_SMS_FAIL: 
-            msgflag = MSG_FAIL;
-            break;
-
-		case FX_SMS_TIMEOUT: 
-		case FX_DIA_SEND_TIMEOUT: 
-		case FX_QUN_SEND_TIMEOUT: 
-		case FX_QUN_SMS_TIMEOUT: 
-            msgflag = MSG_TIMEOUT;
-			break;
-
-        case FX_SMS_FAIL_LIMIT: 
-        case FX_QUN_SMS_FAIL_LIMIT: 
-            msgflag = MSG_FAIL_LIMIT;
-            break;
-	}
-
-    handle_sendmsg(msgflag, fx_msg, who);
-
-    //time out should not to destroy msg, beacuse the system will resend by itself..
-    if (msgflag != MSG_TIMEOUT)
-        fx_destroy_msg((Fetion_MSG *)fx_msg);
 }
 
 void FxMainWindow::slot_set_state(int state)
@@ -1154,14 +1009,6 @@ void FxMainWindow::init_slot_signal()
 			this, SLOT( haveCurrentVersionMessage(int) ) );
 	connect(this, SIGNAL(signal_AddAccountApp(char*, char*)), 
 			this, SLOT( haveAddAccountAppMessage(char*, char*) ) );
-	connect(this, SIGNAL(signal_NewSysMsg(qlonglong) ), 
-			this, SLOT( haveNewSysMessage(qlonglong) ) );
-	connect(this, SIGNAL(signal_NewMsg(qlonglong) ), 
-			this, SLOT( haveNewMessage(qlonglong) ) );
-	connect(this, SIGNAL(signal_NewQunMsg(qlonglong) ), 
-			this, SLOT( haveNewQunMessage(qlonglong) ) );
-	connect(this, SIGNAL(signal_SysDialogMsg(int, int, qlonglong)), 
-			this, SLOT( slot_SysDialogMsg(int, int, qlonglong)) );
 	connect(this, SIGNAL(signal_SystemNetErr(int)), 
 			this, SLOT( slot_SystemNetErr(int)) );
 	connect(this, SIGNAL(signal_DeRegistered()), 
@@ -1171,6 +1018,15 @@ void FxMainWindow::init_slot_signal()
 			this, SLOT( slot_receive_nudge(qlonglong)));
 	connect(this, SIGNAL(signal_set_state(int)), 
 			this, SLOT( slot_set_state(int)) );
+
+	connect(this, SIGNAL(signal_NewSysMsg(qlonglong) ), 
+			msgwin, SLOT( slot_haveNewSysMessage(qlonglong) ) );
+	connect(this, SIGNAL(signal_NewMsg(qlonglong) ), 
+			msgwin, SLOT( slot_haveNewMessage(qlonglong) ) );
+	connect(this, SIGNAL(signal_NewQunMsg(qlonglong) ), 
+			msgwin, SLOT( slot_haveNewQunMessage(qlonglong) ) );
+	connect(this, SIGNAL(signal_SysDialogMsg(int, int, qlonglong)), 
+			msgwin, SLOT( slot_SysDialogMsg(int, int, qlonglong)) );
 
 	connect(this, SIGNAL(signal_add_group(int, int, qlonglong)), 
 			buddyMge, SLOT( slot_add_group(int, int, qlonglong)) );

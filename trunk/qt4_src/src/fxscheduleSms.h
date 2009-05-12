@@ -21,12 +21,10 @@
 #define _FXSCHEDULESMS_H
 
 #include <QMainWindow>
-#include <QDialog>
-#include "fxbuddy.h"
-#include "fxmainwindow.h"
 #include "ui_scheduleSMS.h"
 
-
+class FxMainWindow;
+class BuddyOpt;
 
 class FxScheduleSMS : public QMainWindow, public Ui::ScheduleSMS
 {
