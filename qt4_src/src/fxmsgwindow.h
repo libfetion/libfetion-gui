@@ -56,11 +56,9 @@ public:
 
 	void nudge_shake();
 	void addAccount(qlonglong account_id, bool isSendSms = false);
-	void haveNewMessage(qlonglong account_id);
 	bool addMessage(QString msg, qlonglong account_id, bool iscomeing_msg = false);
 
 	void addQunWin(qlonglong qun_id, bool isSendSms = false);
-	void haveQunMessage(qlonglong qun_id);
 	bool addQunMessage(QString msg, qlonglong qun_id, qlonglong sender, bool iscomeing_msg = false);
 
 	FxQunWindow *findQunWindow(qlonglong qun_id);
@@ -72,6 +70,7 @@ protected:
 	void resizeEvent ( QResizeEvent * event);
 	void addBuddy(qlonglong account_id);
 
+	void handle_sendmsg(int msgflag, int fx_msg, qlonglong who);
 
 public slots:
 	void currentChangedTab(int index); 
@@ -79,6 +78,12 @@ public slots:
 	void closeTabWid(int index);
 	void closeTab();
 	void slot_do_shake();
+
+	void slot_SysDialogMsg (int, int, qlonglong);
+
+	void slot_haveNewSysMessage (qlonglong sys_id);
+	void slot_haveNewMessage (qlonglong account_id);
+	void slot_haveNewQunMessage(qlonglong qun_id);
 
 signals:
 
@@ -97,6 +102,7 @@ private:
 	QToolButton *closeTabButton;
 	FxInputFace  *inputFace;
 	QList<FxQunWindow *> qunWindow;
+	QVector<int> timeOutMsgVector; //stroe the timeout msg.
 };
 
 

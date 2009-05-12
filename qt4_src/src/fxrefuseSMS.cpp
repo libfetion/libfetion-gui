@@ -17,11 +17,7 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#include <QLabel>
-#include <QtGui>
-
 #include "fxrefuseSMS.h"
-#include "appconfig.h"
 
 FxRefuseSMS::FxRefuseSMS(QWidget *parent)
     : QDialog(parent)

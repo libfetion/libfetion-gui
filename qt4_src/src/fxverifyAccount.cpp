@@ -17,10 +17,6 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#include <QLabel>
-#include <QtGui>
-
-
 #include "fxverifyAccount.h"
 
 FxVerifyAccount::FxVerifyAccount(FxMainWindow *wind ,char*uri, char*desc, QWidget *parent)

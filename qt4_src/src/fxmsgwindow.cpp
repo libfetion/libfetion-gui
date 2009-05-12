@@ -17,10 +17,6 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#include <QLabel>
-#include <QtGui>
-#include <QTextEdit>
-#include <math.h> 
 
 #include "fxmainwindow.h"
 #include "fxmsgwindow.h"
@@ -331,7 +327,7 @@ void FxMsgWindow::exec_autoRelpy(QTextEdit* msgBrowser, qlonglong account_id, QS
 	saveHistroyMsg(strtol(fx_get_usr_uid(), NULL, 10), account_id, show_msg.toUtf8().data(), NULL);
 }
 
-void FxMsgWindow::haveQunMessage(qlonglong qun_id)
+void FxMsgWindow::slot_haveNewQunMessage(qlonglong qun_id)
 {
 	Fetion_MSG * fxMsg = fx_get_msg(qun_id);
 	if (!fxMsg)
@@ -342,7 +338,7 @@ void FxMsgWindow::haveQunMessage(qlonglong qun_id)
 	fx_destroy_msg(fxMsg);
 }
 
-void FxMsgWindow::haveNewMessage(qlonglong account_id)
+void FxMsgWindow::slot_haveNewMessage(qlonglong account_id)
 {
 	Fetion_MSG * fxMsg = fx_get_msg(account_id);
 	if (!fxMsg)
@@ -380,6 +376,7 @@ void FxMsgWindow::closeEvent(QCloseEvent *event)
 
 void FxMsgWindow::moveEvent(QMoveEvent *event)
 {
+    Q_UNUSED(event);
 	//when it is shaking, we don't recode the pos of window.
 	if (m_isNudgeShake)
 		return;
@@ -605,5 +602,131 @@ static QString CropTabName(QString orig_name)
     if (new_name.size() > MAXNICELENGTH)
         new_name = new_name.left(MAXNICELENGTH -3) + QString("...");
     return new_name;
+}
+
+#define MSG_OK       1
+#define MSG_FAIL     2
+#define MSG_TIMEOUT  3
+#define MSG_FAIL_LIMIT  4
+
+void FxMsgWindow::handle_sendmsg(int msgflag, int fx_msg, qlonglong account_id)
+{
+	if(!fx_msg)
+		return;
+
+	int i = 0;
+	Fetion_MSG *fxMsg = (Fetion_MSG *) fx_msg;
+	char *msg = fx_msg_qt_format(fxMsg->message); 
+	QString newmsg;
+
+	switch(msgflag)
+	{
+		case MSG_OK:
+			for (i = 0; i < timeOutMsgVector.size(); ++i) {
+				if (timeOutMsgVector.at(i) == fx_msg)
+				{
+					newmsg = "<b style=\"color:rgb(170,0,255);\">" +tr("auto resend ok:") + "</b>" + newmsg.fromUtf8(msg);
+					timeOutMsgVector.remove(i);
+					break;
+				}
+			}
+			break;
+		case MSG_FAIL:
+			for (i = 0; i < timeOutMsgVector.size(); ++i) {
+				if (timeOutMsgVector.at(i) == fx_msg)	{
+					timeOutMsgVector.remove(i);
+					break;
+				}
+			}
+			newmsg = "<b style=\"color:red;\">"+tr("send fail:") +"</b>"+ newmsg.fromUtf8(msg);
+			break;
+
+		case MSG_FAIL_LIMIT:
+			for (i = 0; i < timeOutMsgVector.size(); ++i) {
+				if (timeOutMsgVector.at(i) == fx_msg)	{
+					timeOutMsgVector.remove(i);
+					break;
+				}
+			}
+			newmsg = "<b style=\"color:red;\">"+tr("send sms fail by limit:") +"</b>"+ newmsg.fromUtf8(msg);
+			break;
+		case MSG_TIMEOUT:
+			timeOutMsgVector.append(fx_msg); // add the msg to vector
+			newmsg = "<b style=\"color:rgb(170,0,255);\">" +tr("send timeout:") +"</b>" + newmsg.fromUtf8(msg)+"<br><b style=\"color:rgb(170,0,255);\">" +tr("will auto resend")+"</b>";
+			break;
+	}
+
+    if (fxMsg->ext_id != 0)
+        this->addQunMessage(newmsg, account_id, 0L, true);
+    else
+        this->addMessage(newmsg, account_id);
+
+	if(msg)
+		free(msg);
+}
+
+void FxMsgWindow::slot_SysDialogMsg (int message, int fx_msg, qlonglong who)
+{
+    int msgflag=0; 
+
+    if (!fx_msg)
+        return;
+
+	switch(message)
+	{
+		case FX_SMS_OK: 
+		case FX_DIA_SEND_OK: 
+		case FX_QUN_SEND_OK: 
+        case FX_QUN_SMS_OK: 
+            msgflag = MSG_OK;
+            break;
+
+		case FX_SMS_FAIL: 
+		case FX_DIA_SEND_FAIL: 
+		case FX_QUN_SEND_FAIL: 
+		case FX_QUN_SMS_FAIL: 
+            msgflag = MSG_FAIL;
+            break;
+
+		case FX_SMS_TIMEOUT: 
+		case FX_DIA_SEND_TIMEOUT: 
+		case FX_QUN_SEND_TIMEOUT: 
+		case FX_QUN_SMS_TIMEOUT: 
+            msgflag = MSG_TIMEOUT;
+			break;
+
+        case FX_SMS_FAIL_LIMIT: 
+        case FX_QUN_SMS_FAIL_LIMIT: 
+            msgflag = MSG_FAIL_LIMIT;
+            break;
+	}
+
+    handle_sendmsg(msgflag, fx_msg, who);
+
+    //time out should not to destroy msg, beacuse the system will resend by itself..
+    if (msgflag != MSG_TIMEOUT)
+        fx_destroy_msg((Fetion_MSG *)fx_msg);
+}
+
+void FxMsgWindow::slot_haveNewSysMessage(qlonglong sys_id)
+{
+	Q_UNUSED(sys_id);
+#if 0 //not using system message
+	Fetion_MSG * fxMsg = fx_get_msg(sys_id);
+	if(!fxMsg)
+		return;
+
+	QString newmsg ;
+	char *msg = fx_msg_qt_format(fxMsg->message); 
+	newmsg = newmsg.fromUtf8(msg);
+
+	QSystemTrayIcon::MessageIcon icon = QSystemTrayIcon::MessageIcon(1);
+	trayIcon->showMessage(tr("sys message"), newmsg, 
+			icon, 5*1000);
+
+	fx_destroy_msg (fxMsg);
+	if(msg)
+		free(msg);
+#endif
 }
 
