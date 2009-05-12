@@ -14,7 +14,9 @@ class FxMyTabWidget : public QTabWidget
 		FxMyTabWidget(QWidget *parent);
 		QTabBar* myTabBar();
 		bool eventFilter(QObject *target, QEvent *event);
-
+	public slots:
+		void closeCurrentTab();
+		void closeTab(int index);
 	signals:
 		void mouseDblClick(int index); 
 

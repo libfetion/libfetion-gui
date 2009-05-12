@@ -72,6 +72,22 @@ void FxMsgWindow::init()
 	connect(tabWidget, SIGNAL( currentChanged(int) ), this, SLOT( currentChangedTab(int) ));
 	connect(tabWidget, SIGNAL( mouseDblClick(int) ), this, SLOT( closeTabWid(int) ));
 	connect(&nudge_timer, SIGNAL(timeout()), this, SLOT(slot_do_shake()));
+	
+	// ESCAPE for hide
+	QShortcut *hideShortcut = new QShortcut(QKeySequence(Qt::Key_Escape),this);
+	connect(hideShortcut,SIGNAL(activated()),this,SLOT(hide()));
+	// Ctrl+W to close current tab
+	QShortcut *closeShortcut = new QShortcut(QKeySequence(tr("Ctrl+W")),this,0,0,Qt::WindowShortcut);
+	connect(closeShortcut,SIGNAL(activated()),this,SLOT(closeCurrentTab()));
+	// map Alt+1~ Alt+9 for switch current tab
+	QSignalMapper *_signalMapper = new QSignalMapper(this);
+	for(int i=1;i<10;++i){
+		QShortcut *_tempShortcut = new QShortcut(QString("Alt+%1").arg(i),this,0,0,Qt::WindowShortcut);
+		connect(_tempShortcut,SIGNAL(activated()),_signalMapper,SLOT(map()));
+		_signalMapper->setMapping(_tempShortcut,i-1);
+	}
+	connect(_signalMapper,SIGNAL(mapped(int)),
+			tabWidget,SLOT(setCurrentIndex(int)));
 }
 
 void FxMsgWindow::init_inputFace()
@@ -94,11 +110,13 @@ void FxMsgWindow::init_UI()
 	pal.setColor(QPalette::Inactive, QPalette::Button, pal.color(QPalette::Inactive, QPalette::Window));
 
 #ifdef WIN32 
-    //here add qt4.5 coder for windows!!
+	// comment by iptton .... these code should be placed in fxmytabwidget.cpp
+	tabWidget->setTabsClosable(true);
+	connect(tabWidget,SIGNAL(tabCloseRequested( int)),this,SLOT(closeTabWid(int)));
 #else
-
+	tabWidget->setTabsClosable(true);
+	connect(tabWidget,SIGNAL(tabCloseRequested( int)),this,SLOT(closeTabWid(int)));
 #if MAC_OS
-    //here add qt4.5 coder for mac!!
 #else
     closeTabButton = new QToolButton(tabWidget);
     closeTabButton->setAutoRaise(true);
@@ -108,10 +126,11 @@ void FxMsgWindow::init_UI()
     tabWidget->setCornerWidget(closeTabButton, Qt::TopRightCorner);
     closeTabButton->setCursor(Qt::ArrowCursor);
     closeTabButton->setIcon(getCloseTabImage());
-    connect(closeTabButton, SIGNAL(clicked()), this, SLOT(closeTab()));
+    connect(closeTabButton, SIGNAL(clicked()), this, SLOT(closeCurrentTab()));
     closeTabButton->setToolTip(tr("close current Tab"));
 #endif //end MAC_OS
 #endif //end WIN32
+
 
 	tabWidget->setParent(contentWidget);
 	tabWidget->clear();
@@ -146,7 +165,7 @@ void FxMsgWindow::setCurrentTabTitle(AccountTab *accountTab)
 	this->setWindowIcon (getOnlineStatusIcon(online_state));
 }
 
-void FxMsgWindow::closeTab()
+void FxMsgWindow::closeCurrentTab()
 {
 	closeTabWid (tabWidget->currentIndex());
 }
@@ -154,7 +173,7 @@ void FxMsgWindow::closeTab()
 void FxMsgWindow::closeTabWid(int index)
 {
 	AccountTab *accountTab = (AccountTab *) tabWidget->widget(index); 
-qDebug()<<"closing index:"<<index<<"\n";
+
 	tabWidget->removeTab (index);
 	//if the tabWidget have no tab, hide it..
 	if (tabWidget->count() <= 0)

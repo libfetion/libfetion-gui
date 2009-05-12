@@ -2,6 +2,8 @@
 #include "fxmsgwindow.h"
 #include "fxmytabwidget.h"
 #include "fxshowHistory.h"
+#include <QShortcut>
+#include <QKeySequence>
 
 FxMyTabWidget::FxMyTabWidget(QWidget *parent)
 		: QTabWidget(parent)
@@ -18,7 +20,7 @@ bool FxMyTabWidget::eventFilter(QObject *target, QEvent *event)
 			return true;
 		}
 	}
-
+/* use QShortcut
 	if (event->type() == QEvent::KeyPress ) {
 		QKeyEvent *keyEvent = (QKeyEvent *) event;
 
@@ -33,7 +35,8 @@ bool FxMyTabWidget::eventFilter(QObject *target, QEvent *event)
 			this->setCurrentIndex(index -1); 
 			return true;	
 		}
-
+*/
+/*	use QShortcut
 		if (keyEvent->key() == Qt::Key_W && 
 		(keyEvent->modifiers() == Qt::AltModifier || keyEvent->modifiers() == Qt::ControlModifier )
 		) {
@@ -66,6 +69,7 @@ bool FxMyTabWidget::eventFilter(QObject *target, QEvent *event)
 				}
 			}
 		}
+*/
 		/*
 		if (keyEvent->key() == Qt::Key_H && 
 				(keyEvent->modifiers() == Qt::AltModifier || keyEvent->modifiers() == Qt::ControlModifier )) {
@@ -78,9 +82,19 @@ bool FxMyTabWidget::eventFilter(QObject *target, QEvent *event)
 			}
 			return true;
 		}
-		*/
-	}
+		
+	}*/
 	return QObject::eventFilter(target, event);
+}
+
+void FxMyTabWidget::closeCurrentTab(){
+	closeTab(currentIndex());
+}
+
+void FxMyTabWidget::closeTab(int index){
+	//@To FIX
+	( (FxMsgWindow *)( this->parentWidget()->parentWidget() ) )->closeTabWid(index);
+	//removeTab(index);
 }
 
 QTabBar * FxMyTabWidget::myTabBar()
