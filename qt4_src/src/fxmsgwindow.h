@@ -76,7 +76,7 @@ public slots:
 	void currentChangedTab(int index); 
 	void setCurrentTabTitle(AccountTab *accountTab); 
 	void closeTabWid(int index);
-	void closeTab();
+	void closeCurrentTab();
 	void slot_do_shake();
 
 	void slot_SysDialogMsg (int, int, qlonglong);
