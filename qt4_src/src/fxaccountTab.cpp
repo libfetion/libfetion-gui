@@ -359,11 +359,14 @@ void AccountTab::changeTableInputNM()
 
 void AccountTab::UpdateSkins()
 {
+/*
+	// just remove this member function .
 	TB_FACE->setPixmap (getFaceIcon()); 
 	TB_CHANGEMOD->setPixmap (getChangeSendModIcon()); 
 	TB_NUDGE->setPixmap (getNudgeIcon()); 
 	TB_HISTROY->setPixmap (getHistoryIcon()); 
 	TB_SEND->setPixmap (getSendIcon()); 
+*/
 }
 
 void AccountTab::SetAllFont(QFont font)
@@ -415,11 +418,11 @@ void AccountTab::init()
 }
 void AccountTab::init_slot()
 {
-	connect(TB_CHANGEMOD, SIGNAL(clicked()), this, SLOT(changeSendModle()));
-	connect(TB_HISTROY, SIGNAL(clicked()), this, SLOT(ShowHistroy()));
-	connect(TB_NUDGE, SIGNAL(clicked()), this, SLOT(SendNudge()));
-	connect(TB_SEND, SIGNAL(clicked()), this, SLOT(SendMsg()));
-	connect(TB_FACE, SIGNAL(clicked()), this, SLOT(ShowFaces()));
+	connect(btnSwitchSendMode, SIGNAL(clicked()), this, SLOT(changeSendModle()));
+	connect(btnHistory, SIGNAL(clicked()), this, SLOT(ShowHistroy()));
+	connect(btnNudge, SIGNAL(clicked()), this, SLOT(SendNudge()));
+	connect(btnSend,SIGNAL(clicked()), this, SLOT(SendMsg()));
+	connect(btnFace, SIGNAL(clicked()), this, SLOT(ShowFaces()));
 	connect(MsgEdit, SIGNAL(textChanged()), this, SLOT(changeTableInputNM()));
 	connect(&flickTimer, SIGNAL(timeout()), this, SLOT(flickerTab()));
 
