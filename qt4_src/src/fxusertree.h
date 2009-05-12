@@ -26,44 +26,19 @@ private:
  
 private slots:
 	void onCurrentItemChanged ( QTreeWidgetItem* current, QTreeWidgetItem * previous ){
-	/*
 		if(previous){
-			if( QPushButton *b1 = dynamic_cast<QPushButton*>(itemWidget(previous,0)) ){
-				b1->setText("normal");
+			if(previous->parent()){
 				previous->setSizeHint(0,normalSize);
 			}
 		}
 		if(current){
-			if( QPushButton *b1 = dynamic_cast<QPushButton*>(itemWidget(current,0)) ){
-				b1->setText("normal");
-				current->setSizeHint(0,clickedSize);
-			}
-		}
-	*/
-		if(previous){
-			if(previous->parent()){// has a treewidgetitem as parent. not a folder
-				//FxUserTreeItemWidget * item = dynamic_cast<FxUserTreeItemWidget*>(itemWidget(previous,0));
-				//if(item)
-				//	item->setState(FxUserTreeItemWidget::STATE_NORMAL);
-				//QPushButton *b1 = dynamic_cast<QPushButton*>(itemWidget(previous,0));
-				//b1->setText("normal");
-				previous->setSizeHint(0,normalSize);
-			}
-		}
-		if(current){
-			if(current->parent()){// has a treewidgetitem as parent. not a folder
-				//FxUserTreeItemWidget * item = dynamic_cast<FxUserTreeItemWidget*>(itemWidget(current,0));
-				//if(item)
-				//	item->setState(FxUserTreeItemWidget::STATE_SELECTED);
-				//QPushButton *b2 = dynamic_cast<QPushButton*>(itemWidget(current,0));
-				//b2->setText("clicked");
+			if(current->parent()){
 				current->setSizeHint(0,clickedSize);
 			}
 		}
 		updateGeometries();
 	}
-	void onItemClicked(QTreeWidgetItem * item,int column){
-
+	void onItemClicked(QTreeWidgetItem * /*item*/,int /*column*/){
 	}
 };
 
