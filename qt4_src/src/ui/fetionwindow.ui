@@ -97,7 +97,7 @@
       </widget>
      </item>
      <item row="2" column="2">
-      <widget class="QToolButton" name="toolButton_3">
+      <widget class="QToolButton" name="btnSkin">
        <property name="text">
         <string>skin</string>
        </property>
