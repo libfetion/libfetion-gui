@@ -43,7 +43,7 @@ bool FxMyTabWidget::eventFilter(QObject *target, QEvent *event)
 			QWidget *_pre = this;
 			while(_tmp == 0 && _pre!=0){
 				qDebug()<<"*]";
-				QWidget *_pre = dynamic_cast<QWidget *> (_pre->parent());
+				_pre = dynamic_cast<QWidget *> (_pre->parent());
 				_tmp = dynamic_cast<FxMsgWindow *>(_pre);
 			}
 			qDebug()<<"\n";
