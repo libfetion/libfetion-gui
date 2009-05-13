@@ -109,14 +109,10 @@ void FxMsgWindow::init_UI()
 	pal.setColor(QPalette::Disabled, QPalette::Button, pal.color(QPalette::Disabled, QPalette::Window));
 	pal.setColor(QPalette::Inactive, QPalette::Button, pal.color(QPalette::Inactive, QPalette::Window));
 
-#ifdef WIN32 
+#if QT_VERSION >= 0x040500
 	// comment by iptton .... these code should be placed in fxmytabwidget.cpp
 	tabWidget->setTabsClosable(true);
 	connect(tabWidget,SIGNAL(tabCloseRequested( int)),this,SLOT(closeTabWid(int)));
-#else
-	tabWidget->setTabsClosable(true);
-	connect(tabWidget,SIGNAL(tabCloseRequested( int)),this,SLOT(closeTabWid(int)));
-#if MAC_OS
 #else
     closeTabButton = new QToolButton(tabWidget);
     closeTabButton->setAutoRaise(true);
@@ -128,8 +124,7 @@ void FxMsgWindow::init_UI()
     closeTabButton->setIcon(getCloseTabImage());
     connect(closeTabButton, SIGNAL(clicked()), this, SLOT(closeCurrentTab()));
     closeTabButton->setToolTip(tr("close current Tab"));
-#endif //end MAC_OS
-#endif //end WIN32
+#endif // end mac of QT_VERSION
 
 
 	tabWidget->setParent(contentWidget);
