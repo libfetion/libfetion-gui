@@ -148,7 +148,6 @@ private slots:
 	void menu_setAutoLogin();
 	void menu_setmute();
 	void menu_setautoshowmsg();
-	void menu_setundgemsg();
 	void menu_setlongsms();
 	void saveMsgHistroy();
 	void cleanMsgHistroy();
@@ -213,7 +212,6 @@ private:
 
 
 	QAction *SetLongSMSAct;
-	QAction *SetUndgeMsgAct;
 	QAction *SaveMsgHistroyAct;
 	QAction *CleanMsgHistroyAct;
 	QAction *ConfigAppAct;
