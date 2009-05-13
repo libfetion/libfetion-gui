@@ -959,8 +959,6 @@ void FxMainWindow::createMenu()
 void FxMainWindow::init_slot_signal()
 {
 
-	connect(lineSearch, SIGNAL(clicked ()), 
-			this, SLOT(UI_enable_search()));
 
 
 	connect(btnSettings, SIGNAL(clicked ()), this, SLOT(showConfigDlg()));
@@ -973,7 +971,6 @@ void FxMainWindow::init_slot_signal()
 	connect(impression, SIGNAL(textChanged(QString)), this, SLOT(changeImpresa(QString)));
 	connect(lineSearch, SIGNAL(editingFinished ()), this, SLOT(SearcheditingFinished ()));
 
-	connect(impression, SIGNAL(infocus ()), this, SLOT(ImpresaFocusIn ()));
 	connect(lineSearch, SIGNAL(infocus ()), this, SLOT(SearchFocusIn ()));
 
 	connect(lineSearch, SIGNAL(textChanged (const QString &) ), this, SLOT(SearchtextChanged (const QString &)));
