@@ -79,6 +79,7 @@ FxMainWindow::FxMainWindow(QWidget *parent)
 #endif
 	
 	setWindowFlags(windowFlags() | Qt::ToolTip);
+	setFocusPolicy(Qt::StrongFocus);
 	
 	minimizedTimer.start(100);
 	checkSkinsTimer.start(10000);

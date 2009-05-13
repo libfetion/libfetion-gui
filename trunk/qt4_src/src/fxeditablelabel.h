@@ -34,7 +34,6 @@ public:
 		FxLabel("",parent);
 	}
     FxLabel(const QString & text,QWidget * parent = 0):QLabel(text,parent) {
-		setFocusPolicy(Qt::StrongFocus);
 	};
 signals:
     void clicked();
