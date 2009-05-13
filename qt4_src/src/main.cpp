@@ -78,7 +78,8 @@ int main(int argc, char *argv[])
 	qApp->setStyleSheet(file.readAll());
 	file.close();
 // end import stylesheet
-	QObject::connect(&app, SIGNAL(lastWindowClosed()), &app, SLOT(quit()));
+	//QObject::connect(&app, SIGNAL(lastWindowClosed()), &app, SLOT(quit()));
+	app.setQuitOnLastWindowClosed(false);
 	int reslut = app.exec();
 
 	if (mainWin)
