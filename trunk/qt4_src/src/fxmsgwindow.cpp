@@ -93,9 +93,7 @@ void FxMsgWindow::init()
 void FxMsgWindow::init_inputFace()
 {
 	inputFace = new FxInputFace(contentWidget);
-	QPalette pal;
-	pal.setBrush(QPalette::Window,QBrush(getInputFaceIcon()));
-	inputFace->setPalette(pal);
+	inputFace->setObjectName("facesPopup");
 	inputFace->setMsgWindow(this);
 	inputFace->setGeometry (QCursor::pos().x(), QCursor::pos().y(), 320, 261);
 	inputFace->setWindowFlags(Qt::Dialog| Qt::FramelessWindowHint);
