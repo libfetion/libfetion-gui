@@ -1041,7 +1041,9 @@ void FxMainWindow::schedule_SMS()
 
 void FxMainWindow::showPortrait()
 {
+    this->setAutoHide(false);
 	buddySetStatusMenu->exec(QCursor::pos());
+    this->setAutoHide(true);
 }
 
 
