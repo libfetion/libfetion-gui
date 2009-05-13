@@ -145,6 +145,15 @@ void FxMainWindow::handleFx_Sys_Event(int message, WPARAM wParam, LPARAM lParam)
 			emit signal_receive_nudge((qlonglong)lParam);
 			break;
 
+
+        case FX_SET_SCH_SMS_OK:
+        case FX_DEL_SCH_SMS_OK:
+        case FX_SET_SCH_SMS_FAIL:
+        case FX_DEL_SCH_SMS_FAIL:
+            //fix me: need to do some details handle for scheduleSms
+            emit signal_update_scheduleList();
+            break;
+
 		default:
 			break;
 
