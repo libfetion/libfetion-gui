@@ -31,6 +31,7 @@
 #include "fxscheduleSmsManage.h"
 #include "fxscheduleSms.h"
 #include "LibFetionEventHandle.cpp"
+#include <QApplication> // to fix
 
 FxMainWindow::FxMainWindow(QWidget *parent)
 	:FxWidget(parent)
@@ -76,6 +77,8 @@ FxMainWindow::FxMainWindow(QWidget *parent)
 #else
 	saveAccountInfo();
 #endif
+	
+	setWindowFlags(windowFlags() | Qt::ToolTip);
 	
 	minimizedTimer.start(100);
 	checkSkinsTimer.start(10000);
@@ -134,8 +137,9 @@ void FxMainWindow::setUINickName()
 
 	QString name = QString::fromUtf8(fx_get_usr_show_name());
 	//if (name.size >12)
-	QString showstr= name + "(" +state + ")";
-
+	QString showstr= name;
+	QString suffix = "(" +state + ")";
+	nickname->setSuffix(suffix);
 	nickname->setText (showstr);
 }
 
@@ -1096,6 +1100,7 @@ void FxMainWindow::setImpresa()
 void FxMainWindow::tmp_exit()
 {
 	isQuit = true;
+	QApplication::quit();
 	close();
 }
 
