@@ -72,7 +72,8 @@ protected:
 		adjustLabelText(edit->text());
 		QStackedWidget::resizeEvent(event);
 	}
-	void adjustLabelText(QString text){
+	void adjustLabelText(QString _text){
+		QString text = _text+_suffixText;
 		if(text==""){
 			label->setText("");
 			label->setToolTip("");
@@ -102,6 +103,10 @@ public:
 signals:
 	void textChanged(QString);
 public slots:
+	void setSuffix(const QString& text){
+		_suffixText = text;
+		adjustLabelText(text);
+	}
     void labelClicked(){
 		// change to page edit.
 		setCurrentWidget(edit);
@@ -130,6 +135,7 @@ private:
     QLineEdit *edit;
     QLabel *label;
 	QString oldText;
+	QString _suffixText;
 };
 }// end  namespace fxgui 
 #endif
