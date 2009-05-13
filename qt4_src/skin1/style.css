@@ -255,6 +255,7 @@ QToolButton#btnSettings:pressed{
 	height:17px;
 }
 #icon,#ChatWindow #icon{
+	border-image:none;
 	border:none;
 }
 
@@ -298,6 +299,7 @@ QToolButton#btnSettings:pressed{
  }
 
  /* non-exclusive indicator = check box style indicator (see QActionGroup::setExclusive) */
+ /*
  QMenu::indicator:non-exclusive:unchecked {
      image: url(:/images/checkbox_unchecked.png);
  }
@@ -313,8 +315,9 @@ QToolButton#btnSettings:pressed{
  QMenu::indicator:non-exclusive:checked:selected {
      image: url(:/images/checkbox_checked_hover.png);
  }
-
+ */
  /* exclusive indicator = radio button style indicator (see QActionGroup::setExclusive) */
+ /*
  QMenu::indicator:exclusive:unchecked {
      image: url(:/images/radiobutton_unchecked.png);
  }
@@ -330,3 +333,11 @@ QToolButton#btnSettings:pressed{
  QMenu::indicator:exclusive:checked:selected {
      image: url(:/images/radiobutton_checked_hover.png);
  }
+ */
+
+#facesPopup{
+	background-image:url(./skins/default/misc/input_face.gif);
+	background-repeat:none;
+} 
+
+ 
