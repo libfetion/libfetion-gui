@@ -686,7 +686,7 @@ void FxMainWindow::init_UI()
 	setWindowTitle(QString::fromUtf8(fx_get_usr_show_name()) + "--Linux Fetion");
 #endif
 #endif
-	this->setWindowIcon(getSysTrayIcon(1));
+	//this->setWindowIcon(getSysTrayIcon(1));
 	
 	move(Settings::instance().MainWinPos());
 
@@ -695,9 +695,9 @@ void FxMainWindow::init_UI()
 	//@TO FIX 
 	// should not appeared here!
 	portrait->setIcon(getPortraitImage());
-	btnAddFriend->setIcon(getAddImage());
-	btnSettings->setIcon(getBTSettingImage());
-	btnSendSelf->setIcon(getBTSendSelfImage());
+	//btnAddFriend->setIcon(getAddImage());
+	//btnSettings->setIcon(getBTSettingImage());
+	//btnSendSelf->setIcon(getBTSendSelfImage());
 
 	lineSearch->setText(tr("search friends..."));
 	nickname->setText(QString::fromUtf8(fx_get_usr_show_name()));
@@ -1426,12 +1426,12 @@ void FxMainWindow::UpdateSkins()
 	msgwin->UpdateSkins();
 	buddyMge->UpdateSkins();
 
-	setWindowIcon(getSysTrayIcon(1));
+	//setWindowIcon(getSysTrayIcon(1));
 	portrait->setIcon(getPortraitImage());
 	btnAddFriend->setIcon(getAddImage());
 
-	btnSettings->setIcon(getBTSettingImage());
-	btnSendSelf->setIcon(getBTSendSelfImage());
+	//btnSettings->setIcon(getBTSettingImage());
+	//btnSendSelf->setIcon(getBTSendSelfImage());
 
 	if (trayIcon)
 		trayIcon->setIcon(getSysTrayIcon (fx_get_user_state()));
