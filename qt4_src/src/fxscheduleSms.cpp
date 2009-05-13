@@ -21,6 +21,7 @@
 #include "fxscheduleSms.h"
 #include "fxbuddy.h"
 #include "fxmainwindow.h"
+#include "fxscheduleSmsManage.h"
 FxScheduleSMS::FxScheduleSMS(FxMainWindow * wind,QWidget *parent)
     : QMainWindow(parent)
 {
@@ -47,11 +48,11 @@ FxScheduleSMS::FxScheduleSMS(FxMainWindow * wind,QWidget *parent)
 	connect(Schedule_Sms_Manage, SIGNAL(linkActivated(const QString &)), this, SLOT(ShowSCM_Manage(const QString &)));
 	
 
-
 	ChangechooseNM();
 	ChangeInputNM();
 
-	move(Settings::instance().SendMultMsgWinPos());
+	QSize dt_size =	QApplication::desktop()->size();
+	this->move(dt_size.width()/3, dt_size.height()/3);
 }
 
 FxScheduleSMS::~FxScheduleSMS()
@@ -188,11 +189,15 @@ void FxScheduleSMS::ChangeInputNM()
 
 void FxScheduleSMS::ShowSCM_Manage(const QString &)
 {
+    if (mainwind && mainwind->getScheduleSmsManagerWindows())
+        mainwind->getScheduleSmsManagerWindows()->showNormal();
 }
 
 void FxScheduleSMS::closeEvent(QCloseEvent *event)
 {
-	if (mainwind)
-		mainwind->show();
-	event->accept();
+    Q_UNUSED(event);
+    if (mainwind)
+		mainwind->showNormal();
+    this->hide();
+//	event->accept();
 }

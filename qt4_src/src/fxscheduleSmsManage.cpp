@@ -18,6 +18,7 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 #include "fxscheduleSmsManage.h"
+#include "fxscheduleSms.h"
 
 FxScheduleSMSManage::FxScheduleSMSManage(FxMainWindow * wind,QWidget *parent)
     : QMainWindow(parent)
@@ -26,6 +27,9 @@ FxScheduleSMSManage::FxScheduleSMSManage(FxMainWindow * wind,QWidget *parent)
 	mainwind = wind;
 
     init_UI();
+	
+	QSize dt_size =	QApplication::desktop()->size();
+	this->move(dt_size.width()/3, dt_size.height()/3);
 }
 
 FxScheduleSMSManage::~FxScheduleSMSManage()
@@ -58,7 +62,8 @@ void FxScheduleSMSManage::init_UI()
 
 void FxScheduleSMSManage::createItemOfSCMList()
 {
-
+    if (mainwind && mainwind->getScheduleSmsWindow())
+        mainwind->getScheduleSmsWindow()->showNormal();
 }
 
 void FxScheduleSMSManage::deleteItemOfSCMList()
@@ -82,6 +87,11 @@ void FxScheduleSMSManage::deleteItemOfSCMList()
 			view->removeRow(i);//fix bug?
 		}
 	}
+}
+
+void FxScheduleSMSManage::slot_update_scheduleList()
+{
+	loadALlSCMList();
 }
 
 void FxScheduleSMSManage::refreshSCMList()
@@ -164,8 +174,10 @@ void FxScheduleSMSManage::addItemToSCMList(QString &receiver, QString& send_time
 
 void FxScheduleSMSManage::closeEvent(QCloseEvent *event)
 {
-	if (mainwind)
-		mainwind->show();
-	event->accept();
+    Q_UNUSED(event);
+    if (mainwind)
+		mainwind->showNormal();
+    this->hide();
+//	event->accept();
 }
 

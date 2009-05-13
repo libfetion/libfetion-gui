@@ -53,6 +53,9 @@ FxMainWindow::FxMainWindow(QWidget *parent)
 	isHaveminimized = false;
 	isNeedRecordWinPos = false;
 	tmp_addBuddy = NULL;
+    scheduleSms = new FxScheduleSMS(this, this);
+    scheduleSmsManager = new FxScheduleSMSManage(this, this);
+
 
 	init_UI();
 	setMinimizetoHide(true);
@@ -76,7 +79,7 @@ FxMainWindow::FxMainWindow(QWidget *parent)
 	
 	minimizedTimer.start(100);
 	checkSkinsTimer.start(10000);
-	updateAccountInfoTimer.start(2000);
+	updateAccountInfoTimer.start(1500);
 }
 
 FxMainWindow::~FxMainWindow()
@@ -1020,15 +1023,14 @@ void FxMainWindow::init_slot_signal()
 			buddyMge, SLOT( updateAccountInfo(qlonglong) ) );
 	connect(this, SIGNAL(signal_MoveGroup(qlonglong, int)), 
 			buddyMge, SLOT( slot_MoveGroup(qlonglong, int) ) );
+
+	connect(this, SIGNAL(signal_update_scheduleList()), 
+			scheduleSmsManager, SLOT( slot_update_scheduleList() ) );
 }
 
 void FxMainWindow::schedule_SMS()
 {
-	FxScheduleSMS * test = new FxScheduleSMS(this, this);
-	test->show();
-
-	FxScheduleSMSManage *schedule_sms = new FxScheduleSMSManage(this, this);
-	schedule_sms->show();
+	scheduleSms->showNormal();
 }
 
 void FxMainWindow::showPortrait()
