@@ -423,14 +423,6 @@ void FxMainWindow::slot_SystemNetErr(int err)
 		trayIcon->setIcon (getSysTrayIcon(0));
 }
 
-void FxMainWindow::slot_receive_nudge(qlonglong account_id)
-{
-	QString nudgemsg = "<b style=\"color:rgb(250,0,255);\">" +tr("send a nudge to you") + "</b><br>";
-	msgwin->addMessage(nudgemsg, account_id);
-
-	if (!Settings::instance().isDisableNudge())
-		msgwin->nudge_shake();
-}
 
 void FxMainWindow::slot_DeRegistered()
 {
@@ -998,8 +990,6 @@ void FxMainWindow::init_slot_signal()
 	connect(this, SIGNAL(signal_DeRegistered()), 
 			this, SLOT( slot_DeRegistered()) );
 	connect(this, SIGNAL(signal_set_nickname_ok()), this, SLOT(setUINickName()));
-	connect(this, SIGNAL(signal_receive_nudge(qlonglong)), 
-			this, SLOT( slot_receive_nudge(qlonglong)));
 	connect(this, SIGNAL(signal_set_state(int)), 
 			this, SLOT( slot_set_state(int)) );
 
@@ -1011,6 +1001,8 @@ void FxMainWindow::init_slot_signal()
 			msgwin, SLOT( slot_haveNewQunMessage(qlonglong) ) );
 	connect(this, SIGNAL(signal_SysDialogMsg(int, int, qlonglong)), 
 			msgwin, SLOT( slot_SysDialogMsg(int, int, qlonglong)) );
+	connect(this, SIGNAL(signal_receive_nudge(qlonglong)), 
+			msgwin, SLOT( slot_receive_nudge(qlonglong)));
 
 	connect(this, SIGNAL(signal_add_group(int, int, qlonglong)), 
 			buddyMge, SLOT( slot_add_group(int, int, qlonglong)) );

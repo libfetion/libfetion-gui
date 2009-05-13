@@ -84,6 +84,7 @@ public slots:
 	void slot_haveNewSysMessage (qlonglong sys_id);
 	void slot_haveNewMessage (qlonglong account_id);
 	void slot_haveNewQunMessage(qlonglong qun_id);
+	void slot_receive_nudge(qlonglong);
 
 signals:
 
