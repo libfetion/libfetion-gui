@@ -36,6 +36,8 @@ class QAction;
 class QActionGroup;
 class QLabel;
 class QMenu;
+class FxScheduleSMSManage;
+class FxScheduleSMS;
 
 class FxMainWindow : public FxWidget, public Ui::FetionWindow
 {
@@ -56,6 +58,8 @@ public:
 
     FxAddBuddy * getTmpAddBuddyWindow() {return tmp_addBuddy;}  //save the tmp addbuddy handle
     FxMsgWindow * getMsgWindow() {return msgwin;}
+    FxScheduleSMSManage *getScheduleSmsManagerWindows() { return scheduleSmsManager;}
+    FxScheduleSMS *getScheduleSmsWindow() { return scheduleSms; }
 protected:
 #if WIN32
     virtual bool winEvent(MSG *msg, long *result);
@@ -99,6 +103,7 @@ signals:
 	void signal_set_state(int);
 	void signal_set_nickname_ok();
 	void signal_UpdateSmsDay(int);
+    void signal_update_scheduleList();
 
 private slots:
 	void checkSkinPath();
@@ -231,6 +236,8 @@ private:
     FxAddBuddy *tmp_addBuddy;  //save the tmp addbuddy handle
     FxMsgWindow *msgwin;
     BuddyMge *buddyMge; 
+    FxScheduleSMS *scheduleSms;
+    FxScheduleSMSManage *scheduleSmsManager; 
 public:
     QAction *AutoLoginAct;
     QAction *MuteAct;

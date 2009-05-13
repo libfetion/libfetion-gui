@@ -41,6 +41,8 @@ private slots:
 	void refreshSCMList();
 	void chooseAllSCMList();
 
+    void slot_update_scheduleList();
+
 protected:
 	void addItemToSCMList(Fetion_Schedule_SMS*);
 	void addItemToSCMList(QString &receiver, QString& send_time, QString &message, int scm_id);
