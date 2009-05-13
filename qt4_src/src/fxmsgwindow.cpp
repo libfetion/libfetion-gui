@@ -743,3 +743,11 @@ void FxMsgWindow::slot_haveNewSysMessage(qlonglong sys_id)
 #endif
 }
 
+void FxMsgWindow::slot_receive_nudge(qlonglong account_id)
+{
+	QString nudgemsg = "<b style=\"color:rgb(250,0,255);\">" +tr("send a nudge to you") + "</b><br>";
+	this->addMessage(nudgemsg, account_id);
+
+	if (!Settings::instance().isDisableNudge())
+		this->nudge_shake();
+}

@@ -118,7 +118,6 @@ private slots:
 	void haveAddAccountAppMessage(char* uri, char*desc);
 	void slot_SystemNetErr (int);
 	void slot_DeRegistered ();
-	void slot_receive_nudge(qlonglong);
 
 	void slot_set_state(int);
 
