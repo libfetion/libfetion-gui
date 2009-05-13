@@ -836,18 +836,6 @@ void FxMainWindow::initAllActions()
 	IsAutoShowMsgAct->setStatusTip(tr("autoshowmsg"));
 	connect(IsAutoShowMsgAct, SIGNAL(triggered()), this, SLOT(menu_setautoshowmsg()));
 
-#if 0
-	SetUndgeMsgAct = new QAction(tr("undgemsg"), this);
-
-	if (1)
-	//if (!isAutoShowMsg(fx_get_usr_uid()))
-		SetUndgeMsgAct->setIcon(getMenuIcon(CancelIcon));
-	else 
-		SetUndgeMsgAct->setIcon(getMenuIcon(ApplyIcon));
-	SetUndgeMsgAct->setStatusTip(tr("undgemsg"));
-	connect(SetUndgeMsgAct, SIGNAL(triggered()), this, SLOT(menu_setundgemsg()));
-#endif
-
 	SetLongSMSAct = new QAction(tr("catsms"), this);
 	if (Settings::instance().isEnableLongSMS())
 		SetLongSMSAct->setIcon(getMenuIcon(ApplyIcon));
@@ -936,7 +924,6 @@ void FxMainWindow::createMenu()
 	menuSetting->addAction (AutoLoginAct); 
 	menuSetting->addAction (MuteAct); 
 	//menuSetting->addAction (IsAutoShowMsgAct); 
-	//menuSetting->addAction (SetUndgeMsgAct); 
 	//menuSetting->addAction (SetLongSMSAct); 
 	
 	skinMenu = menuSetting->addMenu(tr("skins"));
@@ -1357,12 +1344,6 @@ void FxMainWindow::menu_setautoshowmsg()
 		IsAutoShowMsgAct->setIcon(getMenuIcon(CancelIcon));
 }
 
-void FxMainWindow::menu_setundgemsg()
-{
-	QMessageBox::critical(this, ("setundgemsg"), ("setundgemsg") ); 
-	fx_send_nudge(630352708L);
-}
-
 void FxMainWindow::menu_setlongsms()
 {
 	bool currentIsEnableLongSMS = Settings::instance().isEnableLongSMS();
@@ -1493,7 +1474,6 @@ void FxMainWindow::UpdateSkins()
 	else 
 		SetLongSMSAct->setIcon(getMenuIcon(CancelIcon));
 
-	//SetUndgeMsgAct;
 	SaveMsgHistroyAct->setIcon(getMenuIcon(HistoryIcon));
 	CleanMsgHistroyAct->setIcon(getMenuIcon(HistoryIcon));
 	ConfigAppAct->setIcon(getMenuIcon(OptionsIcon));
