@@ -78,8 +78,7 @@ FxMainWindow::FxMainWindow(QWidget *parent)
 	saveAccountInfo();
 #endif
 	
-	setWindowFlags(windowFlags() | Qt::ToolTip);
-	setFocusPolicy(Qt::StrongFocus);
+        setWindowFlags(windowFlags() | Qt::SplashScreen);
 	
 	minimizedTimer.start(100);
 	checkSkinsTimer.start(10000);
