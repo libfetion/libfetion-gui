@@ -864,13 +864,12 @@ void FxMainWindow::initAllActions()
 
 void FxMainWindow::createMenu()
 {
-	QMenu *mainMenu = new QMenu(btnMenu);
+	mainMenu = new QMenu(btnMenu);
 	buddyMenu = mainMenu->addMenu(tr("buddy"));
 	menuSetting = mainMenu->addMenu(tr("settings"));
 	menuAbout = mainMenu->addMenu(tr("about"));
 	mainMenu->addSeparator();
 	mainMenu->addAction(exitAct);
-	btnMenu->setMenu(mainMenu);
 	
 	reloginTrayMenu = new QMenu(this);
 	reloginTrayMenu->addAction(exitAct);
@@ -944,8 +943,7 @@ void FxMainWindow::createMenu()
 
 void FxMainWindow::init_slot_signal()
 {
-
-
+	connect(btnMenu, SIGNAL(clicked ()), this, SLOT(showMenu()));
 
 	connect(btnSettings, SIGNAL(clicked ()), this, SLOT(showConfigDlg()));
 	connect(btnSendSelf, SIGNAL(clicked ()), this, SLOT(sendself()));
@@ -1044,6 +1042,12 @@ void FxMainWindow::showPortrait()
     this->setAutoHide(true);
 }
 
+void FxMainWindow::showMenu()
+{
+    this->setAutoHide(false);
+	mainMenu->exec(QCursor::pos());
+    this->setAutoHide(true);
+}
 
 void FxMainWindow::addBuddy()
 {
