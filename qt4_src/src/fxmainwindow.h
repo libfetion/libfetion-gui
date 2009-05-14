@@ -118,6 +118,7 @@ private slots:
 	void sendself();
 	void sendgroupsms();
 	void about();
+	void showMenu();
 	void searchaccountDoubleClicked (QTreeWidgetItem * item, int column );
 	void haveCurrentVersionMessage(int);
 	void haveAddAccountAppMessage(char* uri, char*desc);
@@ -191,6 +192,7 @@ private:
 
 
 	QSystemTrayIcon *trayIcon;
+	QMenu *mainMenu;
 	QMenu *trayIconMenu;
 	QMenu *reloginTrayMenu;
 	QMenu *traySetStatusMenu;
