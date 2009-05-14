@@ -87,7 +87,7 @@ p, li { white-space: pre-wrap; }
        <set>Qt::TextSelectableByMouse</set>
       </property>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <layout class="QGridLayout" name="gridLayout">
        <property name="spacing">
         <number>0</number>
@@ -106,8 +106,14 @@ p, li { white-space: pre-wrap; }
            <height>0</height>
           </size>
          </property>
+         <property name="toolTip">
+          <string>switch send mode</string>
+         </property>
          <property name="text">
           <string>send mode</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
