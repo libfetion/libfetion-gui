@@ -22,7 +22,7 @@
 
 #mainWindow #icon{
 	border:none;
-	border-image:url(./skin1/icon.ico);
+	border-image:url(./skin1/Bomb.jpg); /* icon.ico); */
 	height:18px;
 	width:18px;
 	margin:2px;
@@ -62,7 +62,7 @@
 /*  设置所有窗口的缺省背景(目前只支持主窗口，登陆窗口及聊天窗口) ，如第一个规则设定了聊天窗口的背景。 */
 fxgui--FxWidget{
 	background-origin:padding;
-	qproperty-background:url(./skin1/main.png);
+	qproperty-background:url(./skin1/panda_mainWin.bmp); /* main.png); */
 	qproperty-scaleLeft:82;
 	qproperty-scaleRight:30;
 	qproperty-scaleTop:145;
@@ -74,7 +74,7 @@ fxgui--FxWidget{
 登陆窗口为 loginWindow
 */
 #ChatWindow{
-	qproperty-background:url(./skin1/chat.png);
+	qproperty-background:url(./skin1/panda_mainWin.bmp); /* chat.png); */
 	/* 以下为9宫缩放的4个参数,类似于css3里的 borderImage，不
 过QT并非所有窗体都支持borderImage,且borderImage里要在border上放按钮我还没找
 到方法...这个的具体实现我解决了。提供的背景图不需要固定尺寸，只需要
@@ -93,12 +93,12 @@ fxgui--FxWidget{
 /*  好友列表树关闭时的背景图 */
 QTreeView::branch:has-children:closed{
 	border-image: none;
-    image: url(./skin1/fold_up.png);
+    image: url(./skin1/folder-close.png);
 }
 /* 好友列表树打开时的背景图 */
 QTreeView::branch:has-children:open{
  	border-image: none;
- 	image: url(./skin1/fold_down.png);
+ 	image: url(./skin1/folder-open.png);
  }
 
 
@@ -204,36 +204,36 @@ fxgui--FxWidget QLabel#title:!active{
 
 QPushButton#btnMinimize{
     border: none;
-    border-image: url(./skin1/mini-normal.png);
+    border-image: url(./skin1/panda_minBtn.bmp); /* mini-normal.png); */
 	margin-top:2px;
-	margin-right:4px;
+	/* margin-right:4px; */
 }
 fxgui--FxWidgetTitleBar QPushButton{
-	width:15px;
-	height:15px;
+	width:20px;
+	height:32px; 
 	margin:0;
 	padding:0;
 }
 QPushButton#btnMinimize:hover{
-	border-image: url(./skin1/mini-hover.png);
+	border-image: url(./skin1/panda_minBtn_hover.bmp); /* mini-hover.png); */
 	margin-top:2px;
 }
 QPushButton#btnMinimize:pressed{
-	border-image: url(./skin1/mini-pressed.png);
+	border-image: url(./skin1/panda_minBtn_pressed.bmp); /* mini-pressed.png); */
 	margin-top:2px;
 }
 /* 所有窗口的关闭按钮的三个状态图片 */
 QPushButton#btnClose{
     border: none;
-    border-image: url(./skin1/close-normal.png);
+    border-image: url(./skin1/panda_closeBtn.bmp); /* close-normal.png); */
 	margin-top:2px;
 }
 QPushButton#btnClose:hover{
-	border-image: url(./skin1/close-hover.png);
+	border-image: url(./skin1/panda_closeBtn.bmp); /* close-hover.png); */
 	margin-top:2px;
 }
 QPushButton#btnClose:pressed{
-	border-image: url(./skin1/close-pressed.png);
+	border-image: url(./skin1/panda_closeBtn.bmp); /* close-pressed.png); */
 	margin-top:2px;
 }
 
@@ -255,27 +255,38 @@ QToolButton#btnMenu:pressed{
 
 /* 主窗口“给自已发短信”按钮的三个状态图片 */
 QToolButton#btnSendSelf{
+	border:none;
 	qproperty-icon:url(./skin1/phone.png);
-    border-image: url(./skin1/bt-normal.png);
+    /* border-image: url(./skin1/bt-normal.png); */
+	/* background-color:rgba(100,255,100,50%); */
 }
+
 QToolButton#btnSendSelf:hover{
-	border-image: url(./skin1/bt-focus.png);
+	/* border-image: url(./skin1/bt-focus.png); */
+	background-color:rgba(100,255,100,20%);
 }
 QToolButton#btnSendSelf:pressed{
-	border-image: url(./skin1/bt-press.png);
+	/* border-image: url(./skin1/bt-press.png); */
+	background-color:rgba(100,255,100,10%);
 }
+
 
 /* 主窗口底部“设置”按钮的三个状态图片 */
 QToolButton#btnSettings{
+	border:none;
 	qproperty-icon:url(./skin1/setting.png);
-    border-image: url(./skin1/bt-normal.png);
+    /* border-image: url(./skin1/bt-normal.png); */
 }
+
 QToolButton#btnSettings:hover{
-	border-image: url(./skin1/bt-focus.png);
+	/* border-image: url(./skin1/bt-focus.png); */
+	background-color:rgba(100,255,100,20%);
 }
 QToolButton#btnSettings:pressed{
-	border-image: url(./skin1/bt-press.png);
+	/* border-image: url(./skin1/bt-press.png); */
+	background-color:rgba(100,255,100,10%);
 }
+
 
 
 /* 以下可忽略 */
@@ -287,14 +298,18 @@ QToolButton#btnSettings:pressed{
 	qproperty-icon:url(./skin1/ap.png) 2 2 2 2;
 }
 #icon,#ChatWindow #icon{
+	border-image:none;
 	border:none;
 }
 #lineSearch{
-	background-color:rgba(240,255,255,100%); 
+	background-color:rgba(240,255,255,0%); 
 	border:1px solid gray;
 }
- QMenu{
-   background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 #6b9be8, stop: 0.3 #6b9be8,stop: 0.3 #f77fbf, stop: 1 #f77fbf);
+#lineSearch:hover,#lineSearch:focus{
+	background-color:rgba(240,255,255,100%);
+}
+ QMenu::item{
+   background: /* url(./skin1/menu-bg.png); */ qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 #a0f5a0, stop:0.1 #a0f5a0, stop: 1 #0ffaff);  
  }
 
  QMenu::item {
@@ -303,7 +318,7 @@ QToolButton#btnSettings:pressed{
  }
 
  QMenu::item:selected {
-     border-color: darkblue;
+     /* border-color: darkblue; */
      background: rgba(100, 100, 100, 150);
  }
 
@@ -317,7 +332,7 @@ QToolButton#btnSettings:pressed{
      left: 1px;
  }
 
- QMenu::separator {
+ /*QMenu::separator {
      height: 2px;
      background: lightblue;
      margin-left: 10px;
@@ -327,9 +342,9 @@ QToolButton#btnSettings:pressed{
  QMenu::indicator {
      width: 13px;
      height: 13px;
- }
+ }*/
 
- /* non-exclusive indicator = check box style indicator (see QActionGroup::setExclusive) */
+ /* non-exclusive indicator = check box style indicator (see QActionGroup::setExclusive) *//*
  QMenu::indicator:non-exclusive:unchecked {
      image: url(:/images/checkbox_unchecked.png);
  }
@@ -346,7 +361,7 @@ QToolButton#btnSettings:pressed{
      image: url(:/images/checkbox_checked_hover.png);
  }
 
- /* exclusive indicator = radio button style indicator (see QActionGroup::setExclusive) */
+ *//* exclusive indicator = radio button style indicator (see QActionGroup::setExclusive) *//*
  QMenu::indicator:exclusive:unchecked {
      image: url(:/images/radiobutton_unchecked.png);
  }
@@ -362,3 +377,4 @@ QToolButton#btnSettings:pressed{
  QMenu::indicator:exclusive:checked:selected {
      image: url(:/images/radiobutton_checked_hover.png);
  }
+ */
