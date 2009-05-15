@@ -73,7 +73,7 @@ public:
 	FxWidgetTitleBar *titleBar;
 	QWidget *contentWidget;
 public slots:
-#if MAC_OS
+#ifdef Q_OS_MAC
     //on mac platform, we didn't support autohide function
     void setAutoHide(bool autoHide=true){}
 #else

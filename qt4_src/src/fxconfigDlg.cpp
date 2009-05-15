@@ -54,7 +54,7 @@ void FxConfigDia::init_state()
 	else
 		CB_MainTopHit->setCheckState(Qt::Unchecked);
 
-#if MAC_OS
+#ifdef Q_OS_MAC
 	CB_AutoShowMsg->setVisible(false); 
 #endif
 	if (Settings::instance().isAutoShowMsg())

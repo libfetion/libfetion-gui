@@ -41,7 +41,7 @@
 #ifdef WIN32
 Q_IMPORT_PLUGIN(qgif)
 #else
-	#if MAC_OS
+	#ifdef Q_OS_MAC
 		Q_IMPORT_PLUGIN(qgif)
 	#else //linux
 		//Q_IMPORT_PLUGIN(qgif)

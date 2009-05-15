@@ -127,13 +127,13 @@ void FxInputFace::setMsgWindow(FxMsgWindow *Wind)
 	msgWind = Wind;
 }
 
-#if MAC_OS
+#ifdef Q_OS_MAC
 static bool shouldHide = false;
 #endif
 
 void FxInputFace::focusOutEvent ( QFocusEvent * event ) 
 {
-#if MAC_OS
+#ifdef Q_OS_MAC
 	if (shouldHide)
 	{
 		shouldHide = false;
@@ -149,7 +149,7 @@ void FxInputFace::focusOutEvent ( QFocusEvent * event )
 
 void FxInputFace::mouseReleaseEvent ( QMouseEvent * event ) 
 {
-#if MAC_OS
+#ifdef Q_OS_MAC
 	shouldHide = false;
 #endif
 	hide();

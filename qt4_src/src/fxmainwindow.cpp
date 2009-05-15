@@ -640,7 +640,7 @@ void FxMainWindow::trayIconActivated(QSystemTrayIcon::ActivationReason reason)
 
 			trayMessageClicked();
 
-#if MAC_OS
+#ifdef Q_OS_MAC
 				this->showNormal();	
 			
 #endif
@@ -680,7 +680,7 @@ void FxMainWindow::init_UI()
 #if WIN32
 	setWindowTitle(QString::fromUtf8(fx_get_usr_show_name()) + "--Win Fetion");
 #else
-#if MAC_OS
+#ifdef Q_OS_MAC
 	setWindowTitle(QString::fromUtf8(fx_get_usr_show_name()) + "--Mac Fetion");
 #else
 	setWindowTitle(QString::fromUtf8(fx_get_usr_show_name()) + "--Linux Fetion");
@@ -824,7 +824,7 @@ void FxMainWindow::initAllActions()
 	connect(MuteAct, SIGNAL(triggered()), this, SLOT(menu_setmute()));
 
 	IsAutoShowMsgAct = new QAction(tr("autoshowmsg"), this);
-#if MAC_OS
+#ifdef Q_OS_MAC
 	IsAutoShowMsgAct->setVisible(false); 
 #endif
 	if (Settings::instance().isAutoShowMsg())
@@ -1385,7 +1385,7 @@ void FxMainWindow::initTrayIcon()
 #if WIN32
 		trayIcon->setToolTip (QString::fromUtf8(fx_get_usr_show_name()) + " Win Fetion");
 #else
-#if MAC_OS
+#ifdef Q_OS_MAC
 		trayIcon->setToolTip (QString::fromUtf8(fx_get_usr_show_name()) + " Mac Fetion");
 #else
 		trayIcon->setToolTip (QString::fromUtf8(fx_get_usr_show_name()) + " Linux Fetion");

@@ -97,7 +97,7 @@ void Settings::init_setting()
 	m_isEnterSend = value("EnterSend", true).toBool();
 	m_isStartHide = value("StartHide", false).toBool();
 
-#if MAC_OS
+#ifdef Q_OS_MAC
 	m_isAutoShow = true; 
 	m_isMainWindowTopHint = value("MainWindowTopHint", false).toBool();
 #else
