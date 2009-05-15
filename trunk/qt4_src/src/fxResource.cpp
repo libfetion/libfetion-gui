@@ -150,7 +150,7 @@ QString defaultSoundPath()
 
 void execPlaySound(QString music)
 {
-#if MAC_OS //Mac OS X platfrom
+#ifdef Q_OS_MAC //Mac OS X platfrom
 	QSound::play(music);
 #else
 	#ifdef WIN32 //windows platfrom
@@ -343,7 +343,7 @@ QPixmap getCloseTabImage()
 
 QPixmap getLoginImage()
 {
-#if MAC_OS //Mac OS X platfrom
+#ifdef Q_OS_MAC //Mac OS X platfrom
 	return QPixmap(getSkinPath() + "/theme/login_image-mac.gif");
 #else
 	#ifdef WIN32 //windows platfrom
@@ -356,7 +356,7 @@ QPixmap getLoginImage()
 
 QPixmap getPortraitImage()
 {
-#if MAC_OS //Mac OS X platfrom
+#ifdef Q_OS_MAC //Mac OS X platfrom
 	return QPixmap(getSkinPath() + "/theme/portrait-mac.gif");
 #else
 	#ifdef WIN32 //windows platfrom
