@@ -27,7 +27,10 @@
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <property name="topMargin">
-    <number>0</number>
+    <number>9</number>
+   </property>
+   <property name="bottomMargin">
+    <number>2</number>
    </property>
    <item row="0" column="0" colspan="4">
     <layout class="QGridLayout" name="gridLayout">
