@@ -121,3 +121,11 @@ FORMS         =  \
 				./src/ui/scheduleSms/scheduleSMSManage.ui \
 				./src/ui/refusesms.ui \
 				./src/ui/configdia.ui
+
+
+
+DISTFILES += src/LibFetionEventHandle.cpp 
+DISTFILES += 64_libfetion.sh CREDITS.txt install.sh fetion_utf8_CN.qm
+DISTFILES += lib/*.a lib/libcurl_imp.lib sound/msg.wav
+DISTFILES += libfetion/*.h
+
