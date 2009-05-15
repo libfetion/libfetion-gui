@@ -28,7 +28,8 @@ class FxWidget:public QWidget{
 	//Q_PROPERTY(QPixmap hiddenBar WRITE setHiddenBar)
 public:
 	FxWidget(QWidget *parent=0,Qt::WindowFlags flag=( Qt::Window | Qt::FramelessWindowHint | Qt::WindowSystemMenuHint) );
-public:
+    void setAutoHideTime(int msec) { autoHideTime = msec; }
+public slots:
     void beginAutoHide();
     void endAutoHide();
 signals:
@@ -41,6 +42,8 @@ protected:
 	void moveEvent(QMoveEvent *event);
 	void updateWindowPositionType();
 private:
+	QTimer triggerAutoHideTimer;
+	int autoHideTime;
 	QPushButton *btnMaximize;
 	QGridLayout *_mainLayout;
 	QLabel *sideBarRL;  // sideBar right 
