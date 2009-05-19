@@ -894,34 +894,48 @@ FX_EXPORT const DList *fx_get_group();
 
 
 /**
-  * \fn const DList *fx_get_account()
-  * \brief get the fetion's all accounts info
+  * \fn const Fetion_Account *fx_get_frist_account()
+  * \brief get the frist account of fetion's accounts list
   *
-  * this function will return a list which store all account info
+  * this function will return the frist account of account info list
   *
-  * \return a dlist value if successfully, otherwise return NULL..
+  * \return a No_NULL value if successfully, otherwise return NULL..
   *
   *
   *
-  * A template to get all account info from the dlis struct
-  * \code
-  * 
-  * Fetion_Account *account = NULL;
-  *	DList *tmp = (DList *)fx_get_account();
-  *	while(tmp) 
+  *	const Fetion_Account *account = fx_get_frist_account();
+  *	while(account)
   *	{
-  *		if(	account =(Fetion_Account *)tmp->data ) {
-  *         // do something to access this account...
-  *        }
+  *  //do some things...
   *
-  *		tmp = d_list_next(tmp);
-  *	}
+  *  account = fx_get_next_account(account);
+  * }
   * \endcode
   *
-  *
-  * \sa Fetion_Account DList 
+  * \sa Fetion_Account  fx_get_next_account
 */
-FX_EXPORT const DList *fx_get_account();
+FX_EXPORT const Fetion_Account *fx_get_frist_account();
+
+/**
+  * \fn const Fetion_Account *fx_get_next_account(const Fetion_Account *account)
+  * \brief get the next  account of the given account
+  *
+  * this function will return a account that was next postion of given account
+  *
+  * \return a No_NULL value if successfully, otherwise return NULL..
+  *
+  *	const Fetion_Account *account = fx_get_frist_account();
+  *	while(account)
+  *	{
+  *  //do some things...
+  *
+  *  account = fx_get_next_account(account);
+  * }
+  * \endcode
+  *
+  * \sa Fetion_Account  fx_get_frist_account
+*/
+FX_EXPORT const Fetion_Account *fx_get_next_account(const Fetion_Account *account);
 
 /**
   * \fn const DList *fx_get_blacklist()
@@ -1132,6 +1146,14 @@ FX_EXPORT int fx_get_online_status_by_id(const long uid);
 */
 FX_EXPORT int fx_get_online_status_by_account(const Fetion_Account * account);
 
+/**
+  * \fn int fx_islogin_by_mobile(const Fetion_Account * account)
+  * \brief return fetion account's login by mobile or not.  
+  *
+  * \return 1 if the fetion is login by mobile, or return 0.
+  *
+*/
+FX_EXPORT int fx_islogin_by_mobile(const Fetion_Account * account);
 /**
   * \fn int fx_get_refuse_sms_day(const Fetion_Account *account)
   * \brief return fetion account's refuse_sms_day.  

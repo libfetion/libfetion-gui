@@ -318,6 +318,7 @@ typedef enum
 		 */
 		Fetion_Personal *personal;
 		Ftion_USER_TYPE usr_type; //PC or moblie
+        char *device_type; //device_type: "PC" or mobile
 	}Fetion_Account;
 
 /**
