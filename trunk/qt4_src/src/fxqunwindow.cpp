@@ -247,21 +247,6 @@ bool FxQunWindow::eventFilter(QObject *target, QEvent *event)
     return QObject::eventFilter(target, event);
 }
 
-void FxQunWindow::keyPressEvent(QKeyEvent *keyEvent)
-{
-	if (keyEvent->key() == Qt::Key_Return)
-	{
-		if ((Settings::instance().isEnterSend() && keyEvent->modifiers()!= Qt::ControlModifier)
-				|| (!Settings::instance().isEnterSend() && keyEvent->modifiers() == Qt::ControlModifier) ) 
-		{
-			SendMsg();
-			return;
-		} 
-	}
-
-	QWidget::keyPressEvent(keyEvent);
-}
-
 void FxQunWindow::closeEvent(QCloseEvent *event)
 {
 	hide();
