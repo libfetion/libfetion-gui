@@ -34,6 +34,9 @@ FxLoginWindow::FxLoginWindow(QWidget *parent)
     setupUi(contentWidget);
 	init();
 	checkAutoLogin();
+
+	QShortcut *loginShortcut = new QShortcut(QKeySequence(Qt::Key_Return), this);
+	connect(loginShortcut, SIGNAL(activated()), this, SLOT(login()));
 }
 
 FxLoginWindow::~FxLoginWindow()
@@ -308,21 +311,6 @@ void FxLoginWindow::login_timer()
 	
 	Login_State->setText(tr("login time out"));
 	set_login_button_state(true);
-}
-
-
-bool FxLoginWindow::eventFilter(QObject *target, QEvent *event)
-{
-   
-	if (event->type() == QEvent::KeyPress ) {
-		QKeyEvent *keyEvent = (QKeyEvent *) event;
-		if (keyEvent->key() == Qt::Key_Return) {
-			login();
-			return true;
-		}
-	}
-
-    return QObject::eventFilter(target, event);
 }
 
 void FxLoginWindow::init()
