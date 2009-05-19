@@ -176,21 +176,6 @@ bool AccountTab::eventFilter(QObject *target, QEvent *event)
     return QObject::eventFilter(target, event);
 }
 
-void AccountTab::keyPressEvent(QKeyEvent *keyEvent)
-{
-	if (keyEvent->key() == Qt::Key_Return)
-	{
-		if ((Settings::instance().isEnterSend() && keyEvent->modifiers()!= Qt::ControlModifier)
-			|| (!Settings::instance().isEnterSend() && keyEvent->modifiers() == Qt::ControlModifier) ) 
-		{
-			SendMsg();
-			return;
-		} 
-	}
-
-	QWidget::keyPressEvent(keyEvent);
-}
-
 void AccountTab::handle_alt_num( QKeyEvent *keyEvent)
 {
 	int index = keyEvent->key() - Qt::Key_0;

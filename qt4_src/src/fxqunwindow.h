@@ -34,7 +34,6 @@ public:
     FxQunWindow(qlonglong qun_id, QWidget *parent = 0,  bool awaySendSms = false);
 	~FxQunWindow();
 	bool eventFilter(QObject *target, QEvent *event);
-	void keyPressEvent(QKeyEvent *keyEvent);
 	QString getSenderName(qlonglong sender);
 	qlonglong qun_id;
 	void qun_exit();

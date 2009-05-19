@@ -38,7 +38,6 @@ public:
 	AccountTab(qlonglong id, FxMyTabWidget *parent = 0, bool awaySendSms = false);
 	~AccountTab();
 	bool eventFilter(QObject *target, QEvent *event);
-	void keyPressEvent(QKeyEvent *keyEvent);
 	qlonglong account_id;
 	QString account_name;
 
