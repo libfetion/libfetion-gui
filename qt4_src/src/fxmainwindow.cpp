@@ -60,7 +60,6 @@ FxMainWindow::FxMainWindow(QWidget *parent)
 
 	init_UI();
 	setMinimizetoHide(true);
-	setAutoHide(true);
 	initAllActions();
 	createMenu();
 	initTrayIcon();
@@ -392,6 +391,7 @@ void FxMainWindow::minimizedWind()
 		
 		move(Settings::instance().MainWinPos());
 		isNeedRecordWinPos = true;
+        setAutoHide(true);
 	}
 }
 
@@ -578,6 +578,9 @@ void FxMainWindow::closeEvent(QCloseEvent *event)
 		if(isHaveTray) 
 			trayIcon->hide();
 		msgwin->msg_exit();
+
+		QApplication::quit();
+
 		event->accept();
 		return;
 	}
@@ -1104,7 +1107,6 @@ void FxMainWindow::setImpresa()
 void FxMainWindow::tmp_exit()
 {
 	isQuit = true;
-	QApplication::quit();
 	close();
 }
 
