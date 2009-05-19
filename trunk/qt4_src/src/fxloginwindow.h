@@ -46,7 +46,6 @@ public:
 	void UpdateSkins();
 
 protected:
-	bool eventFilter(QObject *target, QEvent *event);
 	void closeEvent(QCloseEvent *event);
 
 private slots:
@@ -55,13 +54,14 @@ private slots:
 	void Setting(const QString &);
 	void login_timer();
 
+	void login();
+
 signals:
 	void signal_LoginOK();
 	void signal_enableLoginBT();
 
 private:
 	void set_login_button_state(bool state);
-	void login();
 	void Cancel_logwin();
 	void setLogingState(char *ch);
 
