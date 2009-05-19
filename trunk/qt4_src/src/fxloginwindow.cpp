@@ -363,6 +363,11 @@ void FxLoginWindow::checkAutoLogin()
 			login();
 	}
 }
+void FxLoginWindow::closeEvent(QCloseEvent *event)
+{
+	QApplication::quit();
+	event->accept();
+}
 
 void FxLoginWindow::UpdateSkins()
 {

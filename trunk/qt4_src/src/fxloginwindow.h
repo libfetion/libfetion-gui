@@ -47,6 +47,7 @@ public:
 
 protected:
 	bool eventFilter(QObject *target, QEvent *event);
+	void closeEvent(QCloseEvent *event);
 
 private slots:
 	void BT_Login_clicked();
