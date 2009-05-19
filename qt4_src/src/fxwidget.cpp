@@ -22,9 +22,6 @@ FxWidget::FxWidget(QWidget *parent,Qt::WindowFlags flag):QWidget(parent,flag){
 	bgScaleTop=135;
 	
 	_autoHide = false;
-    autoHideTime = 1500;
-    connect(&triggerAutoHideTimer, SIGNAL(timeout()), 
-            this, SLOT(beginAutoHide()));
 
 	// for "editable label"
 	setFocusPolicy(Qt::ClickFocus);
@@ -205,14 +202,10 @@ void FxWidget::moveEvent(QMoveEvent *event){
 }
 void FxWidget::leaveEvent(QEvent* event){
 	Q_UNUSED(event);
-    if(!_autoHide || isMaximized())
-        return;
-    triggerAutoHideTimer.start(autoHideTime);
-    //beginAutoHide();
+    beginAutoHide();
 }
 
 void FxWidget::enterEvent(QEvent*){
-    triggerAutoHideTimer.stop();
     endAutoHide();
 }
 
