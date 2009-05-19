@@ -382,15 +382,11 @@ void BuddyOpt::delGroup(qlonglong id)
 //add account info to tree widget
 void BuddyOpt::addAccountToTree()
 {
-	Fetion_Account *account = NULL;
-	DList *tmp_account = (DList *)fx_get_account();
-	while(tmp_account) 
+	const Fetion_Account *account = fx_get_frist_account();
+	while(account) 
 	{
-		account = (Fetion_Account *)tmp_account->data; 
-		if(account)
-			addAccountToGroup(account);
-
-		tmp_account = d_list_next(tmp_account);
+		addAccountToGroup(account);
+		account = fx_get_next_account(account);
 	}
 }
 

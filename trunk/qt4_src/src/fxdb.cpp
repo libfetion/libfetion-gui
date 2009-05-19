@@ -714,7 +714,7 @@ BOOL init_storeAccountInfo_db(long usr)
 	return TRUE;
 }
 
-void saveAccountToDB(Fetion_Account *account, long usr)
+void saveAccountToDB(const Fetion_Account *account, long usr)
 {
 	if (!account || account->id == usr)
 		return;
@@ -771,14 +771,11 @@ void saveAccountInfo()
 
 	sqlite3_exec(pdb, "begin transaction", 0, 0, &perrmsg ); 
 
-	Fetion_Account *account = NULL;
-	DList *tmp_account = (DList *)fx_get_account();
-	while(tmp_account) 
+	const Fetion_Account *account = fx_get_frist_account();
+	while(account) 
 	{
-		account = (Fetion_Account *)tmp_account->data; 
-		if(account)
-			saveAccountToDB(account, usr);
-		tmp_account = d_list_next(tmp_account);
+		saveAccountToDB(account, usr);
+		account = fx_get_next_account(account);
 	}
 
 	sqlite3_exec(pdb, "commit transaction", 0, 0, &perrmsg ); 
