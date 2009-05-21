@@ -77,7 +77,11 @@ FxMainWindow::FxMainWindow(QWidget *parent)
 	saveAccountInfo();
 #endif
 	
-        setWindowFlags(windowFlags() | Qt::SplashScreen);
+#ifdef WIN32
+    setWindowFlags(windowFlags() | Qt::SplashScreen);
+#else
+    //do nothing for linux platform
+#endif
 	
 	minimizedTimer.start(100);
 	checkSkinsTimer.start(10000);
