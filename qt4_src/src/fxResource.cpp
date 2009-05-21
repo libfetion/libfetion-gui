@@ -189,7 +189,6 @@ QPixmap getOnlineStatusIcon(int status)
 
 		case FX_STATUS_BLACK:
 			return QPixmap(getSkinPath() + "/online/black.gif");
-
 		case FX_STATUS_MOBILE: //mobile user
 			return QPixmap(getSkinPath() + "/online/mobile.gif");
 		case FX_STATUS_WAITING_AUTH:  //the account waiting   
@@ -214,6 +213,33 @@ QPixmap getOnlineStatusIcon(int status)
 			return QPixmap(getSkinPath() + "/online/extnded_away.gif");
 		case FX_STATUS_NUM_PRIMITIVES:
 			return QPixmap(getSkinPath() + "/online/num_primitives.gif");
+
+		case FX_STATUS_BLACK + MOBILE_LOGIN:
+			return QPixmap(getSkinPath() + "/online/m_black.gif");
+		case FX_STATUS_MOBILE + MOBILE_LOGIN: //mobile user
+			return QPixmap(getSkinPath() + "/online/m_mobile.gif");
+		case FX_STATUS_WAITING_AUTH + MOBILE_LOGIN:  //the account waiting   
+			return QPixmap(getSkinPath() + "/online/m_waiting.gif");
+		case FX_STATUS_REFUSE + MOBILE_LOGIN:   //the account is refuse make friends with you
+			return QPixmap(getSkinPath() + "/online/m_refuse.gif");
+		case FX_STATUS_OFFLINE + MOBILE_LOGIN:
+			return QPixmap(getSkinPath() + "/online/m_offline.gif");
+		case FX_STATUS_DINNER + MOBILE_LOGIN:
+			return QPixmap(getSkinPath() + "/online/m_dinner.gif");
+		case FX_STATUS_AWAY + MOBILE_LOGIN:
+			return QPixmap(getSkinPath() + "/online/m_away.gif");
+		case FX_STATUS_ONLINE + MOBILE_LOGIN:
+			return QPixmap(getSkinPath() + "/online/m_online.gif");
+		case FX_STATUS_PHONE + MOBILE_LOGIN:
+			return QPixmap(getSkinPath() + "/online/m_phone.gif");
+		case FX_STATUS_BUSY + MOBILE_LOGIN:
+			return QPixmap(getSkinPath() + "/online/m_busy.gif");
+		case FX_STATUS_MEETING + MOBILE_LOGIN:
+			return QPixmap(getSkinPath() + "/online/m_meeting.gif");
+		case FX_STATUS_EXTENDED_AWAY + MOBILE_LOGIN:
+			return QPixmap(getSkinPath() + "/online/m_extnded_away.gif");
+		case FX_STATUS_NUM_PRIMITIVES + MOBILE_LOGIN:
+			return QPixmap(getSkinPath() + "/online/m_num_primitives.gif");
 	}
 
 	return QPixmap();
