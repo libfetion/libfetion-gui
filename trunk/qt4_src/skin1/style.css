@@ -137,9 +137,10 @@ QLineEdit::focus{
 }
 
 /* 心情短语 非编辑状态 鼠标经过时背景，这里原代码还有个BUG，主窗口RESIZE后要点中心情短语的文字才可以进入编辑状态 */
-#impression:hover{
-	border:none;
-	border-image:url(./skin1/bt-normal.png) 4 4 4 4;
+#nickname:hover,#impression:hover{
+border:none;
+/* border-image:url(./skin1/bt-normal.png) 4 4 4 4; */
+background:rgba(222,140,41,20%);
 }
 /* 心情短语 编辑状态  */
 #impression QLineEdit:focus{

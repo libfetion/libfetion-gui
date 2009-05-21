@@ -11,7 +11,13 @@ win32 {
 
 unix {
 	TARGET    = linux-fetion
-	LIBS 	 +=  -lcurl -lssl ./lib/libfetion_32.a
+
+    *-64 {
+            LIBS 	 +=  -lcurl -lssl ./lib/libfetion_64.a
+         }
+    else {
+            LIBS 	 +=  -lcurl -lssl ./lib/libfetion_32.a
+         }
 }
 
 mac {
@@ -128,4 +134,13 @@ DISTFILES += src/LibFetionEventHandle.cpp
 DISTFILES += 64_libfetion.sh CREDITS.txt install.sh fetion_utf8_CN.qm
 DISTFILES += lib/*.a lib/libcurl_imp.lib sound/msg.wav
 DISTFILES += libfetion/*.h
+
+
+
+#run a stricp to install our project
+unix:target.extra = ./install.sh 
+
+#target
+target.path += /usr/bin
+INSTALLS += target
 
