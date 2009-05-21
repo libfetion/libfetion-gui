@@ -453,8 +453,12 @@ void BuddyOpt::addAccountToGroup(const Fetion_Account *account, QString & name, 
 	Account_Info * ac_info = new Account_Info;
 	ac_info->accountName = name;
 	ac_info->accountID = account->id;
-	ac_info->onlinestate = online_state;
     ac_info->haveUpdate = false;
+
+    if (fx_islogin_by_mobile(account)) //mobile login
+        ac_info->onlinestate = online_state + MOBILE_LOGIN;
+    else
+        ac_info->onlinestate = online_state;
 
 	QTreeWidgetItem *accountItem = new QTreeWidgetItem;
 
