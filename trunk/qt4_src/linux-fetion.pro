@@ -11,13 +11,7 @@ win32 {
 
 unix {
 	TARGET    = linux-fetion
-
-    *-64 {
-            LIBS 	 +=  -lcurl -lssl ./lib/libfetion_64.a
-         }
-    else {
-            LIBS 	 +=  -lcurl -lssl ./lib/libfetion_32.a
-         }
+  LIBS 	 +=  -lcurl -lssl ./lib/libfetion_32.a
 }
 
 mac {
