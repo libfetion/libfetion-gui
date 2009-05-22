@@ -19,6 +19,7 @@
  ***************************************************************************/
 #include <QSound>
 #include <QFile>
+#include <QDir>
 #include "fxResource.h"
 #include "fxskinmanage.h"
 
@@ -67,22 +68,19 @@ void moveOldConfigFile()
 
     done = true;
 
-    QString cmd;
     //create the .libfetion folder
-    cmd = "mkdir -p " + currentUserPath() + "/.libfetion" + "&";
-    system(cmd.toStdString().c_str());
+    QDir home(currentUserPath());
+    home.mkdir(".libfetion");
 
     //move old config file to .libfetion folder
     if (QFile::exists(currentUserPath() + DBNAME) && !QFile::exists(chatDBFile()))
     {
-        cmd = "mv " + currentUserPath()+"/."DBNAME"  " + chatDBFile() +"&";
-        system(cmd.toStdString().c_str());
+        QFile::rename(currentUserPath()+"/."DBNAME, chatDBFile());
     }
 
     if (QFile::exists(currentUserPath()+"/."CONFFILENAME) && !QFile::exists(configFile()))
     {
-        cmd = "mv " + currentUserPath()+"/."CONFFILENAME"  " + configFile() +"&";
-        system(cmd.toStdString().c_str());
+        QFile::rename(currentUserPath()+"/."CONFFILENAME, configFile());
     }
 }
 
