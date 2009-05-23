@@ -894,16 +894,16 @@ FX_EXPORT const DList *fx_get_group();
 
 
 /**
-  * \fn const Fetion_Account *fx_get_frist_account()
-  * \brief get the frist account of fetion's accounts list
+  * \fn const Fetion_Account *fx_get_first_account()
+  * \brief get the first account of fetion's accounts list
   *
-  * this function will return the frist account of account info list
+  * this function will return the first account of account info list
   *
   * \return a No_NULL value if successfully, otherwise return NULL..
   *
   *
   *
-  *	const Fetion_Account *account = fx_get_frist_account();
+  *	const Fetion_Account *account = fx_get_first_account();
   *	while(account)
   *	{
   *  //do some things...
@@ -914,7 +914,7 @@ FX_EXPORT const DList *fx_get_group();
   *
   * \sa Fetion_Account  fx_get_next_account
 */
-FX_EXPORT const Fetion_Account *fx_get_frist_account();
+FX_EXPORT const Fetion_Account *fx_get_first_account();
 
 /**
   * \fn const Fetion_Account *fx_get_next_account(const Fetion_Account *account)
@@ -924,7 +924,7 @@ FX_EXPORT const Fetion_Account *fx_get_frist_account();
   *
   * \return a No_NULL value if successfully, otherwise return NULL..
   *
-  *	const Fetion_Account *account = fx_get_frist_account();
+  *	const Fetion_Account *account = fx_get_first_account();
   *	while(account)
   *	{
   *  //do some things...
@@ -933,7 +933,7 @@ FX_EXPORT const Fetion_Account *fx_get_frist_account();
   * }
   * \endcode
   *
-  * \sa Fetion_Account  fx_get_frist_account
+  * \sa Fetion_Account  fx_get_first_account
 */
 FX_EXPORT const Fetion_Account *fx_get_next_account(const Fetion_Account *account);
 
