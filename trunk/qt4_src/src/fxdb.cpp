@@ -771,7 +771,7 @@ void saveAccountInfo()
 
 	sqlite3_exec(pdb, "begin transaction", 0, 0, &perrmsg ); 
 
-	const Fetion_Account *account = fx_get_frist_account();
+	const Fetion_Account *account = fx_get_first_account();
 	while(account) 
 	{
 		saveAccountToDB(account, usr);
