@@ -33,9 +33,13 @@ AccountTab::AccountTab(qlonglong id, FxMyTabWidget *parent, bool awaySendSms)
 	setWindowFlags(Qt::FramelessWindowHint);
 
 	msgSend = this;
-	msgSend->MsgEdit->installEventFilter(this);
+	msgSend->MsgEdit->installEventFilter(this);  // should be reomved
 	msgSend->MsgBrowser->setText("");
 
+	//Alt+S to send message
+	QShortcut *_sendShortCutAltS = new QShortcut(QKeySequence("Alt+S"),this);
+	connect(_sendShortCutAltS,SIGNAL(activated()),this,SLOT(SendMsg()));
+	
 	init();
 }
 
