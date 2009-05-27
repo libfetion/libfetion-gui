@@ -35,6 +35,10 @@ Settings::Settings(const QString & fileName, Format format)
 	m_mainwind = NULL;
 	m_isAutoLogin = ::isAutoLogin(NULL, NULL, NULL);
 
+	QSize dt_size =	QApplication::desktop()->size();
+	m_LoginWinPos = value("LoginWinPos", QPoint(dt_size.width()/3, dt_size.height()/3)).toPoint();
+	m_LoginWinSize = value("LoginWinSize", QSize(399, 274)).toSize();
+
 	m_skinPath = value("SkinPath", defaultSkinPath()).toString();
 	m_skinName = value("SkinName", "default").toString();
 
@@ -115,6 +119,7 @@ void Settings::init_setting()
 	m_MsgRingPath = value("MsgRingPath", defaultSoundPath() +"/msg.wav").toString();
 
 	QSize dt_size =	QApplication::desktop()->size();
+
 
 	m_MsgWinPos = value("MsgWinPos", QPoint(dt_size.width()/3, dt_size.height()/3)).toPoint();
 	m_MsgWinSize = value("MsgWinSize", QSize(399, 274)).toSize();
@@ -230,6 +235,18 @@ void Settings::setMsgRingPath(QString path)
 	m_MsgRingPath = path; 
 	setValue("MsgRingPath", m_MsgRingPath);
 }
+
+void Settings::setLoginWinPos(QPoint pos)
+{
+	if (m_uid)
+		endGroup();
+
+	m_LoginWinPos = pos;
+	setValue("LoginWinPos", pos);
+
+	if (m_uid)
+		beginGroup(QString("%1").arg(m_uid));
+}
 			
 void Settings::setMsgWinPos(QPoint pos)
 {
@@ -241,6 +258,18 @@ void Settings::setMainWinPos(QPoint pos)
 {
 	m_MainWinPos = pos;
 	setValue("MainWinPos", pos);
+}
+
+void Settings::setLoginWinSize(QSize size)
+{
+	if (m_uid)
+		endGroup();
+
+	m_LoginWinSize = size;
+	setValue("LoginWinSize", size);
+
+	if (m_uid)
+		beginGroup(QString("%1").arg(m_uid));
 }
 
 void Settings::setMainWinSize(QSize size)
