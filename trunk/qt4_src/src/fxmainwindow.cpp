@@ -32,6 +32,8 @@
 #include "fxscheduleSms.h"
 #include "LibFetionEventHandle.cpp"
 #include <QApplication> // to fix
+#include <QDir>
+#include <QFile>
 
 FxMainWindow::FxMainWindow(QWidget *parent)
 	:FxWidget(parent)
@@ -530,6 +532,7 @@ void FxMainWindow::skinMenutriggered(QAction *action)
 		return;
 	setSkins(sk_info->skinpath, sk_info->name);
 
+	setupStyleSheet();
 	this->UpdateSkins();
 }
 

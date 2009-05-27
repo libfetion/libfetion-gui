@@ -21,6 +21,7 @@
 #include "fxskinmanage.h"
 #include <QDir>
 #include <QtXml/QDomDocument>
+#include <QApplication>
 
 //the skin path is stored in the settings
 QString getSkinPath()
@@ -112,3 +113,44 @@ QList<Skin_Info *> *searchAllSkins()
 	get_skin_search_result(g_skinlist, SkinPath());
 	return g_skinlist;
 }
+
+void setupStyleSheet(){
+/***************************
+add some code for style sheet 
+shoul be move to class FxSkinManager
+by iptton
+***************************/
+
+	QString path = getSkinPath();
+	if( ! QFile::exists( path + "/style.css") ){
+		// has not style.css use the default/style.css
+		path = SkinPath() + "/default";
+	}
+	
+	// if it's not and validated directory, just do nothing. 
+	// not a good user experiment @TO FIX
+	
+	/*QDir dir(path);
+	if( !dir.exists(path) ){
+		return;
+	}*/
+	
+	QFile file(path+"/style.css");
+	file.open(QFile::ReadOnly);
+	QString content = file.readAll();
+	
+	// do some replace work, it's case insensitive
+	content.replace("%skinpath%",SkinPath(),Qt::CaseInsensitive);
+	content.replace("%currentPath%",getSkinPath(),Qt::CaseInsensitive);
+	
+	//qDebug(content.toUtf8().data());
+	// apply the stylesheet
+	qApp->setStyleSheet(content);
+	file.close();
+	
+	//qDebug(path.toUtf8().data());
+/*********************************
+end
+*********************************/
+}
+
