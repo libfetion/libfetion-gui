@@ -29,6 +29,7 @@
 #include "appconfig.h"
 #include "fxmain.h"
 #include "fxdb.h"
+#include "fxskinmanage.h"
 
 #ifdef WIN32
 #else
@@ -72,12 +73,8 @@ int main(int argc, char *argv[])
 	Settings::instance().setSyetemDefualFont( QApplication::font() );
 	app.setFont(Settings::instance().getCurrentFont());
 	FxMain *mainWin = new FxMain;
-// @TO FIX import stylesheet
-	QFile file("./skin1/style.css");
-	file.open(QFile::ReadOnly);
-	qApp->setStyleSheet(file.readAll());
-	file.close();
-// end import stylesheet
+	//import stylesheet
+	setupStyleSheet();
 	//QObject::connect(&app, SIGNAL(lastWindowClosed()), &app, SLOT(quit()));
 	app.setQuitOnLastWindowClosed(false);
 	int reslut = app.exec();

@@ -132,6 +132,9 @@ void FxWidget::setBackground(QPixmap pix){
 
     palette.setBrush(this->backgroundRole(),QBrush(bgTop));
     this->setPalette(palette);
+    // for skin change
+    // but it doesn't work..
+    this->repaint();
 }
 
 void FxWidget::turnBackNormal(){

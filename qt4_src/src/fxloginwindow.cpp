@@ -335,6 +335,7 @@ void FxLoginWindow::init()
 	connect(Net_Setting, SIGNAL(linkActivated(const QString &)), this, SLOT(Setting(const QString &)));
 	connect(&loginTimer, SIGNAL(timeout()), this, SLOT(login_timer()));
 
+
 	UpdateSkins();
 }
 
