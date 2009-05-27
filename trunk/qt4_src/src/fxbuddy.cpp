@@ -743,7 +743,11 @@ void BuddyOpt::updateAccountInfo(qlonglong account_id)
 
 	int old_online_state = ac_info->onlinestate;
 	int new_online_state = fx_get_online_status_by_account(account);
-	ac_info->onlinestate = new_online_state;
+
+    if (fx_islogin_by_mobile(account)) //mobile login
+        ac_info->onlinestate = new_online_state + MOBILE_LOGIN;
+    else
+        ac_info->onlinestate = new_online_state;
 
 	accountItem->setText(0, show_name);
 	accountItem->setIcon(0, getOnlineStatusIcon(ac_info->onlinestate));
