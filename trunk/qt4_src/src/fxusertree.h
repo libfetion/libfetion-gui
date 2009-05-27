@@ -11,7 +11,7 @@ Q_OBJECT
  
 public:
 	FxUserTree(QWidget *parent = 0):QTreeWidget(parent){
-		normalSize = QSize(30,20); // normalSize should be set to the orientSize
+		normalSize = QSize(30,16);
 		clickedSize = QSize(70,40);
 		connect(this,SIGNAL(itemClicked(QTreeWidgetItem *, int)),
 				this,SLOT(onItemClicked(QTreeWidgetItem *, int)));
@@ -30,8 +30,6 @@ private slots:
 			if(previous->parent()){
 				previous->setSizeHint(0,normalSize);
 			}
-		}else{//set normalSize
-			normalSize = current->sizeHint(0);
 		}
 		if(current){
 			if(current->parent()){
