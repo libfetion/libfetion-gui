@@ -68,6 +68,7 @@ protected:
 #endif
 	void closeEvent(QCloseEvent *event);
 	void moveEvent(QMoveEvent * event);
+	void resizeEvent(QResizeEvent * event);
 
 	void startFlickerTray();
 	void endFlickerTray();
@@ -227,6 +228,7 @@ private:
     QAction *AboutLibFetionAct;
     QAction *AboutCMAct;
 
+    bool isNeedRecordWinSize;
     bool isNeedRecordWinPos;
     bool isHaveminimized;
     QTimer checkSkinsTimer;
