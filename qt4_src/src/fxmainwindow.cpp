@@ -53,6 +53,7 @@ FxMainWindow::FxMainWindow(QWidget *parent)
 	isBreakOut = false;
 	isHaveminimized = false;
 	isNeedRecordWinPos = false;
+	isNeedRecordWinSize = false;
 	tmp_addBuddy = NULL;
     scheduleSms = new FxScheduleSMS(this, this);
     scheduleSmsManager = new FxScheduleSMSManage(this, this);
@@ -393,8 +394,11 @@ void FxMainWindow::minimizedWind()
 		if (Settings::instance().isStartHide())
 			this->hide();
 		
-		move(Settings::instance().MainWinPos());
-		isNeedRecordWinPos = true;
+        move(Settings::instance().MainWinPos());
+        resize(Settings::instance().MainWinSize());
+
+        isNeedRecordWinPos = true;
+        isNeedRecordWinSize = true;
         setAutoHide(true);
 	}
 }
@@ -602,9 +606,16 @@ void FxMainWindow::closeEvent(QCloseEvent *event)
 
 void FxMainWindow::moveEvent(QMoveEvent * event)
 {
-	Q_UNUSED(event);
 	if (isNeedRecordWinPos)
 		Settings::instance().setMainWinPos(pos());
+	FxWidget::moveEvent(event);
+}
+
+void FxMainWindow::resizeEvent(QResizeEvent * event) 
+{
+    if (isNeedRecordWinSize)
+        Settings::instance().setMainWinSize(size());
+	FxWidget::resizeEvent(event);
 }
 
 void FxMainWindow::trayMessageClicked()
@@ -1521,7 +1532,6 @@ void FxMainWindow::SetAllFont(QFont font)
 	lineSearch->setFont(font);
 	nickname->setFont(font);
 	impression->setFont(font);
-	version->setFont(font);
 	version->setFont(font);
 
     view->setFont(font);

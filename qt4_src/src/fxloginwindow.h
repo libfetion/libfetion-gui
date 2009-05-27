@@ -47,6 +47,8 @@ public:
 
 protected:
 	void closeEvent(QCloseEvent *event);
+	void moveEvent(QMoveEvent *event);
+	void resizeEvent(QResizeEvent *event);
 
 private slots:
 	void BT_Login_clicked();
