@@ -394,6 +394,7 @@ void FxMsgWindow::moveEvent(QMoveEvent *event)
 	if (m_isNudgeShake)
 		return;
 	Settings::instance().setMsgWinPos(pos());
+	FxWidget::moveEvent(event);
 }
 
 void FxMsgWindow::addQunWin(qlonglong qun_id, bool isSendSms)
