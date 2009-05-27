@@ -71,6 +71,12 @@ extern "C" {
 
 			void setMsgRingPath(QString path);
 			QString MsgRingPath() {return m_MsgRingPath;}
+
+			void setLoginWinSize(QSize size);
+			QSize LoginWinSize(){ return m_LoginWinSize; }
+			
+			void setLoginWinPos(QPoint pos);
+			QPoint LoginWinPos(){ return m_LoginWinPos;}
 			
 			void setMsgWinPos(QPoint pos);// { m_msgWinPos = pos; }
 			QPoint MsgWinPos(){ return m_MsgWinPos; }
@@ -126,6 +132,9 @@ extern "C" {
 			QString m_replyMsg;
 			QString m_MsgRingPath;
 			
+			QPoint m_LoginWinPos;
+			QSize m_LoginWinSize;
+
 			QPoint m_MsgWinPos;
 			QSize m_MsgWinSize;
 			
