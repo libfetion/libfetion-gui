@@ -358,7 +358,7 @@ void AccountTab::UpdateSkins()
 */
 }
 
-void AccountTab::SetAllFont(QFont font)
+void AccountTab::SetAllFont(const QFont & font)
 {
 	this->setFont(font);
 

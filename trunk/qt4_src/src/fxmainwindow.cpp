@@ -1524,7 +1524,7 @@ void FxMainWindow::UpdateSkins()
 		IsAutoShowMsgAct->setIcon(getMenuIcon(CancelIcon));
 }
 
-void FxMainWindow::SetAllFont(QFont font)
+void FxMainWindow::SetAllFont(const QFont & font)
 {
 	this->setFont(font);
 	msgwin->SetAllFont(font);
@@ -1543,6 +1543,8 @@ void FxMainWindow::SetAllFont(QFont font)
     buddyMenu->setFont(font);
     menuSetting->setFont(font);
     menuAbout->setFont(font);
+
+	btnMenu->setFont(font);
 
 	this->repaint();
 }
