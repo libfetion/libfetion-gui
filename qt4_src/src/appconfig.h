@@ -67,6 +67,7 @@
 #define NEW_MSG 2
 #define SYS_DeRegist 3
 #define SYS_RELOGIN 4
+#define NEW_VERSION 5
 
 typedef struct _Group_Info
 {
