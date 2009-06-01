@@ -286,7 +286,7 @@ void FxConfigDia::slot_SetDefaultFont()
 	SetAllFont( Settings::instance().getSyetemDefualFont() );
 }
 
-void FxConfigDia::SetAllFont(QFont font)
+void FxConfigDia::SetAllFont(const QFont & font)
 {
 	Settings::instance().setFont(font); 
 	QApplication::setFont(font);

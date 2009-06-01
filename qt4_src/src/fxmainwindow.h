@@ -54,7 +54,7 @@ public:
 
 	void UpdateSkins();
 	void UpdateSkinsMenu();
-	void SetAllFont(QFont font);
+	void SetAllFont(const QFont & font);
 
     FxAddBuddy * getTmpAddBuddyWindow() {return tmp_addBuddy;}  //save the tmp addbuddy handle
     FxMsgWindow * getMsgWindow() {return msgwin;}

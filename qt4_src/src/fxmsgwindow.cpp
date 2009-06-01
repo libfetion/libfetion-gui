@@ -575,7 +575,7 @@ void FxMsgWindow::UpdateSkins()
 		closeTabButton->setIcon(getCloseTabImage());
 }
 
-void FxMsgWindow::SetAllFont(QFont font)
+void FxMsgWindow::SetAllFont(const QFont & font)
 {
 	this->setFont(font);
 	tabWidget->setFont(font);

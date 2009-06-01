@@ -67,11 +67,13 @@ void Settings::setUser(long uid)
 	beginGroup(QString("%1").arg(m_uid));
 	init_setting();
 }
-void Settings::setFont(QFont font) 
+
+void Settings::setFont(const QFont & font) 
 {
 	if (m_uid)
 		endGroup();
 
+	QApplication::setFont(font);
 	m_CurrentFont = font;
 	setValue("AppFont", m_CurrentFont);
 
