@@ -408,15 +408,19 @@ void FxMainWindow::minimizedWind()
 
 void FxMainWindow::haveCurrentVersionMessage(int version)
 {
-	newVersion = version;
-	if (version > CURRENT_VERSION)
-	{
-		QSystemTrayIcon::MessageIcon icon = QSystemTrayIcon::MessageIcon(1);
-		trayIcon->showMessage(tr("LibFetion"),
-				tr("LibFetion Have New Version,"
-					"access http://www.libfetion.cn for more infomation"),
-				icon, 10*1000);
-	}
+    newVersion = version;
+    if (version <= CURRENT_VERSION)
+        return;
+
+    if (isHaveTray && trayIcon)
+    {
+        QSystemTrayIcon::MessageIcon icon = QSystemTrayIcon::MessageIcon(1);
+        trayIcon->showMessage(tr("LibFetion"),
+                tr("LibFetion Have New Version,"
+                    "click to download the new version..."),
+                icon, 10*1000);
+        fx_status = NEW_VERSION;
+    }
 }
 
 
@@ -625,25 +629,18 @@ void FxMainWindow::trayMessageClicked()
 {
 	switch(fx_status)
 	{
-#if 0
-		case NET_ERR:
-			QMessageBox::critical (this, tr("connect break off"), 
-					tr("disconnect from fetion server, will relogin fetion"));
-			printf("the system network have some error, we will relogin fetion \n");
-
-			isQuit = true;
-			close();
-			break;
-#endif
-
-		case SYS_DeRegist:
-			QMessageBox::critical(this, tr("relogin"), 
-					tr("you have login in other pc, libfetion will quit") ); 
-			isQuit = true;
-			close();
-			break;
-		case NEW_MSG:
-			break;
+        case NEW_VERSION:
+            QDesktopServices::openUrl(QUrl("http://www.libfetion.cn/demoapp_download.html"));
+            fx_status = NO_SET;
+            break;
+        case SYS_DeRegist:
+            QMessageBox::critical(this, tr("relogin"), 
+                    tr("you have login in other pc, libfetion will quit") ); 
+            isQuit = true;
+            close();
+            break;
+        case NEW_MSG:
+            break;
 	}
 }
 
