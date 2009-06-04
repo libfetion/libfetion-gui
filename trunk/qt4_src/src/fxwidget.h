@@ -52,12 +52,15 @@ private:
 	QPixmap backgroundPixmap;
 	//QPixmap hiddenBarPixmap;
 	bool _autoHide;
+	bool _enableautoHide;
 	enum WINDOW_POS{
 		WP_LEFT=1,WP_RIGHT=2,WP_TOP=4,WP_BOTTOM=8,WP_HIDDEN=16,WP_NORMAL=0
 	};
 	int positionState;
 	QSize orientSize;
+	bool _isSetSystemTitleBar;
 public:
+	void setSystemTitleBar(bool flag = true);
 	void setMinimizetoHide(bool minimizetoHide = false);
 	//void setHiddenBar(QPixmap pix); use css instead
 	void setBackground(QPixmap pix);
@@ -79,7 +82,15 @@ public slots:
     //on mac platform, we didn't support autohide function
     void setAutoHide(bool autoHide=true){}
 #else
+	void enableAutoHide(bool flag=true){ 
+		_enableautoHide = flag; 
+		if (!flag)
+			_autoHide = false;
+		}
+			
 	void setAutoHide(bool autoHide=true){
+		if (!_enableautoHide)
+			return;
 		_autoHide = autoHide;
 		if(_autoHide){
 			setWindowFlags( windowFlags() | Qt::WindowStaysOnTopHint);
