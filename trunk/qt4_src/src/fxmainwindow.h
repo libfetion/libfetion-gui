@@ -171,6 +171,7 @@ private slots:
 	void ImpresaFocusIn();
 	void SearchFocusIn();
 	void showPortrait();
+	void showSkinMenu();
 	void setUINickName();
 
 	void schedule_SMS();

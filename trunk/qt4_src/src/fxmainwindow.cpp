@@ -968,6 +968,8 @@ void FxMainWindow::init_slot_signal()
 	connect(btnSendSelf, SIGNAL(clicked ()), this, SLOT(sendself()));
 	connect(btnAddFriend, SIGNAL(clicked ()), this, SLOT(addBuddy()));
 	connect(portrait, SIGNAL(clicked ()), this, SLOT(showPortrait()));
+	connect(btnSkin, SIGNAL(clicked ()), this, SLOT(showSkinMenu()));
+
 
 	connect(nickname, SIGNAL(textChanged(QString)), this, SLOT(changeNickName (QString)));
 
@@ -1052,6 +1054,13 @@ void FxMainWindow::init_slot_signal()
 void FxMainWindow::schedule_SMS()
 {
 	scheduleSms->showNormal();
+}
+
+void FxMainWindow::showSkinMenu()
+{
+    this->setAutoHide(false);
+	skinMenu->exec(QCursor::pos());
+    this->setAutoHide(true);
 }
 
 void FxMainWindow::showPortrait()
