@@ -536,7 +536,6 @@ void FxMainWindow::skinMenutriggered(QAction *action)
 		return;
 	setSkins(sk_info->skinpath, sk_info->name);
 
-	setupStyleSheet();
 	this->UpdateSkins();
 }
 

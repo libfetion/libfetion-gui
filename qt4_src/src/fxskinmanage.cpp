@@ -39,6 +39,7 @@ bool setSkins(QString skinPath, QString skinName)
 	//here checking the skins is usable
 	//
     Settings::instance().setSkins(skinPath, skinName);
+    setupStyleSheet();
 	return	true;
 }
 
