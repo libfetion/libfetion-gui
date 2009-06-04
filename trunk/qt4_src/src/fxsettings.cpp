@@ -50,6 +50,8 @@ Settings::Settings(const QString & fileName, Format format)
     }
 
 	m_CurrentFont = value("AppFont",QFont()).value<QFont>();
+
+    setSkins(m_skinPath, m_skinName);
 }
 
 Settings::~Settings()
