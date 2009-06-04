@@ -22,6 +22,7 @@
 
 #include "appconfig.h"
 #include "fxloginwindow.h"
+#include "fxskinmanage.h"
 
 FxLoginWindow::FxLoginWindow(QWidget *parent)
     : FxWidget(parent)
@@ -37,6 +38,8 @@ FxLoginWindow::FxLoginWindow(QWidget *parent)
 
 	QShortcut *loginShortcut = new QShortcut(QKeySequence(Qt::Key_Return), this);
 	connect(loginShortcut, SIGNAL(activated()), this, SLOT(login()));
+
+    CHECK_SystemTiTle();
 
     move(Settings::instance().LoginWinPos());
     resize(Settings::instance().LoginWinSize());

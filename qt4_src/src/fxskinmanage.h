@@ -32,4 +32,14 @@ void get_skin_search_result(QList<Skin_Info *>  *items, QString path);
 void setupStyleSheet();
 
 Skin_Info * getCurrentSkinInfo();
+
+#define CHECK_SystemTiTle()  Skin_Info * sk_info = getCurrentSkinInfo(); \
+    if (sk_info) \
+    { \
+        if (sk_info->usingSystemTitle != "no") \
+            this->setSystemTitleBar(false); \
+        else \
+            this->setSystemTitleBar(true); \
+        delete sk_info; \
+    } 
 #endif
