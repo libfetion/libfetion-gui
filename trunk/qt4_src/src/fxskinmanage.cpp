@@ -38,7 +38,7 @@ bool setSkins(QString skinPath, QString skinName)
 {
 	//here checking the skins is usable
 	//
-	Settings::instance().setSkins(skinPath, skinName);
+    Settings::instance().setSkins(skinPath, skinName);
 	return	true;
 }
 
@@ -71,6 +71,7 @@ Skin_Info *get_skininfo(QString skinPath)
 	sk_info->name = doc.documentElement().attribute("name", "unset");
 	sk_info->author = doc.documentElement().attribute("author", "unset");
 	sk_info->describe = doc.documentElement().attribute("describe", "unset");
+	sk_info->usingSystemTitle = doc.documentElement().attribute("usingSystemTitle", "no");
 	sk_info->skinpath = skinPath;
 #if 0
 	qDebug(sk_info->name.toUtf8().data());
@@ -79,6 +80,11 @@ Skin_Info *get_skininfo(QString skinPath)
 	qDebug(sk_info->skinpath.toUtf8().data());
 #endif
 	return sk_info;
+}
+
+Skin_Info * getCurrentSkinInfo()
+{
+    return get_skininfo(getSkinPath());
 }
 
 void get_skin_search_result(QList<Skin_Info *>  *items, QString path)
@@ -114,7 +120,8 @@ QList<Skin_Info *> *searchAllSkins()
 	return g_skinlist;
 }
 
-void setupStyleSheet(){
+void setupStyleSheet()
+{
 /***************************
 add some code for style sheet 
 shoul be move to class FxSkinManager
