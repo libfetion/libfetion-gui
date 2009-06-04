@@ -22,6 +22,8 @@ FxWidget::FxWidget(QWidget *parent,Qt::WindowFlags flag):QWidget(parent,flag){
 	bgScaleTop=135;
 	
 	_autoHide = false;
+	_enableautoHide = false;
+	_isSetSystemTitleBar = false;
 
 	// for "editable label"
 	setFocusPolicy(Qt::ClickFocus);
@@ -78,6 +80,31 @@ FxWidget::FxWidget(QWidget *parent,Qt::WindowFlags flag):QWidget(parent,flag){
 	updateWindowPositionType();	
 }
 
+void FxWidget::setSystemTitleBar(bool flag)
+{
+	if (_isSetSystemTitleBar == flag)
+		return;
+
+	_isSetSystemTitleBar = flag;
+	if (flag){
+		setWindowFlags(windowFlags() ^ Qt::FramelessWindowHint);
+		setWindowFlags(windowFlags() ^ Qt::WindowSystemMenuHint);
+		
+		enableAutoHide(false);
+		titleBar->hide();
+		sideBarRL->hide();
+		sideBarTB->hide();
+	} else {
+		setWindowFlags(windowFlags() | Qt::FramelessWindowHint);
+		setWindowFlags(windowFlags() | Qt::WindowSystemMenuHint);
+
+		enableAutoHide(true);
+		titleBar->show();
+		sideBarRL->show();
+		sideBarTB->show();
+	}
+}
+
 void FxWidget::setMinimizetoHide(bool minimizetoHide){
 	if (titleBar)
 		titleBar->setMinimizetoHide(minimizetoHide); 
@@ -110,6 +137,12 @@ void FxWidget::mouseDoubleClickEvent(QMouseEvent *event){
 }
 
 void FxWidget::setBackground(QPixmap pix){
+
+	if (_isSetSystemTitleBar)
+	{
+		this->repaint();
+		return;
+	}
 	QPalette palette;
     backgroundPixmap = pix;
     QImage image = pix.toImage();
