@@ -36,7 +36,7 @@ Skin_Info * getCurrentSkinInfo();
 #define CHECK_SystemTiTle()  Skin_Info * sk_info = getCurrentSkinInfo(); \
     if (sk_info) \
     { \
-        if (sk_info->usingSystemTitle != "no") \
+        if (sk_info->usingSystemTitle != "yes") \
             this->setSystemTitleBar(false); \
         else \
             this->setSystemTitleBar(true); \

@@ -72,7 +72,7 @@ Skin_Info *get_skininfo(QString skinPath)
 	sk_info->name = doc.documentElement().attribute("name", "unset");
 	sk_info->author = doc.documentElement().attribute("author", "unset");
 	sk_info->describe = doc.documentElement().attribute("describe", "unset");
-	sk_info->usingSystemTitle = doc.documentElement().attribute("usingSystemTitle", "no");
+	sk_info->usingSystemTitle = doc.documentElement().attribute("usingSystemTitle", "yes");
 	sk_info->skinpath = skinPath;
 #if 0
 	qDebug(sk_info->name.toUtf8().data());
