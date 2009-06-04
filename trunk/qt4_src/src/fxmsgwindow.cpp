@@ -23,6 +23,8 @@
 #include "fxmsgwindow.h"
 #include "fxutil.h"
 #include "fxaddBuddyWindow.h"
+#include "fxskinmanage.h"
+
 
 
 #define SHAKE_DISTANCE 10
@@ -68,6 +70,8 @@ void FxMsgWindow::init()
 {
 	init_inputFace();
 	init_UI();
+
+    CHECK_SystemTiTle();
 
 	connect(tabWidget, SIGNAL( currentChanged(int) ), this, SLOT( currentChangedTab(int) ));
 	connect(tabWidget, SIGNAL( mouseDblClick(int) ), this, SLOT( closeTabWid(int) ));
@@ -558,6 +562,7 @@ void FxMsgWindow::showFaces()
 
 void FxMsgWindow::UpdateSkins()
 {
+    CHECK_SystemTiTle();
     AccountTab *ac_tab = NULL;
 	int tabCount = tabWidget->count();
     for(int i = 0; i < tabCount; i++)

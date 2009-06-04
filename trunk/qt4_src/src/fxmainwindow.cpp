@@ -85,6 +85,8 @@ FxMainWindow::FxMainWindow(QWidget *parent)
 #else
     //do nothing for linux platform
 #endif
+
+    CHECK_SystemTiTle();
 	
 	minimizedTimer.start(100);
 	checkSkinsTimer.start(10000);
@@ -1443,6 +1445,7 @@ void FxMainWindow::UpdateSkinsMenu()
 
 void FxMainWindow::UpdateSkins()
 {
+    CHECK_SystemTiTle();
 	msgwin->UpdateSkins();
 	buddyMge->UpdateSkins();
 
