@@ -80,13 +80,6 @@ FxMainWindow::FxMainWindow(QWidget *parent)
 	saveAccountInfo();
 #endif
 	
-#ifdef WIN32
-    setWindowFlags(windowFlags() | Qt::SplashScreen);
-#else
-    //do nothing for linux platform
-#endif
-
-    CHECK_SystemTiTle();
 	
 	minimizedTimer.start(100);
 	checkSkinsTimer.start(10000);
@@ -404,6 +397,7 @@ void FxMainWindow::minimizedWind()
         isNeedRecordWinPos = true;
         isNeedRecordWinSize = true;
         setAutoHide(true);
+		CHECK_SystemTiTle();
 	}
 }
 
