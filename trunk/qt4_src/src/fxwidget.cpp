@@ -83,13 +83,19 @@ FxWidget::FxWidget(QWidget *parent,Qt::WindowFlags flag):QWidget(parent,flag){
 void FxWidget::setSystemTitleBar(bool flag)
 {
 	if (_isSetSystemTitleBar == flag)
+	{	
+		setBackground(backgroundPixmap);
 		return;
+	}	
 
 	_isSetSystemTitleBar = flag;
 	if (flag){
 		setWindowFlags(windowFlags() ^ Qt::FramelessWindowHint);
 		setWindowFlags(windowFlags() ^ Qt::WindowSystemMenuHint);
-		
+#ifdef WIN32
+    setWindowFlags(windowFlags() ^ Qt::SplashScreen);
+#endif		
+
 		enableAutoHide(false);
 		titleBar->hide();
 		sideBarRL->hide();
@@ -97,12 +103,19 @@ void FxWidget::setSystemTitleBar(bool flag)
 	} else {
 		setWindowFlags(windowFlags() | Qt::FramelessWindowHint);
 		setWindowFlags(windowFlags() | Qt::WindowSystemMenuHint);
+#ifdef WIN32
+    setWindowFlags(windowFlags() | Qt::SplashScreen);
+#endif
 
 		enableAutoHide(true);
 		titleBar->show();
 		sideBarRL->show();
 		sideBarTB->show();
 	}
+
+	if (isVisible())
+		showNormal();
+	setBackground(backgroundPixmap);
 }
 
 void FxWidget::setMinimizetoHide(bool minimizetoHide){
@@ -140,9 +153,12 @@ void FxWidget::setBackground(QPixmap pix){
 
 	if (_isSetSystemTitleBar)
 	{
-		this->repaint();
+    this->setPalette(QApplication::palette());
 		return;
 	}
+
+	if(pix.isNull())
+		return;
 	QPalette palette;
     backgroundPixmap = pix;
     QImage image = pix.toImage();
@@ -169,9 +185,6 @@ void FxWidget::setBackground(QPixmap pix){
 
     palette.setBrush(this->backgroundRole(),QBrush(bgTop));
     this->setPalette(palette);
-    // for skin change
-    // but it doesn't work..
-    this->repaint();
 }
 
 void FxWidget::turnBackNormal(){
