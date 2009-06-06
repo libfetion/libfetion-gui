@@ -5,19 +5,19 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>295</width>
+    <width>281</width>
     <height>220</height>
    </rect>
   </property>
   <property name="sizePolicy" >
-   <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+   <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
   </property>
   <property name="minimumSize" >
    <size>
-    <width>295</width>
+    <width>281</width>
     <height>220</height>
    </size>
   </property>
@@ -56,9 +56,9 @@
    <property name="geometry" >
     <rect>
      <x>6</x>
-     <y>0</y>
-     <width>291</width>
-     <height>61</height>
+     <y>10</y>
+     <width>281</width>
+     <height>51</height>
     </rect>
    </property>
    <property name="sizePolicy" >
@@ -200,9 +200,15 @@
     <rect>
      <x>190</x>
      <y>133</y>
-     <width>103</width>
+     <width>81</width>
      <height>17</height>
     </rect>
+   </property>
+   <property name="sizePolicy" >
+    <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
    </property>
    <property name="layoutDirection" >
     <enum>Qt::LeftToRight</enum>
