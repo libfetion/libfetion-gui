@@ -40,6 +40,5 @@ Skin_Info * getCurrentSkinInfo();
             this->setSystemTitleBar(false); \
         else \
             this->setSystemTitleBar(true); \
-        delete sk_info; \
     } 
 #endif
