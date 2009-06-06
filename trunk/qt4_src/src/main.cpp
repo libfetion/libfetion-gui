@@ -72,6 +72,7 @@ int main(int argc, char *argv[])
 
 	Settings::instance().setSyetemDefualFont( QApplication::font() );
 	app.setFont(Settings::instance().getCurrentFont());
+	setSkins(Settings::instance().SkinPath(), Settings::instance().SkinName());
 	FxMain *mainWin = new FxMain;
 
 	//QObject::connect(&app, SIGNAL(lastWindowClosed()), &app, SLOT(quit()));
