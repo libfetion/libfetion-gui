@@ -92,9 +92,6 @@ void FxWidget::setSystemTitleBar(bool flag)
 	if (flag){
 		setWindowFlags(windowFlags() ^ Qt::FramelessWindowHint);
 		setWindowFlags(windowFlags() ^ Qt::WindowSystemMenuHint);
-#ifdef WIN32
-    setWindowFlags(windowFlags() ^ Qt::SplashScreen);
-#endif		
 
 		enableAutoHide(false);
 		titleBar->hide();
@@ -103,9 +100,6 @@ void FxWidget::setSystemTitleBar(bool flag)
 	} else {
 		setWindowFlags(windowFlags() | Qt::FramelessWindowHint);
 		setWindowFlags(windowFlags() | Qt::WindowSystemMenuHint);
-#ifdef WIN32
-    setWindowFlags(windowFlags() | Qt::SplashScreen);
-#endif
 
 		enableAutoHide(true);
 		titleBar->show();

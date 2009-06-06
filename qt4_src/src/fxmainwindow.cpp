@@ -95,6 +95,35 @@ FxMainWindow::~FxMainWindow()
 		delete msgwin;
 }
 
+void FxMainWindow::checkSplashScreenFlag()
+{
+#ifdef WIN32
+	bool isSplashScreen;
+	Qt::WindowFlags type = (windowFlags() & Qt::WindowType_Mask);
+	if (type == Qt::SplashScreen)
+		isSplashScreen = true;
+	else
+		isSplashScreen = false;
+
+	Skin_Info * __sk_info = getCurrentSkinInfo(); 
+
+	if (!__sk_info) 
+		return;
+	if (__sk_info->usingSystemTitle != "yes")  
+	{ 
+		/*we didn't need SystemTitle, so If current is not SplashScreen,
+		  we need to set the windowsflags to SplashScreen*/
+		if (!isSplashScreen) 
+			setWindowFlags(windowFlags() | Qt::SplashScreen);
+	} else {
+		/*we need SystemTitle, so If current is SplashScreen,
+		  we need to remove SplashScreen flag*/
+		if (isSplashScreen)
+			setWindowFlags(this->windowFlags() ^ Qt::SplashScreen);
+	}
+#endif
+}
+
 void FxMainWindow::UI_enable_impresa()
 {
 }
@@ -398,6 +427,7 @@ void FxMainWindow::minimizedWind()
         isNeedRecordWinSize = true;
         setAutoHide(true);
 		CHECK_SystemTiTle();
+		checkSplashScreenFlag();
 	}
 }
 
@@ -1449,6 +1479,7 @@ void FxMainWindow::UpdateSkinsMenu()
 void FxMainWindow::UpdateSkins()
 {
     CHECK_SystemTiTle();
+    checkSplashScreenFlag();
 	msgwin->UpdateSkins();
 	buddyMge->UpdateSkins();
 

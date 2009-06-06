@@ -107,6 +107,7 @@ signals:
     void signal_update_scheduleList();
 
 private slots:
+    void checkSplashScreenFlag();
 	void checkSkinPath();
 	void minimizedWind();
 	void flickerTray();

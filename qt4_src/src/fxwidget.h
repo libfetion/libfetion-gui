@@ -27,11 +27,7 @@ class FxWidget:public QWidget{
 	
 	//Q_PROPERTY(QPixmap hiddenBar WRITE setHiddenBar)
 public:
-	#ifdef WIN32
-    	FxWidget(QWidget *parent=0,Qt::WindowFlags flag=( Qt::Window | Qt::FramelessWindowHint | Qt::WindowSystemMenuHint | Qt::SplashScreen) );
-    	#else
     	FxWidget(QWidget *parent=0,Qt::WindowFlags flag=( Qt::Window | Qt::FramelessWindowHint | Qt::WindowSystemMenuHint) );
-#endif
 public slots:
     void beginAutoHide();
     void endAutoHide();
