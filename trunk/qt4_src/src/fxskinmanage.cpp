@@ -83,9 +83,23 @@ Skin_Info *get_skininfo(QString skinPath)
 	return sk_info;
 }
 
+
 Skin_Info * getCurrentSkinInfo()
 {
-    return get_skininfo(getSkinPath());
+	static Skin_Info * currentSkinInfo = NULL;
+	static QString currentSkinPath;
+	if (currentSkinPath == getSkinPath())
+		{
+		if (!currentSkinInfo)
+		currentSkinInfo = get_skininfo(getSkinPath());
+		return currentSkinInfo;
+	}
+		
+		currentSkinPath = getSkinPath();
+		if (currentSkinInfo)
+			delete currentSkinInfo;
+		currentSkinInfo = get_skininfo(getSkinPath());
+		return currentSkinInfo;
 }
 
 void get_skin_search_result(QList<Skin_Info *>  *items, QString path)
