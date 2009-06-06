@@ -37,7 +37,7 @@ Settings::Settings(const QString & fileName, Format format)
 
 	QSize dt_size =	QApplication::desktop()->size();
 	m_LoginWinPos = value("LoginWinPos", QPoint(dt_size.width()/3, dt_size.height()/3)).toPoint();
-	m_LoginWinSize = value("LoginWinSize", QSize(399, 274)).toSize();
+	m_LoginWinSize = value("LoginWinSize", QSize(281, 220)).toSize();
 
 	m_skinPath = value("SkinPath", defaultSkinPath()).toString();
 	m_skinName = value("SkinName", "default").toString();
@@ -129,7 +129,7 @@ void Settings::init_setting()
 	m_MsgWinSize = value("MsgWinSize", QSize(399, 274)).toSize();
 
 	m_MainWinPos = value("MainWinPos", QPoint(dt_size.width()/10*7, dt_size.height()/10)).toPoint();
-	m_MainWinSize = value("MainWinSize", QSize(400, 400)).toSize();
+	m_MainWinSize = value("MainWinSize", QSize(254, 551)).toSize();
 
 	m_SendMultMsgWinPos = value("SendMultMsgWinPos", QPoint(dt_size.width()/3, dt_size.height()/3)).toPoint();
 	m_SendMultMsgWinSize = value("SendMultMsgWinSize", QSize(400, 400)).toSize();
