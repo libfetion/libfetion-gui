@@ -98,8 +98,10 @@ void FxWidget::setSystemTitleBar(bool flag)
 		sideBarRL->hide();
 		sideBarTB->hide();
 	} else {
-		setWindowFlags(windowFlags() | Qt::FramelessWindowHint);
-		setWindowFlags(windowFlags() | Qt::WindowSystemMenuHint);
+		//setWindowFlags(windowFlags() | Qt::FramelessWindowHint);
+		//setWindowFlags(windowFlags() | Qt::WindowSystemMenuHint);
+		/** I don't know why need to do as following... */
+		setWindowFlags(Qt::Window | Qt::FramelessWindowHint | Qt::WindowSystemMenuHint); 
 
 		enableAutoHide(true);
 		titleBar->show();
