@@ -106,21 +106,21 @@ SOURCES       =  \
 				./src/sqlite/sqlite3.c
 
 FORMS         =  \
-				./src/ui/login_window.ui\
-				./src/ui/fetionwindow.ui \
-				./src/ui/msgwindow.ui \	
-				./src/ui/msgsend.ui \
-				./src/ui/showAccountInfo.ui \
-				./src/ui/qunwindow.ui \
-				./src/ui/historyMsg.ui \
-				./src/ui/verifyAccount.ui \
-				./src/ui/addBuddy.ui \
-				./src/ui/proxy.ui \
-				./src/ui/sendgroupsms.ui \
-				./src/ui/scheduleSms/scheduleSMS.ui \
-				./src/ui/scheduleSms/scheduleSMSManage.ui \
-				./src/ui/refusesms.ui \
-				./src/ui/configdia.ui
+				./ui/login_window.ui\
+				./ui/fetionwindow.ui \
+				./ui/msgwindow.ui \	
+				./ui/msgsend.ui \
+				./ui/showAccountInfo.ui \
+				./ui/qunwindow.ui \
+				./ui/historyMsg.ui \
+				./ui/verifyAccount.ui \
+				./ui/addBuddy.ui \
+				./ui/proxy.ui \
+				./ui/sendgroupsms.ui \
+				./ui/scheduleSms/scheduleSMS.ui \
+				./ui/scheduleSms/scheduleSMSManage.ui \
+				./ui/refusesms.ui \
+				./ui/configdia.ui
 
 
 
