@@ -42,7 +42,7 @@ FxLoginWindow::FxLoginWindow(QWidget *parent)
     CHECK_SystemTiTle();
 
     move(Settings::instance().LoginWinPos());
-    resize(Settings::instance().LoginWinSize());
+    //resize(Settings::instance().LoginWinSize());
 }
 
 FxLoginWindow::~FxLoginWindow()
