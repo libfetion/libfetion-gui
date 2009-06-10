@@ -197,6 +197,7 @@ QPixmap getOnlineStatusIcon(int status)
 			return QPixmap(getSkinPath() + "/online/mobile" + postfix);
 		case FX_STATUS_WAITING_AUTH:  //the account waiting   
 			return QPixmap(getSkinPath() + "/online/waiting" + postfix);
+		case FX_STATUS_REFUSE + MOBILE_LOGIN:   //the account is refuse make friends with you
 		case FX_STATUS_REFUSE:   //the account is refuse make friends with you
 			return QPixmap(getSkinPath() + "/online/refuse" + postfix);
 		case FX_STATUS_OFFLINE:
@@ -224,26 +225,18 @@ QPixmap getOnlineStatusIcon(int status)
 			return QPixmap(getSkinPath() + "/online/m_mobile" + postfix);
 		case FX_STATUS_WAITING_AUTH + MOBILE_LOGIN:  //the account waiting   
 			return QPixmap(getSkinPath() + "/online/m_waiting" + postfix);
-		case FX_STATUS_REFUSE + MOBILE_LOGIN:   //the account is refuse make friends with you
-			return QPixmap(getSkinPath() + "/online/m_refuse" + postfix);
-		case FX_STATUS_OFFLINE + MOBILE_LOGIN:
-			return QPixmap(getSkinPath() + "/online/m_offline" + postfix);
-		case FX_STATUS_DINNER + MOBILE_LOGIN:
-			return QPixmap(getSkinPath() + "/online/m_dinner" + postfix);
-		case FX_STATUS_AWAY + MOBILE_LOGIN:
-			return QPixmap(getSkinPath() + "/online/m_away" + postfix);
+		
 		case FX_STATUS_ONLINE + MOBILE_LOGIN:
 			return QPixmap(getSkinPath() + "/online/m_online" + postfix);
+		case FX_STATUS_DINNER + MOBILE_LOGIN:
+		case FX_STATUS_AWAY + MOBILE_LOGIN:
+		case FX_STATUS_EXTENDED_AWAY + MOBILE_LOGIN:
+		case FX_STATUS_NUM_PRIMITIVES + MOBILE_LOGIN:
+			return QPixmap(getSkinPath() + "/online/m_away" + postfix);
 		case FX_STATUS_PHONE + MOBILE_LOGIN:
-			return QPixmap(getSkinPath() + "/online/m_phone" + postfix);
+		case FX_STATUS_MEETING + MOBILE_LOGIN:
 		case FX_STATUS_BUSY + MOBILE_LOGIN:
 			return QPixmap(getSkinPath() + "/online/m_busy" + postfix);
-		case FX_STATUS_MEETING + MOBILE_LOGIN:
-			return QPixmap(getSkinPath() + "/online/m_meeting" + postfix);
-		case FX_STATUS_EXTENDED_AWAY + MOBILE_LOGIN:
-			return QPixmap(getSkinPath() + "/online/m_extnded_away" + postfix);
-		case FX_STATUS_NUM_PRIMITIVES + MOBILE_LOGIN:
-			return QPixmap(getSkinPath() + "/online/m_num_primitives" + postfix);
 	}
 
 	return QPixmap();
