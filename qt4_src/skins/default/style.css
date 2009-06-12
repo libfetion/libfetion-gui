@@ -1,11 +1,11 @@
 /*****************************
-ä¸€èˆ¬æƒ…å†µä¸‹ä»¥#å¼€å¤´çš„æ ‡è®°ï¼Œå¦‚ QPushButton#btnClose ä¹Ÿå¯ä»¥ç›´æ¥ç”¨ #btnCloseï¼Œæ•ˆæœä¸€æ ·ã€‚
+Ò»°ãÇé¿öÏÂÒÔ#¿ªÍ·µÄ±ê¼Ç£¬Èç QPushButton#btnClose Ò²¿ÉÒÔÖ±½ÓÓÃ #btnClose£¬Ğ§¹ûÒ»Ñù¡£
 
 
-ä¹å®«æ ¼å››ä¸ªå‚æ•°å±æ€§ä¸ºï¼š qproperty-scaleLeft   qproperty-scaleRight qproperty-scaleTop qproperty-scaleBottom
-å›¾ä¸ºï¼š                         qproperty-background
+¾Å¹¬¸ñËÄ¸ö²ÎÊıÊôĞÔÎª£º qproperty-scaleLeft   qproperty-scaleRight qproperty-scaleTop qproperty-scaleBottom
+Í¼Îª£º                         qproperty-background
 
-ä¸»çª—å£çš„idä¸º mainWindow
+Ö÷´°¿ÚµÄidÎª mainWindow
 
 
 ******************************/
@@ -34,7 +34,7 @@ QWidget{
 	margin:2px;
 }
 
-/*  è®¾ç½® èŠå¤©çª—å£ << æ‰€æœ‰ >> æŒ‰é’®å›¾ç‰‡ è®¾è®¡å¥½åå¯ä¿®æ”¹ */
+/*  ÉèÖÃ ÁÄÌì´°¿Ú << ËùÓĞ >> °´Å¥Í¼Æ¬ Éè¼ÆºÃºó¿ÉĞŞ¸Ä */
 /*
 #ChatWindow QToolButton, #ChatWindow QPushButton{
     border-image: url(%currentPath%/style/bt-normal.png);
@@ -57,7 +57,7 @@ QToolButton:pressed,QPushButton:pressed{
 /*	border-image: url(%currentPath%/style/iR.Btn.PressDown.png); */
 }
 
-/* è®¾ç½®æ”¹å˜å‘é€æ¨¡å¼æŒ‰é’® */
+/* ÉèÖÃ¸Ä±ä·¢ËÍÄ£Ê½°´Å¥ */
 #ChatWindow #btnSwitchSendMode{
 	border-image:url(%currentPath%/style/sendToPC-normal.png);
 }
@@ -82,29 +82,29 @@ QToolButton:pressed,QPushButton:pressed{
 }
 */
 
-/* è®¾ç½®èŠå¤©çª—å£å†å²è®°å½•æŒ‰é’® */
+/* ÉèÖÃÁÄÌì´°¿ÚÀúÊ·¼ÇÂ¼°´Å¥ */
 #ChatWindow #btnHistory{
 	border-image:url(%currentPath%/style/history.png);
 }
 
-/* è®¾ç½®èŠå¤©çª—å£æŒ¯åŠ¨æŒ‰é’® */
+/* ÉèÖÃÁÄÌì´°¿ÚÕñ¶¯°´Å¥ */
 #ChatWindow #btnNudge{
 	border-image:url(%currentPath%/style/nudge_button.png);
 }
 
-/* è®¾ç½®èŠå¤©çª—å£å‘é€æ¶ˆæ¯æŒ‰é’® */
+/* ÉèÖÃÁÄÌì´°¿Ú·¢ËÍÏûÏ¢°´Å¥ */
 #ChatWindow #btnSend{
 	border-image:url(%currentPath%/style/send_button.png);
 }
 
 
-/* è®¾ç½®èŠå¤©çª—å£é€‰æ‹©è¡¨æƒ…æŒ‰é’® */
+/* ÉèÖÃÁÄÌì´°¿ÚÑ¡Ôñ±íÇé°´Å¥ */
 #ChatWindow #btnFace{
 	border-image:url(%currentPath%/misc/tool_face.gif);
 }
 
 
-/*  è®¾ç½®æ‰€æœ‰çª—å£çš„ç¼ºçœèƒŒæ™¯(ç›®å‰åªæ”¯æŒä¸»çª—å£ï¼Œç™»é™†çª—å£åŠèŠå¤©çª—å£) ï¼Œå¦‚ç¬¬ä¸€ä¸ªè§„åˆ™è®¾å®šäº†èŠå¤©çª—å£çš„èƒŒæ™¯ã€‚ */
+/*  ÉèÖÃËùÓĞ´°¿ÚµÄÈ±Ê¡±³¾°(Ä¿Ç°Ö»Ö§³ÖÖ÷´°¿Ú£¬µÇÂ½´°¿Ú¼°ÁÄÌì´°¿Ú) £¬ÈçµÚÒ»¸ö¹æÔòÉè¶¨ÁËÁÄÌì´°¿ÚµÄ±³¾°¡£ */
 fxgui--FxWidget{
 	background-origin:padding;
 	qproperty-background:url(%currentPath%/style/iF.Bg.MainPanel.png);
@@ -121,9 +121,9 @@ fxgui--FxWidget{
 	height:519px;
 }
 /* 
-èŠå¤©ç•Œé¢èƒŒæ™¯è®¾ç½® 
-è‹¥è¦ç‹¬ç«‹è®¾ç½®ä¸»çª—å£èƒŒæ™¯å¯å°† ChatWindowæ¢ä¸º mainWindow
-ç™»é™†çª—å£ä¸º loginWindow
+ÁÄÌì½çÃæ±³¾°ÉèÖÃ 
+ÈôÒª¶ÀÁ¢ÉèÖÃÖ÷´°¿Ú±³¾°¿É½« ChatWindow»»Îª mainWindow
+µÇÂ½´°¿ÚÎª loginWindow
 
 #ChatWindow{
 	qproperty-background:url(%currentPath%/style/chat.png);
@@ -133,7 +133,7 @@ fxgui--FxWidget{
 	qproperty-scaleBottom:30;
 	
 } */
-/*  å»æ‰å¥½å‹åˆ—è¡¨çš„è™šçº¿ */
+/*  È¥µôºÃÓÑÁĞ±íµÄĞéÏß */
 QTreeView::branch:!has-children {
     border:none;
 }
@@ -143,12 +143,12 @@ QTreeView{
 	alternate-background-color:rgba(200,200,200,30%);
 	/* background-color:rgba(23,73,63,80%); */
 }
-/*  å¥½å‹åˆ—è¡¨æ ‘å…³é—­æ—¶çš„èƒŒæ™¯å›¾ */
+/*  ºÃÓÑÁĞ±íÊ÷¹Ø±ÕÊ±µÄ±³¾°Í¼ */
 QTreeView::branch:has-children:closed{
 	border-image: none;
     image: url(%currentPath%/style/iF.Mk.groupFold.png);
 }
-/* å¥½å‹åˆ—è¡¨æ ‘æ‰“å¼€æ—¶çš„èƒŒæ™¯å›¾ */
+/* ºÃÓÑÁĞ±íÊ÷´ò¿ªÊ±µÄ±³¾°Í¼ */
 QTreeView::branch:has-children:open{
  	border-image: none;
  	image: url(%currentPath%/style/iF.Mk.groupExpand.png);
@@ -162,72 +162,38 @@ QTreeView > QTreeView::item{
 	background:#ff0000;
 }
 
- QTabWidget::pane { /* The tab widget frame */
-     border-top: 2px solid #C2C7CB;
-     position: absolute;
-     top: -0.5em;
- }
 
- QTabWidget::tab-bar {
-     alignment: center;
- }
-
- /* Style the tab using the tab sub-control. Note that
-     it reads QTabBar _not_ QTabWidget */
- QTabBar::tab {
-     background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                 stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,
-                                 stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);
-     border: 2px solid #C4C4C3;
-     border-bottom-color: #C2C7CB; /* same as the pane color */
-     border-top-left-radius: 4px;
-     border-top-right-radius: 4px;
-     min-width: 8ex;
-     padding: 2px;
- }
-
- QTabBar::tab:selected, QTabBar::tab:hover {
-     background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                 stop: 0 #fafafa, stop: 0.4 #f4f4f4,
-                                 stop: 0.5 #e7e7e7, stop: 1.0 #fafafa);
- }
-
- QTabBar::tab:selected {
-     border-color: #9B9B9B;
-     border-bottom-color: #C2C7CB; /* same as pane color */
- }
-
-/* å¥½å‹åˆ—è¡¨ä¸­é¼ æ ‡ç»è¿‡æ—¶çš„èƒŒæ™¯æ¸å˜  */
+/* ºÃÓÑÁĞ±íÖĞÊó±ê¾­¹ıÊ±µÄ±³¾°½¥±ä  */
 QTreeView::item:hover {
    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #e7effd, stop: 1 #cbdaf1);
    border: 1px solid #bfcde4;
 }
-/* å¥½å‹åˆ—è¡¨è¢«é€‰ä¸­å…ƒç´  æœ‰ç„¦ç‚¹æ—¶ èƒŒæ™¯æ¸å˜ */
+/* ºÃÓÑÁĞ±í±»Ñ¡ÖĞÔªËØ ÓĞ½¹µãÊ± ±³¾°½¥±ä */
 QTreeView::item:selected:active{
    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #6ea1f1, stop: 1 #567dbc);
 }
-/* å¥½å‹åˆ—è¡¨è¢«é€‰ä¸­å…ƒç´  æ— ç„¦ç‚¹æ—¶ èƒŒæ™¯æ¸å˜ */
+/* ºÃÓÑÁĞ±í±»Ñ¡ÖĞÔªËØ ÎŞ½¹µãÊ± ±³¾°½¥±ä */
 QTreeView::item:selected:!active {
    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #6b9be8, stop: 1 #577fbf);
 }
 
 
-/* è¾“å…¥æ¡†èƒŒæ™¯é€æ˜ */
+/* ÊäÈë¿ò±³¾°Í¸Ã÷ */
 QLineEdit{
 	background-color:rgba(255,255,255,30%); 
 	border:1px solid #999999;
 }
-/* è¾“å…¥æ¡†æœ‰é¼ æ ‡ç»è¿‡æ—¶èƒŒæ™¯è‰²å˜åŒ– */
+/* ÊäÈë¿òÓĞÊó±ê¾­¹ıÊ±±³¾°É«±ä»¯ */
 QLineEdit:hover{
 	border:1px solid #333333;
 }
-/* è¾“å…¥æ¡†æœ‰ç„¦ç‚¹æ—¶(å¯æ¥æ”¶è¾“å…¥æ—¶) èƒŒæ™¯è‰²ï¼Œè¿™é‡Œç”¨äº†QTçš„palletï¼Œä¹Ÿå¯ä»¥è®¾ç½®ç¡®å®šçš„é¢œè‰²ï¼Œç”¨rgb æˆ–rgbaéƒ½å¯ä»¥ */
+/* ÊäÈë¿òÓĞ½¹µãÊ±(¿É½ÓÊÕÊäÈëÊ±) ±³¾°É«£¬ÕâÀïÓÃÁËQTµÄpallet£¬Ò²¿ÉÒÔÉèÖÃÈ·¶¨µÄÑÕÉ«£¬ÓÃrgb »òrgba¶¼¿ÉÒÔ */
 QLineEdit::focus{
 	border:1px solid #333333;
 	background-color:rgba(255,255,255,100%);
 }
 
-/* å¿ƒæƒ…çŸ­è¯­ éç¼–è¾‘çŠ¶æ€ é¼ æ ‡ç»è¿‡æ—¶èƒŒæ™¯ï¼Œè¿™é‡ŒåŸä»£ç è¿˜æœ‰ä¸ªBUGï¼Œä¸»çª—å£RESIZEåè¦ç‚¹ä¸­å¿ƒæƒ…çŸ­è¯­çš„æ–‡å­—æ‰å¯ä»¥è¿›å…¥ç¼–è¾‘çŠ¶æ€ */
+/* ĞÄÇé¶ÌÓï ·Ç±à¼­×´Ì¬ Êó±ê¾­¹ıÊ±±³¾°£¬ÕâÀïÔ­´úÂë»¹ÓĞ¸öBUG£¬Ö÷´°¿ÚRESIZEºóÒªµãÖĞĞÄÇé¶ÌÓïµÄÎÄ×Ö²Å¿ÉÒÔ½øÈë±à¼­×´Ì¬ */
 #nickname:hover,#impression:hover{
 	border:1px solid #999999;
 	/*border-image:url(%currentPath%/style/bt-normal.png) 4 4 4 4;*/
@@ -237,7 +203,7 @@ QLineEdit::focus{
 }
 
 
-/* æ·»åŠ å¥½å‹æŒ‰é’® */
+/* Ìí¼ÓºÃÓÑ°´Å¥ */
 #btnAddFriend{
 /*	border:1px solid #cccccc;*/
 	border:none;
@@ -256,7 +222,7 @@ QLineEdit::focus{
 } */
 
 
-/* æœç´¢æ  */
+/* ËÑË÷À¸ */
 #lineSearch{
 	background-color:rgba(255,255,255,100%); 
 	border:1px solid #cccccc;
@@ -267,24 +233,24 @@ QLineEdit::focus{
 }
 
 
-/* portrait å¤´åƒ */
-/* å¤‡æ³¨ï¼šå¾€åç‰ˆæœ¬å¦‚æœä¸‹è½½ç”¨æˆ·å®šä¹‰çš„å¤´åƒï¼Œåˆ™æ­¤å±æ€§çš„CSSå°†ä¸æä¾›ä¿®æ”¹æˆ–èƒŒæ™¯é»˜è®¤æŒ‡å‘æŒ‡å®šè·¯å¾„ */
+/* portrait Í·Ïñ */
+/* ±¸×¢£ºÍùºó°æ±¾Èç¹ûÏÂÔØÓÃ»§¶¨ÒåµÄÍ·Ïñ£¬Ôò´ËÊôĞÔµÄCSS½«²»Ìá¹©ĞŞ¸Ä»ò±³¾°Ä¬ÈÏÖ¸ÏòÖ¸¶¨Â·¾¶ */
 #portrait{
-	border-image:url(%currentPath%/style/user-face.png) 0 0 0 0; /*è¿™ä¸ªæ˜¯å¤´åƒçš„è¾¹æ¡†ï¼Œæ³¨æ„ï¼Œè¾¹æ¡†çš„æ˜¾ç¤ºè¦æ±‚å¤´åƒå‘¨å›´æ˜¯é€æ˜çš„ */
+	border-image:url(%currentPath%/style/user-face.png) 0 0 0 0; /*Õâ¸öÊÇÍ·ÏñµÄ±ß¿ò£¬×¢Òâ£¬±ß¿òµÄÏÔÊ¾ÒªÇóÍ·ÏñÖÜÎ§ÊÇÍ¸Ã÷µÄ */
 	background-repeat:repeat-none;
 /*	background-image:url(%currentPath%/style/Bomb.jpg); */
 	background-position: center center;
 	width:66;
 	height:66;
 }
-/* ä¸»çª—å£æ ‡é¢˜ï¼Œè¿™ä¸ªæ²¡å¤šå¤§ä½œç”¨ */
+/* Ö÷´°¿Ú±êÌâ£¬Õâ¸öÃ»¶à´ó×÷ÓÃ */
 fxgui--FxWidget{
 	qproperty-windowTitle:"LibFetion";
 }
 fxgui--FxWidget QLabel#title{
 	margin-top:2px;
 }
-/* å½“å‰çª—å£æœ‰ç„¦ç‚¹æ—¶ï¼Œæ ‡é¢˜çš„æ ·å¼ */
+/* µ±Ç°´°¿ÚÓĞ½¹µãÊ±£¬±êÌâµÄÑùÊ½ */
 fxgui--FxWidget QLabel#title:active{
 	color:#666666;
 }
@@ -306,7 +272,7 @@ QPushButton{
 }
 */
 
-/* æ‰€æœ‰çª—å£çš„æœ€å°åŒ–ï¼Œå…³é—­æŒ‰é’®çš„ä¸‰ä¸ªçŠ¶æ€å›¾ç‰‡ */
+/* ËùÓĞ´°¿ÚµÄ×îĞ¡»¯£¬¹Ø±Õ°´Å¥µÄÈı¸ö×´Ì¬Í¼Æ¬ */
 QPushButton#btnMinimize{
     border-image: url(%currentPath%/style/iF.Btn.Min.png);
 }
@@ -327,10 +293,10 @@ QPushButton#btnClose:pressed{
 }
 
 
-/* ä¸»çª—å£åº•éƒ¨â€œMENUâ€æŒ‰é’®çš„ä¸‰ä¸ªçŠ¶æ€å›¾ç‰‡ */
+/* Ö÷´°¿Úµ×²¿¡°MENU¡±°´Å¥µÄÈı¸ö×´Ì¬Í¼Æ¬ */
 QToolButton#btnMenu{
 	border:none;
-	qproperty-shortcut:"CTRL+A";  /* è®¾ç½®å¿«æ·é”®(éœ€åœ¨ä¸»çª—å£ä¸ºå½“å‰çª—å£æ—¶æ‰æœ‰æ•ˆ) */
+	qproperty-shortcut:"CTRL+A";  /* ÉèÖÃ¿ì½İ¼ü(ĞèÔÚÖ÷´°¿ÚÎªµ±Ç°´°¿ÚÊ±²ÅÓĞĞ§) */
     border-image: url(%currentPath%/style/iR.Btn.normal.png);
 }
 QToolButton#btnMenu:hover{
@@ -340,7 +306,7 @@ QToolButton#btnMenu:pressed{
 	border-image: url(%currentPath%/style/iR.Btn.PressDown.png);
 }
 
-/* ä¸»çª—å£â€œç»™è‡ªå·²å‘çŸ­ä¿¡â€æŒ‰é’®çš„ä¸‰ä¸ªçŠ¶æ€å›¾ç‰‡ */
+/* Ö÷´°¿Ú¡°¸ø×ÔÒÑ·¢¶ÌĞÅ¡±°´Å¥µÄÈı¸ö×´Ì¬Í¼Æ¬ */
 QToolButton#btnSendSelf{
 	border:none;
 	qproperty-icon:url(%currentPath%/style/iR.sms.png);
@@ -359,7 +325,7 @@ QToolButton#btnSendSelf:pressed{
 }
 */
 
-/* ä¸»çª—å£åº•éƒ¨â€œè®¾ç½®â€æŒ‰é’®çš„ä¸‰ä¸ªçŠ¶æ€å›¾ç‰‡ */
+/* Ö÷´°¿Úµ×²¿¡°ÉèÖÃ¡±°´Å¥µÄÈı¸ö×´Ì¬Í¼Æ¬ */
 QToolButton#btnSettings{
 	border:none;
 	qproperty-icon:url(%currentPath%/style/iR.setting.png);
@@ -377,7 +343,7 @@ QToolButton#btnSettings:pressed{
 }
 */
 
-/* èŠå¤©çª—å£å¼¹å‡ºçš„é€‰æ‹©è¡¨æƒ…å›¾ç‰‡ */
+/* ÁÄÌì´°¿Úµ¯³öµÄÑ¡Ôñ±íÇéÍ¼Æ¬ */
 #facesPopup{
 	background-image:url(%currentPath%/style/input_face.gif);
 	background-repeat:none;
@@ -412,7 +378,7 @@ QToolButton#btnSettings:pressed{
 	 
 
 	 
-/* ä»¥ä¸‹å¯å¿½ç•¥ */
+/* ÒÔÏÂ¿ÉºöÂÔ */
  QMenu::icon:checked { /* appearance of a 'checked' icon */
      background: gray;
      border: 1px inset gray;
