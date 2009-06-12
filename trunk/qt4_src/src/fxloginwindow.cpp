@@ -57,7 +57,8 @@ FxLoginWindow::~FxLoginWindow()
 void FxLoginWindow::Cancel_logwin()
 {
 	enableLoginBT();
-	fx_close_network();
+	fx_cancel_login();
+	Login_State->setText(QObject::tr("cancel login"));
 }
 
 void FxLoginWindow::set_login_button_state(bool state)

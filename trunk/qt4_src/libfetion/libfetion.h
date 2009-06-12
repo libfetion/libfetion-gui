@@ -267,6 +267,19 @@ FX_EXPORT BOOL fs_login(const char *uid, const char *password);
 FX_EXPORT void fx_set_login_status(int longin_status);
 
 /**
+  * \fn void fx_cancel_login()
+  * \brief cancel login fetion.
+  *
+  * This function will cancel login, don't use it after logined fetion!!!
+  * because it's not tested for that case.
+  *
+  *
+  * \sa fx_login
+  */
+FX_EXPORT void fx_cancel_login();
+
+
+/**
   * \fn void fx_login(const char *uid, const char *password, EventListener func, void *args)
   * \brief login fetion.
   *
