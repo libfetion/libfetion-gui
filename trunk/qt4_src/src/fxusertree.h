@@ -13,10 +13,13 @@ public:
 	FxUserTree(QWidget *parent = 0):QTreeWidget(parent){
 		normalSize = QSize(30,16);
 		clickedSize = QSize(70,40);
+	 /** just close this feature temporarily, we will reopen it when supproting portrait */
+	 /*
 		connect(this,SIGNAL(itemClicked(QTreeWidgetItem *, int)),
 				this,SLOT(onItemClicked(QTreeWidgetItem *, int)));
 		connect(this,SIGNAL(currentItemChanged ( QTreeWidgetItem *, QTreeWidgetItem *)),
 				this,SLOT(onCurrentItemChanged(QTreeWidgetItem *, QTreeWidgetItem *)));
+				*/
 	}
 
  
