@@ -428,20 +428,12 @@ QPixmap getCloseTabImage()
 
 QPixmap getLoginImage()
 {
-		QString postfix;
-	if(QFile::exists(getSkinPath() + "/theme/login_image-mac.png"))	
-		postfix = ".png";
-	else
-	  postfix = ".gif";
-#ifdef Q_OS_MAC //Mac OS X platfrom
-	return QPixmap(getSkinPath() + "/theme/login_image-mac" + postfix);
-#else
-	#ifdef WIN32 //windows platfrom
-		return QPixmap(getSkinPath() + "/theme/login_image-win" + postfix);
-	#else //linux platfrom
-		return QPixmap(getSkinPath() + "/theme/login_image-linux" + postfix);
-	#endif
-#endif
+    QString postfix;
+    if(QFile::exists(getSkinPath() + "/theme/login_image.png"))	
+        postfix = ".png";
+    else
+        postfix = ".gif";
+    return QPixmap(getSkinPath() + "/theme/login_image" + postfix);
 }
 
 QPixmap getPortraitImage()
