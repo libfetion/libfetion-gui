@@ -1,9 +1,9 @@
 Package: LinuxFetion
-Version: 0.2.2
+Version: 1.0.0a2
 Architecture: i386
 Maintainer: DDD <dedodong@163.com>
 Installed-Size: 1588 
-Depends: libc6 (>= 2.3.6-6), libgcc1 (>= 1:4.1.1-12), libstdc++6 (>= 4.1.1-12),  libqt4-core (>= 4.3.2), libqt4-gui (>= 4.3.2), libx11-6
+Depends: libc6 (>= 2.3.6-6), libgcc1 (>= 1:4.1.1-12), libstdc++6 (>= 4.1.1-12), libqt4-core (>= 4.3.2), libqt4-gui (>= 4.3.2),libx11-6, libcurl4-openssl-dev
 Section: kde
 Priority: optional
 Description: Linux Fetion a KDE IM client, Using CHINA MOBILE's Fetion Protocol.
