@@ -1,3 +1,3 @@
 
-dpkg -b linux_fetion/ linux_fetion_v0.2.2_8.04_beta_i386.deb
+dpkg -b linux_fetion/ linux_fetion_v1.0_8.04_alpha2_i386.deb
 
