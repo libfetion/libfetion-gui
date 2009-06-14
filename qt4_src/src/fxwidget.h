@@ -80,6 +80,7 @@ public:
 public slots:
 #ifdef Q_OS_MAC
     //on mac platform, we didn't support autohide function
+    void enableAutoHide(bool flag=true){}
     void setAutoHide(bool autoHide=true){}
 #else
 	void enableAutoHide(bool flag=true){ 
