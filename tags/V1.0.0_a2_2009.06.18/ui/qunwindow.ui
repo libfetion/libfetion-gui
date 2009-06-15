@@ -1,0 +1,156 @@
+<ui version="4.0" >
+ <class>FxQunWin</class>
+ <widget class="QMainWindow" name="FxQunWin" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>388</width>
+    <height>335</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>qunwindow</string>
+  </property>
+  <property name="styleSheet" >
+   <string>QMainWindow {
+ 
+background-color:rgb(246,243,243);
+
+}</string>
+  </property>
+  <widget class="QWidget" name="centralwidget" >
+   <widget class="QPushButton" name="BT_SMS" >
+    <property name="geometry" >
+     <rect>
+      <x>180</x>
+      <y>10</y>
+      <width>51</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+    <property name="icon" >
+     <iconset>../../../../home/dengdd/image/misc/bt_sms.gif</iconset>
+    </property>
+    <property name="iconSize" >
+     <size>
+      <width>45</width>
+      <height>38</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="MsgEdit" >
+    <property name="geometry" >
+     <rect>
+      <x>9</x>
+      <y>285</y>
+      <width>371</width>
+      <height>45</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Ac_Status" >
+    <property name="geometry" >
+     <rect>
+      <x>10</x>
+      <y>6</y>
+      <width>161</width>
+      <height>38</height>
+     </rect>
+    </property>
+    <property name="frameShape" >
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+    <property name="textFormat" >
+     <enum>Qt::RichText</enum>
+    </property>
+    <property name="wordWrap" >
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="Line" name="line" >
+    <property name="geometry" >
+     <rect>
+      <x>7</x>
+      <y>268</y>
+      <width>371</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="orientation" >
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="MsgBrowser" >
+    <property name="geometry" >
+     <rect>
+      <x>10</x>
+      <y>49</y>
+      <width>231</width>
+      <height>221</height>
+     </rect>
+    </property>
+    <property name="focusPolicy" >
+     <enum>Qt::NoFocus</enum>
+    </property>
+    <property name="lineWidth" >
+     <number>2</number>
+    </property>
+    <property name="verticalScrollBarPolicy" >
+     <enum>Qt::ScrollBarAlwaysOn</enum>
+    </property>
+    <property name="autoFormatting" >
+     <set>QTextEdit::AutoBulletList</set>
+    </property>
+    <property name="undoRedoEnabled" >
+     <bool>true</bool>
+    </property>
+    <property name="readOnly" >
+     <bool>true</bool>
+    </property>
+    <property name="overwriteMode" >
+     <bool>true</bool>
+    </property>
+    <property name="textInteractionFlags" >
+     <set>Qt::TextSelectableByMouse</set>
+    </property>
+   </widget>
+   <widget class="QTreeWidget" name="view" >
+    <property name="geometry" >
+     <rect>
+      <x>245</x>
+      <y>46</y>
+      <width>131</width>
+      <height>221</height>
+     </rect>
+    </property>
+    <column>
+     <property name="text" >
+      <string>1</string>
+     </property>
+    </column>
+   </widget>
+   <widget class="QLabel" name="label" >
+    <property name="geometry" >
+     <rect>
+      <x>260</x>
+      <y>20</y>
+      <width>111</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string>qun members list</string>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
