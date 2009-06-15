@@ -121,6 +121,15 @@ void FxMainWindow::checkSplashScreenFlag()
 		if (isSplashScreen)
 			setWindowFlags(this->windowFlags() ^ Qt::SplashScreen);
 	}
+
+	/** I swear: this is the worst code of mine!!!!*/
+    /*fix the bug of issue 87*/
+	Sleep(10);
+	if Settings::instance().isEnableGetMsgHotKey() 
+	{
+		Settings::instance().setEnableGetMsgHotKey(false);
+		Settings::instance().setEnableGetMsgHotKey(true);
+	}
 #endif
 }
 
@@ -249,8 +258,10 @@ void FxMainWindow::addNewMsgCount(bool isQunMsg)
 	else
 		new_qun_msg_count++;
 
+/*
 	if (isHaveTray) 
 		startFlickerTray();
+*/
 }
 
 bool FxMainWindow::showNewMsgDlg()
