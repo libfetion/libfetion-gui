@@ -192,10 +192,13 @@ QPixmap getOnlineStatusIcon(int status)
 			return QPixmap(getSkinPath() + "/online/offline" + postfix);
 
 		case FX_STATUS_BLACK:
+		case FX_STATUS_BLACK + MOBILE_LOGIN:
 			return QPixmap(getSkinPath() + "/online/black" + postfix);
 		case FX_STATUS_MOBILE: //mobile user
+		case FX_STATUS_MOBILE + MOBILE_LOGIN: //mobile user
 			return QPixmap(getSkinPath() + "/online/mobile" + postfix);
 		case FX_STATUS_WAITING_AUTH:  //the account waiting   
+		case FX_STATUS_WAITING_AUTH + MOBILE_LOGIN:  //the account waiting   
 			return QPixmap(getSkinPath() + "/online/waiting" + postfix);
 		case FX_STATUS_REFUSE + MOBILE_LOGIN:   //the account is refuse make friends with you
 		case FX_STATUS_REFUSE:   //the account is refuse make friends with you
@@ -219,12 +222,6 @@ QPixmap getOnlineStatusIcon(int status)
 		case FX_STATUS_NUM_PRIMITIVES:
 			return QPixmap(getSkinPath() + "/online/num_primitives" + postfix);
 
-		case FX_STATUS_BLACK + MOBILE_LOGIN:
-			return QPixmap(getSkinPath() + "/online/m_black" + postfix);
-		case FX_STATUS_MOBILE + MOBILE_LOGIN: //mobile user
-			return QPixmap(getSkinPath() + "/online/m_mobile" + postfix);
-		case FX_STATUS_WAITING_AUTH + MOBILE_LOGIN:  //the account waiting   
-			return QPixmap(getSkinPath() + "/online/m_waiting" + postfix);
 		
 		case FX_STATUS_ONLINE + MOBILE_LOGIN:
 			return QPixmap(getSkinPath() + "/online/m_online" + postfix);
