@@ -113,13 +113,23 @@ void FxMainWindow::checkSplashScreenFlag()
 	{ 
 		/*we didn't need SystemTitle, so If current is not SplashScreen,
 		  we need to set the windowsflags to SplashScreen*/
-		if (!isSplashScreen) 
+		if (!isSplashScreen){
 			setWindowFlags(windowFlags() | Qt::SplashScreen);
+			// after window's flag's change,the window will hide. @See QtDoc by iptton
+			if(!isVisible()){
+				showNormal();
+			}
+		}
 	} else {
 		/*we need SystemTitle, so If current is SplashScreen,
 		  we need to remove SplashScreen flag*/
-		if (isSplashScreen)
+		if (isSplashScreen){
 			setWindowFlags(this->windowFlags() ^ Qt::SplashScreen);
+			// after window's flag's change,the window will hide. @See QtDoc by iptton
+			if(!isVisible()){
+				showNormal();
+			}
+		}
 	}
 
 	/** I swear: this is the worst code of mine!!!!*/
