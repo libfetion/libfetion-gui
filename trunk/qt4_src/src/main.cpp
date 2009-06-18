@@ -66,9 +66,12 @@ int main(int argc, char *argv[])
 	QApplication app(argc, argv);
 	QCoreApplication::addLibraryPath(QCoreApplication::applicationDirPath()); 
 
-	QTranslator translator;
-	translator.load( "fetion_utf8_CN", defaultResPath());
-	app.installTranslator( &translator );
+	QTranslator translator_fetion;
+	translator_fetion.load( "fetion_utf8_CN", defaultResPath());
+	QTranslator translator_qt;
+	translator_qt.load( "qt_zh_CN", defaultResPath());
+	app.installTranslator( &translator_fetion );
+	app.installTranslator( &translator_qt );
 
 	Settings::instance().setSyetemDefualFont( QApplication::font() );
 	app.setFont(Settings::instance().getCurrentFont());
