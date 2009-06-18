@@ -109,7 +109,7 @@ void FxWidget::setSystemTitleBar(bool flag)
 		sideBarTB->show();
 	}
 
-	if (isVisible())
+	if (!isVisible())
 		showNormal();
 	setBackground(backgroundPixmap);
 }
@@ -272,32 +272,32 @@ void FxWidget::beginAutoHide(){
 		case WP_NORMAL:return;break;
 		case WP_LEFT:
 			move(0,y());
-			orientSize = size();
 			positionState |= WP_HIDDEN;
+			orientSize = size();
 			hideToLeftRight();
 			//setMask(QRegion(0,0,3,height()));
 			resize(5,height());
 			break;
 		case WP_RIGHT:
 			//setMask(QRegion(0,0,3,height()));
-			orientSize = size();
+			move(QApplication::desktop()->width()-4,y());
 			positionState |= WP_HIDDEN;
+			orientSize = size();
 			hideToLeftRight();
 			resize(5,height());
-			move(QApplication::desktop()->width()-8,y());
 			break;
 		case WP_TOP:
 			move(x(),0);
-			orientSize = size();
 			positionState |= WP_HIDDEN;
+			orientSize = size();
 			//setMask(QRegion(0,0,width(),3));
 			hideToTopBottom();
 			resize(width(),5);
 			break;
 		case WP_BOTTOM:
 			move(x(),QApplication::desktop()->height()-5);
-			orientSize = size();
 			positionState |= WP_HIDDEN;
+			orientSize = size();
 			//setMask(QRegion(0,0,width(),3));
 			hideToTopBottom();
 			resize(width(),5);
@@ -321,8 +321,9 @@ void FxWidget::endAutoHide(){
 			turnBackNormal();
 			break;
 		case WP_RIGHT:
+			//qDebug()<<"orientSize:"<<orientSize;
 			resize(orientSize);
-			move(QApplication::desktop()->width()-orientSize.width(),y());
+			move(QApplication::desktop()->width()-orientSize.width()-1,y());
 			turnBackNormal();
 			break;
 		case WP_TOP:

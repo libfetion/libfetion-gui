@@ -84,9 +84,8 @@ public slots:
     void setAutoHide(bool autoHide=true){}
 #else
 	void enableAutoHide(bool flag=true){ 
-		_enableautoHide = flag; 
-		if (!flag)
-			_autoHide = false;
+		_enableautoHide = flag;
+		_autoHide = flag;
 		}
 			
 	void setAutoHide(bool autoHide=true){
