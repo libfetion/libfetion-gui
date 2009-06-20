@@ -169,8 +169,28 @@ by iptton
 	// apply the stylesheet
 	qApp->setStyleSheet(content);
 	file.close();
-	
-	//qDebug(path.toUtf8().data());
+
+//*************************************
+//get the res.xml, maybe this file can be included by style.css
+	QDomDocument *doc = new QDomDocument("xml");
+
+	path = getSkinPath();
+	if( ! QFile::exists( path + "/res.xml") ){
+		// has not style.css use the default/res.xml
+		path = SkinPath() + "/default";
+	}
+    QFile file1(path + "/res.xml"); 
+    file1.open(QIODevice::ReadOnly);
+
+	if (!doc->setContent(&file1)) 
+	{
+		qDebug("error for geting res.xml file, process will crash...");
+		file1.close();
+		return ;
+	}
+	file1.close();
+
+	setXMLRes(doc);
 /*********************************
 end
 *********************************/

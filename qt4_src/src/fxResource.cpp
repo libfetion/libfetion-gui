@@ -33,6 +33,15 @@
 
 #include <QDebug>
 
+QDomDocument *ResXML = NULL;
+
+void setXMLRes(QDomDocument *xml)
+{
+//	if (ResXML)
+//		ResXML;
+
+	ResXML = xml;
+}
 
 #ifdef WIN32
 #else
@@ -180,60 +189,85 @@ void playSound(SOUND_TYPE type)
 
 QPixmap getOnlineStatusIcon(int status)
 {
-	QString postfix;
-	if(QFile::exists(getSkinPath() + "/online/offline.png"))	
-		postfix = ".png";
-	else
-	  postfix = ".gif";
-	
 	switch(status)
 	{
 		case 0:  //pc offline
-			return QPixmap(getSkinPath() + "/online/offline" + postfix);
+			return QPixmap(getSkinPath() + "/" +  
+					ResXML->documentElement().attribute("online_offline", ""));
 
 		case FX_STATUS_BLACK:
 		case FX_STATUS_BLACK + MOBILE_LOGIN:
-			return QPixmap(getSkinPath() + "/online/black" + postfix);
+			return QPixmap(getSkinPath() + "/" +  
+					ResXML->documentElement().attribute("online_black", ""));
+
 		case FX_STATUS_MOBILE: //mobile user
 		case FX_STATUS_MOBILE + MOBILE_LOGIN: //mobile user
-			return QPixmap(getSkinPath() + "/online/mobile" + postfix);
+			return QPixmap(getSkinPath() + "/" +  
+					ResXML->documentElement().attribute("online_mobile", ""));
+
 		case FX_STATUS_WAITING_AUTH:  //the account waiting   
 		case FX_STATUS_WAITING_AUTH + MOBILE_LOGIN:  //the account waiting   
-			return QPixmap(getSkinPath() + "/online/waiting" + postfix);
+			return QPixmap(getSkinPath() + "/" +  
+					ResXML->documentElement().attribute("online_waiting", ""));
+
 		case FX_STATUS_REFUSE + MOBILE_LOGIN:   //the account is refuse make friends with you
 		case FX_STATUS_REFUSE:   //the account is refuse make friends with you
-			return QPixmap(getSkinPath() + "/online/refuse" + postfix);
-		case FX_STATUS_OFFLINE:
-			return QPixmap(getSkinPath() + "/online/offline" + postfix);
-		case FX_STATUS_DINNER:
-			return QPixmap(getSkinPath() + "/online/dinner" + postfix);
-		case FX_STATUS_AWAY:
-			return QPixmap(getSkinPath() + "/online/away" + postfix);
-		case FX_STATUS_ONLINE:
-			return QPixmap(getSkinPath() + "/online/online" + postfix);
-		case FX_STATUS_PHONE:
-			return QPixmap(getSkinPath() + "/online/phone" + postfix);
-		case FX_STATUS_BUSY:
-			return QPixmap(getSkinPath() + "/online/busy" + postfix);
-		case FX_STATUS_MEETING :
-			return QPixmap(getSkinPath() + "/online/meeting" + postfix);
-		case FX_STATUS_EXTENDED_AWAY:
-			return QPixmap(getSkinPath() + "/online/extnded_away" + postfix);
-		case FX_STATUS_NUM_PRIMITIVES:
-			return QPixmap(getSkinPath() + "/online/num_primitives" + postfix);
+			return QPixmap(getSkinPath() + "/" +  
+					ResXML->documentElement().attribute("online_refuse", ""));
 
-		
+		case FX_STATUS_OFFLINE:
+			return QPixmap(getSkinPath() + "/" +  
+					ResXML->documentElement().attribute("online_offline", ""));
+
+		case FX_STATUS_DINNER:
+			return QPixmap(getSkinPath() + "/" +  
+					ResXML->documentElement().attribute("online_dinner", ""));
+
+		case FX_STATUS_AWAY:
+			return QPixmap(getSkinPath() + "/" +  
+					ResXML->documentElement().attribute("online_away", ""));
+
+		case FX_STATUS_ONLINE:
+			return QPixmap(getSkinPath() + "/" +  
+					ResXML->documentElement().attribute("online_online", ""));
+
+		case FX_STATUS_PHONE:
+			return QPixmap(getSkinPath() + "/" +  
+					ResXML->documentElement().attribute("online_phone", ""));
+
+		case FX_STATUS_BUSY:
+			return QPixmap(getSkinPath() + "/" +  
+					ResXML->documentElement().attribute("online_busy", ""));
+
+		case FX_STATUS_MEETING :
+			return QPixmap(getSkinPath() + "/" +  
+					ResXML->documentElement().attribute("online_meeting", ""));
+
+		case FX_STATUS_EXTENDED_AWAY:
+			return QPixmap(getSkinPath() + "/" +  
+					ResXML->documentElement().attribute("online_extnded_away", ""));
+
+		case FX_STATUS_NUM_PRIMITIVES:
+			return QPixmap(getSkinPath() + "/" +  
+					ResXML->documentElement().attribute("online_num_primitives", ""));
+
 		case FX_STATUS_ONLINE + MOBILE_LOGIN:
-			return QPixmap(getSkinPath() + "/online/m_online" + postfix);
+			return QPixmap(getSkinPath() + "/" +  
+					ResXML->documentElement().attribute("online_m_online", ""));
+
 		case FX_STATUS_DINNER + MOBILE_LOGIN:
 		case FX_STATUS_AWAY + MOBILE_LOGIN:
 		case FX_STATUS_EXTENDED_AWAY + MOBILE_LOGIN:
 		case FX_STATUS_NUM_PRIMITIVES + MOBILE_LOGIN:
-			return QPixmap(getSkinPath() + "/online/m_away" + postfix);
+			return QPixmap(getSkinPath() + "/" +  
+					ResXML->documentElement().attribute("online_m_away", ""));
+
 		case FX_STATUS_PHONE + MOBILE_LOGIN:
 		case FX_STATUS_MEETING + MOBILE_LOGIN:
 		case FX_STATUS_BUSY + MOBILE_LOGIN:
-			return QPixmap(getSkinPath() + "/online/m_busy" + postfix);
+			return QPixmap(getSkinPath() + "/" +  
+					ResXML->documentElement().attribute("online_m_busy", ""));
+
 	}
 
 	return QPixmap();
@@ -241,292 +275,219 @@ QPixmap getOnlineStatusIcon(int status)
 
 QPixmap getSysTrayIcon(int status)
 {
-QString postfix;
-	if(QFile::exists(getSkinPath() + "/online/offline.png"))	
-		postfix = ".png";
-	else
-	  postfix = ".gif";
-	  
 	switch(status)
 	{
 	case 0:  //no login
-		return QPixmap(getSkinPath() + "/systray/offline" + postfix);		
+		return QPixmap(getSkinPath() + "/" + 
+					ResXML->documentElement().attribute("systray_offline", ""));
 	case 1: //login
 	case FX_STATUS_ONLINE:
-		return QPixmap(getSkinPath() + "/systray/online" + postfix);
+		return QPixmap(getSkinPath() + "/" + 
+					ResXML->documentElement().attribute("systray_online", ""));
+		
 	case FX_STATUS_OFFLINE:
-		return QPixmap(getSkinPath() + "/systray/hide" + postfix);
+		return QPixmap(getSkinPath() + "/" + 
+					ResXML->documentElement().attribute("systray_hide", ""));
+		
 	case FX_STATUS_DINNER:
 	case FX_STATUS_AWAY:
 	case FX_STATUS_MEETING :
 	case FX_STATUS_EXTENDED_AWAY:
 	case FX_STATUS_NUM_PRIMITIVES:
-		return QPixmap(getSkinPath() + "/systray/away" + postfix);
-	case FX_STATUS_PHONE:
+		return QPixmap(getSkinPath() + "/" + 
+					ResXML->documentElement().attribute("systray_away", ""));
+/*	case FX_STATUS_PHONE:
 	case FX_STATUS_BUSY:
-		return QPixmap(getSkinPath() + "/systray/busy" + postfix);
+	deafult:
+*/
 	}
-	return QPixmap(getSkinPath() + "/systray/busy" + postfix);
+		return QPixmap(getSkinPath() + "/" + 
+					ResXML->documentElement().attribute("systray_busy", ""));
 }
 
 QPixmap getMenuIcon(int menuID)
 {
-	QString postfix;
-	if(QFile::exists(getSkinPath() + "/menu/im.png"))	
-		postfix = ".png";
-	else
-	  postfix = ".gif";
 	switch(menuID)
 	{
 		case IMBuddyIcon:  //IM
-			return QPixmap(getSkinPath() + "/menu/im" + postfix);
+		return QPixmap(getSkinPath() + "/" + 
+					ResXML->documentElement().attribute("menu_im", ""));
 		case SMSBuddyIcon: //SMS
-			return QPixmap(getSkinPath() + "/menu/sms" + postfix);
+		return QPixmap(getSkinPath() + "/" + 
+					ResXML->documentElement().attribute("menu_sms", ""));
 		case GetInfoBuddyIcon: //GetInfo
-			return QPixmap(getSkinPath() + "/menu/profile" + postfix);
+		return QPixmap(getSkinPath() + "/" + 
+					ResXML->documentElement().attribute("menu_profile", ""));
 		case ReNameBuddyIcon: //rename
-			return QPixmap(getSkinPath() + "/menu/edit" + postfix);
+		return QPixmap(getSkinPath() + "/" + 
+					ResXML->documentElement().attribute("menu_edit", ""));
 		case AddBuddyIcon:
-			return QPixmap(getSkinPath() + "/menu/addfriend" + postfix);
+		return QPixmap(getSkinPath() + "/" + 
+					ResXML->documentElement().attribute("menu_addfriend", ""));
 		case AboutIcon:
-			return QPixmap(getSkinPath() + "/menu/about" + postfix);
+		return QPixmap(getSkinPath() + "/" + 
+					ResXML->documentElement().attribute("menu_about", ""));
 		case ExitIcon:
-			return QPixmap(getSkinPath() + "/menu/exit" + postfix);
+		return QPixmap(getSkinPath() + "/" + 
+					ResXML->documentElement().attribute("menu_exit", ""));
 		case ApplyIcon:
 		case RemoveBlackIcon:
-			return QPixmap(getSkinPath() + "/menu/apply" + postfix);
+		return QPixmap(getSkinPath() + "/" + 
+					ResXML->documentElement().attribute("menu_apply", ""));
 		case CancelIcon:
-			return QPixmap(getSkinPath() + "/menu/cancel" + postfix);
+		return QPixmap(getSkinPath() + "/" + 
+					ResXML->documentElement().attribute("menu_cancel", ""));
 		case SetImpresaIcon:
-			return QPixmap(getSkinPath() + "/menu/edit" + postfix);
+		return QPixmap(getSkinPath() + "/" + 
+					ResXML->documentElement().attribute("menu_edit", ""));
 		case AddGroupIcon:
-			return QPixmap(getSkinPath() + "/menu/addqun" + postfix);
+		return QPixmap(getSkinPath() + "/" + 
+					ResXML->documentElement().attribute("menu_addqun", ""));
 		case BackInBuddyIcon:
-			return QPixmap(getSkinPath() + "/menu/backlist" + postfix);
+		return QPixmap(getSkinPath() + "/" + 
+					ResXML->documentElement().attribute("menu_backlist", ""));
 		case DeleteBuddyIcon:
-			return QPixmap(getSkinPath() + "/menu/delete" + postfix);
+		return QPixmap(getSkinPath() + "/" + 
+					ResXML->documentElement().attribute("menu_delete", ""));
 		case MoveIcon:
-			return QPixmap(getSkinPath() + "/menu/move" + postfix);
+		return QPixmap(getSkinPath() + "/" + 
+					ResXML->documentElement().attribute("menu_move", ""));
 		case RefreshBuddyIcon:
-			return QPixmap(getSkinPath() + "/menu/refresh" + postfix);
+		return QPixmap(getSkinPath() + "/" + 
+					ResXML->documentElement().attribute("menu_refresh", ""));
 		case OptionsIcon:
-			return QPixmap(getSkinPath() + "/menu/options" + postfix);
+		return QPixmap(getSkinPath() + "/" + 
+					ResXML->documentElement().attribute("menu_options", ""));
 		case HistoryIcon:
-			return QPixmap(getSkinPath() + "/menu/history" + postfix);
+		return QPixmap(getSkinPath() + "/" + 
+					ResXML->documentElement().attribute("menu_history", ""));
 		case SkinIcon:
-			return QPixmap(getSkinPath() + "/menu/skin" + postfix);
+		return QPixmap(getSkinPath() + "/" + 
+					ResXML->documentElement().attribute("menu_skin", ""));
 	}
 	return QPixmap();
 }
 
 QPixmap getQunIcon()
 {
-			QString postfix;
-	if(QFile::exists(getSkinPath() + "/misc/qun.png"))	
-		postfix = ".png";
-	else
-	  postfix = ".gif";
-	return QPixmap(getSkinPath() + "/misc/qun" + postfix);
+	return QPixmap(getSkinPath() + "/" + 
+			ResXML->documentElement().attribute("qun_icon", ""));
 }
 
 QPixmap getBT_SMSIcon()
 {
-		QString postfix;
-	if(QFile::exists(getSkinPath() + "/misc/bt_sms.png"))	
-		postfix = ".png";
-	else
-	  postfix = ".gif";
-	return QPixmap(getSkinPath() + "/misc/bt_sms" + postfix);
+	return QPixmap(getSkinPath() + "/" + 
+			ResXML->documentElement().attribute("bt_smsicon", ""));
 }
 
 QPixmap getFlickIcon(bool flag)
 {
-	QString postfix;
-	if(QFile::exists(getSkinPath() + "/systray/online.png"))	
-		postfix = ".png";
-	else
-	  postfix = ".gif";
-	  
 	if(flag)
-		return QPixmap(getSkinPath() + "/systray/online" + postfix);
+		return QPixmap(getSkinPath() + "/" + 
+				ResXML->documentElement().attribute("systray_online", ""));
 	else
-		return QPixmap(getSkinPath() + "/systray/online_flick" + postfix);
+		return QPixmap(getSkinPath() + "/" + 
+				ResXML->documentElement().attribute("systray_online_flick", ""));
 }
 
 QPixmap getInputFaceIcon()
 {
-		QString postfix;
-	if(QFile::exists(getSkinPath() + "/misc/input_face.png"))	
-		postfix = ".png";
-	else
-	  postfix = ".gif";
-	return QPixmap(getSkinPath() + "/misc/input_face" + postfix);
+	return QPixmap(getSkinPath() + "/" + 
+			ResXML->documentElement().attribute("input_face", ""));
 }
 
 QPixmap getFaceIcon()
 {
-			QString postfix;
-	if(QFile::exists(getSkinPath() + "/misc/tool_face.png"))	
-		postfix = ".png";
-	else
-	  postfix = ".gif";
-	return QPixmap(getSkinPath() + "/misc/tool_face" + postfix);
+	return QPixmap(getSkinPath() + "/" + 
+			ResXML->documentElement().attribute("tool_face", ""));
 }
 
 QPixmap getNudgeIcon()
 {
-			QString postfix;
-	if(QFile::exists(getSkinPath() + "/theme/nudge_button.png"))	
-		postfix = ".png";
-	else
-	  postfix = ".gif";
-	return QPixmap(getSkinPath() + "/theme/nudge_button" + postfix);
+	return QPixmap(getSkinPath() + "/" + 
+			ResXML->documentElement().attribute("nudge_button", ""));
 }
 
 QPixmap getSendIcon()
 {
-				QString postfix;
-	if(QFile::exists(getSkinPath() + "/theme/send_button.png"))	
-		postfix = ".png";
-	else
-	  postfix = ".gif";
-	return QPixmap(getSkinPath() + "/theme/send_button" + postfix);
+	return QPixmap(getSkinPath() + "/" + 
+			ResXML->documentElement().attribute("send_button", ""));
 }
 
 QPixmap getHistoryIcon()
 {
-				QString postfix;
-	if(QFile::exists(getSkinPath() + "/theme/history.png"))	
-		postfix = ".png";
-	else
-	  postfix = ".gif";
-	return QPixmap(getSkinPath() + "/theme/history" + postfix);
+	return QPixmap(getSkinPath() + "/" + 
+			ResXML->documentElement().attribute("history", ""));
 }
 
 QPixmap getChangeSendModIcon()
 {
-			QString postfix;
-	if(QFile::exists(getSkinPath() + "/theme/change_send_mode.png"))	
-		postfix = ".png";
-	else
-	  postfix = ".gif";
-	return QPixmap(getSkinPath() + "/theme/change_send_mode" + postfix);
+	return QPixmap(getSkinPath() + "/" + 
+			ResXML->documentElement().attribute("change_send_mode", ""));
 }
 
 QPixmap getCloseTabImage()
 {
-	QString postfix;
-	if(QFile::exists(getSkinPath() + "/theme/closetab.png"))	
-		postfix = ".png";
-	else
-	  postfix = ".gif";
-	return QPixmap(getSkinPath() + "/theme/closetab" + postfix);
+	return QPixmap(getSkinPath() + "/" + 
+			ResXML->documentElement().attribute("closetab", ""));
 }
 
 QPixmap getLoginImage()
 {
-    QString postfix;
-    if(QFile::exists(getSkinPath() + "/theme/login_image.png"))	
-        postfix = ".png";
-    else
-        postfix = ".gif";
-    return QPixmap(getSkinPath() + "/theme/login_image" + postfix);
+	return QPixmap(getSkinPath() + "/" + 
+			ResXML->documentElement().attribute("login_image", ""));
 }
 
 QPixmap getPortraitImage()
 {
-		QString postfix;
-	if(QFile::exists(getSkinPath() + "/theme/portrait-mac.png"))	
-		postfix = ".png";
-	else
-	  postfix = ".gif";
-#ifdef Q_OS_MAC //Mac OS X platfrom
-	return QPixmap(getSkinPath() + "/theme/portrait-mac" + postfix);
-#else
-	#ifdef WIN32 //windows platfrom
-		return QPixmap(getSkinPath() + "/theme/portrait-win" + postfix);
-	#else //linux platfrom
-		return QPixmap(getSkinPath() + "/theme/portrait-linux" + postfix);
-	#endif
-#endif
+	return QPixmap(getSkinPath() + "/" + 
+			ResXML->documentElement().attribute("portrait", ""));
 }
 
 QPixmap getBTSettingImage()
 {
-		QString postfix;
-	if(QFile::exists(getSkinPath() + "/theme/bt_setting.png"))	
-		postfix = ".png";
-	else
-	  postfix = ".gif";
-	return QPixmap(getSkinPath() + "/theme/bt_setting" + postfix);
+	return QPixmap(getSkinPath() + "/" + 
+			ResXML->documentElement().attribute("bt_setting", ""));
 }
 
 QPixmap getBTSendSelfImage()
 {
-	QString postfix;
-	if(QFile::exists(getSkinPath() + "/theme/bt_sendself.png"))	
-		postfix = ".png";
-	else
-	  postfix = ".gif";
-	return QPixmap(getSkinPath() + "/theme/bt_sendself" + postfix);
+	return QPixmap(getSkinPath() + "/" + 
+			ResXML->documentElement().attribute("bt_sendself", ""));
 }
 
 QPixmap getAddImage()
 {
-	QString postfix;
-	if(QFile::exists(getSkinPath() + "/theme/addfriend.png"))	
-		postfix = ".png";
-	else
-	  postfix = ".gif";
-	return QPixmap(getSkinPath() + "/theme/addfriend" + postfix);
+	return QPixmap(getSkinPath() + "/" + 
+			ResXML->documentElement().attribute("addfriend", ""));
 }
 
 QPixmap getImpresaBKImage()
 {
-	QString postfix;
-	if(QFile::exists(getSkinPath() + "/theme/impresabk.png"))	
-		postfix = ".png";
-	else
-	  postfix = ".gif";
-	return QPixmap(getSkinPath() + "/theme/impresabk" + postfix);
+	return QPixmap(getSkinPath() + "/" + 
+			ResXML->documentElement().attribute("impresabk", ""));
 }
 
 QPixmap getSearchBKImage()
 {
-		QString postfix;
-	if(QFile::exists(getSkinPath() + "/theme/search.png"))	
-		postfix = ".png";
-	else
-	  postfix = ".gif";
-	return QPixmap(getSkinPath() + "/theme/search" + postfix);
+	return QPixmap(getSkinPath() + "/" + 
+			ResXML->documentElement().attribute("search", ""));
 }
 
 QPixmap getLibFetionImage()
 {
-			QString postfix;
-	if(QFile::exists(getSkinPath() + "/theme/LibFetion.png"))	
-		postfix = ".png";
-	else
-	  postfix = ".gif";
-	return QPixmap(getSkinPath() + "/theme/LibFetion" + postfix);
+	return QPixmap(getSkinPath() + "/" + 
+			ResXML->documentElement().attribute("LibFetion", ""));
 }
 
 QPixmap getLogion_InImage()
 {
-		QString postfix;
-	if(QFile::exists(getSkinPath() + "/theme/Logion_In.png"))	
-		postfix = ".png";
-	else
-	  postfix = ".gif";
-	return QPixmap(getSkinPath() + "/theme/Logion_In" + postfix);
+	return QPixmap(getSkinPath() + "/" + 
+			ResXML->documentElement().attribute("login_in", ""));
 }
 
 QPixmap getLogin_CancelImage()
 {
-		QString postfix;
-	if(QFile::exists(getSkinPath() + "/theme/Login_Cancel.png"))	
-		postfix = ".png";
-	else
-	  postfix = ".gif";
-	return QPixmap(getSkinPath() + "/theme/Login_Cancel" + postfix);
+	return QPixmap(getSkinPath() + "/" + 
+			ResXML->documentElement().attribute("login_cancel", ""));
 }
