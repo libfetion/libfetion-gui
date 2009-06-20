@@ -82,6 +82,7 @@ FxWidget::FxWidget(QWidget *parent,Qt::WindowFlags flag):QWidget(parent,flag){
 
 void FxWidget::setSystemTitleBar(bool flag)
 {
+	bool isvisible = isVisible();
 	if (_isSetSystemTitleBar == flag)
 	{	
 		setBackground(backgroundPixmap);
@@ -109,7 +110,7 @@ void FxWidget::setSystemTitleBar(bool flag)
 		sideBarTB->show();
 	}
 
-	if (!isVisible())
+	if (isvisible)
 		showNormal();
 	setBackground(backgroundPixmap);
 }
@@ -280,11 +281,19 @@ void FxWidget::beginAutoHide(){
 			break;
 		case WP_RIGHT:
 			//setMask(QRegion(0,0,3,height()));
+#ifdef WIN32
 			move(QApplication::desktop()->width()-4,y());
 			positionState |= WP_HIDDEN;
 			orientSize = size();
 			hideToLeftRight();
 			resize(5,height());
+#else
+			orientSize = size();
+			positionState |= WP_HIDDEN;
+			hideToLeftRight();
+			resize(5,height());
+			move(QApplication::desktop()->width()-8,y());
+#endif
 			break;
 		case WP_TOP:
 			move(x(),0);
