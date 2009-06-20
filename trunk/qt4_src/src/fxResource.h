@@ -20,6 +20,7 @@
 #ifndef IMAGERESOURCE_H
 #define IMAGERESOURCE_H
 
+#include <QtXml/QDomDocument>
 #include "appconfig.h"
 
 typedef enum {
@@ -32,6 +33,7 @@ typedef enum {
 #else
 void moveOldConfigFile();
 #endif
+void setXMLRes(QDomDocument *xml);
 QString dataResPath();
 QString configFile();
 QString chatDBFile();
