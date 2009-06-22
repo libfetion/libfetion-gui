@@ -37,9 +37,8 @@ QDomDocument *ResXML = NULL;
 
 void setXMLRes(QDomDocument *xml)
 {
-//	if (ResXML)
-//		ResXML;
-
+	if (ResXML)
+		ResXML->clear();
 	ResXML = xml;
 }
 
@@ -110,19 +109,16 @@ QString defaultResPath()
 #else //linux
 	static QString defaultResPath;
 	static bool init = false;
-	FILE* fp;
 
 	if(init)
 		return defaultResPath;
 
     //here we set the CREDITS.txt as an identifying item
-	  if ((fp = fopen("./CREDITS.txt", "r")))
-	  {
-		  fclose (fp);
-		  defaultResPath = ".";
-	  }	
-	  else
-		  defaultResPath = "/usr/share/libfetion";
+
+	if (QFile::exists("./CREDITS.txt"))
+		defaultResPath = ".";
+	else
+		defaultResPath = "/usr/share/libfetion";
 
 	init = true;
 	return defaultResPath;
