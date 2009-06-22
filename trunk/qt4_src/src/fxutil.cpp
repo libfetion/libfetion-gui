@@ -28,6 +28,7 @@
  ***************************************************************************/
 #include "fxutil.h"
 #include <QDateTime>
+#include <QFile>
 /* 
  * Copyright (C) 2008
  * 
@@ -104,18 +105,14 @@ QString FxFacePath()
 #else //linux
 	static QString path;
 	static bool init = false;
-	FILE* fp;
 
 	if(init)
 		return path;
 
-	  if ((fp = fopen("./faces_image/1.gif", "r")))
-	  {
-		  fclose (fp);
-		  path = "./faces_image";
-	  }	
-	  else
-		  path = "/usr/share/libfetion/faces_image";
+	if (QFile::exists("./faces_image/1.gif"))
+		path = "./faces_image";
+	else
+		path = "/usr/share/libfetion/faces_image";
 
 	init = true;
 	return path;
