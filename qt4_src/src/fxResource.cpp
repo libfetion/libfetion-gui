@@ -43,6 +43,14 @@ void setXMLRes(QDomDocument *xml)
 	ResXML = xml;
 }
 
+QString getXMLRes(QString item, QString defValue)
+{
+	if (!ResXML)
+		return "";
+	return ResXML->documentElement().attribute(item, defValue);
+
+}
+
 #ifdef WIN32
 #else
 QString currentUserPath()
@@ -194,86 +202,86 @@ QPixmap getOnlineStatusIcon(int status)
 		case 0:  //pc offline
 		case 0 + MOBILE_LOGIN:
 			return QPixmap(getSkinPath() + "/" +  
-					ResXML->documentElement().attribute("online_offline", ""));
+					getXMLRes("online_offline", ""));
 
 		case FX_STATUS_BLACK:
 		case FX_STATUS_BLACK + MOBILE_LOGIN:
 			return QPixmap(getSkinPath() + "/" +  
-					ResXML->documentElement().attribute("online_black", ""));
+					getXMLRes("online_black", ""));
 
 		case FX_STATUS_MOBILE: //mobile user
 		case FX_STATUS_MOBILE + MOBILE_LOGIN: //mobile user
 			return QPixmap(getSkinPath() + "/" +  
-					ResXML->documentElement().attribute("online_mobile", ""));
+					getXMLRes("online_mobile", ""));
 
 		case FX_STATUS_WAITING_AUTH:  //the account waiting   
 		case FX_STATUS_WAITING_AUTH + MOBILE_LOGIN:  //the account waiting   
 			return QPixmap(getSkinPath() + "/" +  
-					ResXML->documentElement().attribute("online_waiting", ""));
+					getXMLRes("online_waiting", ""));
 
 		case FX_STATUS_REFUSE + MOBILE_LOGIN:   //the account is refuse make friends with you
 		case FX_STATUS_REFUSE:   //the account is refuse make friends with you
 			return QPixmap(getSkinPath() + "/" +  
-					ResXML->documentElement().attribute("online_refuse", ""));
+					getXMLRes("online_refuse", ""));
 
 		case FX_STATUS_OFFLINE:
 		case FX_STATUS_OFFLINE + MOBILE_LOGIN:
 			return QPixmap(getSkinPath() + "/" +  
-					ResXML->documentElement().attribute("online_offline", ""));
+					getXMLRes("online_offline", ""));
 
 		case FX_STATUS_DINNER:
 			return QPixmap(getSkinPath() + "/" +  
-					ResXML->documentElement().attribute("online_dinner", ""));
+					getXMLRes("online_dinner", ""));
 
 		case FX_STATUS_AWAY:
 			return QPixmap(getSkinPath() + "/" +  
-					ResXML->documentElement().attribute("online_away", ""));
+					getXMLRes("online_away", ""));
 
 		case FX_STATUS_ONLINE:
 			return QPixmap(getSkinPath() + "/" +  
-					ResXML->documentElement().attribute("online_online", ""));
+					getXMLRes("online_online", ""));
 
 		case FX_STATUS_PHONE:
 			return QPixmap(getSkinPath() + "/" +  
-					ResXML->documentElement().attribute("online_phone", ""));
+					getXMLRes("online_phone", ""));
 
 		case FX_STATUS_BUSY:
 			return QPixmap(getSkinPath() + "/" +  
-					ResXML->documentElement().attribute("online_busy", ""));
+					getXMLRes("online_busy", ""));
 
 		case FX_STATUS_MEETING :
 			return QPixmap(getSkinPath() + "/" +  
-					ResXML->documentElement().attribute("online_meeting", ""));
+					getXMLRes("online_meeting", ""));
 
 		case FX_STATUS_EXTENDED_AWAY:
 			return QPixmap(getSkinPath() + "/" +  
-					ResXML->documentElement().attribute("online_extnded_away", ""));
+					getXMLRes("online_extnded_away", ""));
 
 		case FX_STATUS_NUM_PRIMITIVES:
 			return QPixmap(getSkinPath() + "/" +  
-					ResXML->documentElement().attribute("online_num_primitives", ""));
+					getXMLRes("online_num_primitives", ""));
 
 		case FX_STATUS_ONLINE + MOBILE_LOGIN:
 			return QPixmap(getSkinPath() + "/" +  
-					ResXML->documentElement().attribute("online_m_online", ""));
+					getXMLRes("online_m_online", ""));
 
 		case FX_STATUS_DINNER + MOBILE_LOGIN:
 		case FX_STATUS_AWAY + MOBILE_LOGIN:
 		case FX_STATUS_EXTENDED_AWAY + MOBILE_LOGIN:
 		case FX_STATUS_NUM_PRIMITIVES + MOBILE_LOGIN:
 			return QPixmap(getSkinPath() + "/" +  
-					ResXML->documentElement().attribute("online_m_away", ""));
+					getXMLRes("online_m_away", ""));
 
 		case FX_STATUS_PHONE + MOBILE_LOGIN:
 		case FX_STATUS_MEETING + MOBILE_LOGIN:
 		case FX_STATUS_BUSY + MOBILE_LOGIN:
 			return QPixmap(getSkinPath() + "/" +  
-					ResXML->documentElement().attribute("online_m_busy", ""));
+					getXMLRes("online_m_busy", ""));
 
 	}
 
 	return QPixmap(getSkinPath() + "/" +  
-			ResXML->documentElement().attribute("online_offline", ""));
+			getXMLRes("online_offline", ""));
 }
 
 QPixmap getSysTrayIcon(int status)
@@ -282,15 +290,15 @@ QPixmap getSysTrayIcon(int status)
 	{
 	case 0:  //no login
 		return QPixmap(getSkinPath() + "/" + 
-					ResXML->documentElement().attribute("systray_offline", ""));
+					getXMLRes("systray_offline", ""));
 	case 1: //login
 	case FX_STATUS_ONLINE:
 		return QPixmap(getSkinPath() + "/" + 
-					ResXML->documentElement().attribute("systray_online", ""));
+					getXMLRes("systray_online", ""));
 		
 	case FX_STATUS_OFFLINE:
 		return QPixmap(getSkinPath() + "/" + 
-					ResXML->documentElement().attribute("systray_hide", ""));
+					getXMLRes("systray_hide", ""));
 		
 	case FX_STATUS_DINNER:
 	case FX_STATUS_AWAY:
@@ -298,14 +306,14 @@ QPixmap getSysTrayIcon(int status)
 	case FX_STATUS_EXTENDED_AWAY:
 	case FX_STATUS_NUM_PRIMITIVES:
 		return QPixmap(getSkinPath() + "/" + 
-					ResXML->documentElement().attribute("systray_away", ""));
+					getXMLRes("systray_away", ""));
 /*	case FX_STATUS_PHONE:
 	case FX_STATUS_BUSY:
 	deafult:
 */
 	}
 		return QPixmap(getSkinPath() + "/" + 
-					ResXML->documentElement().attribute("systray_busy", ""));
+					getXMLRes("systray_busy", ""));
 }
 
 QPixmap getMenuIcon(int menuID)
@@ -314,59 +322,59 @@ QPixmap getMenuIcon(int menuID)
 	{
 		case IMBuddyIcon:  //IM
 		return QPixmap(getSkinPath() + "/" + 
-					ResXML->documentElement().attribute("menu_im", ""));
+					getXMLRes("menu_im", ""));
 		case SMSBuddyIcon: //SMS
 		return QPixmap(getSkinPath() + "/" + 
-					ResXML->documentElement().attribute("menu_sms", ""));
+					getXMLRes("menu_sms", ""));
 		case GetInfoBuddyIcon: //GetInfo
 		return QPixmap(getSkinPath() + "/" + 
-					ResXML->documentElement().attribute("menu_profile", ""));
+					getXMLRes("menu_profile", ""));
 		case ReNameBuddyIcon: //rename
 		return QPixmap(getSkinPath() + "/" + 
-					ResXML->documentElement().attribute("menu_edit", ""));
+					getXMLRes("menu_edit", ""));
 		case AddBuddyIcon:
 		return QPixmap(getSkinPath() + "/" + 
-					ResXML->documentElement().attribute("menu_addfriend", ""));
+					getXMLRes("menu_addfriend", ""));
 		case AboutIcon:
 		return QPixmap(getSkinPath() + "/" + 
-					ResXML->documentElement().attribute("menu_about", ""));
+					getXMLRes("menu_about", ""));
 		case ExitIcon:
 		return QPixmap(getSkinPath() + "/" + 
-					ResXML->documentElement().attribute("menu_exit", ""));
+					getXMLRes("menu_exit", ""));
 		case ApplyIcon:
 		case RemoveBlackIcon:
 		return QPixmap(getSkinPath() + "/" + 
-					ResXML->documentElement().attribute("menu_apply", ""));
+					getXMLRes("menu_apply", ""));
 		case CancelIcon:
 		return QPixmap(getSkinPath() + "/" + 
-					ResXML->documentElement().attribute("menu_cancel", ""));
+					getXMLRes("menu_cancel", ""));
 		case SetImpresaIcon:
 		return QPixmap(getSkinPath() + "/" + 
-					ResXML->documentElement().attribute("menu_edit", ""));
+					getXMLRes("menu_edit", ""));
 		case AddGroupIcon:
 		return QPixmap(getSkinPath() + "/" + 
-					ResXML->documentElement().attribute("menu_addqun", ""));
+					getXMLRes("menu_addqun", ""));
 		case BackInBuddyIcon:
 		return QPixmap(getSkinPath() + "/" + 
-					ResXML->documentElement().attribute("menu_backlist", ""));
+					getXMLRes("menu_backlist", ""));
 		case DeleteBuddyIcon:
 		return QPixmap(getSkinPath() + "/" + 
-					ResXML->documentElement().attribute("menu_delete", ""));
+					getXMLRes("menu_delete", ""));
 		case MoveIcon:
 		return QPixmap(getSkinPath() + "/" + 
-					ResXML->documentElement().attribute("menu_move", ""));
+					getXMLRes("menu_move", ""));
 		case RefreshBuddyIcon:
 		return QPixmap(getSkinPath() + "/" + 
-					ResXML->documentElement().attribute("menu_refresh", ""));
+					getXMLRes("menu_refresh", ""));
 		case OptionsIcon:
 		return QPixmap(getSkinPath() + "/" + 
-					ResXML->documentElement().attribute("menu_options", ""));
+					getXMLRes("menu_options", ""));
 		case HistoryIcon:
 		return QPixmap(getSkinPath() + "/" + 
-					ResXML->documentElement().attribute("menu_history", ""));
+					getXMLRes("menu_history", ""));
 		case SkinIcon:
 		return QPixmap(getSkinPath() + "/" + 
-					ResXML->documentElement().attribute("menu_skin", ""));
+					getXMLRes("menu_skin", ""));
 	}
 	return QPixmap();
 }
@@ -374,123 +382,123 @@ QPixmap getMenuIcon(int menuID)
 QPixmap getQunIcon()
 {
 	return QPixmap(getSkinPath() + "/" + 
-			ResXML->documentElement().attribute("qun_icon", ""));
+			getXMLRes("qun_icon", ""));
 }
 
 QPixmap getBT_SMSIcon()
 {
 	return QPixmap(getSkinPath() + "/" + 
-			ResXML->documentElement().attribute("bt_smsicon", ""));
+			getXMLRes("bt_smsicon", ""));
 }
 
 QPixmap getFlickIcon(bool flag)
 {
 	if(flag)
 		return QPixmap(getSkinPath() + "/" + 
-				ResXML->documentElement().attribute("systray_online", ""));
+				getXMLRes("systray_online", ""));
 	else
 		return QPixmap(getSkinPath() + "/" + 
-				ResXML->documentElement().attribute("systray_online_flick", ""));
+				getXMLRes("systray_online_flick", ""));
 }
 
 QPixmap getInputFaceIcon()
 {
 	return QPixmap(getSkinPath() + "/" + 
-			ResXML->documentElement().attribute("input_face", ""));
+			getXMLRes("input_face", ""));
 }
 
 QPixmap getFaceIcon()
 {
 	return QPixmap(getSkinPath() + "/" + 
-			ResXML->documentElement().attribute("tool_face", ""));
+			getXMLRes("tool_face", ""));
 }
 
 QPixmap getNudgeIcon()
 {
 	return QPixmap(getSkinPath() + "/" + 
-			ResXML->documentElement().attribute("nudge_button", ""));
+			getXMLRes("nudge_button", ""));
 }
 
 QPixmap getSendIcon()
 {
 	return QPixmap(getSkinPath() + "/" + 
-			ResXML->documentElement().attribute("send_button", ""));
+			getXMLRes("send_button", ""));
 }
 
 QPixmap getHistoryIcon()
 {
 	return QPixmap(getSkinPath() + "/" + 
-			ResXML->documentElement().attribute("history", ""));
+			getXMLRes("history", ""));
 }
 
 QPixmap getChangeSendModIcon()
 {
 	return QPixmap(getSkinPath() + "/" + 
-			ResXML->documentElement().attribute("change_send_mode", ""));
+			getXMLRes("change_send_mode", ""));
 }
 
 QPixmap getCloseTabImage()
 {
 	return QPixmap(getSkinPath() + "/" + 
-			ResXML->documentElement().attribute("closetab", ""));
+			getXMLRes("closetab", ""));
 }
 
 QPixmap getLoginImage()
 {
 	return QPixmap(getSkinPath() + "/" + 
-			ResXML->documentElement().attribute("login_image", ""));
+			getXMLRes("login_image", ""));
 }
 
 QPixmap getPortraitImage()
 {
 	return QPixmap(getSkinPath() + "/" + 
-			ResXML->documentElement().attribute("portrait", ""));
+			getXMLRes("portrait", ""));
 }
 
 QPixmap getBTSettingImage()
 {
 	return QPixmap(getSkinPath() + "/" + 
-			ResXML->documentElement().attribute("bt_setting", ""));
+			getXMLRes("bt_setting", ""));
 }
 
 QPixmap getBTSendSelfImage()
 {
 	return QPixmap(getSkinPath() + "/" + 
-			ResXML->documentElement().attribute("bt_sendself", ""));
+			getXMLRes("bt_sendself", ""));
 }
 
 QPixmap getAddImage()
 {
 	return QPixmap(getSkinPath() + "/" + 
-			ResXML->documentElement().attribute("addfriend", ""));
+			getXMLRes("addfriend", ""));
 }
 
 QPixmap getImpresaBKImage()
 {
 	return QPixmap(getSkinPath() + "/" + 
-			ResXML->documentElement().attribute("impresabk", ""));
+			getXMLRes("impresabk", ""));
 }
 
 QPixmap getSearchBKImage()
 {
 	return QPixmap(getSkinPath() + "/" + 
-			ResXML->documentElement().attribute("search", ""));
+			getXMLRes("search", ""));
 }
 
 QPixmap getLibFetionImage()
 {
 	return QPixmap(getSkinPath() + "/" + 
-			ResXML->documentElement().attribute("LibFetion", ""));
+			getXMLRes("LibFetion", ""));
 }
 
 QPixmap getLogion_InImage()
 {
 	return QPixmap(getSkinPath() + "/" + 
-			ResXML->documentElement().attribute("login_in", ""));
+			getXMLRes("login_in", ""));
 }
 
 QPixmap getLogin_CancelImage()
 {
 	return QPixmap(getSkinPath() + "/" + 
-			ResXML->documentElement().attribute("login_cancel", ""));
+			getXMLRes("login_cancel", ""));
 }
