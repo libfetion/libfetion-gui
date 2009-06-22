@@ -192,6 +192,7 @@ QPixmap getOnlineStatusIcon(int status)
 	switch(status)
 	{
 		case 0:  //pc offline
+		case 0 + MOBILE_LOGIN:
 			return QPixmap(getSkinPath() + "/" +  
 					ResXML->documentElement().attribute("online_offline", ""));
 
@@ -216,6 +217,7 @@ QPixmap getOnlineStatusIcon(int status)
 					ResXML->documentElement().attribute("online_refuse", ""));
 
 		case FX_STATUS_OFFLINE:
+		case FX_STATUS_OFFLINE + MOBILE_LOGIN:
 			return QPixmap(getSkinPath() + "/" +  
 					ResXML->documentElement().attribute("online_offline", ""));
 
@@ -270,7 +272,8 @@ QPixmap getOnlineStatusIcon(int status)
 
 	}
 
-	return QPixmap();
+	return QPixmap(getSkinPath() + "/" +  
+			ResXML->documentElement().attribute("online_offline", ""));
 }
 
 QPixmap getSysTrayIcon(int status)

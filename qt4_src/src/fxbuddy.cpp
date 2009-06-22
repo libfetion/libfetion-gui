@@ -673,15 +673,23 @@ QTreeWidgetItem* BuddyOpt::findAccountItem(const Fetion_Account *account)
 
 static bool isonline(int state)
 {
-	if (state != FX_STATUS_OFFLINE && 
-			state != 0 &&
-			state != FX_STATUS_WAITING_AUTH &&
-			state != FX_STATUS_REFUSE &&
-			state != FX_STATUS_BLACK &&
-			state != FX_STATUS_MOBILE ) 
-		return true;
-	else
-		return false;
+	switch(state)
+	{
+		case 0:
+		case FX_STATUS_OFFLINE:
+		case FX_STATUS_WAITING_AUTH:
+		case FX_STATUS_REFUSE:
+		case FX_STATUS_BLACK:
+		case FX_STATUS_MOBILE:
+		case 0 + MOBILE_LOGIN:
+		case FX_STATUS_OFFLINE + MOBILE_LOGIN:
+		case FX_STATUS_WAITING_AUTH + MOBILE_LOGIN:
+		case FX_STATUS_REFUSE + MOBILE_LOGIN:
+		case FX_STATUS_BLACK + MOBILE_LOGIN:
+		case FX_STATUS_MOBILE + MOBILE_LOGIN:
+			return false;
+	}
+	return true;
 
 }
 //this function will add to libfetion impl...
@@ -756,7 +764,7 @@ void BuddyOpt::updateAccountInfo(qlonglong account_id)
 	if (isOnlineStateChanged(old_online_state , new_online_state , &state))
 	{
 		//group name ++1
-		int	group_no = fx_get_account_group_id(account) ;
+		int	group_no = fx_get_account_group_id(account);
 		if(group_no <= 0)
 			group_no = 0;
 
