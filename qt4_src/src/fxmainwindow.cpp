@@ -1123,12 +1123,10 @@ void FxMainWindow::showMenu()
 
 void FxMainWindow::addBuddy()
 {
-	this->show();
 	tmp_addBuddy = new FxAddBuddy(this);
 	tmp_addBuddy->exec();
 	//fix a bug when addbuddy show, and mainwindow is hide, quit the addbuddy, 
 	//mainwindows will quit too.
-	this->show(); 
 	delete tmp_addBuddy;
 	tmp_addBuddy = NULL;
 }
@@ -1205,7 +1203,6 @@ void FxMainWindow::setacceptSMS()
 
 void FxMainWindow::setrefuseSMS()
 {
-	this->show();
 	FxRefuseSMS * xx = new FxRefuseSMS(this);
 	xx->exec();
 	delete xx;
@@ -1289,7 +1286,6 @@ void FxMainWindow::setPersonalInfo(QTextEdit *AcInfo, const Fetion_Personal *per
 
 void FxMainWindow::personlInfo()
 {
-	this->showNormal();
 	QDialog *window = new QDialog(this);
 	window->setWindowTitle(tr("see personal info"));
 
@@ -1312,8 +1308,6 @@ void FxMainWindow::personlInfo()
 
 void FxMainWindow::checkNewVersion()
 {
-	this->show();
-
 	QString info;
 	if (newVersion > CURRENT_VERSION)
 		info = 	tr("LibFetion Have New Version,"
@@ -1331,16 +1325,24 @@ void FxMainWindow::reportBugAct()
 
 void FxMainWindow::aboutLibFetion()
 {
-	this->show();
-	QMessageBox::about(this, tr("About LibFetion"),
-			tr(	"Application Current Version"  ) + VERSION_NO +
+	QMessageBox messageBox(this);
+	messageBox.setText (tr("Application Current Version"  ) + VERSION_NO +
 			tr(	"<br>This application is based on LibFetion library to writing, for more infomation access<a href=\"http://www.libfetion.cn\"> www.libfetion.cn </a> <br>"
-				"Copyright @ 2008 <b> <a href=\"mailto:dedodong@163.com\">DDD</a> (dedodong@163.com)</b>. All Rights reserved."));
+				"Copyright @ 2009 <b> <a href=\"mailto:dedodong@163.com\">DDD</a> (dedodong@163.com)</b>. All Rights reserved."));
+	messageBox.setTextFormat (Qt::RichText);
+	messageBox.setWindowTitle(tr("About LibFetion"));
+
+	QAbstractButton *authorButton = messageBox.addButton(tr("Author Info"), QMessageBox::ActionRole);
+	messageBox.setDefaultButton(messageBox.addButton(QMessageBox::Ok));
+
+	messageBox.exec();
+
+	if (messageBox.clickedButton() == authorButton) 
+		displayAboutLibFetion();
 }
 
 void FxMainWindow::aboutCM()
 {
-	this->show();
 	QMessageBox::about(this, tr("About CHINA Mobile"),
 			tr("<a href=\"http://www.fetion.com.cn\"> China Mobile Fetion</a>"
 				"China Mobile Fetion introduce"));
@@ -1359,7 +1361,6 @@ void FxMainWindow::menu_setmute()
 
 void FxMainWindow::saveMsgHistroy()
 {
-	this->show();
 	bool ok;
 	QString text = QInputDialog::getText(this, tr("saveMsgHistroy"),
 			tr("please input password"), QLineEdit::Password,
@@ -1388,7 +1389,6 @@ void FxMainWindow::saveMsgHistroy()
 
 void FxMainWindow::cleanMsgHistroy()
 {
-	this->show();
 	bool ok;
 	QString text = QInputDialog::getText(this, tr("cleanMsgHistroy"),
 			tr("please input password"), QLineEdit::Password,

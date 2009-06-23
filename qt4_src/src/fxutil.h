@@ -31,6 +31,7 @@ QString fxgui_handle_newMsg(Fetion_MSG *fxMsg);
 QString fxgui_to_faces(QString newmsg);
 QString fxgui_format_time(QString stamp);
 
+void displayAboutLibFetion();
 
 
 #define PERM 	(S_IRUSR | S_IWUSR)
