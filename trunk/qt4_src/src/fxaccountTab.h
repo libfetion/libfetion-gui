@@ -26,6 +26,7 @@
 #include "appconfig.h"
 #include "ui_msgsend.h"
 #include "fxmytabwidget.h"
+#include "fxshowHistory.h"
 
 #define SYSTEM_ID 10000
 class FxMainWindow;
@@ -74,7 +75,8 @@ private:
 	FxMyTabWidget *tabWidget;
 	QTimer flickTimer;
 	bool flick_flag;
-    FxMainWindow *mainWind;
+	FxMainWindow *mainWind;
+	FxShowHistory *histroy;
 };
 
 #endif
