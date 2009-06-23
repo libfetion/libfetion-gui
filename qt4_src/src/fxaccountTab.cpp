@@ -19,7 +19,6 @@
  ***************************************************************************/
 #include "fxaccountTab.h"
 #include "fxmainwindow.h"
-#include "fxshowHistory.h"
 
 AccountTab::AccountTab(qlonglong id, FxMyTabWidget *parent, bool awaySendSms)
     : QWidget(parent)
@@ -28,6 +27,7 @@ AccountTab::AccountTab(qlonglong id, FxMyTabWidget *parent, bool awaySendSms)
 	, tabWidget(parent)
 	, flick_flag(FALSE)
 	, mainWind(NULL)
+	, histroy(NULL)
 {
 	setupUi(this);
 	setWindowFlags(Qt::FramelessWindowHint);
@@ -45,6 +45,8 @@ AccountTab::AccountTab(qlonglong id, FxMyTabWidget *parent, bool awaySendSms)
 
 AccountTab::~AccountTab()
 {
+	if (histroy)
+		delete histroy;
 	fx_end_dialog (account_id);
 }
 
@@ -111,8 +113,9 @@ void AccountTab::ShowHistroy()
 {
 	if (!m_account)
 		return;
-	FxShowHistory * histroy = new FxShowHistory (m_account->id, mainWind);
-	histroy->show();
+	if (!histroy)
+		histroy = new FxShowHistory (m_account->id, mainWind);
+	histroy->showNormal();
 }
 
 

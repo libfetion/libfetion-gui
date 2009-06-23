@@ -175,10 +175,9 @@ by iptton
 	QDomDocument *doc = new QDomDocument("xml");
 
 	path = getSkinPath();
-	if( ! QFile::exists( path + "/res.xml") ){
-		// has not style.css use the default/res.xml
-		path = SkinPath() + "/default";
-	}
+	if (!QFile::exists( path + "/res.xml"))
+		path = SkinPath() + "/default";// has not res.xml use the default/res.xml
+		
     QFile file1(path + "/res.xml"); 
     file1.open(QIODevice::ReadOnly);
 
