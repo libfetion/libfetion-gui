@@ -493,3 +493,55 @@ int check_dir_state(const char *path)
 	}	
 }
 ***************************************/
+
+
+/* 
+ * Copyright (C) 2009
+ * 
+ * Show author and coryright info of LibFetion.
+ *
+ * Current maintainer: DDD(dedodong@163.com)
+ * Origin Author: weizhg23(weizhg23@gmail.com)
+ */
+ 
+#include <QFile>
+#include <QDialog>
+#include <QWidget>
+#include <QListWidget>
+#include <QListWidgetItem>
+#include <QHBoxLayout>
+#include <QTextStream>
+
+void displayAboutLibFetion()
+{
+	QWidget *window = new QWidget;
+	QListWidget *listWidget = new QListWidget;
+	window->setMinimumSize(460,220);
+	window->setMaximumSize(460,220);
+	window->setWindowTitle("Libfetion Authors");
+	window->setWindowFlags(Qt::WindowTitleHint | Qt::WindowSystemMenuHint | Qt::WindowStaysOnTopHint);
+	window->move(Settings::instance().MainWinPos());
+
+	QFile file(defaultResPath()+ "/CREDITS.txt");
+	if (file.open(QIODevice::ReadOnly)) 
+	{
+		QTextStream stream(&file);
+		QString line;
+		int item = 0;
+		while (!stream.atEnd()) 
+		{
+			line = stream.readLine(); // 不包括“\n”的一行文本
+			QListWidgetItem *newItem = new QListWidgetItem;
+			newItem->setText(line);
+			listWidget->insertItem(item, newItem);
+			item++;
+		}
+		file.close();
+	}
+
+	QHBoxLayout *layout = new QHBoxLayout;
+	layout->addWidget(listWidget);
+	window->setLayout(layout);
+	window->setFocus();
+	window->showNormal();
+}
