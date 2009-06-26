@@ -41,6 +41,7 @@ QString defaultResPath();
 QString SkinPath();
 QString defaultSkinPath();
 QString defaultSoundPath();
+QString FxFacePath();
 void playSound(SOUND_TYPE type);
 void execPlaySound(QString file);
 

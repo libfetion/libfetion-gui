@@ -159,6 +159,27 @@ QString defaultSoundPath()
     return defaultResPath() + "/sound";
 }
 
+QString FxFacePath()
+{
+#ifdef WIN32
+	return "./faces_image";
+#else //linux
+	static QString path;
+	static bool init = false;
+
+	if(init)
+		return path;
+
+	if (QFile::exists("./faces_image/1.gif"))
+		path = "./faces_image";
+	else
+		path = "/usr/share/libfetion/faces_image";
+
+	init = true;
+	return path;
+#endif
+}
+
 void execPlaySound(QString music)
 {
 #ifdef Q_OS_MAC //Mac OS X platfrom
