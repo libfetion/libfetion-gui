@@ -97,27 +97,6 @@ bool UnRegistHotkey(QWidget *window, QChar keyValue, Qt::KeyboardModifiers keyMo
 #endif
 }
 
-//fixme: this function should move to fxResource..
-QString FxFacePath()
-{
-#ifdef WIN32
-	return "./faces_image";
-#else //linux
-	static QString path;
-	static bool init = false;
-
-	if(init)
-		return path;
-
-	if (QFile::exists("./faces_image/1.gif"))
-		path = "./faces_image";
-	else
-		path = "/usr/share/libfetion/faces_image";
-
-	init = true;
-	return path;
-#endif
-}
 
 QString fxgui_handle_newMsg(Fetion_MSG *fxMsg)
 {
@@ -160,7 +139,6 @@ QString fxgui_to_faces(QString newmsg)
 	newmsg.replace("*-:)","<img src='"+FxFacePath()+"/37.gif'>");
 
 	newmsg.replace(":-d","<img src='"+FxFacePath()+"/2.gif'>");
-	newmsg.replace(";)","<img src='"+FxFacePath()+"/3.gif'>");
 	newmsg.replace(":-o","<img src='"+FxFacePath()+"/4.gif'>");
 	newmsg.replace(":-p","<img src='"+FxFacePath()+"/5.gif'>");
 	newmsg.replace("(h)","<img src='"+FxFacePath()+"/6.gif'>");
@@ -218,6 +196,7 @@ QString fxgui_to_faces(QString newmsg)
 	newmsg.replace(":-b","<img src='"+FxFacePath()+"/51.gif'>");
 	newmsg.replace("b)","<img src='"+FxFacePath()+"/52.gif'>");
 
+	newmsg.replace(";)","<img src='"+FxFacePath()+"/3.gif'>");
 	newmsg.replace(":)","<img src='"+FxFacePath()+"/1.gif'>");
 
 	return newmsg;
