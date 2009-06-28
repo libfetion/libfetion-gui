@@ -125,17 +125,14 @@ FxInputFace::~FxInputFace()
 void FxInputFace::setMsgWindow(FxMsgWindow *Wind)
 {
 	msgWind = Wind;
-	// add by iptton. 
-	setFocusProxy(Wind);
 }
 
 #ifdef Q_OS_MAC
 static bool shouldHide = false;
 #endif
 
-void FxInputFace::focusOutEvent (QFocusEvent *event) 
+void FxInputFace::focusOutEvent ( QFocusEvent * event ) 
 {
-	Q_UNUSED(event);
 #ifdef Q_OS_MAC
 	if (shouldHide)
 	{
@@ -170,19 +167,20 @@ void FxInputFace::mouseReleaseEvent ( QMouseEvent * event )
 	if (!accountTab)
 		return;
 
+	/*
+	 QString symbol;
+		 QString str;
+	QString face = getFaces (event->x(), event->y());
+*/
+
 	QString face;
 	QString str;
 	if (!getFaces (event->x(), event->y(), face, str))
 		return;
-	/* this will broke the user's edit(because the cursor changed)
-	   QString msg = accountTab->msgSend->MsgEdit->toPlainText();
-	   QString newmsg = msg + face;
+	QString msg = accountTab->msgSend->MsgEdit->toPlainText();
+	QString newmsg = msg + face;
 
-	   accountTab->msgSend->MsgEdit->setText(newmsg);
-	   accountTab->msgSend->MsgEdit->moveCursor(QTextCursor::End);
-	   accountTab->msgSend->MsgEdit->setFocus();
-	 */
-	accountTab->msgSend->MsgEdit->textCursor().insertText(face);
+	accountTab->msgSend->MsgEdit->setText(newmsg);
 	accountTab->msgSend->MsgEdit->moveCursor(QTextCursor::End);
 	accountTab->msgSend->MsgEdit->setFocus();
 }
