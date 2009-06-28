@@ -68,7 +68,6 @@ HEADERS       =  \
                  ./src/qwidgetresizehandler_p.h \
                  ./src/fxusertree.h \
 				 ./src/fxeditablelabel.h \
-				 ./src/fxeditor.h \
 				 ./src/sqlite/sqlite3.h
 
 
@@ -104,7 +103,6 @@ SOURCES       =  \
                 ./src/fxwidgettitlebar.cpp \
                 ./src/qlayoutengine.cpp \
                 ./src/qwidgetresizehandler.cpp \
-                ./src/fxeditor.cpp \
 				./src/sqlite/sqlite3.c
 
 FORMS         =  \
