@@ -27,6 +27,7 @@ FxQunWindow::FxQunWindow(qlonglong id, QWidget *parent,  bool awaySendSms)
 {
 	setupUi(this);
 	isQuit = false;
+	haveUnreadMsg = false;
 
 	view-> header()->setHidden(1);
 	view->setRootIsDecorated(true);

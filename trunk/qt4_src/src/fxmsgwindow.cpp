@@ -184,6 +184,21 @@ void FxMsgWindow::closeTabWid(int index)
 		accountTab->deleteLater();
 }
 
+void FxMsgWindow::showQunUnreadMsg()
+{
+	int size = qunWindow.size();
+	for (int i = 0; i < size; i++ )
+	{
+		if (qunWindow.at(i)->isHaveUnReadMsg())
+		{
+			qunWindow.at(i)->showNormal();
+			qunWindow.at(i)->MsgEdit->setFocus();
+			qunWindow.at(i)->setHaveUnReadMsg(false);
+			return ;
+		}
+	}
+}
+
 FxQunWindow* FxMsgWindow::findQunWindow(qlonglong qun_id)
 {
 	int size = qunWindow.size();
@@ -208,9 +223,6 @@ bool FxMsgWindow::addQunMessage(QString msg, qlonglong qun_id, qlonglong sender,
 		qunWindow.append(qunW);
 	}
 
-	qunW->showNormal();
-	qunW->MsgEdit->setFocus();
-
 	QString str; 
 	QString show_msg; 
 	if(iscoming_msg) {
@@ -234,7 +246,23 @@ bool FxMsgWindow::addQunMessage(QString msg, qlonglong qun_id, qlonglong sender,
 
 	saveHistroyMsg(strtol(fx_get_usr_uid(), NULL, 10), qun_id, show_msg.toUtf8().data(), NULL);
 
-	this->setFocus();
+	if (qunW->isVisible() || Settings::instance().isAutoShowMsg())
+	{
+		qunW->showNormal();
+		qunW->MsgEdit->setFocus();
+		qunW->setHaveUnReadMsg(false);
+	} else {
+
+		/** if we run here, we need to add addNewMsgCount,
+		 * and the qun is pre window one count, so do that:
+		 */
+		if (!qunW->isHaveUnReadMsg())
+		{
+			qunW->setHaveUnReadMsg(true);
+			m_mainwindow->addNewMsgCount(true);
+		}
+	}
+
 	return true;
 }
 

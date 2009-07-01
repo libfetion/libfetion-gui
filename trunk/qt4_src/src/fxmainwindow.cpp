@@ -284,6 +284,7 @@ bool FxMainWindow::showNewMsgDlg()
 	if (new_qun_msg_count > 0)
 	{
 		subNewMsgCount(true);
+		msgwin->showQunUnreadMsg();
 		return true;
 	}
 
