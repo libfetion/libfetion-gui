@@ -436,8 +436,6 @@ void FxMainWindow::minimizedWind()
 		#endif
 		this->showNormal();
 		minimizedTimer.stop();
-		if (Settings::instance().isStartHide())
-			this->hide();
 		
         move(Settings::instance().MainWinPos());
         resize(Settings::instance().MainWinSize());
@@ -448,6 +446,9 @@ void FxMainWindow::minimizedWind()
         setAutoHide(true);
         CHECK_SystemTiTle();
         checkSplashScreenFlag();
+
+		if (Settings::instance().isStartHide())
+			this->hide();
 	}
 }
 
