@@ -37,6 +37,8 @@ public:
 	QString getSenderName(qlonglong sender);
 	qlonglong qun_id;
 	void qun_exit();
+	bool isHaveUnReadMsg() {return haveUnreadMsg;}
+	void setHaveUnReadMsg(bool flag) { haveUnreadMsg = flag;}
 protected:
 	void closeEvent(QCloseEvent *event);
 	void setQuninfo();
@@ -51,6 +53,7 @@ private:
 	bool isQuit;
 	bool isAwaySendSMS;
 	void SendMsg();
+	bool haveUnreadMsg;
 };
 
 #endif

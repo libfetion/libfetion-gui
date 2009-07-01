@@ -62,6 +62,7 @@ public:
 	bool addQunMessage(QString msg, qlonglong qun_id, qlonglong sender, bool iscomeing_msg = false);
 
 	FxQunWindow *findQunWindow(qlonglong qun_id);
+	void showQunUnreadMsg();
 
     void updateAccountInfo(qlonglong account_id);
 protected:
