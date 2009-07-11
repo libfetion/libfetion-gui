@@ -125,7 +125,8 @@ FORMS         =  \
 
 
 DISTFILES += src/LibFetionEventHandle.cpp 
-DISTFILES += 64_libfetion.sh CREDITS.txt install.sh fetion_utf8_CN.qm
+DISTFILES += 64_libfetion.sh CREDITS.txt install.sh fetion_utf8_CN.qm \
+COPYING README
 DISTFILES += lib/*.a lib/libcurl_imp.lib sound/msg.wav
 DISTFILES += libfetion/*.h
 
