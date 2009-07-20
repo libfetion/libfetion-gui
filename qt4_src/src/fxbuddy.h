@@ -74,6 +74,7 @@ private:
 private:
 		QTreeWidgetItem* findAccountItem(const Fetion_Account *account);
 		QTreeWidgetItem* findAccountItemFromGroup(QTreeWidgetItem *groupItem, const Fetion_Account *account);
+		void create_zero_group();
 		QTreeWidget *treeWidget;
 		QTreeWidgetItem *QunItem;
 		bool have_zero_group; 
