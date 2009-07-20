@@ -399,35 +399,7 @@ void BuddyOpt::addAccountToGroup(const Fetion_Account *account)
 
 	int	group_no = fx_get_account_group_id(account) ;
 	if(group_no <= 0)
-	{
-		group_no = 0;
-		if( !have_zero_group)
-		{
-			QTreeWidgetItem *item;
-			item = new QTreeWidgetItem(treeWidget);
-
-			if (!m_isMainView)
-				item->setCheckState(0, Qt::Unchecked);
-
-			QString str = tr("un set group");
-
-			Group_Info *groupinfo = new Group_Info;
-			groupinfo->groupName = str;
-			groupinfo->groupID = group_no;
-			groupinfo->online_no = 0;
-
-			item->setText(0, str);
-#if MS_VC6
-			QVariant Var((uint)groupinfo);
-#else
-			QVariant Var;
-			Var.setValue (groupinfo); 
-#endif
-			item->setData(0, Qt::UserRole, Var);
-
-			have_zero_group = true;
-		}
-	}
+		create_zero_group();
 
 	char * showname = fx_get_account_show_name(account, TRUE);
 	QString show_name = QString::fromUtf8(showname);
@@ -447,7 +419,13 @@ void BuddyOpt::addAccountToGroup(const Fetion_Account *account, QString & name, 
 		return;
 
 	QTreeWidgetItem * groupItem = findGroupItemByID(group_id);
-	if(!groupItem)
+	if (!groupItem)
+	{
+		create_zero_group();
+		groupItem = findGroupItemByID(0);
+	}
+
+	if (!groupItem)
 		return;
 
 	Account_Info * ac_info = new Account_Info;
@@ -634,6 +612,39 @@ QTreeWidgetItem* BuddyOpt::findGroupItemByID(int group_id)
 	return NULL;
 }
 
+void BuddyOpt::create_zero_group()
+{
+	int group_no = 0;
+
+	if (have_zero_group)
+		return;
+
+	QTreeWidgetItem *item;
+	item = new QTreeWidgetItem(treeWidget);
+
+	if (!m_isMainView)
+		item->setCheckState(0, Qt::Unchecked);
+
+	QString str = tr("un set group");
+
+	Group_Info *groupinfo = new Group_Info;
+	groupinfo->groupName = str;
+	groupinfo->groupID = group_no;
+	groupinfo->online_no = 0;
+
+	item->setText(0, str);
+#if MS_VC6
+	QVariant Var((uint)groupinfo);
+#else
+	QVariant Var;
+	Var.setValue (groupinfo); 
+#endif
+	item->setData(0, Qt::UserRole, Var);
+
+	have_zero_group = true;
+}
+
+
 QTreeWidgetItem* BuddyOpt::findAccountItemFromGroup(QTreeWidgetItem *groupItem, const Fetion_Account *account)
 {
 	if (!groupItem || !account)
@@ -668,6 +679,13 @@ QTreeWidgetItem* BuddyOpt::findAccountItem(const Fetion_Account *account)
 		group_no = 0;
 
 	QTreeWidgetItem* groupItem = findGroupItemByID(group_no);
+
+	if (!groupItem)
+	{
+		create_zero_group();
+		groupItem = findGroupItemByID(0);
+	}
+
 	return findAccountItemFromGroup(groupItem, account);
 }
 
@@ -769,6 +787,11 @@ void BuddyOpt::updateAccountInfo(qlonglong account_id)
 			group_no = 0;
 
 		QTreeWidgetItem* groupItem = findGroupItemByID(group_no);
+		if (!groupItem)
+		{
+			create_zero_group();
+			groupItem = findGroupItemByID(0);
+		}
 		if (groupItem)
 		{
 #if MS_VC6
