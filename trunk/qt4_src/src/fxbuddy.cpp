@@ -555,8 +555,8 @@ QString BuddyOpt::createAccountTipsInfo(const Fetion_Account *account)
 				info += "<b style=\"color:red; \">" + tr("boy") +"</b>";
 				tips += info +"<br>";
 				break;
-			case 0:
-				info += "<b style=\"color:red; \">" + tr("unknow") +"</b>";
+			default:
+				info += "<b style=\"color:red; \">" + tr("secrecy") +"</b>";
 				break;
 		}
 
@@ -567,6 +567,15 @@ QString BuddyOpt::createAccountTipsInfo(const Fetion_Account *account)
 			info += "<b style=\"color:red; \">" + tmp +"</b>";
 			tips += info +"<br>";
 		}
+
+		info = tr("province:");
+		info += "<b style=\"color:red; \">" +
+			getProvince(QString::fromUtf8(account->personal->province)) +"</b>";
+		tips += info +"<br>";
+
+		info = tr("city:");
+		info += "<b style=\"color:red; \">" + getCity(account->personal->city) +"</b>";
+		tips += info +"<br>";
 	}
 
 	//remove the last "<br>"
