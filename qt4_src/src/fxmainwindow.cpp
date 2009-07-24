@@ -1283,6 +1283,18 @@ void FxMainWindow::setPersonalInfo(QTextEdit *AcInfo, const Fetion_Personal *per
 	else 
 		info += "<b style=\"color:red; \"> </b>"; 
 	AcInfo->append(info);
+
+	if (hP)
+	{
+		info = tr("province:");
+		info += "<b style=\"color:red; \">" +
+			getProvince(QString::fromUtf8(personal->province)) +"</b>";
+		AcInfo->append(info);
+
+		info = tr("city:");
+		info += "<b style=\"color:red; \">" + getCity(personal->city) +"</b>";
+		AcInfo->append(info);
+	}
 }
 
 

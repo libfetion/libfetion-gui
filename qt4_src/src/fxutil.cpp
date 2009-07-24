@@ -22,7 +22,7 @@
 /***************************************************************************
  *
  *
- * The faces resources and implement by iptton（iptton@gmail.com). thanks iptton.
+ * The faces resources and implement by iptton (iptton@gmail.com). thanks iptton.
  *
  *
  ***************************************************************************/
@@ -82,6 +82,9 @@ bool RegistHotkey(QWidget *window, QChar keyValue, Qt::KeyboardModifiers keyMod)
 	int modifiy = QtModToWinMod(keyMod);
 	return RegisterHotKey(w_handle, hotkey_id, modifiy, VkKeyScan(keyValue.toAscii()));
 #else //liunx or mac os are not implement...
+	Q_UNUSED(window);
+	Q_UNUSED(keyValue);
+	Q_UNUSED(keyMod);
 	return false;
 #endif
 
@@ -93,6 +96,9 @@ bool UnRegistHotkey(QWidget *window, QChar keyValue, Qt::KeyboardModifiers keyMo
 	WId w_handle = window?window->winId():0;
 	return UnregisterHotKey(w_handle, hotkey_id);
 #else
+	Q_UNUSED(window);
+	Q_UNUSED(keyValue);
+	Q_UNUSED(keyMod);
 	return false;
 #endif
 }
@@ -150,7 +156,7 @@ QString fxgui_to_faces(QString newmsg)
 
 	//linux
 	//newmsg.replace(":&amp;","<img src='"+FxFacePath()+"/12.gif'>");
-	//官方
+	//瀹樻柟
 	newmsg.replace(":&","<img src='"+FxFacePath()+"/12.gif'>");
 
 	newmsg.replace("8o|","<img src='"+FxFacePath()+"/13.gif'>");
@@ -166,7 +172,7 @@ QString fxgui_to_faces(QString newmsg)
 
 	//linux
 	//newmsg.replace("(&amp;)","<img src='"+FxFacePath()+"/23.gif'>");
-	//官方
+	//瀹樻柟
 	newmsg.replace("(&)","<img src='"+FxFacePath()+"/23.gif'>");
 
 	newmsg.replace("(sn)","<img src='"+FxFacePath()+"/24.gif'>");
@@ -276,6 +282,8 @@ int initshared(const char* path,const char* keyString)
 {
 
 #ifndef WIN32 
+	Q_UNUSED(keyString);
+
 	key_t 	key = ftok( path, 'S' );
 
 	/* get attached memory, creating it if necessary */
@@ -509,7 +517,7 @@ void displayAboutLibFetion()
 		int item = 0;
 		while (!stream.atEnd()) 
 		{
-			line = stream.readLine(); // ��������\n����һ���ı�
+			line = stream.readLine(); // 不包括“\n”的一行文本
 			QListWidgetItem *newItem = new QListWidgetItem;
 			newItem->setText(line);
 			listWidget->insertItem(item, newItem);
@@ -524,3 +532,47 @@ void displayAboutLibFetion()
 	window->setFocus();
 	window->showNormal();
 }
+
+
+
+
+/****************************************
+this code is porting from WM libfetion project,
+The origin author is shikun(shikun.z@gmail.com)
+porting by DDD(dedodong@163.com).
+****************************************/
+
+#include "fxprovAndCityCode.cpp"
+
+QString getProvince(QString provinceCode)
+{
+	if("" == provinceCode)
+		return QString::fromUtf8("其它");
+
+	for(int i = 0; i < 34; i ++)
+	{
+		if (provinceCode == QString::fromUtf8(ProvinceArray[i].ProvinceCode))
+			return QString::fromUtf8(ProvinceArray[i].ProvinceName);
+	}
+
+	return QString::fromUtf8("其它");
+}
+
+QString getCity(int cityCode)
+{
+	//默认如果是99表示其它
+	if(99 == cityCode)
+		return QString::fromUtf8("其它");
+
+	for(int i = 0; i < 340; i ++)
+	{
+		if(cityCode == CityArray[i].CityCode)
+			return QString::fromUtf8(CityArray[i].CityName);
+	}
+
+	return QString::fromUtf8("其它");
+}
+
+
+
+

@@ -25,6 +25,9 @@
 #include <QString>
 #include "appconfig.h"
 
+QString getProvince(QString Province);
+QString getCity(int cityID);
+
 bool RegistHotkey(QWidget *window, QChar keyValue, Qt::KeyboardModifiers keyMod);
 bool UnRegistHotkey(QWidget *window, QChar keyValue, Qt::KeyboardModifiers keyMod);
 QString fxgui_handle_newMsg(Fetion_MSG *fxMsg);
