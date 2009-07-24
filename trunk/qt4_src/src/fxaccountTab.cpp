@@ -71,8 +71,13 @@ void AccountTab::setSendModle(bool isSMS)
 		return;
 	}
 
-	if(!m_account)
+	if (!m_account) {
+		QString status = tr("with stranger") + 
+			QString("%1").arg(account_id) +
+			tr("chat");
+		msgSend->Ac_Status->setText (status); 
 		return;
+	}
 
 	if (!fx_is_pc_user_by_account (m_account)) {
 		QString status = account_name + tr("is mobile user, your message just send to his mobile");
@@ -396,10 +401,14 @@ void AccountTab::init()
 			//begin a dialog init, if the account is mobile, this function will do nothing...
 			if (!isAwaySendSMS)
 				fx_begin_dialog (account_id, NULL, NULL); 
-			char * showname = fx_get_account_show_name(m_account, FALSE);
-			account_name = QString::fromUtf8(showname);
-			if(showname)
-				free(showname);
+			if (m_account) {
+				char * showname = fx_get_account_show_name(m_account, FALSE);
+				account_name = QString::fromUtf8(showname);
+				if(showname)
+					free(showname);
+			} else {
+				account_name = QString("%1").arg(account_id);
+			}
 		}
 	} //(account_id == SYSTEM_ID)
 
