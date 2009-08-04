@@ -36,19 +36,14 @@ FxMain::FxMain()
 	/*
 	   QMessageBox::about(mainWin, ("test version for v 0.2.0"),
 	   ("Thank you for testing. your working will make Libfetion more strong!!"));
-	   */
+    */
+#if !DEBUG_GUI
 	loginWin = new FxLoginWindow(0);
 	doSlotConnection();
 	loginWin->show();
-}
-
-FxMain::~FxMain() 
-{
-	if(isLoginIn)
-	{
-		printf("fx_loginout \n");
-		fx_loginout();
-	}
+#else
+    createMainWindow();
+#endif
 }
 
 void FxMain::doSlotConnection()
@@ -56,12 +51,29 @@ void FxMain::doSlotConnection()
 	QObject::connect(loginWin, SIGNAL(signal_LoginOK()), this, SLOT(slotLoginOK()));
 }
 
+void FxMain::createMainWindow()
+{
+    mainWin = new FxMainWindow(0);
+#if !DEBUG_GUI
+    loginWin->hide();
+#endif
+    mainWin->show();
+}
+
 void FxMain::slotLoginOK()
 {
 	isLoginIn = true;
-	mainWin = new FxMainWindow(0);
-	loginWin->hide();
-	mainWin->show();
+    createMainWindow();
+#if !DEBUG_GUI
 	delete loginWin; 
+#endif
 }
 
+FxMain::~FxMain()
+{
+    if(isLoginIn)
+    {
+        printf("fx_loginout \n");
+        fx_loginout();
+    }
+}

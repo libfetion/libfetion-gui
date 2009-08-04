@@ -46,7 +46,7 @@ private:
 //	FxSmsWindow * xx;
 
 	bool isLoginIn;
-
+    void createMainWindow();
 	void doSlotConnection();
 
 private slots:
