@@ -737,22 +737,20 @@ void FxMainWindow::init_UI()
 	Settings::instance().setMainWindow(this);
 #if DEBUG_GUI 
 	Settings::instance().setUser(1000);
+    setWindowTitle("DEBUG_GUI Test User --Linux Fetion");
 #else
 	Settings::instance().setUser((qlonglong)strtol(fx_get_usr_uid(), NULL, 10));
-#endif
-
-
-#if WIN32
-	setWindowTitle(QString::fromUtf8(fx_get_usr_show_name()) + "--Win Fetion");
-#else
-#ifdef Q_OS_MAC
-	setWindowTitle(QString::fromUtf8(fx_get_usr_show_name()) + "--Mac Fetion");
-#else
-	setWindowTitle(QString::fromUtf8(fx_get_usr_show_name()) + "--Linux Fetion");
-#endif
+    #if WIN32
+        setWindowTitle(QString::fromUtf8(fx_get_usr_show_name()) + "--Win Fetion");
+    #else
+        #ifdef Q_OS_MAC
+            setWindowTitle(QString::fromUtf8(fx_get_usr_show_name()) + "--Mac Fetion");
+        #else
+            setWindowTitle(QString::fromUtf8(fx_get_usr_show_name()) + "--Linux Fetion");
+        #endif
+    #endif
 #endif
 	//this->setWindowIcon(getSysTrayIcon(1));
-	
 	move(Settings::instance().MainWinPos());
 
 	//UI set all images of main windows
