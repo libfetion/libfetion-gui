@@ -276,7 +276,7 @@ void FxConfigDia::slot_SetFont()
 {
 	bool ok;
 	QFont font = QFontDialog::getFont(&ok,
-					Settings::instance().getCurrentFont(), this);
+                    Settings::instance().getCurrentFont());
 	if (ok)
 		SetAllFont(font);
 }
@@ -288,15 +288,20 @@ void FxConfigDia::slot_SetDefaultFont()
 
 void FxConfigDia::SetAllFont(const QFont & font)
 {
-	Settings::instance().setFont(font); 
+    /* TODO:
+     *   need a font manager to control application font.
+     */
 	QApplication::setFont(font);
 
-	this->setFont(font);
+    Settings::instance().setFont(font);
 
-	if (mainwind)
-		mainwind->SetAllFont(font);
+    if (mainwind)
+        mainwind->SetAllFont(font);
 
-
+    /* FIXME: disable set font for config dialog, till it's resizable. Need to
+     *        implement the layout function for config dialog
+     */
+#ifdef FX_CONFIG_DIALOG_RESIZEABLE
 	{ //update current dialog contorl font. very bad code, haha
     groupBox->setFont(font);
     RingFile->setFont(font);
@@ -324,8 +329,8 @@ void FxConfigDia::SetAllFont(const QFont & font)
     CB_EnableHotKey->setFont(font);
     registedHotKeyState->setFont(font);
 	}
-
-	this->repaint();
+#endif
+//	this->repaint();
 }
 
 bool FxConfigDia::eventFilter(QObject *target, QEvent *event)
