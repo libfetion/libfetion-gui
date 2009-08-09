@@ -515,10 +515,11 @@ void displayAboutLibFetion()
 		QTextStream stream(&file);
 		QString line;
 		int item = 0;
+		QListWidgetItem *newItem = NULL;
 		while (!stream.atEnd()) 
 		{
 			line = stream.readLine(); // 不包括“\n”的一行文本
-			QListWidgetItem *newItem = new QListWidgetItem;
+			newItem = new QListWidgetItem;
 			newItem->setText(line);
 			listWidget->insertItem(item, newItem);
 			item++;
