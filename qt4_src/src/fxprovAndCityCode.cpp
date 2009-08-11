@@ -1,16 +1,27 @@
+/* TODO:
+ *   Use data files to save province / city info instead.
+ */
+
+#define FX_USER_LOC_CITY_NAME_MAX_LENGTH    18
+#define FX_USER_LOC_PROV_CODE_MAX_LENGTH    5
+#define FX_USER_LOC_PROV_NAME_MAX_LENGTH    32
+
+#define FX_CHN_CITY_ALL_NUM                 340
+#define FX_CHN_PROV_ALL_NUM                 34
+
 struct CITY
 {
     int CityCode;
-    char CityName[18];
+    char CityName[FX_USER_LOC_CITY_NAME_MAX_LENGTH];
 };
 
 struct PROVINCE
 {
-    char ProvinceCode[5];
-    char ProvinceName[22];
+    char ProvinceCode[FX_USER_LOC_PROV_CODE_MAX_LENGTH];
+    char ProvinceName[FX_USER_LOC_PROV_NAME_MAX_LENGTH];
 };
 
-CITY CityArray[340] = 
+CITY CityArray[FX_CHN_CITY_ALL_NUM] =
 {
 {10,"北京"},
 {20,"广州"},
@@ -354,7 +365,7 @@ CITY CityArray[340] =
 {999,"伊宁"}
 };
 
-PROVINCE ProvinceArray[34] = {
+PROVINCE ProvinceArray[FX_CHN_PROV_ALL_NUM] = {
 {"bj","北京市 "},
 {"sh","上海市 "},
 {"tj","天津市 "},
