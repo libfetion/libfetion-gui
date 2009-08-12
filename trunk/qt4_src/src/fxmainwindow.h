@@ -233,7 +233,6 @@ private:
     bool isNeedRecordWinSize;
     bool isNeedRecordWinPos;
     bool isHaveminimized;
-    bool isConfigDialogShown;
 
     QTimer checkSkinsTimer;
     QTimer minimizedTimer;
