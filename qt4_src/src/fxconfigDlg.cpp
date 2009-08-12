@@ -20,12 +20,16 @@
 #include "fxconfigDlg.h"
 #include "appconfig.h"
 
+bool FxConfigDia::hasInstance = false;
+
 FxConfigDia::FxConfigDia(FxMainWindow *wind, QWidget *parent)
     : QDialog(parent)
 {
 	setupUi(this);
 	mainwind= wind;
 	hotKey->installEventFilter(this);
+
+    FxConfigDia::hasInstance = true;
 
 	init_state();
 	init_connect();
@@ -39,6 +43,7 @@ void FxConfigDia::closeEvent(QCloseEvent *event)
 {
 	if (mainwind)
 		mainwind->show();
+    FxConfigDia::hasInstance = false;
 	event->accept();
 }
 

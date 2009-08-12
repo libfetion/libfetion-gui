@@ -30,33 +30,36 @@ class FxConfigDia : public QDialog, public Ui::ConfigApp
 public:
     FxConfigDia(FxMainWindow *wind, QWidget *parent = 0);
     ~FxConfigDia();
-	bool eventFilter(QObject *target, QEvent *event);
-	void SetAllFont(const QFont & font);
-private slots:
-	void slot_DisableNudge();
-	void slot_MainTopHit();
-	void slot_AutoShowMsg();
-	void slot_RemberPwd();
-	void slot_MainStartHide();
-	void slot_Mute();
-	void slot_LongMsg();
-	void slot_SendMode();
-	void slot_AutoReplyMsg();
-    void slot_LimitReplyMsgLenth();
-	void slot_TestRing();
-	void slot_ChangeRing();
-	void slot_DefaultRing();
-	void slot_EnableHotKey();
-	void slot_SetFont();
-	void slot_SetDefaultFont();
-protected:
-	void closeEvent(QCloseEvent *event);
-	void init_state();
-	void init_connect();
-	bool getHotKeyValue(QKeyEvent *keyEvent);
-	void setHotKeyValue();
-private:
-	FxMainWindow *mainwind;
-};
+    bool eventFilter(QObject *target, QEvent *event);
+    void SetAllFont(const QFont & font);
+    static bool hasInstance;
 
+private slots:
+    void slot_DisableNudge();
+    void slot_MainTopHit();
+    void slot_AutoShowMsg();
+    void slot_RemberPwd();
+    void slot_MainStartHide();
+    void slot_Mute();
+    void slot_LongMsg();
+    void slot_SendMode();
+    void slot_AutoReplyMsg();
+    void slot_LimitReplyMsgLenth();
+    void slot_TestRing();
+    void slot_ChangeRing();
+    void slot_DefaultRing();
+    void slot_EnableHotKey();
+    void slot_SetFont();
+    void slot_SetDefaultFont();
+
+protected:
+    void closeEvent(QCloseEvent *event);
+    void init_state();
+    void init_connect();
+    bool getHotKeyValue(QKeyEvent *keyEvent);
+    void setHotKeyValue();
+
+private:
+    FxMainWindow *mainwind;
+};
 #endif
