@@ -56,6 +56,7 @@ FxMainWindow::FxMainWindow(QWidget *parent)
 	isHaveminimized = false;
 	isNeedRecordWinPos = false;
 	isNeedRecordWinSize = false;
+    isConfigDialogShown = false;
 	tmp_addBuddy = NULL;
     scheduleSms = new FxScheduleSMS(this, this);
     scheduleSmsManager = new FxScheduleSMSManage(this, this);
@@ -1416,9 +1417,14 @@ void FxMainWindow::cleanMsgHistroy()
 
 void FxMainWindow::showConfigDlg()
 {
-	show();
-	FxConfigDia * configdia= new FxConfigDia(this, this);
-	configdia->show();
+    show();
+    /* ONLY one configure dialog is allowed */
+    if (!isConfigDialogShown)
+    {
+        FxConfigDia * configdia= new FxConfigDia(this, this);
+        configdia->show();
+        isConfigDialogShown = true;
+    }
 }
 
 void FxMainWindow::menu_setautoshowmsg()
