@@ -73,10 +73,10 @@ int main(int argc, char *argv[])
 	app.installTranslator( &translator_fetion );
 	app.installTranslator( &translator_qt );
 
-	Settings::instance().setSyetemDefualFont( QApplication::font() );
+    Settings::instance().setSysDefaultFont( QApplication::font() );
 	app.setFont(Settings::instance().getCurrentFont());
 	setSkins(Settings::instance().SkinPath(), Settings::instance().SkinName());
-	FxMain *mainWin = new FxMain;
+    FxMain *mainWin = new FxMain();
 
 	//QObject::connect(&app, SIGNAL(lastWindowClosed()), &app, SLOT(quit()));
 	app.setQuitOnLastWindowClosed(false);

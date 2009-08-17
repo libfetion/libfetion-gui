@@ -99,8 +99,8 @@ extern "C" {
 			void setFont(const QFont & font); 
 			QFont getCurrentFont(){ return m_CurrentFont; }
 
-			void setSyetemDefualFont(QFont font){ m_DefaultFont = font; }
-			QFont getSyetemDefualFont(){ return m_DefaultFont; }
+            void setSysDefaultFont(QFont font){ m_DefaultFont = font; }
+            QFont setSysDefaultFont(){ return m_DefaultFont; }
 
 			bool setEnableGetMsgHotKey(bool enable);
 			bool setGetMsgHotKey(QChar keyvalue, Qt::KeyboardModifiers keyMod, bool isRegister = true);
