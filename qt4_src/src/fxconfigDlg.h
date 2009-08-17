@@ -31,8 +31,14 @@ public:
     FxConfigDia(FxMainWindow *wind, QWidget *parent = 0);
     ~FxConfigDia();
     bool eventFilter(QObject *target, QEvent *event);
-    void SetAllFont(const QFont & font);
     static bool hasInstance;
+
+private:
+    void _updateFonts(const QFont & font);
+    void _setObjectFont(QObject * obj, const QFont & font);
+
+signals:
+    void signal_FontChanged(const QFont & font);
 
 private slots:
     void slot_DisableNudge();

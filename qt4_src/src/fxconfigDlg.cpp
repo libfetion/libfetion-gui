@@ -279,64 +279,41 @@ void FxConfigDia::slot_EnableHotKey()
 
 void FxConfigDia::slot_SetFont()
 {
-	bool ok;
-	QFont font = QFontDialog::getFont(&ok,
+    bool ok;
+    QFont font = QFontDialog::getFont(&ok,
                     Settings::instance().getCurrentFont());
-	if (ok)
-		SetAllFont(font);
+
+    /* FIXME: Check if font changed */
+    emit signal_FontChanged(font);
+
+    _updateFonts(font);
 }
 
 void FxConfigDia::slot_SetDefaultFont()
 {
-	SetAllFont( Settings::instance().getSyetemDefualFont() );
+    _updateFonts( Settings::instance().setSysDefaultFont() );
 }
-
-void FxConfigDia::SetAllFont(const QFont & font)
+void FxConfigDia::_updateFonts(const QFont & font)
 {
-    /* TODO:
-     *   need a font manager to control application font.
+    /* INFO: since v1.0, css was used for theme management, just update stylesheet
+     *       for font setting.
      */
-	QApplication::setFont(font);
+    QString style = qApp->styleSheet();
+    style += "QWidget { ";
+    style += "font-family: "; style += font.family(); style += ";";
+    style += "font-size: "; style += QString::number(font.pointSize()); style += "px;";
+    if (font.italic())
+        style += " font-style: italic;";
+    if (font.bold())
+        style += " font-weight: bold;";
 
-    Settings::instance().setFont(font);
+    style += " color: #333333;";
+    style += " }";
 
-    if (mainwind)
-        mainwind->SetAllFont(font);
+    qApp->setStyleSheet(style);
 
-    /* FIXME: disable set font for config dialog, till it's resizable. Need to
-     *        implement the layout function for config dialog
-     */
-#ifdef FX_CONFIG_DIALOG_RESIZEABLE
-	{ //update current dialog contorl font. very bad code, haha
-    groupBox->setFont(font);
-    RingFile->setFont(font);
-    BT_ChangeRing->setFont(font);
-    BT_TestRing->setFont(font);
-    BT_RingDefault->setFont(font);
-    groupBox_2->setFont(font);
-    MsgAutoRelpy->setFont(font);
-    CB_AutoReply->setFont(font);
-    groupBox_3->setFont(font);
-    RB_EnterSend->setFont(font);
-    RB_CtrlEnterSend->setFont(font);
-    groupBox_4->setFont(font);
-    CB_MainTopHit->setFont(font);
-    CB_AutoShowMsg->setFont(font);
-    CB_RemberPwd->setFont(font);
-    CB_MainStartHide->setFont(font);
-    CB_Mute->setFont(font);
-    CB_LongMsg->setFont(font);
-    CB_DisableNudge->setFont(font);
-    BT_SetDefaultFont->setFont(font);
-    BT_SetFont->setFont(font);
-    groupBox_5->setFont(font);
-    hotKey->setFont(font);
-    CB_EnableHotKey->setFont(font);
-    registedHotKeyState->setFont(font);
-	}
-#endif
-//	this->repaint();
 }
+
 
 bool FxConfigDia::eventFilter(QObject *target, QEvent *event)
 {
