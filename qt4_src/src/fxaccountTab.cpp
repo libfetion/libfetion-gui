@@ -366,19 +366,6 @@ void AccountTab::UpdateSkins()
 */
 }
 
-void AccountTab::SetAllFont(const QFont & font)
-{
-	this->setFont(font);
-
-	MsgEdit->setFont(font);
-	MsgBrowser->setFont(font);
-
-	Ac_Status->setFont(font);
-
-	input_nm->setFont(font);
-	this->repaint();
-}
-
 void AccountTab::init()
 {
 	UpdateSkins();

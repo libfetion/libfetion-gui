@@ -1592,27 +1592,3 @@ void FxMainWindow::UpdateSkins()
 		IsAutoShowMsgAct->setIcon(getMenuIcon(CancelIcon));
 }
 
-void FxMainWindow::SetAllFont(const QFont & font)
-{
-	this->setFont(font);
-	msgwin->SetAllFont(font);
-
-	// ???
-	addBuddyAct->setIcon(getMenuIcon(AddBuddyIcon));
-
-	lineSearch->setFont(font);
-	nickname->setFont(font);
-	impression->setFont(font);
-	version->setFont(font);
-
-    view->setFont(font);
-    search->setFont(font);
-
-    buddyMenu->setFont(font);
-    menuSetting->setFont(font);
-    menuAbout->setFont(font);
-
-	btnMenu->setFont(font);
-
-	this->repaint();
-}

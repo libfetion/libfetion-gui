@@ -96,7 +96,7 @@ extern "C" {
 			void setSendMultMsgWinSize(QSize size);
 			QSize SendMultMsgWinSize(){ return m_SendMultMsgWinSize; }
 
-			void setFont(const QFont & font); 
+            void saveFontSetting(const QFont & font);
 			QFont getCurrentFont(){ return m_CurrentFont; }
 
             void setSysDefaultFont(QFont font){ m_DefaultFont = font; }

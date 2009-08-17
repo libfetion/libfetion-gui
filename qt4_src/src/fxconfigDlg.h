@@ -35,10 +35,6 @@ public:
 
 private:
     void _updateFonts(const QFont & font);
-    void _setObjectFont(QObject * obj, const QFont & font);
-
-signals:
-    void signal_FontChanged(const QFont & font);
 
 private slots:
     void slot_DisableNudge();
