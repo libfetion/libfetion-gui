@@ -43,7 +43,6 @@ public:
 	QString account_name;
 
 	void UpdateSkins();
-	void SetAllFont(const QFont & font);
 	void startFlickerTab();
 	void endFlickerTab();
 	bool isAwaySendSMS;

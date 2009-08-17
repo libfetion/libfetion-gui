@@ -608,23 +608,6 @@ void FxMsgWindow::UpdateSkins()
 		closeTabButton->setIcon(getCloseTabImage());
 }
 
-void FxMsgWindow::SetAllFont(const QFont & font)
-{
-	this->setFont(font);
-	tabWidget->setFont(font);
-
-    AccountTab *ac_tab = NULL;
-	int tabCount = tabWidget->count();
-    for(int i = 0; i < tabCount; i++)
-    {
-        ac_tab = (AccountTab *) tabWidget->widget(i); 
-        if(ac_tab)
-            ac_tab->SetAllFont(font);
-    }
-
-   this->repaint();
-}
-
 void FxMsgWindow::updateAccountInfo(qlonglong account_id)
 {
     // get the current tab

@@ -50,10 +50,6 @@ public:
 	FxEditableLabel(QWidget *parent=0):QStackedWidget(parent){
 		init();
 	}
-	void setFont(const QFont & font){
-		edit->setFont(font);
-		label->setFont(font);
-	}
 protected:
 	void init(QString text=""){
 		edit = new QLineEdit(text,this);

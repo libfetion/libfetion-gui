@@ -111,6 +111,7 @@ QString fxgui_handle_newMsg(Fetion_MSG *fxMsg)
 	//text/html-fragment is sended from pc client, and it is the xml format.
 	if (!fxMsg)
 		return "";
+
 	QString newmsg;
 
 	if (fxMsg->msgformat && strstr (fxMsg->msgformat, "plain")) //message from mobile  text/plain
@@ -119,8 +120,6 @@ QString fxgui_handle_newMsg(Fetion_MSG *fxMsg)
 		newmsg.replace(QString("<"), QString("&lt;"));
 		newmsg.replace(QString(">"), QString("&gt;"));
 	} else { //message from pc  text/html-fragment
-
-		//here imple the font type and size.
 		char *msg = fx_msg_qt_format(fxMsg->message); 
 		newmsg = newmsg.fromUtf8(msg);
 		if(msg)

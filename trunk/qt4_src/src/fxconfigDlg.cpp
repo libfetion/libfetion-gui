@@ -284,8 +284,6 @@ void FxConfigDia::slot_SetFont()
                     Settings::instance().getCurrentFont());
 
     /* FIXME: Check if font changed */
-    emit signal_FontChanged(font);
-
     _updateFonts(font);
 }
 
@@ -312,6 +310,8 @@ void FxConfigDia::_updateFonts(const QFont & font)
 
     qApp->setStyleSheet(style);
 
+    /* save in user config file */
+    Settings::instance().saveFontSetting(font);
 }
 
 

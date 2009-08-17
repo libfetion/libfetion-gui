@@ -21,7 +21,6 @@ public:
 	QPushButton *btnMaximize;
 	void setWindowTitle(const QString&title);
 	void setWindowIcon(const QIcon&icon);
-	void setFont(const QFont & font) { title->setFont(font); }
 	void setMinimizetoHide(bool minimizetoHide) {_isminimizetoHide = minimizetoHide;}
 private:
 	FxWidget *_parent;

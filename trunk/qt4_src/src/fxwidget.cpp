@@ -127,10 +127,7 @@ void FxWidget::setWindowTitle(const QString &title){
 	titleBar->setWindowTitle(title);
 	QWidget::setWindowTitle(title);
 }
-void FxWidget::setFont(const QFont & font){
-	titleBar->setFont(font); 
-	QWidget::setFont(font); 
-}
+
 void FxWidget::setWindowIcon(const QIcon & icon){
 	titleBar->setWindowIcon(icon);
 	QWidget::setWindowIcon(icon);
