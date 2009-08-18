@@ -27,30 +27,35 @@
 #include "ui_scheduleSMSManage.h"
 
 
-class FxScheduleSMSManage : public QMainWindow, public Ui::ScheduleSmSManage
+class FxScheduleSMSManage : public QMainWindow,
+                            public Ui::ScheduleSmSManage
 {
     Q_OBJECT
-public:
-   FxScheduleSMSManage(FxMainWindow * mainwind, QWidget *parent = 0);
-    ~FxScheduleSMSManage();
+    public:
+       FxScheduleSMSManage(FxMainWindow * mainwind,
+                           QWidget *parent = 0);
+        ~FxScheduleSMSManage();
 
-private slots:
-	void loadALlSCMList();
-	void createItemOfSCMList();
-	void deleteItemOfSCMList();
-	void refreshSCMList();
-	void chooseAllSCMList();
+    private slots:
+        void loadALlSCMList();
+        void createItemOfSCMList();
+        void deleteItemOfSCMList();
+        void refreshSCMList();
+        void chooseAllSCMList();
 
-    void slot_update_scheduleList();
+        void slot_update_scheduleList();
 
-protected:
-	void addItemToSCMList(Fetion_Schedule_SMS*);
-	void addItemToSCMList(QString &receiver, QString& send_time, QString &message, int scm_id);
-	void closeEvent(QCloseEvent *event);
-private:
-    void init_UI();
-private:
-	FxMainWindow * mainwind;
+    protected:
+        void addItemToSCMList(Fetion_Schedule_SMS*);
+        void addItemToSCMList(QString &receiver,
+                              QString& send_time,
+                              QString &message,
+                              int scm_id);
+        void closeEvent(QCloseEvent *event);
+    private:
+        void init_UI();
+    private:
+        FxMainWindow * mainwind;
 };
 
 #endif

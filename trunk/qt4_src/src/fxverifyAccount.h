@@ -29,19 +29,25 @@
 class FxVerifyAccount : public QDialog, public Ui::VerifyAccount
 {
     Q_OBJECT
-public:
-   FxVerifyAccount(FxMainWindow *wind, char*uri, char*desc, QWidget *parent = 0);
-   ~FxVerifyAccount();
-	void init_groupItem();
-protected:
-	void closeEvent(QCloseEvent *event);
-private slots:
-	void verifyAccount();
-	void verifyRB();
-private:
-	char * m_uri;
-	QString m_desc;
-	FxMainWindow *mainwind;
+    public:
+       FxVerifyAccount(FxMainWindow *wind,
+                       char*uri,
+                       char*desc,
+                       QWidget *parent = 0);
+       ~FxVerifyAccount();
+        void init_groupItem();
+
+    protected:
+        void closeEvent(QCloseEvent *event);
+
+    private slots:
+        void verifyAccount();
+        void verifyRB();
+
+    private:
+        char * m_uri;
+        QString m_desc;
+        FxMainWindow *mainwind;
 };
 
 #endif

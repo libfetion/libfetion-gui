@@ -29,22 +29,22 @@ class BuddyOpt;
 class FxScheduleSMS : public QMainWindow, public Ui::ScheduleSMS
 {
     Q_OBJECT
-public:
-   FxScheduleSMS(FxMainWindow * mainwind, QWidget *parent = 0);
-    ~FxScheduleSMS();
+    public:
+       FxScheduleSMS(FxMainWindow * mainwind, QWidget *parent = 0);
+        ~FxScheduleSMS();
 
-protected:
-	void closeEvent(QCloseEvent *event);
-	void moveEvent(QMoveEvent * event);
-private slots:
-	void timeEditFinished();
-	void ShowSCM_Manage(const QString &);
-	void ChangechooseNM();
-	void ChangeInputNM();
-	void SendMsg();
-private:
-	BuddyOpt *buddyopt; 
-	FxMainWindow * mainwind;
+    protected:
+        void closeEvent(QCloseEvent *event);
+        void moveEvent(QMoveEvent * event);
+    private slots:
+        void timeEditFinished();
+        void ShowSCM_Manage(const QString &);
+        void ChangechooseNM();
+        void ChangeInputNM();
+        void SendMsg();
+    private:
+        BuddyOpt *buddyopt;
+        FxMainWindow * mainwind;
 };
 
 #endif

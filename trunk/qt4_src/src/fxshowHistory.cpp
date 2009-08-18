@@ -19,92 +19,130 @@
  ***************************************************************************/
 #include "fxshowHistory.h"
 
-FxShowHistory::FxShowHistory(long uid, QWidget *parent)
-    : QDialog(parent)
+FxShowHistory::FxShowHistory(long uid, QWidget *parent): QDialog(parent)
 {
-	setupUi(this);
-	m_uid = uid;
+    setupUi(this);
+    m_uid = uid;
 
-	connect(todayBT, SIGNAL(clicked()), this, SLOT(today()));
-	connect(oneweekBT, SIGNAL(clicked()), this, SLOT(oneweek()));
-	connect(twoweekBT, SIGNAL(clicked()), this, SLOT(twoweek()));
-	connect(onemonthBT, SIGNAL(clicked()), this, SLOT(onemonth()));
-	connect(allBT, SIGNAL(clicked()), this, SLOT(all()));
+    connect(todayBT, SIGNAL(clicked()),
+            this, SLOT(today()));
+    connect(oneweekBT, SIGNAL(clicked()),
+            this, SLOT(oneweek()));
+    connect(twoweekBT, SIGNAL(clicked()),
+            this, SLOT(twoweek()));
+    connect(onemonthBT, SIGNAL(clicked()),
+            this, SLOT(onemonth()));
+    connect(allBT, SIGNAL(clicked()),
+            this, SLOT(all()));
 
-	today();
-	
-	char * showname = fx_get_account_show_name(fx_get_account_by_id(uid), FALSE);
-	QString show_name = QString::fromUtf8(showname);
-	if(showname)
-		free(showname);
-	QString title = tr("look") + show_name + tr("histroy"); 
-	this->setWindowTitle(title);
+    today();
+
+    char *showname =
+            fx_get_account_show_name(fx_get_account_by_id(uid), FALSE);
+    QString show_name = QString::fromUtf8(showname);
+
+    if (showname)
+    {
+        free(showname);
+    }
+    QString title = tr("look") + show_name + tr("histroy");
+
+    this->setWindowTitle(title);
 }
 
-FxShowHistory::~FxShowHistory()
-{
+/**************************************************************************/
+/*                                                                        */
+/**************************************************************************/
+
+FxShowHistory::~FxShowHistory(){
 
 }
 
 void FxShowHistory::today()
 {
-	MsgBrowser->clear();
-	MsgBrowser->append(selectHistroyMsg((qlonglong)strtol(fx_get_usr_uid(), NULL, 10), m_uid, TODAY_HISTORY));
+    MsgBrowser->clear();
+    MsgBrowser->append(selectHistroyMsg(
+                                (qlonglong)strtol(fx_get_usr_uid(),NULL, 10),
+                                m_uid,
+                                TODAY_HISTORY));
 }
+
+/**************************************************************************/
+/*                                                                        */
+/**************************************************************************/
 
 void FxShowHistory::oneweek()
 {
-	QString history = selectHistroyMsg(
-			(qlonglong)strtol(fx_get_usr_uid(), NULL, 10), 
-			m_uid,
-			ONE_WEEK_HISTORY);
+    QString history =
+            selectHistroyMsg((qlonglong)strtol(fx_get_usr_uid(), NULL,10),
+                             m_uid,
+                             ONE_WEEK_HISTORY);
 
-	if (history.isNull())
-		history= tr("no history");
+    if (history.isNull())
+    {
+        history = tr("no history");
+    }
 
-	MsgBrowser->clear();
-	MsgBrowser->append(history);
+    MsgBrowser->clear();
+    MsgBrowser->append(history);
 }
+
+/**************************************************************************/
+/*                                                                        */
+/**************************************************************************/
 
 void FxShowHistory::twoweek()
 {
-	QString history = selectHistroyMsg(
-			(qlonglong)strtol(fx_get_usr_uid(), NULL, 10), 
-			m_uid,
-			TWO_WEEK_HISTORY);
+    QString history =
+            selectHistroyMsg((qlonglong)strtol(fx_get_usr_uid(), NULL, 10),
+                             m_uid,
+                             TWO_WEEK_HISTORY);
 
-	if (history.isNull())
-		history= tr("no history");
+    if (history.isNull())
+    {
+        history = tr("no history");
+    }
 
-	MsgBrowser->clear();
-	MsgBrowser->append(history);
+    MsgBrowser->clear();
+    MsgBrowser->append(history);
 }
+
+/**************************************************************************/
+/*                                                                        */
+/**************************************************************************/
 
 void FxShowHistory::onemonth()
 {
-	QString history = selectHistroyMsg(
-			(qlonglong)strtol(fx_get_usr_uid(), NULL, 10), 
-			m_uid,
-			ONE_MONTH_HISTORY);
+    QString history =
+            selectHistroyMsg((qlonglong)strtol(fx_get_usr_uid(), NULL, 10),
+                             m_uid,
+                             ONE_MONTH_HISTORY);
 
-	if (history.isNull())
-		history= tr("no history");
+    if (history.isNull())
+    {
+        history = tr("no history");
+    }
 
-	MsgBrowser->clear();
-	MsgBrowser->append(history);
+    MsgBrowser->clear();
+    MsgBrowser->append(history);
 }
+
+/**************************************************************************/
+/*                                                                        */
+/**************************************************************************/
 
 void FxShowHistory::all()
 {
-	QString history = selectHistroyMsg(
-			(qlonglong)strtol(fx_get_usr_uid(), NULL, 10), 
-			m_uid,
-			ALL_DATE_HISTORY);
+    QString history =
+            selectHistroyMsg((qlonglong)strtol(fx_get_usr_uid(), NULL, 10),
+                             m_uid,
+                             ALL_DATE_HISTORY);
 
-	if (history.isNull())
-		history= tr("no history");
+    if (history.isNull())
+    {
+        history = tr("no history");
+    }
 
-	MsgBrowser->clear();
-	MsgBrowser->append(history);
+    MsgBrowser->clear();
+    MsgBrowser->append(history);
 }
-

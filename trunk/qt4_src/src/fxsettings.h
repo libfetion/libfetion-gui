@@ -22,13 +22,14 @@
 
 #include <QSettings>
 #include "appconfig.h"
-//#include "fxdb.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif /* __cplusplus */
 
 	class FxMainWindow;
-	class Settings : public QSettings { //this class is just store data for setting...
+    // store setting data
+    class Settings : public QSettings {
 			
 			Settings(const QString & fileName, Format format);
 			~Settings();

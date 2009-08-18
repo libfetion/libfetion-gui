@@ -24,54 +24,64 @@
 #include "fxloginwindow.h"
 #include "fxmainwindow.h"
 
-//#include "fxqunwindow.h"
-
-
-FxMain::FxMain() 
+FxMain::FxMain()
 {
-	QTextCodec::setCodecForCStrings(QTextCodec::codecForName("GBK"));
-	
-	isLoginIn = false;
+    QTextCodec::setCodecForCStrings(QTextCodec::codecForName("GBK"));
 
-	/*
-	   QMessageBox::about(mainWin, ("test version for v 0.2.0"),
-	   ("Thank you for testing. your working will make Libfetion more strong!!"));
-    */
-#if !DEBUG_GUI
-	loginWin = new FxLoginWindow(0);
-	doSlotConnection();
-	loginWin->show();
-#else
-    createMainWindow();
-#endif
+    isLoginIn = false;
+
+    #if !DEBUG_GUI
+        loginWin = new FxLoginWindow(0);
+        doSlotConnection();
+        loginWin->show();
+    #else
+        createMainWindow();
+    #endif
 }
+
+/**************************************************************************/
+/*                                                                        */
+/**************************************************************************/
 
 void FxMain::doSlotConnection()
 {
-	QObject::connect(loginWin, SIGNAL(signal_LoginOK()), this, SLOT(slotLoginOK()));
+    QObject::connect(loginWin, SIGNAL(signal_LoginOK()),
+                     this, SLOT(slotLoginOK()));
 }
+
+/**************************************************************************/
+/*                                                                        */
+/**************************************************************************/
 
 void FxMain::createMainWindow()
 {
     mainWin = new FxMainWindow(0);
-#if !DEBUG_GUI
-    loginWin->hide();
-#endif
+    #if !DEBUG_GUI
+        loginWin->hide();
+    #endif
     mainWin->show();
 }
 
+/**************************************************************************/
+/*                                                                        */
+/**************************************************************************/
+
 void FxMain::slotLoginOK()
 {
-	isLoginIn = true;
+    isLoginIn = true;
     createMainWindow();
-#if !DEBUG_GUI
-	delete loginWin; 
-#endif
+    #if !DEBUG_GUI
+        delete loginWin;
+    #endif
 }
+
+/**************************************************************************/
+/*                                                                        */
+/**************************************************************************/
 
 FxMain::~FxMain()
 {
-    if(isLoginIn)
+    if (isLoginIn)
     {
         printf("fx_loginout \n");
         fx_loginout();

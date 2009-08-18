@@ -54,11 +54,19 @@ public:
 	void msg_exit();
 
 	void nudge_shake();
-	void addAccount(qlonglong account_id, bool isSendSms = false);
-	bool addMessage(QString msg, qlonglong account_id, bool iscomeing_msg = false);
+    void addAccount(qlonglong account_id,
+                    bool isSendSms = false);
 
-	void addQunWin(qlonglong qun_id, bool isSendSms = false);
-	bool addQunMessage(QString msg, qlonglong qun_id, qlonglong sender, bool iscomeing_msg = false);
+    bool addMessage(QString msg,
+                    qlonglong account_id,
+                    bool iscomeing_msg = false);
+
+    void addQunWin(qlonglong qun_id,
+                   bool isSendSms = false);
+    bool addQunMessage(QString msg,
+                       qlonglong qun_id,
+                       qlonglong sender,
+                       bool iscomeing_msg = false);
 
 	FxQunWindow *findQunWindow(qlonglong qun_id);
 	void showQunUnreadMsg();
@@ -70,7 +78,9 @@ protected:
 	void resizeEvent ( QResizeEvent * event);
 	void addBuddy(qlonglong account_id);
 
-	void handle_sendmsg(int msgflag, int fx_msg, qlonglong who);
+    void handle_sendmsg(int msgflag,
+                        int fx_msg,
+                        qlonglong who);
 
 public slots:
 	void currentChangedTab(int index); 
@@ -79,7 +89,9 @@ public slots:
 	void closeCurrentTab();
 	void slot_do_shake();
 
-	void slot_SysDialogMsg (int, int, qlonglong);
+    void slot_SysDialogMsg (int,
+                            int,
+                            qlonglong);
 
 	void slot_haveNewSysMessage (qlonglong sys_id);
 	void slot_haveNewMessage (qlonglong account_id);
@@ -92,7 +104,9 @@ private:
 	void init();
 	void init_inputFace();
 	void init_UI();
-	void exec_autoRelpy(QTextEdit* msgBrowser, qlonglong account_id, QString msg);
+    void exec_autoRelpy(QTextEdit* msgBrowser,
+                        qlonglong account_id,
+                        QString msg);
 
 private:
 	bool m_willQuit;

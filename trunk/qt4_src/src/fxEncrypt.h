@@ -24,16 +24,14 @@
 extern "C" {
 #endif /* __cplusplus */
 
-#ifndef KEY 
-#define KEY "libfetion-dedodong@163.com" 
-#endif
+    #ifndef KEY
+    #define KEY "libfetion-dedodong@163.com"
+    #endif
 
-char *encryPWD(const char * data, long datalen, bool isEncry);
-char* encryptXOR(const char *str, int str_len, const char* key);
-char* decryptXOR(const char *str, int str_len, const char* key);
+    char *encryPWD(const char * data, long datalen, bool isEncry);
+    char* encryptXOR(const char *str, int str_len, const char* key);
+    char* decryptXOR(const char *str, int str_len, const char* key);
 
-
-/** @} end of mdolphin_control */
 #ifdef __cplusplus
 }
 #endif /* __cplusplus */
