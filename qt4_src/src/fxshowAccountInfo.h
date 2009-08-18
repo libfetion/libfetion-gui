@@ -28,14 +28,17 @@
 class FxShowAccountInfo : public QDialog, public Ui::ShowAccountInfo
 {
     Q_OBJECT
-public:
-   FxShowAccountInfo(const Fetion_Account *account, QWidget *parent = 0);
-    ~FxShowAccountInfo();
-	void setShowInfo();
-private slots:
-	void chang_localname();
-private:
-	const Fetion_Account *m_account;
+    public:
+        FxShowAccountInfo(const Fetion_Account *account,
+                         QWidget *parent = 0);
+        ~FxShowAccountInfo();
+        void setShowInfo();
+
+    private slots:
+        void chang_localname();
+
+    private:
+        const Fetion_Account *m_account;
 };
 
 #endif

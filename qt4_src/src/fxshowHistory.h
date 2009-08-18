@@ -28,17 +28,20 @@
 class FxShowHistory : public QDialog, public Ui::HistoryMsg
 {
     Q_OBJECT
-public:
-   FxShowHistory(long uid, QWidget *parent = 0);
-   ~FxShowHistory();
-private slots:
-	void today();
-	void oneweek();
-	void twoweek();
-	void onemonth();
-	void all();
-private:
-	long m_uid;
+    public:
+        FxShowHistory(long uid,
+                      QWidget *parent = 0);
+        ~FxShowHistory();
+
+    private slots:
+        void today();
+        void oneweek();
+        void twoweek();
+        void onemonth();
+        void all();
+
+    private:
+        long m_uid;
 };
 
 #endif

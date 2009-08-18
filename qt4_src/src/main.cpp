@@ -33,60 +33,62 @@
 
 #ifdef WIN32
 #else
-#include <fcntl.h>
-#include <sys/types.h>
-#include <pwd.h>
+    #include <fcntl.h>
+    #include <sys/types.h>
+    #include <pwd.h>
 #endif
 
 
 #ifdef WIN32
-Q_IMPORT_PLUGIN(qgif)
+    Q_IMPORT_PLUGIN(qgif)
 #else
-	#ifdef Q_OS_MAC
-		Q_IMPORT_PLUGIN(qgif)
-	#else //linux
-		//Q_IMPORT_PLUGIN(qgif)
-	#endif
+    #ifdef Q_OS_MAC
+        Q_IMPORT_PLUGIN(qgif)
+    #else //linux
+        //Q_IMPORT_PLUGIN(qgif)
+    #endif
 #endif
 
 int main(int argc, char *argv[])
 {
-	if(!fx_init()) {
-		fprintf(stderr, "init the libfetion fail \n");
-		exit(0);
-	}
-	init_db();
+    if (!fx_init())
+    {
+        fprintf(stderr, "init the libfetion fail \n");
+        exit(0);
+    }
+    init_db();
 
-#ifdef WIN32
-#else
-    //compatible old app's config file
-    moveOldConfigFile();
-#endif
+    #ifdef WIN32
+    #else
+        //compatible old app's config file
+        moveOldConfigFile();
+    #endif
 
-	QApplication app(argc, argv);
-	QCoreApplication::addLibraryPath(QCoreApplication::applicationDirPath()); 
+    QApplication app(argc, argv);
+    QCoreApplication::addLibraryPath(QCoreApplication::applicationDirPath());
 
-	QTranslator translator_fetion;
-	translator_fetion.load( "fetion_utf8_CN", defaultResPath());
-	QTranslator translator_qt;
-	translator_qt.load( "qt_zh_CN", defaultResPath());
-	app.installTranslator( &translator_fetion );
-	app.installTranslator( &translator_qt );
+    QTranslator translator_fetion;
+    translator_fetion.load("fetion_utf8_CN", defaultResPath());
+    QTranslator translator_qt;
+    translator_qt.load("qt_zh_CN", defaultResPath());
+    app.installTranslator(&translator_fetion);
+    app.installTranslator(&translator_qt);
 
-    Settings::instance().setSysDefaultFont( QApplication::font() );
-	app.setFont(Settings::instance().getCurrentFont());
-	setSkins(Settings::instance().SkinPath(), Settings::instance().SkinName());
+    Settings::instance().setSysDefaultFont(QApplication::font());
+    app.setFont(Settings::instance().getCurrentFont());
+    setSkins(Settings::instance().SkinPath(), Settings::instance().SkinName());
     FxMain *mainWin = new FxMain();
 
-	//QObject::connect(&app, SIGNAL(lastWindowClosed()), &app, SLOT(quit()));
-	app.setQuitOnLastWindowClosed(false);
-	int reslut = app.exec();
+    app.setQuitOnLastWindowClosed(false);
+    int reslut = app.exec();
 
-	if (mainWin)
-		delete mainWin;
+    if (mainWin)
+    {
+        delete mainWin;
+    }
 
-	destoy_db();
-	//destroy the libfetion
-	fx_terminate();
-	return reslut; 
+    destoy_db();
+    //destroy the libfetion
+    fx_terminate();
+    return reslut;
 }

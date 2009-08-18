@@ -33,46 +33,46 @@ class FxLoginWindow : public FxWidget, public Ui::Fetion_Login
 {
     Q_OBJECT
 
-public:
-    FxLoginWindow(QWidget *parent = 0);
-    ~FxLoginWindow();
+    public:
+        FxLoginWindow(QWidget *parent = 0);
+        ~FxLoginWindow();
 
-	void init();
-	void checkAutoLogin();
+        void init();
+        void checkAutoLogin();
 
-	void LoginOK();
+        void LoginOK();
 
-	void enableLoginBT();
-	void UpdateSkins();
+        void enableLoginBT();
+        void UpdateSkins();
 
-protected:
-	void closeEvent(QCloseEvent *event);
-	void moveEvent(QMoveEvent *event);
-	void resizeEvent(QResizeEvent *event);
+    protected:
+        void closeEvent(QCloseEvent *event);
+        void moveEvent(QMoveEvent *event);
+        void resizeEvent(QResizeEvent *event);
 
-private slots:
-	void BT_Login_clicked();
-	void slots_enableLonginBT();
-	void Setting(const QString &);
-	void login_timer();
+    private slots:
+        void BT_Login_clicked();
+        void slots_enableLonginBT();
+        void Setting(const QString &);
+        void login_timer();
 
-	void login();
+        void login();
 
-signals:
-	void signal_LoginOK();
-	void signal_enableLoginBT();
+    signals:
+        void signal_LoginOK();
+        void signal_enableLoginBT();
 
-private:
-	void set_login_button_state(bool state);
-	void Cancel_logwin();
-	void setLogingState(char *ch);
+    private:
+        void set_login_button_state(bool state);
+        void Cancel_logwin();
+        void setLogingState(char *ch);
 
-private:
-	char *user_id;
-	char *user_pwd;
-	FxProxy *proxy; 
-	QTimer loginTimer;
-	bool willLogin;
+    private:
+        char *user_id;
+        char *user_pwd;
+        FxProxy *proxy;
+        QTimer loginTimer;
+        bool willLogin;
 };
 
 #endif

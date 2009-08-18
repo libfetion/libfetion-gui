@@ -27,12 +27,17 @@ class FxWidget:public QWidget{
 	
 	//Q_PROPERTY(QPixmap hiddenBar WRITE setHiddenBar)
 public:
-    	FxWidget(QWidget *parent=0,Qt::WindowFlags flag=( Qt::Window | Qt::FramelessWindowHint | Qt::WindowSystemMenuHint) );
+        FxWidget(QWidget *parent=0,
+                 Qt::WindowFlags flag= ( Qt::Window | \
+                                         Qt::FramelessWindowHint | \
+                                         Qt::WindowSystemMenuHint) );
 public slots:
     void beginAutoHide();
     void endAutoHide();
+
 signals:
 	void triggleMaximizeAndNormal();
+
 protected:
 	void resizeEvent(QResizeEvent *event);
 	void mouseDoubleClickEvent(QMouseEvent *event);
@@ -40,6 +45,7 @@ protected:
 	void leaveEvent(QEvent *event);
 	void moveEvent(QMoveEvent *event);
 	void updateWindowPositionType();
+
 private:
 	QPushButton *btnMaximize;
 	QGridLayout *_mainLayout;
@@ -54,15 +60,20 @@ private:
 	bool _autoHide;
 	bool _enableautoHide;
 	enum WINDOW_POS{
-		WP_LEFT=1,WP_RIGHT=2,WP_TOP=4,WP_BOTTOM=8,WP_HIDDEN=16,WP_NORMAL=0
+        WP_NORMAL = 0,
+        WP_LEFT=1,
+        WP_RIGHT=2,
+        WP_TOP=4,
+        WP_BOTTOM=8,
+        WP_HIDDEN=16,
 	};
 	int positionState;
 	QSize orientSize;
 	bool _isSetSystemTitleBar;
+
 public:
 	void setSystemTitleBar(bool flag = true);
 	void setMinimizetoHide(bool minimizetoHide = false);
-	//void setHiddenBar(QPixmap pix); use css instead
 	void setBackground(QPixmap pix);
 	void setBgScaleLeft(int p){bgScaleLeft = p;}
 	void setBgScaleRight(int p){bgScaleRight = p;}
@@ -73,6 +84,7 @@ public:
 		
 	void setWindowIcon(const QIcon & icon);
 	bool isAutoHide()const{return _autoHide;}
+
 public:
 	FxWidgetTitleBar *titleBar;
 	QWidget *contentWidget;
@@ -82,18 +94,22 @@ public slots:
     void enableAutoHide(bool flag=true){}
     void setAutoHide(bool autoHide=true){}
 #else
-	void enableAutoHide(bool flag=true){ 
+    void enableAutoHide(bool flag=true)
+    {
 		_enableautoHide = flag;
 		_autoHide = flag;
-		}
+    }
 			
-	void setAutoHide(bool autoHide=true){
+    void setAutoHide(bool autoHide=true)
+    {
 		if (!_enableautoHide)
 			return;
 		_autoHide = autoHide;
-		if(_autoHide){
+        if(_autoHide)
+        {
 			setWindowFlags( windowFlags() | Qt::WindowStaysOnTopHint);
-			if( !isVisible() ){
+            if( !isVisible() )
+            {
 				show();
 			}
 			updateWindowPositionType();

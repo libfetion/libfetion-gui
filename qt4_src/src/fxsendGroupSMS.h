@@ -26,25 +26,23 @@
 #include "fxmainwindow.h"
 #include "ui_sendgroupsms.h"
 
-
-
 class FxSendGroupSMS : public QMainWindow, public Ui::SendGroupSMS
 {
     Q_OBJECT
-public:
-   FxSendGroupSMS(FxMainWindow * mainwind, QWidget *parent = 0);
-    ~FxSendGroupSMS();
+    public:
+       FxSendGroupSMS(FxMainWindow * mainwind, QWidget *parent = 0);
+        ~FxSendGroupSMS();
 
-protected:
-	void closeEvent(QCloseEvent *event);
-	void moveEvent(QMoveEvent * event);
-private slots:
-	void ChangechooseNM();
-	void ChangeInputNM();
-	void SendMsg();
-private:
-	BuddyOpt *buddyopt; 
-	FxMainWindow * mainwind;
+    protected:
+        void closeEvent(QCloseEvent *event);
+        void moveEvent(QMoveEvent * event);
+    private slots:
+        void ChangechooseNM();
+        void ChangeInputNM();
+        void SendMsg();
+    private:
+        BuddyOpt *buddyopt;
+        FxMainWindow * mainwind;
 };
 
 #endif

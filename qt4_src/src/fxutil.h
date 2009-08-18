@@ -26,12 +26,21 @@
 #include "appconfig.h"
 
 QString getProvince(QString Province);
+
 QString getCity(int cityID);
 
-bool RegistHotkey(QWidget *window, QChar keyValue, Qt::KeyboardModifiers keyMod);
-bool UnRegistHotkey(QWidget *window, QChar keyValue, Qt::KeyboardModifiers keyMod);
+bool RegistHotkey(QWidget *window,
+                  QChar keyValue,
+                  Qt::KeyboardModifiers keyMod);
+
+bool UnRegistHotkey(QWidget *window,
+                    QChar keyValue,
+                    Qt::KeyboardModifiers keyMod);
+
 QString fxgui_handle_newMsg(Fetion_MSG *fxMsg);
+
 QString fxgui_to_faces(QString newmsg);
+
 QString fxgui_format_time(QString stamp);
 
 void displayAboutLibFetion();
@@ -51,10 +60,11 @@ int check_dir_state(const char *path);
 
 class m_Instance
 {
-	m_Instance();
-	~m_Instance();
-	int GetInstancesNum();
+    private:
+        m_Instance();
+        ~m_Instance();
+        int GetInstancesNum();
 	public:
-	static int isHaveInstance();
+        static int isHaveInstance();
 };
 #endif

@@ -34,26 +34,22 @@ class FxMain : public QObject
 {
 	Q_OBJECT
 
-public:
-	FxMain();
-	~FxMain();
+    public:
+        FxMain();
+        ~FxMain();
 
-private:
-	// login window, first one you will see
-	FxLoginWindow *loginWin;
-	// the main guy, with your friend list in
-	FxMainWindow *mainWin;
-//	FxSmsWindow * xx;
+    private:
+        /* login window, first one you will see */
+        FxLoginWindow *loginWin;
+        /* the main guy, with your friend list in */
+        FxMainWindow *mainWin;
 
-	bool isLoginIn;
-    void createMainWindow();
-	void doSlotConnection();
+        bool isLoginIn;
+        void createMainWindow();
+        void doSlotConnection();
 
-private slots:
-	void slotLoginOK();
-//	void doQuit();
-
-//	friend class EvaMainWindow;
+    private slots:
+        void slotLoginOK();
 };
 
 

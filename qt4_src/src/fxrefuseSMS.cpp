@@ -19,70 +19,85 @@
  ***************************************************************************/
 #include "fxrefuseSMS.h"
 
-FxRefuseSMS::FxRefuseSMS(QWidget *parent)
-    : QDialog(parent)
+FxRefuseSMS::FxRefuseSMS(QWidget *parent): QDialog(parent)
 {
-	setupUi(this);
+    setupUi(this);
 
-	smsday = 1;
-	connect(RB_24, SIGNAL(clicked()), this, SLOT(RB_changed()));
-	connect(RB_3D, SIGNAL(clicked()), this, SLOT(RB_changed()));
-	connect(RB_1W, SIGNAL(clicked()), this, SLOT(RB_changed()));
-	connect(RB_FE, SIGNAL(clicked()), this, SLOT(RB_changed()));
-	connect(buttonBox, SIGNAL(accepted()), this, SLOT(setRefuseSMS()));
-	connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    smsday = 1;
+    connect(RB_24, SIGNAL(clicked()),
+            this, SLOT(RB_changed()));
+    connect(RB_3D, SIGNAL(clicked()),
+            this, SLOT(RB_changed()));
+    connect(RB_1W, SIGNAL(clicked()),
+            this, SLOT(RB_changed()));
+    connect(RB_FE, SIGNAL(clicked()),
+            this, SLOT(RB_changed()));
+    connect(buttonBox, SIGNAL(accepted()),
+            this, SLOT(setRefuseSMS()));
+    connect(buttonBox, SIGNAL(rejected()),
+            this, SLOT(reject()));
 }
+
+/**************************************************************************/
+/*                                                                        */
+/**************************************************************************/
 
 void FxRefuseSMS::setRefuseSMS()
 {
-	fx_set_user_refuse_sms_day (smsday, NULL, NULL);
-	this->accept();
+    fx_set_user_refuse_sms_day(smsday, NULL, NULL);
+    this->accept();
 }
 
-FxRefuseSMS::~FxRefuseSMS()
-{
-}
+/**************************************************************************/
+/*                                                                        */
+/**************************************************************************/
+
+FxRefuseSMS::~FxRefuseSMS(){}
 
 
 void FxRefuseSMS::RB_changed()
 {
-	setChanged();
+    setChanged();
 }
+
+/**************************************************************************/
+/*                                                                        */
+/**************************************************************************/
 
 void FxRefuseSMS::setChanged()
 {
-	if (RB_24->isChecked())
-	{
-		smsday = 1;
-		RB_3D->setChecked (false);
-		RB_1W->setChecked (false);
-		RB_FE->setChecked (false);
-		return ;
-	}
+    if (RB_24->isChecked())
+    {
+        smsday = 1;
+        RB_3D->setChecked(false);
+        RB_1W->setChecked(false);
+        RB_FE->setChecked(false);
+        return ;
+    }
 
-	if (RB_3D->isChecked())
-	{
-		smsday = 3;
-		RB_24->setChecked (false);
-		RB_1W->setChecked (false);
-		RB_FE->setChecked (false);
-		return ;
-	}
-	if (RB_1W->isChecked ())
-	{
-		smsday = 7;
-		RB_3D->setChecked (false);
-		RB_24->setChecked (false);
-		RB_FE->setChecked (false);
-		return ;
-	}
+    if (RB_3D->isChecked())
+    {
+        smsday = 3;
+        RB_24->setChecked(false);
+        RB_1W->setChecked(false);
+        RB_FE->setChecked(false);
+        return ;
+    }
+    if (RB_1W->isChecked())
+    {
+        smsday = 7;
+        RB_3D->setChecked(false);
+        RB_24->setChecked(false);
+        RB_FE->setChecked(false);
+        return ;
+    }
 
-	if (RB_FE->isChecked ())
-	{
-		smsday = 36000;
-		RB_3D->setChecked (false);
-		RB_1W->setChecked (false);
-		RB_24->setChecked (false);
-		return ;
-	}
+    if (RB_FE->isChecked())
+    {
+        smsday = 36000;
+        RB_3D->setChecked(false);
+        RB_1W->setChecked(false);
+        RB_24->setChecked(false);
+        return ;
+    }
 }

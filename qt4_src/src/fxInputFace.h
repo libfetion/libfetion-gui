@@ -27,20 +27,19 @@ class FxMsgWindow;
 class FxInputFace : public QDialog
 {
     Q_OBJECT
-public:
-   FxInputFace(QWidget *parent = 0);
-    ~FxInputFace();
-    void setMsgWindow(FxMsgWindow *msgWind);
-protected:
-	void mouseMoveEvent(QMouseEvent *event);
-	void mouseReleaseEvent ( QMouseEvent * event ) ;
-	void focusOutEvent ( QFocusEvent * event ) ;
-private slots:
+    public:
+       FxInputFace(QWidget *parent = 0);
+        ~FxInputFace();
+        void setMsgWindow(FxMsgWindow *msgWind);
+    protected:
+        void mouseMoveEvent(QMouseEvent *event);
+        void mouseReleaseEvent ( QMouseEvent * event ) ;
+        void focusOutEvent ( QFocusEvent * event ) ;
+    private slots:
 
-private:
-	FxMsgWindow *msgWind;
-	bool getFaces(int x, int y, QString &face, QString &str);
-	//QString getFaces(int x, int y);
+    private:
+        FxMsgWindow *msgWind;
+        bool getFaces(int x, int y, QString &face, QString &str);
 };
 
 class MyRect 
@@ -70,22 +69,4 @@ class MyRect rect;
 QString str;
 } FACES_INFO;
 
-#if 0
-class MyRect
-{
-pubilc:
-	MyRect()
-	{
-		;
-	}
-	MyRect(int x, int y, int width, int buttom);
-
-
-private:
-	int m_x, m_y, m_width, m_buttom;
-};
-
-
-
-#endif
 #endif
