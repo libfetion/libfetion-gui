@@ -18,6 +18,10 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
+#include <QApplication> // to fix
+#include <QDir>
+#include <QFile>
+
 #include "appconfig.h"
 #include "fxmainwindow.h"
 #include "fxloginwindow.h"
@@ -30,10 +34,9 @@
 #include "fxskinmanage.h"
 #include "fxscheduleSmsManage.h"
 #include "fxscheduleSms.h"
+#include "fxlocationparser.h"
 #include "LibFetionEventHandle.cpp"
-#include <QApplication> // to fix
-#include <QDir>
-#include <QFile>
+
 
 FxMainWindow::FxMainWindow(QWidget *parent): FxWidget(parent), trayIcon(NULL),
                            traySetStatusMenu(NULL), buddySetStatusMenu(NULL),
@@ -1599,8 +1602,8 @@ void FxMainWindow::setrefuseSMS()
 /**************************************************************************/
 
 
-void FxMainWindow::setPersonalInfo(QTextEdit *AcInfo, const Fetion_Personal
-                                   *personal)
+void FxMainWindow::setPersonalInfo(QTextEdit *AcInfo,
+                                   const Fetion_Personal *personal)
 {
     bool hP = false;
     if (personal)
@@ -1613,8 +1616,9 @@ void FxMainWindow::setPersonalInfo(QTextEdit *AcInfo, const Fetion_Personal
     info += tr("mobile_no:");
     if (hP)
     {
-        info += "<b style=\"color:red; \">" + QString::fromUtf8
-            (fx_get_usr_mobilenum()) + "</b>";
+        info += "<b style=\"color:red; \">" +
+                QString::fromUtf8(fx_get_usr_mobilenum()) +
+                "</b>";
     }
     else
     {
@@ -1624,17 +1628,17 @@ void FxMainWindow::setPersonalInfo(QTextEdit *AcInfo, const Fetion_Personal
     AcInfo->append(info);
 
     info = tr("fetion_no:");
-    info += "<b style=\"color:red; \">" + QString::fromUtf8(fx_get_usr_uid()) +
-        "</b>";
+    info += "<b style=\"color:red; \">" +
+            QString::fromUtf8(fx_get_usr_uid()) +
+            "</b>";
     AcInfo->append(info);
-
-    //AcInfo->append(<b style=\"color:red; \">" + tr("personal infomation")+"</b>");
 
     info = tr("nickname:");
     if (hP)
     {
-        info += "<b style=\"color:red; \">" + QString::fromUtf8(personal
-            ->nickname) + "</b>";
+        info += "<b style=\"color:red; \">" +
+                QString::fromUtf8(personal->nickname) +
+                "</b>";
     }
     else
     {
@@ -1645,8 +1649,9 @@ void FxMainWindow::setPersonalInfo(QTextEdit *AcInfo, const Fetion_Personal
     info = tr("name:");
     if (hP)
     {
-        info += "<b style=\"color:red; \">" + QString::fromUtf8(personal->name)
-            + "</b>";
+        info += "<b style=\"color:red; \">" +
+                QString::fromUtf8(personal->name) +
+                "</b>";
     }
     else
     {
@@ -1675,15 +1680,17 @@ void FxMainWindow::setPersonalInfo(QTextEdit *AcInfo, const Fetion_Personal
     AcInfo->append(info);
 
     info = tr("score:");
-    info += "<b style=\"color:red; \">" + QString("%1").arg(fx_get_usr_score())
-        + "</b>";
+    info += "<b style=\"color:red; \">" +
+            QString("%1").arg(fx_get_usr_score()) +
+            "</b>";
     AcInfo->append(info);
 
     info = tr("impresa:");
     if (hP)
     {
-        info += "<b style=\"color:red; \">" + QString::fromUtf8(personal
-            ->impresa) + "</b>";
+        info += "<b style=\"color:red; \">" +
+                QString::fromUtf8(personal->impresa) +
+                "</b>";
     }
     else
     {
@@ -1691,15 +1698,19 @@ void FxMainWindow::setPersonalInfo(QTextEdit *AcInfo, const Fetion_Personal
     }
     AcInfo->append(info);
 
+    FxLocationParser *parser = new FxLocationParser();
     if (hP)
     {
         info = tr("province:");
-        info += "<b style=\"color:red; \">" + getProvince(QString::fromUtf8
-            (personal->province)) + "</b>";
+        info += "<b style=\"color:red; \">" +
+                parser->getProvinceByAlias(QString::fromUtf8(personal->province)) +
+                "</b>";
         AcInfo->append(info);
 
         info = tr("city:");
-        info += "<b style=\"color:red; \">" + getCity(personal->city) + "</b>";
+        info += "<b style=\"color:red; \">" +
+                parser->getCityByCode(personal->city) +
+                "</b>";
         AcInfo->append(info);
     }
 }
@@ -1716,16 +1727,18 @@ void FxMainWindow::personlInfo()
 
     QTextEdit *AcInfo = new QTextEdit(window);
     QDialogButtonBox *buttonBox = new QDialogButtonBox(window);
-    buttonBox->setStandardButtons(QDialogButtonBox::Cancel | QDialogButtonBox
-                                  ::Ok);
+    buttonBox->setStandardButtons(QDialogButtonBox::Cancel | \
+                                  QDialogButtonBox::Ok);
 
     QVBoxLayout *layout = new QVBoxLayout;
     layout->addWidget(AcInfo);
     layout->addWidget(buttonBox);
     window->setLayout(layout);
     setPersonalInfo(AcInfo, fx_data_get_PersonalInfo());
-    connect(buttonBox, SIGNAL(accepted()), window, SLOT(accept()));
-    connect(buttonBox, SIGNAL(rejected()), window, SLOT(reject()));
+    connect(buttonBox, SIGNAL(accepted()),
+            window, SLOT(accept()));
+    connect(buttonBox, SIGNAL(rejected()),
+            window, SLOT(reject()));
     window->exec();
     delete window;
 }
@@ -1768,13 +1781,15 @@ void FxMainWindow::reportBugAct()
 void FxMainWindow::aboutLibFetion()
 {
     QMessageBox messageBox(this);
-    messageBox.setText(tr("Application Current Version") + VERSION_NO + tr(
-                       "<br>This application is based on LibFetion library to writing, for more infomation access<a href=\"http://www.libfetion.cn\"> www.libfetion.cn </a> <br>""Copyright @ 2009 <b> <a href=\"mailto:dedodong@163.com\">DDD</a> (dedodong@163.com)</b>. All Rights reserved."));
+    messageBox.setText(tr("Application Current Version") +
+                       VERSION_NO +
+                       tr("<br>This application is based on LibFetion library to writing, for more infomation access<a href=\"http://www.libfetion.cn\"> www.libfetion.cn </a> <br>""Copyright @ 2009 <b> <a href=\"mailto:dedodong@163.com\">DDD</a> (dedodong@163.com)</b>. All Rights reserved."));
     messageBox.setTextFormat(Qt::RichText);
     messageBox.setWindowTitle(tr("About LibFetion"));
 
-    QAbstractButton *authorButton = messageBox.addButton(tr("Author Info"),
-        QMessageBox::ActionRole);
+    QAbstractButton *authorButton =
+            messageBox.addButton(tr("Author Info"),
+                                 QMessageBox::ActionRole);
     messageBox.setDefaultButton(messageBox.addButton(QMessageBox::Ok));
 
     messageBox.exec();
@@ -1791,7 +1806,8 @@ void FxMainWindow::aboutLibFetion()
 
 void FxMainWindow::aboutCM()
 {
-    QMessageBox::about(this, tr("About CHINA Mobile"),
+    QMessageBox::about(this,
+                       tr("About CHINA Mobile"),
                        tr("<a href=\"http://www.fetion.com.cn\"> China Mobile Fetion</a>""China Mobile Fetion introduce"));
 }
 

@@ -20,6 +20,7 @@
 #include <assert.h>
 #include "fxbuddy.h"
 #include "fxsendGroupSMS.h"
+#include "fxlocationparser.h"
 
 BuddyOpt::BuddyOpt(QTreeWidget *widget, bool isMainView)
 {
@@ -641,8 +642,10 @@ void BuddyOpt::addAccountToGroup(const Fetion_Account *account, QString &name,
         QString groupShowName = group_info->groupName + online;
     #else
         char *online = NULL;
-        asprintf(&online, "(%d/%d)", group_info->online_no, groupItem
-                 ->childCount());
+        asprintf(&online,
+                 "(%d/%d)",
+                 group_info->online_no,
+                 groupItem->childCount());
         QString groupShowName = group_info->groupName + online;
         if (online)
         {
@@ -744,14 +747,16 @@ QString BuddyOpt::createAccountTipsInfo(const Fetion_Account *account)
             tips += info + "<br>";
         }
 
+        FxLocationParser *parser = new FxLocationParser();
         info = tr("province:");
-        info += "<b style=\"color:red; \">" + getProvince(QString::fromUtf8
-            (account->personal->province)) + "</b>";
+        info += "<b style=\"color:red; \">" +
+                parser->getProvinceByAlias(QString::fromUtf8(account->personal->province)) + "</b>";
         tips += info + "<br>";
 
         info = tr("city:");
-        info += "<b style=\"color:red; \">" + getCity(account->personal->city)
-            + "</b>";
+        info += "<b style=\"color:red; \">" +
+                parser->getCityByCode(account->personal->city)+
+                "</b>";
         tips += info + "<br>";
     }
 

@@ -209,6 +209,10 @@ QString defaultSoundPath()
     return defaultResPath() + "/sound";
 }
 
+QString defaultDataPath()
+{
+    return defaultResPath() + "/data";
+}
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
