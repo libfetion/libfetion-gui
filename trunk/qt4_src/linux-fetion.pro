@@ -1,5 +1,5 @@
 TEMPLATE = app
-QT += xml
+QT += xml xmlpatterns
 win32 { 
     TARGET = LibFx
     CONFIG += static
@@ -67,7 +67,7 @@ HEADERS = ./src/appconfig.h \
     ./src/fxusertree.h \
     ./src/fxeditablelabel.h \
     ./src/sqlite/sqlite3.h \
-    ./src/fxlocationxmlparser.h
+    ./src/fxlocationparser.h
 SOURCES = ./src/main.cpp \
     ./src/fxmain.cpp \
     ./src/fxloginwindow.cpp \
@@ -100,7 +100,7 @@ SOURCES = ./src/main.cpp \
     ./src/qlayoutengine.cpp \
     ./src/qwidgetresizehandler.cpp \
     ./src/sqlite/sqlite3.c \
-    ./src/fxlocationxmlparser.cpp
+    ./src/fxlocationparser.cpp
 FORMS = ./ui/login_window.ui \
     ./ui/fetionwindow.ui \
     ./ui/msgwindow.ui \
