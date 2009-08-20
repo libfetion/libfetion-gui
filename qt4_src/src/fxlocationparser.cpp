@@ -27,7 +27,7 @@
 
 FxLocationParser::FxLocationParser()
 {
-    QFile file(FX_LOCATION_DOM_FILE);
+    QFile file(FX_LOCATION_DATA_PATH);
 
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
         return;
@@ -40,23 +40,30 @@ FxLocationParser::FxLocationParser()
 QString
 FxLocationParser::getProvinceByAlias(QString provinceAlias)
 {
-    if ("" == provinceAlias)
-    {
-        return QString::fromUtf8("其它");
-    }
+    QString rval;
 
-    return getValueByTagName("provList", provinceAlias, "");
+    FX_RETURN_WITH_VALUE_IF_FAILED((!provinceAlias.isEmpty()),
+                                   QString::fromUtf8("其它"));
+
+    rval = getValueByTagName("provList", provinceAlias);
+    if (rval.isNull())
+        return QString::fromUtf8("其它");
+
+    return rval;
 }
 
 QString
 FxLocationParser::getCityByCode(quint32 cityCode)
 {
-    if (99 == cityCode)
-    {
-        return QString::fromUtf8("其它");
-    }
+    QString rval;
 
-    return getValueByTagName("cityList", QString::number(cityCode), "");
+    FX_RETURN_WITH_VALUE_IF_FAILED((99 != cityCode), QString::fromUtf8("其它"));
+
+    rval = getValueByTagName("cityList", QString::number(cityCode));
+    if (rval.isNull())
+        return QString::fromUtf8("其它");
+
+    return rval;
 }
 
 /**
@@ -66,15 +73,16 @@ FxLocationParser::getCityByCode(quint32 cityCode)
  */
 QString
 FxLocationParser::getValueByTagName(QString tag,
-                                    QString item,
-                                    QString defValue)
+                                    QString item)
 {
     QString results;
+    QString xpath;
+    QFile   xml(FX_LOCATION_DATA_PATH);
 
-    QString xpath =
-            QString("/document/" + tag + "/item" + "[@key=\"" + item + "\"]") ;
+    FX_RETURN_WITH_VALUE_IF_FAILED(xml.exists(), NULL);
 
-    m_query.setQuery(xpath, QUrl(FX_LOCATION_DOM_FILE));
+    xpath = QString("/document/" + tag + "/item" + "[@key=\"" + item + "\"]") ;
+    m_query.setQuery(xpath, QUrl(FX_LOCATION_DATA_PATH));
 
     if ( ! m_query.isValid())
         return NULL;
