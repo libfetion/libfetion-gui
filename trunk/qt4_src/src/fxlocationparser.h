@@ -24,8 +24,10 @@
 
 #include <QXmlQuery>
 
-#define FX_LOCATION_DOM_NAME    "document"
-#define FX_LOCATION_DOM_FILE    defaultDataPath() + "/Location.xml"
+#define FX_LOCATION_DATA_PATH    defaultDataPath() + "/Location.xml"
+
+#define FX_RETURN_IF_FAILED(x) do{ if (!x) return; }while(0)
+#define FX_RETURN_WITH_VALUE_IF_FAILED(x, v) do{ if (!x) return v; }while(0)
 
 class FxLocationParser
 {
@@ -37,8 +39,7 @@ class FxLocationParser
 
     private:
         QString getValueByTagName(QString tag,
-                                  QString item,
-                                  QString defValue);
+                                  QString item);
 
     private:
         QXmlQuery m_query;
