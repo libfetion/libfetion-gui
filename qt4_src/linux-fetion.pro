@@ -116,8 +116,8 @@ FORMS = ./ui/login_window.ui \
     ./ui/scheduleSms/scheduleSMSManage.ui \
     ./ui/refusesms.ui \
     ./ui/configdia.ui
+DISTFILES += data/Location.xml \
 DISTFILES += src/LibFetionEventHandle.cpp
-DISTFILES += src/fxprovAndCityCode.cpp
 DISTFILES += 64_libfetion.sh \
     CREDITS.txt \
     install.sh \
