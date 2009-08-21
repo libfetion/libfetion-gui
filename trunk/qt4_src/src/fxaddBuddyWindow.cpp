@@ -64,6 +64,7 @@ FxAddBuddy::FxAddBuddy(QWidget *parent): QDialog(parent)
 FxAddBuddy::FxAddBuddy(QString id, bool ismobile /* = false*/, QWidget *parent
                        /* = 0 */)
 {
+    Q_UNUSED(parent);
     setupUi(this);
     init();
 

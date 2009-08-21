@@ -27,224 +27,224 @@ static FACES_INFO _faces_info[] =
     {
         "&gt;:)", MyRect(80, 229, 118, 259), QObject::tr("naughty")
     }
-    ,  //ÌÔÆøµÄ
+    ,  //ï¿½ï¿½ï¿½ï¿½ï¿½
     {
         "o:)", MyRect(280, 191, 318, 227), QObject::tr("angel")
     }
-    ,  //ÌìÊ¹
+    ,  //ï¿½ï¿½Ê¹
     {
         "*-:)", MyRect(160, 153, 198, 189), QObject::tr("idea")
     }
-    ,  //Ïë·¨
+    ,  //ï¿½ë·¨
 
     //	{":)",   MyRect(1,   2, 38,  39)},
     {
         ":-d", MyRect(40, 2, 78, 39), QObject::tr("yuk")
     }
-    ,  //´óÐ¦,
+    ,  //ï¿½ï¿½Ð¦,
     {
         ";)", MyRect(80, 2, 118, 39), QObject::tr("blink")
     }
-    ,  //Õ£ÑÛ,
+    ,  //Õ£ï¿½ï¿½,
     {
         ":-o", MyRect(120, 2, 158, 39), QObject::tr("surprise")
     }
-    ,  //¾ªÑÈ,
+    ,  //ï¿½ï¿½ï¿½ï¿½,
     {
         ":-p", MyRect(160, 2, 198, 39), QObject::tr("spit_tongue_smile")
     }
-    ,  //ÍÂÉàÐ¦Á³,
+    ,  //ï¿½ï¿½ï¿½ï¿½Ð¦ï¿½ï¿½,
     {
         "(h)", MyRect(200, 2, 238, 39), QObject::tr("fiery_smile")
     }
-    ,  //ÈÈÁÒÐ¦Á³,,
+    ,  //ï¿½ï¿½ï¿½ï¿½Ð¦ï¿½ï¿½,,
     {
         ":-@", MyRect(240, 2, 278, 39), QObject::tr("Angry")
     }
-    ,  //ÉúÆø
+    ,  //ï¿½ï¿½ï¿½ï¿½
     {
         ":(", MyRect(280, 2, 318, 39), QObject::tr("sadness")
     }
-    ,  //±¯ÉË,
+    ,  //ï¿½ï¿½ï¿½ï¿½,
 
 
     {
         ":'(", MyRect(1, 40, 39, 77), QObject::tr("blubber")
     }
-    ,  //¿ÞÆü,
+    ,  //ï¿½ï¿½ï¿½ï¿½,
     {
         ":\"&gt;", MyRect(40, 40, 78, 77), QObject::tr("embarrass")
     }
-    ,  //ÞÏÞÎ
+    ,  //ï¿½ï¿½ï¿½ï¿½
     {
         "^o)", MyRect(80, 40, 118, 77), QObject::tr("Ironically")
     }
-    ,  //·í´Ì,
+    ,  //ï¿½ï¿½ï¿½,
     //{":&amp;",  MyRect(120, 40,  158, 77)},
     {
         ":&", MyRect(120, 40, 158, 77), QObject::tr("Sick")
     }
-    ,  //Éú²¡,
+    ,  //ï¿½ï¿½,
     {
         "8o|", MyRect(160, 40, 198, 77), QObject::tr("Yaoyaqiechi")
     }
-    ,  //Ò§ÑÀÇÐ³Ý
+    ,  //Ò§ï¿½ï¿½ï¿½Ð³ï¿½
     {
         "|-)", MyRect(200, 40, 238, 77), QObject::tr("sleepy")
     }
-    ,  //À§
+    ,  //ï¿½ï¿½
     {
         ":-#", MyRect(240, 40, 278, 77), QObject::tr("Privacy")
     }
-    ,  //±£ÃÜ
+    ,  //ï¿½ï¿½ï¿½ï¿½
     {
         "8-)", MyRect(280, 40, 318, 77), QObject::tr("MomentisEyess")
     }
-    ,  //×ª¶¯µÄÑÛ¾¦
+    ,  //×ªï¿½ï¿½ï¿½ï¿½ï¿½Û¾ï¿½
 
     {
         "(s)", MyRect(1, 78, 39, 113), QObject::tr("sleepyMoon")
     }
-    ,  //³ÁË¯µÄÔÂÁÁ
+    ,  //ï¿½ï¿½Ë¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     {
         "(st)", MyRect(40, 78, 78, 113), QObject::tr("rain")
     }
-    ,  //ÏÂÓê
+    ,  //ï¿½ï¿½ï¿½ï¿½
     {
         "(o)", MyRect(80, 78, 118, 113), QObject::tr("clock")
     }
-    ,  //Ê±ÖÓ
+    ,  //Ê±ï¿½ï¿½
     {
         "(l)", MyRect(120, 78, 158, 113), QObject::tr("hearts")
     }
-    ,  //ºìÐÄ
+    ,  //ï¿½ï¿½ï¿½ï¿½
     {
         "(u)", MyRect(160, 78, 198, 113), QObject::tr("crackedhearts")
     }
-    ,  //ÆÆËéµÄÐÄ
+    ,  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     {
         "(@)", MyRect(200, 78, 238, 113), QObject::tr("catfaces")
     }
-    ,  //Ã¨Á³
+    ,  //Ã¨ï¿½ï¿½
     {
         "(&)", MyRect(240, 78, 278, 113), QObject::tr("dogfaces")
     }
-    ,  //¹·Á³
+    ,  //ï¿½ï¿½ï¿½ï¿½
     {
         "(sn)", MyRect(280, 78, 318, 113), QObject::tr("snail")
     }
-    ,  //ÎÏÅ£
+    ,  //ï¿½ï¿½Å£
 
 
     {
         "(*)", MyRect(1, 115, 39, 151), QObject::tr("star")
     }
-    ,  //ÐÇÐÇ
+    ,  //ï¿½ï¿½ï¿½ï¿½
     {
         "(#)", MyRect(40, 115, 78, 151), QObject::tr("sun")
     }
-    ,  //Ì«Ñô
+    ,  //Ì«ï¿½ï¿½
     {
         "(r)", MyRect(80, 115, 118, 151), QObject::tr("rainbow")
     }
-    ,  //²Êºç
+    ,  //ï¿½Êºï¿½
     {
         "(})", MyRect(120, 115, 158, 151), QObject::tr("leftembrace")
     }
-    ,  //×óÓµ±§,
+    ,  //ï¿½ï¿½Óµï¿½ï¿½,
     {
         "({)", MyRect(160, 115, 198, 151), QObject::tr("rightembrace")
     }
-    ,  //ÓÒÓµ±§,
+    ,  //ï¿½ï¿½Óµï¿½ï¿½,
     {
         "(k)", MyRect(200, 115, 238, 151), QObject::tr("lip")
     }
-    ,  //ºì´½
+    ,  //ï¿½ì´½
     {
         "(f)", MyRect(240, 115, 278, 151), QObject::tr("rose")
     }
-    ,  //ºìÃµ¹å
+    ,  //ï¿½ï¿½Ãµï¿½ï¿½
     {
         "(w)", MyRect(280, 115, 318, 151), QObject::tr("emarcidrose")
     }
-    ,  //µòÐ»µÄÃµ¹å
+    ,  //ï¿½ï¿½Ð»ï¿½ï¿½Ãµï¿½ï¿½
 
 
     {
         "(g)", MyRect(1, 153, 39, 189), QObject::tr("giftbox")
     }
-    ,  //ÀñÆ·ºÐ
+    ,  //ï¿½ï¿½Æ·ï¿½ï¿½
     {
         "(^)", MyRect(40, 153, 78, 189), QObject::tr("Birthdaycake")
     }
-    ,  //ÉúÈÕµ°¸â
+    ,  //ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½
     {
         "-8", MyRect(80, 153, 118, 189), QObject::tr("music")
     }
-    ,  //ÒôÀÖ
+    ,  //ï¿½ï¿½ï¿½ï¿½
     {
         "(i)", MyRect(120, 153, 158, 189), QObject::tr("bulb")
     }
-    ,  //µÆÅÝ,
+    ,  //ï¿½ï¿½ï¿½ï¿½,
     //	{"*-:)", MyRect(160, 153,  198, 189)},
     {
         "(c)", MyRect(200, 153, 238, 189), QObject::tr("coffee")
     }
-    ,  //¿§·È
+    ,  //ï¿½ï¿½ï¿½ï¿½
     {
         "(um)", MyRect(240, 153, 278, 189), QObject::tr("bumbershoot")
     }
-    ,  //ÓêÉ¡
+    ,  //ï¿½ï¿½É¡
     {
         "b)", MyRect(280, 153, 318, 189), QObject::tr("withsunglass")
     }
-    ,  //´ø×ÅÌ«Ñô¾µ
+    ,  //ï¿½ï¿½ï¿½ï¿½Ì«ï¿½ï¿½ï¿½ï¿½
 
 
     {
         "(mp)", MyRect(1, 191, 39, 227), QObject::tr("mobiletelephone")
     }
-    ,  //ÊÖ»ú
+    ,  //ï¿½Ö»ï¿½
     {
         "(co)", MyRect(40, 191, 78, 227), QObject::tr("computer")
     }
-    ,  //¼ÆËã»ú
+    ,  //ï¿½ï¿½ï¿½ï¿½ï¿½
     {
         ":-|", MyRect(80, 191, 118, 227), QObject::tr("despair")
     }
-    ,  //Ê§Íû
+    ,  //Ê§ï¿½ï¿½
     {
         ":-/", MyRect(120, 191, 158, 227), QObject::tr("confused")
     }
-    ,  //À§»óµÄ
+    ,  //ï¿½ï¿½ï¿½ï¿½ï¿½
     {
         ":-s", MyRect(160, 191, 198, 227), QObject::tr("afraid")
     }
-    ,  //µ£ÐÄ
+    ,  //ï¿½ï¿½ï¿½ï¿½
     {
         ")-|", MyRect(200, 191, 238, 227), QObject::tr("drink")
     }
-    ,  //ÒûÁÏ
+    ,  //ï¿½ï¿½ï¿½ï¿½
     {
         "(d)", MyRect(240, 191, 278, 227), QObject::tr("goblet")
     }
-    ,  //¸ß½Å±­
+    ,  //ï¿½ß½Å±ï¿½
     //{"o:)", MyRect(280, 191,  318, 227)},
 
 
     {
         ":-?", MyRect(1, 229, 39, 259), QObject::tr("meditation")
     }
-    ,  //³ÁË¼
+    ,  //ï¿½ï¿½Ë¼
     {
         "(y)", MyRect(40, 229, 78, 259), QObject::tr("Praised")
     }
-    ,  //Ì«°ôÁË
+    ,  //Ì«ï¿½ï¿½ï¿½ï¿½
     //{"&gt;:)",    MyRect(80,  229,  118, 259)},
     {
         ":-b", MyRect(120, 229, 158, 259), QObject::tr("spoony")
     }
-    ,  //±¿¹Ï
+    ,  //ï¿½ï¿½ï¿½ï¿½
 
     {
         ":)", MyRect(1, 2, 38, 39), QObject::tr("smile")
@@ -301,6 +301,7 @@ void FxInputFace::setMsgWindow(FxMsgWindow *Wind)
 
 void FxInputFace::focusOutEvent(QFocusEvent *event)
 {
+    Q_UNUSED(event);
     #ifdef Q_OS_MAC
         if (shouldHide)
         {
