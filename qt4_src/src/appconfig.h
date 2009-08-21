@@ -41,7 +41,8 @@
 #define SKIN_CONFG_FILE    "/skin.xml"
 #define USING_SERVER_TIME 0
 
-#define DEBUG_GUI 0
+/* GUI Debug Option */
+#undef DEBUG_GUI
 
 #ifdef WIN32 
 #pragma comment(lib, "./lib/LibFetion.lib")  

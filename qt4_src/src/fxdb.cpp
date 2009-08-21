@@ -1140,7 +1140,7 @@ void create_search_result(QList < QTreeWidgetItem * >  * items, char **result,
 /**************************************************************************/
 
 
-#if DEBUG_GUI
+#ifdef DEBUG_GUI
     char buf_sd[1024 *10];
 
     void qt_debug(char *fmt, ...)

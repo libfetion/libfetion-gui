@@ -307,7 +307,7 @@ void FxLoginWindow::LoginOK()
 
 void FxLoginWindow::login()
 {
-    #if DEBUG_GUI
+    #ifdef DEBUG_GUI
         LoginOK();
         return ;
     #endif
