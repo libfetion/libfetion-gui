@@ -29,8 +29,8 @@ extern "C" {
     #endif
 
     char *encryPWD(const char * data, long datalen, bool isEncry);
-    char* encryptXOR(const char *str, int str_len, const char* key);
-    char* decryptXOR(const char *str, int str_len, const char* key);
+    char* encryptXOR(const char *str, unsigned int str_len, const char* key);
+    char* decryptXOR(const char *str, unsigned int str_len, const char* key);
 
 #ifdef __cplusplus
 }
