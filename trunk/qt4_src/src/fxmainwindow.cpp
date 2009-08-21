@@ -70,7 +70,7 @@ FxMainWindow::FxMainWindow(QWidget *parent): FxWidget(parent), trayIcon(NULL),
 
     //save the account info to db,
     //will a bug: when the account is changed, but the db info maybe not changed follow
-    #if DEBUG_GUI
+    #ifdef DEBUG_GUI
         QTreeWidgetItem *tm = new QTreeWidgetItem(view, 0);
         tm->setText(0, "haha");
     #else
@@ -1013,7 +1013,7 @@ void FxMainWindow::trayIconActivated(QSystemTrayIcon::ActivationReason reason)
 void FxMainWindow::init_UI()
 {
     Settings::instance().setMainWindow(this);
-    #if DEBUG_GUI
+    #ifdef DEBUG_GUI
         Settings::instance().setUser(1000);
         setWindowTitle("DEBUG_GUI Test User --Linux Fetion");
     #else
