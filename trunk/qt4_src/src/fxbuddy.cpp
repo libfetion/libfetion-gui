@@ -1046,7 +1046,7 @@ void BuddyOpt::updateAccountInfo(qlonglong account_id)
     accountItem->setIcon(0, getOnlineStatusIcon(ac_info->onlinestate));
 
     int state = 0;
-    if (isOnlineStateChanged(old_online_state, new_online_state, &state))
+    if (isOnlineStateChanged(old_online_state, ac_info->onlinestate, &state))
     {
         //group name ++1
         int group_no = fx_get_account_group_id(account);
