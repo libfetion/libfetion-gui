@@ -32,8 +32,16 @@ FxLocationParser::FxLocationParser()
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
         return;
 
+#ifdef FX_XML_USE_DOM
+    m_dom = QDomDocument(FX_LOCATION_DOM_NAME);
+    if (!m_dom.setContent(&file))
+    {
+        file.close();
+        return;
+    }
+#else
     m_query.setFocus(&file);
-
+#endif
     file.close();
 }
 
@@ -71,10 +79,42 @@ FxLocationParser::getCityByCode(quint32 cityCode)
  *    Following xml parser tight close to identical DOM hierarchy.
  *    XML must ensure the unique key
  */
+#ifdef FX_XML_USE_DOM
 QString
 FxLocationParser::getValueByTagName(QString tag,
                                     QString item)
 {
+    QString rval;
+    QDomElement docElem = m_dom.documentElement();
+
+    /* prevent accidential location data file missing */
+    QFile   xml(FX_LOCATION_DATA_PATH);
+    FX_RETURN_WITH_VALUE_IF_FAILED(xml.exists(), NULL);
+
+    QDomNodeList n = docElem.elementsByTagName(tag);
+    QDomNodeList childNodeList = n.at(0).childNodes();
+
+    for(int i = 0; i < childNodeList.count(); i++)
+    {
+        rval = childNodeList.at(i).toElement().attribute(
+                                                    FX_LOCATION_DOM_KEY_NAME,
+                                                    "Other");
+        if (rval == item)
+        {
+            rval = childNodeList.at(i).toElement().text();
+            goto RETURN;
+        }
+    }
+RETURN:
+    return rval;
+}
+#else
+/* QXmlQuery: avalible after QT4.5, much faster than DOM parser */
+QString
+FxLocationParser::getValueByTagName(QString tag,
+                                    QString item)
+{
+
     QString results;
     QString xpath;
     QFile   xml(FX_LOCATION_DATA_PATH);
@@ -92,6 +132,7 @@ FxLocationParser::getValueByTagName(QString tag,
 
     return results;
 }
+#endif
 
 FxLocationParser::~FxLocationParser()
 {

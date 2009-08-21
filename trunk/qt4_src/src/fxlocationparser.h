@@ -22,7 +22,20 @@
 #ifndef FXLOCATIONPARSER_H
 #define FXLOCATIONPARSER_H
 
-#include <QXmlQuery>
+#if QT_VERSION >= QT_VERSION_CHECK(4, 5, 0)
+    #undef FX_XML_USE_DOM
+#else
+    #define FX_XML_USE_DOM
+#endif
+
+#ifdef  FX_XML_USE_DOM
+    #include <QDomDocument>
+
+    #define FX_LOCATION_DOM_NAME     "document"
+    #define FX_LOCATION_DOM_KEY_NAME "key"
+#else
+    #include <QXmlQuery>
+#endif
 
 #define FX_LOCATION_DATA_PATH    defaultDataPath() + "/Location.xml"
 
@@ -42,7 +55,11 @@ class FxLocationParser
                                   QString item);
 
     private:
-        QXmlQuery m_query;
+#ifdef FX_XML_USE_DOM
+        QDomDocument m_dom;
+#else
+        QXmlQuery    m_query;
+#endif
 };
 
 #endif // FXLOCATIONPARSER_H
