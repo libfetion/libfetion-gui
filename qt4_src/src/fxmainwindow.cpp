@@ -37,6 +37,7 @@
 #include "LibFetionEventHandle.cpp"
 
 
+
 FxMainWindow::FxMainWindow(QWidget *parent): FxWidget(parent), trayIcon(NULL),
                            traySetStatusMenu(NULL), buddySetStatusMenu(NULL),
                            msgHistroyMenu(NULL), skinMenu(NULL),
@@ -1602,7 +1603,10 @@ void FxMainWindow::setrefuseSMS()
 void FxMainWindow::personlInfo()
 {
     const Fetion_Account * account =
-            fx_get_account_by_id(buddyMge->fetchNoUpdateAccount()->accountID);
+            fx_get_account_by_id(strtol(fx_get_usr_uid(), NULL, 10));
+    qDebug() << "local name: " << account->local_name;
+    qDebug() << "local id: " << account->id;
+
     FxContactInfo *info = new FxContactInfo(this, account);
 
     info->exec();

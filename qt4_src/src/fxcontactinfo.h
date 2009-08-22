@@ -32,7 +32,7 @@ class FxContactInfo : public QDialog, public Ui::ContactInfo
         FxContactInfo(QWidget *parent = 0,
                 const Fetion_Account *account = 0);
         ~FxContactInfo();
-        QString getAccountInfo();
+        QString getContactInfo();
 
     private slots:
         void chang_localname();

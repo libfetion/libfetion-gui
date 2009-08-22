@@ -1903,77 +1903,77 @@ background-color:rgb(246,243,243);
 <context>
     <name>FxShowAccountInfo</name>
     <message>
-        <location filename="src/fxshowAccountInfo.cpp" line="61"/>
+        <location filename="src/fxcontactinfo.cpp" line="61"/>
         <source>mobile_no:</source>
         <translation>手机号码:</translation>
     </message>
     <message>
-        <location filename="src/fxshowAccountInfo.cpp" line="85"/>
+        <location filename="src/fxcontactinfo.cpp" line="85"/>
         <source>fetion_no:</source>
         <translation>飞信号:</translation>
     </message>
     <message>
-        <location filename="src/fxshowAccountInfo.cpp" line="92"/>
+        <location filename="src/fxcontactinfo.cpp" line="92"/>
         <source>nickname:</source>
         <translation>昵称:</translation>
     </message>
     <message>
-        <location filename="src/fxshowAccountInfo.cpp" line="101"/>
+        <location filename="src/fxcontactinfo.cpp" line="101"/>
         <source>name:</source>
         <translation>姓名:</translation>
     </message>
     <message>
-        <location filename="src/fxshowAccountInfo.cpp" line="136511596"/>
+        <location filename="src/fxcontactinfo.cpp" line="136511596"/>
         <source>sex:</source>
         <translation type="obsolete">性别:</translation>
     </message>
     <message>
-        <location filename="src/fxshowAccountInfo.cpp" line="125"/>
+        <location filename="src/fxcontactinfo.cpp" line="125"/>
         <source>unknow</source>
         <translation>未知</translation>
     </message>
     <message>
-        <location filename="src/fxshowAccountInfo.cpp" line="118"/>
+        <location filename="src/fxcontactinfo.cpp" line="118"/>
         <source>boy</source>
         <translation>男</translation>
     </message>
     <message>
-        <location filename="src/fxshowAccountInfo.cpp" line="115"/>
+        <location filename="src/fxcontactinfo.cpp" line="115"/>
         <source>girl</source>
         <translation>女</translation>
     </message>
     <message>
-        <location filename="src/fxshowAccountInfo.cpp" line="160"/>
+        <location filename="src/fxcontactinfo.cpp" line="160"/>
         <source>impresa:</source>
         <translation>心情短语:</translation>
     </message>
     <message>
-        <location filename="src/fxshowAccountInfo.cpp" line="110"/>
+        <location filename="src/fxcontactinfo.cpp" line="110"/>
         <source>gender:</source>
         <translation>性别:</translation>
     </message>
     <message>
-        <location filename="src/fxshowAccountInfo.cpp" line="128"/>
+        <location filename="src/fxcontactinfo.cpp" line="128"/>
         <source>province:</source>
         <translation>省份:</translation>
     </message>
     <message>
-        <location filename="src/fxshowAccountInfo.cpp" line="137"/>
+        <location filename="src/fxcontactinfo.cpp" line="137"/>
         <source>city</source>
         <translation>城市</translation>
     </message>
     <message>
-        <location filename="src/fxshowAccountInfo.cpp" line="159"/>
+        <location filename="src/fxcontactinfo.cpp" line="159"/>
         <source>extern infomation</source>
         <translation>扩展信息</translation>
     </message>
     <message>
-        <location filename="src/fxshowAccountInfo.cpp" line="33"/>
+        <location filename="src/fxcontactinfo.cpp" line="33"/>
         <source>see</source>
         <translation>查看(</translation>
     </message>
     <message>
-        <location filename="src/fxshowAccountInfo.cpp" line="33"/>
+        <location filename="src/fxcontactinfo.cpp" line="33"/>
         <source>info </source>
         <translation>)的个人信息</translation>
     </message>
