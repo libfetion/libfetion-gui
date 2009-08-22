@@ -360,27 +360,27 @@ background-color:rgb(246,243,243);
     <message>
         <location filename="src/fxbuddy.cpp" line="522"/>
         <source>mobile_no:</source>
-        <translation>手机号码:</translation>
+        <translation>手机号码: </translation>
     </message>
     <message>
         <location filename="src/fxbuddy.cpp" line="546"/>
         <source>fetion_no:</source>
-        <translation>飞信号:</translation>
+        <translation>飞信号: </translation>
     </message>
     <message>
         <location filename="src/fxbuddy.cpp" line="556"/>
         <source>nickname:</source>
-        <translation>昵称:</translation>
+        <translation>昵称: </translation>
     </message>
     <message>
         <location filename="src/fxbuddy.cpp" line="564"/>
         <source>name:</source>
-        <translation>姓名:</translation>
+        <translation>姓名: </translation>
     </message>
     <message>
         <location filename="src/fxbuddy.cpp" line="569"/>
         <source>gender:</source>
-        <translation>性别:</translation>
+        <translation>性别: </translation>
     </message>
     <message>
         <location filename="src/fxbuddy.cpp" line="573"/>
@@ -395,12 +395,22 @@ background-color:rgb(246,243,243);
     <message>
         <location filename="src/fxbuddy.cpp" line="581"/>
         <source>unknow</source>
-        <translation>未知</translation>
+        <translation>保密</translation>
     </message>
     <message>
         <location filename="src/fxbuddy.cpp" line="588"/>
         <source>impresa:</source>
-        <translation>心情短语:</translation>
+        <translation>心情短语: </translation>
+    </message>
+    <message>
+        <location filename="src/fxbuddy.cpp" line="128"/>
+        <source>province:</source>
+        <translation>省份: </translation>
+    </message>
+    <message>
+        <location filename="src/fxbuddy.cpp" line="137"/>
+        <source>city:</source>
+        <translation>城市: </translation>
     </message>
 </context>
 <context>
