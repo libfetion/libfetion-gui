@@ -1901,36 +1901,46 @@ background-color:rgb(246,243,243);
     </message>
 </context>
 <context>
-    <name>FxShowAccountInfo</name>
+    <name>FxContactInfo</name>
+    <message>
+        <location filename="src/fxcontactinfo.cpp" line="61"/>
+        <source>fx_contact_info_tips</source>
+        <translation>备注名</translation>
+    </message>
+    <message>
+        <location filename="src/fxcontactinfo.cpp" line="61"/>
+        <source>fx_contact_info_modify</source>
+        <translation>修改</translation>
+    </message>
     <message>
         <location filename="src/fxcontactinfo.cpp" line="61"/>
         <source>mobile_no:</source>
-        <translation>手机号码:</translation>
+        <translation>手机号码: </translation>
     </message>
     <message>
         <location filename="src/fxcontactinfo.cpp" line="85"/>
         <source>fetion_no:</source>
-        <translation>飞信号:</translation>
+        <translation>飞信号: </translation>
     </message>
     <message>
         <location filename="src/fxcontactinfo.cpp" line="92"/>
         <source>nickname:</source>
-        <translation>昵称:</translation>
+        <translation>昵称: </translation>
     </message>
     <message>
         <location filename="src/fxcontactinfo.cpp" line="101"/>
         <source>name:</source>
-        <translation>姓名:</translation>
+        <translation>姓名: </translation>
     </message>
     <message>
         <location filename="src/fxcontactinfo.cpp" line="136511596"/>
         <source>sex:</source>
-        <translation type="obsolete">性别:</translation>
+        <translation type="obsolete">性别: </translation>
     </message>
     <message>
         <location filename="src/fxcontactinfo.cpp" line="125"/>
         <source>unknow</source>
-        <translation>未知</translation>
+        <translation>保密</translation>
     </message>
     <message>
         <location filename="src/fxcontactinfo.cpp" line="118"/>
@@ -1944,23 +1954,28 @@ background-color:rgb(246,243,243);
     </message>
     <message>
         <location filename="src/fxcontactinfo.cpp" line="160"/>
+        <source>score:</source>
+        <translation>个人积分: </translation>
+    </message>
+    <message>
+        <location filename="src/fxcontactinfo.cpp" line="160"/>
         <source>impresa:</source>
-        <translation>心情短语:</translation>
+        <translation>心情短语: </translation>
     </message>
     <message>
         <location filename="src/fxcontactinfo.cpp" line="110"/>
         <source>gender:</source>
-        <translation>性别:</translation>
+        <translation>性别: </translation>
     </message>
     <message>
         <location filename="src/fxcontactinfo.cpp" line="128"/>
         <source>province:</source>
-        <translation>省份:</translation>
+        <translation>省份: </translation>
     </message>
     <message>
         <location filename="src/fxcontactinfo.cpp" line="137"/>
-        <source>city</source>
-        <translation>城市</translation>
+        <source>city:</source>
+        <translation>城市: </translation>
     </message>
     <message>
         <location filename="src/fxcontactinfo.cpp" line="159"/>
