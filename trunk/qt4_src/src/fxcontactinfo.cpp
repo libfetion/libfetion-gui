@@ -37,7 +37,7 @@ FxContactInfo::FxContactInfo(QWidget*parent, const Fetion_Account *account):
     QString title = tr("see") + show_name + tr("info ");
     this->setWindowTitle(title);
 
-    this->AcInfo->setHtml(getAccountInfo());
+    this->AcInfo->setHtml(getContactInfo());
 
     connect(pushButton, SIGNAL(clicked()),
             this, SLOT(chang_localname()));
@@ -65,7 +65,7 @@ FxContactInfo::chang_localname()
 /**************************************************************************/
 
 QString
-FxContactInfo::getAccountInfo()
+FxContactInfo::getContactInfo()
 {
     QString info;
 
