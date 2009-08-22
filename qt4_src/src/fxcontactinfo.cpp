@@ -39,6 +39,9 @@ FxContactInfo::FxContactInfo(QWidget*parent, const Fetion_Account *account):
 
     this->AcInfo->setHtml(getContactInfo());
 
+    this->label->setText(tr("fx_contact_info_tips"));
+    this->pushButton->setText(tr("fx_contact_info_modify"));
+
     connect(pushButton, SIGNAL(clicked()),
             this, SLOT(chang_localname()));
 }
@@ -55,7 +58,7 @@ void
 FxContactInfo::chang_localname()
 {
     fx_set_buddyinfo(m_account->id,
-                     loacl_name->text().toUtf8().data(),
+                     local_name->text().toUtf8().data(),
                      NULL,
                      NULL);
 }
@@ -74,7 +77,7 @@ FxContactInfo::getContactInfo()
         return NULL;
     }
 
-    loacl_name->setText(QString::fromUtf8(m_account->local_name));
+    local_name->setText(QString::fromUtf8(m_account->local_name));
 
     bool hP = false;
     if (m_account->personal)
