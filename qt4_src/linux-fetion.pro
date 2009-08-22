@@ -102,12 +102,11 @@ SOURCES = ./src/main.cpp \
     ./src/qwidgetresizehandler.cpp \
     ./src/sqlite/sqlite3.c \
     ./src/fxlocationparser.cpp
-FORMS = ui/contactinfo.ui \
+FORMS = ./ui/contactinfo.ui \
     ./ui/login_window.ui \
     ./ui/fetionwindow.ui \
     ./ui/msgwindow.ui \
     ./ui/msgsend.ui \
-    ./ui/contactinfo.ui \
     ./ui/qunwindow.ui \
     ./ui/historyMsg.ui \
     ./ui/verifyAccount.ui \

@@ -1,7 +1,8 @@
-<ui version="4.0" >
- <class>ShowAccountInfo</class>
- <widget class="QDialog" name="ShowAccountInfo" >
-  <property name="geometry" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ContactInfo</class>
+ <widget class="QDialog" name="ContactInfo">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
@@ -9,10 +10,10 @@
     <height>279</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <property name="styleSheet" >
+  <property name="styleSheet">
    <string>QDialog {
  
 background-color:rgb(246,243,243);
@@ -20,8 +21,8 @@ background-color:rgb(246,243,243);
 }
 </string>
   </property>
-  <widget class="QDialogButtonBox" name="buttonBox" >
-   <property name="geometry" >
+  <widget class="QDialogButtonBox" name="buttonBox">
+   <property name="geometry">
     <rect>
      <x>-120</x>
      <y>244</y>
@@ -29,15 +30,15 @@ background-color:rgb(246,243,243);
      <height>32</height>
     </rect>
    </property>
-   <property name="orientation" >
+   <property name="orientation">
     <enum>Qt::Horizontal</enum>
    </property>
-   <property name="standardButtons" >
-    <set>QDialogButtonBox::Cancel|QDialogButtonBox::NoButton|QDialogButtonBox::Ok</set>
+   <property name="standardButtons">
+    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
    </property>
   </widget>
-  <widget class="QTextEdit" name="AcInfo" >
-   <property name="geometry" >
+  <widget class="QTextEdit" name="AcInfo">
+   <property name="geometry">
     <rect>
      <x>0</x>
      <y>30</y>
@@ -46,8 +47,8 @@ background-color:rgb(246,243,243);
     </rect>
    </property>
   </widget>
-  <widget class="QLabel" name="label" >
-   <property name="geometry" >
+  <widget class="QLabel" name="label">
+   <property name="geometry">
     <rect>
      <x>4</x>
      <y>6</y>
@@ -55,12 +56,12 @@ background-color:rgb(246,243,243);
      <height>18</height>
     </rect>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>screen show</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="loacl_name" >
-   <property name="geometry" >
+  <widget class="QLineEdit" name="local_name">
+   <property name="geometry">
     <rect>
      <x>65</x>
      <y>1</y>
@@ -69,8 +70,8 @@ background-color:rgb(246,243,243);
     </rect>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton" >
-   <property name="geometry" >
+  <widget class="QPushButton" name="pushButton">
+   <property name="geometry">
     <rect>
      <x>188</x>
      <y>0</y>
@@ -78,7 +79,7 @@ background-color:rgb(246,243,243);
      <height>27</height>
     </rect>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>modifly</string>
    </property>
   </widget>
@@ -88,14 +89,14 @@ background-color:rgb(246,243,243);
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>ShowAccountInfo</receiver>
+   <receiver>ContactInfo</receiver>
    <slot>accept()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>248</x>
      <y>254</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>157</x>
      <y>274</y>
     </hint>
@@ -104,14 +105,14 @@ background-color:rgb(246,243,243);
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>ShowAccountInfo</receiver>
+   <receiver>ContactInfo</receiver>
    <slot>reject()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>316</x>
      <y>260</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>286</x>
      <y>274</y>
     </hint>
