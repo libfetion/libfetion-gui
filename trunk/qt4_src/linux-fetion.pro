@@ -1,5 +1,6 @@
 TEMPLATE = app
-QT += xml xmlpatterns
+QT += xml \
+    xmlpatterns
 win32 { 
     TARGET = LibFx
     CONFIG += static
@@ -42,7 +43,7 @@ HEADERS = ./src/appconfig.h \
     ./src/fxmytabwidget.h \
     ./src/fxResource.h \
     ./src/fxdb.h \
-    ./src/fxshowAccountInfo.h \
+    ./src/fxcontactinfo.h \
     ./src/fxaddBuddyWindow.h \
     ./src/fxqunwindow.h \
     ./src/fxEncrypt.h \
@@ -79,7 +80,7 @@ SOURCES = ./src/main.cpp \
     ./src/fxmytabwidget.cpp \
     ./src/fxResource.cpp \
     ./src/fxdb.cpp \
-    ./src/fxshowAccountInfo.cpp \
+    ./src/fxcontactinfo.cpp \
     ./src/fxaddBuddyWindow.cpp \
     ./src/fxqunwindow.cpp \
     ./src/fxEncrypt.cpp \
@@ -101,11 +102,12 @@ SOURCES = ./src/main.cpp \
     ./src/qwidgetresizehandler.cpp \
     ./src/sqlite/sqlite3.c \
     ./src/fxlocationparser.cpp
-FORMS = ./ui/login_window.ui \
+FORMS = ui/contactinfo.ui \
+    ./ui/login_window.ui \
     ./ui/fetionwindow.ui \
     ./ui/msgwindow.ui \
     ./ui/msgsend.ui \
-    ./ui/showAccountInfo.ui \
+    ./ui/contactinfo.ui \
     ./ui/qunwindow.ui \
     ./ui/historyMsg.ui \
     ./ui/verifyAccount.ui \
@@ -117,7 +119,9 @@ FORMS = ./ui/login_window.ui \
     ./ui/refusesms.ui \
     ./ui/configdia.ui
 DISTFILES += data/Location.xml \
-DISTFILES += src/LibFetionEventHandle.cpp
+    DISTFILES \
+    += \
+    src/LibFetionEventHandle.cpp
 DISTFILES += 64_libfetion.sh \
     CREDITS.txt \
     install.sh \
