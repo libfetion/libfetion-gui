@@ -20,7 +20,7 @@
 #include <assert.h>
 #include "fxbuddyManage.h"
 #include "fxmainwindow.h"
-#include "fxshowAccountInfo.h"
+#include "fxcontactinfo.h"
 
 BuddyMge::BuddyMge(QTreeWidget *widget, FxMainWindow *wind)
 {
@@ -660,8 +660,8 @@ void BuddyMge::slot_getInfoBuddy()
     {
         return ;
     }
-    FxShowAccountInfo *showInfo = new FxShowAccountInfo(account, getMainWindow()
-        );
+    FxContactInfo *showInfo =
+            new FxContactInfo(getMainWindow(), account);
     showInfo->exec();
     delete showInfo;
 }

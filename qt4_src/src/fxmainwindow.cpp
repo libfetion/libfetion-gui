@@ -25,7 +25,7 @@
 #include "appconfig.h"
 #include "fxmainwindow.h"
 #include "fxloginwindow.h"
-#include "fxshowAccountInfo.h"
+#include "fxcontactinfo.h"
 #include "fxqunwindow.h"
 #include "fxverifyAccount.h"
 #include "fxrefuseSMS.h"
@@ -34,7 +34,6 @@
 #include "fxskinmanage.h"
 #include "fxscheduleSmsManage.h"
 #include "fxscheduleSms.h"
-#include "fxlocationparser.h"
 #include "LibFetionEventHandle.cpp"
 
 
@@ -1598,157 +1597,20 @@ void FxMainWindow::setrefuseSMS()
 }
 
 /**************************************************************************/
-/*                                                                        */
+/* Fetch personal information                                             */
 /**************************************************************************/
-
-
-void FxMainWindow::setPersonalInfo(QTextEdit *AcInfo,
-                                   const Fetion_Personal *personal)
-{
-    bool hP = false;
-    if (personal)
-    {
-        hP = true;
-    }
-
-    QString info;
-
-    info += tr("mobile_no:");
-    if (hP)
-    {
-        info += "<b style=\"color:red; \">" +
-                QString::fromUtf8(fx_get_usr_mobilenum()) +
-                "</b>";
-    }
-    else
-    {
-        info += "<b style=\"color:red; \"> </b>";
-    }
-
-    AcInfo->append(info);
-
-    info = tr("fetion_no:");
-    info += "<b style=\"color:red; \">" +
-            QString::fromUtf8(fx_get_usr_uid()) +
-            "</b>";
-    AcInfo->append(info);
-
-    info = tr("nickname:");
-    if (hP)
-    {
-        info += "<b style=\"color:red; \">" +
-                QString::fromUtf8(personal->nickname) +
-                "</b>";
-    }
-    else
-    {
-        info += "<b style=\"color:red; \"> </b>";
-    }
-    AcInfo->append(info);
-
-    info = tr("name:");
-    if (hP)
-    {
-        info += "<b style=\"color:red; \">" +
-                QString::fromUtf8(personal->name) +
-                "</b>";
-    }
-    else
-    {
-        info += "<b style=\"color:red; \"> </b>";
-    }
-    AcInfo->append(info);
-
-    info = tr("gender:");
-    if (hP)
-    switch (personal->gender)
-    {
-        case 2:
-            info += "<b style=\"color:red; \">" + tr("girl") + "</b>";
-            break;
-        case 1:
-            info += "<b style=\"color:red; \">" + tr("boy") + "</b>";
-            break;
-        case 0:
-            info += "<b style=\"color:red; \">" + tr("unknow") + "</b>";
-            break;
-    }
-    else
-    {
-        info += "<b style=\"color:red; \">" + tr("unknow") + "</b>";
-    }
-    AcInfo->append(info);
-
-    info = tr("score:");
-    info += "<b style=\"color:red; \">" +
-            QString("%1").arg(fx_get_usr_score()) +
-            "</b>";
-    AcInfo->append(info);
-
-    info = tr("impresa:");
-    if (hP)
-    {
-        info += "<b style=\"color:red; \">" +
-                QString::fromUtf8(personal->impresa) +
-                "</b>";
-    }
-    else
-    {
-        info += "<b style=\"color:red; \"> </b>";
-    }
-    AcInfo->append(info);
-
-    FxLocationParser *parser = new FxLocationParser();
-    if (hP)
-    {
-        info = tr("province:");
-        info += "<b style=\"color:red; \">" +
-                parser->getProvinceByAlias(QString::fromUtf8(personal->province)) +
-                "</b>";
-        AcInfo->append(info);
-
-        info = tr("city:");
-        info += "<b style=\"color:red; \">" +
-                parser->getCityByCode(personal->city) +
-                "</b>";
-        AcInfo->append(info);
-    }
-}
-
-/**************************************************************************/
-/*                                                                        */
-/**************************************************************************/
-
-
 void FxMainWindow::personlInfo()
 {
-    QDialog *window = new QDialog(this);
-    window->setWindowTitle(tr("see personal info"));
+    const Fetion_Account * account =
+            fx_get_account_by_id(buddyMge->fetchNoUpdateAccount()->accountID);
+    FxContactInfo *info = new FxContactInfo(this, account);
 
-    QTextEdit *AcInfo = new QTextEdit(window);
-    QDialogButtonBox *buttonBox = new QDialogButtonBox(window);
-    buttonBox->setStandardButtons(QDialogButtonBox::Cancel | \
-                                  QDialogButtonBox::Ok);
-
-    QVBoxLayout *layout = new QVBoxLayout;
-    layout->addWidget(AcInfo);
-    layout->addWidget(buttonBox);
-    window->setLayout(layout);
-    setPersonalInfo(AcInfo, fx_data_get_PersonalInfo());
-    connect(buttonBox, SIGNAL(accepted()),
-            window, SLOT(accept()));
-    connect(buttonBox, SIGNAL(rejected()),
-            window, SLOT(reject()));
-    window->exec();
-    delete window;
+    info->exec();
 }
 
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
-
-
 void FxMainWindow::checkNewVersion()
 {
     QString info;
@@ -1768,7 +1630,6 @@ void FxMainWindow::checkNewVersion()
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void FxMainWindow::reportBugAct()
 {
     QDesktopServices::openUrl(QUrl("http://www.libfetion.cn/bbs"));
@@ -1777,7 +1638,6 @@ void FxMainWindow::reportBugAct()
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void FxMainWindow::aboutLibFetion()
 {
     QMessageBox messageBox(this);
@@ -1803,7 +1663,6 @@ void FxMainWindow::aboutLibFetion()
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void FxMainWindow::aboutCM()
 {
     QMessageBox::about(this,

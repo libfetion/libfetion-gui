@@ -17,17 +17,17 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#include "fxshowAccountInfo.h"
+#include <QtDebug>
 
-FxShowAccountInfo::FxShowAccountInfo(const Fetion_Account *account, QWidget*parent):
+#include "fxcontactinfo.h"
+#include "fxlocationparser.h"
+
+FxContactInfo::FxContactInfo(QWidget*parent, const Fetion_Account *account):
     QDialog(parent)
 {
     setupUi(this);
     m_account = account;
 
-    connect(pushButton, SIGNAL(clicked()),
-            this, SLOT(chang_localname()));
-    setShowInfo();
     char *showname = fx_get_account_show_name(account, FALSE);
     QString show_name = QString::fromUtf8(showname);
     if (showname)
@@ -36,17 +36,23 @@ FxShowAccountInfo::FxShowAccountInfo(const Fetion_Account *account, QWidget*pare
     }
     QString title = tr("see") + show_name + tr("info ");
     this->setWindowTitle(title);
+
+    this->AcInfo->setHtml(getAccountInfo());
+
+    connect(pushButton, SIGNAL(clicked()),
+            this, SLOT(chang_localname()));
 }
 
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
 
-FxShowAccountInfo::~FxShowAccountInfo(){
+FxContactInfo::~FxContactInfo(){
 
 }
 
-void FxShowAccountInfo::chang_localname()
+void
+FxContactInfo::chang_localname()
 {
     fx_set_buddyinfo(m_account->id,
                      loacl_name->text().toUtf8().data(),
@@ -58,11 +64,14 @@ void FxShowAccountInfo::chang_localname()
 /*                                                                        */
 /**************************************************************************/
 
-void FxShowAccountInfo::setShowInfo()
+QString
+FxContactInfo::getAccountInfo()
 {
+    QString info;
+
     if (!m_account)
     {
-        return ;
+        return NULL;
     }
 
     loacl_name->setText(QString::fromUtf8(m_account->local_name));
@@ -72,9 +81,6 @@ void FxShowAccountInfo::setShowInfo()
     {
         hP = true;
     }
-    QString info;
-
-
 
     info += tr("mobile_no:");
     if (hP)
@@ -97,25 +103,23 @@ void FxShowAccountInfo::setShowInfo()
 
         info += "<b style=\"color:red; \"> </b>";
     }
-
-    AcInfo->append(info);
+    info += "<br>";
 
     if (!fx_is_pc_user_by_account(m_account))
     {
-        info = tr("fetion_no:");
+        info += tr("fetion_no:");
         info += "<b style=\"color:red; \"> </b>";
-        AcInfo->append(info);
     }
     else
     {
-        info = tr("fetion_no:");
+        info += tr("fetion_no:");
         info += "<b style=\"color:red; \">" +
                 QString("%1").arg(m_account->id) +
                 "</b>";
-        AcInfo->append(info);
     }
+    info += "<br>";
 
-    info = tr("nickname:");
+    info += tr("nickname:");
     if (hP)
     {
         info += "<b style=\"color:red; \">" +
@@ -126,9 +130,9 @@ void FxShowAccountInfo::setShowInfo()
     {
         info += "<b style=\"color:red; \"> </b>";
     }
-    AcInfo->append(info);
+    info += "<br>";
 
-    info = tr("name:");
+    info += tr("name:");
     if (hP)
     {
         info += "<b style=\"color:red; \">" +
@@ -139,9 +143,9 @@ void FxShowAccountInfo::setShowInfo()
     {
         info += "<b style=\"color:red; \"> </b>";
     }
-    AcInfo->append(info);
+    info += "<br>";
 
-    info = tr("gender:");
+    info += tr("gender:");
     if (hP)
     switch (m_account->personal->gender)
     {
@@ -167,9 +171,15 @@ void FxShowAccountInfo::setShowInfo()
                 tr("unknow") +
                 "</b>";
     }
-    AcInfo->append(info);
+    info += "<br>";
 
-    info = tr("impresa:");
+    info += tr("score:");
+    info += "<b style=\"color:red; \">" +
+            QString("%1").arg(fx_get_usr_score()) +
+            "</b>";
+    info += "<br>";
+
+    info += tr("impresa:");
     if (hP)
     {
         info += "<b style=\"color:red; \">" +
@@ -180,11 +190,24 @@ void FxShowAccountInfo::setShowInfo()
     {
         info += "<b style=\"color:red; \"> </b>";
     }
-    AcInfo->append(info);
+    info += "<br>";
 
-    /* have no other info*/
-    if (!hP)
+    FxLocationParser *parser = new FxLocationParser();
+    if (hP)
     {
-        return ;
+        info += tr("province:");
+        info += "<b style=\"color:red; \">" +
+                parser->getProvinceByAlias(QString::fromUtf8(m_account->personal->province)) +
+                "</b>";
+        info += "<br>";
+
+        info += tr("city:");
+        info += "<b style=\"color:red; \">" +
+                parser->getCityByCode(m_account->personal->city) +
+                "</b>";
+        info += "<br>";
     }
+
+    qDebug() << "Account info : " << info;
+    return info;
 }

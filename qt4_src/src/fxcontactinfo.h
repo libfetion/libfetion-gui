@@ -17,22 +17,22 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#ifndef FXSHOWACCOUNTINFO_H
-#define FXSHOWACCOUNTINFO_H
+#ifndef FXCONTACTINFO_H
+#define FXCONTACTINFO_H
 
 #include <QDialog>
-#include "ui_showAccountInfo.h"
+#include "ui_contactinfo.h"
 
 #include "appconfig.h"
 
-class FxShowAccountInfo : public QDialog, public Ui::ShowAccountInfo
+class FxContactInfo : public QDialog, public Ui::ContactInfo
 {
     Q_OBJECT
     public:
-        FxShowAccountInfo(const Fetion_Account *account,
-                         QWidget *parent = 0);
-        ~FxShowAccountInfo();
-        void setShowInfo();
+        FxContactInfo(QWidget *parent = 0,
+                const Fetion_Account *account = 0);
+        ~FxContactInfo();
+        QString getAccountInfo();
 
     private slots:
         void chang_localname();
