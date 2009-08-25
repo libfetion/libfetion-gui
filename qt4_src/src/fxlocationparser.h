@@ -48,7 +48,7 @@ class FxLocationParser
         FxLocationParser();
         ~FxLocationParser();
         QString getProvinceByAlias(QString provinceAlias);
-        QString getCityByCode(quint32 cityCode);
+        QString getCityByCode(int cityCode);
 
     private:
         QString getValueByTagName(QString tag,

@@ -61,7 +61,7 @@ FxLocationParser::getProvinceByAlias(QString provinceAlias)
 }
 
 QString
-FxLocationParser::getCityByCode(quint32 cityCode)
+FxLocationParser::getCityByCode(int cityCode)
 {
     QString rval;
 

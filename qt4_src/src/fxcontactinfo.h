@@ -38,6 +38,10 @@ class FxContactInfo : public QDialog, public Ui::ContactInfo
         void chang_localname();
 
     private:
+        QString htmlStyledValueString(QString data = NULL);
+        QString htmlStyledNewline();
+
+    private:
         const Fetion_Account *m_account;
 };
 
