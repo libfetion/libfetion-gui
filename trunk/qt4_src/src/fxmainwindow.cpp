@@ -1607,6 +1607,10 @@ void FxMainWindow::personlInfo()
     qDebug() << "local name: " << account->local_name;
     qDebug() << "local id: " << account->id;
 
+    /* update user's personal info, before fetch the details */
+    fx_update_account_info_by_id(account->id);
+
+    /* FIXME: need to wait the account info update complete event */
     FxContactInfo *info = new FxContactInfo(this, account);
 
     info->exec();
