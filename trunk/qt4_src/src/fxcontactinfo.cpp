@@ -22,6 +22,22 @@
 #include "fxcontactinfo.h"
 #include "fxlocationparser.h"
 
+#define FX_CONTACT_INFO_TAG_PREFIX    "<b style=\"color:red; \">"
+#define FX_CONTACT_INFO_TAG_SUFFIX    "</b>"
+#define FX_CONTACT_INFO_HTML_NEWLINE    "<br>"
+
+#define FX_CONTACT_INFO_DATA_SET_WITH_VALUE(x, v)    do{ \
+                x += htmlStyledValueString(v); \
+                }while(0);
+
+#define FX_CONTACT_INFO_DATA_SET(x)     do{ \
+                x += htmlStyledValueString();\
+                }while(0);
+
+#define FX_CONTACT_INFO_NEWLINE(x)      do{ \
+                x += htmlStyledNewline();    \
+                }while(0);
+
 FxContactInfo::FxContactInfo(QWidget*parent, const Fetion_Account *account):
     QDialog(parent)
 {
@@ -63,6 +79,25 @@ FxContactInfo::chang_localname()
                      NULL);
 }
 
+QString
+FxContactInfo::htmlStyledValueString(QString data)
+{
+    QString val;
+
+    val = FX_CONTACT_INFO_TAG_PREFIX + data + FX_CONTACT_INFO_TAG_SUFFIX;
+
+    return val;
+}
+
+QString
+FxContactInfo::htmlStyledNewline()
+{
+    QString val;
+
+    val = FX_CONTACT_INFO_HTML_NEWLINE;
+
+    return val;
+}
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
@@ -71,146 +106,104 @@ QString
 FxContactInfo::getContactInfo()
 {
     QString info;
+    QString mobile_no;
+    QString fetion_no;
 
-    if (!m_account)
-    {
-        return NULL;
-    }
+    if (!m_account) return NULL;
 
     local_name->setText(QString::fromUtf8(m_account->local_name));
 
-    bool hP = false;
-    if (m_account->personal)
-    {
-        hP = true;
-    }
-
-    info += tr("mobile_no:");
-    if (hP)
-    {
-        info += "<b style=\"color:red; \">" +
-                QString::fromUtf8(m_account->personal->mobile_no) +
-                "</b>";
-    }
-    else
-    {
-        if (!fx_is_pc_user_by_account(m_account))
-        {
-            char *mobile_no = fx_get_original_ID(m_account->id);
-            info += "<b style=\"color:red; \">" +
-                    QString(mobile_no) +
-                    "</b>";
-            free(mobile_no);
-            mobile_no = NULL;
-        }
-
-        info += "<b style=\"color:red; \"> </b>";
-    }
-    info += "<br>";
-
     if (!fx_is_pc_user_by_account(m_account))
     {
+        mobile_no = QString::fromUtf8(fx_get_original_ID(m_account->id));
+        fetion_no = QString();
+    }else{
+        mobile_no = QString();
+        fetion_no = QString("%1").arg(m_account->id);
+    }
+
+    if (m_account->personal)
+    {
+        info += tr("mobile_no:");
+        FX_CONTACT_INFO_DATA_SET_WITH_VALUE(info,
+                        QString::fromUtf8(m_account->personal->mobile_no));
+        FX_CONTACT_INFO_NEWLINE(info);
         info += tr("fetion_no:");
-        info += "<b style=\"color:red; \"> </b>";
-    }
-    else
-    {
-        info += tr("fetion_no:");
-        info += "<b style=\"color:red; \">" +
-                QString("%1").arg(m_account->id) +
-                "</b>";
-    }
-    info += "<br>";
-
-    info += tr("nickname:");
-    if (hP)
-    {
-        info += "<b style=\"color:red; \">" +
-                QString::fromUtf8(m_account->personal->nickname) +
-                "</b>";
-    }
-    else
-    {
-        info += "<b style=\"color:red; \"> </b>";
-    }
-    info += "<br>";
-
-    info += tr("name:");
-    if (hP)
-    {
-        info += "<b style=\"color:red; \">" +
-                QString::fromUtf8(m_account->personal->name) +
-                "</b>";
-    }
-    else
-    {
-        info += "<b style=\"color:red; \"> </b>";
-    }
-    info += "<br>";
-
-    info += tr("gender:");
-    if (hP)
-    switch (m_account->personal->gender)
-    {
-        case 2:
-            info += "<b style=\"color:red; \">" +
-                    tr("girl") +
-                    "</b>";
-            break;
-        case 1:
-            info += "<b style=\"color:red; \">" +
-                    tr("boy") +
-                    "</b>";
-            break;
-        case 0:
-            info += "<b style=\"color:red; \">" +
-                    tr("unknow") +
-                    "</b>";
-            break;
-    }
-    else
-    {
-        info += "<b style=\"color:red; \">" +
-                tr("unknow") +
-                "</b>";
-    }
-    info += "<br>";
-
-    info += tr("score:");
-    info += "<b style=\"color:red; \">" +
-            QString("%1").arg(fx_get_usr_score()) +
-            "</b>";
-    info += "<br>";
-
-    info += tr("impresa:");
-    if (hP)
-    {
-        info += "<b style=\"color:red; \">" +
-                QString::fromUtf8(m_account->personal->impresa) +
-                "</b>";
-    }
-    else
-    {
-        info += "<b style=\"color:red; \"> </b>";
-    }
-    info += "<br>";
-
-    FxLocationParser *parser = new FxLocationParser();
-    if (hP)
-    {
+        FX_CONTACT_INFO_DATA_SET_WITH_VALUE(info, fetion_no);
+        FX_CONTACT_INFO_NEWLINE(info);
+        info += tr("nickname:");
+        FX_CONTACT_INFO_DATA_SET_WITH_VALUE(info,
+                QString::fromUtf8(m_account->personal->nickname));
+        FX_CONTACT_INFO_NEWLINE(info);
+        info += tr("name:");
+        FX_CONTACT_INFO_DATA_SET_WITH_VALUE(info,
+                QString::fromUtf8(m_account->personal->name));
+        FX_CONTACT_INFO_NEWLINE(info);
+        info += tr("gender:");
+        switch (m_account->personal->gender)
+        {
+            case 2:
+                FX_CONTACT_INFO_DATA_SET_WITH_VALUE(info, tr("girl"));
+                break;
+            case 1:
+                FX_CONTACT_INFO_DATA_SET_WITH_VALUE(info, tr("boy"));
+                break;
+            case 0:
+                FX_CONTACT_INFO_DATA_SET_WITH_VALUE(info, tr("unknow"));
+                break;
+        }
+        FX_CONTACT_INFO_NEWLINE(info);
+        info += tr("score:");
+        FX_CONTACT_INFO_DATA_SET_WITH_VALUE(info,
+                QString("%1").arg(fx_get_usr_score()));
+        FX_CONTACT_INFO_NEWLINE(info);
+        info += tr("impresa:");
+        FX_CONTACT_INFO_DATA_SET_WITH_VALUE(info,
+                        QString::fromUtf8(m_account->personal->impresa));
+        FX_CONTACT_INFO_NEWLINE(info);
+        FxLocationParser *parser = new FxLocationParser();
         info += tr("province:");
-        info += "<b style=\"color:red; \">" +
-                parser->getProvinceByAlias(QString::fromUtf8(m_account->personal->province)) +
-                "</b>";
-        info += "<br>";
+        FX_CONTACT_INFO_DATA_SET_WITH_VALUE(info,
+                parser->getProvinceByAlias(QString::fromUtf8(m_account->personal->province)));
+        FX_CONTACT_INFO_NEWLINE(info);
 
         info += tr("city:");
-        info += "<b style=\"color:red; \">" +
-                parser->getCityByCode(m_account->personal->city) +
-                "</b>";
-        info += "<br>";
+        FX_CONTACT_INFO_DATA_SET_WITH_VALUE(info,
+                parser->getCityByCode(m_account->personal->city));
+        FX_CONTACT_INFO_NEWLINE(info);
+
+    }else{
+        info += tr("mobile_no:");
+        FX_CONTACT_INFO_DATA_SET_WITH_VALUE(info, mobile_no);
+        FX_CONTACT_INFO_NEWLINE(info);
+        info += tr("fetion_no:");
+        FX_CONTACT_INFO_DATA_SET_WITH_VALUE(info,
+                QString("%1").arg(m_account->id));
+        FX_CONTACT_INFO_NEWLINE(info);
+        info += tr("nickname:");
+        FX_CONTACT_INFO_DATA_SET(info);
+        FX_CONTACT_INFO_NEWLINE(info);
+        info += tr("name:");
+        FX_CONTACT_INFO_DATA_SET(info);
+        FX_CONTACT_INFO_NEWLINE(info);
+        info += tr("gender:");
+        FX_CONTACT_INFO_DATA_SET_WITH_VALUE(info, tr("unknow"));
+        FX_CONTACT_INFO_NEWLINE(info);
+        info += tr("score:");
+        FX_CONTACT_INFO_DATA_SET_WITH_VALUE(info,
+                QString("%1").arg(fx_get_usr_score()));
+        FX_CONTACT_INFO_NEWLINE(info);
+        info += tr("impresa:");
+        FX_CONTACT_INFO_DATA_SET(info);
+        FX_CONTACT_INFO_NEWLINE(info);
+        info += tr("province:");
+        FX_CONTACT_INFO_DATA_SET_WITH_VALUE(info, tr("unknow"));
+        FX_CONTACT_INFO_NEWLINE(info);
+
+        info += tr("city:");
+        FX_CONTACT_INFO_DATA_SET_WITH_VALUE(info, tr("unknow"));
+        FX_CONTACT_INFO_NEWLINE(info);
     }
 
-    qDebug() << "Account info : " << info;
     return info;
 }

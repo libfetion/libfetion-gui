@@ -1604,13 +1604,10 @@ void FxMainWindow::personlInfo()
 {
     const Fetion_Account * account =
             fx_get_account_by_id(strtol(fx_get_usr_uid(), NULL, 10));
-    qDebug() << "local name: " << account->local_name;
-    qDebug() << "local id: " << account->id;
 
     /* update user's personal info, before fetch the details */
     fx_update_account_info_by_id(account->id);
 
-    /* FIXME: need to wait the account info update complete event */
     FxContactInfo *info = new FxContactInfo(this, account);
 
     info->exec();
