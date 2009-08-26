@@ -32,3 +32,10 @@ We suggested newly created functions have FX_FUNCTION inside body
 {{{
 #define FX_FUNCTION FX_DEBUG(__PRETTY_FUNCTION__)
 }}}
+{{{
+FxMain::FxMain()
+{
+    FX_FUNCTION
+    ...
+}
+}}}
