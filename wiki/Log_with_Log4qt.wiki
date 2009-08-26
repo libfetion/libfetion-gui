@@ -3,7 +3,9 @@
 = Introduction =
 
 Libfetion-gui uses Log4qt::Logger::rootLogger for debug information logging. Access rootLogger with
-{{{#define FX_LOGGER   logger()}}}
+{{{
+#define FX_LOGGER   logger()
+}}}
 Five categories log level DEBUG, INFO, WARN, ERROR and FATAL were supported in our application. You can use different log level with our built-in macros.
 {{{
 #define FX_DEBUG(x) do{logger()->debug(x);}while(0);
@@ -13,7 +15,9 @@ Five categories log level DEBUG, INFO, WARN, ERROR and FATAL were supported in o
 #define FX_FATAL(x) do{logger()->fatal(x);}while(0);
 }}}
 We suggested newly created functions have FX_FUNCTION inside body
-{{{#define FX_FUNCTION FX_DEBUG(__PRETTY_FUNCTION__)}}}
+{{{
+#define FX_FUNCTION FX_DEBUG(__PRETTY_FUNCTION__)
+}}}
 
 = Details =
 
