@@ -26,14 +26,13 @@
 #include "fxmainwindow.h"
 #include "ui_scheduleSMSManage.h"
 
-
-class FxScheduleSMSManage : public QMainWindow,
-                            public Ui::ScheduleSmSManage
+#include "fxutil.h"
+class FxScheduleSMSManage: public QMainWindow, public Ui::ScheduleSmSManage
 {
     Q_OBJECT
+    LOG4QT_DECLARE_QCLASS_LOGGER
     public:
-       FxScheduleSMSManage(FxMainWindow * mainwind,
-                           QWidget *parent = 0);
+        FxScheduleSMSManage(FxMainWindow * mainwind, QWidget *parent = 0);
         ~FxScheduleSMSManage();
 
     private slots:
@@ -47,10 +46,8 @@ class FxScheduleSMSManage : public QMainWindow,
 
     protected:
         void addItemToSCMList(Fetion_Schedule_SMS*);
-        void addItemToSCMList(QString &receiver,
-                              QString& send_time,
-                              QString &message,
-                              int scm_id);
+        void addItemToSCMList(QString &receiver, QString& send_time,
+                QString &message, int scm_id);
         void closeEvent(QCloseEvent *event);
     private:
         void init_UI();

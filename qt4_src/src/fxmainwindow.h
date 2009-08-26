@@ -30,6 +30,7 @@
 #include "fxaddBuddyWindow.h"
 
 #include "fxwidget.h"
+#include "fxutil.h"
 using namespace fxgui;
 
 class QAction;
@@ -42,7 +43,7 @@ class FxScheduleSMS;
 class FxMainWindow : public FxWidget, public Ui::FetionWindow
 {
     Q_OBJECT
-
+    LOG4QT_DECLARE_QCLASS_LOGGER
 public:
     FxMainWindow(QWidget *parent = 0);
 	~FxMainWindow();

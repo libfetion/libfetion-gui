@@ -23,14 +23,16 @@
 #include <QMainWindow>
 #include "ui_scheduleSMS.h"
 
+#include "fxutil.h"
 class FxMainWindow;
 class BuddyOpt;
 
-class FxScheduleSMS : public QMainWindow, public Ui::ScheduleSMS
+class FxScheduleSMS: public QMainWindow, public Ui::ScheduleSMS
 {
     Q_OBJECT
+    LOG4QT_DECLARE_QCLASS_LOGGER
     public:
-       FxScheduleSMS(FxMainWindow * mainwind, QWidget *parent = 0);
+        FxScheduleSMS(FxMainWindow * mainwind, QWidget *parent = 0);
         ~FxScheduleSMS();
 
     protected:

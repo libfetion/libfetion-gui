@@ -19,7 +19,7 @@
  ***************************************************************************/
 #ifndef FXDB_H
 #define FXDB_H
-#include "appconfig.h"
+
 #include <stdio.h>
 
 #if WIN32
@@ -39,17 +39,19 @@
 
 #include "appconfig.h"
 
-typedef enum {
-	TODAY_HISTORY= 0,
-	ONE_WEEK_HISTORY, 
-	TWO_WEEK_HISTORY, 
-	ONE_MONTH_HISTORY, 
-	ALL_DATE_HISTORY, 
+typedef enum
+{
+    TODAY_HISTORY = 0,
+    ONE_WEEK_HISTORY,
+    TWO_WEEK_HISTORY,
+    ONE_MONTH_HISTORY,
+    ALL_DATE_HISTORY,
 } HISTORY_DATE;
 
-typedef enum {
-	NO_INCOMING=0,
-	INCOMING= 1,
+typedef enum
+{
+    NO_INCOMING = 0,
+    INCOMING,
 } INCOMING_TYPR;
 
 bool init_db();
@@ -78,6 +80,5 @@ bool selectSystemMsg(long usr, long uid, const char* msg);
 void saveAccountInfo();
 
 QList<QTreeWidgetItem *> *searchAccountInfo(char * keyword);
-
 
 #endif

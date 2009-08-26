@@ -23,10 +23,11 @@
 #include <QtXml/QDomDocument>
 #include "appconfig.h"
 
-typedef enum {
-	MSG_SOUND = 0,
-	ONLINE_SOUND, 
-	SYS_SOUND 
+typedef enum
+{
+    MSG_SOUND = 0,
+    ONLINE_SOUND,
+    SYS_SOUND
 } SOUND_TYPE;
 
 #ifdef WIN32
@@ -84,7 +85,6 @@ QPixmap getFlickIcon(bool flag);
 
 #define ReNameGroupIcon ReNameBuddyIcon 
 #define DeleteGroupIcon DeleteBuddyIcon     
-
 
 QPixmap getLoginImage(); //this function is get the login picture
 QPixmap getPortraitImage(); //this function is get the portrait picture

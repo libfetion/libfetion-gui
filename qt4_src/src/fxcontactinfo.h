@@ -23,11 +23,12 @@
 #include <QDialog>
 #include "ui_contactinfo.h"
 
-#include "appconfig.h"
+#include "fxutil.h"
 
 class FxContactInfo : public QDialog, public Ui::ContactInfo
 {
     Q_OBJECT
+    LOG4QT_DECLARE_QCLASS_LOGGER
     public:
         FxContactInfo(QWidget *parent = 0,
                 const Fetion_Account *account = 0);

@@ -24,9 +24,11 @@
 #include "ui_configdia.h"
 #include "fxmainwindow.h"
 
+#include "fxutil.h"
 class FxConfigDia : public QDialog, public Ui::ConfigApp
 {
     Q_OBJECT
+    LOG4QT_DECLARE_QCLASS_LOGGER
 public:
     FxConfigDia(FxMainWindow *wind, QWidget *parent = 0);
     ~FxConfigDia();

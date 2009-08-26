@@ -26,6 +26,7 @@
 
 FxMain::FxMain()
 {
+    FX_FUNCTION
     QTextCodec::setCodecForCStrings(QTextCodec::codecForName("GBK"));
 
     isLoginIn = false;
@@ -45,6 +46,7 @@ FxMain::FxMain()
 
 void FxMain::doSlotConnection()
 {
+    FX_FUNCTION
     QObject::connect(loginWin, SIGNAL(signal_LoginOK()),
                      this, SLOT(slotLoginOK()));
 }
@@ -55,6 +57,7 @@ void FxMain::doSlotConnection()
 
 void FxMain::createMainWindow()
 {
+    FX_FUNCTION
     mainWin = new FxMainWindow(0);
     #ifndef DEBUG_GUI
         loginWin->hide();

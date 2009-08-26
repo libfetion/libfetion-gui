@@ -25,18 +25,21 @@
 
 #include "appconfig.h"
 
-class FxRefuseSMS : public QDialog, public Ui::refuseSMSDia
+#include "fxutil.h"
+
+class FxRefuseSMS: public QDialog, public Ui::refuseSMSDia
 {
     Q_OBJECT
-public:
-   FxRefuseSMS(QWidget *parent = 0);
-   ~FxRefuseSMS();
-	void setChanged();
-private slots:
-	void RB_changed();
-	void setRefuseSMS();
-private:
-	int smsday;
+    LOG4QT_DECLARE_QCLASS_LOGGER
+    public:
+        FxRefuseSMS(QWidget *parent = 0);
+        ~FxRefuseSMS();
+        void setChanged();
+    private slots:
+        void RB_changed();
+        void setRefuseSMS();
+    private:
+        int smsday;
 };
 
 #endif

@@ -26,11 +26,14 @@
 #include "fxmainwindow.h"
 #include "ui_sendgroupsms.h"
 
-class FxSendGroupSMS : public QMainWindow, public Ui::SendGroupSMS
+#include "fxutil.h"
+
+class FxSendGroupSMS: public QMainWindow, public Ui::SendGroupSMS
 {
     Q_OBJECT
+    LOG4QT_DECLARE_QCLASS_LOGGER
     public:
-       FxSendGroupSMS(FxMainWindow * mainwind, QWidget *parent = 0);
+        FxSendGroupSMS(FxMainWindow * mainwind, QWidget *parent = 0);
         ~FxSendGroupSMS();
 
     protected:

@@ -31,6 +31,8 @@
 #include "fxdb.h"
 #include "fxskinmanage.h"
 
+#include "log4qt/propertyconfigurator.h" /* log4qt configure load */
+
 #ifdef WIN32
 #else
     #include <fcntl.h>
@@ -66,6 +68,10 @@ int main(int argc, char *argv[])
 
     QApplication app(argc, argv);
     QCoreApplication::addLibraryPath(QCoreApplication::applicationDirPath());
+
+    /*FIXME: real log4qt configuration path */
+    Log4Qt::PropertyConfigurator::configure(
+            app.applicationDirPath() + "/log4qt.properties");
 
     QTranslator translator_fetion;
     translator_fetion.load("fetion_utf8_CN", defaultResPath());

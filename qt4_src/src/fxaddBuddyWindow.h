@@ -25,9 +25,11 @@
 
 #include "appconfig.h"
 
+#include "fxutil.h"
 class FxAddBuddy : public QDialog, public Ui::AddBuddyDia
 {
     Q_OBJECT
+    LOG4QT_DECLARE_QCLASS_LOGGER
 public:
    FxAddBuddy(QWidget *parent = 0);
    FxAddBuddy(QString id, bool ismobile = false, QWidget *parent = 0);

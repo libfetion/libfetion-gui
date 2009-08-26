@@ -35,6 +35,7 @@ UI_HEADERS_DIR = ./.ui
 
 include (src/gui.pri)
 include (ui/ui.pri)
+include (log4qt/log4qt.pri)
 
 DISTFILES += data/Location.xml
 

@@ -2,9 +2,13 @@
 #define FXLINEEDITFOCUS_H
 
 #include <QLineEdit>
+#include "fxutil.h"
+
 class QLineEditFocus : public QLineEdit // inherit QLineEdit
 {
     Q_OBJECT
+    LOG4QT_DECLARE_QCLASS_LOGGER
+
     public:
         QLineEditFocus(QWidget *parent) : QLineEdit(parent) { };
 

@@ -1,34 +1,43 @@
 #ifndef FXWIDGETTITLEBAR_H
 #define FXWIDGETTITLEBAR_H
 #include <QtGui>
-namespace fxgui{
+#include "fxutil.h"
 
-    class FxWidget;
+namespace fxgui
+{
 
-    class FxWidgetTitleBar:public QWidget{
-        Q_OBJECT
-        public:
-            FxWidgetTitleBar(FxWidget* parent);
+class FxWidget;
 
-        public slots:
-            void on_btnMinimize_clicked();
-            void on_btnMaximize_clicked(bool checked = false);
-            void on_btnClose_clicked();
+class FxWidgetTitleBar: public QWidget
+{
+    Q_OBJECT
+    LOG4QT_DECLARE_QCLASS_LOGGER
 
-        public:
-            //@TO FIX
-            //   for convenience of showMaximized & showNormal
-            QPushButton *btnMaximize;
-            void setWindowTitle(const QString&title);
-            void setWindowIcon(const QIcon&icon);
-            void setMinimizetoHide(bool minimizetoHide) {_isminimizetoHide = minimizetoHide;}
+    public:
+        FxWidgetTitleBar(FxWidget* parent);
 
-        private:
-            FxWidget *_parent;
-            QLabel *title;
-            QToolButton *icon;
-            bool _isminimizetoHide;
-    };
+    public slots:
+        void on_btnMinimize_clicked();
+        void on_btnMaximize_clicked(bool checked = false);
+        void on_btnClose_clicked();
+
+    public:
+        //@TO FIX
+        //   for convenience of showMaximized & showNormal
+        QPushButton *btnMaximize;
+        void setWindowTitle(const QString&title);
+        void setWindowIcon(const QIcon&icon);
+        void setMinimizetoHide(bool minimizetoHide)
+        {
+            _isminimizetoHide = minimizetoHide;
+        }
+
+    private:
+        FxWidget *_parent;
+        QLabel *title;
+        QToolButton *icon;
+        bool _isminimizetoHide;
+};
 
 }
 #endif

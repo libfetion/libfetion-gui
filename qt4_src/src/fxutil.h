@@ -25,6 +25,22 @@
 #include <QString>
 #include "appconfig.h"
 
+/* stmt quick check macro */
+#define FX_RETURN_IF_FAILED(x) do{ if (!x) return; }while(0);
+#define FX_RETURN_WITH_VALUE_IF_FAILED(x, v) do{ if (!x) return v; }while(0);
+
+/* DEBUG Logger */
+#include "log4qt/logger.h"
+
+#define FX_LOGGER   logger()
+#define FX_DEBUG(x) do{logger()->debug(x);}while(0);
+#define FX_INFO(x) do{logger()->info(x);}while(0);
+#define FX_WARN(x) do{logger()->warn(x);}while(0);
+#define FX_ERROR(x) do{logger()->error(x);}while(0);
+#define FX_FATAL(x) do{logger()->fatal(x);}while(0);
+
+#define FX_FUNCTION FX_DEBUG(__PRETTY_FUNCTION__)
+
 QString getProvince(QString Province);
 
 QString getCity(int cityID);
