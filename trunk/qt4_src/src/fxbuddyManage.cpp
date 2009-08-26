@@ -24,6 +24,7 @@
 
 BuddyMge::BuddyMge(QTreeWidget *widget, FxMainWindow *wind)
 {
+    FX_FUNCTION
     assert(widget);
     assert(wind);
     treeWidget = widget;
@@ -45,63 +46,70 @@ BuddyMge::BuddyMge(QTreeWidget *widget, FxMainWindow *wind)
 /*                                                                        */
 /**************************************************************************/
 
-BuddyMge::~BuddyMge(){}
+BuddyMge::~BuddyMge()
+{
+    FX_FUNCTION
+}
 
 void BuddyMge::initAllActions()
 {
+    FX_FUNCTION
     AddGroupAct = new QAction(tr("add group"), getMainWindow());
     AddGroupAct->setIcon(getMenuIcon(AddGroupIcon));
-    connect(AddGroupAct, SIGNAL(triggered()), this, SLOT(slot_addGroup()));
+    connect(AddGroupAct, SIGNAL(triggered()),
+            this, SLOT(slot_addGroup()));
 
     DeleteGroupAct = new QAction(tr("delete group"), getMainWindow());
     DeleteGroupAct->setIcon(getMenuIcon(DeleteGroupIcon));
-    connect(DeleteGroupAct, SIGNAL(triggered()), this, SLOT(slot_deleteGroup()))
-            ;
+    connect(DeleteGroupAct, SIGNAL(triggered()),
+            this, SLOT(slot_deleteGroup()));
 
     ReNameGroupAct = new QAction(tr("rename group"), getMainWindow());
     ReNameGroupAct->setIcon(getMenuIcon(ReNameGroupIcon));
-    connect(ReNameGroupAct, SIGNAL(triggered()), this, SLOT(slot_renameGroup()))
-            ;
+    connect(ReNameGroupAct, SIGNAL(triggered()),
+            this, SLOT(slot_renameGroup()));
 
     ReNameBuddyAct = new QAction(tr("rename buddy"), getMainWindow());
     ReNameBuddyAct->setIcon(getMenuIcon(ReNameBuddyIcon));
-    connect(ReNameBuddyAct, SIGNAL(triggered()), this, SLOT(slot_renameBuddy()))
-            ;
+    connect(ReNameBuddyAct, SIGNAL(triggered()),
+            this, SLOT(slot_renameBuddy()));
 
     IMBuddyAct = new QAction(tr("im buddy"), getMainWindow());
     IMBuddyAct->setIcon(getMenuIcon(IMBuddyIcon));
-    connect(IMBuddyAct, SIGNAL(triggered()), this, SLOT(slot_imBuddy()));
+    connect(IMBuddyAct, SIGNAL(triggered()),
+            this, SLOT(slot_imBuddy()));
 
     SMSBuddyAct = new QAction(tr("sms buddy"), getMainWindow());
     SMSBuddyAct->setIcon(getMenuIcon(SMSBuddyIcon));
-    connect(SMSBuddyAct, SIGNAL(triggered()), this, SLOT(slot_smsBuddy()));
+    connect(SMSBuddyAct, SIGNAL(triggered()),
+            this, SLOT(slot_smsBuddy()));
 
     GetInfoBuddyAct = new QAction(tr("get info buddy"), getMainWindow());
     GetInfoBuddyAct->setIcon(getMenuIcon(GetInfoBuddyIcon));
-    connect(GetInfoBuddyAct, SIGNAL(triggered()), this, SLOT(slot_getInfoBuddy()
-            ));
+    connect(GetInfoBuddyAct, SIGNAL(triggered()),
+            this, SLOT(slot_getInfoBuddy()));
 
     RefreshInfoBuddyAct = new QAction(tr("update info buddy"), getMainWindow());
     RefreshInfoBuddyAct->setIcon(getMenuIcon(RefreshBuddyIcon));
-    connect(RefreshInfoBuddyAct, SIGNAL(triggered()), this, SLOT
-            (slot_updateInfoBuddy()));
+    connect(RefreshInfoBuddyAct, SIGNAL(triggered()),
+            this, SLOT(slot_updateInfoBuddy()));
 
 
     DeleteBuddyAct = new QAction(tr("delete buddy"), getMainWindow());
     DeleteBuddyAct->setIcon(getMenuIcon(DeleteBuddyIcon));
-    connect(DeleteBuddyAct, SIGNAL(triggered()), this, SLOT(slot_deleteBuddy()))
-            ;
+    connect(DeleteBuddyAct, SIGNAL(triggered()),
+            this, SLOT(slot_deleteBuddy()));
 
     AddBlackBuddyAct = new QAction(tr("add to black list"), getMainWindow());
     AddBlackBuddyAct->setIcon(getMenuIcon(BackInBuddyIcon));
-    connect(AddBlackBuddyAct, SIGNAL(triggered()), this, SLOT
-            (slot_addBlackBuddy()));
+    connect(AddBlackBuddyAct, SIGNAL(triggered()),
+            this, SLOT(slot_addBlackBuddy()));
 
-    RemoveBlackBuddyAct = new QAction(tr("remove frome black list"),
-                                      getMainWindow());
+    RemoveBlackBuddyAct =
+            new QAction(tr("remove frome black list"), getMainWindow());
     RemoveBlackBuddyAct->setIcon(getMenuIcon(RemoveBlackIcon));
-    connect(RemoveBlackBuddyAct, SIGNAL(triggered()), this, SLOT
-            (slot_removeBlackBuddy()));
+    connect(RemoveBlackBuddyAct, SIGNAL(triggered()),
+            this, SLOT(slot_removeBlackBuddy()));
 
     IMQunAct = new QAction(tr("im qun"), getMainWindow());
     IMQunAct->setIcon(getMenuIcon(IMBuddyIcon));
@@ -113,7 +121,8 @@ void BuddyMge::initAllActions()
 
     GetInfoQunAct = new QAction(tr("getinfo qun"), getMainWindow());
     GetInfoQunAct->setIcon(getMenuIcon(GetInfoBuddyIcon));
-    connect(GetInfoQunAct, SIGNAL(triggered()), this, SLOT(slot_getInfoQun()));
+    connect(GetInfoQunAct, SIGNAL(triggered()),
+            this, SLOT(slot_getInfoQun()));
 }
 
 /**************************************************************************/
@@ -122,6 +131,7 @@ void BuddyMge::initAllActions()
 
 FxMsgWindow *BuddyMge::getMsgWindow()
 {
+    FX_FUNCTION
     if (getMainWindow())
     {
         return getMainWindow()->getMsgWindow();
@@ -135,6 +145,7 @@ FxMsgWindow *BuddyMge::getMsgWindow()
 
 void BuddyMge::slot_accountDoubleClicked(QTreeWidgetItem *item, int)
 {
+    FX_FUNCTION
     if (item == 0)
     {
         return ;
@@ -153,6 +164,7 @@ void BuddyMge::slot_accountDoubleClicked(QTreeWidgetItem *item, int)
 
 void BuddyMge::handleAccountDoubleClicked(QTreeWidgetItem *item)
 {
+    FX_FUNCTION
     if (!item)
     {
         return ;
@@ -194,6 +206,7 @@ void BuddyMge::handleAccountDoubleClicked(QTreeWidgetItem *item)
 
 void BuddyMge::showQunWindow(qlonglong qun_id)
 {
+    FX_FUNCTION
     getMsgWindow()->addQunWin(qun_id);
 
 }

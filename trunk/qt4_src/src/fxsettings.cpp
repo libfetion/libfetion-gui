@@ -31,18 +31,17 @@ Settings &Settings::instance()
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
-Settings::Settings(const QString &fileName, Format format):
-        QSettings(fileName,format)
+Settings::Settings(const QString &fileName, Format format) :
+    QSettings(fileName, format)
 {
+//    FX_FUNCTION
     m_uid = 0L;
     m_mainwind = NULL;
     m_isAutoLogin = ::isAutoLogin(NULL, NULL, NULL);
 
     QSize dt_size = QApplication::desktop()->size();
-    m_LoginWinPos =
-            value("LoginWinPos",
-                  QPoint(dt_size.width() / 3, dt_size.height() / 3)).toPoint();
+    m_LoginWinPos = value("LoginWinPos", QPoint(dt_size.width() / 3,
+            dt_size.height() / 3)).toPoint();
     m_LoginWinSize = value("LoginWinSize", QSize(281, 220)).toSize();
 
     m_skinPath = value("SkinPath", defaultSkinPath()).toString();
@@ -55,15 +54,15 @@ Settings::Settings(const QString &fileName, Format format):
         m_skinName = "default";
     }
 
-    m_CurrentFont = value("AppFont", QFont()).value < QFont > ();
+    m_CurrentFont = value("AppFont", QFont()).value<QFont> ();
 }
 
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 Settings::~Settings()
 {
+//    FX_FUNCTION
     if (m_uid)
     {
         endGroup();
@@ -73,10 +72,9 @@ Settings::~Settings()
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
-
 void Settings::setUser(long uid)
 {
+//    FX_FUNCTION
     if (m_uid)
     {
         endGroup();
@@ -89,9 +87,9 @@ void Settings::setUser(long uid)
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void Settings::saveFontSetting(const QFont &font)
 {
+//    FX_FUNCTION
     if (m_uid)
     {
         endGroup();
@@ -109,9 +107,9 @@ void Settings::saveFontSetting(const QFont &font)
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void Settings::setSkins(QString skinPath, QString skinName)
 {
+//    FX_FUNCTION
     if (m_uid)
     {
         endGroup();
@@ -131,22 +129,21 @@ void Settings::setSkins(QString skinPath, QString skinName)
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void Settings::init_setting()
 {
-
+//    FX_FUNCTION
     m_DisableNudge = value("DisableNudge", false).toBool();
     m_isMute = value("Mute", false).toBool();
     m_isEnterSend = value("EnterSend", true).toBool();
     m_isStartHide = value("StartHide", false).toBool();
 
-    #ifdef Q_OS_MAC
-        m_isAutoShow = true;
-        m_isMainWindowTopHint = value("MainWindowTopHint", false).toBool();
-    #else
-        m_isAutoShow = value("AutoShowMsg", false).toBool();
-        m_isMainWindowTopHint = value("MainWindowTopHint", true).toBool();
-    #endif
+#ifdef Q_OS_MAC
+    m_isAutoShow = true;
+    m_isMainWindowTopHint = value("MainWindowTopHint", false).toBool();
+#else
+    m_isAutoShow = value("AutoShowMsg", false).toBool();
+    m_isMainWindowTopHint = value("MainWindowTopHint", true).toBool();
+#endif
     setMainWindowTopHint(m_isMainWindowTopHint);
 
     m_isEnableLongSMS = value("EnableLongSMS", true).toBool();
@@ -155,48 +152,38 @@ void Settings::init_setting()
     m_isAutoReply = value("AutoReply", false).toBool();
     m_replyMsg = value("ReplyMsg", QObject::tr("I'll be back soon")).toString();
 
-    m_MsgRingPath = value("MsgRingPath", defaultSoundPath() + "/msg.wav")
-                          .toString();
+    m_MsgRingPath
+            = value("MsgRingPath", defaultSoundPath() + "/msg.wav").toString();
 
     QSize dt_size = QApplication::desktop()->size();
 
+    m_MsgWinPos = value("MsgWinPos", QPoint(dt_size.width() / 3,
+            dt_size.height() / 3)).toPoint();
+    m_MsgWinSize = value("MsgWinSize", QSize(399, 274)).toSize();
 
-    m_MsgWinPos =
-            value("MsgWinPos",
-                  QPoint(dt_size.width() / 3, dt_size.height() / 3)).toPoint();
-    m_MsgWinSize =
-            value("MsgWinSize", QSize(399, 274)).toSize();
+    m_MainWinPos = value("MainWinPos", QPoint(dt_size.width() / 10 * 7,
+            dt_size.height() / 10)).toPoint();
+    m_MainWinSize = value("MainWinSize", QSize(254, 551)).toSize();
 
-    m_MainWinPos =
-            value("MainWinPos",
-                  QPoint(dt_size.width() / 10 * 7, dt_size.height() / 10)).toPoint();
-    m_MainWinSize =
-            value("MainWinSize", QSize(254, 551)).toSize();
+    m_SendMultMsgWinPos = value("SendMultMsgWinPos", QPoint(
+            dt_size.width() / 3, dt_size.height() / 3)).toPoint();
+    m_SendMultMsgWinSize
+            = value("SendMultMsgWinSize", QSize(400, 400)).toSize();
 
-    m_SendMultMsgWinPos =
-            value("SendMultMsgWinPos",
-                  QPoint(dt_size.width() / 3, dt_size.height() / 3)).toPoint();
-    m_SendMultMsgWinSize =
-            value("SendMultMsgWinSize", QSize(400, 400)).toSize();
-
-    m_GetMsgHotKey =
-            value("GetMsgHotKey", 'x').toChar();
-    m_GetMsgHotKeyMod =
-            (Qt::KeyboardModifiers)value("GetMsgHotKeyMod",
-                                         (qlonglong)(Qt::ControlModifier | Qt::AltModifier)).toLongLong();
+    m_GetMsgHotKey = value("GetMsgHotKey", 'x').toChar();
+    m_GetMsgHotKeyMod = (Qt::KeyboardModifiers) value("GetMsgHotKeyMod",
+            (qlonglong) (Qt::ControlModifier | Qt::AltModifier)).toLongLong();
 
     m_isRegisteredGetMsgHotKey = false;
     m_isEnableGetMsgHotKey = value("EnableGetMsgHotKey", true).toBool();
-
 }
 
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
-
 void Settings::setDisableNudge(bool isDisableNudge)
 {
+//    FX_FUNCTION
     m_DisableNudge = isDisableNudge;
     setValue("DisableNudge", m_DisableNudge);
 }
@@ -204,9 +191,9 @@ void Settings::setDisableNudge(bool isDisableNudge)
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void Settings::setAutoLogin(bool isAutoLogin)
 {
+//    FX_FUNCTION
     m_isAutoLogin = isAutoLogin;
 
     if (!m_isAutoLogin)
@@ -237,9 +224,9 @@ void Settings::setAutoLogin(bool isAutoLogin)
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void Settings::setMainWindowTopHint(bool isMainWindowTopHint)
 {
+//    FX_FUNCTION
     m_isMainWindowTopHint = isMainWindowTopHint;
     setValue("MainWindowTopHint", m_isMainWindowTopHint);
 
@@ -247,13 +234,13 @@ void Settings::setMainWindowTopHint(bool isMainWindowTopHint)
     {
         if (m_isMainWindowTopHint)
         {
-            m_mainwind->setWindowFlags(m_mainwind->windowFlags() | \
-                                       Qt::WindowStaysOnTopHint);
+            m_mainwind->setWindowFlags(m_mainwind->windowFlags()
+                    | Qt::WindowStaysOnTopHint);
         }
         else
         {
-            m_mainwind->setWindowFlags(m_mainwind->windowFlags() ^ \
-                                       Qt::WindowStaysOnTopHint);
+            m_mainwind->setWindowFlags(m_mainwind->windowFlags()
+                    ^ Qt::WindowStaysOnTopHint);
         }
         m_mainwind->show();
     }
@@ -262,9 +249,9 @@ void Settings::setMainWindowTopHint(bool isMainWindowTopHint)
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void Settings::setAutoShowMsg(bool isAutoShow)
 {
+//    FX_FUNCTION
     m_isAutoShow = isAutoShow;
     setValue("AutoShowMsg", m_isAutoShow);
 }
@@ -272,9 +259,9 @@ void Settings::setAutoShowMsg(bool isAutoShow)
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void Settings::setMute(bool isMute)
 {
+//    FX_FUNCTION
     m_isMute = isMute;
     setValue("Mute", m_isMute);
 }
@@ -282,9 +269,9 @@ void Settings::setMute(bool isMute)
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void Settings::setEnableLongSMS(bool isEnableLongSMS)
 {
+//    FX_FUNCTION
     m_isEnableLongSMS = isEnableLongSMS;
     setValue("EnableLongSMS", m_isEnableLongSMS);
     if (m_isEnableLongSMS)
@@ -300,9 +287,9 @@ void Settings::setEnableLongSMS(bool isEnableLongSMS)
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void Settings::setEnterSend(bool isEnterSend)
 {
+//    FX_FUNCTION
     m_isEnterSend = isEnterSend;
     setValue("EnterSend", m_isEnterSend);
 }
@@ -310,9 +297,9 @@ void Settings::setEnterSend(bool isEnterSend)
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void Settings::setStartHide(bool isStartHide)
 {
+//    FX_FUNCTION
     m_isStartHide = isStartHide;
     setValue("StartHide", m_isStartHide);
 }
@@ -320,9 +307,9 @@ void Settings::setStartHide(bool isStartHide)
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void Settings::setAutoReply(bool isAutoReply, QString re_msg)
 {
+//    FX_FUNCTION
     m_isAutoReply = isAutoReply;
     setValue("AutoReply", m_isAutoReply);
 
@@ -333,9 +320,9 @@ void Settings::setAutoReply(bool isAutoReply, QString re_msg)
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void Settings::setMsgRingPath(QString path)
 {
+//    FX_FUNCTION
     m_MsgRingPath = path;
     setValue("MsgRingPath", m_MsgRingPath);
 }
@@ -343,9 +330,9 @@ void Settings::setMsgRingPath(QString path)
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void Settings::setLoginWinPos(QPoint pos)
 {
+//    FX_FUNCTION
     if (m_uid)
     {
         endGroup();
@@ -363,9 +350,9 @@ void Settings::setLoginWinPos(QPoint pos)
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void Settings::setMsgWinPos(QPoint pos)
 {
+//    FX_FUNCTION
     m_MsgWinPos = pos;
     setValue("MsgWinPos", pos);
 }
@@ -373,9 +360,9 @@ void Settings::setMsgWinPos(QPoint pos)
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void Settings::setMainWinPos(QPoint pos)
 {
+//    FX_FUNCTION
     m_MainWinPos = pos;
     setValue("MainWinPos", pos);
 }
@@ -383,9 +370,9 @@ void Settings::setMainWinPos(QPoint pos)
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void Settings::setLoginWinSize(QSize size)
 {
+//    FX_FUNCTION
     if (m_uid)
     {
         endGroup();
@@ -403,9 +390,9 @@ void Settings::setLoginWinSize(QSize size)
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void Settings::setMainWinSize(QSize size)
 {
+//    FX_FUNCTION
     m_MainWinSize = size;
     setValue("MainWinSize", size);
 }
@@ -413,9 +400,9 @@ void Settings::setMainWinSize(QSize size)
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void Settings::setMsgWinSize(QSize size)
 {
+//    FX_FUNCTION
     m_MsgWinSize = size;
     setValue("MsgWinSize", size);
 }
@@ -423,9 +410,9 @@ void Settings::setMsgWinSize(QSize size)
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void Settings::setSendMultMsgWinPos(QPoint pos)
 {
+//    FX_FUNCTION
     m_SendMultMsgWinPos = pos;
     setValue("SendMultMsgWinPos", pos);
 }
@@ -433,9 +420,9 @@ void Settings::setSendMultMsgWinPos(QPoint pos)
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void Settings::setSendMultMsgWinSize(QSize size)
 {
+//    FX_FUNCTION
     m_SendMultMsgWinSize = size;
     setValue("SendMultMsgWinSize", size);
 }
@@ -443,9 +430,9 @@ void Settings::setSendMultMsgWinSize(QSize size)
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 bool Settings::setEnableGetMsgHotKey(bool enable)
 {
+//    FX_FUNCTION
     if (enable == m_isEnableGetMsgHotKey)
     {
         return true;
@@ -468,11 +455,11 @@ bool Settings::setEnableGetMsgHotKey(bool enable)
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 bool Settings::setGetMsgHotKey(QChar keyValue,
                                Qt::KeyboardModifiers keyMod,
                                bool isRegister)
 {
+//    FX_FUNCTION
     if (!isRegister)
     {
         //unRegister hot key
@@ -488,7 +475,7 @@ bool Settings::setGetMsgHotKey(QChar keyValue,
     setValue("GetMsgHotKey", m_GetMsgHotKey);
 
     m_GetMsgHotKeyMod = keyMod;
-    setValue("GetMsgHotKeyMod", (qlonglong)(m_GetMsgHotKeyMod));
+    setValue("GetMsgHotKeyMod", (qlonglong) (m_GetMsgHotKeyMod));
 
     m_isRegisteredGetMsgHotKey = RegistHotkey(m_mainwind, keyValue, keyMod);
     return true;

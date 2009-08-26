@@ -22,6 +22,7 @@
 
 FxProxy::FxProxy(QWidget *parent): QDialog(parent)
 {
+    FX_FUNCTION
     setupUi(this);
     isQuit = false;
 
@@ -67,9 +68,9 @@ FxProxy::FxProxy(QWidget *parent): QDialog(parent)
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 FxProxy::~FxProxy()
 {
+    FX_FUNCTION
     if (proxy_item)
     {
         free_proxt_struct(proxy_item);
@@ -79,9 +80,9 @@ FxProxy::~FxProxy()
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void FxProxy::free_proxt_struct(PROXY_ITEM *p_item)
 {
+    FX_FUNCTION
     if (!p_item)
     {
         return ;
@@ -112,9 +113,9 @@ void FxProxy::free_proxt_struct(PROXY_ITEM *p_item)
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void FxProxy::proxy_destroy()
 {
+    FX_FUNCTION
     isQuit = true;
     close();
 }
@@ -122,9 +123,9 @@ void FxProxy::proxy_destroy()
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void FxProxy::closeEvent(QCloseEvent *event)
 {
+    FX_FUNCTION
     hide();
     if (isQuit)
     {
@@ -139,10 +140,9 @@ void FxProxy::closeEvent(QCloseEvent *event)
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
-
 void FxProxy::setDisableEdit(bool stat)
 {
+    FX_FUNCTION
     HostEdit->setDisabled(stat);
     PortEdit->setDisabled(stat);
     UserEdit->setDisabled(stat);
@@ -152,10 +152,9 @@ void FxProxy::setDisableEdit(bool stat)
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 int FxProxy::setEdit(int index)
 {
-    //if (connectMode->itemText(index) == tr("DirectConnect"))
+    FX_FUNCTION
     if (index == 0)
     {
         setDisableEdit(true);
@@ -170,10 +169,9 @@ int FxProxy::setEdit(int index)
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
-
 void FxProxy::init_get_Proxy()
 {
+    FX_FUNCTION
     if (proxy_item)
     {
         free_proxt_struct(proxy_item);
@@ -240,9 +238,9 @@ void FxProxy::init_get_Proxy()
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void FxProxy::SetProxy()
 {
+    FX_FUNCTION
     init_get_Proxy();
     fx_set_proxy(proxy_item);
     setProxy(proxy_item);
@@ -251,15 +249,13 @@ void FxProxy::SetProxy()
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
-
 void FxProxy::TestNetting()
 {
-    //connectMode
+    FX_FUNCTION
     init_get_Proxy();
 
     Test_Show->setText(tr("testing net"));
-    printf("testing net \n");
+    FX_DEBUG("testing net");
 
     if (fx_test_network(proxy_item, NULL, NULL))
     {
@@ -269,5 +265,5 @@ void FxProxy::TestNetting()
     {
         Test_Show->setText(tr("net fail"));
     }
-    printf("testing over \n");
+    FX_DEBUG("testing over");
 }

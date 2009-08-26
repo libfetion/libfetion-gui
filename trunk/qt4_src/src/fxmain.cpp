@@ -71,6 +71,7 @@ void FxMain::createMainWindow()
 
 void FxMain::slotLoginOK()
 {
+    FX_FUNCTION
     isLoginIn = true;
     createMainWindow();
     #ifndef DEBUG_GUI
@@ -84,6 +85,7 @@ void FxMain::slotLoginOK()
 
 FxMain::~FxMain()
 {
+    FX_FUNCTION
     if (isLoginIn)
     {
         printf("fx_loginout \n");

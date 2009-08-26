@@ -39,7 +39,6 @@ using namespace fxgui;
 
 class FxMainWindow;
 
-//class FxMsgWindow : public QDialog, public Ui::MsgWindow
 class FxMsgWindow : public FxWidget, public Ui::MsgWindow
 {
     Q_OBJECT
@@ -108,6 +107,7 @@ private:
     void exec_autoRelpy(QTextEdit* msgBrowser,
                         qlonglong account_id,
                         QString msg);
+    QString CropTabName(QString orig_name);
 
 private:
 	bool m_willQuit;

@@ -21,6 +21,7 @@
 
 FxRefuseSMS::FxRefuseSMS(QWidget *parent): QDialog(parent)
 {
+    FX_FUNCTION
     setupUi(this);
 
     smsday = 1;
@@ -41,9 +42,9 @@ FxRefuseSMS::FxRefuseSMS(QWidget *parent): QDialog(parent)
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void FxRefuseSMS::setRefuseSMS()
 {
+    FX_FUNCTION
     fx_set_user_refuse_sms_day(smsday, NULL, NULL);
     this->accept();
 }
@@ -51,21 +52,24 @@ void FxRefuseSMS::setRefuseSMS()
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
-FxRefuseSMS::~FxRefuseSMS(){}
+FxRefuseSMS::~FxRefuseSMS()
+{
+    FX_FUNCTION
+}
 
 
 void FxRefuseSMS::RB_changed()
 {
+    FX_FUNCTION
     setChanged();
 }
 
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void FxRefuseSMS::setChanged()
 {
+    FX_FUNCTION
     if (RB_24->isChecked())
     {
         smsday = 1;

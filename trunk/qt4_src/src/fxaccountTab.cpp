@@ -25,6 +25,7 @@ AccountTab::AccountTab(qlonglong id, FxMyTabWidget *parent, bool awaySendSms):
                        (awaySendSms), tabWidget(parent), flick_flag(FALSE),
                        mainWind(NULL), histroy(NULL)
 {
+    FX_FUNCTION
     setupUi(this);
     setWindowFlags(Qt::FramelessWindowHint);
 
@@ -45,6 +46,7 @@ AccountTab::AccountTab(qlonglong id, FxMyTabWidget *parent, bool awaySendSms):
 
 AccountTab::~AccountTab()
 {
+    FX_FUNCTION
     if (histroy)
     {
         delete histroy;
@@ -59,7 +61,7 @@ AccountTab::~AccountTab()
 void AccountTab::setSendModle(bool isSMS)
 {
     //	isAwaySendSMS = isSMS; /*fix bug issue 37*/
-
+    FX_FUNCTION
     if (account_id == SYSTEM_ID)
     {
         QString status = tr("view the system message");
@@ -146,6 +148,7 @@ void AccountTab::setSendModle(bool isSMS)
 
 void AccountTab::ShowHistroy()
 {
+    FX_FUNCTION
     if (!m_account)
     {
         return ;
@@ -164,6 +167,7 @@ void AccountTab::ShowHistroy()
 
 void AccountTab::ShowFaces()
 {
+    FX_FUNCTION
     // @TO FIX
     ((FxMsgWindow*)(tabWidget->parentWidget()->parentWidget()))->showFaces();
 }
@@ -174,6 +178,7 @@ void AccountTab::ShowFaces()
 
 void AccountTab::changeSendModle()
 {
+    FX_FUNCTION
     isAwaySendSMS = !isAwaySendSMS;
     setSendModle(isAwaySendSMS);
 }
@@ -184,6 +189,7 @@ void AccountTab::changeSendModle()
 
 bool AccountTab::eventFilter(QObject *target, QEvent *event)
 {
+    FX_FUNCTION
     if (event->type() == QEvent::KeyPress)
     {
         QKeyEvent *keyEvent = (QKeyEvent*)event;
@@ -243,6 +249,7 @@ bool AccountTab::eventFilter(QObject *target, QEvent *event)
 
 void AccountTab::handle_alt_num(QKeyEvent *keyEvent)
 {
+    FX_FUNCTION
     int index = keyEvent->key() - Qt::Key_0;
     if (index <= 0 || index > tabWidget->count())
     {
@@ -258,6 +265,7 @@ void AccountTab::handle_alt_num(QKeyEvent *keyEvent)
 
 void AccountTab::SendNudge()
 {
+    FX_FUNCTION
     QString str;
     if (!fx_is_pc_user_by_id(account_id) || !fx_is_on_line_by_id(account_id))
     {
@@ -288,6 +296,7 @@ void AccountTab::SendNudge()
 
 void AccountTab::SendMsg()
 {
+    FX_FUNCTION
     QString msg = msgSend->MsgEdit->toPlainText();
     if (msg.isEmpty())
     {
@@ -375,6 +384,7 @@ void AccountTab::SendMsg()
 
 void AccountTab::startFlickerTab()
 {
+    FX_FUNCTION
     if (flickTimer.isActive())
     {
         return ;
@@ -394,6 +404,7 @@ void AccountTab::startFlickerTab()
 
 void AccountTab::endFlickerTab()
 {
+    FX_FUNCTION
     if (flickTimer.isActive())
     {
         if (mainWind)
@@ -411,6 +422,7 @@ void AccountTab::endFlickerTab()
 
 void AccountTab::flickerTab()
 {
+    FX_FUNCTION
     if (tabWidget->currentWidget() == this && tabWidget->parentWidget()
         ->isVisible())
     {
@@ -432,6 +444,7 @@ void AccountTab::flickerTab()
 
 void AccountTab::resizeEvent(QResizeEvent *event)
 {
+    FX_FUNCTION
     QWidget::resizeEvent(event);
     //	tabWidget->resize(event->size());
 }
@@ -442,6 +455,7 @@ void AccountTab::resizeEvent(QResizeEvent *event)
 
 void AccountTab::changeTableInputNM()
 {
+    FX_FUNCTION
     if (isAwaySendSMS || !fx_is_pc_user_by_account(m_account) ||
         !fx_is_on_line_by_account(m_account))
     {
@@ -470,6 +484,7 @@ void AccountTab::changeTableInputNM()
 
 void AccountTab::UpdateSkins()
 {
+    FX_FUNCTION
     /*
     // just remove this member function .
     TB_FACE->setPixmap (getFaceIcon());
@@ -486,6 +501,7 @@ void AccountTab::UpdateSkins()
 
 void AccountTab::init()
 {
+    FX_FUNCTION
     UpdateSkins();
     init_slot();
 
@@ -542,6 +558,7 @@ void AccountTab::init()
 
 void AccountTab::init_slot()
 {
+    FX_FUNCTION
     connect(btnSwitchSendMode, SIGNAL(clicked()), this, SLOT(changeSendModle()))
             ;
     connect(btnHistory, SIGNAL(clicked()), this, SLOT(ShowHistroy()));

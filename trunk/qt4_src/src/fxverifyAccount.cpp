@@ -24,6 +24,7 @@ FxVerifyAccount::FxVerifyAccount(FxMainWindow *wind,
                                  char *desc,
                                  QWidget *parent): QDialog(parent)
 {
+    FX_FUNCTION
     setupUi(this);
 
     mainwind = wind;
@@ -48,9 +49,9 @@ FxVerifyAccount::FxVerifyAccount(FxMainWindow *wind,
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 FxVerifyAccount::~FxVerifyAccount()
 {
+    FX_FUNCTION
     if (mainwind)
     {
         mainwind->show();
@@ -60,9 +61,9 @@ FxVerifyAccount::~FxVerifyAccount()
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void FxVerifyAccount::verifyAccount()
 {
+    FX_FUNCTION
     if (RB_Accept->isChecked())
     {
         int groupId = CB_group->itemData(CB_group->currentIndex()).toInt();
@@ -85,9 +86,9 @@ void FxVerifyAccount::verifyAccount()
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void FxVerifyAccount::verifyRB()
 {
+    FX_FUNCTION
     if (RB_Accept->isChecked())
     {
         RB_Refuse->setChecked(false);
@@ -107,9 +108,9 @@ void FxVerifyAccount::verifyRB()
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void FxVerifyAccount::init_groupItem()
 {
+    FX_FUNCTION
     Fetion_Group *group = NULL;
 
     DList *tmp_group = (DList*)fx_get_group();
@@ -128,9 +129,9 @@ void FxVerifyAccount::init_groupItem()
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void FxVerifyAccount::closeEvent(QCloseEvent *event)
 {
+    FX_FUNCTION
     if (mainwind)
     {
         mainwind->show();

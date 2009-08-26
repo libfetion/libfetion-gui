@@ -41,6 +41,7 @@
 FxContactInfo::FxContactInfo(QWidget*parent, const Fetion_Account *account):
     QDialog(parent)
 {
+    FX_FUNCTION
     setupUi(this);
     m_account = account;
 
@@ -67,12 +68,13 @@ FxContactInfo::FxContactInfo(QWidget*parent, const Fetion_Account *account):
 /**************************************************************************/
 
 FxContactInfo::~FxContactInfo(){
-
+    FX_FUNCTION
 }
 
 void
 FxContactInfo::chang_localname()
 {
+    FX_FUNCTION
     fx_set_buddyinfo(m_account->id,
                      local_name->text().toUtf8().data(),
                      NULL,
@@ -105,6 +107,7 @@ FxContactInfo::htmlStyledNewline()
 QString
 FxContactInfo::getContactInfo()
 {
+    FX_FUNCTION
     QString info;
     QString mobile_no;
     QString fetion_no;

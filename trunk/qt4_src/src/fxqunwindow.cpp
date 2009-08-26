@@ -25,6 +25,7 @@
 FxQunWindow::FxQunWindow(qlonglong id, QWidget *parent, bool awaySendSms):
                          QMainWindow(parent)
 {
+    FX_FUNCTION
     setupUi(this);
     isQuit = false;
     haveUnreadMsg = false;
@@ -56,9 +57,9 @@ FxQunWindow::FxQunWindow(qlonglong id, QWidget *parent, bool awaySendSms):
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
-FxQunWindow::~FxQunWindow(){
-
+FxQunWindow::~FxQunWindow()
+{
+    FX_FUNCTION
 }
 
 static QString getName(Fetion_QunMember *qunmem)
@@ -84,9 +85,9 @@ static QString getName(Fetion_QunMember *qunmem)
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 QString FxQunWindow::getSenderName(qlonglong sender)
 {
+    FX_FUNCTION
     if (!fx_qun)
     {
         return QString("%1").arg(sender);
@@ -116,9 +117,9 @@ QString FxQunWindow::getSenderName(qlonglong sender)
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void FxQunWindow::setQuninfo()
 {
+    FX_FUNCTION
     if (!fx_qun)
     {
         return ;
@@ -135,15 +136,14 @@ void FxQunWindow::setQuninfo()
     this->setWindowIcon(getOnlineStatusIcon(1));
 
     listQunMem(quninfo);
-
 }
 
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void FxQunWindow::listQunMem(Fetion_QunInfo *quninfo)
 {
+    FX_FUNCTION
     if (!quninfo)
     {
         return ;
@@ -167,9 +167,9 @@ void FxQunWindow::listQunMem(Fetion_QunInfo *quninfo)
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void FxQunWindow::SendMsg()
 {
+    FX_FUNCTION
     QString msg = MsgEdit->toPlainText();
     if (msg.isEmpty())
     {
@@ -236,10 +236,9 @@ void FxQunWindow::SendMsg()
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
-
 void FxQunWindow::changeSendModle()
 {
+    FX_FUNCTION
     isAwaySendSMS = !isAwaySendSMS;
     setSendModle(isAwaySendSMS);
 }
@@ -247,9 +246,9 @@ void FxQunWindow::changeSendModle()
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void FxQunWindow::setSendModle(bool isSMS)
 {
+    FX_FUNCTION
     isAwaySendSMS = isSMS;
 
     if (!fx_qun)
@@ -281,9 +280,9 @@ void FxQunWindow::setSendModle(bool isSMS)
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 bool FxQunWindow::eventFilter(QObject *target, QEvent *event)
 {
+    FX_FUNCTION
     if (target == MsgEdit)
     {
         if (event->type() == QEvent::KeyPress)
@@ -326,9 +325,9 @@ bool FxQunWindow::eventFilter(QObject *target, QEvent *event)
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void FxQunWindow::closeEvent(QCloseEvent *event)
 {
+    FX_FUNCTION
     hide();
     if (isQuit)
     {
@@ -343,9 +342,9 @@ void FxQunWindow::closeEvent(QCloseEvent *event)
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void FxQunWindow::qun_exit()
 {
+    FX_FUNCTION
     isQuit = true;
     close();
 }

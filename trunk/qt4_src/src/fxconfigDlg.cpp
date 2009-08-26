@@ -24,6 +24,7 @@ bool FxConfigDia::hasInstance = false;
 
 FxConfigDia::FxConfigDia(FxMainWindow *wind, QWidget *parent): QDialog(parent)
 {
+    FX_FUNCTION
     setupUi(this);
     mainwind = wind;
     hotKey->installEventFilter(this);
@@ -39,10 +40,11 @@ FxConfigDia::FxConfigDia(FxMainWindow *wind, QWidget *parent): QDialog(parent)
 /**************************************************************************/
 
 FxConfigDia::~FxConfigDia(){
-
+    FX_FUNCTION
 }
 void FxConfigDia::closeEvent(QCloseEvent *event)
 {
+    FX_FUNCTION
     if (mainwind)
     {
         mainwind->show();
@@ -57,6 +59,7 @@ void FxConfigDia::closeEvent(QCloseEvent *event)
 
 void FxConfigDia::init_state()
 {
+    FX_FUNCTION
     if (Settings::instance().isDisableNudge())
     {
         CB_DisableNudge->setCheckState(Qt::Checked);
@@ -173,31 +176,45 @@ void FxConfigDia::init_state()
 
 void FxConfigDia::init_connect()
 {
-    connect(BT_ChangeRing, SIGNAL(clicked()), this, SLOT(slot_ChangeRing()));
-    connect(BT_TestRing, SIGNAL(clicked()), this, SLOT(slot_TestRing()));
-    connect(BT_RingDefault, SIGNAL(clicked()), this, SLOT(slot_DefaultRing()));
+    FX_FUNCTION
+    connect(BT_ChangeRing, SIGNAL(clicked()),
+            this, SLOT(slot_ChangeRing()));
+    connect(BT_TestRing, SIGNAL(clicked()),
+            this, SLOT(slot_TestRing()));
+    connect(BT_RingDefault, SIGNAL(clicked()),
+            this, SLOT(slot_DefaultRing()));
 
-    connect(CB_DisableNudge, SIGNAL(clicked()), this, SLOT(slot_DisableNudge()))
+    connect(CB_DisableNudge, SIGNAL(clicked()),
+            this, SLOT(slot_DisableNudge()))
             ;
-    connect(CB_MainTopHit, SIGNAL(clicked()), this, SLOT(slot_MainTopHit()));
-    connect(CB_MainStartHide, SIGNAL(clicked()), this, SLOT(slot_MainStartHide()
-            ));
-    connect(CB_RemberPwd, SIGNAL(clicked()), this, SLOT(slot_RemberPwd()));
-    connect(CB_AutoShowMsg, SIGNAL(clicked()), this, SLOT(slot_AutoShowMsg()));
-    connect(CB_Mute, SIGNAL(clicked()), this, SLOT(slot_Mute()));
-    connect(CB_LongMsg, SIGNAL(clicked()), this, SLOT(slot_LongMsg()));
+    connect(CB_MainTopHit, SIGNAL(clicked()),
+            this, SLOT(slot_MainTopHit()));
+    connect(CB_MainStartHide, SIGNAL(clicked()),
+            this, SLOT(slot_MainStartHide()));
+    connect(CB_RemberPwd, SIGNAL(clicked()),
+            this, SLOT(slot_RemberPwd()));
+    connect(CB_AutoShowMsg, SIGNAL(clicked()),
+            this, SLOT(slot_AutoShowMsg()));
+    connect(CB_Mute, SIGNAL(clicked()),
+            this, SLOT(slot_Mute()));
+    connect(CB_LongMsg, SIGNAL(clicked()),
+            this, SLOT(slot_LongMsg()));
 
-    connect(CB_AutoReply, SIGNAL(clicked()), this, SLOT(slot_AutoReplyMsg()));
-    connect(MsgAutoRelpy, SIGNAL(textChanged()), this, SLOT
-            (slot_LimitReplyMsgLenth()));
+    connect(CB_AutoReply, SIGNAL(clicked()),
+            this, SLOT(slot_AutoReplyMsg()));
+    connect(MsgAutoRelpy, SIGNAL(textChanged()),
+            this, SLOT(slot_LimitReplyMsgLenth()));
 
-    connect(RB_EnterSend, SIGNAL(clicked()), this, SLOT(slot_SendMode()));
-    connect(RB_CtrlEnterSend, SIGNAL(clicked()), this, SLOT(slot_SendMode()));
-    connect(CB_EnableHotKey, SIGNAL(clicked()), this, SLOT(slot_EnableHotKey()))
-            ;
-    connect(BT_SetFont, SIGNAL(clicked()), this, SLOT(slot_SetFont()));
-    connect(BT_SetDefaultFont, SIGNAL(clicked()), this, SLOT
-            (slot_SetDefaultFont()));
+    connect(RB_EnterSend, SIGNAL(clicked()),
+            this, SLOT(slot_SendMode()));
+    connect(RB_CtrlEnterSend, SIGNAL(clicked()),
+            this, SLOT(slot_SendMode()));
+    connect(CB_EnableHotKey, SIGNAL(clicked()),
+            this, SLOT(slot_EnableHotKey()));
+    connect(BT_SetFont, SIGNAL(clicked()),
+            this, SLOT(slot_SetFont()));
+    connect(BT_SetDefaultFont, SIGNAL(clicked()),
+            this, SLOT(slot_SetDefaultFont()));
 }
 
 /**************************************************************************/
@@ -206,6 +223,7 @@ void FxConfigDia::init_connect()
 
 void FxConfigDia::slot_DisableNudge()
 {
+    FX_FUNCTION
     bool state = !Settings::instance().isDisableNudge();
     Settings::instance().setDisableNudge(state);
 }
@@ -216,6 +234,7 @@ void FxConfigDia::slot_DisableNudge()
 
 void FxConfigDia::slot_MainTopHit()
 {
+    FX_FUNCTION
     bool state = !Settings::instance().isMainWindowTopHint();
     Settings::instance().setMainWindowTopHint(state);
 }
@@ -227,6 +246,7 @@ void FxConfigDia::slot_MainTopHit()
 
 void FxConfigDia::slot_RemberPwd()
 {
+    FX_FUNCTION
     bool state = !Settings::instance().isAutoLogin();
     Settings::instance().setAutoLogin(state);
 
@@ -249,6 +269,7 @@ void FxConfigDia::slot_RemberPwd()
 
 void FxConfigDia::slot_MainStartHide()
 {
+    FX_FUNCTION
     bool state = !Settings::instance().isStartHide();
     Settings::instance().setStartHide(state);
 }
@@ -259,6 +280,7 @@ void FxConfigDia::slot_MainStartHide()
 
 void FxConfigDia::slot_AutoShowMsg()
 {
+    FX_FUNCTION
     bool state = !Settings::instance().isAutoShowMsg();
     Settings::instance().setAutoShowMsg(state);
     if (mainwind)
@@ -280,6 +302,7 @@ void FxConfigDia::slot_AutoShowMsg()
 
 void FxConfigDia::slot_Mute()
 {
+    FX_FUNCTION
     bool state = !Settings::instance().isMute();
     Settings::instance().setMute(state);
     if (mainwind)
@@ -301,6 +324,7 @@ void FxConfigDia::slot_Mute()
 
 void FxConfigDia::slot_LongMsg()
 {
+    FX_FUNCTION
     bool state = !Settings::instance().isEnableLongSMS();
     Settings::instance().setEnableLongSMS(state);
 }
@@ -311,6 +335,7 @@ void FxConfigDia::slot_LongMsg()
 
 void FxConfigDia::slot_AutoReplyMsg()
 {
+    FX_FUNCTION
     if (CB_AutoReply->checkState() == Qt::Checked)
     {
         Settings::instance().setAutoReply(true, MsgAutoRelpy->toPlainText());
@@ -327,6 +352,7 @@ void FxConfigDia::slot_AutoReplyMsg()
 
 void FxConfigDia::slot_SendMode()
 {
+    FX_FUNCTION
     if (RB_EnterSend->isChecked())
     {
         Settings::instance().setEnterSend(true);
@@ -343,6 +369,7 @@ void FxConfigDia::slot_SendMode()
 
 void FxConfigDia::slot_LimitReplyMsgLenth()
 {
+    FX_FUNCTION
     QString msg = MsgAutoRelpy->toPlainText();
     if (msg.size() > 150)
     {
@@ -361,6 +388,7 @@ void FxConfigDia::slot_LimitReplyMsgLenth()
 
 void FxConfigDia::slot_DefaultRing()
 {
+    FX_FUNCTION
     QString defaultPath = defaultSoundPath() + "/msg.wav";
     RingFile->setText(defaultPath);
     Settings::instance().setMsgRingPath(defaultPath);
@@ -372,6 +400,7 @@ void FxConfigDia::slot_DefaultRing()
 
 void FxConfigDia::slot_TestRing()
 {
+    FX_FUNCTION
     execPlaySound(Settings::instance().MsgRingPath());
 }
 
@@ -381,9 +410,13 @@ void FxConfigDia::slot_TestRing()
 
 void FxConfigDia::slot_ChangeRing()
 {
+    FX_FUNCTION
     QFileDialog::Options options;
-    QString fileName = QFileDialog::getOpenFileName(this, tr("get ring file"),
-        QDir::homePath(), tr("Ring Files (*.wav);;All Files (*)"));
+    QString fileName =
+            QFileDialog::getOpenFileName(this,
+                    tr("get ring file"),
+                    QDir::homePath(),
+                    tr("Ring Files (*.wav);;All Files (*)"));
 
     if (!fileName.isEmpty())
     {
@@ -398,6 +431,7 @@ void FxConfigDia::slot_ChangeRing()
 
 void FxConfigDia::slot_EnableHotKey()
 {
+    FX_FUNCTION
     bool state = !Settings::instance().isEnableGetMsgHotKey();
     Settings::instance().setEnableGetMsgHotKey(state);
     if (state)
@@ -416,6 +450,7 @@ void FxConfigDia::slot_EnableHotKey()
 
 void FxConfigDia::slot_SetFont()
 {
+    FX_FUNCTION
     bool ok;
     QFont font = QFontDialog::getFont(&ok, Settings::instance().getCurrentFont()
                                       );
@@ -430,6 +465,7 @@ void FxConfigDia::slot_SetFont()
 
 void FxConfigDia::slot_SetDefaultFont()
 {
+    FX_FUNCTION
     _updateFonts(Settings::instance().setSysDefaultFont());
 }
 
@@ -439,6 +475,7 @@ void FxConfigDia::slot_SetDefaultFont()
 
 void FxConfigDia::_updateFonts(const QFont &font)
 {
+    FX_FUNCTION
     /* INFO: since v1.0, css was used for theme management, just update stylesheet
      *       for font setting.
      */
@@ -471,10 +508,9 @@ void FxConfigDia::_updateFonts(const QFont &font)
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
-
 bool FxConfigDia::eventFilter(QObject *target, QEvent *event)
 {
+    FX_FUNCTION
     if (event->type() == QEvent::KeyPress)
     {
         getHotKeyValue((QKeyEvent*)event);
@@ -546,6 +582,7 @@ QChar keyToChar(int key)
 
 bool FxConfigDia::getHotKeyValue(QKeyEvent *keyEvent)
 {
+    FX_FUNCTION
     bool ret = false;
     QChar value = keyToChar(keyEvent->key());
     if (QChar('A') != value)
@@ -564,6 +601,7 @@ bool FxConfigDia::getHotKeyValue(QKeyEvent *keyEvent)
 
 void FxConfigDia::setHotKeyValue()
 {
+    FX_FUNCTION
     QString Modifiy;
     bool isHaveModifie = false;
 

@@ -27,6 +27,7 @@
 
 FxLocationParser::FxLocationParser()
 {
+    FX_FUNCTION
     QFile file(FX_LOCATION_DATA_PATH);
 
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -48,6 +49,7 @@ FxLocationParser::FxLocationParser()
 QString
 FxLocationParser::getProvinceByAlias(QString provinceAlias)
 {
+    FX_FUNCTION
     QString rval;
 
     FX_RETURN_WITH_VALUE_IF_FAILED((!provinceAlias.isEmpty()),
@@ -63,6 +65,7 @@ FxLocationParser::getProvinceByAlias(QString provinceAlias)
 QString
 FxLocationParser::getCityByCode(int cityCode)
 {
+    FX_FUNCTION
     QString rval;
 
     FX_RETURN_WITH_VALUE_IF_FAILED((99 != cityCode), QString::fromUtf8("其它"));

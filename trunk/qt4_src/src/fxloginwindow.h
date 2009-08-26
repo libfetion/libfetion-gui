@@ -28,12 +28,14 @@
 #include "fxproxy.h"
 #include "fxwidget.h"
 #include "fxutil.h"
+
 using namespace fxgui;
 
 class FxLoginWindow : public FxWidget, public Ui::Fetion_Login
 {
     Q_OBJECT
     LOG4QT_DECLARE_QCLASS_LOGGER
+
     public:
         FxLoginWindow(QWidget *parent = 0);
         ~FxLoginWindow();

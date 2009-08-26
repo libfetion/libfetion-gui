@@ -23,6 +23,7 @@ FxSendGroupSMS::FxSendGroupSMS(FxMainWindow *wind,
                                QWidget *parent):
                                QMainWindow(parent)
 {
+    FX_FUNCTION
     setupUi(this);
     mainwind = wind;
 
@@ -48,11 +49,12 @@ FxSendGroupSMS::FxSendGroupSMS(FxMainWindow *wind,
 /**************************************************************************/
 
 FxSendGroupSMS::~FxSendGroupSMS(){
-
+    FX_FUNCTION
 }
 
 void FxSendGroupSMS::moveEvent(QMoveEvent *event)
 {
+    FX_FUNCTION
     Q_UNUSED(event);
     Settings::instance().setSendMultMsgWinPos(pos());
 }
@@ -60,9 +62,9 @@ void FxSendGroupSMS::moveEvent(QMoveEvent *event)
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void FxSendGroupSMS::SendMsg()
 {
+    FX_FUNCTION
     QString msg = MsgEdit->toPlainText();
     if (msg.isEmpty())
     {
@@ -152,9 +154,9 @@ void FxSendGroupSMS::SendMsg()
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void FxSendGroupSMS::ChangechooseNM()
 {
+    FX_FUNCTION
     QString txt = tr("have choose [") +
                   QString("%1").arg(buddyopt->markedCount) +
                   tr("] ") +
@@ -166,9 +168,9 @@ void FxSendGroupSMS::ChangechooseNM()
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void FxSendGroupSMS::ChangeInputNM()
 {
+    FX_FUNCTION
     QString msg = MsgEdit->toPlainText();
     if (msg.size() > MAXSMSLENGTH)
     {
@@ -187,9 +189,9 @@ void FxSendGroupSMS::ChangeInputNM()
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void FxSendGroupSMS::closeEvent(QCloseEvent *event)
 {
+    FX_FUNCTION
     if (mainwind)
     {
         mainwind->show();
