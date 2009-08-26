@@ -4,7 +4,7 @@
 
 Add your content here.
 
-`
+{{{
 #define FX_LOGGER   logger()
 #define FX_DEBUG(x) do{logger()->debug(x);}while(0);
 #define FX_INFO(x) do{logger()->info(x);}while(0);
@@ -13,7 +13,7 @@ Add your content here.
 #define FX_FATAL(x) do{logger()->fatal(x);}while(0);
 
 #define FX_FUNCTION FX_DEBUG(__PRETTY_FUNCTION__)
-`
+}}}
 = Details =
 
 Add your content here.  Format your content with:
