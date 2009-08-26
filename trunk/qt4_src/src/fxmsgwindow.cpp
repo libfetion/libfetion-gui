@@ -194,7 +194,7 @@ void FxMsgWindow::setCurrentTabTitle(AccountTab *accountTab)
     }
 
     accountTab->endFlickerTab();
-    QString title = tr("with") + accountTab->account_name + tr("chating... ");
+    QString title = tr("with ") + accountTab->account_name + tr(" chating... ");
     this->setWindowTitle(title);
 
     int online_state;

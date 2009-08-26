@@ -88,7 +88,7 @@ void AccountTab::setSendModle(bool isSMS)
     if (!fx_is_pc_user_by_account(m_account))
     {
         QString status = account_name + tr(
-            "is mobile user, your message just send to his mobile");
+            " is mobile user, your message just send to his mobile");
         msgSend->Ac_Status->setText(status);
 
         isAwaySendSMS = true;
@@ -102,11 +102,11 @@ void AccountTab::setSendModle(bool isSMS)
         if (fx_get_refuse_sms_day(m_account) > 0)
         {
             status = account_name + tr(
-                                       " are offline, can't receive you sms immediately, your msg will saved and send later");
+                                       " is offline, can't receive you sms immediately, your msg will be saved and sent later");
         }
         else
         {
-            status = tr("your message will send to") + account_name + tr(
+            status = tr("your message will send to ") + account_name + tr(
                         " 's mobile");
         }
 
@@ -126,12 +126,12 @@ void AccountTab::setSendModle(bool isSMS)
             if (fx_get_refuse_sms_day(m_account) > 0)
             {
                 status = account_name + tr(
-                    " are offline, can't receive you sms immediately, your msg will saved and send later");
+                    " is offline, can't receive you sms immediately, your msg will saved and send later");
             }
             else
             {
                 status = account_name + tr(
-                    "are offline, your message will send to his mobile");
+                    " is offline, your message will be send to his mobile phone");
             }
             msgSend->Ac_Status->setText(status);
         } //end of !fx_is_on_line_by_account (m_account))
@@ -453,8 +453,8 @@ void AccountTab::changeTableInputNM()
             MsgEdit->moveCursor(QTextCursor::End);
         }
 
-        QString txt = tr("you can input") + QString("%1").arg(MAXSMSLENGTH -
-                         msg.size()) + tr("character");
+        QString txt = tr("you can input ") + QString("%1").arg(MAXSMSLENGTH -
+                         msg.size()) + tr(" characters");
 
         input_nm->setText(txt);
     }

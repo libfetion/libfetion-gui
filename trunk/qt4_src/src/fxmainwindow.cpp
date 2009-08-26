@@ -1076,7 +1076,7 @@ void FxMainWindow::init_UI()
 
 void FxMainWindow::initAllActions()
 {
-    Schedule_SMS_Act = new QAction(tr("schedulesms"), this);
+    Schedule_SMS_Act = new QAction(tr("schedule sms"), this);
     //Schedule_SMS_Act->setIcon(getOnlineStatusIcon(FX_STATUS_ONLINE));
     connect(Schedule_SMS_Act, SIGNAL(triggered()), this, SLOT(schedule_SMS()));
 
@@ -1133,10 +1133,10 @@ void FxMainWindow::initAllActions()
     exitAct->setIcon(getMenuIcon(ExitIcon));
     connect(exitAct, SIGNAL(triggered()), this, SLOT(tmp_exit()));
 
-    personlInfoAct = new QAction(tr("personlInfo"), this);
-    personlInfoAct->setStatusTip(tr("personlInfo"));
-    personlInfoAct->setIcon(getMenuIcon(GetInfoBuddyIcon));
-    connect(personlInfoAct, SIGNAL(triggered()), this, SLOT(personlInfo()));
+    personalInfoAct = new QAction(tr("personalInfo"), this);
+    personalInfoAct->setStatusTip(tr("personalInfo"));
+    personalInfoAct->setIcon(getMenuIcon(GetInfoBuddyIcon));
+    connect(personalInfoAct, SIGNAL(triggered()), this, SLOT(personalInfo()));
 
     CheckNewVersionAct = new QAction(tr("checkNewVersion"), this);
     CheckNewVersionAct->setStatusTip(tr("checkNewVersion"));
@@ -1228,8 +1228,8 @@ void FxMainWindow::initAllActions()
             ()));
 
 
-    ConfigAppAct = new QAction(tr("moresetting"), this);
-    ConfigAppAct->setStatusTip(tr("moresetting"));
+    ConfigAppAct = new QAction(tr("moresettings"), this);
+    ConfigAppAct->setStatusTip(tr("moresettings"));
     ConfigAppAct->setIcon(getMenuIcon(OptionsIcon));
     connect(ConfigAppAct, SIGNAL(triggered()), this, SLOT(showConfigDlg()));
 
@@ -1261,13 +1261,13 @@ void FxMainWindow::createMenu()
     traySetStatusMenu->addAction(AwayAct);
 
 
-    traySendSmsMenu = trayIconMenu->addMenu(tr("sendsms"));
+    traySendSmsMenu = trayIconMenu->addMenu(tr("send sms"));
     traySendSmsMenu->setIcon(getMenuIcon(SMSBuddyIcon));
     traySendSmsMenu->addAction(sendselfAct);
     traySendSmsMenu->addAction(sendgroupsmsAct);
     trayIconMenu->addAction(Schedule_SMS_Act);
     trayIconMenu->addAction(addBuddyAct);
-    trayIconMenu->addAction(personlInfoAct);
+    trayIconMenu->addAction(personalInfoAct);
 
     trayIconMenu->addSeparator();
     trayIconMenu->addAction(exitAct);
@@ -1283,13 +1283,13 @@ void FxMainWindow::createMenu()
     buddySetStatusMenu->addAction(refuseSMSAct);
 
     buddyMenu->addMenu(buddySetStatusMenu);
-    optSendSmsMenu = buddyMenu->addMenu(tr("sendsms"));
+    optSendSmsMenu = buddyMenu->addMenu(tr("send sms"));
     optSendSmsMenu->setIcon(getMenuIcon(SMSBuddyIcon));
     optSendSmsMenu->addAction(sendselfAct);
     optSendSmsMenu->addAction(sendgroupsmsAct);
     buddyMenu->addAction(Schedule_SMS_Act);
     buddyMenu->addAction(addBuddyAct);
-    buddyMenu->addAction(personlInfoAct);
+    buddyMenu->addAction(personalInfoAct);
 
     #if 0
         buddyMenu->addSeparator();
@@ -1600,7 +1600,7 @@ void FxMainWindow::setrefuseSMS()
 /**************************************************************************/
 /* Fetch personal information                                             */
 /**************************************************************************/
-void FxMainWindow::personlInfo()
+void FxMainWindow::personalInfo()
 {
     const Fetion_Account * account =
             fx_get_account_by_id(strtol(fx_get_usr_uid(), NULL, 10));
@@ -1947,7 +1947,7 @@ void FxMainWindow::UpdateSkins()
 
     UpdateSkinsMenu();
 
-    personlInfoAct->setIcon(getMenuIcon(GetInfoBuddyIcon));
+    personalInfoAct->setIcon(getMenuIcon(GetInfoBuddyIcon));
     addBuddyAct->setIcon(getMenuIcon(AddBuddyIcon));
     sendselfAct->setIcon(getMenuIcon(SMSBuddyIcon));
     sendgroupsmsAct->setIcon(getMenuIcon(SMSBuddyIcon));
