@@ -42,7 +42,7 @@
 #define USING_SERVER_TIME 0
 
 /* GUI Debug Option */
-#define DEBUG_GUI
+#undef DEBUG_GUI
 
 #ifdef WIN32 
 #pragma comment(lib, "./lib/LibFetion.lib")  
