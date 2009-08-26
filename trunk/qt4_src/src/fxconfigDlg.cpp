@@ -591,12 +591,12 @@ void FxConfigDia::setHotKeyValue()
 
     hotKey->setText(QString(Modifiy + keyValue).toUpper());
 
-    if (Settings::instance().isRegistedGetMsgHotKey())
+    if (Settings::instance().isRegisteredGetMsgHotKey())
     {
-        registedHotKeyState->setText("");
+        registeredHotKeyState->setText("");
     }
     else
     {
-        registedHotKeyState->setText(tr("registed fail"));
+        registeredHotKeyState->setText(tr("registered fail"));
     }
 }

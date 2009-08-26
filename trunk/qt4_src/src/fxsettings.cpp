@@ -185,7 +185,7 @@ void Settings::init_setting()
             (Qt::KeyboardModifiers)value("GetMsgHotKeyMod",
                                          (qlonglong)(Qt::ControlModifier | Qt::AltModifier)).toLongLong();
 
-    m_isRegistedGetMsgHotKey = false;
+    m_isRegisteredGetMsgHotKey = false;
     m_isEnableGetMsgHotKey = value("EnableGetMsgHotKey", true).toBool();
 
 }
@@ -476,11 +476,11 @@ bool Settings::setGetMsgHotKey(QChar keyValue,
     if (!isRegister)
     {
         //unRegister hot key
-        if (m_isRegistedGetMsgHotKey)
+        if (m_isRegisteredGetMsgHotKey)
         {
             UnRegistHotkey(m_mainwind, keyValue, keyMod);
         }
-        m_isRegistedGetMsgHotKey = false;
+        m_isRegisteredGetMsgHotKey = false;
         return true;
     }
 
@@ -490,6 +490,6 @@ bool Settings::setGetMsgHotKey(QChar keyValue,
     m_GetMsgHotKeyMod = keyMod;
     setValue("GetMsgHotKeyMod", (qlonglong)(m_GetMsgHotKeyMod));
 
-    m_isRegistedGetMsgHotKey = RegistHotkey(m_mainwind, keyValue, keyMod);
+    m_isRegisteredGetMsgHotKey = RegistHotkey(m_mainwind, keyValue, keyMod);
     return true;
 }
