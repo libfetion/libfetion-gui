@@ -39,7 +39,11 @@
 #define FX_ERROR(x) do{logger()->error(x);}while(0);
 #define FX_FATAL(x) do{logger()->fatal(x);}while(0);
 
+#ifdef WIN32 
+#define FX_FUNCTION FX_DEBUG(__FUNCTION__)
+#else
 #define FX_FUNCTION FX_DEBUG(__PRETTY_FUNCTION__)
+#endif
 
 QString getProvince(QString Province);
 
