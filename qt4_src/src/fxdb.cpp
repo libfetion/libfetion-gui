@@ -926,7 +926,7 @@ void saveAccountToDB(const Fetion_Account *account, long usr)
     }
     else
     {
-        local_name = "";
+        local_name = (char*)"";
     }
 
     if (personal && personal->mobile_no)
@@ -935,7 +935,7 @@ void saveAccountToDB(const Fetion_Account *account, long usr)
     }
     else
     {
-        mobilenm = "";
+        mobilenm = (char*)"";
     }
 
     if (personal && personal->nickname)
@@ -944,7 +944,7 @@ void saveAccountToDB(const Fetion_Account *account, long usr)
     }
     else
     {
-        nickname = "";
+        nickname = (char*)"";
     }
 
     if (personal && personal->impresa)
@@ -953,7 +953,7 @@ void saveAccountToDB(const Fetion_Account *account, long usr)
     }
     else
     {
-        impresa = "";
+        impresa = (char*)"";
     }
 
     showname = fx_get_account_show_name(account, TRUE);
