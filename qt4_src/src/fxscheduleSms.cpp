@@ -22,9 +22,11 @@
 #include "fxbuddy.h"
 #include "fxmainwindow.h"
 #include "fxscheduleSmsManage.h"
+
 FxScheduleSMS::FxScheduleSMS(FxMainWindow *wind, QWidget *parent):
         QMainWindow(parent)
 {
+    FX_FUNCTION
     setupUi(this);
     mainwind = wind;
 
@@ -34,11 +36,9 @@ FxScheduleSMS::FxScheduleSMS(FxMainWindow *wind, QWidget *parent):
 
     timeEdit->setTime(QTime::currentTime().addSecs(60 *10));
 
-
     view->header()->setHidden(1);
     view->setRootIsDecorated(true);
     buddyopt = new BuddyOpt(view, false);
-
 
     connect(timeEdit, SIGNAL(editingFinished()),
             this, SLOT(timeEditFinished()));
@@ -52,7 +52,6 @@ FxScheduleSMS::FxScheduleSMS(FxMainWindow *wind, QWidget *parent):
     connect(Schedule_Sms_Manage, SIGNAL(linkActivated(const QString &)),
             this, SLOT(ShowSCM_Manage(const QString &)));
 
-
     ChangechooseNM();
     ChangeInputNM();
 
@@ -65,13 +64,15 @@ FxScheduleSMS::FxScheduleSMS(FxMainWindow *wind, QWidget *parent):
 /*                                                                        */
 /**************************************************************************/
 
-FxScheduleSMS::~FxScheduleSMS(){
-
+FxScheduleSMS::~FxScheduleSMS()
+{
+    FX_FUNCTION
 }
 
 
 void FxScheduleSMS::timeEditFinished()
 {
+    FX_FUNCTION
     if (dateEdit->date() > QDate::currentDate())
     {
         return ;
@@ -86,9 +87,9 @@ void FxScheduleSMS::timeEditFinished()
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void FxScheduleSMS::moveEvent(QMoveEvent *event)
 {
+    FX_FUNCTION
     Q_UNUSED(event);
     Settings::instance().setSendMultMsgWinPos(pos());
 }
@@ -96,10 +97,9 @@ void FxScheduleSMS::moveEvent(QMoveEvent *event)
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void FxScheduleSMS::SendMsg()
 {
-
+    FX_FUNCTION
     QString time;
     time = dateEdit->date().toString("yyyy-MM-dd") +
            " " +
@@ -188,9 +188,6 @@ void FxScheduleSMS::SendMsg()
         }
     }
 
-
-
-
     if (!fx_set_schedule_sms(receiver,
                              sendMsg.toUtf8().data(),
                              time.toUtf8().data(),
@@ -210,9 +207,9 @@ void FxScheduleSMS::SendMsg()
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void FxScheduleSMS::ChangechooseNM()
 {
+    FX_FUNCTION
     QString txt = tr("have choose [") +
                   QString("%1").arg(buddyopt->markedCount) +
                   tr("] ") +
@@ -224,9 +221,9 @@ void FxScheduleSMS::ChangechooseNM()
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void FxScheduleSMS::ChangeInputNM()
 {
+    FX_FUNCTION
     QString msg = MsgEdit->toPlainText();
     if (msg.size() > MAXSMSLENGTH)
     {
@@ -245,9 +242,9 @@ void FxScheduleSMS::ChangeInputNM()
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void FxScheduleSMS::ShowSCM_Manage(const QString &)
 {
+    FX_FUNCTION
     if (mainwind && mainwind->getScheduleSmsManagerWindows())
     {
         mainwind->getScheduleSmsManagerWindows()->showNormal();
@@ -257,9 +254,9 @@ void FxScheduleSMS::ShowSCM_Manage(const QString &)
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void FxScheduleSMS::closeEvent(QCloseEvent *event)
 {
+    FX_FUNCTION
     Q_UNUSED(event);
     if (mainwind)
     {

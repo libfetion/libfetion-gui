@@ -23,6 +23,7 @@
 FxScheduleSMSManage::FxScheduleSMSManage(FxMainWindow *wind, QWidget *parent):
     QMainWindow(parent)
 {
+    FX_FUNCTION
     setupUi(this);
     mainwind = wind;
 
@@ -36,13 +37,13 @@ FxScheduleSMSManage::FxScheduleSMSManage(FxMainWindow *wind, QWidget *parent):
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 FxScheduleSMSManage::~FxScheduleSMSManage(){
-
+    FX_FUNCTION
 }
 
 void FxScheduleSMSManage::init_UI()
 {
+    FX_FUNCTION
     connect(CreateSCM, SIGNAL(clicked()),
             this, SLOT(createItemOfSCMList()));
     connect(DeleteSCM, SIGNAL(clicked()),
@@ -71,9 +72,9 @@ void FxScheduleSMSManage::init_UI()
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void FxScheduleSMSManage::createItemOfSCMList()
 {
+    FX_FUNCTION
     if (mainwind && mainwind->getScheduleSmsWindow())
     {
         mainwind->getScheduleSmsWindow()->showNormal();
@@ -83,9 +84,9 @@ void FxScheduleSMSManage::createItemOfSCMList()
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void FxScheduleSMSManage::deleteItemOfSCMList()
 {
+    FX_FUNCTION
     QTableWidgetItem *item = NULL;
     int row = view->rowCount();
     for (int i = row; i >= 0; i--)
@@ -114,9 +115,9 @@ void FxScheduleSMSManage::deleteItemOfSCMList()
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void FxScheduleSMSManage::slot_update_scheduleList()
 {
+    FX_FUNCTION
     loadALlSCMList();
 }
 
@@ -126,6 +127,7 @@ void FxScheduleSMSManage::slot_update_scheduleList()
 
 void FxScheduleSMSManage::refreshSCMList()
 {
+    FX_FUNCTION
     loadALlSCMList();
 }
 
@@ -135,6 +137,7 @@ void FxScheduleSMSManage::refreshSCMList()
 
 void FxScheduleSMSManage::chooseAllSCMList()
 {
+    FX_FUNCTION
     QTableWidgetItem *item = NULL;
     int row = view->rowCount();
     for (int i = 0; i < row; i++)
@@ -151,9 +154,9 @@ void FxScheduleSMSManage::chooseAllSCMList()
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void FxScheduleSMSManage::loadALlSCMList()
 {
+    FX_FUNCTION
     view->setRowCount(0);
     #ifdef DEBUG_GUI
         QString receiver = "ddd";
@@ -177,9 +180,9 @@ void FxScheduleSMSManage::loadALlSCMList()
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void FxScheduleSMSManage::addItemToSCMList(Fetion_Schedule_SMS *scm)
 {
+    FX_FUNCTION
     if (!scm)
     {
         return ;
@@ -200,10 +203,12 @@ void FxScheduleSMSManage::addItemToSCMList(Fetion_Schedule_SMS *scm)
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
-void FxScheduleSMSManage::addItemToSCMList(QString &receiver, QString
-    &send_time, QString &message, int scm_id)
+void FxScheduleSMSManage::addItemToSCMList(QString &receiver,
+                                           QString &send_time,
+                                           QString &message,
+                                           int scm_id)
 {
+    FX_FUNCTION
     int row = view->rowCount();
     view->setRowCount(row + 1);
 
@@ -221,15 +226,14 @@ void FxScheduleSMSManage::addItemToSCMList(QString &receiver, QString
     view->setItem(row, 2, item2);
 
     item0->setCheckState(Qt::Unchecked);
-
 }
 
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void FxScheduleSMSManage::closeEvent(QCloseEvent *event)
 {
+    FX_FUNCTION
     Q_UNUSED(event);
     if (mainwind)
     {

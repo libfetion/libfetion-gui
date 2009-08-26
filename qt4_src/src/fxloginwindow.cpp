@@ -31,6 +31,7 @@ FxLoginWindow::FxLoginWindow(QWidget *parent):
         proxy(NULL),
         willLogin(true)
 {
+    FX_FUNCTION
     setObjectName("loginWindow");
     setupUi(contentWidget);
     init();
@@ -51,6 +52,7 @@ FxLoginWindow::FxLoginWindow(QWidget *parent):
 
 FxLoginWindow::~FxLoginWindow()
 {
+    FX_FUNCTION
     if (user_id)
     {
         free(user_id);
@@ -68,6 +70,7 @@ FxLoginWindow::~FxLoginWindow()
 
 void FxLoginWindow::Cancel_logwin()
 {
+    FX_FUNCTION
     enableLoginBT();
     fx_cancel_login();
     Login_State->setText(QObject::tr("cancel login"));
@@ -79,6 +82,7 @@ void FxLoginWindow::Cancel_logwin()
 
 void FxLoginWindow::set_login_button_state(bool state)
 {
+    FX_FUNCTION
     willLogin = state;
     if (willLogin)
     {
@@ -98,6 +102,7 @@ void FxLoginWindow::set_login_button_state(bool state)
 
 void FxLoginWindow::BT_Login_clicked()
 {
+    FX_FUNCTION
     if (willLogin)
     {
         login();
@@ -115,6 +120,7 @@ void FxLoginWindow::BT_Login_clicked()
 
 void FxLoginWindow::Setting(const QString &)
 {
+    FX_FUNCTION
     proxy->show();
 }
 
@@ -124,6 +130,7 @@ void FxLoginWindow::Setting(const QString &)
 
 void FxLoginWindow::setLogingState(char *ch)
 {
+    FX_FUNCTION
     QString str = str.fromUtf8(ch);
 
     Login_State->setText(str);
@@ -134,8 +141,9 @@ void FxLoginWindow::setLogingState(char *ch)
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
-#define fetion_debug printf
+/* FIXME: comment this FX_DEBUG when My_EventListener is C++ styled */
+#undef FX_DEBUG
+#define FX_DEBUG(x) do {printf(x);}while(0)
 
 void My_EventListener(int message, WPARAM wParam, LPARAM lParam, void *args)
 {
@@ -153,45 +161,45 @@ void My_EventListener(int message, WPARAM wParam, LPARAM lParam, void *args)
     switch (message)
     {
         case FX_LOGIN_URI_ERROR:
-            fetion_debug("FX_LOGIN_URI_ERROR\n");
+            FX_DEBUG("FX_LOGIN_URI_ERROR");
             loginDlg->Login_State->setText(
                     QObject::tr("mobile_no or fetion uid error"));
             loginDlg->enableLoginBT();
             break;
 
         case FX_LOGIN_CONNECTING:
-            fetion_debug("FX_LOGIN_CONNECTING\n");
+            FX_DEBUG("FX_LOGIN_CONNECTING");
             loginDlg->Login_State->setText(
                     QObject::tr("connecting the fetion server"));
             break;
 
         case FX_LOGIN_WAIT_AUTH:
-            fetion_debug("FX_LOGIN_WAIT_AUTH\n");
+            FX_DEBUG("FX_LOGIN_WAIT_AUTH");
             loginDlg->Login_State->setText(
                     QObject::tr("waiting the server auth"));
             break;
 
         case FX_LOGIN_AUTH_OK:
-            fetion_debug("FX_LOGIN_WAIT_AUTH \n");
+            FX_DEBUG("FX_LOGIN_WAIT_AUTH");
             loginDlg->Login_State->setText(
                     QObject::tr("server auth ok"));
             break;
 
         case FX_LOGIN_FAIL:
-            fetion_debug("FX_LOGIN_FAIL \n");
+            FX_DEBUG("FX_LOGIN_FAIL");
             loginDlg->Login_State->setText(
                     QObject::tr("password error"));
             loginDlg->enableLoginBT();
             break;
         case FX_LOGIN_NETWORK_ERROR:
-            fetion_debug("FX_LOGIN_NETWORK_ERROR \n");
+            FX_DEBUG("FX_LOGIN_NETWORK_ERROR");
             loginDlg->Login_State->setText(
                     QObject::tr("network error"));
             cleanCacheServerAdd(); //clean the sever ip cache
             loginDlg->enableLoginBT();
             break;
         case FX_LOGIN_UNKOWN_ERROR:
-            fetion_debug("FX_LOGIN_UNKOWN_ERROR \n");
+            FX_DEBUG("FX_LOGIN_UNKOWN_ERROR");
             loginDlg->Login_State->setText(
                     QObject::tr("unkown error"));
             cleanCacheServerAdd(); //clean the sever ip cache
@@ -199,50 +207,50 @@ void My_EventListener(int message, WPARAM wParam, LPARAM lParam, void *args)
             break;
 
         case FX_LOGIN_TIMEOUT:
-            fetion_debug("FX_LOGIN_TIMEOUT \n");
+            FX_DEBUG("FX_LOGIN_TIMEOUT");
             loginDlg->Login_State->setText(
                     QObject::tr("login time out"));
             loginDlg->enableLoginBT();
             break;
 
         case FX_LOGIN_UNKOWN_USR:
-            fetion_debug("FX_LOGIN_UNKOWN_USR \n");
+            FX_DEBUG("FX_LOGIN_UNKOWN_USR");
             loginDlg->Login_State->setText(
                     QObject::tr("unkown fetion uid"));
             loginDlg->enableLoginBT();
             break;
 
         case FX_LOGIN_GCL_GETTING:
-            fetion_debug("FX_LOGIN_GCL_GETTING\n");
+            FX_DEBUG("FX_LOGIN_GCL_GETTING");
             break;
 
         case FX_LOGIN_GCL_OK:
-            fetion_debug("FX_LOGIN_GCL_OK \n");
+            FX_DEBUG("FX_LOGIN_GCL_OK");
             break;
 
         case FX_LOGIN_GCL_FAIL:
-            fetion_debug("FX_LOGIN_GCL_FAIL \n");
+            FX_DEBUG("FX_LOGIN_GCL_FAIL");
             loginDlg->Login_State->setText(
                     QObject::tr("get account list fail"));
             loginDlg->enableLoginBT();
             break;
 
         case FX_LOGIN_GP_GETTING:
-            fetion_debug("FX_LOGIN_GP_GETTING\n");
+            FX_DEBUG("FX_LOGIN_GP_GETTING");
             break;
 
         case FX_LOGIN_GP_OK:
-            fetion_debug("FX_LOGIN_GP_OK \n");
+            FX_DEBUG("FX_LOGIN_GP_OK");
             break;
         case FX_LOGIN_GP_FAIL:
-            fetion_debug("FX_LOGIN_GP_FAIL\n");
+            FX_DEBUG("FX_LOGIN_GP_FAIL");
             loginDlg->Login_State->setText(
                     QObject::tr("get account info fail"));
             loginDlg->enableLoginBT();
             break;
 
         case FX_LOGIN_OK:
-            fetion_debug("FX_LOGIN_OK \n");
+            FX_DEBUG("FX_LOGIN_OK");
             loginDlg->Login_State->setText(
                     QObject::tr("fetion login ok"));
             loginDlg->LoginOK();
@@ -259,6 +267,7 @@ void My_EventListener(int message, WPARAM wParam, LPARAM lParam, void *args)
 
 void FxLoginWindow::enableLoginBT()
 {
+//    FX_FUNCTION
     emit signal_enableLoginBT();
 }
 
@@ -268,6 +277,7 @@ void FxLoginWindow::enableLoginBT()
 
 void FxLoginWindow::slots_enableLonginBT()
 {
+//    FX_FUNCTION
     if (loginTimer.isActive())
     {
         loginTimer.stop();
@@ -281,6 +291,7 @@ void FxLoginWindow::slots_enableLonginBT()
 
 void FxLoginWindow::LoginOK()
 {
+//    FX_FUNCTION
     if (remPWD->checkState() == Qt::Checked)
     {
         setAutoLogin(user_id, user_pwd, loginState->currentIndex());
@@ -307,6 +318,7 @@ void FxLoginWindow::LoginOK()
 
 void FxLoginWindow::login()
 {
+//    FX_FUNCTION
     #ifdef DEBUG_GUI
         LoginOK();
         return ;
@@ -401,11 +413,11 @@ void FxLoginWindow::login()
 
 void FxLoginWindow::login_timer()
 {
+//    FX_FUNCTION
     if (loginTimer.isActive())
     {
         loginTimer.stop();
     }
-
 
     Login_State->setText(tr("login time out"));
     set_login_button_state(true);
@@ -417,6 +429,7 @@ void FxLoginWindow::login_timer()
 
 void FxLoginWindow::init()
 {
+//    FX_FUNCTION
     proxy = new FxProxy(this);
     proxy->hide();
 
@@ -447,6 +460,7 @@ void FxLoginWindow::init()
 
 void FxLoginWindow::checkAutoLogin()
 {
+//    FX_FUNCTION
     //set auto login
     int state_tmp = 0;
     if (isAutoLogin(&user_id, &user_pwd, &state_tmp) && user_id)
@@ -470,6 +484,7 @@ void FxLoginWindow::checkAutoLogin()
 
 void FxLoginWindow::closeEvent(QCloseEvent *event)
 {
+//    FX_FUNCTION
     Q_UNUSED(event);
     QApplication::quit();
     event->accept();
@@ -481,6 +496,7 @@ void FxLoginWindow::closeEvent(QCloseEvent *event)
 
 void FxLoginWindow::moveEvent(QMoveEvent *event)
 {
+//    FX_FUNCTION
     Q_UNUSED(event);
     Settings::instance().setLoginWinPos(pos());
     FxWidget::moveEvent(event);
@@ -492,6 +508,7 @@ void FxLoginWindow::moveEvent(QMoveEvent *event)
 
 void FxLoginWindow::resizeEvent(QResizeEvent *event)
 {
+//    FX_FUNCTION
     Settings::instance().setLoginWinSize(size());
     FxWidget::resizeEvent(event);
 }
@@ -502,6 +519,7 @@ void FxLoginWindow::resizeEvent(QResizeEvent *event)
 
 void FxLoginWindow::UpdateSkins()
 {
+//    FX_FUNCTION
     loginState->setStyleSheet("background-color: rgb(246,243,243)");
 
     loginState->setItemIcon(0, getOnlineStatusIcon(FX_STATUS_ONLINE));

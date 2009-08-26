@@ -21,6 +21,7 @@
 
 FxShowHistory::FxShowHistory(long uid, QWidget *parent): QDialog(parent)
 {
+    FX_FUNCTION
     setupUi(this);
     m_uid = uid;
 
@@ -53,13 +54,13 @@ FxShowHistory::FxShowHistory(long uid, QWidget *parent): QDialog(parent)
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 FxShowHistory::~FxShowHistory(){
-
+    FX_FUNCTION
 }
 
 void FxShowHistory::today()
 {
+    FX_FUNCTION
     MsgBrowser->clear();
     MsgBrowser->append(selectHistroyMsg(
                                 (qlonglong)strtol(fx_get_usr_uid(),NULL, 10),
@@ -70,9 +71,9 @@ void FxShowHistory::today()
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void FxShowHistory::oneweek()
 {
+    FX_FUNCTION
     QString history =
             selectHistroyMsg((qlonglong)strtol(fx_get_usr_uid(), NULL,10),
                              m_uid,
@@ -90,9 +91,9 @@ void FxShowHistory::oneweek()
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void FxShowHistory::twoweek()
 {
+    FX_FUNCTION
     QString history =
             selectHistroyMsg((qlonglong)strtol(fx_get_usr_uid(), NULL, 10),
                              m_uid,
@@ -110,9 +111,9 @@ void FxShowHistory::twoweek()
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void FxShowHistory::onemonth()
 {
+    FX_FUNCTION
     QString history =
             selectHistroyMsg((qlonglong)strtol(fx_get_usr_uid(), NULL, 10),
                              m_uid,
@@ -130,9 +131,9 @@ void FxShowHistory::onemonth()
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void FxShowHistory::all()
 {
+    FX_FUNCTION
     QString history =
             selectHistroyMsg((qlonglong)strtol(fx_get_usr_uid(), NULL, 10),
                              m_uid,

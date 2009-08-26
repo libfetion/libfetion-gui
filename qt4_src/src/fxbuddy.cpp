@@ -24,6 +24,7 @@
 
 BuddyOpt::BuddyOpt(QTreeWidget *widget, bool isMainView)
 {
+    FX_FUNCTION
     m_isMainView = isMainView;
 
     QunItem = NULL;
@@ -55,6 +56,7 @@ BuddyOpt::BuddyOpt(QTreeWidget *widget, bool isMainView)
 
 BuddyOpt::~BuddyOpt()
 {
+    FX_FUNCTION
     freeAllGroupdata();
 }
 
@@ -64,6 +66,7 @@ BuddyOpt::~BuddyOpt()
 
 void BuddyOpt::expandTree()
 {
+    FX_FUNCTION
     QTreeWidgetItem *RootItem = this->treeWidget->invisibleRootItem();
     if (!RootItem)
     {
@@ -82,6 +85,7 @@ void BuddyOpt::expandTree()
 
 void BuddyOpt::freeAllGroupdata()
 {
+    FX_FUNCTION
     QTreeWidgetItem *RootItem = this->treeWidget->invisibleRootItem();
     if (!RootItem)
     {
@@ -111,8 +115,8 @@ void BuddyOpt::freeAllGroupdata()
             Group_Info *group_info = (Group_Info*)(groupItem->data(0, Qt
                                       ::UserRole).toUInt());
         #else
-            Group_Info *group_info = groupItem->data(0, Qt::UserRole).value <
-                Group_Info * > ();
+            Group_Info *group_info =
+                    groupItem->data(0, Qt::UserRole).value <Group_Info * > ();
         #endif
         if (group_info)
         {
@@ -128,6 +132,7 @@ void BuddyOpt::freeAllGroupdata()
 
 void BuddyOpt::freeAllAccountdata(QTreeWidgetItem *groupItem)
 {
+    FX_FUNCTION
     if (!groupItem)
     {
         return ;
@@ -162,6 +167,7 @@ void BuddyOpt::freeAllAccountdata(QTreeWidgetItem *groupItem)
 
 void BuddyOpt::freeAllQundata(QTreeWidgetItem *groupItem)
 {
+    FX_FUNCTION
     if (!groupItem)
     {
         return ;
@@ -197,6 +203,7 @@ void BuddyOpt::freeAllQundata(QTreeWidgetItem *groupItem)
 
 void BuddyOpt::addQunToTree()
 {
+    FX_FUNCTION
     Fetion_Qun *qun = NULL;
     Qun_Info *qun_info = NULL;
 
@@ -245,6 +252,7 @@ void BuddyOpt::addQunToTree()
 
 bool BuddyOpt::isQunItem(QTreeWidgetItem *item)
 {
+    FX_FUNCTION
     if (QunItem)
     {
         return item == QunItem;
@@ -258,6 +266,7 @@ bool BuddyOpt::isQunItem(QTreeWidgetItem *item)
 //add Group info to tree widget
 void BuddyOpt::addGroupToTree()
 {
+    FX_FUNCTION
     Group_Info *groupinfo = NULL;
     Fetion_Group *group = NULL;
 
@@ -305,6 +314,7 @@ void BuddyOpt::addGroupToTree()
 
 void BuddyOpt::delAccount_direct(qlonglong uid)
 {
+    FX_FUNCTION
     QTreeWidgetItem *RootItem = this->treeWidget->invisibleRootItem();
     if (!RootItem)
     {
@@ -356,6 +366,7 @@ void BuddyOpt::delAccount_direct(qlonglong uid)
 
 void BuddyOpt::delAccount(QTreeWidgetItem *accountItem)
 {
+    FX_FUNCTION
     if (!accountItem)
     {
         return ;
@@ -431,6 +442,7 @@ void BuddyOpt::delAccount(QTreeWidgetItem *accountItem)
 
 void BuddyOpt::delAccount(qlonglong uid)
 {
+    FX_FUNCTION
     const Fetion_Account *account = fx_get_account_by_id(uid);
     if (!account)
     {

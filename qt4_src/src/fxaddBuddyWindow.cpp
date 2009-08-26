@@ -24,6 +24,7 @@
 #include "fxaddBuddyWindow.h"
 void FxAddBuddy::init()
 {
+    FX_FUNCTION
     init_groupItem();
     ED_usr_name->setMaxLength(10);
 
@@ -53,6 +54,7 @@ void FxAddBuddy::init()
 
 FxAddBuddy::FxAddBuddy(QWidget *parent): QDialog(parent)
 {
+    FX_FUNCTION
     setupUi(this);
     init();
 }
@@ -61,9 +63,11 @@ FxAddBuddy::FxAddBuddy(QWidget *parent): QDialog(parent)
 /*                                                                        */
 /**************************************************************************/
 
-FxAddBuddy::FxAddBuddy(QString id, bool ismobile /* = false*/, QWidget *parent
-                       /* = 0 */)
+FxAddBuddy::FxAddBuddy(QString id,
+        bool ismobile /* = false*/,
+        QWidget *parent /* = 0 */)
 {
+    FX_FUNCTION
     Q_UNUSED(parent);
     setupUi(this);
     init();
@@ -83,11 +87,12 @@ FxAddBuddy::FxAddBuddy(QString id, bool ismobile /* = false*/, QWidget *parent
 /**************************************************************************/
 
 FxAddBuddy::~FxAddBuddy(){
-
+    FX_FUNCTION
 }
 
 void FxAddBuddy::addfriend()
 {
+    FX_FUNCTION
     bool ismobile = false;
     if (RB_mobile->isChecked())
     {
@@ -132,6 +137,7 @@ void FxAddBuddy::addfriend()
 
 void FxAddBuddy::getPersInfo()
 {
+    FX_FUNCTION
     if (RB_mobile->isChecked())
     {
         ED_mobile->setEnabled(true);
@@ -158,6 +164,7 @@ void FxAddBuddy::getPersInfo()
 
 void FxAddBuddy::newgroup()
 {
+    FX_FUNCTION
     bool ok;
     QString text = QInputDialog::getText(this, tr("addGroup"), tr(
         "please input group name"), QLineEdit::Normal, "", &ok);
@@ -165,7 +172,7 @@ void FxAddBuddy::newgroup()
     {
         fx_add_buddylist(text.toUtf8().data(), NULL, NULL);
     }
-    printf("will create a new group\n");
+    FX_DEBUG("will create a new group");
 }
 
 /**************************************************************************/
@@ -174,6 +181,7 @@ void FxAddBuddy::newgroup()
 
 void FxAddBuddy::mobileRB()
 {
+    FX_FUNCTION
     setChanged();
 }
 
@@ -183,6 +191,7 @@ void FxAddBuddy::mobileRB()
 
 void FxAddBuddy::fetionRB()
 {
+    FX_FUNCTION
     setChanged();
 }
 
@@ -192,6 +201,7 @@ void FxAddBuddy::fetionRB()
 
 void FxAddBuddy::setChanged()
 {
+    FX_FUNCTION
     if (RB_mobile->isChecked())
     {
         RB_fetionID->setChecked(false);
@@ -213,6 +223,7 @@ void FxAddBuddy::setChanged()
 
 void FxAddBuddy::init_groupItem()
 {
+    FX_FUNCTION
     Fetion_Group *group = NULL;
 
     DList *tmp_group = (DList*)fx_get_group();

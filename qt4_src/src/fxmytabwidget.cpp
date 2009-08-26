@@ -1,12 +1,13 @@
+#include <QShortcut>
+#include <QKeySequence>
 
 #include "fxmsgwindow.h"
 #include "fxmytabwidget.h"
 #include "fxshowHistory.h"
-#include <QShortcut>
-#include <QKeySequence>
 
 FxMyTabWidget::FxMyTabWidget(QWidget *parent): QTabWidget(parent)
 {
+    FX_FUNCTION
     myTabBar()->installEventFilter(this);
     this->installEventFilter(this);
 }
@@ -17,6 +18,7 @@ FxMyTabWidget::FxMyTabWidget(QWidget *parent): QTabWidget(parent)
 
 bool FxMyTabWidget::eventFilter(QObject *target, QEvent *event)
 {
+    FX_FUNCTION
     if (target == myTabBar())
     {
         if (event->type() == QEvent::MouseButtonDblClick)
@@ -31,28 +33,26 @@ bool FxMyTabWidget::eventFilter(QObject *target, QEvent *event)
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void FxMyTabWidget::closeCurrentTab()
 {
+    FX_FUNCTION
     closeTab(currentIndex());
 }
 
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void FxMyTabWidget::closeTab(int index)
 {
-    //FIXME:
+    FX_FUNCTION
     ((FxMsgWindow*)(this->parentWidget()->parentWidget()))->closeTabWid(index);
-    //removeTab(index);
 }
 
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 QTabBar *FxMyTabWidget::myTabBar()
 {
+    FX_FUNCTION
     return tabBar();
 }

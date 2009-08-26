@@ -25,8 +25,6 @@
 #include "fxaddBuddyWindow.h"
 #include "fxskinmanage.h"
 
-
-
 #define SHAKE_DISTANCE 10
 #define SHAKE_CYCLE 9
 //msec
@@ -35,9 +33,8 @@
 //msec
 #define SHAKE_TIMER_UPDATE 57
 
-
 #define MAXNICELENGTH 8
-static QString CropTabName(QString orig_name);
+
 //find is have the ac_id
 inline AccountTab *findFromMsgWindow(QTabWidget *tabWidget, qlonglong ac_id)
 {
@@ -60,6 +57,7 @@ inline AccountTab *findFromMsgWindow(QTabWidget *tabWidget, qlonglong ac_id)
 /**************************************************************************/
 FxMsgWindow::FxMsgWindow(QWidget *parent): FxWidget(parent)
 {
+    FX_FUNCTION
     setupUi(contentWidget);
     setObjectName("ChatWindow");
     m_mainwindow = NULL;
@@ -75,6 +73,7 @@ FxMsgWindow::FxMsgWindow(QWidget *parent): FxWidget(parent)
 /**************************************************************************/
 void FxMsgWindow::init()
 {
+    FX_FUNCTION
     init_inputFace();
     init_UI();
 
@@ -119,6 +118,7 @@ void FxMsgWindow::init()
 /**************************************************************************/
 void FxMsgWindow::init_inputFace()
 {
+    FX_FUNCTION
     inputFace = new FxInputFace(contentWidget);
     inputFace->setObjectName("facesPopup");
     inputFace->setMsgWindow(this);
@@ -131,6 +131,7 @@ void FxMsgWindow::init_inputFace()
 /**************************************************************************/
 void FxMsgWindow::init_UI()
 {
+    FX_FUNCTION
     QPalette pal;
     pal = palette();
     pal.setColor(QPalette::Active,
@@ -173,11 +174,9 @@ void FxMsgWindow::init_UI()
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void FxMsgWindow::currentChangedTab(int index)
 {
-    /*	if(tabWidget->currentIndex() == index)
-    return; */
+    FX_FUNCTION
     AccountTab *accountTab = (AccountTab*)tabWidget->widget(index);
     setCurrentTabTitle(accountTab);
 }
@@ -185,9 +184,9 @@ void FxMsgWindow::currentChangedTab(int index)
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void FxMsgWindow::setCurrentTabTitle(AccountTab *accountTab)
 {
+    FX_FUNCTION
     if (!accountTab)
     {
         return ;
@@ -213,18 +212,18 @@ void FxMsgWindow::setCurrentTabTitle(AccountTab *accountTab)
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void FxMsgWindow::closeCurrentTab()
 {
+    FX_FUNCTION
     closeTabWid(tabWidget->currentIndex());
 }
 
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void FxMsgWindow::closeTabWid(int index)
 {
+    FX_FUNCTION
     AccountTab *accountTab = (AccountTab*)tabWidget->widget(index);
 
     tabWidget->removeTab(index);
@@ -247,9 +246,9 @@ void FxMsgWindow::closeTabWid(int index)
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void FxMsgWindow::showQunUnreadMsg()
 {
+    FX_FUNCTION
     int size = qunWindow.size();
     for (int i = 0; i < size; i++)
     {
@@ -266,9 +265,9 @@ void FxMsgWindow::showQunUnreadMsg()
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 FxQunWindow *FxMsgWindow::findQunWindow(qlonglong qun_id)
 {
+    FX_FUNCTION
     int size = qunWindow.size();
     for (int i = 0; i < size; i++)
         if (qunWindow.at(i)->qun_id == qun_id)
@@ -287,6 +286,7 @@ bool FxMsgWindow::addQunMessage(QString msg,
                                 qlonglong sender,
                                 bool iscoming_msg)
 {
+    FX_FUNCTION
     if (msg.isEmpty())
     {
         return false;
@@ -308,13 +308,6 @@ bool FxMsgWindow::addQunMessage(QString msg,
     QString show_msg;
     if (iscoming_msg)
     {
-        /*
-        str = "<b style=\"color:rgb(0,85,0);\">"+
-        qunW->getSenderName(sender) +"("+
-        QDateTime::currentDateTime().toString(tr("hh:mm:ss")) + "--" +
-        QDateTime::currentDateTime().toString(tr("yyyy-MM-dd")) +
-        "):</b><br>"+ msg;
-         */
         str = "<b style=\"color:rgb(0,85,0);\">" +
               qunW->getSenderName(sender)+
               msg;
@@ -358,11 +351,11 @@ bool FxMsgWindow::addQunMessage(QString msg,
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 bool FxMsgWindow::addMessage(QString msg,
                              qlonglong account_id,
                              bool iscoming_msg)
 {
+    FX_FUNCTION
     if (msg.isEmpty())
     {
         return false;
@@ -393,12 +386,6 @@ bool FxMsgWindow::addMessage(QString msg,
     QString show_msg;
     if (iscoming_msg)
     {
-        /*	
-        str ="<b style=\"color:rgb(0,85,0);\">"+ accountTab->account_name + "("+
-        QDateTime::currentDateTime().toString(tr("hh:mm:ss")) + "--" +
-        QDateTime::currentDateTime().toString(tr("yyyy-MM-dd")) +
-        "):</b><br>" + msg;
-         */
         str = "<b style=\"color:rgb(0,85,0);\">" +
               accountTab->account_name +
               msg;
@@ -453,6 +440,7 @@ bool FxMsgWindow::addMessage(QString msg,
 void FxMsgWindow::exec_autoRelpy(QTextEdit *msgBrowser, qlonglong account_id,
                                  QString msg)
 {
+    FX_FUNCTION
     bool sendFlag = false;
     msg = QObject::tr("(LibFetion auto reply msg)") + msg;
 
@@ -511,6 +499,7 @@ void FxMsgWindow::exec_autoRelpy(QTextEdit *msgBrowser, qlonglong account_id,
 
 void FxMsgWindow::slot_haveNewQunMessage(qlonglong qun_id)
 {
+    FX_FUNCTION
     Fetion_MSG *fxMsg = fx_get_msg(qun_id);
     if (!fxMsg)
     {
@@ -528,6 +517,7 @@ void FxMsgWindow::slot_haveNewQunMessage(qlonglong qun_id)
 
 void FxMsgWindow::slot_haveNewMessage(qlonglong account_id)
 {
+    FX_FUNCTION
     Fetion_MSG *fxMsg = fx_get_msg(account_id);
     if (!fxMsg)
     {
@@ -552,6 +542,7 @@ void FxMsgWindow::slot_haveNewMessage(qlonglong account_id)
 
 void FxMsgWindow::resizeEvent(QResizeEvent *event)
 {
+    FX_FUNCTION
     Settings::instance().setMsgWinSize(size());
     tabWidget->resize(event->size());
     FxWidget::resizeEvent(event);
@@ -563,6 +554,7 @@ void FxMsgWindow::resizeEvent(QResizeEvent *event)
 
 void FxMsgWindow::closeEvent(QCloseEvent *event)
 {
+    FX_FUNCTION
     hide();
     if (m_willQuit)
     {
@@ -586,6 +578,7 @@ void FxMsgWindow::closeEvent(QCloseEvent *event)
 
 void FxMsgWindow::moveEvent(QMoveEvent *event)
 {
+    FX_FUNCTION
     Q_UNUSED(event);
     //when it is shaking, we don't recode the pos of window.
     if (m_isNudgeShake)
@@ -602,6 +595,7 @@ void FxMsgWindow::moveEvent(QMoveEvent *event)
 
 void FxMsgWindow::addQunWin(qlonglong qun_id, bool isSendSms)
 {
+    FX_FUNCTION
     FxQunWindow *qun = findQunWindow(qun_id);
     if (!qun)
     {
@@ -617,6 +611,7 @@ void FxMsgWindow::addQunWin(qlonglong qun_id, bool isSendSms)
 
 void FxMsgWindow::addBuddy(qlonglong account_id)
 {
+    FX_FUNCTION
     QString id;
     bool ismobile = false;
     if (fx_is_pc_user_by_id(account_id))
@@ -650,9 +645,8 @@ void FxMsgWindow::addBuddy(qlonglong account_id)
 
 void FxMsgWindow::addAccount(qlonglong account_id, bool isSendSms)
 {
-
-    /******************************************************/
-    //**********************VerifiedAccount****************/
+    FX_FUNCTION
+    // VerifiedAccount
     if (fx_is_InBlacklist_by_id(account_id))
     {
         QMessageBox::information(this->parentWidget(),
@@ -686,7 +680,6 @@ void FxMsgWindow::addAccount(qlonglong account_id, bool isSendSms)
         #endif
         return ;
     }
-    /******************************************************/
 
     //first find is have the instance of the account_id, if have show it, and return.
     //then create a new instance of this account_id, and add to the tabwidget.
@@ -711,10 +704,14 @@ void FxMsgWindow::addAccount(qlonglong account_id, bool isSendSms)
 /*                                                                        */
 /**************************************************************************/
 
-FxMsgWindow::~FxMsgWindow(){}
+FxMsgWindow::~FxMsgWindow()
+{
+    FX_FUNCTION
+}
 
 void FxMsgWindow::msg_exit()
 {
+    FX_FUNCTION
     m_willQuit = true;
     close();
 }
@@ -722,11 +719,10 @@ void FxMsgWindow::msg_exit()
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
-
 static int libfetion_shake_stamp = 0;
 void FxMsgWindow::slot_do_shake()
 {
+    FX_FUNCTION
     libfetion_shake_stamp += SHAKE_TIMER_UPDATE;
     if (libfetion_shake_stamp >= SHAKE_DURATION)
     {
@@ -755,9 +751,9 @@ void FxMsgWindow::slot_do_shake()
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void FxMsgWindow::nudge_shake()
 {
+    FX_FUNCTION
     //if have a new nudge recive, we extend the shake time.
     libfetion_shake_stamp = 0;
     if (nudge_timer.isActive())
@@ -776,25 +772,23 @@ void FxMsgWindow::nudge_shake()
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void FxMsgWindow::showFaces()
 {
+    FX_FUNCTION
     inputFace->setGeometry(QCursor::pos().x() - 320, QCursor::pos().y() - 261,
                            320, 261);
     qDebug() << "y:" << inputFace->geometry().y() << "\n";
     inputFace->show();
     qDebug() << "z:" << inputFace->geometry().y() << "\n";
     inputFace->setFocus();
-    //inputFace->setWindowState(Qt::WindowActive);
-    //inputFace->grabMouse() ;
 }
 
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void FxMsgWindow::UpdateSkins()
 {
+    FX_FUNCTION
     CHECK_SystemTiTle();
     AccountTab *ac_tab = NULL;
     int tabCount = tabWidget->count();
@@ -820,9 +814,9 @@ void FxMsgWindow::UpdateSkins()
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void FxMsgWindow::updateAccountInfo(qlonglong account_id)
 {
+    FX_FUNCTION
     // get the current tab
     AccountTab *accountTab =
             (AccountTab*)tabWidget->widget(tabWidget->currentIndex());
@@ -847,9 +841,10 @@ void FxMsgWindow::updateAccountInfo(qlonglong account_id)
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
-static QString CropTabName(QString orig_name)
+QString
+FxMsgWindow::CropTabName(QString orig_name)
 {
+    FX_FUNCTION
     QString new_name = orig_name;
     //here handle the ac_name is length. if too long ,using ...repleace.
     if (new_name.size() > MAXNICELENGTH)
@@ -862,14 +857,16 @@ static QString CropTabName(QString orig_name)
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 #define MSG_OK       1
 #define MSG_FAIL     2
 #define MSG_TIMEOUT  3
 #define MSG_FAIL_LIMIT  4
 
-void FxMsgWindow::handle_sendmsg(int msgflag, int fx_msg, qlonglong account_id)
+void FxMsgWindow::handle_sendmsg(int msgflag,
+                                int fx_msg,
+                                qlonglong account_id)
 {
+    FX_FUNCTION
     if (!fx_msg)
     {
         return ;
@@ -955,9 +952,9 @@ void FxMsgWindow::handle_sendmsg(int msgflag, int fx_msg, qlonglong account_id)
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void FxMsgWindow::slot_SysDialogMsg(int message, int fx_msg, qlonglong who)
 {
+    FX_FUNCTION
     int msgflag = 0;
 
     if (!fx_msg)
@@ -1006,9 +1003,9 @@ void FxMsgWindow::slot_SysDialogMsg(int message, int fx_msg, qlonglong who)
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void FxMsgWindow::slot_haveNewSysMessage(qlonglong sys_id)
 {
+    FX_FUNCTION
     Q_UNUSED(sys_id);
     #if 0 //not using system message
         Fetion_MSG *fxMsg = fx_get_msg(sys_id);
@@ -1035,9 +1032,9 @@ void FxMsgWindow::slot_haveNewSysMessage(qlonglong sys_id)
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-
 void FxMsgWindow::slot_receive_nudge(qlonglong account_id)
 {
+    FX_FUNCTION
     QString nudgemsg = "<b style=\"color:rgb(250,0,255);\">" +
                        tr("send a nudge to you") +
                        "</b><br>";
