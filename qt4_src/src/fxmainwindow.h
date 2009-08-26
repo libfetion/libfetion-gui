@@ -115,7 +115,7 @@ private slots:
 	void relogin_timer();
     void updateAccountInfo_timer();
 	void tmp_exit();
-	void personlInfo();
+	void personalInfo();
 	void addBuddy();
 	void sendself();
 	void sendgroupsms();
@@ -206,7 +206,7 @@ private:
 	QMenu *optSendSmsMenu; //opt menu of send sms
 
 	QAction *Schedule_SMS_Act;
-    QAction *personlInfoAct;
+    QAction *personalInfoAct;
     QAction *addBuddyAct;
     QAction *sendselfAct;
     QAction *sendgroupsmsAct;
