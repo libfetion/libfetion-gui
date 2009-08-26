@@ -1,7 +1,8 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>ConfigApp</class>
- <widget class="QDialog" name="ConfigApp" >
-  <property name="geometry" >
+ <widget class="QDialog" name="ConfigApp">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
@@ -9,10 +10,10 @@
     <height>411</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>ConfigApp</string>
   </property>
-  <property name="styleSheet" >
+  <property name="styleSheet">
    <string>QDialog {
  
 background-color:rgb(246,243,243);
@@ -20,8 +21,8 @@ background-color:rgb(246,243,243);
 }
 </string>
   </property>
-  <widget class="QGroupBox" name="groupBox" >
-   <property name="geometry" >
+  <widget class="QGroupBox" name="groupBox">
+   <property name="geometry">
     <rect>
      <x>10</x>
      <y>351</y>
@@ -29,11 +30,11 @@ background-color:rgb(246,243,243);
      <height>51</height>
     </rect>
    </property>
-   <property name="title" >
+   <property name="title">
     <string>set message ring</string>
    </property>
-   <widget class="QLineEdit" name="RingFile" >
-    <property name="geometry" >
+   <widget class="QLineEdit" name="RingFile">
+    <property name="geometry">
      <rect>
       <x>10</x>
       <y>20</y>
@@ -41,12 +42,12 @@ background-color:rgb(246,243,243);
       <height>20</height>
      </rect>
     </property>
-    <property name="readOnly" >
+    <property name="readOnly">
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QToolButton" name="BT_ChangeRing" >
-    <property name="geometry" >
+   <widget class="QToolButton" name="BT_ChangeRing">
+    <property name="geometry">
      <rect>
       <x>208</x>
       <y>20</y>
@@ -54,12 +55,12 @@ background-color:rgb(246,243,243);
       <height>19</height>
      </rect>
     </property>
-    <property name="text" >
+    <property name="text">
      <string>change</string>
     </property>
    </widget>
-   <widget class="QToolButton" name="BT_TestRing" >
-    <property name="geometry" >
+   <widget class="QToolButton" name="BT_TestRing">
+    <property name="geometry">
      <rect>
       <x>253</x>
       <y>20</y>
@@ -67,12 +68,12 @@ background-color:rgb(246,243,243);
       <height>19</height>
      </rect>
     </property>
-    <property name="text" >
+    <property name="text">
      <string>test</string>
     </property>
    </widget>
-   <widget class="QToolButton" name="BT_RingDefault" >
-    <property name="geometry" >
+   <widget class="QToolButton" name="BT_RingDefault">
+    <property name="geometry">
      <rect>
       <x>300</x>
       <y>20</y>
@@ -80,13 +81,13 @@ background-color:rgb(246,243,243);
       <height>19</height>
      </rect>
     </property>
-    <property name="text" >
+    <property name="text">
      <string>Default</string>
     </property>
    </widget>
   </widget>
-  <widget class="QGroupBox" name="groupBox_2" >
-   <property name="geometry" >
+  <widget class="QGroupBox" name="groupBox_2">
+   <property name="geometry">
     <rect>
      <x>10</x>
      <y>130</y>
@@ -94,11 +95,11 @@ background-color:rgb(246,243,243);
      <height>91</height>
     </rect>
    </property>
-   <property name="title" >
+   <property name="title">
     <string>auto reply message</string>
    </property>
-   <widget class="QTextEdit" name="MsgAutoRelpy" >
-    <property name="geometry" >
+   <widget class="QTextEdit" name="MsgAutoRelpy">
+    <property name="geometry">
      <rect>
       <x>15</x>
       <y>45</y>
@@ -107,8 +108,8 @@ background-color:rgb(246,243,243);
      </rect>
     </property>
    </widget>
-   <widget class="QCheckBox" name="CB_AutoReply" >
-    <property name="geometry" >
+   <widget class="QCheckBox" name="CB_AutoReply">
+    <property name="geometry">
      <rect>
       <x>14</x>
       <y>20</y>
@@ -116,13 +117,13 @@ background-color:rgb(246,243,243);
       <height>17</height>
      </rect>
     </property>
-    <property name="text" >
+    <property name="text">
      <string>enable auto reply</string>
     </property>
    </widget>
   </widget>
-  <widget class="QGroupBox" name="groupBox_3" >
-   <property name="geometry" >
+  <widget class="QGroupBox" name="groupBox_3">
+   <property name="geometry">
     <rect>
      <x>10</x>
      <y>227</y>
@@ -130,11 +131,11 @@ background-color:rgb(246,243,243);
      <height>61</height>
     </rect>
    </property>
-   <property name="title" >
+   <property name="title">
     <string>message send mode</string>
    </property>
-   <widget class="QRadioButton" name="RB_EnterSend" >
-    <property name="geometry" >
+   <widget class="QRadioButton" name="RB_EnterSend">
+    <property name="geometry">
      <rect>
       <x>10</x>
       <y>20</y>
@@ -142,15 +143,15 @@ background-color:rgb(246,243,243);
       <height>17</height>
      </rect>
     </property>
-    <property name="text" >
+    <property name="text">
      <string>Enter send message</string>
     </property>
-    <property name="checked" >
+    <property name="checked">
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QRadioButton" name="RB_CtrlEnterSend" >
-    <property name="geometry" >
+   <widget class="QRadioButton" name="RB_CtrlEnterSend">
+    <property name="geometry">
      <rect>
       <x>10</x>
       <y>40</y>
@@ -158,16 +159,16 @@ background-color:rgb(246,243,243);
       <height>17</height>
      </rect>
     </property>
-    <property name="text" >
+    <property name="text">
      <string>Ctrl+Enter send message</string>
     </property>
-    <property name="checked" >
+    <property name="checked">
      <bool>false</bool>
     </property>
    </widget>
   </widget>
-  <widget class="QGroupBox" name="groupBox_4" >
-   <property name="geometry" >
+  <widget class="QGroupBox" name="groupBox_4">
+   <property name="geometry">
     <rect>
      <x>10</x>
      <y>10</y>
@@ -175,11 +176,11 @@ background-color:rgb(246,243,243);
      <height>111</height>
     </rect>
    </property>
-   <property name="title" >
+   <property name="title">
     <string>general</string>
    </property>
-   <widget class="QCheckBox" name="CB_MainTopHit" >
-    <property name="geometry" >
+   <widget class="QCheckBox" name="CB_MainTopHit">
+    <property name="geometry">
      <rect>
       <x>13</x>
       <y>20</y>
@@ -187,12 +188,12 @@ background-color:rgb(246,243,243);
       <height>17</height>
      </rect>
     </property>
-    <property name="text" >
+    <property name="text">
      <string>MainWind Top Hit</string>
     </property>
    </widget>
-   <widget class="QCheckBox" name="CB_AutoShowMsg" >
-    <property name="geometry" >
+   <widget class="QCheckBox" name="CB_AutoShowMsg">
+    <property name="geometry">
      <rect>
       <x>13</x>
       <y>40</y>
@@ -200,12 +201,12 @@ background-color:rgb(246,243,243);
       <height>17</height>
      </rect>
     </property>
-    <property name="text" >
+    <property name="text">
      <string>auto show msg</string>
     </property>
    </widget>
-   <widget class="QCheckBox" name="CB_RemberPwd" >
-    <property name="geometry" >
+   <widget class="QCheckBox" name="CB_RemberPwd">
+    <property name="geometry">
      <rect>
       <x>13</x>
       <y>61</y>
@@ -213,12 +214,12 @@ background-color:rgb(246,243,243);
       <height>17</height>
      </rect>
     </property>
-    <property name="text" >
+    <property name="text">
      <string>remember password</string>
     </property>
    </widget>
-   <widget class="QCheckBox" name="CB_MainStartHide" >
-    <property name="geometry" >
+   <widget class="QCheckBox" name="CB_MainStartHide">
+    <property name="geometry">
      <rect>
       <x>160</x>
       <y>20</y>
@@ -226,15 +227,15 @@ background-color:rgb(246,243,243);
       <height>17</height>
      </rect>
     </property>
-    <property name="text" >
+    <property name="text">
      <string>start hide windows</string>
     </property>
-    <property name="checked" >
+    <property name="checked">
      <bool>false</bool>
     </property>
    </widget>
-   <widget class="QCheckBox" name="CB_Mute" >
-    <property name="geometry" >
+   <widget class="QCheckBox" name="CB_Mute">
+    <property name="geometry">
      <rect>
       <x>160</x>
       <y>40</y>
@@ -242,12 +243,12 @@ background-color:rgb(246,243,243);
       <height>17</height>
      </rect>
     </property>
-    <property name="text" >
+    <property name="text">
      <string>mute</string>
     </property>
    </widget>
-   <widget class="QCheckBox" name="CB_LongMsg" >
-    <property name="geometry" >
+   <widget class="QCheckBox" name="CB_LongMsg">
+    <property name="geometry">
      <rect>
       <x>160</x>
       <y>60</y>
@@ -255,12 +256,12 @@ background-color:rgb(246,243,243);
       <height>17</height>
      </rect>
     </property>
-    <property name="text" >
+    <property name="text">
      <string>long msg support</string>
     </property>
    </widget>
-   <widget class="QCheckBox" name="CB_DisableNudge" >
-    <property name="geometry" >
+   <widget class="QCheckBox" name="CB_DisableNudge">
+    <property name="geometry">
      <rect>
       <x>13</x>
       <y>80</y>
@@ -268,12 +269,12 @@ background-color:rgb(246,243,243);
       <height>23</height>
      </rect>
     </property>
-    <property name="text" >
+    <property name="text">
      <string>disable nudge</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="BT_SetDefaultFont" >
-    <property name="geometry" >
+   <widget class="QPushButton" name="BT_SetDefaultFont">
+    <property name="geometry">
      <rect>
       <x>250</x>
       <y>80</y>
@@ -281,12 +282,12 @@ background-color:rgb(246,243,243);
       <height>23</height>
      </rect>
     </property>
-    <property name="text" >
+    <property name="text">
      <string>default font</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="BT_SetFont" >
-    <property name="geometry" >
+   <widget class="QPushButton" name="BT_SetFont">
+    <property name="geometry">
      <rect>
       <x>160</x>
       <y>80</y>
@@ -294,13 +295,13 @@ background-color:rgb(246,243,243);
       <height>23</height>
      </rect>
     </property>
-    <property name="text" >
+    <property name="text">
      <string>set font</string>
     </property>
    </widget>
   </widget>
-  <widget class="QGroupBox" name="groupBox_5" >
-   <property name="geometry" >
+  <widget class="QGroupBox" name="groupBox_5">
+   <property name="geometry">
     <rect>
      <x>10</x>
      <y>295</y>
@@ -308,11 +309,11 @@ background-color:rgb(246,243,243);
      <height>51</height>
     </rect>
    </property>
-   <property name="title" >
+   <property name="title">
     <string>get message(only on windows)</string>
    </property>
-   <widget class="QLineEdit" name="hotKey" >
-    <property name="geometry" >
+   <widget class="QLineEdit" name="hotKey">
+    <property name="geometry">
      <rect>
       <x>111</x>
       <y>18</y>
@@ -321,8 +322,8 @@ background-color:rgb(246,243,243);
      </rect>
     </property>
    </widget>
-   <widget class="QCheckBox" name="CB_EnableHotKey" >
-    <property name="geometry" >
+   <widget class="QCheckBox" name="CB_EnableHotKey">
+    <property name="geometry">
      <rect>
       <x>12</x>
       <y>19</y>
@@ -330,12 +331,12 @@ background-color:rgb(246,243,243);
       <height>23</height>
      </rect>
     </property>
-    <property name="text" >
+    <property name="text">
      <string>using hot key</string>
     </property>
    </widget>
-   <widget class="QLabel" name="registedHotKeyState" >
-    <property name="geometry" >
+   <widget class="QLabel" name="registeredHotKeyState">
+    <property name="geometry">
      <rect>
       <x>251</x>
       <y>20</y>
@@ -343,7 +344,7 @@ background-color:rgb(246,243,243);
       <height>20</height>
      </rect>
     </property>
-    <property name="text" >
+    <property name="text">
      <string/>
     </property>
    </widget>

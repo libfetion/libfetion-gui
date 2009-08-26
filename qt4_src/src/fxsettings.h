@@ -186,10 +186,10 @@ class Settings: public QSettings
         {
             return m_isEnableGetMsgHotKey;
         }
-        //get hot key register sate, registed success will return true, or return false;
-        bool isRegistedGetMsgHotKey()
+        //get hot key register sate, registered success will return true, or return false;
+        bool isRegisteredGetMsgHotKey()
         {
-            return m_isRegistedGetMsgHotKey;
+            return m_isRegisteredGetMsgHotKey;
         }
         QChar GetMsgHotKey()
         {
@@ -234,7 +234,7 @@ class Settings: public QSettings
         QSize m_SendMultMsgWinSize;
 
         bool m_isEnableGetMsgHotKey :1;
-        bool m_isRegistedGetMsgHotKey :1;
+        bool m_isRegisteredGetMsgHotKey :1;
         QChar m_GetMsgHotKey;
         Qt::KeyboardModifiers m_GetMsgHotKeyMod;
 
