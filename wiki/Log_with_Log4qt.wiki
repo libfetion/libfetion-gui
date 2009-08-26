@@ -1,7 +1,15 @@
 #summary One-sentence summary of this page.
 
 = Introduction =
-
+To use the logger function, you have to include `fxutil.h` or `log4qt/logger.h` in your class header.
+{{{
+#include "fxutil.h"
+}}}
+Then, add LOG4QT_DECLARE_QCLASS_LOGGER in your class declaration
+{{{
+    Q_OBJECT
+    LOG4QT_DECLARE_QCLASS_LOGGER
+}}}
 Libfetion-gui uses Log4qt::Logger::rootLogger for debug information logging. Access rootLogger with
 {{{
 #define FX_LOGGER   logger()
