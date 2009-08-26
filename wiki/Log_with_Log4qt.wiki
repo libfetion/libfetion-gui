@@ -1,4 +1,4 @@
-#summary One-sentence summary of this page.
+#summary This page tells how to use the our log4qt wrapper to log debug/runtime information.
 
 = Introduction =
 To use the logger function, you have to include `fxutil.h` or `log4qt/logger.h` in your class header.
@@ -15,6 +15,7 @@ FxTestClass:public QObject
 }
 }}}
 *Note, only classes derived from QObject were supported with Log4qt logger* 
+
 Libfetion-gui uses Log4qt::Logger::rootLogger for debug information logging. Access rootLogger with
 {{{
 #define FX_LOGGER   logger()
@@ -31,10 +32,3 @@ We suggested newly created functions have FX_FUNCTION inside body
 {{{
 #define FX_FUNCTION FX_DEBUG(__PRETTY_FUNCTION__)
 }}}
-
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
