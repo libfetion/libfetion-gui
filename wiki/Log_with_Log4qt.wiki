@@ -7,9 +7,14 @@ To use the logger function, you have to include `fxutil.h` or `log4qt/logger.h` 
 }}}
 Then, add LOG4QT_DECLARE_QCLASS_LOGGER in your class declaration
 {{{
+FxTestClass:public QObject
+{
     Q_OBJECT
     LOG4QT_DECLARE_QCLASS_LOGGER
+    ...
+}
 }}}
+*Note, only classes derived from QObject were supported with Log4qt logger* 
 Libfetion-gui uses Log4qt::Logger::rootLogger for debug information logging. Access rootLogger with
 {{{
 #define FX_LOGGER   logger()
