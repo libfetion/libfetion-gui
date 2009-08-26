@@ -22,11 +22,14 @@
 
 #include <QDialog>
 
+#include "fxutil.h"
+
 class FxMsgWindow;
 
 class FxInputFace : public QDialog
 {
     Q_OBJECT
+    LOG4QT_DECLARE_QCLASS_LOGGER
     public:
        FxInputFace(QWidget *parent = 0);
         ~FxInputFace();

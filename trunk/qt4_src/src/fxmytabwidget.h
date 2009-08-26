@@ -5,20 +5,20 @@
 #include <QTabWidget>
 #include <QTabBar>
 
-
-class FxMyTabWidget : public QTabWidget 
+#include "fxutil.h"
+class FxMyTabWidget: public QTabWidget
 {
     Q_OBJECT
-
-	public:
-		FxMyTabWidget(QWidget *parent);
-		QTabBar* myTabBar();
-		bool eventFilter(QObject *target, QEvent *event);
-	public slots:
-		void closeCurrentTab();
-		void closeTab(int index);
-	signals:
-		void mouseDblClick(int index); 
+    LOG4QT_DECLARE_QCLASS_LOGGER
+    public:
+        FxMyTabWidget(QWidget *parent);
+        QTabBar* myTabBar();
+        bool eventFilter(QObject *target, QEvent *event);
+    public slots:
+        void closeCurrentTab();
+        void closeTab(int index);
+    signals:
+        void mouseDblClick(int index);
 
 };
 

@@ -255,7 +255,7 @@ static FACES_INFO _faces_info[] =
 
 bool FxInputFace::getFaces(int x, int y, QString &face, QString &str)
 {
-    int i;
+    uint i;
     for (i = 0; i < sizeof(_faces_info) / sizeof(_faces_info[0]); i++)
     if (_faces_info[i].rect.contains(x, y))
     {

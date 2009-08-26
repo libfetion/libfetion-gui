@@ -24,13 +24,15 @@
 #include "ui_historyMsg.h"
 
 #include "appconfig.h"
+#include "fxutil.h"
 
-class FxShowHistory : public QDialog, public Ui::HistoryMsg
+class FxShowHistory: public QDialog, public Ui::HistoryMsg
 {
     Q_OBJECT
+    LOG4QT_DECLARE_QCLASS_LOGGER
+
     public:
-        FxShowHistory(long uid,
-                      QWidget *parent = 0);
+        FxShowHistory(long uid, QWidget *parent = 0);
         ~FxShowHistory();
 
     private slots:

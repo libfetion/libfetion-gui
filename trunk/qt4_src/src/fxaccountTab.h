@@ -28,13 +28,14 @@
 #include "fxmytabwidget.h"
 #include "fxshowHistory.h"
 
+#include "fxutil.h"
 #define SYSTEM_ID 10000
 class FxMainWindow;
 
 class AccountTab : public QWidget, public Ui::MsgSend
 {
     Q_OBJECT
-
+    LOG4QT_DECLARE_QCLASS_LOGGER
 public:
 	AccountTab(qlonglong id, FxMyTabWidget *parent = 0, bool awaySendSms = false);
 	~AccountTab();

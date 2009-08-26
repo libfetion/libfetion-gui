@@ -25,25 +25,27 @@
 
 #include "appconfig.h"
 
-class FxProxy : public QDialog, public Ui::ProxyDia
+#include "fxutil.h"
+class FxProxy: public QDialog, public Ui::ProxyDia
 {
     Q_OBJECT
-public:
-   FxProxy(QWidget *parent = 0);
-   ~FxProxy();
-   void closeEvent(QCloseEvent *event);
-   void proxy_destroy();
-private slots:
-	void TestNetting();
-	void SetProxy();
-	int setEdit(int);
-	void setDisableEdit(bool);
-private:
-	bool isQuit;
-	PROXY_ITEM *proxy_item;
-	void free_proxt_struct (PROXY_ITEM *);
+    LOG4QT_DECLARE_QCLASS_LOGGER
+    public:
+        FxProxy(QWidget *parent = 0);
+        ~FxProxy();
+        void closeEvent(QCloseEvent *event);
+        void proxy_destroy();
+    private slots:
+        void TestNetting();
+        void SetProxy();
+        int setEdit(int);
+        void setDisableEdit(bool);
+    private:
+        bool isQuit;
+        PROXY_ITEM *proxy_item;
+        void free_proxt_struct(PROXY_ITEM *);
 
-	void init_get_Proxy();
+        void init_get_Proxy();
 };
 
 #endif

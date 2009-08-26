@@ -26,34 +26,43 @@
 #include "ui_qunwindow.h"
 #include "appconfig.h"
 
-class FxQunWindow : public QMainWindow, public Ui::FxQunWin
+#include "fxutil.h"
+
+class FxQunWindow: public QMainWindow, public Ui::FxQunWin
 {
     Q_OBJECT
+    LOG4QT_DECLARE_QCLASS_LOGGER
+    public:
+        FxQunWindow(qlonglong qun_id, QWidget *parent = 0, bool awaySendSms =
+                false);
+        ~FxQunWindow();
+        bool eventFilter(QObject *target, QEvent *event);
+        QString getSenderName(qlonglong sender);
+        qlonglong qun_id;
+        void qun_exit();
+        bool isHaveUnReadMsg()
+        {
+            return haveUnreadMsg;
+        }
+        void setHaveUnReadMsg(bool flag)
+        {
+            haveUnreadMsg = flag;
+        }
+    protected:
+        void closeEvent(QCloseEvent *event);
+        void setQuninfo();
+        void setSendModle(bool isSMS);
+        void listQunMem(Fetion_QunInfo *quninfo);
+    signals:
+    private slots:
+        void changeSendModle();
 
-public:
-    FxQunWindow(qlonglong qun_id, QWidget *parent = 0,  bool awaySendSms = false);
-	~FxQunWindow();
-	bool eventFilter(QObject *target, QEvent *event);
-	QString getSenderName(qlonglong sender);
-	qlonglong qun_id;
-	void qun_exit();
-	bool isHaveUnReadMsg() {return haveUnreadMsg;}
-	void setHaveUnReadMsg(bool flag) { haveUnreadMsg = flag;}
-protected:
-	void closeEvent(QCloseEvent *event);
-	void setQuninfo();
-	void setSendModle(bool isSMS);	
-	void listQunMem(Fetion_QunInfo *quninfo);
-signals:
-private slots:
-	void changeSendModle();
-
-private:
-	const Fetion_Qun * fx_qun;
-	bool isQuit;
-	bool isAwaySendSMS;
-	void SendMsg();
-	bool haveUnreadMsg;
+    private:
+        const Fetion_Qun * fx_qun;
+        bool isQuit;
+        bool isAwaySendSMS;
+        void SendMsg();
+        bool haveUnreadMsg;
 };
 
 #endif

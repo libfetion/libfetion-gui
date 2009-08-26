@@ -23,141 +23,226 @@
 #include <QSettings>
 #include "appconfig.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
+#include "fxutil.h"
 
-	class FxMainWindow;
-    // store setting data
-    class Settings : public QSettings {
-			
-			Settings(const QString & fileName, Format format);
-			~Settings();
-		public:
-			static Settings& instance();
-			void setUser(long uid);
-			void setMainWindow(FxMainWindow *mainwind) { m_mainwind = mainwind; }
+class FxMainWindow;
+class Settings: public QSettings
+{
+    Q_OBJECT
+/*FIXME: why LOG4QT_DECLARE_QCLASS_LOGGER got a build error here? */
+//    LOG4QT_DECLARE_QCLASS_LOGGER
+    public:
+        Settings(const QString & fileName, Format format);
+        ~Settings();
+        static Settings& instance();
+        void setUser(long uid);
+        void setMainWindow(FxMainWindow *mainwind)
+        {
+            m_mainwind = mainwind;
+        }
 
-			void setSkins(QString m_skinPath, QString m_skinName);
-			QString SkinPath() { return m_skinPath; }
-			QString SkinName() { return m_skinName; }
+        void setSkins(QString m_skinPath, QString m_skinName);
+        QString SkinPath()
+        {
+            return m_skinPath;
+        }
+        QString SkinName()
+        {
+            return m_skinName;
+        }
 
-			void setDisableNudge(bool isDisableNudge);
-			bool isDisableNudge() const { return m_DisableNudge; }
+        void setDisableNudge(bool isDisableNudge);
+        bool isDisableNudge() const
+        {
+            return m_DisableNudge;
+        }
 
-			void setAutoLogin(bool isAutoLogin);
-			bool isAutoLogin() const { return m_isAutoLogin; }
+        void setAutoLogin(bool isAutoLogin);
+        bool isAutoLogin() const
+        {
+            return m_isAutoLogin;
+        }
 
-			void setMainWindowTopHint(bool isMainWindowTopHint);
-			bool isMainWindowTopHint() const { return m_isMainWindowTopHint; }
+        void setMainWindowTopHint(bool isMainWindowTopHint);
+        bool isMainWindowTopHint() const
+        {
+            return m_isMainWindowTopHint;
+        }
 
-			void setAutoShowMsg(bool isAutoShow);
-			bool isAutoShowMsg() const { return m_isAutoShow; }
+        void setAutoShowMsg(bool isAutoShow);
+        bool isAutoShowMsg() const
+        {
+            return m_isAutoShow;
+        }
 
-			void setMute(bool isMute);
-			bool isMute() const { return m_isMute; }
+        void setMute(bool isMute);
+        bool isMute() const
+        {
+            return m_isMute;
+        }
 
-			void setEnableLongSMS(bool isEnableLongSMS);
-			bool isEnableLongSMS() const { return m_isEnableLongSMS; }
+        void setEnableLongSMS(bool isEnableLongSMS);
+        bool isEnableLongSMS() const
+        {
+            return m_isEnableLongSMS;
+        }
 
-			void setEnterSend(bool isEnterSend);
-			bool isEnterSend() const { return m_isEnterSend; }
+        void setEnterSend(bool isEnterSend);
+        bool isEnterSend() const
+        {
+            return m_isEnterSend;
+        }
 
-			void setStartHide(bool isStartHide);
-			bool isStartHide() const { return m_isStartHide; }
-                    
-			void setAutoReply(bool isAutoReply, QString re_msg = NULL);
-			bool isAutoReply() {return m_isAutoReply; }
-			QString getAutoReply() {return m_replyMsg; }
+        void setStartHide(bool isStartHide);
+        bool isStartHide() const
+        {
+            return m_isStartHide;
+        }
 
-			void setMsgRingPath(QString path);
-			QString MsgRingPath() {return m_MsgRingPath;}
+        void setAutoReply(bool isAutoReply, QString re_msg = NULL);
+        bool isAutoReply()
+        {
+            return m_isAutoReply;
+        }
+        QString getAutoReply()
+        {
+            return m_replyMsg;
+        }
 
-			void setLoginWinSize(QSize size);
-			QSize LoginWinSize(){ return m_LoginWinSize; }
-			
-			void setLoginWinPos(QPoint pos);
-			QPoint LoginWinPos(){ return m_LoginWinPos;}
-			
-			void setMsgWinPos(QPoint pos);// { m_msgWinPos = pos; }
-			QPoint MsgWinPos(){ return m_MsgWinPos; }
-			
-			void setMsgWinSize(QSize size);
-			QSize MsgWinSize(){ return m_MsgWinSize; }
-			
-			void setMainWinPos(QPoint pos);
-			QPoint MainWinPos(){ return m_MainWinPos;}
-			
-			void setMainWinSize(QSize size);
-			QSize MainWinSize(){ return m_MainWinSize;}
-			
-			void setSendMultMsgWinPos(QPoint pos);
-			QPoint SendMultMsgWinPos(){ return m_SendMultMsgWinPos; }
-			
-			void setSendMultMsgWinSize(QSize size);
-			QSize SendMultMsgWinSize(){ return m_SendMultMsgWinSize; }
+        void setMsgRingPath(QString path);
+        QString MsgRingPath()
+        {
+            return m_MsgRingPath;
+        }
 
-            void saveFontSetting(const QFont & font);
-			QFont getCurrentFont(){ return m_CurrentFont; }
+        void setLoginWinSize(QSize size);
+        QSize LoginWinSize()
+        {
+            return m_LoginWinSize;
+        }
 
-            void setSysDefaultFont(QFont font){ m_DefaultFont = font; }
-            QFont setSysDefaultFont(){ return m_DefaultFont; }
+        void setLoginWinPos(QPoint pos);
+        QPoint LoginWinPos()
+        {
+            return m_LoginWinPos;
+        }
 
-			bool setEnableGetMsgHotKey(bool enable);
-			bool setGetMsgHotKey(QChar keyvalue, Qt::KeyboardModifiers keyMod, bool isRegister = true);
+        void setMsgWinPos(QPoint pos);// { m_msgWinPos = pos; }
+        QPoint MsgWinPos()
+        {
+            return m_MsgWinPos;
+        }
 
-			bool isEnableGetMsgHotKey(){ return m_isEnableGetMsgHotKey; }
-			//get hot key register sate, registed success will return true, or return false;
-			bool isRegistedGetMsgHotKey(){ return m_isRegistedGetMsgHotKey; }
-			QChar GetMsgHotKey(){ return m_GetMsgHotKey; }
-			Qt::KeyboardModifiers GetMsgHotKeyMod(){ return m_GetMsgHotKeyMod; }
-			
-		private:
-			void init_setting();
+        void setMsgWinSize(QSize size);
+        QSize MsgWinSize()
+        {
+            return m_MsgWinSize;
+        }
 
-		private:
-			bool m_DisableNudge : 1;
-			bool m_isAutoLogin : 1;
-			bool m_isMainWindowTopHint : 1;
-			bool m_isEnableLongSMS : 1;
-			bool m_isMute : 1;
-			bool m_isAutoShow : 1;
+        void setMainWinPos(QPoint pos);
+        QPoint MainWinPos()
+        {
+            return m_MainWinPos;
+        }
 
-			bool m_isEnterSend : 1;
-			bool m_isStartHide : 1;
-			bool m_isAutoReply : 1;
-			
-			QString m_skinPath;
-			QString m_skinName;
+        void setMainWinSize(QSize size);
+        QSize MainWinSize()
+        {
+            return m_MainWinSize;
+        }
 
-			QString m_replyMsg;
-			QString m_MsgRingPath;
-			
-			QPoint m_LoginWinPos;
-			QSize m_LoginWinSize;
+        void setSendMultMsgWinPos(QPoint pos);
+        QPoint SendMultMsgWinPos()
+        {
+            return m_SendMultMsgWinPos;
+        }
 
-			QPoint m_MsgWinPos;
-			QSize m_MsgWinSize;
-			
-			QPoint m_MainWinPos;
-			QSize m_MainWinSize;
+        void setSendMultMsgWinSize(QSize size);
+        QSize SendMultMsgWinSize()
+        {
+            return m_SendMultMsgWinSize;
+        }
 
-			QPoint m_SendMultMsgWinPos;
-			QSize m_SendMultMsgWinSize;
+        void saveFontSetting(const QFont & font);
+        QFont getCurrentFont()
+        {
+            return m_CurrentFont;
+        }
 
-			bool m_isEnableGetMsgHotKey : 1;
-			bool m_isRegistedGetMsgHotKey : 1;
-			QChar m_GetMsgHotKey;
-			Qt::KeyboardModifiers m_GetMsgHotKeyMod;
+        void setSysDefaultFont(QFont font)
+        {
+            m_DefaultFont = font;
+        }
+        QFont setSysDefaultFont()
+        {
+            return m_DefaultFont;
+        }
 
-			QFont m_CurrentFont;
-			QFont m_DefaultFont;
+        bool setEnableGetMsgHotKey(bool enable);
+        bool setGetMsgHotKey(QChar keyvalue, Qt::KeyboardModifiers keyMod,
+                bool isRegister = true);
 
-			long m_uid;
-			FxMainWindow *m_mainwind;
-	};
-#ifdef __cplusplus
-}
-#endif /* __cplusplus */
+        bool isEnableGetMsgHotKey()
+        {
+            return m_isEnableGetMsgHotKey;
+        }
+        //get hot key register sate, registed success will return true, or return false;
+        bool isRegistedGetMsgHotKey()
+        {
+            return m_isRegistedGetMsgHotKey;
+        }
+        QChar GetMsgHotKey()
+        {
+            return m_GetMsgHotKey;
+        }
+        Qt::KeyboardModifiers GetMsgHotKeyMod()
+        {
+            return m_GetMsgHotKeyMod;
+        }
+
+    private:
+        void init_setting();
+
+    private:
+        bool m_DisableNudge;
+        bool m_isAutoLogin;
+        bool m_isMainWindowTopHint;
+        bool m_isEnableLongSMS;
+        bool m_isMute;
+        bool m_isAutoShow;
+
+        bool m_isEnterSend;
+        bool m_isStartHide;
+        bool m_isAutoReply;
+
+        QString m_skinPath;
+        QString m_skinName;
+
+        QString m_replyMsg;
+        QString m_MsgRingPath;
+
+        QPoint m_LoginWinPos;
+        QSize m_LoginWinSize;
+
+        QPoint m_MsgWinPos;
+        QSize m_MsgWinSize;
+
+        QPoint m_MainWinPos;
+        QSize m_MainWinSize;
+
+        QPoint m_SendMultMsgWinPos;
+        QSize m_SendMultMsgWinSize;
+
+        bool m_isEnableGetMsgHotKey :1;
+        bool m_isRegistedGetMsgHotKey :1;
+        QChar m_GetMsgHotKey;
+        Qt::KeyboardModifiers m_GetMsgHotKeyMod;
+
+        QFont m_CurrentFont;
+        QFont m_DefaultFont;
+
+        long m_uid;
+        FxMainWindow *m_mainwind;
+};
 
 #endif

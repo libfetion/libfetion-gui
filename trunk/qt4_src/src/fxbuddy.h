@@ -24,10 +24,11 @@
 #include <QTreeWidget>
 #include "appconfig.h"
 
-
+#include "fxutil.h"
 class BuddyOpt : public QObject
 {
 	Q_OBJECT
+	LOG4QT_DECLARE_QCLASS_LOGGER
 	public:
 		BuddyOpt(QTreeWidget * Widget, bool isMainView = true);
 		~BuddyOpt();

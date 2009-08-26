@@ -29,12 +29,14 @@
 
 #include "fxbuddy.h"
 
+#include "fxutil.h"
 class FxMainWindow;
 class FxMsgWindow; 
 
 class BuddyMge : public QObject
 {
 	Q_OBJECT
+	LOG4QT_DECLARE_QCLASS_LOGGER
 	public:
 		BuddyMge(QTreeWidget * Widget, FxMainWindow *wind);
 		~BuddyMge();

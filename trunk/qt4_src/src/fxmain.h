@@ -17,22 +17,19 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-
-
 #ifndef FXMAIN_H
 #define FXMAIN_H
-
-
 
 #include <qobject.h>
 
 class FxLoginWindow;
 class FxMainWindow;
-//class FxSmsWindow;
 
+#include "fxutil.h"
 class FxMain : public QObject
 {
-	Q_OBJECT
+    Q_OBJECT
+    LOG4QT_DECLARE_QCLASS_LOGGER
 
     public:
         FxMain();
@@ -51,14 +48,4 @@ class FxMain : public QObject
     private slots:
         void slotLoginOK();
 };
-
-
-
-
-
-
-
-
-
-
 #endif

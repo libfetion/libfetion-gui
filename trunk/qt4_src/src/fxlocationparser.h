@@ -22,6 +22,8 @@
 #ifndef FXLOCATIONPARSER_H
 #define FXLOCATIONPARSER_H
 
+#include "appconfig.h"
+
 #if QT_VERSION >= QT_VERSION_CHECK(4, 5, 0)
     #undef FX_XML_USE_DOM
 #else
@@ -37,13 +39,14 @@
     #include <QXmlQuery>
 #endif
 
+#include "fxutil.h"
+
 #define FX_LOCATION_DATA_PATH    defaultDataPath() + "/Location.xml"
 
-#define FX_RETURN_IF_FAILED(x) do{ if (!x) return; }while(0)
-#define FX_RETURN_WITH_VALUE_IF_FAILED(x, v) do{ if (!x) return v; }while(0)
-
-class FxLocationParser
+class FxLocationParser : public QObject
 {
+    Q_OBJECT
+    LOG4QT_DECLARE_QCLASS_LOGGER
     public:
         FxLocationParser();
         ~FxLocationParser();
