@@ -23,7 +23,9 @@
 #include <QMainWindow>
 #include "ui_scheduleSMS.h"
 
-#include "fxutil.h"
+#include "fxglobal.h"
+#include "fxdebug.h"
+
 class FxMainWindow;
 class BuddyOpt;
 

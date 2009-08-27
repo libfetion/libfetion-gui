@@ -20,6 +20,7 @@
 #ifndef FX_EventHandle_DATA
 #define FX_EventHandle_DATA
 
+#include "libfetion/event.h"
 void Sys_EventListener(int message, WPARAM wParam, LPARAM lParam, void
                        *args)
 {
@@ -99,9 +100,10 @@ void FxMainWindow::handleFx_Sys_Event(int message, WPARAM wParam, LPARAM
             emit signal_SystemNetErr(wParam);
             break;
 
-        case FX_SYS_DEREGISTERED:
-            emit signal_DeRegistered();
-            break;
+//FIXME: FX_SYS_UNREGISTERERED missing in libfetion/event.h
+//        case FX_SYS_UNREGISTERERED:
+//            emit signal_DeRegistered();
+//            break;
 
         case FX_DIA_SEND_OK:
         case FX_DIA_SEND_FAIL:

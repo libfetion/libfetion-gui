@@ -1,6 +1,6 @@
 /***************************************************************************
- *   Copyright (C) 2008 by DDD                                          *
- *   dedodong@163.com                                                     *
+ *   Copyright (C) 2008 by DDD                                             *
+ *   dedodong@163.com                                                      *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -23,9 +23,9 @@
 #include <QDialog>
 #include "ui_refusesms.h"
 
-#include "appconfig.h"
+#include "fxglobal.h"
 
-#include "fxutil.h"
+#include "fxdebug.h"
 
 class FxRefuseSMS: public QDialog, public Ui::refuseSMSDia
 {

@@ -31,7 +31,7 @@ FxMain::FxMain()
 
     isLoginIn = false;
 
-    #ifndef DEBUG_GUI
+    #ifndef HAVE_GUI_DEBUG_ENABLED
         loginWin = new FxLoginWindow(0);
         doSlotConnection();
         loginWin->show();
@@ -59,7 +59,7 @@ void FxMain::createMainWindow()
 {
     FX_FUNCTION
     mainWin = new FxMainWindow(0);
-    #ifndef DEBUG_GUI
+    #ifndef HAVE_GUI_DEBUG_ENABLED
         loginWin->hide();
     #endif
     mainWin->show();
@@ -74,7 +74,7 @@ void FxMain::slotLoginOK()
     FX_FUNCTION
     isLoginIn = true;
     createMainWindow();
-    #ifndef DEBUG_GUI
+    #ifndef HAVE_GUI_DEBUG_ENABLED
         delete loginWin;
     #endif
 }

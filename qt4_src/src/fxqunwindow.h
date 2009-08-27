@@ -24,9 +24,9 @@
 #include <QMainWindow>
 #include <QTreeWidget>
 #include "ui_qunwindow.h"
-#include "appconfig.h"
+#include "fxglobal.h"
 
-#include "fxutil.h"
+#include "fxdebug.h"
 
 class FxQunWindow: public QMainWindow, public Ui::FxQunWin
 {

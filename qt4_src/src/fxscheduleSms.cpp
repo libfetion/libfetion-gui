@@ -23,6 +23,8 @@
 #include "fxmainwindow.h"
 #include "fxscheduleSmsManage.h"
 
+#include "fxutil.h" //fxgui_to_faces
+
 FxScheduleSMS::FxScheduleSMS(FxMainWindow *wind, QWidget *parent):
         QMainWindow(parent)
 {

@@ -99,7 +99,7 @@ void FxScheduleSMSManage::deleteItemOfSCMList()
 
         if (item->checkState() == Qt::Checked)
         {
-            #ifdef DEBUG_GUI
+            #ifdef HAVE_GUI_DEBUG_ENABLED
                 printf("FxScheduleSMSManage::deleteItemOfSCMList() %d \n", item
                        ->data(Qt::UserRole).toInt());
             #else
@@ -158,7 +158,7 @@ void FxScheduleSMSManage::loadALlSCMList()
 {
     FX_FUNCTION
     view->setRowCount(0);
-    #ifdef DEBUG_GUI
+    #ifdef HAVE_GUI_DEBUG_ENABLED
         QString receiver = "ddd";
         QString send_time = "3224234";
         QString message = "32242349324324";

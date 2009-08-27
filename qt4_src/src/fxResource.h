@@ -20,8 +20,8 @@
 #ifndef IMAGERESOURCE_H
 #define IMAGERESOURCE_H
 
-#include <QtXml/QDomDocument>
-#include "appconfig.h"
+#include <QDomDocument>
+#include <QPixmap>
 
 typedef enum
 {

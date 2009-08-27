@@ -1,6 +1,6 @@
 /***************************************************************************
- *   Copyright (C) 2008 by DDD                                          *
- *   dedodong@163.com                                                     *
+ *   Copyright (C) 2008 by DDD                                             *
+ *   dedodong@163.com                                                      *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -24,8 +24,8 @@
 #include "ui_verifyAccount.h"
 
 #include "fxmainwindow.h"
-#include "appconfig.h"
-#include "fxutil.h"
+
+#include "fxdebug.h"
 
 class FxVerifyAccount: public QDialog, public Ui::VerifyAccount
 {

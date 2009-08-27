@@ -20,7 +20,7 @@
 #include <QtGui>
 #include <QMainWindow>
 
-#include "appconfig.h"
+#include "fxutil.h"     //m_Instance
 #include "fxloginwindow.h"
 #include "fxskinmanage.h"
 
@@ -319,7 +319,7 @@ void FxLoginWindow::LoginOK()
 void FxLoginWindow::login()
 {
 //    FX_FUNCTION
-    #ifdef DEBUG_GUI
+    #ifdef HAVE_GUI_DEBUG_ENABLED
         LoginOK();
         return ;
     #endif

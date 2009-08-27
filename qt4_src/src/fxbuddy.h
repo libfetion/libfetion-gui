@@ -20,67 +20,72 @@
 #ifndef FXBUDDY_H
 #define FXBUDDY_H
 
-#include <qobject.h>
 #include <QTreeWidget>
-#include "appconfig.h"
 
-#include "fxutil.h"
-class BuddyOpt : public QObject
+#include "fxglobal.h"
+#include "fxdebug.h"
+
+class BuddyOpt: public QObject
 {
-	Q_OBJECT
-	LOG4QT_DECLARE_QCLASS_LOGGER
-	public:
-		BuddyOpt(QTreeWidget * Widget, bool isMainView = true);
-		~BuddyOpt();
+    Q_OBJECT
+    LOG4QT_DECLARE_QCLASS_LOGGER
+    public:
+        BuddyOpt(QTreeWidget * Widget, bool isMainView = true);
+        ~BuddyOpt();
 
-		void UpdateSkins();
+        void UpdateSkins();
 
-		int  markedCount;
-		bool isQunItem(QTreeWidgetItem *); 
-		
-		void freeAllGroupdata();    
-		void freeAllAccountdata(QTreeWidgetItem *);    
-		void freeAllQundata(QTreeWidgetItem *);    
-		void addGroupToTree();    
-		void addAccountToTree();  
-		void addQunToTree();
+        int markedCount;
+        bool isQunItem(QTreeWidgetItem *);
 
-		void delAccount_direct(qlonglong uid);  
-		void delAccount(qlonglong uid);  
-		void delAccount(QTreeWidgetItem* accountItem); 
+        void freeAllGroupdata();
+        void freeAllAccountdata(QTreeWidgetItem *);
+        void freeAllQundata(QTreeWidgetItem *);
+        void addGroupToTree();
+        void addAccountToTree();
+        void addQunToTree();
 
-		void delGroup(qlonglong id);  
-		void addGroup(const char* groupname, qlonglong id);  
+        void delAccount_direct(qlonglong uid);
+        void delAccount(qlonglong uid);
+        void delAccount(QTreeWidgetItem* accountItem);
 
-		void addAccountToGroup(const Fetion_Account *account); 
-		void addAccountToGroup(const Fetion_Account *account, QString & name, int online_state, int group ); 
+        void delGroup(qlonglong id);
+        void addGroup(const char* groupname, qlonglong id);
 
-		Account_Info *fetchNoUpdateAccount();
-		void updateAccountInfo(qlonglong account_id);
-		QString createAccountTipsInfo(const Fetion_Account *account);
-		void setTipsOfAccount(QTreeWidgetItem *accountItem, const Fetion_Account *account);
+        void addAccountToGroup(const Fetion_Account *account);
+        void addAccountToGroup(const Fetion_Account *account,
+                QString & name,
+                int online_state,
+                int group);
 
-		QTreeWidgetItem* findGroupItemByID(int group_id);
+        Account_Info *fetchNoUpdateAccount();
+        void updateAccountInfo(qlonglong account_id);
+        QString createAccountTipsInfo(const Fetion_Account *account);
+        void setTipsOfAccount(QTreeWidgetItem *accountItem,
+                              const Fetion_Account *account);
 
-		void expandTree();
+        QTreeWidgetItem* findGroupItemByID(int group_id);
 
-signals:
-		void m_itemChanged();
+        void expandTree();
 
-private slots:
-		void updateStyles(QTreeWidgetItem *item, int column);
-private:
-		void UpdateSkinsForAccount(QTreeWidgetItem *groupItem);    
-		void UpdateSkinsForQun(QTreeWidgetItem *groupItem);    
-private:
-		QTreeWidgetItem* findAccountItem(const Fetion_Account *account);
-		QTreeWidgetItem* findAccountItemFromGroup(QTreeWidgetItem *groupItem, const Fetion_Account *account);
-		void create_zero_group();
-		QTreeWidget *treeWidget;
-		QTreeWidgetItem *QunItem;
-		bool have_zero_group; 
-		bool isOnlineStateChanged(int old_state, int new_state, int* state);
-		bool m_isMainView; //two mode: just main view and group sms send view
+    signals:
+        void m_itemChanged();
+
+    private slots:
+        void updateStyles(QTreeWidgetItem *item, int column);
+    private:
+        void UpdateSkinsForAccount(QTreeWidgetItem *groupItem);
+        void UpdateSkinsForQun(QTreeWidgetItem *groupItem);
+    private:
+        QTreeWidgetItem* findAccountItem(const Fetion_Account *account);
+        QTreeWidgetItem* findAccountItemFromGroup(QTreeWidgetItem *groupItem,
+                const Fetion_Account *account);
+        void create_zero_group();
+        QTreeWidget *treeWidget;
+        QTreeWidgetItem *QunItem;
+        bool have_zero_group;
+        bool isOnlineStateChanged(int old_state, int new_state, int* state);
+        bool m_isMainView; //two mode: just main view and group sms send view
 };
 
 #endif

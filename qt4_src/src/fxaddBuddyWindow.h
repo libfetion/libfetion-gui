@@ -23,9 +23,10 @@
 #include <QDialog>
 #include "ui_addBuddy.h"
 
-#include "appconfig.h"
+#include "fxglobal.h"
 
-#include "fxutil.h"
+#include "fxdebug.h"
+
 class FxAddBuddy : public QDialog, public Ui::AddBuddyDia
 {
     Q_OBJECT

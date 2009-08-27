@@ -22,6 +22,7 @@
 #include "fxmainwindow.h"
 #include "fxskinmanage.h"
 
+#include "fxutil.h" //RegistHotkey, UnRegistHotkey
 Settings &Settings::instance()
 {
     static Settings instance(configFile(), QSettings::IniFormat);

@@ -24,7 +24,7 @@
 #include "ui_configdia.h"
 #include "fxmainwindow.h"
 
-#include "fxutil.h"
+#include "fxdebug.h"
 class FxConfigDia : public QDialog, public Ui::ConfigApp
 {
     Q_OBJECT

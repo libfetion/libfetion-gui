@@ -22,7 +22,7 @@
 #ifndef FXLOCATIONPARSER_H
 #define FXLOCATIONPARSER_H
 
-#include "appconfig.h"
+#include "fxglobal.h"
 
 #if QT_VERSION >= QT_VERSION_CHECK(4, 5, 0)
     #undef FX_XML_USE_DOM
@@ -39,7 +39,7 @@
     #include <QXmlQuery>
 #endif
 
-#include "fxutil.h"
+#include "fxdebug.h"
 
 #define FX_LOCATION_DATA_PATH    defaultDataPath() + "/Location.xml"
 
