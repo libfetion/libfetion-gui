@@ -146,7 +146,7 @@ QString fxgui_handle_newMsg(Fetion_MSG *fxMsg)
     }
     newmsg.replace(QString("\n"), QString("<br>"));
     newmsg = fxgui_to_faces(newmsg);
-    #if USING_SERVER_TIME
+    #if FX_USE_SERVER_TIME
         newmsg = "(" + fxgui_format_time(fxMsg->msgtime) + "):</b><br>" +
             newmsg;
     #else

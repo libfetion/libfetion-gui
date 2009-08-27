@@ -22,22 +22,23 @@
 
 #include <QDialog>
 
-#include "fxutil.h"
+#include "fxglobal.h"
+#include "fxdebug.h"
 
 class FxMsgWindow;
 
-class FxInputFace : public QDialog
+class FxInputFace: public QDialog
 {
     Q_OBJECT
     LOG4QT_DECLARE_QCLASS_LOGGER
     public:
-       FxInputFace(QWidget *parent = 0);
+        FxInputFace(QWidget *parent = 0);
         ~FxInputFace();
         void setMsgWindow(FxMsgWindow *msgWind);
     protected:
         void mouseMoveEvent(QMouseEvent *event);
-        void mouseReleaseEvent ( QMouseEvent * event ) ;
-        void focusOutEvent ( QFocusEvent * event ) ;
+        void mouseReleaseEvent(QMouseEvent * event);
+        void focusOutEvent(QFocusEvent * event);
     private slots:
 
     private:
@@ -45,31 +46,33 @@ class FxInputFace : public QDialog
         bool getFaces(int x, int y, QString &face, QString &str);
 };
 
-class MyRect 
-{ 
-	public: 
-		MyRect(int x, int y, int width, int buttom)
-		{
-			m_x = x;
-			m_y = y;
-			m_width = width;
-			m_buttom = buttom;
-		};
-		bool contains(int x, int y)
-		{
-			if (x > m_x && y > m_y && x < m_width && y < m_buttom )
-				return true;
-			else
-				return false;
-		}
-	private: 
-		int m_x, m_y, m_width, m_buttom;
+class MyRect
+{
+    public:
+        MyRect(int x, int y, int width, int buttom)
+        {
+            m_x = x;
+            m_y = y;
+            m_width = width;
+            m_buttom = buttom;
+        }
+        ;
+        bool contains(int x, int y)
+        {
+            if (x > m_x && y > m_y && x < m_width && y < m_buttom)
+                return true;
+            else
+                return false;
+        }
+    private:
+        int m_x, m_y, m_width, m_buttom;
 };
 
-typedef struct _FACES_INFO {
-	QString face;
-class MyRect rect;
-QString str;
+typedef struct _FACES_INFO
+{
+        QString face;
+        class MyRect rect;
+        QString str;
 } FACES_INFO;
 
 #endif

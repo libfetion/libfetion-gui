@@ -1,6 +1,6 @@
 /***************************************************************************
- *   Copyright (C) 2008 by DDD                                          *
- *   dedodong@163.com                                                     *
+ *   Copyright (C) 2008 by DDD                                             *
+ *   dedodong@163.com                                                      *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -20,12 +20,13 @@
 #ifndef FXMAIN_H
 #define FXMAIN_H
 
-#include <qobject.h>
-
 class FxLoginWindow;
 class FxMainWindow;
 
-#include "fxutil.h"
+#include <QObject>
+
+#include "fxdebug.h"
+
 class FxMain : public QObject
 {
     Q_OBJECT

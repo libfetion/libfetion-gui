@@ -26,7 +26,7 @@
 #include "fxmainwindow.h"
 #include "ui_scheduleSMSManage.h"
 
-#include "fxutil.h"
+#include "fxdebug.h"
 class FxScheduleSMSManage: public QMainWindow, public Ui::ScheduleSmSManage
 {
     Q_OBJECT

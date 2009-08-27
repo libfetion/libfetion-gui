@@ -23,9 +23,9 @@
 #include <QDialog>
 #include "ui_proxy.h"
 
-#include "appconfig.h"
+#include "fxglobal.h"
 
-#include "fxutil.h"
+#include "fxdebug.h"
 class FxProxy: public QDialog, public Ui::ProxyDia
 {
     Q_OBJECT

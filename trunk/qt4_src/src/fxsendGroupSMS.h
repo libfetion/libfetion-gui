@@ -22,11 +22,12 @@
 
 #include <QMainWindow>
 #include <QDialog>
-#include "fxbuddy.h"
-#include "fxmainwindow.h"
 #include "ui_sendgroupsms.h"
 
-#include "fxutil.h"
+#include "fxbuddy.h"
+#include "fxmainwindow.h"
+
+#include "fxdebug.h"
 
 class FxSendGroupSMS: public QMainWindow, public Ui::SendGroupSMS
 {

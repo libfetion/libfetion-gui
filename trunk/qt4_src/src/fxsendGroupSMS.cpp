@@ -19,6 +19,7 @@
  ***************************************************************************/
 #include "fxsendGroupSMS.h"
 
+#include "fxutil.h" //fxgui_to_faces
 FxSendGroupSMS::FxSendGroupSMS(FxMainWindow *wind,
                                QWidget *parent):
                                QMainWindow(parent)

@@ -27,7 +27,8 @@
 #include "ui_login_window.h"
 #include "fxproxy.h"
 #include "fxwidget.h"
-#include "fxutil.h"
+
+#include "fxdebug.h"
 
 using namespace fxgui;
 

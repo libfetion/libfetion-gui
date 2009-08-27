@@ -21,9 +21,11 @@
 #define FXSETTINGS_H
 
 #include <QSettings>
-#include "appconfig.h"
+#include <QFont>
+#include <QPoint>
+#include <QSize>
 
-#include "fxutil.h"
+#include "fxdebug.h"
 
 class FxMainWindow;
 class Settings: public QSettings

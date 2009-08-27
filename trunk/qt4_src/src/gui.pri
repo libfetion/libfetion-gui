@@ -1,8 +1,8 @@
 INCLUDEPATH += $$PWD/..
 DEPENDPATH += $$PWD/..
-
-HEADERS = \
-	$$PWD/appconfig.h \
+HEADERS = $$PWD/fxglobal.h \
+    $$PWD/fxdebug.h \
+    $$PWD/appconfig.h \
     $$PWD/fxmain.h \
     $$PWD/fxmainwindow.h \
     $$PWD/fxloginwindow.h \
@@ -39,7 +39,6 @@ HEADERS = \
     $$PWD/fxeditablelabel.h \
     $$PWD/sqlite/sqlite3.h \
     $$PWD/fxlocationparser.h
-
 SOURCES = $$PWD/main.cpp \
     $$PWD/fxmain.cpp \
     $$PWD/fxloginwindow.cpp \

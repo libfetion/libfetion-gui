@@ -36,7 +36,7 @@
 #include "fxscheduleSms.h"
 #include "LibFetionEventHandle.cpp"
 
-
+#include "fxutil.h" //check_dir_state
 
 FxMainWindow::FxMainWindow(QWidget *parent): FxWidget(parent), trayIcon(NULL),
                            traySetStatusMenu(NULL), buddySetStatusMenu(NULL),
@@ -71,7 +71,7 @@ FxMainWindow::FxMainWindow(QWidget *parent): FxWidget(parent), trayIcon(NULL),
 
     //save the account info to db,
     //will a bug: when the account is changed, but the db info maybe not changed follow
-    #ifdef DEBUG_GUI
+    #ifdef HAVE_GUI_DEBUG_ENABLED
         QTreeWidgetItem *tm = new QTreeWidgetItem(view, 0);
         tm->setText(0, "haha");
     #else
@@ -708,7 +708,7 @@ void FxMainWindow::slot_DeRegistered()
     if (isHaveTray)
     {
         trayIcon->setIcon(getSysTrayIcon(0));
-        fx_status = SYS_DeRegist;
+        fx_status = SYS_UNREGISTER;
         QSystemTrayIcon::MessageIcon icon = QSystemTrayIcon::MessageIcon(3);
         trayIcon->showMessage(tr("relogin"), tr(
                               "you have login in other pc, libfetion will quit")
@@ -978,7 +978,7 @@ void FxMainWindow::trayMessageClicked()
                                       "http://www.libfetion.cn/demoapp_download.html"));
             fx_status = NO_SET;
             break;
-        case SYS_DeRegist:
+        case SYS_UNREGISTER:
             QMessageBox::critical(this, tr("relogin"), tr(
                                   "you have login in other pc, libfetion will quit"));
             isQuit = true;
@@ -1051,9 +1051,9 @@ void FxMainWindow::init_UI()
 {
     FX_FUNCTION
     Settings::instance().setMainWindow(this);
-    #ifdef DEBUG_GUI
+    #ifdef HAVE_GUI_DEBUG_ENABLED
         Settings::instance().setUser(1000);
-        setWindowTitle("DEBUG_GUI Test User --Linux Fetion");
+        setWindowTitle("HAVE_GUI_DEBUG_ENABLED Test User --Linux Fetion");
     #else
         Settings::instance().setUser((qlonglong)strtol(fx_get_usr_uid(), NULL,
                            10));

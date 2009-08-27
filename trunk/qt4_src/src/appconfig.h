@@ -1,6 +1,6 @@
 /***************************************************************************
- *   Copyright (C) 2008 by DDD                                          *
- *   dedodong@163.com                                                     *
+ *   Copyright (C) 2008 by DDD                                             *
+ *   dedodong@163.com                                                      *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -20,92 +20,14 @@
 #ifndef FXAPPCONFIG_H 
 #define FXAPPCONFIG_H 
 
-
-#include <QMainWindow>
-#include <QTreeWidget>
-#include <qobject.h>
-#include <libfetion/libfetion.h>
-#include "fxResource.h"
-#include "fxdb.h"
-#include "fxsettings.h"
-#include "fxutil.h"
-
 #define BUILD_DATE 20090701
 #define CURRENT_VERSION 100
 #define VERSION_NO "v1.0"
 
-#define MAXSMSLENGTH 180 
+/* GUI debug, no real network connection */
+// #define HAVE_GUI_DEBUG_ENABLED
 
-#define CONFFILENAME    "libfetion.conf"
-#define DBNAME    "libfx.db"
-#define SKIN_CONFG_FILE    "/skin.xml"
-#define USING_SERVER_TIME 0
-
-/* GUI Debug Option */
-#undef DEBUG_GUI
-
-#ifdef WIN32 
-#pragma comment(lib, "./lib/LibFetion.lib")  
-#pragma comment(lib, "./lib/libcurl_imp.lib")  
-#pragma comment(lib, "Ws2_32.lib") 
-#pragma comment(lib, "user32.lib")
-#endif
-
-#ifdef WIN32 
-#if _MSC_VER < 1300  //vc6 complile 
-#define MS_VC6 1 //now vc6 is no support...
-#else  //vc7 up 
-#define MS_VC6 0
-#endif
-#else //linux platform
-#define MS_VC6 0
-#endif //#ifdef WIN32 
-
-#define MOBILE_LOGIN 0x011
-
-#define NO_SET  0
-#define NET_ERR 1
-#define NEW_MSG 2
-#define SYS_DeRegist 3
-#define SYS_RELOGIN 4
-#define NEW_VERSION 5
-
-typedef struct _Group_Info
-{
-	QString groupName;
-	qlonglong groupID;
-	int online_no;
-}Group_Info;
-
-typedef struct _Account_Info
-{
-	QString accountName;
-	qlonglong accountID;
-	int onlinestate;
-    bool haveUpdate;
-}Account_Info;
-
-typedef struct _Qun_Info
-{
-	QString qunName;
-	qlonglong qunID;
-}Qun_Info;
-
-typedef struct _Skin_Info
-{
-	QString name;
-	QString author;
-	QString describe;
-	QString skinpath;
-	QString usingSystemTitle;
-}Skin_Info;
-
-#if MS_VC6
-#else
-Q_DECLARE_METATYPE(Group_Info *);
-Q_DECLARE_METATYPE(Account_Info *);
-Q_DECLARE_METATYPE(Qun_Info *);
-Q_DECLARE_METATYPE(Skin_Info *);
-#endif
+/* log4qt, comment out for product release */
+//#define HAVE_LOG4QT_DEBUG_ENABLED
 
 #endif

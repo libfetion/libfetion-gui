@@ -20,16 +20,13 @@
 #ifndef FXBUDDYMANAGE_H
 #define FXBUDDYMANAGE_H
 
-#include <qobject.h>
 #include <QMainWindow>
 #include <QTreeWidget>
 #include <QTextEdit>
 
-#include "appconfig.h"
-
 #include "fxbuddy.h"
+#include "fxdebug.h"
 
-#include "fxutil.h"
 class FxMainWindow;
 class FxMsgWindow; 
 

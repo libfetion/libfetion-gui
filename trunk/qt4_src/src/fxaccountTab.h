@@ -23,12 +23,14 @@
 #include <QDialog>
 #include <QTabWidget>
 
-#include "appconfig.h"
+#include "fxglobal.h"
+
 #include "ui_msgsend.h"
 #include "fxmytabwidget.h"
 #include "fxshowHistory.h"
 
-#include "fxutil.h"
+#include "fxdebug.h"
+
 #define SYSTEM_ID 10000
 class FxMainWindow;
 

@@ -23,7 +23,8 @@
 #include <QDialog>
 #include "ui_contactinfo.h"
 
-#include "fxutil.h"
+#include "fxglobal.h"
+#include "fxdebug.h"
 
 class FxContactInfo : public QDialog, public Ui::ContactInfo
 {

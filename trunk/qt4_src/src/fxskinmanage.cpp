@@ -58,7 +58,7 @@ bool setSkins(QString skinPath, QString skinName)
 bool validateSkinPath(QString skinPath)
 {
     bool ret = false;
-    QFile file(skinPath + SKIN_CONFG_FILE);
+    QFile file(skinPath + FX_SKIN_CONFIG);
     ret = file.open(QIODevice::ReadOnly);
     file.close();
 
@@ -73,7 +73,7 @@ Skin_Info *get_skininfo(QString skinPath)
 {
     QDomDocument doc("xml");
 
-    QFile file(skinPath + SKIN_CONFG_FILE);
+    QFile file(skinPath + FX_SKIN_CONFIG);
     if (!file.open(QIODevice::ReadOnly))
     {
         return NULL;

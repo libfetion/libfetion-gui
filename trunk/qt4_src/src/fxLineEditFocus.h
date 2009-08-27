@@ -2,7 +2,7 @@
 #define FXLINEEDITFOCUS_H
 
 #include <QLineEdit>
-#include "fxutil.h"
+#include "fxdebug.h"
 
 class QLineEditFocus : public QLineEdit // inherit QLineEdit
 {

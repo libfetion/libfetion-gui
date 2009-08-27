@@ -31,13 +31,13 @@
 #include <stdlib.h>
 #include <sys/types.h>
 #include <string.h>
-#include "./sqlite/sqlite3.h"
+#include "sqlite/sqlite3.h"
 
 #include <QString>
 #include <QList>
 #include <QTreeWidgetItem>
 
-#include "appconfig.h"
+#include "fxglobal.h"
 
 typedef enum
 {

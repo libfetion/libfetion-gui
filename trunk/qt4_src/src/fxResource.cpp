@@ -20,8 +20,12 @@
 #include <QSound>
 #include <QFile>
 #include <QDir>
+#include <QDebug>
+
 #include "fxResource.h"
 #include "fxskinmanage.h"
+
+#include "fxglobal.h"
 
 #ifdef WIN32
 #else
@@ -29,9 +33,6 @@
     #include <sys/types.h>
     #include <pwd.h>
 #endif
-
-
-#include <QDebug>
 
 QDomDocument *ResXML = NULL;
 
@@ -107,16 +108,16 @@ QString getXMLRes(QString item, QString defValue)
         home.mkdir(".libfetion");
 
         //move old config file to .libfetion folder
-        if (QFile::exists(currentUserPath() + DBNAME) && !QFile::exists
+        if (QFile::exists(currentUserPath() + FX_DATABASE_NAME) && !QFile::exists
             (chatDBFile()))
         {
-            QFile::rename(currentUserPath() + "/." DBNAME, chatDBFile());
+            QFile::rename(currentUserPath() + "/." FX_DATABASE_NAME, chatDBFile());
         }
 
-        if (QFile::exists(currentUserPath() + "/." CONFFILENAME) && !QFile
+        if (QFile::exists(currentUserPath() + "/." FX_CONFIG_FILE) && !QFile
             ::exists(configFile()))
         {
-            QFile::rename(currentUserPath() + "/." CONFFILENAME, configFile());
+            QFile::rename(currentUserPath() + "/." FX_CONFIG_FILE, configFile());
         }
     }
 
@@ -170,7 +171,7 @@ QString dataResPath()
 
 QString configFile()
 {
-    return dataResPath() + "/" CONFFILENAME;
+    return dataResPath() + "/" FX_CONFIG_FILE;
 }
 
 /**************************************************************************/
@@ -179,7 +180,7 @@ QString configFile()
 
 QString chatDBFile()
 {
-    return dataResPath() + "/" DBNAME;
+    return dataResPath() + "/" FX_DATABASE_NAME;
 }
 
 /**************************************************************************/

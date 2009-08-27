@@ -19,7 +19,7 @@
  ***************************************************************************/
 #ifndef _FX_SKIN_MANAGE_H
 #define _FX_SKIN_MANAGE_H
-#include "appconfig.h"
+#include "fxglobal.h"
 
 bool validateSkinPath(QString skinPath);
 QString getSkinPath();

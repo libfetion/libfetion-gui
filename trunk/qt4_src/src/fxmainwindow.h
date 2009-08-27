@@ -30,7 +30,9 @@
 #include "fxaddBuddyWindow.h"
 
 #include "fxwidget.h"
-#include "fxutil.h"
+
+#include "fxdebug.h"
+
 using namespace fxgui;
 
 class QAction;

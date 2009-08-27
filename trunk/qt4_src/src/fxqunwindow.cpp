@@ -22,6 +22,7 @@
 #include "fxqunwindow.h"
 #include "fxshowHistory.h"
 
+#include "fxutil.h" //fxgui_to_faces
 FxQunWindow::FxQunWindow(qlonglong id, QWidget *parent, bool awaySendSms):
                          QMainWindow(parent)
 {
