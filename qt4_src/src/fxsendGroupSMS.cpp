@@ -19,7 +19,7 @@
  ***************************************************************************/
 #include "fxsendGroupSMS.h"
 
-#include "fxutil.h" //fxgui_to_faces
+#include "fxInputFace.h"
 FxSendGroupSMS::FxSendGroupSMS(FxMainWindow *wind,
                                QWidget *parent):
                                QMainWindow(parent)
@@ -112,7 +112,7 @@ void FxSendGroupSMS::SendMsg()
     msg.replace(QString("<"), QString("&lt;"));
     msg.replace(QString(">"), QString("&gt;"));
     msg.replace(QString("\n"), QString("<br>"));
-    msg = fxgui_to_faces(msg);
+    msg = FxInputFace::parseSmileySymbol(msg);
 
     show_msg = show_msg.fromUtf8((head + msg).toUtf8().data());
     MsgBrowser->append(show_msg);

@@ -2058,3 +2058,97 @@ void FxMainWindow::UpdateSkins()
         IsAutoShowMsgAct->setIcon(getMenuIcon(CancelIcon));
     }
 }
+
+/*
+ * Copyright (C) 2009
+ *
+ * Show author and coryright info of LibFetion.
+ *
+ * Current maintainer: DDD(dedodong@163.com)
+ * Origin Author: weizhg23(weizhg23@gmail.com)
+ */
+
+#include <QFile>
+#include <QDialog>
+#include <QWidget>
+#include <QListWidget>
+#include <QListWidgetItem>
+#include <QHBoxLayout>
+#include <QTextStream>
+
+void FxMainWindow::displayAboutLibFetion()
+{
+    QWidget *window = new QWidget;
+    QListWidget *listWidget = new QListWidget;
+    window->setMinimumSize(460, 220);
+    window->setMaximumSize(460, 220);
+    window->setWindowTitle("Libfetion Authors");
+    window->setWindowFlags(Qt::WindowTitleHint | \
+                           Qt::WindowSystemMenuHint | \
+                           Qt::WindowStaysOnTopHint);
+    window->move(Settings::instance().MainWinPos());
+
+    QFile file(defaultResPath() + "/CREDITS.txt");
+    if (file.open(QIODevice::ReadOnly))
+    {
+        QTextStream stream(&file);
+        QString line;
+        int item = 0;
+        QListWidgetItem *newItem = NULL;
+        while (!stream.atEnd())
+        {
+            line = stream.readLine(); // no trail '\n'
+            newItem = new QListWidgetItem;
+            newItem->setText(line);
+            listWidget->insertItem(item, newItem);
+            item++;
+        }
+        file.close();
+    }
+
+    QHBoxLayout *layout = new QHBoxLayout;
+    layout->addWidget(listWidget);
+    window->setLayout(layout);
+    window->setFocus();
+    window->showNormal();
+}
+
+/*
+ * Copyright (C) 2008
+ *
+ * A Directory Modifly State Checker used in libfetion for Mac/Linux/Windows.
+ *
+ * Author: YY(51test2003@gmail.com)
+ */
+#include <stdio.h>
+#include <sys/stat.h>
+
+#ifdef WIN32
+    #include <windows.h>
+#else
+    #include <time.h>
+#endif
+
+int FxMainWindow::check_dir_state(const char *path)
+{
+    static time_t mtime = 0;
+    struct stat state;
+    if (stat(path, &state) ==  - 1)
+     /* System call failed. Treat as be modified.*/
+    {
+        return 1;
+    }
+    if (mtime == 0)
+     /* Initialize the default timestamp*/
+    {
+        mtime = state.st_mtime;
+    } if (mtime != state.st_mtime)
+     /* Directory was modified*/
+    {
+        //printf("Modyfied.\n");
+        mtime = state.st_mtime;
+        return 1;
+    }
+
+    return 0;
+}

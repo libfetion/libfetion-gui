@@ -128,18 +128,10 @@ private slots:
 	void haveAddAccountAppMessage(char* uri, char*desc);
 	void slot_SystemNetErr (int);
 	void slot_DeRegistered ();
-
 	void slot_set_state(int);
-
 	void slot_updateSmsDay(int);
-
 	void slot_ShowSkinMenu() { createSkinMenu(skinMenu); }
-
-
-
     void setImpresa();
-
-
 
 	void checkNewVersion();
 	void reportBugAct();
@@ -161,7 +153,6 @@ private slots:
 	void saveMsgHistroy();
 	void cleanMsgHistroy();
 	void showConfigDlg();
-	
 
 	void UI_enable_impresa();
 	void UI_enable_search();
@@ -184,6 +175,8 @@ private:
     void createMenu();
 	void initTrayIcon();
 	void init_slot_signal();
+	void displayAboutLibFetion();
+	int check_dir_state(const char *path);
 
 private:
 	int newVersion;
