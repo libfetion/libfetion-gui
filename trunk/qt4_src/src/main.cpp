@@ -31,24 +31,25 @@
 #include "fxdb.h"
 #include "fxskinmanage.h"
 
-#include "log4qt/propertyconfigurator.h" /* log4qt configure load */
-
+#ifdef HAVE_LOG4QT_DEBUG_ENABLED
+  #include "log4qt/propertyconfigurator.h" /* log4qt configure load */
+#endif
 #ifdef WIN32
 #else
-    #include <fcntl.h>
-    #include <sys/types.h>
-    #include <pwd.h>
+  #include <fcntl.h>
+  #include <sys/types.h>
+  #include <pwd.h>
 #endif
 
 
 #ifdef WIN32
-    Q_IMPORT_PLUGIN(qgif)
+  Q_IMPORT_PLUGIN(qgif)
 #else
-    #ifdef Q_OS_MAC
-        Q_IMPORT_PLUGIN(qgif)
-    #else //linux
-        //Q_IMPORT_PLUGIN(qgif)
-    #endif
+  #ifdef Q_OS_MAC
+      Q_IMPORT_PLUGIN(qgif)
+  #else //linux
+      //Q_IMPORT_PLUGIN(qgif)
+  #endif
 #endif
 
 int main(int argc, char *argv[])
@@ -69,10 +70,11 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
     QCoreApplication::addLibraryPath(QCoreApplication::applicationDirPath());
 
+#ifdef HAVE_LOG4QT_DEBUG_ENABLED
     /*FIXME: real log4qt configuration path */
     Log4Qt::PropertyConfigurator::configure(
             app.applicationDirPath() + "/log4qt.properties");
-
+#endif
     QTranslator translator_fetion;
     translator_fetion.load("fetion_utf8_CN", defaultResPath());
     QTranslator translator_qt;
