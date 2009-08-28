@@ -28,6 +28,8 @@
 // #define HAVE_GUI_DEBUG_ENABLED
 
 /* log4qt, comment out for product release */
+/* always use debug/release option (CONFIG) in .pro, unless there is
+ * no qmake around */
 //#define HAVE_LOG4QT_DEBUG_ENABLED
 
 #endif
