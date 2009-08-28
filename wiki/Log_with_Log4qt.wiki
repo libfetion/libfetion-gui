@@ -1,9 +1,15 @@
 #summary This page tells how to use the our log4qt wrapper to log debug/runtime information.
+#labels Phase-Implementation
 
 = Introduction =
-To use the logger function, you have to include `fxutil.h` or `log4qt/logger.h` in your class header.
+Warning: log4qt debug support was disabled in PR build. As a developer, you need append 'debug' profile in libfetion.pro
 {{{
-#include "fxutil.h"
+# development configure
+CONFIG += debug
+}}}
+To use the logger function, you have to include `fxdebug.h` or `log4qt/logger.h` in your class header.
+{{{
+#include "fxdebug.h"
 }}}
 Then, add LOG4QT_DECLARE_QCLASS_LOGGER in your class declaration
 {{{
