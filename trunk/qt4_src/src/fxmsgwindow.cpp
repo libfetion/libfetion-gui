@@ -25,6 +25,7 @@
 #include "fxaddBuddyWindow.h"
 #include "fxskinmanage.h"
 
+#include "fxInputFace.h"
 #define SHAKE_DISTANCE 10
 #define SHAKE_CYCLE 9
 //msec
@@ -366,7 +367,7 @@ bool FxMsgWindow::addMessage(QString msg,
     {
         accountTab = new AccountTab(account_id, tabWidget);
         accountTab->setMainWind(this->m_mainwindow);
-        tabWidget->addTab(accountTab, CropTabName(accountTab->account_name));
+        tabWidget->addTab(accountTab, cropTabName(accountTab->account_name));
     }
 
     if (!this->isVisible())
@@ -479,7 +480,7 @@ void FxMsgWindow::exec_autoRelpy(QTextEdit *msgBrowser, qlonglong account_id,
     msg.replace(QString("<"), QString("&lt;"));
     msg.replace(QString(">"), QString("&gt;"));
     msg.replace(QString("\n"), QString("<br>"));
-    msg = fxgui_to_faces(msg);
+    msg = FxInputFace::parseSmileySymbol(msg);
 
     QString str = head + msg;
     show_msg = show_msg.fromUtf8(str.toUtf8().data());
@@ -507,7 +508,7 @@ void FxMsgWindow::slot_haveNewQunMessage(qlonglong qun_id)
     }
 
     long sender = fxMsg->ext_id;
-    addQunMessage(fxgui_handle_newMsg(fxMsg), qun_id, sender, true);
+    addQunMessage(parseReceivedMsg(fxMsg), qun_id, sender, true);
     fx_destroy_msg(fxMsg);
 }
 
@@ -526,11 +527,11 @@ void FxMsgWindow::slot_haveNewMessage(qlonglong account_id)
 
     if (fxMsg->ext_id != 0)
     {
-        addQunMessage(fxgui_handle_newMsg(fxMsg), account_id, 0L, true);
+        addQunMessage(parseReceivedMsg(fxMsg), account_id, 0L, true);
     }
     else
     {
-        addMessage(fxgui_handle_newMsg(fxMsg), account_id, true);
+        addMessage(parseReceivedMsg(fxMsg), account_id, true);
     }
 
     fx_destroy_msg(fxMsg);
@@ -688,7 +689,7 @@ void FxMsgWindow::addAccount(qlonglong account_id, bool isSendSms)
     {
         accountTab = new AccountTab(account_id, tabWidget, isSendSms);
         accountTab->setMainWind(this->m_mainwindow);
-        tabWidget->addTab(accountTab, CropTabName(accountTab->account_name));
+        tabWidget->addTab(accountTab, cropTabName(accountTab->account_name));
     }
 
     tabWidget->setCurrentWidget(accountTab);
@@ -842,7 +843,7 @@ void FxMsgWindow::updateAccountInfo(qlonglong account_id)
 /*                                                                        */
 /**************************************************************************/
 QString
-FxMsgWindow::CropTabName(QString orig_name)
+FxMsgWindow::cropTabName(QString orig_name)
 {
     FX_FUNCTION
     QString new_name = orig_name;
@@ -1044,4 +1045,142 @@ void FxMsgWindow::slot_receive_nudge(qlonglong account_id)
     {
         this->nudge_shake();
     }
+}
+
+/**************************************************************************/
+/*                                                                        */
+/**************************************************************************/
+QString FxMsgWindow::parseReceivedMsg(Fetion_MSG *fxMsg)
+{
+    //note: there are two formats of the fetion msg: text/plain and text/html-fragment.
+    //text/plain  is sended from mobile client.
+    //text/html-fragment is sended from pc client, and it is the xml format.
+    if (!fxMsg)
+    {
+        return "";
+    }
+
+    QString newmsg;
+
+    if (fxMsg->msgformat && strstr(fxMsg->msgformat, "plain"))
+    //message from mobile  text/plain
+    {
+        newmsg = newmsg.fromUtf8(fxMsg->message);
+        newmsg.replace(QString("<"), QString("&lt;"));
+        newmsg.replace(QString(">"), QString("&gt;"));
+    }
+    else
+    {
+        //message from pc  text/html-fragment
+        char *msg = fx_msg_qt_format(fxMsg->message);
+        newmsg = newmsg.fromUtf8(msg);
+        if (msg)
+        {
+            free(msg);
+        }
+    }
+    newmsg.replace(QString("\n"), QString("<br>"));
+    newmsg = FxInputFace::parseSmileySymbol(newmsg);
+    #if FX_USE_SERVER_TIME
+        newmsg = "(" + fxgui_format_time(fxMsg->msgtime) + "):</b><br>" +
+            newmsg;
+    #else
+        newmsg = "(" +
+                 QDateTime::currentDateTime().toString("hh:mm:ss") +
+                 "--" +
+                 QDateTime::currentDateTime().toString("yyyy-MM-dd") +
+                 "):</b><br>" +
+                 newmsg;
+    #endif
+    return newmsg;
+}
+
+/**************************************************************************/
+/*                                                                        */
+/**************************************************************************/
+QString FxMsgWindow::formatTime(QString stamp)
+{
+    QString dateTime;
+    bool formatRight;
+    QRegExp regexp("\\s(\\d{2})\\s(\\w{3})\\s(\\d{4})\\s((\\d{2}):(\\d{2}):(\\d{2}))\\s(\\w{3})");
+
+    if (regexp.indexIn(stamp) !=  - 1)
+    {
+        QStringList list = regexp.capturedTexts();
+        formatRight = TRUE;
+    }
+    else
+    {
+        formatRight = FALSE;
+    }
+
+    QString day, month, year;
+    QString time;
+    day = regexp.cap(1);
+    month = regexp.cap(2);
+    if (month == "Jan")
+    {
+        month = "01";
+    }
+    else if (month == "Feb")
+    {
+        month = "02";
+    }
+    else if (month == "Mar")
+    {
+        month = "03";
+    }
+    else if (month == "Apr")
+    {
+        month = "04";
+    }
+    else if (month == "May")
+    {
+        month = "05";
+    }
+    else if (month == "Jun")
+    {
+        month = "06";
+    }
+    else if (month == "Jul")
+    {
+        month = "07";
+    }
+    else if (month == "Aug")
+    {
+        month = "08";
+    }
+    else if (month == "Sep")
+    {
+        month = "09";
+    }
+    else if (month == "Oct")
+    {
+        month = "10";
+    }
+    else if (month == "Nov")
+    {
+        month = "11";
+    }
+    else if (month == "Dec")
+    {
+        month = "12";
+    }
+    else
+    {
+        month = "";
+    }
+    year = regexp.cap(3);
+    time = regexp.cap(4);
+
+    if (formatRight)
+    {
+        dateTime = time + "--" + year + "-" + month + "-" + day;
+    }
+    else
+    {
+        dateTime = "";
+    }
+
+    return dateTime;
 }

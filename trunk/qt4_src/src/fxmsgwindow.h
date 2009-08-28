@@ -108,7 +108,9 @@ private:
     void exec_autoRelpy(QTextEdit* msgBrowser,
                         qlonglong account_id,
                         QString msg);
-    QString CropTabName(QString orig_name);
+    QString cropTabName(QString orig_name);
+    QString parseReceivedMsg(Fetion_MSG *fxMsg);
+    QString formatTime(QString stamp);
 
 private:
 	bool m_willQuit;

@@ -21,8 +21,8 @@
 
 #include "fxqunwindow.h"
 #include "fxshowHistory.h"
+#include "fxInputFace.h"
 
-#include "fxutil.h" //fxgui_to_faces
 FxQunWindow::FxQunWindow(qlonglong id, QWidget *parent, bool awaySendSms):
                          QMainWindow(parent)
 {
@@ -218,7 +218,7 @@ void FxQunWindow::SendMsg()
     msg.replace(QString(">"), QString("&gt;"));
     msg.replace(QString("\n"), QString("<br>"));
 
-    msg = fxgui_to_faces(msg);
+    msg = FxInputFace::parseSmileySymbol(msg);
 
     QString str = head + msg;
 

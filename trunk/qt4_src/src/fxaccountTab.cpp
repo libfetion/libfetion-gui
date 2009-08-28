@@ -364,7 +364,8 @@ void AccountTab::SendMsg()
     msg.replace(QString("<"), QString("&lt;"));
     msg.replace(QString(">"), QString("&gt;"));
     msg.replace(QString("\n"), QString("<br>"));
-    msg = fxgui_to_faces(msg);
+
+    msg = FxInputFace::parseSmileySymbol(msg);
 
     QString str = head + msg;
     show_msg = show_msg.fromUtf8(str.toUtf8().data());
