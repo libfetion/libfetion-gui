@@ -3,9 +3,9 @@ TEMPLATE = app
 #               Global Configuration
 ################################################################################
 # product release configure
-# CONFIG -= debug
+CONFIG -= debug
 # development configure
-CONFIG += debug
+#CONFIG += debug
 
 QT += xml \
     xmlpatterns
