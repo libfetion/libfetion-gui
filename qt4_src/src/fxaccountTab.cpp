@@ -20,8 +20,6 @@
 #include "fxaccountTab.h"
 #include "fxmainwindow.h"
 
-#include "fxutil.h" //fxgui_to_faces
-
 AccountTab::AccountTab(qlonglong id, FxMyTabWidget *parent, bool awaySendSms):
                        QWidget(parent), account_id(id), isAwaySendSMS
                        (awaySendSms), tabWidget(parent), flick_flag(FALSE),
