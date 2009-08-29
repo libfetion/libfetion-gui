@@ -470,7 +470,7 @@ void FxLoginWindow::checkAutoLogin()
         loginState->setCurrentIndex(state_tmp);
 
         //here check is have one instance for auto login
-        if (!Settings::instance().isSingleInstance())
+        if (Settings::instance().isSingleInstance())
         {
             login();
         }

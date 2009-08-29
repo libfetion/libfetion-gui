@@ -243,9 +243,9 @@ int Settings::GetInstancesNum()
 int Settings::isSingleInstance()
 {
 	if (GetInstancesNum() > 1)
-		return 1;
-	else
 		return 0;
+	else
+		return 1;
 }
 
 /**************************************************************************/
