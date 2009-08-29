@@ -22,8 +22,6 @@
 #include "fxmainwindow.h"
 #include "fxskinmanage.h"
 
-#include "fxutil.h" //RegistHotkey, UnRegistHotkey
-
 /*
  * Copyright (C) 2008
  *

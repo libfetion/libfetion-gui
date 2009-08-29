@@ -36,8 +36,6 @@
 #include "fxscheduleSms.h"
 #include "LibFetionEventHandle.cpp"
 
-#include "fxutil.h" //check_dir_state
-
 FxMainWindow::FxMainWindow(QWidget *parent): FxWidget(parent), trayIcon(NULL),
                            traySetStatusMenu(NULL), buddySetStatusMenu(NULL),
                            msgHistroyMenu(NULL), skinMenu(NULL),

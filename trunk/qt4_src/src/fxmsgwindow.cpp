@@ -21,7 +21,6 @@
 #include <math.h>
 #include "fxmainwindow.h"
 #include "fxmsgwindow.h"
-#include "fxutil.h"
 #include "fxaddBuddyWindow.h"
 #include "fxskinmanage.h"
 
