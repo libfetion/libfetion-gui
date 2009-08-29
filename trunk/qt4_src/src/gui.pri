@@ -20,7 +20,6 @@ HEADERS = $$PWD/fxglobal.h \
     $$PWD/fxshowHistory.h \
     $$PWD/fxverifyAccount.h \
     $$PWD/fxInputFace.h \
-    $$PWD/fxutil.h \
     $$PWD/fxproxy.h \
     $$PWD/fxLableMouse.h \
     $$PWD/fxLineEditFocus.h \
@@ -57,7 +56,6 @@ SOURCES = $$PWD/main.cpp \
     $$PWD/fxshowHistory.cpp \
     $$PWD/fxverifyAccount.cpp \
     $$PWD/fxInputFace.cpp \
-    $$PWD/fxutil.cpp \
     $$PWD/fxproxy.cpp \
     $$PWD/fxrefuseSMS.cpp \
     $$PWD/fxsendGroupSMS.cpp \

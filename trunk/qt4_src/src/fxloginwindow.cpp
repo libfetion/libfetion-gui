@@ -20,7 +20,6 @@
 #include <QtGui>
 #include <QMainWindow>
 
-#include "fxutil.h"     //m_Instance
 #include "fxloginwindow.h"
 #include "fxskinmanage.h"
 
@@ -471,7 +470,7 @@ void FxLoginWindow::checkAutoLogin()
         loginState->setCurrentIndex(state_tmp);
 
         //here check is have one instance for auto login
-        if (!m_Instance::isHaveInstance())
+        if (!Settings::instance().isSingleInstance())
         {
             login();
         }
