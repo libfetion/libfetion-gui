@@ -37,6 +37,7 @@ class Settings: public QSettings
         Settings(const QString & fileName, Format format);
         ~Settings();
         static Settings& instance();
+        int isSingleInstance();
         void setUser(long uid);
         void setMainWindow(FxMainWindow *mainwind)
         {
@@ -204,6 +205,13 @@ class Settings: public QSettings
 
     private:
         void init_setting();
+        int GetInstancesNum();
+
+		int QtModToWinMod(Qt::KeyboardModifiers keyMod);
+		bool RegistHotkey(QWidget *window, QChar keyValue,
+				Qt::KeyboardModifiers keyMod);
+		bool UnRegistHotkey(QWidget *window, QChar keyValue,
+				Qt::KeyboardModifiers keyMod);
 
     private:
         bool m_DisableNudge;
