@@ -26,7 +26,7 @@
 //@TO FIX remove it affter fixed styleshee's import
 #include <QFile>
 
-#include "appconfig.h"
+#include "fxglobal.h"
 #include "fxmain.h"
 #include "fxdb.h"
 #include "fxskinmanage.h"
@@ -52,6 +52,26 @@
   #endif
 #endif
 
+/*TODO: use tmp file to check instance, need to rewritte
+ * after session manager implemented
+ */
+#include "stdio.h"
+#include "stdlib.h"
+#include "unistd.h"
+#include "fcntl.h"
+/*TODO: P */
+static void
+getInstanceLock()
+{
+    open(FX_INSTANCE_TMP_FILE, O_CREAT | O_TRUNC, O_NONBLOCK);
+}
+/*TODO: V */
+static void
+releaseInstanceLock()
+{
+    unlink(FX_INSTANCE_TMP_FILE);
+}
+
 int main(int argc, char *argv[])
 {
     if (!fx_init())
@@ -66,6 +86,9 @@ int main(int argc, char *argv[])
         //compatible old app's config file
         moveOldConfigFile();
     #endif
+
+    /* Acquire application lock */
+    getInstanceLock();
 
     QApplication app(argc, argv);
     QCoreApplication::addLibraryPath(QCoreApplication::applicationDirPath());
@@ -98,5 +121,9 @@ int main(int argc, char *argv[])
     destoy_db();
     //destroy the libfetion
     fx_terminate();
+
+    /* Release application lock */
+    releaseInstanceLock();
+
     return reslut;
 }

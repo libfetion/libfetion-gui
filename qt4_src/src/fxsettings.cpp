@@ -30,156 +30,19 @@
  * Author: YongLi(liyong03@gmail.com)
  */
 
-
 #ifndef WIN32
-    #include <errno.h>
-    #include <signal.h>
-    #include <stdio.h>
-    #include <sys/sem.h>
-    #include <sys/shm.h>
-    #include <sys/stat.h>
+#include <errno.h>
+#include <signal.h>
+#include <stdio.h>
+#include <sys/sem.h>
+#include <sys/shm.h>
+#include <sys/stat.h>
 #else
-    #include <iostream>
-    using namespace std;
-    #include <windows.h>
-    #define hotkey_id 1
+#include <iostream>
+using namespace std;
+#include <windows.h>
+#define hotkey_id 1
 #endif
-
-#define PERM 	(S_IRUSR | S_IWUSR)
-//#define KEY 	36264
-#define KEYPATH	"/tmp"
-#define STRKEY	"LIBFETIONKETFORWINDOWS"
-static int *shmPointer;
-
-#ifndef WIN32
-    static int shid;
-#else
-    static HANDLE shHandle = NULL;
-#endif
-
-int addCount();
-int reducecount();
-int detachandremove(void *shmaddr);
-
-int initshared(const char *path, const char *keyString)
-{
-    #ifndef WIN32
-        Q_UNUSED(keyString);
-
-        key_t key = ftok(path, 'S');
-
-        /* get attached memory, creating it if necessary */
-        shid = shmget(key, sizeof(int), PERM | IPC_CREAT | IPC_EXCL);
-        if ((shid == -1) && (errno != EEXIST))  /* real error */
-            return -1;
-
-        if (shid == -1)
-        {
-             /* already created, access and attach it */
-			if ( ((shid = shmget(key, sizeof(int), PERM)) ==  -1) || 
-					((shmPointer = (int*)shmat(shid, NULL, 0)) == (void*) -1)
-			   )
-                return -1;
-            //printf("already have a shared memory and the shmPointer = %d !\n", *shmPointer);
-            addCount();
-        } else {
-             /* successfully created, must attach and initialize variables */
-            //printf("create a shared memory!\n");
-            shmPointer = (int*)shmat(shid, NULL, 0);
-            if (shmPointer == (void*)-1)
-                return -1;
-            *shmPointer = 1;
-        }
-        //printf("There are %d instances!\n", *shmPointer);
-        return 0;
-    #else
-        /* Check the handler */
-        if ((shHandle = OpenFileMapping(FILE_MAP_ALL_ACCESS, false, LPCWSTR
-            (keyString))) == NULL)
-        {
-            /* There is no file mapping, so create one */
-            shHandle = CreateFileMapping((HANDLE)0xFFFFFFFF, NULL,
-                PAGE_READWRITE, 0, 1, LPCWSTR(keyString));
-
-            if (shHandle == NULL)
-                return -1;
-
-            //printf("create a shared memory!\n");
-
-            /* Get the access pointer */
-            shmPointer = (int*)MapViewOfFile(shHandle, FILE_MAP_ALL_ACCESS, 0,
-                          0, 0);
-
-            if (shmPointer == NULL)
-                return -1;
-            (*shmPointer) = 1;
-        } else {
-            /* Get the access pointer */
-            shmPointer = (int*)MapViewOfFile(shHandle, FILE_MAP_ALL_ACCESS, 0,
-                          0, 0);
-
-            if (shmPointer == NULL)
-                return -1;
-            //printf("already have a shared memory and the shmPointer = %d !\n", *shmPointer);
-            addCount();
-        }
-
-        //printf("There are %d instances!\n", *shmPointer);
-        return 0;
-
-    #endif
-}
-
-/**************************************************************************/
-/*                                                                        */
-/**************************************************************************/
-
-int addCount()
-{
-    (*shmPointer) = (*shmPointer) + 1;
-    return 0;
-}
-
-/**************************************************************************/
-/*                                                                        */
-/**************************************************************************/
-
-int reducecount()
-{
-    //printf("reduce shmPointer!\n");
-    *shmPointer =  *shmPointer - 1;
-    if (*shmPointer == 0)
-        detachandremove(shmPointer);
-        //printf("There is no instanceso, so release the shared memory!\n");
-    return 0;
-}
-
-/**************************************************************************/
-/*                                                                        */
-/**************************************************************************/
-
-int detachandremove(void *shmaddr)
-{
-#ifndef WIN32
-	int error = 0;
-	if (shmdt(shmaddr) == -1)
-		error = errno;
-	if ((shmctl(shid, IPC_RMID, NULL) == -1) && !error)
-		error = errno;
-	if (!error)
-		return 0;
-
-	errno = error;
-	return -1;
-#else
-	if (UnmapViewOfFile(shmPointer) != 0)
-		return -1;
-	if (CloseHandle(shHandle) != 0)
-		return -1;
-	return 0;
-#endif
-}
-
 
 Settings &Settings::instance()
 {
@@ -187,20 +50,16 @@ Settings &Settings::instance()
     return instance;
 }
 
-
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
 Settings::Settings(const QString &fileName, Format format) :
     QSettings(fileName, format)
 {
-//    FX_FUNCTION
+    //    FX_FUNCTION
     m_uid = 0L;
     m_mainwind = NULL;
     m_isAutoLogin = ::isAutoLogin(NULL, NULL, NULL);
-
-
-    initshared(KEYPATH, STRKEY);
 
     QSize dt_size = QApplication::desktop()->size();
     m_LoginWinPos = value("LoginWinPos", QPoint(dt_size.width() / 3,
@@ -225,25 +84,11 @@ Settings::Settings(const QString &fileName, Format format) :
 /**************************************************************************/
 Settings::~Settings()
 {
-	reducecount();
-//    FX_FUNCTION
+    //    FX_FUNCTION
     if (m_uid)
     {
         endGroup();
     }
-}
-
-int Settings::GetInstancesNum()
-{
-    return  *shmPointer;
-}
-
-int Settings::isSingleInstance()
-{
-	if (GetInstancesNum() > 1)
-		return 0;
-	else
-		return 1;
 }
 
 /**************************************************************************/
@@ -251,7 +96,7 @@ int Settings::isSingleInstance()
 /**************************************************************************/
 void Settings::setUser(long uid)
 {
-//    FX_FUNCTION
+    //    FX_FUNCTION
     if (m_uid)
     {
         endGroup();
@@ -266,7 +111,7 @@ void Settings::setUser(long uid)
 /**************************************************************************/
 void Settings::saveFontSetting(const QFont &font)
 {
-//    FX_FUNCTION
+    //    FX_FUNCTION
     if (m_uid)
     {
         endGroup();
@@ -286,7 +131,7 @@ void Settings::saveFontSetting(const QFont &font)
 /**************************************************************************/
 void Settings::setSkins(QString skinPath, QString skinName)
 {
-//    FX_FUNCTION
+    //    FX_FUNCTION
     if (m_uid)
     {
         endGroup();
@@ -308,7 +153,7 @@ void Settings::setSkins(QString skinPath, QString skinName)
 /**************************************************************************/
 void Settings::init_setting()
 {
-//    FX_FUNCTION
+    //    FX_FUNCTION
     m_DisableNudge = value("DisableNudge", false).toBool();
     m_isMute = value("Mute", false).toBool();
     m_isEnterSend = value("EnterSend", true).toBool();
@@ -360,7 +205,7 @@ void Settings::init_setting()
 /**************************************************************************/
 void Settings::setDisableNudge(bool isDisableNudge)
 {
-//    FX_FUNCTION
+    //    FX_FUNCTION
     m_DisableNudge = isDisableNudge;
     setValue("DisableNudge", m_DisableNudge);
 }
@@ -370,7 +215,7 @@ void Settings::setDisableNudge(bool isDisableNudge)
 /**************************************************************************/
 void Settings::setAutoLogin(bool isAutoLogin)
 {
-//    FX_FUNCTION
+    //    FX_FUNCTION
     m_isAutoLogin = isAutoLogin;
 
     if (!m_isAutoLogin)
@@ -403,7 +248,7 @@ void Settings::setAutoLogin(bool isAutoLogin)
 /**************************************************************************/
 void Settings::setMainWindowTopHint(bool isMainWindowTopHint)
 {
-//    FX_FUNCTION
+    //    FX_FUNCTION
     m_isMainWindowTopHint = isMainWindowTopHint;
     setValue("MainWindowTopHint", m_isMainWindowTopHint);
 
@@ -428,7 +273,7 @@ void Settings::setMainWindowTopHint(bool isMainWindowTopHint)
 /**************************************************************************/
 void Settings::setAutoShowMsg(bool isAutoShow)
 {
-//    FX_FUNCTION
+    //    FX_FUNCTION
     m_isAutoShow = isAutoShow;
     setValue("AutoShowMsg", m_isAutoShow);
 }
@@ -438,7 +283,7 @@ void Settings::setAutoShowMsg(bool isAutoShow)
 /**************************************************************************/
 void Settings::setMute(bool isMute)
 {
-//    FX_FUNCTION
+    //    FX_FUNCTION
     m_isMute = isMute;
     setValue("Mute", m_isMute);
 }
@@ -448,7 +293,7 @@ void Settings::setMute(bool isMute)
 /**************************************************************************/
 void Settings::setEnableLongSMS(bool isEnableLongSMS)
 {
-//    FX_FUNCTION
+    //    FX_FUNCTION
     m_isEnableLongSMS = isEnableLongSMS;
     setValue("EnableLongSMS", m_isEnableLongSMS);
     if (m_isEnableLongSMS)
@@ -466,7 +311,7 @@ void Settings::setEnableLongSMS(bool isEnableLongSMS)
 /**************************************************************************/
 void Settings::setEnterSend(bool isEnterSend)
 {
-//    FX_FUNCTION
+    //    FX_FUNCTION
     m_isEnterSend = isEnterSend;
     setValue("EnterSend", m_isEnterSend);
 }
@@ -476,7 +321,7 @@ void Settings::setEnterSend(bool isEnterSend)
 /**************************************************************************/
 void Settings::setStartHide(bool isStartHide)
 {
-//    FX_FUNCTION
+    //    FX_FUNCTION
     m_isStartHide = isStartHide;
     setValue("StartHide", m_isStartHide);
 }
@@ -486,7 +331,7 @@ void Settings::setStartHide(bool isStartHide)
 /**************************************************************************/
 void Settings::setAutoReply(bool isAutoReply, QString re_msg)
 {
-//    FX_FUNCTION
+    //    FX_FUNCTION
     m_isAutoReply = isAutoReply;
     setValue("AutoReply", m_isAutoReply);
 
@@ -499,7 +344,7 @@ void Settings::setAutoReply(bool isAutoReply, QString re_msg)
 /**************************************************************************/
 void Settings::setMsgRingPath(QString path)
 {
-//    FX_FUNCTION
+    //    FX_FUNCTION
     m_MsgRingPath = path;
     setValue("MsgRingPath", m_MsgRingPath);
 }
@@ -509,7 +354,7 @@ void Settings::setMsgRingPath(QString path)
 /**************************************************************************/
 void Settings::setLoginWinPos(QPoint pos)
 {
-//    FX_FUNCTION
+    //    FX_FUNCTION
     if (m_uid)
     {
         endGroup();
@@ -529,7 +374,7 @@ void Settings::setLoginWinPos(QPoint pos)
 /**************************************************************************/
 void Settings::setMsgWinPos(QPoint pos)
 {
-//    FX_FUNCTION
+    //    FX_FUNCTION
     m_MsgWinPos = pos;
     setValue("MsgWinPos", pos);
 }
@@ -539,7 +384,7 @@ void Settings::setMsgWinPos(QPoint pos)
 /**************************************************************************/
 void Settings::setMainWinPos(QPoint pos)
 {
-//    FX_FUNCTION
+    //    FX_FUNCTION
     m_MainWinPos = pos;
     setValue("MainWinPos", pos);
 }
@@ -549,7 +394,7 @@ void Settings::setMainWinPos(QPoint pos)
 /**************************************************************************/
 void Settings::setLoginWinSize(QSize size)
 {
-//    FX_FUNCTION
+    //    FX_FUNCTION
     if (m_uid)
     {
         endGroup();
@@ -569,7 +414,7 @@ void Settings::setLoginWinSize(QSize size)
 /**************************************************************************/
 void Settings::setMainWinSize(QSize size)
 {
-//    FX_FUNCTION
+    //    FX_FUNCTION
     m_MainWinSize = size;
     setValue("MainWinSize", size);
 }
@@ -579,7 +424,7 @@ void Settings::setMainWinSize(QSize size)
 /**************************************************************************/
 void Settings::setMsgWinSize(QSize size)
 {
-//    FX_FUNCTION
+    //    FX_FUNCTION
     m_MsgWinSize = size;
     setValue("MsgWinSize", size);
 }
@@ -589,7 +434,7 @@ void Settings::setMsgWinSize(QSize size)
 /**************************************************************************/
 void Settings::setSendMultMsgWinPos(QPoint pos)
 {
-//    FX_FUNCTION
+    //    FX_FUNCTION
     m_SendMultMsgWinPos = pos;
     setValue("SendMultMsgWinPos", pos);
 }
@@ -599,7 +444,7 @@ void Settings::setSendMultMsgWinPos(QPoint pos)
 /**************************************************************************/
 void Settings::setSendMultMsgWinSize(QSize size)
 {
-//    FX_FUNCTION
+    //    FX_FUNCTION
     m_SendMultMsgWinSize = size;
     setValue("SendMultMsgWinSize", size);
 }
@@ -609,7 +454,7 @@ void Settings::setSendMultMsgWinSize(QSize size)
 /**************************************************************************/
 bool Settings::setEnableGetMsgHotKey(bool enable)
 {
-//    FX_FUNCTION
+    //    FX_FUNCTION
     if (enable == m_isEnableGetMsgHotKey)
     {
         return true;
@@ -632,11 +477,10 @@ bool Settings::setEnableGetMsgHotKey(bool enable)
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-bool Settings::setGetMsgHotKey(QChar keyValue,
-                               Qt::KeyboardModifiers keyMod,
-                               bool isRegister)
+bool Settings::setGetMsgHotKey(QChar keyValue, Qt::KeyboardModifiers keyMod,
+        bool isRegister)
 {
-//    FX_FUNCTION
+    //    FX_FUNCTION
     if (!isRegister)
     {
         //unRegister hot key
@@ -660,68 +504,70 @@ bool Settings::setGetMsgHotKey(QChar keyValue,
 
 int Settings::QtModToWinMod(Qt::KeyboardModifiers keyMod)
 {
+    Q_UNUSED(keyMod);
 #if WIN32
-	int Modifiy = 0;
-	bool isHaveModifie = false;
+    int Modifiy = 0;
+    bool isHaveModifie = false;
 
-	if (keyMod &Qt::ControlModifier) {
-		Modifiy = Modifiy | MOD_CONTROL;
-		isHaveModifie = true;
-	}
+    if (keyMod &Qt::ControlModifier)
+    {
+        Modifiy = Modifiy | MOD_CONTROL;
+        isHaveModifie = true;
+    }
 
-	if (keyMod &Qt::ShiftModifier) {
-		Modifiy = Modifiy | MOD_SHIFT;
-		isHaveModifie = true;
-	}
+    if (keyMod &Qt::ShiftModifier)
+    {
+        Modifiy = Modifiy | MOD_SHIFT;
+        isHaveModifie = true;
+    }
 
-	if (keyMod &Qt::AltModifier) {
-		Modifiy = Modifiy | MOD_ALT;
-		isHaveModifie = true;
-	}
+    if (keyMod &Qt::AltModifier)
+    {
+        Modifiy = Modifiy | MOD_ALT;
+        isHaveModifie = true;
+    }
 
-	if (!isHaveModifie)
-		Modifiy = MOD_CONTROL | MOD_ALT;
+    if (!isHaveModifie)
+    Modifiy = MOD_CONTROL | MOD_ALT;
 
-	return Modifiy;
+    return Modifiy;
 #else
-	return 0;
+    return 0;
 #endif
 }
 
-bool Settings::RegistHotkey(QWidget *window,
-		QChar keyValue,
-		Qt::KeyboardModifiers keyMod)
+bool Settings::RegistHotkey(QWidget *window, QChar keyValue,
+        Qt::KeyboardModifiers keyMod)
 {
 #if WIN32
-	WId w_handle = window ? window->winId(): 0;
-		int modifiy = QtModToWinMod(keyMod);
-		return RegisterHotKey(w_handle, hotkey_id, modifiy, VkKeyScan
-				(keyValue.toAscii()));
+    WId w_handle = window ? window->winId(): 0;
+    int modifiy = QtModToWinMod(keyMod);
+    return RegisterHotKey(w_handle, hotkey_id, modifiy, VkKeyScan
+            (keyValue.toAscii()));
 #else //liunx or mac os are not implement...
-		Q_UNUSED(window);
-		Q_UNUSED(keyValue);
-		Q_UNUSED(keyMod);
-		return false;
+    Q_UNUSED(window);
+    Q_UNUSED(keyValue);
+    Q_UNUSED(keyMod);
+    return false;
 #endif
-		
+
 }
 
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
 
-bool Settings::UnRegistHotkey(QWidget *window,
-		QChar keyValue,
-		Qt::KeyboardModifiers keyMod)
+bool Settings::UnRegistHotkey(QWidget *window, QChar keyValue,
+        Qt::KeyboardModifiers keyMod)
 {
 #if WIN32
-	WId w_handle = window ? window->winId(): 0;
-		return UnregisterHotKey(w_handle, hotkey_id);
+    WId w_handle = window ? window->winId(): 0;
+    return UnregisterHotKey(w_handle, hotkey_id);
 #else
-		Q_UNUSED(window);
-		Q_UNUSED(keyValue);
-		Q_UNUSED(keyMod);
-		return false;
+    Q_UNUSED(window);
+    Q_UNUSED(keyValue);
+    Q_UNUSED(keyMod);
+    return false;
 #endif
 }
 

@@ -453,6 +453,18 @@ void FxLoginWindow::init()
     UpdateSkins();
 }
 
+#include "stdio.h"
+#include "stdlib.h"
+#include "unistd.h"
+#include "fcntl.h"
+int FxLoginWindow::checkInstanceLock()
+{
+    if (open(FX_INSTANCE_TMP_FILE, O_RDONLY, O_NONBLOCK) > 0)
+    {
+        return TRUE;
+    }
+    return FALSE;
+}
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
@@ -470,7 +482,7 @@ void FxLoginWindow::checkAutoLogin()
         loginState->setCurrentIndex(state_tmp);
 
         //here check is have one instance for auto login
-        if (Settings::instance().isSingleInstance())
+        if (!checkInstanceLock())
         {
             login();
         }

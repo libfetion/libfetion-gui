@@ -43,7 +43,8 @@ class FxLoginWindow : public FxWidget, public Ui::Fetion_Login
 
         void init();
         void checkAutoLogin();
-
+        /*FIXME: only one instance was allowed */
+        int  checkInstanceLock();
         void LoginOK();
 
         void enableLoginBT();
