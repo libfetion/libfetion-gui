@@ -35,8 +35,6 @@
 #define FX_SKIN_CONFIG      "/skin.xml"
 #define FX_USE_SERVER_TIME  0
 
-#define FX_INSTANCE_TMP_FILE "fx-inst"
-
 #ifdef WIN32
     #pragma comment(lib, "./lib/LibFetion.lib")
     #pragma comment(lib, "./lib/libcurl_imp.lib")

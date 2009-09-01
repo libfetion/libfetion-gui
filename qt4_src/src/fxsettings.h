@@ -37,7 +37,7 @@ class Settings: public QSettings
         Settings(const QString & fileName, Format format);
         ~Settings();
         static Settings& instance();
-
+        int isSingleInstance();
         void setUser(long uid);
         void setMainWindow(FxMainWindow *mainwind)
         {

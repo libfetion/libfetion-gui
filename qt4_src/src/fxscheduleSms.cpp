@@ -260,5 +260,10 @@ void FxScheduleSMS::closeEvent(QCloseEvent *event)
 {
     FX_FUNCTION
     Q_UNUSED(event);
+    if (mainwind)
+    {
+        mainwind->showNormal();
+    }
+
     this->hide();
 }
