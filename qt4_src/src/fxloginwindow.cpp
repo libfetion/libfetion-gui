@@ -146,77 +146,74 @@ void FxLoginWindow::setLogingState(char *ch)
 
 void My_EventListener(int message, WPARAM wParam, LPARAM lParam, void *args)
 {
+    FxLoginWindow *loginDlg = NULL;
+    if (!args)
+        return ;
+    loginDlg = (FxLoginWindow*)args;
+    loginDlg->handleFx_Login_Event(message, wParam, lParam);
+}
+
+void FxLoginWindow::handleFx_Login_Event(int message, WPARAM wParam, LPARAM
+    lParam)
+{
     Q_UNUSED(wParam);
     Q_UNUSED(lParam);
-    FxLoginWindow *loginDlg = NULL;
+    emit signal_Login_Message((int)message);
+}
 
-    if (!args)
-    {
-        return ;
-    }
-
-    loginDlg = (FxLoginWindow*)args;
-
+void FxLoginWindow::slots_Login_Message(int message)
+{
     switch (message)
     {
         case FX_LOGIN_URI_ERROR:
             FX_DEBUG("FX_LOGIN_URI_ERROR");
-            loginDlg->Login_State->setText(
-                    QObject::tr("mobile_no or fetion uid error"));
-            loginDlg->enableLoginBT();
+				Login_State->setText(QObject::tr("mobile_no or fetion uid error"));
+				enableLoginBT();
             break;
 
         case FX_LOGIN_CONNECTING:
             FX_DEBUG("FX_LOGIN_CONNECTING");
-            loginDlg->Login_State->setText(
-                    QObject::tr("connecting the fetion server"));
+            Login_State->setText(QObject::tr("connecting the fetion server"));
             break;
 
         case FX_LOGIN_WAIT_AUTH:
             FX_DEBUG("FX_LOGIN_WAIT_AUTH");
-            loginDlg->Login_State->setText(
-                    QObject::tr("waiting the server auth"));
+            Login_State->setText(QObject::tr("waiting the server auth"));
             break;
 
         case FX_LOGIN_AUTH_OK:
             FX_DEBUG("FX_LOGIN_WAIT_AUTH");
-            loginDlg->Login_State->setText(
-                    QObject::tr("server auth ok"));
+            Login_State->setText(QObject::tr("server auth ok"));
             break;
 
         case FX_LOGIN_FAIL:
             FX_DEBUG("FX_LOGIN_FAIL");
-            loginDlg->Login_State->setText(
-                    QObject::tr("password error"));
-            loginDlg->enableLoginBT();
+            Login_State->setText(QObject::tr("password error"));
+            enableLoginBT();
             break;
         case FX_LOGIN_NETWORK_ERROR:
             FX_DEBUG("FX_LOGIN_NETWORK_ERROR");
-            loginDlg->Login_State->setText(
-                    QObject::tr("network error"));
+            Login_State->setText(QObject::tr("network error"));
             cleanCacheServerAdd(); //clean the sever ip cache
-            loginDlg->enableLoginBT();
+            enableLoginBT();
             break;
         case FX_LOGIN_UNKOWN_ERROR:
             FX_DEBUG("FX_LOGIN_UNKOWN_ERROR");
-            loginDlg->Login_State->setText(
-                    QObject::tr("unkown error"));
+            Login_State->setText(QObject::tr("unkown error"));
             cleanCacheServerAdd(); //clean the sever ip cache
-            loginDlg->enableLoginBT();
+            enableLoginBT();
             break;
 
         case FX_LOGIN_TIMEOUT:
             FX_DEBUG("FX_LOGIN_TIMEOUT");
-            loginDlg->Login_State->setText(
-                    QObject::tr("login time out"));
-            loginDlg->enableLoginBT();
+            Login_State->setText(QObject::tr("login time out"));
+            enableLoginBT();
             break;
 
         case FX_LOGIN_UNKOWN_USR:
             FX_DEBUG("FX_LOGIN_UNKOWN_USR");
-            loginDlg->Login_State->setText(
-                    QObject::tr("unkown fetion uid"));
-            loginDlg->enableLoginBT();
+            Login_State->setText(QObject::tr("unkown fetion uid"));
+            enableLoginBT();
             break;
 
         case FX_LOGIN_GCL_GETTING:
@@ -229,9 +226,8 @@ void My_EventListener(int message, WPARAM wParam, LPARAM lParam, void *args)
 
         case FX_LOGIN_GCL_FAIL:
             FX_DEBUG("FX_LOGIN_GCL_FAIL");
-            loginDlg->Login_State->setText(
-                    QObject::tr("get account list fail"));
-            loginDlg->enableLoginBT();
+            Login_State->setText(QObject::tr("get account list fail"));
+            enableLoginBT();
             break;
 
         case FX_LOGIN_GP_GETTING:
@@ -243,16 +239,14 @@ void My_EventListener(int message, WPARAM wParam, LPARAM lParam, void *args)
             break;
         case FX_LOGIN_GP_FAIL:
             FX_DEBUG("FX_LOGIN_GP_FAIL");
-            loginDlg->Login_State->setText(
-                    QObject::tr("get account info fail"));
-            loginDlg->enableLoginBT();
+            Login_State->setText(QObject::tr("get account info fail"));
+            enableLoginBT();
             break;
 
         case FX_LOGIN_OK:
             FX_DEBUG("FX_LOGIN_OK");
-            loginDlg->Login_State->setText(
-                    QObject::tr("fetion login ok"));
-            loginDlg->LoginOK();
+            Login_State->setText(QObject::tr("fetion login ok"));
+            LoginOK();
             break;
         default:
             break;
@@ -441,6 +435,8 @@ void FxLoginWindow::init()
     set_login_button_state(true);
 
     //Login_State->setText("test version for v 0.2.0");
+    connect(this, SIGNAL(signal_Login_Message(int)),
+            this, SLOT(slots_Login_Message(int)));
     connect(BT_Login_Ok, SIGNAL(clicked()),
             this, SLOT(BT_Login_clicked()));
     connect(this, SIGNAL(signal_enableLoginBT()),
