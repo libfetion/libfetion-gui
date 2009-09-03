@@ -495,6 +495,10 @@ void FxMainWindow::handleFx_relogin_Event(int message,
     FX_FUNCTION
     Q_UNUSED(wParam);
     Q_UNUSED(lParam);
+    emit signal_Relogin_Event((int)message);
+}
+void FxMainWindow::slots_Relogin_Event(int message)
+{
     switch (message)
     {
         case FX_LOGIN_URI_ERROR:
@@ -1416,6 +1420,9 @@ void FxMainWindow::init_slot_signal()
     connect(this, SIGNAL(signal_set_state(int)),
             this, SLOT(slot_set_state(int)));
 
+    connect(this, SIGNAL(signal_Relogin_Event(int)),
+            this, SLOT(slots_Relogin_Event(int)));
+
     connect(this, SIGNAL(signal_NewSysMsg(qlonglong)),
             msgwin, SLOT(slot_haveNewSysMessage(qlonglong)));
     connect(this, SIGNAL(signal_NewMsg(qlonglong)),
@@ -1445,7 +1452,7 @@ void FxMainWindow::init_slot_signal()
             buddyMge, SLOT(slot_MoveGroup(qlonglong, int)));
 
     connect(this, SIGNAL(signal_update_scheduleList()),
-            scheduleSmsManager,SLOT(slot_update_scheduleList()));
+            scheduleSmsManager, SLOT(slot_update_scheduleList()));
 }
 
 /**************************************************************************/
