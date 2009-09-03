@@ -108,6 +108,8 @@ signals:
 	void signal_UpdateSmsDay(int);
     void signal_update_scheduleList();
 
+    void signal_Relogin_Event(int);
+
 private slots:
     void checkSplashScreenFlag();
 	void checkSkinPath();
@@ -169,6 +171,7 @@ private slots:
 	void setUINickName();
 
 	void schedule_SMS();
+	void slots_Relogin_Event(int);
 private:
     void init_UI();
     void initAllActions();
