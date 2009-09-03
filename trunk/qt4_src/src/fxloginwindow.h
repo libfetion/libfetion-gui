@@ -41,6 +41,7 @@ class FxLoginWindow : public FxWidget, public Ui::Fetion_Login
         FxLoginWindow(QWidget *parent = 0);
         ~FxLoginWindow();
 
+        void handleFx_Login_Event(int message, WPARAM wParam, LPARAM lParam);
         void init();
         void checkAutoLogin();
 
@@ -57,12 +58,14 @@ class FxLoginWindow : public FxWidget, public Ui::Fetion_Login
     private slots:
         void BT_Login_clicked();
         void slots_enableLonginBT();
+        void slots_Login_Message(int);
         void Setting(const QString &);
         void login_timer();
 
         void login();
 
     signals:
+        void signal_Login_Message(int);
         void signal_LoginOK();
         void signal_enableLoginBT();
 
