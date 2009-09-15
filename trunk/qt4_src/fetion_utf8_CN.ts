@@ -13,7 +13,7 @@
     </message>
     <message>
         <location filename="src/fxaccountTab.cpp" line="109"/>
-        <source> 's mobile</source>
+        <source> &apos;s mobile</source>
         <translation>的手机上</translation>
     </message>
     <message>
@@ -23,7 +23,7 @@
     </message>
     <message>
         <location filename="src/fxaccountTab.cpp" line="104"/>
-        <source> is offline, can't receive you sms immediately, your msg will be saved and sent later</source>
+        <source> is offline, can&apos;t receive you sms immediately, your msg will be saved and sent later</source>
         <oldsource>are offline, your message will send to his mobile</oldsource>
         <translation>没在线，你的消息将发送到对方手机上</translation>
     </message>
@@ -67,13 +67,13 @@
     </message>
     <message>
         <location filename="src/fxaccountTab.cpp" line="128"/>
-        <source> is offline, can't receive you sms immediately, your msg will saved and send later</source>
+        <source> is offline, can&apos;t receive you sms immediately, your msg will saved and send later</source>
         <translation>已离线，不能立即收到您的消息。 您发送的消息将被保存下来并延迟发送</translation>
     </message>
     <message>
         <location filename="src/fxaccountTab.cpp" line="133"/>
         <source> is offline, your message will be send to his mobile phone</source>
-        <translation>已离线，不能立即收到您的消息。 您发送的消息将被保存下来并延迟发送</translation>
+        <translation>没在线，你的消息将发送到对方手机</translation>
     </message>
     <message>
         <location filename="src/fxaccountTab.cpp" line="341"/>
@@ -120,7 +120,7 @@
         <translation type="obsolete">]个字符</translation>
     </message>
     <message>
-        <source> are offline, can't receive you sms immediately, your msg will saved and send later</source>
+        <source> are offline, can&apos;t receive you sms immediately, your msg will saved and send later</source>
         <translation type="obsolete">已离线，不能立即收到您的消息。 您发送的消息将被保存下来并延迟发送</translation>
     </message>
     <message>
@@ -131,7 +131,7 @@
     </message>
     <message>
         <location filename="src/fxaccountTab.cpp" line="264"/>
-        <source>you couldn't send nudge to him</source>
+        <source>you couldn&apos;t send nudge to him</source>
         <translation>不能给对方发送窗口闪屏</translation>
     </message>
     <message>
@@ -141,7 +141,7 @@
     </message>
     <message>
         <location filename="src/fxaccountTab.cpp" line="276"/>
-        <source>you couldn't send nudge frequently</source>
+        <source>you couldn&apos;t send nudge frequently</source>
         <translation>不能频繁发送窗口闪屏</translation>
     </message>
 </context>
@@ -1103,8 +1103,8 @@ background-color:rgb(246,243,243);
         <translation type="obsolete">&amp;About</translation>
     </message>
     <message>
-        <source>Show the application's About box</source>
-        <translation type="obsolete">Show the application's About box</translation>
+        <source>Show the application&apos;s About box</source>
+        <translation type="obsolete">Show the application&apos;s About box</translation>
     </message>
     <message>
         <location filename="src/fxmainwindow.cpp" line="494"/>
@@ -1533,7 +1533,7 @@ background-color:rgb(246,243,243);
     </message>
     <message>
         <location filename="src/fxmainwindow.cpp" line="1722"/>
-        <source>the path of file can't write</source>
+        <source>the path of file can&apos;t write</source>
         <translation>你选择的目录不可写</translation>
     </message>
     <message>
@@ -1710,7 +1710,7 @@ background-color:rgb(246,243,243);
         <location filename="src/fxmsgwindow.cpp" line="659"/>
         <location filename="src/fxmsgwindow.cpp" line="670"/>
         <location filename="src/fxmsgwindow.cpp" line="682"/>
-        <source>can't send mseeage to he</source>
+        <source>can&apos;t send mseeage to he</source>
         <translation>不能给对方发信息</translation>
     </message>
     <message>
