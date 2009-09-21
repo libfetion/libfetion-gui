@@ -221,8 +221,8 @@ typedef enum
 		char *nickname;                 //昵称
 		/** impresa . */
 		char *impresa;                  //心情 
-		/** sexuality 1 is boy, 0 is girl . */
-		int gender;  //1 boy, 0 girl.   //性别
+		/** 0 secret 1 is boy, 2 is girl . */
+		int gender;  //1 boy, 2 girl.   //性别
 		/** nation. */
 		char *nation;                   //国家 
 		/** province. */
