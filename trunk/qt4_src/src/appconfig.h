@@ -20,9 +20,9 @@
 #ifndef FXAPPCONFIG_H 
 #define FXAPPCONFIG_H 
 
-#define BUILD_DATE 20090701
-#define CURRENT_VERSION 100
-#define VERSION_NO "v1.0"
+#define BUILD_DATE 20090923
+#define CURRENT_VERSION 101
+#define VERSION_NO "v1.1"
 
 /* GUI debug, no real network connection */
 // #define HAVE_GUI_DEBUG_ENABLED
