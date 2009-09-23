@@ -378,7 +378,7 @@ QPixmap getOnlineStatusIcon(int status)
 
         /* should never reach*/
         default:
-            return QPixmap("");
+            ;/*return QPixmap("");*/
     }
 
     return QPixmap(getSkinPath() + "/" + getXMLRes("online_offline", ""));
