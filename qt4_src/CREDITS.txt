@@ -1,5 +1,6 @@
 DDD <dedodong@163.com>(Project Starter, LibFetion protocol Maintainer)
 iptton <iptton@gmail.com>(LibFetion GUI Maintainer)
+alsor <alsor.zhou@gmail.com>(LibFetion GUI Maintainer)
 Ashen <weizhg23@gmail.com>(Windows Maintainer)
 YY <51test2003@gmail.com>(MacOS Maintainer)
 matoung <matoung@qq.com> (smartphone maintainer)
