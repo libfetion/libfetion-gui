@@ -1,0 +1,32 @@
+DDD <dedodong@163.com>(Project Starter, LibFetion protocol Maintainer)
+iptton <iptton@gmail.com>(LibFetion GUI Maintainer)
+alsor <alsor.zhou@gmail.com>(LibFetion GUI Maintainer)
+Ashen <weizhg23@gmail.com>(Windows Maintainer)
+YY <51test2003@gmail.com>(MacOS Maintainer)
+matoung <matoung@qq.com> (smartphone maintainer)
+John <chaiwizard@gmail.com> (Nokia n810 maintiner)
+guohongtao <guohongtao@gmail.com>(IPhone Maintainer)
+Honnix <hxliang1982@gmail.com>(java interface of libfetion)
+
+Echo <echo@stu.xjtu.edu.cn>(Linux Contributer)
+yuking <yuking_net@sohu.com>(Linux Contributer)
+shell <shell909090@gmail.com>(Windows Contributer)
+liyong <liyong03@gmail.com>(MacOS Contributer)
+cjacker <cjacker@gmail.com>(Linux Contributer)
+heihaier <admin@heihaier.org>(GTK of Linux Contributer)
+toy <toy_2003@163.com>(Windows Contributer)
+
+minifish <ikusaisland@gmail.com>(UI Designer)
+HUan <wanzhenhuan@gmail.com>(UI Designer)
+elix <elixzhang@mac.com>(UI Designer)
+ATP <jxhatpjxh@163.com>(UI Designer)
+
+HJMC <sacdcn@126.com>(Tester)
+
+Solvor <solvor@163.com>(Skins Designer)
+hehailong <hehailong10000@126.com>(Skins Designer)
+shanu <shaun.he@mind-unique.com(Skins Designer)
+
+Gel <gel01@163.com>(others)
+alooffx <alooffox@gmail.com>(others)
+

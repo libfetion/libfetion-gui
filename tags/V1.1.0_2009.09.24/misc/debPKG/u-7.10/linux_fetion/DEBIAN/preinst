@@ -1,0 +1,9 @@
+#!/bin/sh
+# preinst script for debian
+#
+# see: dh_installdeb(1)
+
+rm -rf /usr/share/libfetion
+exit 0
+
+

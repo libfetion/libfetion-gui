@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=Linux Fetion
+Exec=linux-fetion %u
+GenericName=Linux Fetion
+GenericName[zh_CN]=Linux 飞信第三方客户程序
+Comment=Linux Fetion
+Comment[zh_CN]=Linux 飞信第三方客户程序
+MimeTypes=
+Icon=fetion.png
+Categories=Qt;KDE;Network
+Terminal=false
