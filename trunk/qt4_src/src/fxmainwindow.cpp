@@ -79,7 +79,7 @@ FxMainWindow::FxMainWindow(QWidget *parent): FxWidget(parent), trayIcon(NULL),
 
     minimizedTimer.start(100);
     checkSkinsTimer.start(10000);
-    updateAccountInfoTimer.start(3500);
+    updateAccountInfoTimer.start(1000);
 }
 
 /**************************************************************************/
