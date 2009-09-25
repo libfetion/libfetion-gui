@@ -1,0 +1,24 @@
+README
+
+  LibFetion a IM client based on QT, using CHINA MOBILE's Fetion Protocol.
+
+
+CONTACT
+
+  If you have problems, questions, ideas or suggestions, please contact us
+  by email to dedodong@163.com or libfetion@gmail.com . 
+
+  All contributors to the project are listed in the CREDITS.txt document.
+
+WEB SITE
+
+  Visit the curl web site for the latest news and downloads:
+
+       China       http://www.libfetion.cn/
+
+SVN
+
+  To download the very latest source off the SVN server do this:
+
+  svn checkout http://libfetion-gui.googlecode.com/svn/trunk/ libfetion-gui-read-only
+
