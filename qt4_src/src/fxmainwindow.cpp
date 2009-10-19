@@ -1643,6 +1643,8 @@ void FxMainWindow::personalInfo()
     const Fetion_Account * account =
             fx_get_account_by_id(strtol(fx_get_usr_uid(), NULL, 10));
 
+	if (!account)
+		return;
     /* update user's personal info, before fetch the details */
     fx_update_account_info_by_id(account->id);
 

@@ -45,6 +45,13 @@ FxContactInfo::FxContactInfo(QWidget*parent, const Fetion_Account *account):
     setupUi(this);
     m_account = account;
 
+    if ((qlonglong)strtol(fx_get_usr_uid(), NULL, 10) == m_account->id)
+	{
+        m_isUser = true;
+	}else{
+        m_isUser = false;
+	}
+
     char *showname = fx_get_account_show_name(account, FALSE);
     QString show_name = QString::fromUtf8(showname);
     if (showname)
@@ -156,10 +163,6 @@ FxContactInfo::getContactInfo()
                 break;
         }
         FX_CONTACT_INFO_NEWLINE(info);
-        info += tr("score:");
-        FX_CONTACT_INFO_DATA_SET_WITH_VALUE(info,
-                QString("%1").arg(fx_get_usr_score()));
-        FX_CONTACT_INFO_NEWLINE(info);
         info += tr("impresa:");
         FX_CONTACT_INFO_DATA_SET_WITH_VALUE(info,
                         QString::fromUtf8(m_account->personal->impresa));
@@ -192,10 +195,6 @@ FxContactInfo::getContactInfo()
         info += tr("gender:");
         FX_CONTACT_INFO_DATA_SET_WITH_VALUE(info, tr("unknow"));
         FX_CONTACT_INFO_NEWLINE(info);
-        info += tr("score:");
-        FX_CONTACT_INFO_DATA_SET_WITH_VALUE(info,
-                QString("%1").arg(fx_get_usr_score()));
-        FX_CONTACT_INFO_NEWLINE(info);
         info += tr("impresa:");
         FX_CONTACT_INFO_DATA_SET(info);
         FX_CONTACT_INFO_NEWLINE(info);
@@ -207,6 +206,15 @@ FxContactInfo::getContactInfo()
         FX_CONTACT_INFO_DATA_SET_WITH_VALUE(info, tr("unknow"));
         FX_CONTACT_INFO_NEWLINE(info);
     }
+
+
+	if (m_isUser)
+	{
+		info += tr("score:");
+		FX_CONTACT_INFO_DATA_SET_WITH_VALUE(info,
+				QString("%1").arg(fx_get_usr_score()));
+		FX_CONTACT_INFO_NEWLINE(info);
+	}
 
     return info;
 }
