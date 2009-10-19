@@ -460,11 +460,11 @@ void FxMsgWindow::exec_autoRelpy(QTextEdit *msgBrowser, qlonglong account_id,
     if (sendFlag)
     {
         head = "<b style=\"color:rgb(0,0,255);\">" +
-               tr("Me:(") +
+               tr("Me(") +
                QDateTime::currentDateTime().toString(tr("hh:mm:ss")) +
                "--" +
                QDateTime::currentDateTime().toString(tr("yyyy-MM-dd")) +
-               ")</b><br>";
+               "):</b><br>";
     }
     else
     {

@@ -347,10 +347,10 @@ void AccountTab::SendMsg()
     QString head;
     if (sendFlag)
     {
-        head = "<b style=\"color:rgb(0,0,255);\">" + tr("Me:(") + QDateTime
+        head = "<b style=\"color:rgb(0,0,255);\">" + tr("Me(") + QDateTime
                                      ::currentDateTime().toString(tr("hh:mm:ss")
                                      ) + "--" + QDateTime::currentDateTime()
-                                     .toString(tr("yyyy-MM-dd")) + ")</b><br>";
+                                     .toString(tr("yyyy-MM-dd")) + "):</b><br>";
     }
     else
     {
