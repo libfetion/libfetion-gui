@@ -45,6 +45,8 @@ class FxContactInfo : public QDialog, public Ui::ContactInfo
 
     private:
         const Fetion_Account *m_account;
+        bool  m_isUser;
+
 };
 
 #endif
