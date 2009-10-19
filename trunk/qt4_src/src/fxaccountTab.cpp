@@ -133,7 +133,7 @@ void AccountTab::setSendModle(bool isSMS)
             else
             {
                 status = account_name + tr(
-                    " is offline, your message will be send to his mobile phone");
+                    " is offline, your message will be sent to his mobile phone");
             }
             msgSend->Ac_Status->setText(status);
         } //end of !fx_is_on_line_by_account (m_account))
