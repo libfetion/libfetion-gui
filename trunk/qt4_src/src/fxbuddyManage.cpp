@@ -620,9 +620,9 @@ void BuddyMge::slot_renameBuddy()
     //fix me: getMainWindow()
     QString text = QInputDialog::getText(getMainWindow(), tr("renamebudd"), tr(
         "please input new buddy name"), QLineEdit::Normal, account_name, &ok);
-    if (ok && !text.isEmpty())
+    if (ok)
     {
-        fx_set_buddyinfo(ac_info->accountID, text.toUtf8().data(), NULL, NULL);
+        fx_set_buddyinfo(ac_info->accountID, text.isEmpty()?"":text.toUtf8().data(), NULL, NULL);
     }
 }
 
