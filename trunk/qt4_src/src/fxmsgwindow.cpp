@@ -360,6 +360,10 @@ bool FxMsgWindow::addMessage(QString msg,
     {
         return false;
     }
+
+	if (!fx_get_account_by_id(account_id))
+		return false;
+
     AccountTab *accountTab = findFromMsgWindow(tabWidget, account_id);
 
     if (!accountTab)
