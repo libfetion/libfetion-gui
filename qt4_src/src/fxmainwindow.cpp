@@ -548,10 +548,6 @@ void FxMainWindow::relogin_timer()
     fx_relogin(Relogin_EventListener, this);
 }
 
-/**************************************************************************/
-/*                                                                        */
-/**************************************************************************/
-
 void FxMainWindow::updateAccountInfo_timer()
 {
     FX_FUNCTION
