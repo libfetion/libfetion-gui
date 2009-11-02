@@ -46,7 +46,7 @@
   Q_IMPORT_PLUGIN(qgif)
 #else
   #ifdef Q_OS_MAC
-      Q_IMPORT_PLUGIN(qgif)
+      //Q_IMPORT_PLUGIN(qgif)
   #else //linux
       //Q_IMPORT_PLUGIN(qgif)
   #endif
