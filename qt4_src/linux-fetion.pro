@@ -35,6 +35,7 @@ mac {
     ICON = ./misc/mac_fetion.icns
     QMAKE_INFO_PLIST = ./misc/mac_fetion.plist
     LIBS =  -lcurl \
+            -lcrypto \
             -lssl \
             ./lib/libfetion_mac.a
 }
