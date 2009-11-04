@@ -30,7 +30,6 @@ unix {
 mac { 
     message ("MAC build start...")
     CONFIG += static
-    QTPLUGIN += qgif
     TARGET = Mac-Fetion
     ICON = ./misc/mac_fetion.icns
     QMAKE_INFO_PLIST = ./misc/mac_fetion.plist
