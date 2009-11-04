@@ -46,7 +46,17 @@ bool setSkins(QString skinPath, QString skinName)
 {
     //here checking the skins is usable
     Settings::instance().setSkins(skinPath, skinName);
+#ifdef Q_OS_MAC
+    static bool OnlyOne = false;
+    if (!OnlyOne)
+    {
+	    OnlyOne = true;
+	    setupStyleSheet();
+    }
+    return false;
+#else
     setupStyleSheet();
+#endif
 
     return true;
 }
