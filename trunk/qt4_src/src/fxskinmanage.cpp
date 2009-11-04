@@ -93,8 +93,12 @@ Skin_Info *get_skininfo(QString skinPath)
             doc.documentElement().attribute("author", "unset");
     sk_info->describe =
             doc.documentElement().attribute("describe", "unset");
+#ifdef Q_OS_MAC
+    sk_info->usingSystemTitle = "no";
+#else
     sk_info->usingSystemTitle =
             doc.documentElement().attribute("usingSystemTitle", "yes");
+#endif
     sk_info->skinpath = skinPath;
 
     return sk_info;

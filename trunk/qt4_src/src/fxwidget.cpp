@@ -90,18 +90,6 @@ FxWidget::FxWidget(QWidget *parent, Qt::WindowFlags flag) :
 void FxWidget::setSystemTitleBar(bool flag)
 {
     FX_FUNCTION
-#ifdef Q_OS_MAC
-    bool isvisible = isVisible();
-    setWindowFlags(windowFlags() ^ Qt::FramelessWindowHint);
-    setWindowFlags(windowFlags() ^ Qt::WindowSystemMenuHint);
-
-    enableAutoHide(false);
-    titleBar->hide();
-    sideBarRL->hide();
-    sideBarTB->hide();
-    if (isvisible)
-	showNormal();
-#else
     bool isvisible = isVisible();
     if (_isSetSystemTitleBar == flag)
     {
@@ -139,7 +127,6 @@ void FxWidget::setSystemTitleBar(bool flag)
         showNormal();
     }
     setBackground(backgroundPixmap);
-#endif
 }
 
 void FxWidget::setMinimizetoHide(bool minimizetoHide)
