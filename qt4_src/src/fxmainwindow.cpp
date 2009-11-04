@@ -834,9 +834,13 @@ void FxMainWindow::skinMenutriggered(QAction *action)
     {
         return ;
     }
-    setSkins(sk_info->skinpath, sk_info->name);
-
-    this->UpdateSkins();
+    if (setSkins(sk_info->skinpath, sk_info->name))
+	    this->UpdateSkins();
+#ifdef Q_OS_MAC
+    QMessageBox::about(this,
+                       tr("Lib Changing SKins"),
+                       tr("Restart APP to apply the new skins"));
+#endif
 }
 
 /**************************************************************************/
