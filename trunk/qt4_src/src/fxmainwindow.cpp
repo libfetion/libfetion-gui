@@ -1645,6 +1645,7 @@ void FxMainWindow::personalInfo()
     FxContactInfo *info = new FxContactInfo(this, account);
 
     info->exec();
+    delete info;
 }
 
 /**************************************************************************/
