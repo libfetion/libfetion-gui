@@ -34,6 +34,10 @@ BuddyMge::BuddyMge(QTreeWidget *widget, FxMainWindow *wind)
     //add all account to main view
     buddyopt = new BuddyOpt(widget);
 
+#ifndef HAVE_GUI_DEBUG_ENABLED
+	saveAllAccountInfo();
+#endif
+
     initAllActions();
 
     connect(treeWidget, SIGNAL(itemDoubleClicked(QTreeWidgetItem *, int)), this,
@@ -414,8 +418,17 @@ void BuddyMge::moveGroupMenutriggered(QAction *action)
 
 void BuddyMge::updateAccountInfo(qlonglong account_id)
 {
-    buddyopt->updateAccountInfo(account_id);
+    const Fetion_Account *account = fx_get_account_by_id(account_id);
+    if (!account)
+        return ;
+	/* update the account list view */
+    buddyopt->updateAccountInfo(account);
+
+	/* update the chat window's info */
     getMsgWindow()->updateAccountInfo(account_id);
+
+	/* update the account Database */
+	saveAccountToDB(account);
 }
 
 /**************************************************************************/

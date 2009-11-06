@@ -77,7 +77,8 @@ bool clean_history(long uid);
 bool selectSystemMsg(long usr, long uid, const char* msg);
 
 //fixme: this function will store all account info in a tmp db table.
-void saveAccountInfo();
+void saveAllAccountInfo();
+void saveAccountToDB(const Fetion_Account *account);
 
 QList<QTreeWidgetItem *> *searchAccountInfo(char * keyword);
 
