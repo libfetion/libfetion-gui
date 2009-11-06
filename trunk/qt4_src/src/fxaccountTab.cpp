@@ -34,8 +34,8 @@ AccountTab::AccountTab(qlonglong id, FxMyTabWidget *parent, bool awaySendSms):
     msgSend->MsgBrowser->setText("");
 
     //Alt+S to send message
-    QShortcut *_sendShortCutAltS = new QShortcut(QKeySequence("Alt+S"), this);
-    connect(_sendShortCutAltS, SIGNAL(activated()), this, SLOT(SendMsg()));
+    m_sendShortCutAltS = new QShortcut(QKeySequence("Alt+S"), this);
+    connect(m_sendShortCutAltS, SIGNAL(activated()), this, SLOT(SendMsg()));
 
     init();
 }
@@ -52,6 +52,8 @@ AccountTab::~AccountTab()
         delete histroy;
     }
     fx_end_dialog(account_id);
+    if (m_sendShortCutAltS)
+        delete m_sendShortCutAltS;
 }
 
 /**************************************************************************/

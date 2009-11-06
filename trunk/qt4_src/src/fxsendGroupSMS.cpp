@@ -51,6 +51,8 @@ FxSendGroupSMS::FxSendGroupSMS(FxMainWindow *wind,
 
 FxSendGroupSMS::~FxSendGroupSMS(){
     FX_FUNCTION
+    if (buddyopt) 
+        delete buddyopt; 
 }
 
 void FxSendGroupSMS::moveEvent(QMoveEvent *event)
