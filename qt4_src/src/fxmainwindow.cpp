@@ -1641,8 +1641,6 @@ void FxMainWindow::personalInfo()
 
 	if (!account)
 		return;
-    /* update user's personal info, before fetch the details */
-    fx_update_account_info_by_id(account->id);
 
     FxContactInfo *info = new FxContactInfo(this, account);
 
