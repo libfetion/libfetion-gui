@@ -692,23 +692,23 @@ char *create_sql_for_histroy(long usr, long uid, HISTORY_DATE type)
     {
         case TODAY_HISTORY:
             sprintf(sql,
-                    "select * from fx%ldusr where julianday(date(datetime(CURRENT_TIMESTAMP,'localtime'))) - julianday(date(date_time)) == 0 and uid == \"%ld\" order by date_time asc", usr, uid);
+                    "select * from fx%ldusr where julianday(date(datetime(CURRENT_TIMESTAMP,'localtime'))) - julianday(date(date_time)) = 0 and uid = \"%ld\" order by date_time asc", usr, uid);
             break;
         case ONE_WEEK_HISTORY:
             sprintf(sql,
-                    "select * from fx%ldusr where julianday(date(datetime(CURRENT_TIMESTAMP,'localtime'))) - julianday(date(date_time)) <= 7 and uid == \"%ld\"  order by date_time asc", usr, uid);
+                    "select * from fx%ldusr where julianday(date(datetime(CURRENT_TIMESTAMP,'localtime'))) - julianday(date(date_time)) <= 7 and uid = \"%ld\"  order by date_time asc", usr, uid);
             break;
         case TWO_WEEK_HISTORY:
             sprintf(sql,
-                    "select * from fx%ldusr where julianday(date(datetime(CURRENT_TIMESTAMP,'localtime'))) - julianday(date(date_time)) <= 14  and uid == \"%ld\"  order by date_time asc", usr, uid);
+                    "select * from fx%ldusr where julianday(date(datetime(CURRENT_TIMESTAMP,'localtime'))) - julianday(date(date_time)) <= 14  and uid = \"%ld\"  order by date_time asc", usr, uid);
             break;
         case ONE_MONTH_HISTORY:
             sprintf(sql,
-                    "select * from fx%ldusr where julianday(date(datetime(CURRENT_TIMESTAMP,'localtime'))) - julianday(date(date_time)) <= 30  and uid == \"%ld\"  order by date_time asc", usr, uid);
+                    "select * from fx%ldusr where julianday(date(datetime(CURRENT_TIMESTAMP,'localtime'))) - julianday(date(date_time)) <= 30  and uid = \"%ld\"  order by date_time asc", usr, uid);
             break;
         case ALL_DATE_HISTORY:
             sprintf(sql,
-                    "select * from fx%ldusr where uid == \"%ld\" order by date_time asc", usr, uid);
+                    "select * from fx%ldusr where uid = \"%ld\" order by date_time asc", usr, uid);
             break;
         default:
             return NULL;
@@ -819,7 +819,7 @@ bool selectSystemMsg(long usr, long uid, const char *msg)
     //maybe it is not very good, but for system message(not important) it is enough..
     memset(sql, 0, SQL_MAXLEN);
     sprintf(sql,
-            "select * from fx%ldusr where msg_len == \"%ld\" and uid == \"%ld\" ", usr, len_msg, uid);
+            "select * from fx%ldusr where msg_len = \"%ld\" and uid = \"%ld\" ", usr, len_msg, uid);
 
     if (sqlite3_get_table(pdb, sql, &result, &nrow, &ncol, &perrmsg) !=
         SQLITE_OK)
@@ -836,7 +836,7 @@ bool selectSystemMsg(long usr, long uid, const char *msg)
     // when system msg over 100, we will clean system msg
     {
         memset(sql, 0, SQL_MAXLEN);
-        sprintf(sql, "select * from fx%ldusr where uid == \"%ld\" ", usr, uid);
+        sprintf(sql, "select * from fx%ldusr where uid = \"%ld\" ", usr, uid);
         if (sqlite3_get_table(pdb, sql, &result, &nrow, &ncol, &perrmsg) !=
             SQLITE_OK)
         {
@@ -846,7 +846,7 @@ bool selectSystemMsg(long usr, long uid, const char *msg)
         if (nrow >= 100)
         {
             memset(sql, 0, SQL_MAXLEN);
-            sprintf(sql, "delete from fx%ldusr where uid == \"%ld\" ", usr, uid)
+            sprintf(sql, "delete from fx%ldusr where uid = \"%ld\" ", usr, uid)
                     ;
             //exec the delete table sql
             sqlite3_exec(pdb, sql, 0, 0, 0);
