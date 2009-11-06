@@ -47,6 +47,7 @@ BuddyOpt::BuddyOpt(QTreeWidget *widget, bool isMainView)
                 SLOT(updateStyles(QTreeWidgetItem *, int)));
 
     }
+
     //expandTree();
 }
 
@@ -1000,13 +1001,10 @@ bool BuddyOpt::isOnlineStateChanged(int old_state, int new_state, int *state)
 /*                                                                        */
 /**************************************************************************/
 
-void BuddyOpt::updateAccountInfo(qlonglong account_id)
+void BuddyOpt::updateAccountInfo(const Fetion_Account *account)
 {
-    const Fetion_Account *account = fx_get_account_by_id(account_id);
     if (!account)
-    {
         return ;
-    }
 
     QTreeWidgetItem *accountItem = findAccountItem(account);
 

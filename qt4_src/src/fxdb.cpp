@@ -833,7 +833,7 @@ bool selectSystemMsg(long usr, long uid, const char *msg)
         ret = true;
     }
 
-    // when system msg over 20, we will clean system msg
+    // when system msg over 100, we will clean system msg
     {
         memset(sql, 0, SQL_MAXLEN);
         sprintf(sql, "select * from fx%ldusr where uid == \"%ld\" ", usr, uid);
@@ -843,9 +843,8 @@ bool selectSystemMsg(long usr, long uid, const char *msg)
             return ret;
         }
         sqlite3_free_table(result);
-        if (nrow >= 20)
+        if (nrow >= 100)
         {
-            printf("haha , i will delete all system msg \n");
             memset(sql, 0, SQL_MAXLEN);
             sprintf(sql, "delete from fx%ldusr where uid == \"%ld\" ", usr, uid)
                     ;
@@ -874,26 +873,34 @@ BOOL init_storeAccountInfo_db(long usr)
         return TRUE;
     }
     char *perrmsg;
+    char **result;
+    int nrow, ncol;
 
-    memset(sql, 0, SQL_MAXLEN);
-    sprintf(sql, "DROP TABLE IF EXISTS fxACINFO%ldusr ", usr);
-    sqlite3_exec(pdb, sql, 0, 0, &perrmsg);
 
-    //create the table
-    memset(sql, 0, SQL_MAXLEN);
-    sprintf(sql,
-            "create table fxACINFO%ldusr(uid, online_state, mobilenm, local_name, nickname, impresa, showname)", usr);
-    //exec the create table sql
-    if (sqlite3_exec(pdb, sql, 0, 0, &perrmsg) != SQLITE_OK)
-    {
-        printf("exel create table %s\n", sql);
-        return FALSE;
-    }
+	// Are there fxACINFO%ldusr ? if not, create it.
+	memset(sql, 0, SQL_MAXLEN);
+	sprintf(sql, "select * from fxACINFO%ldusr  limit 1", usr);
+	if (sqlite3_get_table(pdb, sql, &result, &nrow, &ncol, &perrmsg) !=
+			SQLITE_OK)
+	{
+		//create the table
+		memset(sql, 0, SQL_MAXLEN);
+		sprintf(sql, "create table fxACINFO%ldusr(uid, online_state, mobilenm,"
+				"local_name, nickname, impresa, showname)", usr);
+		//exec the create table sql
+		if (sqlite3_exec(pdb, sql, 0, 0, &perrmsg) != SQLITE_OK)
+		{
+			printf("exel create table %s\n", sql);
+			return FALSE;
+		}
 
-    //creat index
-    memset(sql, 0, SQL_MAXLEN);
-    sprintf(sql, "create index uid_index on fxACINFO%ldusr(uid)", usr);
-    sqlite3_exec(pdb, sql, 0, 0, &perrmsg);
+		//creat index
+		memset(sql, 0, SQL_MAXLEN);
+		sprintf(sql, "create index uid_index on fxACINFO%ldusr(uid)", usr);
+		sqlite3_exec(pdb, sql, 0, 0, &perrmsg);
+	}
+
+    sqlite3_free_table(result);
 
     have_init = TRUE;
     return TRUE;
@@ -903,8 +910,9 @@ BOOL init_storeAccountInfo_db(long usr)
 /*                                                                        */
 /**************************************************************************/
 
-void saveAccountToDB(const Fetion_Account *account, long usr)
+void saveAccountToDB(const Fetion_Account *account)
 {
+    long usr = (qlonglong)strtol(fx_get_usr_uid(), NULL, 10);
     if (!account || account->id == usr)
     {
         return ;
@@ -918,6 +926,13 @@ void saveAccountToDB(const Fetion_Account *account, long usr)
     char *nickname;
     char *impresa;
     char *showname;
+
+	/* first, we remove the old info from db */
+    sprintf(sql, "delete from fxACINFO%ldusr where uid=\"%ld\"", usr, uid);
+
+    sqlite3_exec(pdb, sql, 0, 0, 0);
+
+	/* then begin to save Account info to DB */
 
     online_state = fx_get_online_status_by_account(account);
     if (account->local_name)
@@ -974,7 +989,7 @@ void saveAccountToDB(const Fetion_Account *account, long usr)
 /*                                                                        */
 /**************************************************************************/
 
-void saveAccountInfo()
+void saveAllAccountInfo()
 {
     char *perrmsg;
     long usr = (qlonglong)strtol(fx_get_usr_uid(), NULL, 10);
@@ -989,7 +1004,7 @@ void saveAccountInfo()
     const Fetion_Account *account = fx_get_first_account();
     while (account)
     {
-        saveAccountToDB(account, usr);
+        saveAccountToDB(account);
         account = fx_get_next_account(account);
     }
 

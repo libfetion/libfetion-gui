@@ -59,7 +59,7 @@ class BuddyOpt: public QObject
                 int group);
 
         Account_Info *fetchNoUpdateAccount();
-        void updateAccountInfo(qlonglong account_id);
+        void updateAccountInfo(const Fetion_Account *account);
         QString createAccountTipsInfo(const Fetion_Account *account);
         void setTipsOfAccount(QTreeWidgetItem *accountItem,
                               const Fetion_Account *account);

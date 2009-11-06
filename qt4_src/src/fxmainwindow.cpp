@@ -67,13 +67,9 @@ FxMainWindow::FxMainWindow(QWidget *parent): FxWidget(parent), trayIcon(NULL),
     //set the fetion system msg call back function
     fx_set_system_msg_cb(Sys_EventListener, this);
 
-    //save the account info to db,
-    //will a bug: when the account is changed, but the db info maybe not changed follow
     #ifdef HAVE_GUI_DEBUG_ENABLED
         QTreeWidgetItem *tm = new QTreeWidgetItem(view, 0);
         tm->setText(0, "haha");
-    #else
-        saveAccountInfo();
     #endif
 
 
