@@ -316,11 +316,10 @@ void Settings::init_setting()
 
 #ifdef Q_OS_MAC
     m_isAutoShow = true;
-    m_isMainWindowTopHint = value("MainWindowTopHint", false).toBool();
 #else
     m_isAutoShow = value("AutoShowMsg", false).toBool();
-    m_isMainWindowTopHint = value("MainWindowTopHint", true).toBool();
 #endif
+    m_isMainWindowTopHint = value("MainWindowTopHint", true).toBool();
     setMainWindowTopHint(m_isMainWindowTopHint);
 
     m_isEnableLongSMS = value("EnableLongSMS", true).toBool();
@@ -404,7 +403,13 @@ void Settings::setAutoLogin(bool isAutoLogin)
 void Settings::setMainWindowTopHint(bool isMainWindowTopHint)
 {
 //    FX_FUNCTION
+#ifdef Q_OS_MAC
+	/* fixme: on the mac machine, there is a bad effect about topHint*/
+	m_isMainWindowTopHint = false;
+#else
     m_isMainWindowTopHint = isMainWindowTopHint;
+#endif
+
     setValue("MainWindowTopHint", m_isMainWindowTopHint);
 
     if (m_mainwind)
