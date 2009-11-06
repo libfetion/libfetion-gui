@@ -79,6 +79,7 @@ private:
 	bool flick_flag;
 	FxMainWindow *mainWind;
 	FxShowHistory *histroy;
+	QShortcut *m_sendShortCutAltS;
 };
 
 #endif

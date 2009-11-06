@@ -36,9 +36,9 @@ FxLoginWindow::FxLoginWindow(QWidget *parent):
     init();
     checkAutoLogin();
 
-    QShortcut *loginShortcut =
+    m_loginShortcut =
             new QShortcut(QKeySequence(Qt::Key_Return), this);
-    connect(loginShortcut, SIGNAL(activated()), this, SLOT(login()));
+    connect(m_loginShortcut, SIGNAL(activated()), this, SLOT(login()));
 
     CHECK_SystemTiTle();
 
@@ -60,6 +60,10 @@ FxLoginWindow::~FxLoginWindow()
     {
         free(user_pwd);
     }
+    if (m_loginShortcut)
+    { 
+        delete m_loginShortcut;
+    } 
     proxy->proxy_destroy();
 }
 

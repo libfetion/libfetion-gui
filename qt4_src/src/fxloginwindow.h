@@ -80,6 +80,7 @@ class FxLoginWindow : public FxWidget, public Ui::Fetion_Login
         FxProxy *proxy;
         QTimer loginTimer;
         bool willLogin;
+        QShortcut *m_loginShortcut;
 };
 
 #endif
