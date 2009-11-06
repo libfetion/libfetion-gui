@@ -32,6 +32,7 @@ void get_skin_search_result(QList<Skin_Info *>  *items, QString path);
 void setupStyleSheet();
 
 Skin_Info * getCurrentSkinInfo();
+QString ConvertFontToStyleSheet(const QFont &font);
 
 #define CHECK_SystemTiTle()  do {                        \
     Skin_Info * sk_info = getCurrentSkinInfo();          \

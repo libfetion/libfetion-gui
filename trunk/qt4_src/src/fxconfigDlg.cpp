@@ -18,6 +18,7 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 #include "fxconfigDlg.h"
+#include "fxskinmanage.h"
 #include "appconfig.h"
 
 bool FxConfigDia::hasInstance = false;
@@ -480,24 +481,7 @@ void FxConfigDia::_updateFonts(const QFont &font)
      *       for font setting.
      */
     QString style = qApp->styleSheet();
-    style += "QWidget { ";
-    style += "font-family: ";
-    style += font.family();
-    style += ";";
-    style += "font-size: ";
-    style += QString::number(font.pointSize());
-    style += "px;";
-    if (font.italic())
-    {
-        style += " font-style: italic;";
-    }
-    if (font.bold())
-    {
-        style += " font-weight: bold;";
-    }
-
-    style += " color: #333333;";
-    style += " }";
+    style += ConvertFontToStyleSheet(font);
 
     qApp->setStyleSheet(style);
 
