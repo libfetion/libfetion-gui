@@ -761,6 +761,7 @@ QString BuddyOpt::createAccountTipsInfo(const Fetion_Account *account)
         }
 
         FxLocationParser *parser = new FxLocationParser();
+
         info = tr("province:");
         info += "<b style=\"color:red; \">" +
                 parser->getProvinceByAlias(QString::fromUtf8(account->personal->province)) + "</b>";
@@ -771,6 +772,8 @@ QString BuddyOpt::createAccountTipsInfo(const Fetion_Account *account)
                 parser->getCityByCode(account->personal->city)+
                 "</b>";
         tips += info + "<br>";
+
+		delete parser;
     }
 
     //remove the last "<br>"

@@ -167,7 +167,9 @@ FxContactInfo::getContactInfo()
         FX_CONTACT_INFO_DATA_SET_WITH_VALUE(info,
                         QString::fromUtf8(m_account->personal->impresa));
         FX_CONTACT_INFO_NEWLINE(info);
+
         FxLocationParser *parser = new FxLocationParser();
+
         info += tr("province:");
         FX_CONTACT_INFO_DATA_SET_WITH_VALUE(info,
                 parser->getProvinceByAlias(QString::fromUtf8(m_account->personal->province)));
@@ -177,6 +179,8 @@ FxContactInfo::getContactInfo()
         FX_CONTACT_INFO_DATA_SET_WITH_VALUE(info,
                 parser->getCityByCode(m_account->personal->city));
         FX_CONTACT_INFO_NEWLINE(info);
+
+		delete parser;
 
     }else{
         info += tr("mobile_no:");
