@@ -223,6 +223,7 @@ void setupStyleSheet()
     content.replace("%skinpath%", SkinPath(), Qt::CaseInsensitive);
     content.replace("%currentPath%", getSkinPath(), Qt::CaseInsensitive);
 
+    content += ConvertFontToStyleSheet(Settings::instance().getCurrentFont());
     // apply the stylesheet
     qApp->setStyleSheet(content);
     file.close();
@@ -249,4 +250,29 @@ void setupStyleSheet()
     file1.close();
 
     setXMLRes(doc);
+}
+
+QString ConvertFontToStyleSheet(const QFont &font)
+{
+    QString style;
+    style += "QWidget { ";
+    style += "font-family: ";
+    style += font.family();
+    style += ";";
+    style += "font-size: ";
+    style += QString::number(font.pointSize());
+    style += "px;";
+    if (font.italic())
+    {
+        style += " font-style: italic;";
+    }
+    if (font.bold())
+    {
+        style += " font-weight: bold;";
+    }
+
+    style += " color: #333333;";
+    style += " }";
+
+    return style;
 }
