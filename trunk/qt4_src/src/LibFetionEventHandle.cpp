@@ -150,7 +150,7 @@ void FxMainWindow::handleFx_Sys_Event(int message, WPARAM wParam, LPARAM
             //ignored this message
             if (wParam)
             {
-                free((char*)(int)wParam);
+                free((char*)(unsigned long)wParam);
             }
             break;
 

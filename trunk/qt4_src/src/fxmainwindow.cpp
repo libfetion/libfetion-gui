@@ -1430,14 +1430,14 @@ void FxMainWindow::init_slot_signal()
     connect(this, SIGNAL(signal_receive_nudge(qlonglong)),
             msgwin, SLOT(slot_receive_nudge(qlonglong)));
 
-    connect(this, SIGNAL(signal_add_group(int, int, qlonglong)),
-            buddyMge, SLOT(slot_add_group(int, int, qlonglong)));
-    connect(this, SIGNAL(signal_del_group(int, int, qlonglong)),
-            buddyMge, SLOT(slot_del_group(int, int, qlonglong)));
-    connect(this, SIGNAL(signal_reName_group(int, int, qlonglong)),
-            buddyMge,SLOT(slot_reName_group(int, int, qlonglong)));
-    connect(this, SIGNAL(signal_reName_buddy(int, int, qlonglong)),
-            buddyMge,SLOT(slot_reName_buddy(int, int, qlonglong)));
+    connect(this, SIGNAL(signal_add_group(int, unsigned long, qlonglong)),
+            buddyMge, SLOT(slot_add_group(int, unsigned long, qlonglong)));
+    connect(this, SIGNAL(signal_del_group(int, unsigned long, qlonglong)),
+            buddyMge, SLOT(slot_del_group(int, unsigned long, qlonglong)));
+    connect(this, SIGNAL(signal_reName_group(int, unsigned long, qlonglong)),
+            buddyMge,SLOT(slot_reName_group(int, unsigned long, qlonglong)));
+    connect(this, SIGNAL(signal_reName_buddy(int, unsigned long, qlonglong)),
+            buddyMge,SLOT(slot_reName_buddy(int, unsigned long, qlonglong)));
     connect(this, SIGNAL(signal_add_buddy(int, int, qlonglong)),
             buddyMge, SLOT(slot_add_buddy(int, int, qlonglong)));
     connect(this, SIGNAL(signal_del_buddy(int, int, qlonglong)),

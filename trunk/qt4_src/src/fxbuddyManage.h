@@ -82,10 +82,10 @@ public slots:
 
 	void slot_MoveGroup(qlonglong account_id, int group_id); 
 
-	void slot_add_group(int, int, qlonglong);
-	void slot_del_group(int, int, qlonglong);
-	void slot_reName_group(int, int, qlonglong);
-	void slot_reName_buddy(int, int, qlonglong);
+	void slot_add_group(int, unsigned long, qlonglong);
+	void slot_del_group(int, unsigned long, qlonglong);
+	void slot_reName_group(int, unsigned long, qlonglong);
+	void slot_reName_buddy(int, unsigned long, qlonglong);
 
 
     void slot_addGroup();

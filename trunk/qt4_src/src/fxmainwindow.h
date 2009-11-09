@@ -96,13 +96,13 @@ signals:
 	void signal_SystemNetErr(int);
 	void signal_DeRegistered();
 	void signal_receive_nudge(qlonglong);
-	void signal_reName_group(int, int, qlonglong);
-	void signal_reName_buddy(int, int, qlonglong);
-	void signal_add_group(int, int, qlonglong);
-	void signal_del_group(int, int, qlonglong);
+	void signal_reName_group(int, unsigned long, qlonglong);
+	void signal_reName_buddy(int, unsigned long, qlonglong);
+	void signal_add_group(int, unsigned long, qlonglong);
+	void signal_del_group(int, unsigned long, qlonglong);
 
-	void signal_add_buddy(int, int, qlonglong);
-	void signal_del_buddy(int, int, qlonglong);
+	void signal_add_buddy(int, unsigned long, qlonglong);
+	void signal_del_buddy(int, unsigned long, qlonglong);
 	void signal_set_state(int);
 	void signal_set_nickname_ok();
 	void signal_UpdateSmsDay(int);
