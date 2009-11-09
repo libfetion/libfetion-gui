@@ -435,7 +435,7 @@ void BuddyMge::updateAccountInfo(qlonglong account_id)
 /*                                                                        */
 /**************************************************************************/
 
-void BuddyMge::slot_add_group(int, int newname, qlonglong id)
+void BuddyMge::slot_add_group(int, unsigned long newname, qlonglong id)
 {
     //fix me _mainwindow->tmp_addBuddy, this is a bad code
     if (getMainWindow()->getTmpAddBuddyWindow())
@@ -457,7 +457,7 @@ void BuddyMge::slot_add_group(int, int newname, qlonglong id)
 /*                                                                        */
 /**************************************************************************/
 
-void BuddyMge::slot_del_group(int, int, qlonglong id)
+void BuddyMge::slot_del_group(int, unsigned long, qlonglong id)
 {
     buddyopt->delAccount(id);
 }
@@ -466,7 +466,7 @@ void BuddyMge::slot_del_group(int, int, qlonglong id)
 /*                                                                        */
 /**************************************************************************/
 
-void BuddyMge::slot_reName_group(int, int newname, qlonglong id)
+void BuddyMge::slot_reName_group(int, unsigned long newname, qlonglong id)
 {
     QTreeWidgetItem *groupItem = buddyopt->findGroupItemByID(id);
     if (!groupItem)
@@ -524,7 +524,7 @@ void BuddyMge::slot_reName_group(int, int newname, qlonglong id)
 /*                                                                        */
 /**************************************************************************/
 
-void BuddyMge::slot_reName_buddy(int, int newname, qlonglong id)
+void BuddyMge::slot_reName_buddy(int, unsigned long newname, qlonglong id)
 {
     if (newname)
     {
