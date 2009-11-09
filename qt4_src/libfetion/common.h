@@ -323,11 +323,7 @@ typedef long            LONG;
 * \var typedef unsigned int WPARAM
 * \brief A type definition for the first message paramter.
 */
-#if defined(_64BIT_)
 typedef unsigned long    WPARAM;
-#else
-typedef unsigned int    WPARAM;
-#endif
 
 
 /**
