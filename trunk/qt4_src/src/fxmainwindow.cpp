@@ -476,7 +476,7 @@ void FxMainWindow::relogin_fetion()
     }
 
     this->hide();
-    fx_relogin(Relogin_EventListener, this);
+    fx_relogin(Relogin_EventListener, this, NULL, NULL);
     reloginTimer.start(1000 *35);
 }
 
@@ -541,7 +541,7 @@ void FxMainWindow::slots_Relogin_Event(int message)
 void FxMainWindow::relogin_timer()
 {
     FX_FUNCTION
-    fx_relogin(Relogin_EventListener, this);
+    fx_relogin(Relogin_EventListener, this, NULL, NULL);
 }
 
 void FxMainWindow::updateAccountInfo_timer()
