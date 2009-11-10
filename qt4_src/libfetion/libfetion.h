@@ -303,7 +303,7 @@ FX_EXPORT int fx_login(const char *uid, const char *password, EventListener func
  * \brief relogin fetion when fetion have break from server..
   *
 */
-FX_EXPORT int fx_relogin(EventListener func, void *args);
+FX_EXPORT int fx_relogin(EventListener func, void *args, const char* uid, const char* passwd);
 
 /**
   * \fn void fx_loginout()
