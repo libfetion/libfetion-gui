@@ -1425,8 +1425,8 @@ void FxMainWindow::init_slot_signal()
             msgwin, SLOT(slot_haveNewMessage(qlonglong)));
     connect(this, SIGNAL(signal_NewQunMsg(qlonglong)),
             msgwin, SLOT(slot_haveNewQunMessage(qlonglong)));
-    connect(this, SIGNAL(signal_SysDialogMsg(int, int, qlonglong)),
-            msgwin, SLOT(slot_SysDialogMsg(int, int, qlonglong)));
+    connect(this, SIGNAL(signal_SysDialogMsg(int, unsigned long, qlonglong)),
+            msgwin, SLOT(slot_SysDialogMsg(int, unsigned long, qlonglong)));
     connect(this, SIGNAL(signal_receive_nudge(qlonglong)),
             msgwin, SLOT(slot_receive_nudge(qlonglong)));
 
@@ -1438,14 +1438,14 @@ void FxMainWindow::init_slot_signal()
             buddyMge,SLOT(slot_reName_group(int, unsigned long, qlonglong)));
     connect(this, SIGNAL(signal_reName_buddy(int, unsigned long, qlonglong)),
             buddyMge,SLOT(slot_reName_buddy(int, unsigned long, qlonglong)));
-    connect(this, SIGNAL(signal_add_buddy(int, int, qlonglong)),
-            buddyMge, SLOT(slot_add_buddy(int, int, qlonglong)));
-    connect(this, SIGNAL(signal_del_buddy(int, int, qlonglong)),
-            buddyMge, SLOT(slot_del_buddy(int, int, qlonglong)));
+    connect(this, SIGNAL(signal_add_buddy(int, unsigned long, qlonglong)),
+            buddyMge, SLOT(slot_add_buddy(int, unsigned long, qlonglong)));
+    connect(this, SIGNAL(signal_del_buddy(int, unsigned long, qlonglong)),
+            buddyMge, SLOT(slot_del_buddy(int, unsigned long, qlonglong)));
     connect(this, SIGNAL(signal_UpdateAcInfo(qlonglong)),
             buddyMge, SLOT(updateAccountInfo(qlonglong)));
-    connect(this, SIGNAL(signal_MoveGroup(qlonglong, int)),
-            buddyMge, SLOT(slot_MoveGroup(qlonglong, int)));
+    connect(this, SIGNAL(signal_MoveGroup(qlonglong, unsigned long)),
+            buddyMge, SLOT(slot_MoveGroup(qlonglong, unsigned long)));
 
     connect(this, SIGNAL(signal_update_scheduleList()),
             scheduleSmsManager, SLOT(slot_update_scheduleList()));

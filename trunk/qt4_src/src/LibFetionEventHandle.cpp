@@ -44,7 +44,7 @@ void FxMainWindow::handleFx_Sys_Event(int message, WPARAM wParam, LPARAM
             emit signal_AddAccountApp((char*)(lParam), (char*)wParam);
             break;
         case FX_MOVE_GROUP_OK:
-            emit signal_MoveGroup(qlonglong(lParam), (int)wParam);
+            emit signal_MoveGroup(qlonglong(lParam), (unsigned long)wParam);
             break;
         case FX_MOVE_GROUP_FAIL:
             break;
@@ -150,7 +150,7 @@ void FxMainWindow::handleFx_Sys_Event(int message, WPARAM wParam, LPARAM
             //ignored this message
             if (wParam)
             {
-                free((char*)(unsigned long)wParam);
+                free((char*)wParam);
             }
             break;
 

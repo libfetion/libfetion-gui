@@ -79,8 +79,7 @@ protected:
 	void resizeEvent ( QResizeEvent * event);
 	void addBuddy(qlonglong account_id);
 
-    void handle_sendmsg(int msgflag,
-                        int fx_msg,
+    void handle_sendmsg(int msgflag, unsigned long fx_msg,
                         qlonglong who);
 
 public slots:
@@ -90,8 +89,7 @@ public slots:
 	void closeCurrentTab();
 	void slot_do_shake();
 
-    void slot_SysDialogMsg (int,
-                            int,
+    void slot_SysDialogMsg (int, unsigned long,
                             qlonglong);
 
 	void slot_haveNewSysMessage (qlonglong sys_id);
