@@ -80,7 +80,7 @@ public slots:
 	void moveGroupMenutriggered(QAction *action);
 	void updateAccountInfo (qlonglong account_id);
 
-	void slot_MoveGroup(qlonglong account_id, int group_id); 
+	void slot_MoveGroup(qlonglong account_id, unsigned long group_id); 
 
 	void slot_add_group(int, unsigned long, qlonglong);
 	void slot_del_group(int, unsigned long, qlonglong);
@@ -106,8 +106,8 @@ public slots:
     void slot_smsQun();
     void slot_getInfoQun();
 
-	void slot_del_buddy(int, int, qlonglong);
-	void slot_add_buddy(int, int, qlonglong);
+	void slot_del_buddy(int, unsigned long, qlonglong);
+	void slot_add_buddy(int, unsigned long, qlonglong);
 private:
 
     QAction *ReNameBuddyAct;

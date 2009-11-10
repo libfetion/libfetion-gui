@@ -867,7 +867,7 @@ FxMsgWindow::cropTabName(QString orig_name)
 #define MSG_FAIL_LIMIT  4
 
 void FxMsgWindow::handle_sendmsg(int msgflag,
-                                int fx_msg,
+                                unsigned long fx_msg,
                                 qlonglong account_id)
 {
     FX_FUNCTION
@@ -956,7 +956,7 @@ void FxMsgWindow::handle_sendmsg(int msgflag,
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
-void FxMsgWindow::slot_SysDialogMsg(int message, int fx_msg, qlonglong who)
+void FxMsgWindow::slot_SysDialogMsg(int message, unsigned long fx_msg, qlonglong who)
 {
     FX_FUNCTION
     int msgflag = 0;

@@ -387,7 +387,7 @@ void BuddyMge::createGroupMenu(QMenu *groupMenu)
 /*                                                                        */
 /**************************************************************************/
 
-void BuddyMge::slot_MoveGroup(qlonglong account_id, int group_id)
+void BuddyMge::slot_MoveGroup(qlonglong account_id, unsigned long group_id)
 {
     Q_UNUSED(group_id);
     buddyopt->delAccount_direct(account_id);
@@ -830,7 +830,7 @@ void BuddyMge::slot_getInfoQun()
 /*                                                                        */
 /**************************************************************************/
 
-void BuddyMge::slot_add_buddy(int, int, qlonglong id)
+void BuddyMge::slot_add_buddy(int, unsigned long, qlonglong id)
 {
     buddyopt->delAccount(id);
     buddyopt->addAccountToGroup(fx_get_account_by_id(id));
@@ -841,7 +841,7 @@ void BuddyMge::slot_add_buddy(int, int, qlonglong id)
 /**************************************************************************/
 
 
-void BuddyMge::slot_del_buddy(int, int, qlonglong id)
+void BuddyMge::slot_del_buddy(int, unsigned long, qlonglong id)
 {
     buddyopt->delAccount(id);
 }

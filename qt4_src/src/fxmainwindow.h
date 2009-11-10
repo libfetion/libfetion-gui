@@ -87,12 +87,12 @@ protected:
 signals:
 	void signal_Current_Version(int);
 	void signal_AddAccountApp(char*, char*);
-	void signal_MoveGroup(qlonglong, int);
+	void signal_MoveGroup(qlonglong, unsigned long);
 	void signal_NewSysMsg(qlonglong account_id);
 	void signal_NewMsg(qlonglong account_id);
 	void signal_NewQunMsg(qlonglong qun_id);
 	void signal_UpdateAcInfo(qlonglong account_id);
-	void signal_SysDialogMsg(int, int, qlonglong);
+	void signal_SysDialogMsg(int, unsigned long, qlonglong);
 	void signal_SystemNetErr(int);
 	void signal_DeRegistered();
 	void signal_receive_nudge(qlonglong);
