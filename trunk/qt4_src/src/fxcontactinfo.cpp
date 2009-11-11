@@ -114,103 +114,111 @@ FxContactInfo::htmlStyledNewline()
 QString
 FxContactInfo::getContactInfo()
 {
-    FX_FUNCTION
-    QString info;
-    QString mobile_no;
-    QString fetion_no;
+	FX_FUNCTION
+	QString info;
+	QString mobile_no;
+	QString fetion_no;
+	const Fetion_Personal *personal = NULL;
 
-    if (!m_account) return NULL;
+	if (!m_account) return NULL;
 
-    local_name->setText(QString::fromUtf8(m_account->local_name));
+	if (m_isUser)
+	{
+		local_name->setText(QString::fromUtf8(fx_get_usr_show_name()));
 
-    if (!fx_is_pc_user_by_account(m_account))
-    {
-        mobile_no = QString::fromUtf8(fx_get_original_ID(m_account->id));
-        fetion_no = QString();
-    }else{
-        mobile_no = QString();
-        fetion_no = QString("%1").arg(m_account->id);
-    }
+		personal = fx_data_get_PersonalInfo();
+		mobile_no = QString::fromUtf8(fx_get_usr_mobilenum());
+		fetion_no = QString::fromUtf8(fx_get_usr_uid());
+	} else {
+		local_name->setText(QString::fromUtf8(m_account->local_name));
 
-    if (m_account->personal)
-    {
-        info += tr("mobile_no:");
-        FX_CONTACT_INFO_DATA_SET_WITH_VALUE(info,
-                        QString::fromUtf8(m_account->personal->mobile_no));
-        FX_CONTACT_INFO_NEWLINE(info);
-        info += tr("fetion_no:");
-        FX_CONTACT_INFO_DATA_SET_WITH_VALUE(info, fetion_no);
-        FX_CONTACT_INFO_NEWLINE(info);
-        info += tr("nickname:");
-        FX_CONTACT_INFO_DATA_SET_WITH_VALUE(info,
-                QString::fromUtf8(m_account->personal->nickname));
-        FX_CONTACT_INFO_NEWLINE(info);
-        info += tr("name:");
-        FX_CONTACT_INFO_DATA_SET_WITH_VALUE(info,
-                QString::fromUtf8(m_account->personal->name));
-        FX_CONTACT_INFO_NEWLINE(info);
-        info += tr("gender:");
-        switch (m_account->personal->gender)
-        {
-            case 2:
-                FX_CONTACT_INFO_DATA_SET_WITH_VALUE(info, tr("girl"));
-                break;
-            case 1:
-                FX_CONTACT_INFO_DATA_SET_WITH_VALUE(info, tr("boy"));
-                break;
-            case 0:
-                FX_CONTACT_INFO_DATA_SET_WITH_VALUE(info, tr("unknow"));
-                break;
-        }
-        FX_CONTACT_INFO_NEWLINE(info);
-        info += tr("impresa:");
-        FX_CONTACT_INFO_DATA_SET_WITH_VALUE(info,
-                        QString::fromUtf8(m_account->personal->impresa));
-        FX_CONTACT_INFO_NEWLINE(info);
+		personal = m_account->personal;
 
-        FxLocationParser *parser = new FxLocationParser();
+		if (!fx_is_pc_user_by_account(m_account))
+		{
+			mobile_no = QString::fromUtf8(fx_get_original_ID(m_account->id));
+			fetion_no = QString();
+		} else {
+			if (personal)
+				mobile_no = QString::fromUtf8(personal->mobile_no);
+			else
+				mobile_no = QString();
+			fetion_no = QString("%1").arg(m_account->id);
+		}
+	}
 
-        info += tr("province:");
-        FX_CONTACT_INFO_DATA_SET_WITH_VALUE(info,
-                parser->getProvinceByAlias(QString::fromUtf8(m_account->personal->province)));
-        FX_CONTACT_INFO_NEWLINE(info);
+	info += tr("mobile_no:");
+	FX_CONTACT_INFO_DATA_SET_WITH_VALUE(info, mobile_no);
+	FX_CONTACT_INFO_NEWLINE(info);
+	info += tr("fetion_no:");
+	FX_CONTACT_INFO_DATA_SET_WITH_VALUE(info, fetion_no);
+	FX_CONTACT_INFO_NEWLINE(info);
 
-        info += tr("city:");
-        FX_CONTACT_INFO_DATA_SET_WITH_VALUE(info,
-                parser->getCityByCode(m_account->personal->city));
-        FX_CONTACT_INFO_NEWLINE(info);
+	if (personal)
+	{
+		info += tr("nickname:");
+		FX_CONTACT_INFO_DATA_SET_WITH_VALUE(info,
+				QString::fromUtf8(personal->nickname));
+		FX_CONTACT_INFO_NEWLINE(info);
+		info += tr("name:");
+		FX_CONTACT_INFO_DATA_SET_WITH_VALUE(info,
+				QString::fromUtf8(personal->name));
+		FX_CONTACT_INFO_NEWLINE(info);
+		info += tr("gender:");
+		switch (personal->gender)
+		{
+			case 2:
+				FX_CONTACT_INFO_DATA_SET_WITH_VALUE(info, tr("girl"));
+				break;
+			case 1:
+				FX_CONTACT_INFO_DATA_SET_WITH_VALUE(info, tr("boy"));
+				break;
+			case 0:
+				FX_CONTACT_INFO_DATA_SET_WITH_VALUE(info, tr("unknow"));
+				break;
+		}
+		FX_CONTACT_INFO_NEWLINE(info);
+		info += tr("impresa:");
+		FX_CONTACT_INFO_DATA_SET_WITH_VALUE(info,
+				QString::fromUtf8(personal->impresa));
+		FX_CONTACT_INFO_NEWLINE(info);
+
+		FxLocationParser *parser = new FxLocationParser();
+
+		info += tr("province:");
+		FX_CONTACT_INFO_DATA_SET_WITH_VALUE(info,
+				parser->getProvinceByAlias(QString::fromUtf8(personal->province)));
+		FX_CONTACT_INFO_NEWLINE(info);
+
+		info += tr("city:");
+		FX_CONTACT_INFO_DATA_SET_WITH_VALUE(info,
+				parser->getCityByCode(personal->city));
+		FX_CONTACT_INFO_NEWLINE(info);
 
 		delete parser;
 
-    }else{
-        info += tr("mobile_no:");
-        FX_CONTACT_INFO_DATA_SET_WITH_VALUE(info, mobile_no);
-        FX_CONTACT_INFO_NEWLINE(info);
-        info += tr("fetion_no:");
-        FX_CONTACT_INFO_DATA_SET_WITH_VALUE(info,
-                QString("%1").arg(m_account->id));
-        FX_CONTACT_INFO_NEWLINE(info);
-        info += tr("nickname:");
-        FX_CONTACT_INFO_DATA_SET(info);
-        FX_CONTACT_INFO_NEWLINE(info);
-        info += tr("name:");
-        FX_CONTACT_INFO_DATA_SET(info);
-        FX_CONTACT_INFO_NEWLINE(info);
-        info += tr("gender:");
-        FX_CONTACT_INFO_DATA_SET_WITH_VALUE(info, tr("unknow"));
-        FX_CONTACT_INFO_NEWLINE(info);
-        info += tr("impresa:");
-        FX_CONTACT_INFO_DATA_SET(info);
-        FX_CONTACT_INFO_NEWLINE(info);
-        info += tr("province:");
-        FX_CONTACT_INFO_DATA_SET_WITH_VALUE(info, tr("unknow"));
-        FX_CONTACT_INFO_NEWLINE(info);
+	} else {
+		FX_CONTACT_INFO_NEWLINE(info);
+		info += tr("nickname:");
+		FX_CONTACT_INFO_DATA_SET(info);
+		FX_CONTACT_INFO_NEWLINE(info);
+		info += tr("name:");
+		FX_CONTACT_INFO_DATA_SET(info);
+		FX_CONTACT_INFO_NEWLINE(info);
+		info += tr("gender:");
+		FX_CONTACT_INFO_DATA_SET_WITH_VALUE(info, tr("unknow"));
+		FX_CONTACT_INFO_NEWLINE(info);
+		info += tr("impresa:");
+		FX_CONTACT_INFO_DATA_SET(info);
+		FX_CONTACT_INFO_NEWLINE(info);
+		info += tr("province:");
+		FX_CONTACT_INFO_DATA_SET_WITH_VALUE(info, tr("unknow"));
+		FX_CONTACT_INFO_NEWLINE(info);
 
-        info += tr("city:");
-        FX_CONTACT_INFO_DATA_SET_WITH_VALUE(info, tr("unknow"));
-        FX_CONTACT_INFO_NEWLINE(info);
-    }
-
+		info += tr("city:");
+		FX_CONTACT_INFO_DATA_SET_WITH_VALUE(info, tr("unknow"));
+		FX_CONTACT_INFO_NEWLINE(info);
+	}
 
 	if (m_isUser)
 	{
@@ -220,5 +228,5 @@ FxContactInfo::getContactInfo()
 		FX_CONTACT_INFO_NEWLINE(info);
 	}
 
-    return info;
+	return info;
 }
