@@ -540,11 +540,16 @@ void BuddyOpt::addAccountToTree()
 void BuddyOpt::addAccountToGroup(const Fetion_Account *account)
 {
     //remove the user's id on account from list...
-    if (!account || account->id == (qlonglong)strtol(fx_get_usr_uid(), NULL, 10)
-        )
+    if (!account)
     {
         return ;
     }
+
+	// we need current user's account when we send scheduleSms or others
+    if (m_isMainView && account->id == (qlonglong)strtol(fx_get_usr_uid(), NULL, 10))
+	{
+        return ;
+	}
 
     int group_no = fx_get_account_group_id(account);
     if (group_no <= 0)
@@ -572,12 +577,16 @@ void BuddyOpt::addAccountToGroup(const Fetion_Account *account)
 void BuddyOpt::addAccountToGroup(const Fetion_Account *account, QString &name,
                                  int online_state, int group_id)
 {
-    //remove the user's id on account from list... fixed: it maybe have redundance
-    if (!account || account->id == (qlonglong)strtol(fx_get_usr_uid(), NULL, 10)
-        )
+    if (!account)
     {
         return ;
     }
+
+	// we need current user's account when we send scheduleSms or others
+    if (m_isMainView && account->id == (qlonglong)strtol(fx_get_usr_uid(), NULL, 10))
+	{
+        return ;
+	}
 
     QTreeWidgetItem *groupItem = findGroupItemByID(group_id);
     if (!groupItem)
