@@ -162,7 +162,7 @@ bool DES(char *Out, char *In, long datalen, const char *Key, int keylen,
 {
     if (!(Out && In && Key && (datalen = (datalen + 7) &0xfffffff8)))
     {
-        return  - 1;
+        return  false;
     }
     SetKey(Key, keylen);
     if (!Is3DES)
