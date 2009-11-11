@@ -1009,6 +1009,9 @@ void BuddyOpt::updateAccountInfo(const Fetion_Account *account)
     if (!account)
         return ;
 
+	if (account->id == strtol(fx_get_usr_uid(), NULL, 10))
+		return ;
+
     QTreeWidgetItem *accountItem = findAccountItem(account);
 
     //not find this account, so add it to Group...
