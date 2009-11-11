@@ -323,7 +323,11 @@ typedef long            LONG;
 * \var typedef unsigned int WPARAM
 * \brief A type definition for the first message paramter.
 */
+#ifdef WIN32
+typedef unsigned int    WPARAM;
+#else
 typedef unsigned long    WPARAM;
+#endif
 
 
 /**
