@@ -242,7 +242,7 @@ QLineEdit::focus{
 }
 /* 主窗口标题，这个没多大作用 */
 fxgui--FxWidget{
-	qproperty-windowTitle:"small fetion---default-style";
+	qproperty-windowTitle:"LibFetion";
 }
 fxgui--FxWidget QLabel#title{
 	margin-top:2px;
