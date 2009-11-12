@@ -478,6 +478,15 @@ void FxConfigDia::slot_SetDefaultFont()
 void FxConfigDia::_updateFonts(const QFont &font)
 {
     FX_FUNCTION
+    /* save in user config file */
+    Settings::instance().saveFontSetting(font);
+#ifdef Q_OS_MAC
+    QMessageBox::about(this,
+		    tr("Lib Changing Font"),
+		    tr("Restart APP to apply the new Font"));
+	    return;
+#endif
+
     /* INFO: since v1.0, css was used for theme management, just update stylesheet
      *       for font setting.
      */
@@ -486,8 +495,6 @@ void FxConfigDia::_updateFonts(const QFont &font)
 
     qApp->setStyleSheet(style);
 
-    /* save in user config file */
-    Settings::instance().saveFontSetting(font);
 }
 
 /**************************************************************************/
