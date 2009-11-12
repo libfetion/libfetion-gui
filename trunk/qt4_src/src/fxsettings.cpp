@@ -402,12 +402,13 @@ void Settings::setAutoLogin(bool isAutoLogin)
 /**************************************************************************/
 void Settings::setMainWindowTopHint(bool isMainWindowTopHint)
 {
-//    FX_FUNCTION
+FX_FUNCTION
 #ifdef Q_OS_MAC
 	/* fixme: on the mac machine, there is a bad effect about topHint*/
+	Q_UNUSED(isMainWindowTopHint);
 	m_isMainWindowTopHint = false;
 #else
-    m_isMainWindowTopHint = isMainWindowTopHint;
+	m_isMainWindowTopHint = isMainWindowTopHint;
 #endif
 
     setValue("MainWindowTopHint", m_isMainWindowTopHint);
@@ -689,6 +690,7 @@ int Settings::QtModToWinMod(Qt::KeyboardModifiers keyMod)
 
 	return Modifiy;
 #else
+	Q_UNUSED(keyMod);
 	return 0;
 #endif
 }

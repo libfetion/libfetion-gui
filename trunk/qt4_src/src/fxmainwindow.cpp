@@ -1062,6 +1062,7 @@ void FxMainWindow::init_UI()
             #ifdef Q_OS_MAC
                 setWindowTitle(QString::fromUtf8(fx_get_usr_show_name()) +
                                "--Mac Fetion");
+		setWindowFlags(this->windowFlags() ^ Qt::WindowStaysOnTopHint);
             #else
                 setWindowTitle(QString::fromUtf8(fx_get_usr_show_name()) +
                                "--Linux Fetion");
