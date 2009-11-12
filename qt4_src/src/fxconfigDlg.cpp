@@ -81,6 +81,7 @@ void FxConfigDia::init_state()
 
     #ifdef Q_OS_MAC
         CB_AutoShowMsg->setVisible(false);
+	CB_MainTopHit->setVisible(false);
     #endif
     if (Settings::instance().isAutoShowMsg())
     {
