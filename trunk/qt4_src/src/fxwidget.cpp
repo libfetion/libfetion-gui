@@ -28,7 +28,6 @@ FxWidget::FxWidget(QWidget *parent, Qt::WindowFlags flag) :
     _autoHide = false;
     _enableautoHide = false;
     _isSetSystemTitleBar = false;
-
     // for "editable label"
     setFocusPolicy(Qt::ClickFocus);
 
@@ -91,6 +90,22 @@ void FxWidget::setSystemTitleBar(bool flag)
 {
     FX_FUNCTION
     bool isvisible = isVisible();
+
+#ifdef Q_OS_MAC
+    setWindowFlags(windowFlags() ^ Qt::FramelessWindowHint);
+    setWindowFlags(windowFlags() ^ Qt::WindowSystemMenuHint);
+
+    enableAutoHide(false);
+    titleBar->hide();
+    sideBarRL->hide();
+    sideBarTB->hide();
+    if (isvisible)
+    {
+	    showNormal();
+    }
+    return;
+#endif
+
     if (_isSetSystemTitleBar == flag)
     {
         setBackground(backgroundPixmap);
