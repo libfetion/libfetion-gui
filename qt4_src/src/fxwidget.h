@@ -44,11 +44,11 @@ class FxWidget: public QWidget
     Q_OBJECT
     LOG4QT_DECLARE_QCLASS_LOGGER
 
-    Q_PROPERTY(QPixmap background WRITE setBackground);
-    Q_PROPERTY(int scaleLeft WRITE setBgScaleLeft);
-    Q_PROPERTY(int scaleRight WRITE setBgScaleRight);
-    Q_PROPERTY(int scaleBottom WRITE setBgScaleBottom);
-    Q_PROPERTY(int scaleTop WRITE setBgScaleTop);
+    Q_PROPERTY(QPixmap background READ getBackground WRITE setBackground);
+    Q_PROPERTY(int scaleLeft READ getBgScaleLeft WRITE setBgScaleLeft);
+    Q_PROPERTY(int scaleRight READ getBgScaleRight WRITE setBgScaleRight);
+    Q_PROPERTY(int scaleBottom READ getBgScaleBottom WRITE setBgScaleBottom);
+    Q_PROPERTY(int scaleTop READ getBgScaleTop WRITE setBgScaleTop);
     //Q_PROPERTY(QPixmap hiddenBar WRITE setHiddenBar)
     public:
         FxWidget(QWidget *parent = 0,
@@ -100,18 +100,25 @@ class FxWidget: public QWidget
         void setSystemTitleBar(bool flag = true);
         void setMinimizetoHide(bool minimizetoHide = false);
         void setBackground(QPixmap pix);
+        QPixmap getBackground() { return backgroundPixmap; }
+
+        int getBgScaleLeft() { return bgScaleLeft; }
         void setBgScaleLeft(int p)
         {
             bgScaleLeft = p;
         }
+
+        int getBgScaleRight() { return bgScaleRight;}
         void setBgScaleRight(int p)
         {
             bgScaleRight = p;
         }
+        int getBgScaleBottom() { return bgScaleBottom; }
         void setBgScaleBottom(int p)
         {
             bgScaleBottom = p;
         }
+        int getBgScaleTop() { return bgScaleTop; }
         void setBgScaleTop(int p)
         {
             bgScaleTop = p;
@@ -132,9 +139,13 @@ class FxWidget: public QWidget
 #ifdef Q_OS_MAC
         //on mac platform, we didn't support autohide function
         void enableAutoHide(bool flag=true)
-        {}
+	{
+		Q_UNUSED(flag);
+	}
         void setAutoHide(bool autoHide=true)
-        {}
+	{
+		Q_UNUSED(autoHide);
+	}
 #else
         void enableAutoHide(bool flag = true)
         {
