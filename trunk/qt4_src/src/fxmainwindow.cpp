@@ -861,6 +861,7 @@ void FxMainWindow::searchaccountDoubleClicked(QTreeWidgetItem *item, int column)
     #include <windows.h>
     bool FxMainWindow::winEvent(MSG *msg, long *result)
     {
+        Q_UNUSED(result);
         if (WM_HOTKEY == msg->message)
         {
             if (showNewMsgDlg())
