@@ -1,5 +1,5 @@
+#summary libfetion_gui_code_style
 #labels Phase-Design,Phase-Implementation
-#this doc is the arrive of issue 15.
 
 = Introduction =
 
@@ -105,8 +105,6 @@ GUI代码参照QT类成员函数命名规则：小写动词开始，大写字母
 7: by alsor.zhou, Aug 18, 2009
 
 有个问题～到目前为止(r315), 全局函数使用过多，虽然方便了调用,但不容易管理..
-
-
 
 
 
