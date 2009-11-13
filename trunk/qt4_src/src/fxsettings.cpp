@@ -93,6 +93,7 @@ int initshared(const char *path, const char *keyString)
         //printf("There are %d instances!\n", *shmPointer);
         return 0;
     #else
+        Q_UNUSED(path);
         /* Check the handler */
         if ((shHandle = OpenFileMapping(FILE_MAP_ALL_ACCESS, false, LPCWSTR
             (keyString))) == NULL)
@@ -172,6 +173,7 @@ int detachandremove(void *shmaddr)
 	errno = error;
 	return -1;
 #else
+	Q_UNUSED(shmaddr);
 	if (UnmapViewOfFile(shmPointer) != 0)
 		return -1;
 	if (CloseHandle(shHandle) != 0)
@@ -721,13 +723,13 @@ bool Settings::UnRegistHotkey(QWidget *window,
 		QChar keyValue,
 		Qt::KeyboardModifiers keyMod)
 {
+	Q_UNUSED(keyValue);
+	Q_UNUSED(keyMod);
 #if WIN32
 	WId w_handle = window ? window->winId(): 0;
 		return UnregisterHotKey(w_handle, hotkey_id);
 #else
 		Q_UNUSED(window);
-		Q_UNUSED(keyValue);
-		Q_UNUSED(keyMod);
 		return false;
 #endif
 }
