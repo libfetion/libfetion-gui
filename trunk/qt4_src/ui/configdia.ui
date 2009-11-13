@@ -195,8 +195,8 @@ background-color:rgb(246,243,243);
    <widget class="QCheckBox" name="CB_AutoShowMsg">
     <property name="geometry">
      <rect>
-      <x>13</x>
-      <y>40</y>
+      <x>160</x>
+      <y>20</y>
       <width>131</width>
       <height>17</height>
      </rect>
@@ -221,8 +221,8 @@ background-color:rgb(246,243,243);
    <widget class="QCheckBox" name="CB_MainStartHide">
     <property name="geometry">
      <rect>
-      <x>160</x>
-      <y>20</y>
+      <x>13</x>
+      <y>40</y>
       <width>131</width>
       <height>17</height>
      </rect>
