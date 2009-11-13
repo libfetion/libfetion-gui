@@ -82,6 +82,9 @@
        <property name="cursor" >
         <cursorShape>PointingHandCursor</cursorShape>
        </property>
+       <property name="toolTip" >
+        <string>changed personal state</string>
+       </property>
        <property name="statusTip" >
         <string>changed personal state</string>
        </property>
@@ -142,6 +145,9 @@
            <height>20</height>
           </size>
          </property>
+         <property name="toolTip" >
+          <string>settings</string>
+         </property>
          <property name="statusTip" >
           <string>settings</string>
          </property>
@@ -196,6 +202,9 @@
        <width>22</width>
        <height>22</height>
       </size>
+     </property>
+     <property name="toolTip" >
+      <string>add friends</string>
      </property>
      <property name="text" >
       <string/>
