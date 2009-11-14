@@ -886,7 +886,7 @@ void FxMsgWindow::handle_sendmsg(int msgflag,
         case MSG_OK:
             for (i = 0; i < timeOutMsgVector.size(); ++i)
             {
-                if (timeOutMsgVector.at(i) == fx_msg)
+                if (timeOutMsgVector.at(i) == (long)fx_msg)
                 {
                     newmsg = "<b style=\"color:rgb(170,0,255);\">" +
                              tr("auto resend ok:") +
@@ -900,7 +900,7 @@ void FxMsgWindow::handle_sendmsg(int msgflag,
         case MSG_FAIL:
             for (i = 0; i < timeOutMsgVector.size(); ++i)
             {
-                if (timeOutMsgVector.at(i) == fx_msg)
+                if (timeOutMsgVector.at(i) == (long)fx_msg)
                 {
                     timeOutMsgVector.remove(i);
                     break;
@@ -915,7 +915,7 @@ void FxMsgWindow::handle_sendmsg(int msgflag,
         case MSG_FAIL_LIMIT:
             for (i = 0; i < timeOutMsgVector.size(); ++i)
             {
-                if (timeOutMsgVector.at(i) == fx_msg)
+                if (timeOutMsgVector.at(i) == (long)fx_msg)
                 {
                     timeOutMsgVector.remove(i);
                     break;
