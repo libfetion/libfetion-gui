@@ -540,5 +540,4 @@ void FxLoginWindow::UpdateSkins()
         BT_Login_Ok->setPixmap(getLogin_CancelImage());
     }
 
-    this->setWindowIcon(getSysTrayIcon(0));
 }
