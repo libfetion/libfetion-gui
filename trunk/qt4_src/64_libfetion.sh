@@ -6,9 +6,9 @@ IS_CPU_64BIT=1
 #gcc --version
 #gcc -dumpmachine
 if [ $IS_CPU_64BIT -eq 0 ] ; then
-    sed -i -e "/libfetion.a/c    ./lib/libfetion_32.a" $TARGET_FILE
-    sed -i -e "/libfetion_64.a/c  ./lib/libfetion_32.a" $TARGET_FILE
+    sed -i -e "/libfetion.a/c    ./libfetion/lib/libfetion_32.a" $TARGET_FILE
+    sed -i -e "/libfetion_64.a/c  ./libfetion/lib/libfetion_32.a" $TARGET_FILE
 else
-    sed -i -e "/libfetion_32.a/c  ./lib/libfetion_64.a" $TARGET_FILE
-    sed -i -e "/libfetion.a/c     ./lib/libfetion_64.a" $TARGET_FILE
+    sed -i -e "/libfetion_32.a/c  ./libfetion/lib/libfetion_64.a" $TARGET_FILE
+    sed -i -e "/libfetion.a/c     ./libfetion/lib/libfetion_64.a" $TARGET_FILE
 fi

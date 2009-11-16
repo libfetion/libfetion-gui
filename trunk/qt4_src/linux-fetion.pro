@@ -17,7 +17,7 @@ win32 {
     QTPLUGIN += qgif
     RC_FILE = ./misc/libfetion.rc
     LIBS += qgif.lib \
-        ./lib/libcurl_imp.lib
+        ./libfetion/lib/libcurl_imp.lib
 }
 
 unix { 
@@ -25,7 +25,7 @@ unix {
     TARGET = linux-fetion
     LIBS += -lcurl \
         -lssl \
-        ./lib/libfetion_32.a
+        ./libfetion/lib/libfetion_32.a
 }
 mac { 
     message ("MAC build start...")
@@ -36,11 +36,11 @@ mac {
     LIBS =  -lcurl \
             -lcrypto \
             -lssl \
-            ./lib/libfetion_mac.a
+            ./libfetion/lib/libfetion_mac.a
 }
 
 TRANSLATIONS = fetion_utf8_CN.ts
-QMAKE_CXXFLAGS += -I./ \
+QMAKE_CXXFLAGS += -I./libfetion/include \
     -I./src \
     -I./.ui
 OBJECTS_DIR = ./.tmp
@@ -71,10 +71,10 @@ DISTFILES += 64_libfetion.sh \
     fetion_utf8_CN.qm \
     COPYING \
     README
-DISTFILES += lib/*.a \
-    lib/libcurl_imp.lib \
+DISTFILES += libfetion/lib/*.a \
+    libfetion/lib/libcurl_imp.lib \
     sound/msg.wav
-DISTFILES += libfetion/*.h
+DISTFILES += libfetion/include/*.h
 
 ################################################################################
 #               Installation
