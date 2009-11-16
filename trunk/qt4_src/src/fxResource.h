@@ -82,6 +82,7 @@ QPixmap getFlickIcon(bool flag);
 #define OptionsIcon         17  
 #define HistoryIcon         18
 #define SkinIcon            19
+#define ScheduleSMSIcon     20
 
 #define ReNameGroupIcon ReNameBuddyIcon 
 #define DeleteGroupIcon DeleteBuddyIcon     

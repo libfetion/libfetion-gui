@@ -443,6 +443,8 @@ QPixmap getMenuIcon(int menuID)
             return QPixmap(getSkinPath() + "/" + getXMLRes("menu_history", ""));
         case SkinIcon:
             return QPixmap(getSkinPath() + "/" + getXMLRes("menu_skin", ""));
+        case ScheduleSMSIcon:
+            return QPixmap(getSkinPath() + "/" + getXMLRes("menu_sch_sms", ""));
     }
     return QPixmap();
 }

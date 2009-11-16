@@ -1106,7 +1106,7 @@ void FxMainWindow::initAllActions()
 {
     FX_FUNCTION
     Schedule_SMS_Act = new QAction(tr("schedule sms"), this);
-    //Schedule_SMS_Act->setIcon(getOnlineStatusIcon(FX_STATUS_ONLINE));
+    Schedule_SMS_Act->setIcon(getMenuIcon(ScheduleSMSIcon));
     connect(Schedule_SMS_Act, SIGNAL(triggered()),
             this, SLOT(schedule_SMS()));
 
@@ -1993,6 +1993,7 @@ void FxMainWindow::UpdateSkins()
     UpdateSkinsMenu();
 
     personalInfoAct->setIcon(getMenuIcon(GetInfoBuddyIcon));
+    Schedule_SMS_Act->setIcon(getMenuIcon(ScheduleSMSIcon));
     addBuddyAct->setIcon(getMenuIcon(AddBuddyIcon));
     sendselfAct->setIcon(getMenuIcon(SMSBuddyIcon));
     sendgroupsmsAct->setIcon(getMenuIcon(SMSBuddyIcon));
