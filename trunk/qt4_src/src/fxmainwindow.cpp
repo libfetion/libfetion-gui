@@ -2092,7 +2092,7 @@ void FxMainWindow::displayAboutLibFetion()
                            Qt::WindowStaysOnTopHint);
     window->move(Settings::instance().MainWinPos());
 
-    QFile file(defaultResPath() + "/CREDITS.txt");
+    QFile file(defaultResPath() + "/../CREDITS.txt");
     if (file.open(QIODevice::ReadOnly))
     {
         QTextStream stream(&file);

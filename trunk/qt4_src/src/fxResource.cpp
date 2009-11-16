@@ -126,7 +126,7 @@ QString getXMLRes(QString item, QString defValue)
 QString defaultResPath()
 {
     #ifdef WIN32
-        return ".";
+        return "./resource";
     #else //linux
         static QString defaultResPath;
         static bool init = false;
@@ -140,11 +140,11 @@ QString defaultResPath()
 
         if (QFile::exists("./CREDITS.txt"))
         {
-            defaultResPath = ".";
+            defaultResPath = "./resource";
         }
         else
         {
-            defaultResPath = "/usr/share/libfetion";
+            defaultResPath = "/usr/share/libfetion/resource";
         }
 
         init = true;
@@ -189,7 +189,7 @@ QString chatDBFile()
 
 QString SkinPath()
 {
-    return defaultResPath() + "/skins";
+    return defaultResPath() + "/../skins";
 }
 
 /**************************************************************************/
@@ -220,29 +220,7 @@ QString defaultDataPath()
 
 QString FxFacePath()
 {
-    #ifdef WIN32
-        return "./faces_image";
-    #else //linux
-        static QString path;
-        static bool init = false;
-
-        if (init)
-        {
-            return path;
-        }
-
-        if (QFile::exists("./faces_image/1.gif"))
-        {
-            path = "./faces_image";
-        }
-        else
-        {
-            path = "/usr/share/libfetion/faces_image";
-        }
-
-        init = true;
-        return path;
-    #endif
+	return defaultResPath() + "/faces_image";
 }
 
 /**************************************************************************/
