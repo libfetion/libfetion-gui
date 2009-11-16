@@ -39,7 +39,7 @@ mac {
             ./libfetion/lib/libfetion_mac.a
 }
 
-TRANSLATIONS = fetion_utf8_CN.ts
+TRANSLATIONS = ./resource/fetion_utf8_CN.ts
 QMAKE_CXXFLAGS += -I./libfetion/include \
     -I./src \
     -I./.ui
