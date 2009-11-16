@@ -372,26 +372,24 @@ QPixmap getSysTrayIcon(int status)
     {
         /* no login */
         case 0:
-            return QPixmap(getSkinPath() + "/" +
-                           getXMLRes("systray_offline",""));
+            return QPixmap(defaultResPath() + "/systray/offline.png");
+                           
         /* login */
         case 1:
         case FX_STATUS_ONLINE:
-            return QPixmap(getSkinPath() + "/" +
-                           getXMLRes("systray_online", ""));
+            return QPixmap(defaultResPath() + "/systray/online.png");
 
         case FX_STATUS_OFFLINE:
-            return QPixmap(getSkinPath() + "/" +
-                           getXMLRes("systray_hide", ""));
+            return QPixmap(defaultResPath() + "/systray/hide.png");
 
         case FX_STATUS_DINNER:
         case FX_STATUS_AWAY:
         case FX_STATUS_MEETING:
         case FX_STATUS_EXTENDED_AWAY:
         case FX_STATUS_NUM_PRIMITIVES:
-            return QPixmap(getSkinPath() + "/" + getXMLRes("systray_away", ""));
+            return QPixmap(defaultResPath() + "/systray/away.png");
     }
-    return QPixmap(getSkinPath() + "/" + getXMLRes("systray_busy", ""));
+	return QPixmap(defaultResPath() + "/systray/busy.png");
 }
 
 /**************************************************************************/

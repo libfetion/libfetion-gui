@@ -32,13 +32,6 @@ online_m_away="online/m_away.png"
 online_m_busy="online/m_busy.png"
 
 
-systray_offline="systray/offline.png"
-systray_online="systray/online.png"
-systray_hide="systray/hide.png"
-systray_away="systray/away.png"
-systray_busy="systray/busy.png"
-systray_online_flick="systray/online_flick.png"
-
 menu_im="menu/im.gif"
 menu_sms="menu/sms.gif"
 menu_profile="menu/profile.gif"
