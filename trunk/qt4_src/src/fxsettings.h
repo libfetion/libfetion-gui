@@ -176,7 +176,7 @@ class Settings: public QSettings
         {
             m_DefaultFont = font;
         }
-        QFont setSysDefaultFont()
+        QFont getSysDefaultFont()
         {
             return m_DefaultFont;
         }

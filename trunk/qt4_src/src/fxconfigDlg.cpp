@@ -468,7 +468,7 @@ void FxConfigDia::slot_SetFont()
 void FxConfigDia::slot_SetDefaultFont()
 {
     FX_FUNCTION
-    _updateFonts(Settings::instance().setSysDefaultFont());
+    _updateFonts(Settings::instance().getSysDefaultFont());
 }
 
 /**************************************************************************/
