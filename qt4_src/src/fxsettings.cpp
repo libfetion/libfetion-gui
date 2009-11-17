@@ -219,7 +219,11 @@ Settings::Settings(const QString &fileName, Format format) :
         m_skinName = "default";
     }
 
-    m_CurrentFont = value("AppFont", QFont()).value<QFont> ();
+    QFont font = QApplication::font();
+    font.setPointSize(font.pointSize()+2);
+    setSysDefaultFont(font);
+
+    m_CurrentFont = value("AppFont", getSysDefaultFont()).value<QFont> ();
 }
 
 /**************************************************************************/

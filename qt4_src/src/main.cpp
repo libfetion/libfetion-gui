@@ -82,7 +82,6 @@ int main(int argc, char *argv[])
     app.installTranslator(&translator_fetion);
     app.installTranslator(&translator_qt);
 
-    Settings::instance().setSysDefaultFont(QApplication::font());
     app.setFont(Settings::instance().getCurrentFont());
     setSkins(Settings::instance().SkinPath(), Settings::instance().SkinName());
     FxMain *mainWin = new FxMain();
