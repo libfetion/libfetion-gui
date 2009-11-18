@@ -220,7 +220,7 @@ Settings::Settings(const QString &fileName, Format format) :
     }
 
     QFont font = QApplication::font();
-    font.setPointSize(font.pointSize()+2);
+    font.setPointSize(font.pointSize()+3);
     setSysDefaultFont(font);
 
     m_CurrentFont = value("AppFont", getSysDefaultFont()).value<QFont> ();
