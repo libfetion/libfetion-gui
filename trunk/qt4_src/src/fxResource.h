@@ -61,6 +61,7 @@ QPixmap getHistoryIcon(); //this function is get the history toolbutton is pictu
 QPixmap getChangeSendModIcon(); //this function is get the change_send_mod toolbutton is picture
 
 QPixmap getFlickIcon(bool flag);
+QPixmap getSkinFlickIcon(bool flag);
 
 //here will using enmu replace
 #define IMBuddyIcon			1
