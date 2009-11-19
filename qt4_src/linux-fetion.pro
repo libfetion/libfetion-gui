@@ -48,7 +48,7 @@ MOC_DIR = ./.moc
 UI_HEADERS_DIR = ./.ui
 
 # sub-directory sources
-include (src/gui.pri)
+nclude (src/gui.pri)
 include (ui/ui.pri)
 
 # PR build, no log4qt linked in
@@ -63,17 +63,19 @@ debug {
 ################################################################################
 #               Distribute files (data, config)
 ################################################################################
-DISTFILES += data/Location.xml
+DISTFILES += resource/data/Location.xml
 DISTFILES += src/LibFetionEventHandle.cpp
 DISTFILES += 64_libfetion.sh \
     CREDITS.txt \
     install.sh \
-    fetion_utf8_CN.qm \
+    install_mac.sh \
+    resource/fetion_utf8_CN.qm \
+    resource/qt_zh_CN.qm \
     COPYING \
     README
 DISTFILES += libfetion/lib/*.a \
     libfetion/lib/libcurl_imp.lib \
-    sound/msg.wav
+    resource/sound/msg.wav
 DISTFILES += libfetion/include/*.h
 
 ################################################################################
