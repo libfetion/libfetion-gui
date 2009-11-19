@@ -7,7 +7,7 @@ cp misc/mac_fetion.icns Mac-Fetion.app/Contents/Resources/
 touch Mac-Fetion.app
 
 sudo mkdir -p /usr/share/libfetion/
-sudo cp -rf README COPYING ChangeLog CREDITS.txt resource /usr/share/libfetion/
+sudo cp -rf README COPYING ChangeLog CREDITS.txt resource skins /usr/share/libfetion/
 sudo chmod -R 755 /usr/share/libfetion/
 
 #install lib & frame
