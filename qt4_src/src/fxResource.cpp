@@ -471,18 +471,20 @@ QPixmap getBT_SMSIcon()
 /*                                                                        */
 /**************************************************************************/
 
+QPixmap getSkinFlickIcon(bool flag)
+{
+	if (flag)
+		return QPixmap(getSkinPath() + "/" +
+				getXMLRes("online_online", ""));
+	return QPixmap();
+}
+
 QPixmap getFlickIcon(bool flag)
 {
-    if (flag)
-    {
-        return QPixmap(getSkinPath() + "/" +
-                       getXMLRes("systray_online", ""));
-    }
-    else
-    {
-        return QPixmap(getSkinPath() + "/" +
-                       getXMLRes("systray_online_flick",""));
-    }
+	if (flag)
+		return QPixmap(defaultResPath() + "/systray/online.png");
+
+	return QPixmap(defaultResPath() + "/systray/online_sms.png");
 }
 
 /**************************************************************************/

@@ -437,7 +437,7 @@ void AccountTab::flickerTab()
         return ;
     }
 
-    tabWidget->setTabIcon(tabWidget->indexOf(this), getFlickIcon(flick_flag));
+    tabWidget->setTabIcon(tabWidget->indexOf(this), getSkinFlickIcon(flick_flag));
     flick_flag = !flick_flag;
 }
 
