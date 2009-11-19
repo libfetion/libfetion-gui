@@ -7,8 +7,7 @@ CONFIG -= debug
 # development configure
 #CONFIG += debug
 
-QT += xml \
-    xmlpatterns
+QT += xml 
     
 win32 { 
     message ("WIN32 build start...")
