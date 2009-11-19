@@ -47,7 +47,7 @@ MOC_DIR = ./.moc
 UI_HEADERS_DIR = ./.ui
 
 # sub-directory sources
-nclude (src/gui.pri)
+include (src/gui.pri)
 include (ui/ui.pri)
 
 # PR build, no log4qt linked in
