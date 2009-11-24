@@ -24,6 +24,9 @@
 #define CURRENT_VERSION 101
 #define VERSION_NO "v1.1"
 
+#define DefaultSkinCatalog "Fx_Kieteay"
+#define DefaultSkinName "Fx_Kieteay"
+
 /* GUI debug, no real network connection */
 // #define HAVE_GUI_DEBUG_ENABLED
 
