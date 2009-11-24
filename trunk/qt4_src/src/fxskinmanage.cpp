@@ -209,7 +209,7 @@ void setupStyleSheet()
     if (!QFile::exists(path + "/style.css"))
     {
         // has not style.css use the default/style.css
-        path = SkinPath() + "/default";
+        path = defaultSkinPath();
     }
 
     // FIXME: if it's not and validated directory, just do nothing.
@@ -234,7 +234,7 @@ void setupStyleSheet()
     path = getSkinPath();
     if (!QFile::exists(path + "/res.xml"))
     {
-        path = SkinPath() + "/default";
+        path = defaultSkinPath();
     }
     // has not res.xml use the default/res.xml
 
