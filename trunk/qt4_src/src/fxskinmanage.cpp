@@ -255,7 +255,7 @@ void setupStyleSheet()
 QString ConvertFontToStyleSheet(const QFont &font)
 {
     QString style;
-    style += "QWidget { ";
+    style += "{ ";
     style += "font-family: ";
     style += font.family();
     style += ";";
@@ -274,5 +274,6 @@ QString ConvertFontToStyleSheet(const QFont &font)
     style += " color: #333333;";
     style += " }";
 
+	style = "QWidget" + style + "QToolTip" + style;
     return style;
 }
