@@ -198,7 +198,7 @@ QString SkinPath()
 
 QString defaultSkinPath()
 {
-    return SkinPath() + "/default";
+    return SkinPath() + "/" + DefaultSkinCatalog;
 }
 
 /**************************************************************************/
