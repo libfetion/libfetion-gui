@@ -23,14 +23,15 @@ cjacker <cjacker@gmail.com>(Linux Contributer)
 heihaier <admin@heihaier.org>(GTK of Linux Contributer)
 toy <toy_2003@163.com>(Windows Contributer)
 
+HJMC <sacdcn@126.com>(Tester)
+
 Kieteay <357108421@qq.com>(UI/Skins Designer)
 minifish <ikusaisland@gmail.com>(UI Designer)
 HUan <wanzhenhuan@gmail.com>(UI Designer)
 elix <elixzhang@mac.com>(UI Designer)
 ATP <jxhatpjxh@163.com>(UI Designer)
 
-HJMC <sacdcn@126.com>(Tester)
-
+zhuwuwu <zhuwuwu1@qq.com>(Skins Designer)
 Solvor <solvor@163.com>(Skins Designer)
 hehailong <hehailong10000@126.com>(Skins Designer)
 shanu <shaun.he@mind-unique.com>(Skins Designer)
