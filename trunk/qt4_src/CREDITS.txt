@@ -23,6 +23,7 @@ cjacker <cjacker@gmail.com>(Linux Contributer)
 heihaier <admin@heihaier.org>(GTK of Linux Contributer)
 toy <toy_2003@163.com>(Windows Contributer)
 
+Kieteay <357108421@qq.com>(UI/Skins Designer)
 minifish <ikusaisland@gmail.com>(UI Designer)
 HUan <wanzhenhuan@gmail.com>(UI Designer)
 elix <elixzhang@mac.com>(UI Designer)
@@ -32,7 +33,7 @@ HJMC <sacdcn@126.com>(Tester)
 
 Solvor <solvor@163.com>(Skins Designer)
 hehailong <hehailong10000@126.com>(Skins Designer)
-shanu <shaun.he@mind-unique.com(Skins Designer)
+shanu <shaun.he@mind-unique.com>(Skins Designer)
 
 Gel <gel01@163.com>(others)
 alooffx <alooffox@gmail.com>(others)
