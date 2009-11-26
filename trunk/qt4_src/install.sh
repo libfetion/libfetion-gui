@@ -10,6 +10,7 @@ sudo mkdir -p /usr/share/app-install/icons/
 sudo cp ./misc/fetion.png /usr/share/app-install/icons/
 sudo chmod 644 /usr/share/app-install/icons/fetion.png
 
+sudo rm -rf /usr/share/libfetion/
 sudo mkdir -p /usr/share/libfetion/
 sudo cp -rf README COPYING ChangeLog CREDITS.txt resource skins /usr/share/libfetion/
 sudo chmod -R 755 /usr/share/libfetion/
