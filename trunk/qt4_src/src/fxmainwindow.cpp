@@ -735,6 +735,7 @@ void FxMainWindow::slot_set_state(int state)
     {
         buddySetStatusMenu->setIcon(getOnlineStatusIcon(state));
     }
+    this->setWindowIcon(getSysTrayIcon(state));
 
     if (isHaveTray)
     {
@@ -1074,6 +1075,7 @@ void FxMainWindow::init_UI()
 
     //UI set all images of main windows
     portrait->setIcon(getPortraitImage());
+    this->setWindowIcon(getSysTrayIcon(fx_get_user_state()));
 
     lineSearch->setText(tr("search friends..."));
     nickname->setText(QString::fromUtf8(fx_get_usr_show_name()));

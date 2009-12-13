@@ -528,6 +528,7 @@ void FxLoginWindow::UpdateSkins()
 
     login_image->setPixmap(getLoginImage());
     LibFetion_image->setPixmap(getLibFetionImage());
+    setWindowIcon(getSysTrayIcon(0));
 
     if (willLogin)
     {

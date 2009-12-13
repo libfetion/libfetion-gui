@@ -207,6 +207,7 @@ void FxMsgWindow::setCurrentTabTitle(AccountTab *accountTab)
     }
 
     this->setWindowIcon(getOnlineStatusIcon(online_state));
+    this->setTitleBarIcon(getOnlineStatusIcon(online_state));
 }
 
 /**************************************************************************/
