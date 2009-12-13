@@ -2088,9 +2088,16 @@ void FxMainWindow::displayAboutLibFetion()
     window->setMinimumSize(460, 220);
     window->setMaximumSize(460, 220);
     window->setWindowTitle("Libfetion Authors");
+#if QT_VERSION >= 0x040500
+    window->setWindowFlags(Qt::WindowTitleHint | \
+                           Qt::WindowSystemMenuHint | \
+                           Qt::WindowCloseButtonHint | \
+                           Qt::WindowStaysOnTopHint);
+#else
     window->setWindowFlags(Qt::WindowTitleHint | \
                            Qt::WindowSystemMenuHint | \
                            Qt::WindowStaysOnTopHint);
+#endif
     window->move(Settings::instance().MainWinPos());
 
     QFile file(defaultResPath() + "/../CREDITS.txt");
