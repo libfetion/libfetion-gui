@@ -158,17 +158,12 @@ void FxWidget::setLayout(QLayout *layout)
     FX_FUNCTION
     contentWidget->setLayout(layout);
 }
+
 void FxWidget::setWindowTitle(const QString &title)
 {
     FX_FUNCTION
     titleBar->setWindowTitle(title);
     QWidget::setWindowTitle(title);
-}
-
-void FxWidget::setWindowIcon(const QIcon &icon)
-{
-    FX_FUNCTION
-    QWidget::setWindowIcon(icon);
 }
 
 void FxWidget::setTitleBarIcon(const QIcon &icon)
