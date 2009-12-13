@@ -168,9 +168,15 @@ void FxWidget::setWindowTitle(const QString &title)
 void FxWidget::setWindowIcon(const QIcon &icon)
 {
     FX_FUNCTION
-    titleBar->setWindowIcon(icon);
     QWidget::setWindowIcon(icon);
 }
+
+void FxWidget::setTitleBarIcon(const QIcon &icon)
+{
+    FX_FUNCTION
+    titleBar->setWindowIcon(icon);
+}
+
 void FxWidget::resizeEvent(QResizeEvent *event)
 {
     FX_FUNCTION
