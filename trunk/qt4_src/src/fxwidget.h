@@ -126,7 +126,6 @@ class FxWidget: public QWidget
         void setLayout(QLayout*);
         void setWindowTitle(const QString & title);
 
-        void setWindowIcon(const QIcon & icon);
         void setTitleBarIcon(const QIcon & icon);
 
         bool isAutoHide() const
