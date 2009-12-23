@@ -33,6 +33,7 @@
 
 #define SYSTEM_ID 10000
 class FxMainWindow;
+class FxMsgWindow;
 
 class AccountTab : public QWidget, public Ui::MsgSend
 {
@@ -53,7 +54,8 @@ public:
 	//MsgSend *msgSend;
 	AccountTab * msgSend;
 
-	void setMainWind( FxMainWindow *wind) {mainWind = wind;}
+	void setMainWind(FxMainWindow *wind) { mainWind = wind; }
+	void setMsgWindow(FxMsgWindow *wind) { msgWind = wind; }
 	void setSendModle(bool isSMS);
 	void handle_alt_num( QKeyEvent *keyEvent);
 
@@ -78,6 +80,7 @@ private:
 	QTimer flickTimer;
 	bool flick_flag;
 	FxMainWindow *mainWind;
+	FxMsgWindow *msgWind; 
 	FxShowHistory *histroy;
 	QShortcut *m_sendShortCutAltS;
 };
