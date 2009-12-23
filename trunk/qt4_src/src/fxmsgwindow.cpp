@@ -371,6 +371,7 @@ bool FxMsgWindow::addMessage(QString msg,
     {
         accountTab = new AccountTab(account_id, tabWidget);
         accountTab->setMainWind(this->m_mainwindow);
+        accountTab->setMsgWindow(this);
         tabWidget->addTab(accountTab, cropTabName(accountTab->account_name));
     }
 
@@ -693,6 +694,7 @@ void FxMsgWindow::addAccount(qlonglong account_id, bool isSendSms)
     {
         accountTab = new AccountTab(account_id, tabWidget, isSendSms);
         accountTab->setMainWind(this->m_mainwindow);
+        accountTab->setMsgWindow(this);
         tabWidget->addTab(accountTab, cropTabName(accountTab->account_name));
     }
 

@@ -23,7 +23,7 @@
 AccountTab::AccountTab(qlonglong id, FxMyTabWidget *parent, bool awaySendSms):
                        QWidget(parent), account_id(id), isAwaySendSMS
                        (awaySendSms), tabWidget(parent), flick_flag(FALSE),
-                       mainWind(NULL), histroy(NULL)
+                       mainWind(NULL), msgWind(NULL), histroy(NULL)
 {
     FX_FUNCTION
     setupUi(this);
@@ -169,9 +169,9 @@ void AccountTab::ShowHistroy()
 
 void AccountTab::ShowFaces()
 {
-    FX_FUNCTION
-    // @TO FIX
-    ((FxMsgWindow*)(tabWidget->parentWidget()->parentWidget()))->showFaces();
+	FX_FUNCTION
+	if (msgWind)
+		msgWind->showFaces();
 }
 
 /**************************************************************************/
@@ -216,9 +216,8 @@ bool AccountTab::eventFilter(QObject *target, QEvent *event)
         if (keyEvent->key() == Qt::Key_W && (keyEvent->modifiers() == Qt
             ::AltModifier || keyEvent->modifiers() == Qt::ControlModifier))
         {
-            //@To FIX
-            ((FxMsgWindow*)(tabWidget->parentWidget()->parentWidget()))
-             ->closeTabWid(tabWidget->currentIndex());
+			if (msgWind)
+				msgWind->closeTabWid(tabWidget->currentIndex());
             return true;
         }
 
@@ -226,9 +225,8 @@ bool AccountTab::eventFilter(QObject *target, QEvent *event)
         {
             if (msgSend->MsgEdit->toPlainText().isEmpty())
             {
-                //@TO FIX
-                ((FxMsgWindow*)(tabWidget->parentWidget()->parentWidget()))
-                 ->hide();
+				if (msgWind)
+					msgWind->hide();
                 return true;
             }
         }
@@ -278,8 +276,8 @@ void AccountTab::SendNudge()
     if (fx_send_nudge(account_id))
     {
         str = tr("send nudge ok");
-        ((FxMsgWindow*)(tabWidget->parentWidget()->parentWidget()))
-         ->nudge_shake();
+		if (msgWind)
+			msgWind->nudge_shake();;
     }
     else
     {
@@ -393,7 +391,9 @@ void AccountTab::startFlickerTab()
         return ;
     }
 
-    QApplication::alert(tabWidget->parentWidget()->parentWidget());
+	if (msgWind)
+		QApplication::alert(msgWind);
+
     flickTimer.start(400);
     if (mainWind)
     {
@@ -426,13 +426,9 @@ void AccountTab::endFlickerTab()
 void AccountTab::flickerTab()
 {
     FX_FUNCTION
-    if (tabWidget->currentWidget() == this && tabWidget->parentWidget()
-        ->isVisible())
+    if (tabWidget->currentWidget() == this &&
+		msgWind && msgWind->isVisible() )
     {
-        /*
-        if (!tabWidget->parentWidget()->isActiveWindow())
-        QApplication::alert(tabWidget->parentWidget());
-         */
         endFlickerTab();
         return ;
     }
