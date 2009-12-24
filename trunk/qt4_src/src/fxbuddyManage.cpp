@@ -34,10 +34,6 @@ BuddyMge::BuddyMge(QTreeWidget *widget, FxMainWindow *wind)
     //add all account to main view
     buddyopt = new BuddyOpt(widget);
 
-#ifndef HAVE_GUI_DEBUG_ENABLED
-	saveAllAccountInfo();
-#endif
-
     initAllActions();
 
     connect(treeWidget, SIGNAL(itemDoubleClicked(QTreeWidgetItem *, int)), this,
@@ -428,7 +424,7 @@ void BuddyMge::updateAccountInfo(qlonglong account_id)
     getMsgWindow()->updateAccountInfo(account_id);
 
 	/* update the account Database */
-	saveAccountToDB(account);
+	UpdateAccountToDB(account);
 }
 
 /**************************************************************************/
