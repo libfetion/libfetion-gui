@@ -605,6 +605,25 @@ void BuddyOpt::addAccountToGroup(const Fetion_Account *account, QString &name,
     ac_info->accountID = account->id;
     ac_info->haveUpdate = false;
 
+	QString nicename;
+	QString impresa;
+	if (GetAccountInfoFromDB(account->id, nicename, impresa))
+	{
+		if (!nicename.isEmpty())
+		{
+
+			fx_set_buddy_nickname_ex(account->id, nicename.toUtf8().data());
+			ac_info->haveUpdate = true;
+		}
+
+		if (!impresa.isEmpty())
+		{
+			fx_set_buddy_impresa_ex(account->id, impresa.toUtf8().data());
+			ac_info->haveUpdate = true;
+		}
+	}
+
+
     if (fx_islogin_by_mobile(account))
     //mobile login
     {
