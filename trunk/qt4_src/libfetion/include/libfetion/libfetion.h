@@ -1626,6 +1626,29 @@ FX_EXPORT char* fx_msg_qt_format(const char * msg);
   * \return the no format message, return NULL if the msg is wrong format.
 */
 FX_EXPORT char* fx_get_original_ID(long id);
+
+/**
+  * \fn void fx_set_buddy_nickname_ex(long uid, const char *nickname)
+  * \brief set the nickname for account.
+  *
+  * just used by relax, this change will not be pulled to server of fetion. 
+  *
+  * \param uid The id which you want to change.
+  * \param nickname The nickname which you want to set.
+*/
+FX_EXPORT void fx_set_buddy_nickname_ex(long uid, const char *nickname);
+
+/**
+  * \fn fx_set_buddy_impresa_ex(long uid, const char *impresa)
+  * \brief get the original id of the user.
+  *
+  * just used by relax, this change will not be pulled to server of fetion. 
+  *
+  * \param uid The id which you want to change.
+  * \param impresa The impresa which you want to set.
+  *
+*/
+FX_EXPORT void fx_set_buddy_impresa_ex(long uid, const char *impresa);
 /** @} end of fetion_misc */
 
 #ifdef __cplusplus 
