@@ -864,14 +864,12 @@ bool selectSystemMsg(long usr, long uid, const char *msg)
 BOOL init_storeAccountInfo_db(long usr)
 {
     static BOOL have_init = FALSE;
-    if (!init_db())
-    {
-        return FALSE;
-    }
     if (have_init)
-    {
         return TRUE;
-    }
+
+    if (!init_db())
+        return FALSE;
+
     char *perrmsg;
     char **result;
     int nrow, ncol;
@@ -910,13 +908,57 @@ BOOL init_storeAccountInfo_db(long usr)
 /*                                                                        */
 /**************************************************************************/
 
-void saveAccountToDB(const Fetion_Account *account)
+bool GetAccountInfoFromDB(long uid, QString& nicename, QString& impresa)
+{
+	long usr = (qlonglong)strtol(fx_get_usr_uid(), NULL, 10);
+	if (!init_storeAccountInfo_db(usr))
+		return false;
+    int ret, nrow, ncol;
+    char *perrmsg;
+    char **result;
+
+	sprintf(sql, "select nickname, impresa from fxACINFO%ldusr where uid = \"%ld\"", usr, uid);
+    ret = sqlite3_get_table(pdb, sql, &result, &nrow, &ncol, &perrmsg);
+    if (ret != SQLITE_OK)
+    {
+        printf("GetAccountInfoFromDB fail!, the sql is...%s\n", sql);
+		return false;
+    }
+    bool res = false;
+
+    if (nrow)
+    {
+        res = true;
+        nicename = QString::fromUtf8(result[2]);
+        impresa = QString::fromUtf8(result[3]);
+    }
+
+    sqlite3_free_table(result);
+
+    return res;
+}
+
+/**************************************************************************/
+/*                                                                        */
+/**************************************************************************/
+
+void UpdateAccountToDB(const Fetion_Account *account)
 {
     long usr = (qlonglong)strtol(fx_get_usr_uid(), NULL, 10);
-    if (!account || account->id == usr)
-    {
-        return ;
-    }
+
+	if (!init_storeAccountInfo_db(usr))
+		return;
+
+	if (!account)
+		return;
+
+	if (account->id == usr)
+		return ;
+
+    bool ret = false;
+    int nrow, ncol;
+    char *perrmsg;
+    char **result;
 
     Fetion_Personal *personal = account->personal;
     long uid = account->id;
@@ -927,10 +969,18 @@ void saveAccountToDB(const Fetion_Account *account)
     char *impresa;
     char *showname;
 
-	/* first, we remove the old info from db */
-    sprintf(sql, "delete from fxACINFO%ldusr where uid=\"%ld\"", usr, uid);
+	bool isAccountExist = false;
 
-    sqlite3_exec(pdb, sql, 0, 0, 0);
+    memset(sql, 0, SQL_MAXLEN);
+	/* first, we remove the old info from db */
+    sprintf(sql, "select uid from fxACINFO%ldusr where uid=\"%ld\"", usr, uid);
+    ret = sqlite3_get_table(pdb, sql, &result, &nrow, &ncol, &perrmsg);
+    if (ret != SQLITE_OK)
+        return false;
+    if (nrow)
+		isAccountExist = true;
+	else
+		isAccountExist = false;
 
 	/* then begin to save Account info to DB */
 
@@ -974,8 +1024,15 @@ void saveAccountToDB(const Fetion_Account *account)
     showname = fx_get_account_show_name(account, TRUE);
     // insert data to databse
     memset(sql, 0, SQL_MAXLEN);
-    sprintf(sql,
-            "insert into fxACINFO%ldusr values(\"%ld\", \"%d\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\")", usr, uid, online_state, mobilenm, local_name, nickname, impresa, showname);
+
+	if (isAccountExist) //update
+		sprintf(sql,
+				"update fxACINFO%ldusr set online_state=\"%d\", mobilenm=\"%s\", local_name=\"%s\", nickname=\"%s\", impresa=\"%s\", showname=\"%s\" where uid=\"%ld\")", 
+				usr, online_state, mobilenm, local_name, nickname, impresa, showname, uid);
+	else //insert
+		sprintf(sql,
+				"insert into fxACINFO%ldusr values(\"%ld\", \"%d\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\")", 
+				usr, uid, online_state, mobilenm, local_name, nickname, impresa, showname);
 
     sqlite3_exec(pdb, sql, 0, 0, 0);
 
@@ -989,43 +1046,15 @@ void saveAccountToDB(const Fetion_Account *account)
 /*                                                                        */
 /**************************************************************************/
 
-void saveAllAccountInfo()
-{
-    char *perrmsg;
-    long usr = (qlonglong)strtol(fx_get_usr_uid(), NULL, 10);
-
-    if (!init_db() || !init_storeAccountInfo_db(usr))
-    {
-        return ;
-    }
-
-    sqlite3_exec(pdb, "begin transaction", 0, 0, &perrmsg);
-
-    const Fetion_Account *account = fx_get_first_account();
-    while (account)
-    {
-        saveAccountToDB(account);
-        account = fx_get_next_account(account);
-    }
-
-    sqlite3_exec(pdb, "commit transaction", 0, 0, &perrmsg);
-}
-
-/**************************************************************************/
-/*                                                                        */
-/**************************************************************************/
-
 void create_search_result(QList < QTreeWidgetItem * >  * items, char **result,
                           int nrow, int ncol);
 QList < QTreeWidgetItem * >  * searchAccountInfo(char *keyword)
 {
-    QList < QTreeWidgetItem * >  * items = new QList < QTreeWidgetItem * > ;
-    if (!init_db())
-    {
-        return items;
-    }
     long usr = (qlonglong)strtol(fx_get_usr_uid(), NULL, 10);
+    QList < QTreeWidgetItem * >  * items = new QList < QTreeWidgetItem * > ;
 
+	if (!init_storeAccountInfo_db(usr))
+        return items;
 
     int ret, nrow, ncol;
     char *perrmsg;
