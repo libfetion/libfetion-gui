@@ -179,6 +179,7 @@ void FxMsgWindow::currentChangedTab(int index)
     FX_FUNCTION
     AccountTab *accountTab = (AccountTab*)tabWidget->widget(index);
     setCurrentTabTitle(accountTab);
+    accountTab->MsgEdit->setFocus();
 }
 
 /**************************************************************************/
@@ -232,7 +233,11 @@ void FxMsgWindow::closeTabWid(int index)
     if (tabWidget->count() <= 0)
     {
         this->hide();
-    }
+    } else {
+        int next_index = tabWidget->currentIndex();
+        AccountTab *next_currentTab = (AccountTab*)tabWidget->widget(next_index);
+        next_currentTab->MsgEdit->setFocus();
+	}
 
     // there's warning:
     // QObject do not delete object, 'MsgEdit', during its event handler!
@@ -242,6 +247,7 @@ void FxMsgWindow::closeTabWid(int index)
     {
         accountTab->deleteLater();
     }
+
 }
 
 /**************************************************************************/
