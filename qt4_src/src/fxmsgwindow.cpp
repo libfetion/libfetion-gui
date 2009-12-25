@@ -708,6 +708,7 @@ void FxMsgWindow::addAccount(qlonglong account_id, bool isSendSms)
     setCurrentTabTitle(accountTab);
 
     this->showNormal();
+    QApplication::setActiveWindow(this);
 
     accountTab->setSendModle(isSendSms);
     accountTab->msgSend->MsgEdit->setFocus();
