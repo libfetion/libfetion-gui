@@ -953,7 +953,7 @@ void UpdateAccountToDB(const Fetion_Account *account)
 		return;
 
 	if (account->id == usr)
-		return ;
+		return;
 
     bool ret = false;
     int nrow, ncol;
@@ -976,7 +976,8 @@ void UpdateAccountToDB(const Fetion_Account *account)
     sprintf(sql, "select uid from fxACINFO%ldusr where uid=\"%ld\"", usr, uid);
     ret = sqlite3_get_table(pdb, sql, &result, &nrow, &ncol, &perrmsg);
     if (ret != SQLITE_OK)
-        return false;
+        return;
+
     if (nrow)
 		isAccountExist = true;
 	else
