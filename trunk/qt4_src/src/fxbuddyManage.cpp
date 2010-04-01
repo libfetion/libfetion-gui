@@ -455,7 +455,7 @@ void BuddyMge::slot_add_group(int, unsigned long newname, qlonglong id)
 
 void BuddyMge::slot_del_group(int, unsigned long, qlonglong id)
 {
-    buddyopt->delAccount(id);
+    buddyopt->delGroup(id);
 }
 
 /**************************************************************************/
