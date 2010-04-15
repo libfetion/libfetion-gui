@@ -37,7 +37,9 @@ class FxWidgetTitleBar: public QWidget
 
     public slots:
         void on_btnMinimize_clicked();
+#if 0
         void on_btnMaximize_clicked(bool checked = false);
+#endif
         void on_btnClose_clicked();
 
     public:

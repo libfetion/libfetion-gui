@@ -68,6 +68,8 @@ void FxWidgetTitleBar::on_btnMinimize_clicked()
     }
     // or should be hide as some application presented?
 }
+
+#if 0
 void FxWidgetTitleBar::on_btnMaximize_clicked(bool checked)
 {
     FX_FUNCTION
@@ -83,6 +85,8 @@ void FxWidgetTitleBar::on_btnMaximize_clicked(bool checked)
         //_parent->showFullScreen();
     }
 }
+#endif
+
 void FxWidgetTitleBar::on_btnClose_clicked()
 {
     FX_FUNCTION
