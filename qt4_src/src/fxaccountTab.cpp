@@ -213,6 +213,7 @@ bool AccountTab::eventFilter(QObject *target, QEvent *event)
             return true;
         }
 
+#ifndef LOONGSON
         if (keyEvent->key() == Qt::Key_W && (keyEvent->modifiers() == Qt
             ::AltModifier || keyEvent->modifiers() == Qt::ControlModifier))
         {
@@ -230,6 +231,7 @@ bool AccountTab::eventFilter(QObject *target, QEvent *event)
                 return true;
             }
         }
+#endif
 
         /*
         if (keyEvent->key() == Qt::Key_H &&

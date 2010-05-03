@@ -30,6 +30,9 @@
 /* GUI debug, no real network connection */
 // #define HAVE_GUI_DEBUG_ENABLED
 
+/* add a workaround for loongson platform. */
+//#define LOONGSON
+
 /* log4qt, comment out for product release */
 /* always use debug/release option (CONFIG) in .pro, unless there is
  * no qmake around */

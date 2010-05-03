@@ -1312,7 +1312,9 @@ void FxMainWindow::createMenu()
     traySendSmsMenu->setIcon(getMenuIcon(SMSBuddyIcon));
     traySendSmsMenu->addAction(sendselfAct);
     traySendSmsMenu->addAction(sendgroupsmsAct);
+#ifndef LOONGSON
     trayIconMenu->addAction(Schedule_SMS_Act);
+#endif
     trayIconMenu->addAction(addBuddyAct);
     trayIconMenu->addAction(personalInfoAct);
 
@@ -1334,7 +1336,10 @@ void FxMainWindow::createMenu()
     optSendSmsMenu->setIcon(getMenuIcon(SMSBuddyIcon));
     optSendSmsMenu->addAction(sendselfAct);
     optSendSmsMenu->addAction(sendgroupsmsAct);
+
+#ifndef LOONGSON
     buddyMenu->addAction(Schedule_SMS_Act);
+#endif
     buddyMenu->addAction(addBuddyAct);
     buddyMenu->addAction(personalInfoAct);
 

@@ -86,6 +86,7 @@ void FxMsgWindow::init()
     connect(&nudge_timer, SIGNAL(timeout()),
             this, SLOT(slot_do_shake()));
 
+#ifndef LOONGSON
     // ESCAPE for hide
     QShortcut *hideShortcut = new QShortcut(QKeySequence(Qt::Key_Escape), this);
     connect(hideShortcut, SIGNAL(activated()), this, SLOT(hide()));
@@ -96,6 +97,8 @@ void FxMsgWindow::init()
                                              0,
                                              Qt::WindowShortcut);
     connect(closeShortcut, SIGNAL(activated()), this, SLOT(closeCurrentTab()));
+#endif
+
     // map Alt+1~ Alt+9 for switch current tab
     QSignalMapper *_signalMapper = new QSignalMapper(this);
 
