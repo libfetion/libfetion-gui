@@ -1,0 +1,738 @@
+/*           ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+            ▕     zhuwuwu(v1.0)皮肤(TT风格版)
+            ▕     author:zhuwuwu1@qq.com  
+            ▕     2009.11.7更新                       
+              ▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔
+09.7.7更新内容:
+    ●"星星"系列图标
+
+09.7.11更新内容:
+    ●增加滚动条样式
+    ●去除点击按钮后出现的白色虚线框
+
+09.7.14更新内容:
+    ●增加下拉菜单窗口、按钮样式
+
+09.8.2更新内容:
+    ●修改下拉菜单窗口、按钮样式被应用到所有窗口的错误,使其只应用于登录窗口
+
+09.8.16更新内容:
+    ●增加了单独设置聊天窗口字体的项,增大了聊天窗口字体(微软雅黑,15px,#5b8bc7)
+    ●修改了"切换发送方式"(发送到 电脑/手机)按钮
+    ●修改了聊天窗口输入框&消息框高度
+
+09.11.7更新内容:
+    ●修正了v1.1中聊天窗口按钮提示、tab关闭按钮提示变黑的bug(注意③,方法来自kieteay)
+
+*/
+
+/*--------------------------------------------------------修正*/
+/*降低1px,修正登录窗口文字顶部被削掉1px*/
+QLabel ,QToolTip {
+     padding-top:1px;
+     border: none ;
+}
+
+/*去除点击按钮后出现的白色虚线框*/
+:focus {
+	 outline: none; 
+} 
+
+/*------------------------------------------------------------------------------------------字体设置*/
+/*设置界面的字体,字体颜色,大小*/
+QWidget{
+	font-family:SimSun, Arial, Helvetica, sans-serif;
+	color:#333333;
+	font-size:12px;
+}
+
+/*设置聊天窗口中"显示/输入消息的文本框"字体*/
+#ChatWindow QTextEdit{
+        font-family:Microsoft YaHei, SimSun, Arial, Helvetica;
+        font-size: 15px;
+        color:#5b8bc7;
+}
+/*------------------------------------------------------------------------------------------窗口背景*/
+
+/*  设置所有窗口的缺省背景,(目前只支持主窗口，登陆窗口，聊天窗口) */
+/*
+fxgui--FxWidget{
+	background-origin:padding;
+	qproperty-background:url(%currentPath%/style/background.png);
+	qproperty-scaleLeft:15;
+	qproperty-scaleRight:15;
+	qproperty-scaleTop:25;
+	qproperty-scaleBottom:15;
+	width:254px;
+	height:548px;
+}
+*/
+
+/*设置登陆窗口的背景*/
+#loginWindow{
+	background-origin:padding;
+	qproperty-background:url(%currentPath%/style/background_3.png);
+	qproperty-scaleLeft:15;
+	qproperty-scaleRight:15;
+	qproperty-scaleTop:24;
+	qproperty-scaleBottom:15;
+	width:287px;
+	height:246px;
+}
+
+/*设置主窗口的背景*/
+#mainWindow{
+	background-origin:padding;
+	qproperty-background:url(%currentPath%/style/background_2.png);
+               background-repeat:repeat-x;
+               background-repeat:repeat-y;
+	qproperty-scaleLeft:15;
+	qproperty-scaleRight:15;
+	qproperty-scaleTop:122;
+	qproperty-scaleBottom:15;
+	width:221px;
+	height:541px;
+}
+
+/*设置聊天窗口的背景*/
+#ChatWindow{
+	background-origin:padding;
+	qproperty-background:url(%currentPath%/style/background_3.png);
+	qproperty-scaleLeft:15;
+	qproperty-scaleRight:15;
+	qproperty-scaleTop:24;
+	qproperty-scaleBottom:15;
+}
+
+/*-------------------------------------------------------------------------------icon设置*/
+/*设置主窗口icon*/
+#mainWindow #icon{
+	border:none;
+	image:url(%currentPath%/style/libfetion.png);
+	margin-top:3px;
+}
+
+/*设置聊天窗口icon*/
+#ChatWindow #icon{
+	border:none;
+	margin-top:3px;
+}
+
+/*设置登陆窗口icon*/
+#loginWindow #icon{
+               border:none;
+	margin-top:3px;
+}
+/*-------------------------------------------------------------------------------聊天窗口*/
+/*设置聊天窗口"消息框"*/
+#ChatWindow #MsgBrowser{
+	margin-top: 1px;
+	min-height: 150px;
+	border:1px solid #7b8ea6;
+	background-color:#ffffff;
+}
+/*设置聊天窗口"输入框"*/
+#ChatWindow QTextEdit{
+	margin-top: 4px;
+	min-height: 50px;
+	border:1px solid #7b8ea6;
+	background-color:#ffffff;
+}
+
+/*设置聊天窗口中"发送到电脑"按钮*/
+#ChatWindow #btnSwitchSendMode{
+	margin: 0 0 0 0;                    /*上 右 下 左*/
+	border:none;
+/*	qproperty-icon:url(%currentPath%/style/   .png);          按钮图标*/
+	image:url(%currentPath%/style/send2pc.png);           /*按钮图片*/
+               border-image:url(%currentPath%/style/chat_1.png);  /*按钮(边框)背景*/     
+}
+#ChatWindow #btnSwitchSendMode:hover{
+	border-image:url(%currentPath%/style/chat_2.png);
+}
+#ChatWindow #btnSwitchSendMode:pressed{
+	border-image:url(%currentPath%/style/chat_3.png);
+}
+
+/*设置聊天窗口中"发送到手机"按钮*/
+#ChatWindow #btnSwitchSendMode:checked{
+	margin: 0 0 0 0;
+/*	qproperty-icon:url(%currentPath%/style/   .png);          按钮图标*/
+	image:url(%currentPath%/style/send2mobile.png);    /*按钮图片*/
+               border-image:url(%currentPath%/style/chat_1.png);  /*按钮(边框)背景*/     
+}
+#ChatWindow #btnSwitchSendMode:checked:hover{
+	border-image:url(%currentPath%/style/chat_2.png);
+}
+#ChatWindow #btnSwitchSendMode:checked:pressed{
+	border-image:url(%currentPath%/style/chat_3.png);
+}
+
+
+/*设置聊天窗口中"聊天记录"按钮*/
+#ChatWindow #btnHistory{
+	margin: 0 0 0 0;
+	qproperty-icon:none;
+               image:url(%currentPath%/style/history.png);
+	border-image:url(%currentPath%/style/chat_1.png);        
+}
+#ChatWindow #btnHistory:hover{
+               border-image:url(%currentPath%/style/chat_2.png);
+}
+#ChatWindow #btnHistory:pressed{
+               border-image:url(%currentPath%/style/chat_3.png);
+}
+
+
+/*设置聊天窗口中"闪屏"按钮*/
+#ChatWindow #btnNudge{
+	margin: 0 0 0 0;
+	image:url(%currentPath%/style/nudge.png);          
+	border-image:url(%currentPath%/style/qtool_1.png);
+}
+#ChatWindow #btnNudge:hover{
+	border-image:url(%currentPath%/style/qtool_2.png);
+}
+#ChatWindow #btnNudge:pressed{
+	border-image:url(%currentPath%/style/qtool_3.png);
+}
+
+
+
+/*设置聊天窗口中"发送"按钮*/
+#ChatWindow #btnSend{
+               image:url(%currentPath%/style/send.png);
+	qproperty-icon:none;
+	border-image:url(%currentPath%/style/chat_1.png);
+}
+#ChatWindow #btnSend:hover{
+               border-image:url(%currentPath%/style/chat_2.png);
+}
+#ChatWindow #btnSend:pressed{
+               border-image:url(%currentPath%/style/chat_3.png);
+}
+
+
+
+/*设置聊天窗口中"表情"按钮*/
+#ChatWindow #btnFace{
+	margin: 0 0 0 0;
+	qproperty-icon:url(%currentPath%/style/tool_face.png);
+               border-image:url(%currentPath%/style/qtool_1.png);
+}
+#ChatWindow #btnFace:hover{
+               border-image:url(%currentPath%/style/qtool_2.png);
+}
+#ChatWindow #btnFace:pressed{
+               border-image:url(%currentPath%/style/qtool_3.png);
+}
+
+
+
+/*设置聊天窗口中"XXX在线(不在线),你的消息将发送到对方电脑(手机)"显示位置*/
+QLabel#Ac_Status {
+margin-top: 2px;
+}
+
+
+
+/*注意①:加入这一项目的是,将聊天窗口 未定义的项目 背景设为透明,以隐藏 编辑框 和消息框之间的"拖动把手"区域.
+   这一项必须在#facesPopup{ }(表情列表)项上层!否则会导致表情列表消失*/
+#ChatWindow *{
+        background-color:transparent;
+}
+/*注意②:由于上面一项的作用,导致聊天窗口右键菜单变黑,加入这一项的目的是,修正聊天窗口右键菜单变黑的BUG*/
+#ChatWindow QMenu{
+        background: rgba(255, 255, 255, 90%);
+}
+/*注意③:这一项的作用是,修正v1.1中聊天窗口按钮提示、tab关闭按钮提示变黑的BUG*/
+#ChatWindow QToolButton *{
+               border:1px solid #7b8ea6;
+               background: #ffffff;
+}
+#ChatWindow QTabBar *{
+               border:1px solid #7b8ea6;
+               background: #ffffff;
+}
+
+
+/*设置聊天窗口表情按钮弹出的"表情列表"*/
+#facesPopup{
+              background-color:#ffffff;
+              border-image:url(%currentPath%/style/003.png);
+              background-image:url(%currentPath%/style/input_face.png);
+              background-repeat:none;
+}
+
+
+
+/*---------------------------------------------------------------------------------好友列表*/
+/*去掉好友列表的虚线*/
+/*
+QTreeView::branch:!has-children {
+	border:none;
+}
+*/
+
+/*设置主窗口中"好友列表树"显示区*/
+QTreeView{
+	qproperty-alternatingRowColors:1;
+	alternate-background-color:#ffffff; /*奇数行背景色*/
+	background-color:#f7fbff;              /*偶数行背景色*/
+
+}
+
+/*设置好友列表树关闭时的背景图*/
+QTreeView::branch:has-children:closed{
+	image: url(%currentPath%/style/fold.png);  /*图片*/
+	border-image: none;                                   /*背景*/
+}
+
+/*设置好友列表树打开时的背景图设置*/
+QTreeView::branch:has-children:open{
+ 	image: url(%currentPath%/style/expand.png); /*图片*/
+	border-image: none;                                       /*背景*/
+}
+ 
+
+
+/*每个好友之间的间隔*/
+QTreeView::item{
+	height: 19px;
+}
+
+/*设置好友列表中鼠标经过时的背景*/
+QTreeView::item:hover {
+	background-color: rgba(153,170,192,10%);
+	border: 1px solid rgba(123,142,166,10%);
+}
+
+/*设置好友列表中被选中元素获得焦点时的背景*/
+QTreeView::item:selected:active{
+	background-color: rgba(153,170,192,50%);
+	border: 1px solid rgba(123,142,166,50%);
+	color:#000000;      /*文字颜色*/
+}
+
+/*设置好友列表中被选中元素失去焦点时的背景*/
+QTreeView::item:selected:!active {
+	background-color: rgba(153,170,192,30%);
+	border: 1px solid rgba(123,142,166,30%);
+}
+
+/*未知项?*/
+TreeView::branch{
+ 	border-image: none;
+ 	image: url(%currentPath%/style/001.png);
+}
+
+/*未知项?*/
+QTreeView > QTreeView::item{
+	background:#ff0000;
+}
+/*---------------------------------------------------------------------------------主窗口按钮*/
+
+
+/*设置主窗口中"菜单."按钮的样式*/
+#btnMenu{
+	border:none;
+               color:#000000; /*rgba(,,,%);*/
+	qproperty-shortcut:" /*键盘快捷键*/ ";
+	/*-----Kieteay 修正---开始-----*/
+	/*qproperty-icon: url(%currentPath%/style/menu.png);*/
+	image:url(%currentPath%/style/menu.png);
+	color:transparent;
+	/*-----------------结束---------------*/
+	width:18px;   
+	height:18px; 
+               padding:0 0 0 0 ;
+	margint:0 0 0 0;
+	background-repeat:none;
+}
+#btnMenu:hover{
+               background-image:url(%currentPath%/style/qtool_2.png);
+}
+#btnMenu:pressed{
+               border-image:url(%currentPath%/style/qtool_3.png);
+}
+
+/*设置主窗口中"给自己发短信"按钮的样式*/
+#btnSendSelf{
+	border:none;
+	qproperty-icon:url(%currentPath%/style/sms.png);
+	qproperty-shortcut:"ALT+S";
+               border-image:none;
+}
+#btnSendSelf:hover{
+               border-image:url(%currentPath%/style/qtool_2.png);
+}
+#btnSendSelf:pressed{
+               border-image:url(%currentPath%/style/qtool_3.png);
+}
+
+/*设置主窗口中"设置"按钮的样式*/
+#btnSettings{
+	border:none;
+	qproperty-icon:url(%currentPath%/style/setting.png);
+               border-image:none;
+}
+#btnSettings:hover{
+               border-image:url(%currentPath%/style/qtool_2.png);
+}
+#btnSettings:pressed{
+               border-image:url(%currentPath%/style/qtool_3.png);
+}
+
+/*设置主窗口中"更换皮肤"按钮的样式*/
+#btnSkin{
+	border:none; 
+	qproperty-icon:url(%currentPath%/style/ap.png) 0 0 0 0;
+               border-image:none;
+}
+#btnSkin:hover{
+               border-image:url(%currentPath%/style/qtool_2.png);
+}
+#btnSkin:pressed{
+               border-image:url(%currentPath%/style/qtool_3.png);
+}
+
+/*设置主窗口中的"添加好友"按钮*/
+#btnAddFriend{
+	border:none;
+	qproperty-icon:url(%currentPath%/style/ad.png);
+	padding:0;
+	margin:0;
+}
+#btnAddFriend:hover{
+               border-image:url(%currentPath%/style/qtool_2.png);
+}
+#btnAddFriend:pressed{
+               border-image:url(%currentPath%/style/qtool_3.png);
+}
+
+/*---------------------------------------------------------------------------------输入框设置*/
+/*设置登录窗口、设置菜单、添加好友菜单、查看个人信息菜单 输入框*/
+QLineEdit{
+	border:1px solid rgba(123,142,166,100%);
+	background-color:#e9eef5; 
+}
+QLineEdit:hover{
+	border:1px solid rgba(123,142,166,100%);
+	background-color:#f3f6f9; 
+}
+QLineEdit:focus{
+	background-color:#ffffff;
+	border:1px solid rgba(123,142,166,100%);
+}
+
+
+/*设置昵称框、个人心情框*/
+/*一般状态暂不定义...(定义该项后,昵称框、个人心情框 在编辑状态时 边框会向内加宽1像素?)
+#nickname,#impression{
+	border: 1px solid rgba(123,142,166,10%);
+	background-color:rgba(212,221,233,95%);
+}
+*/
+
+#nickname:hover,#impression:hover{
+	border:1px solid rgba(123,142,166,50%);
+	background-color:#e9eef5;
+}
+/*鼠标点击状态(非编辑状态!),编辑状态由[QLineEdition:focus]"定义*/
+#nickname:focus,#impression:focus{  
+	border:1px solid rgba(123,142,166,100%);
+	background-color:#ffffff;
+}
+
+/*设置好友搜索框*/
+#lineSearch{
+	background-color:#e9eef5; 
+	border:1px solid rgba(123,142,166,100%);
+	margin:0 1 0 0;
+	background-image:url(%currentPath%/style/search.png) ;
+               background-repeat:none; 
+	background-position:right;
+}
+#lineSearch:hover{
+	background-color:#f3f6f9; 
+	border:1px solid rgba(123,142,166,100%);
+}
+#lineSearch:focus{
+	background-color:#ffffff; 
+	border:1px solid rgba(123,142,166,100%);
+}
+
+
+/*设置主窗口中的"个人头像"输入框*/
+#portrait{
+	border:none;
+	/*------------Kieteay修正----开始-------*/
+	/*background-image:url(%currentPath%/style/nokia.png) 0 0 0 0; */
+	background-image:url(%currentPath%/style/LibFx.png) 0 0 0 0;
+	/*----------------结束------------------------*/
+	background-repeat:repeat-none;
+	background-position: center center;
+	width:60;
+	height:60;
+}
+/*注意:1.0版个人头像(theme/portrait.gif文件)的大小不超过58*58px,否则会被压缩*/
+
+/*---------------------------------------------------------------------------------最小化、关闭按钮*/
+/*设置缺省窗口中"最小化,关闭"显示区的大小(直接影响按钮的大小)*/
+/*
+fxgui--FxWidgetTitleBar QPushButton{
+	width:77px;
+	height:18px;
+	margin:0;  (外补丁)
+	padding:0;(内补丁)
+}
+*/
+
+/*设置"最小化"按钮普通状态的样式*/
+QPushButton#btnMinimize{
+	border-image: url(%currentPath%/style/min_1.png);
+               width:25px;
+	height:18px;
+               margin-bottom:4px;
+}
+/*设置"最小化"按钮鼠标经过的样式*/
+QPushButton#btnMinimize:hover{
+	border-image: url(%currentPath%/style/min_2.png);
+}
+/*设置"最小化"按钮鼠标点击的样式*/
+QPushButton#btnMinimize:pressed{
+	border-image: url(%currentPath%/style/min_3.png);
+}
+
+/*设置"关闭"按钮普通状态的样式*/
+QPushButton#btnClose{
+   	border-image: url(%currentPath%/style/close_1.png);
+	qproperty-shortcut:"ALT+C";/*关闭窗口的键盘快捷键*/
+               width:42px;
+	height:18px;
+              margin-bottom:4px;
+}
+/*设置"关闭"按钮鼠标经过的样式*/
+QPushButton#btnClose:hover{
+	border-image: url(%currentPath%/style/close_2.png);
+}
+/*设置"关闭"按钮鼠标点击的样式*/
+QPushButton#btnClose:pressed{
+	border-image: url(%currentPath%/style/close_3.png);
+}
+
+/*注意④:由于程序BUG,登录窗口、聊天窗口的[最小化/关闭按钮]相对主窗口下沉1像素,通过这一项修正*/
+/*#ChatWindow QPushButton,#loginWindow QPushButton{
+	margin-top: -0px;
+}*/
+
+/*--------------------------------------------------------------------------------- 菜单背景*/
+/*设置菜单的背景*/
+QMenu{
+	background: rgba(200, 212, 229, 100%);
+               border:1px solid #7b8ea6;
+}
+
+/*设置菜单中各个内容的显示区域大小,边框*/
+QMenu::item {
+	padding: 1px 16px 2px 20px;
+	border: 1px solid transparent;
+	background: transparent;
+}
+
+/*设置菜单中各个内容的显示区域在被选中时的背景,边框*/
+QMenu::item:selected {
+	background: #99aac0; 
+	padding: 1 16 2 20;
+	border: 1px solid #7b8ea6; 
+               margin-right:1px;
+}
+	 
+/*设置菜单中分隔线的样式*/
+QMenu::separator {
+	height: 1px;
+	background: #7b8ea6;
+	margin: 1px 1px 1px 1px;
+}
+
+/*--------------------------------------------------------------------------------- 滚动条设置*/
+/*滚动条整体*/
+QScrollBar:vertical {
+	border: none;
+	width: 15px;
+	margin: 15px 0 15px 0;
+	background-repeat:none;
+ }
+
+/*顶部*/
+QScrollBar::sub-line:vertical {
+	border: none;
+	height: 15px;
+	subcontrol-position: top;
+	subcontrol-origin: margin;
+}
+/*底部*/
+QScrollBar::add-line:vertical {
+	border: none;
+	height: 15px;
+	subcontrol-position: bottom;
+	subcontrol-origin: margin;
+}
+
+
+/*设置滑块*/
+QScrollBar::handle:vertical {
+	min-height: 0px; /*最低高度(此项影响聊天窗口最低高度)*/
+	border-radius: 2px; /*边框半径(可实现圆角)*/
+	border: 1px solid #5386c3;
+	background-image:url(%currentPath%/style/handle_1.png);
+}
+QScrollBar::handle:hover {
+	background-image:url(%currentPath%/style/handle_1.png); 
+}
+QScrollBar::handle:pressed {
+	background-image:url(%currentPath%/style/handle_1.png); 
+}
+
+
+/*上移按钮*/
+QScrollBar::up-arrow:vertical {
+	border: none;
+	background-image:url(%currentPath%/style/up_1.png); 
+}
+QScrollBar::up-arrow:hover {
+	border: none;
+	background-image:url(%currentPath%/style/up_2.png); 
+}
+QScrollBar::up-arrow:pressed {
+	border: none;
+	background-image:url(%currentPath%/style/up_3.png); 
+}
+
+
+/*下移按钮*/
+QScrollBar::down-arrow:vertical {
+	border: none;
+	background-image:url(%currentPath%/style/down_1.png);
+}
+QScrollBar::down-arrow:hover {
+	border: none;
+	background-image:url(%currentPath%/style/down_2.png); 
+}
+QScrollBar::down-arrow:pressed {
+	border: none;
+	background-image:url(%currentPath%/style/down_3.png); 
+}
+
+
+/*轨道*/
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+	background-image:url(%currentPath%/style/page.png); 
+}
+/*--------------------------------------------------------------------------下拉菜单样式*/
+/*下拉框总体*/
+#loginWindow QComboBox {
+     border: 1px solid rgba(123,142,166,100%);
+     border-radius: 3px;
+     padding: 0 0 0 2 ;
+     margin:1 0 1 0;
+     min-width: 6em;
+}
+
+/*右侧下拉按钮区域*/
+#loginWindow QComboBox::drop-down {
+     width: 17px;
+     border:none;
+}
+
+/*下拉箭头*/
+#loginWindow QComboBox::down-arrow {
+                image:  url(%currentPath%/style/down_1.png); 
+}
+
+#loginWindow QComboBox::down-arrow:hover {
+                image:  url(%currentPath%/style/down_2.png); 
+}
+
+#loginWindow QComboBox::down-arrow:on { 
+                image:  url(%currentPath%/style/down_3.png); 
+}
+/*---------------------------------------------------------------------------------其他*/	
+
+/*登录时显示在任务栏的标题*/
+fxgui--FxWidget{
+	qproperty-windowTitle:"LibFetion";
+} 
+
+/*设置标题栏的样式*/
+fxgui--FxWidget QLabel#title{
+	margin-top:3px;
+	color:#546479;
+}
+/* 当前窗口有焦点时，标题栏的样式 */
+fxgui--FxWidget QLabel#title:active{
+	margin-top:3px;
+	color:#546479;
+}
+ 
+/*-------------------------------------------------------------------------以下可忽略 */
+QMenu::icon:checked {
+	background: gray;
+	border: 1px inset gray;
+	position: absolute;
+	top: 1px;
+	right: 1px;
+	bottom: 1px;
+	left: 1px;
+}
+
+
+
+QMenu::indicator {
+	width: 13px;
+	height: 13px;
+}
+
+QMenu::indicator:non-exclusive:unchecked {
+	image: url(:/images/checkbox_unchecked.png);
+}
+
+QMenu::indicator:non-exclusive:unchecked:selected {
+	image: url(:/images/checkbox_unchecked_hover.png);
+}
+
+QMenu::indicator:non-exclusive:checked {
+	image: url(:/images/checkbox_checked.png);
+}
+
+QMenu::indicator:non-exclusive:checked:selected {
+	image: url(:/images/checkbox_checked_hover.png);
+}
+
+QMenu::indicator:exclusive:unchecked {
+	image: url(:/images/radiobutton_unchecked.png);
+}
+
+QMenu::indicator:exclusive:unchecked:selected {
+	image: url(:/images/radiobutton_unchecked_hover.png);
+}
+
+QMenu::indicator:exclusive:checked {
+	image: url(:/images/radiobutton_checked.png);
+}
+
+QMenu::indicator:exclusive:checked:selected {
+	image: url(:/images/radiobutton_checked_hover.png);
+}
+ 
+#ChatWindow #btnSwitchSendMode{
+	text-indent:-999px;
+}
+
+FxMainWindow{
+	margin-top:16px;
+}
+
+FxWidgetTitlebar{
+	padding-top:5px;
+}
