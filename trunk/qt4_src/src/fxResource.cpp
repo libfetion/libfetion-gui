@@ -273,35 +273,29 @@ QPixmap getOnlineStatusIcon(int status)
     {
         /* pc offline */
         case 0:
-        case 0+MOBILE_LOGIN:
             return QPixmap(getSkinPath() + "/" +
                            getXMLRes("online_offline", ""));
 
         case FX_STATUS_BLACK:
-        case FX_STATUS_BLACK + MOBILE_LOGIN:
             return QPixmap(getSkinPath() + "/" +
                            getXMLRes("online_black", ""));
 
         /* mobile user */
         case FX_STATUS_MOBILE:
-        case FX_STATUS_MOBILE + MOBILE_LOGIN:
             return QPixmap(getSkinPath() + "/" +
                            getXMLRes("online_mobile", ""));
 
         /* the account waiting */
         case FX_STATUS_WAITING_AUTH:
-        case FX_STATUS_WAITING_AUTH + MOBILE_LOGIN:
             return QPixmap(getSkinPath() + "/" +
                            getXMLRes("online_waiting", ""));
 
         /* the account is refuse make friends with you */
         case FX_STATUS_REFUSE:
-        case FX_STATUS_REFUSE + MOBILE_LOGIN:
             return QPixmap(getSkinPath() + "/" +
                            getXMLRes("online_refuse", ""));
 
         case FX_STATUS_OFFLINE:
-        case FX_STATUS_OFFLINE + MOBILE_LOGIN:
             return QPixmap(getSkinPath() + "/" +
                            getXMLRes("online_offline", ""));
 
@@ -337,20 +331,30 @@ QPixmap getOnlineStatusIcon(int status)
             return QPixmap(getSkinPath() + "/" +
                            getXMLRes("online_num_primitives", ""));
 
-        case FX_STATUS_ONLINE + MOBILE_LOGIN:
+		case FX_STATUS_REFUSE_SMS:
+            return QPixmap(getSkinPath() + "/" +
+                           getXMLRes("online_offline", ""));
+
+		case FX_STATUS_MOBILE_OUT_OF_SERIVCE:
+		case FX_STATUS_CLOSE_FETION_SERIVCE:
+            return QPixmap(getSkinPath() + "/" +
+                           getXMLRes("online_refuse", ""));
+
+
+        case FX_STATUS_MOBILE_ONLINE:
             return QPixmap(getSkinPath() + "/" +
                            getXMLRes("online_m_online", ""));
 
-        case FX_STATUS_DINNER + MOBILE_LOGIN:
-        case FX_STATUS_AWAY + MOBILE_LOGIN:
-        case FX_STATUS_EXTENDED_AWAY + MOBILE_LOGIN:
-        case FX_STATUS_NUM_PRIMITIVES + MOBILE_LOGIN:
+        case FX_STATUS_MOBILE_DINNER:
+        case FX_STATUS_MOBILE_AWAY:
+        case FX_STATUS_MOBILE_EXTENDED_AWAY:
+        case FX_STATUS_MOBILE_NUM_PRIMITIVES:
             return QPixmap(getSkinPath() + "/" +
                            getXMLRes("online_m_away", ""));
 
-        case FX_STATUS_PHONE + MOBILE_LOGIN:
-        case FX_STATUS_MEETING + MOBILE_LOGIN:
-        case FX_STATUS_BUSY + MOBILE_LOGIN:
+        case FX_STATUS_MOBILE_PHONE:
+        case FX_STATUS_MOBILE_MEETING:
+        case FX_STATUS_MOBILE_BUSY:
             return QPixmap(getSkinPath() + "/" +
                            getXMLRes("online_m_busy", ""));
 
