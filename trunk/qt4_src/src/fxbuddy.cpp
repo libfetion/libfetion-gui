@@ -644,9 +644,6 @@ void BuddyOpt::addAccountToGroup(const Fetion_Account *account, QString &name,
     accountItem->setIcon(0, getOnlineStatusIcon(ac_info->onlinestate));
     setTipsOfAccount(accountItem, account);
 
-
-    groupItem->addChild(accountItem);
-
     #if MS_VC6
         Group_Info *group_info = (Group_Info*)(groupItem->data(0, Qt::UserRole)
                                   .toUInt());
@@ -658,6 +655,9 @@ void BuddyOpt::addAccountToGroup(const Fetion_Account *account, QString &name,
     {
         return ;
     }
+
+
+	groupItem->insertChild(groupItem->childCount(), accountItem);
 
     if (fx_is_on_line_by_account(account))
     {
@@ -1048,9 +1048,6 @@ void BuddyOpt::updateAccountInfo(const Fetion_Account *account)
     accountItem->setText(0, show_name);
     accountItem->setIcon(0, getOnlineStatusIcon(ac_info->onlinestate));
 
-    int state = 0;
-    if (isOnlineStateChanged(old_online_state, ac_info->onlinestate, &state))
-    {
         //group name ++1
         int group_no = fx_get_account_group_id(account);
         if (group_no <= 0)
@@ -1064,60 +1061,71 @@ void BuddyOpt::updateAccountInfo(const Fetion_Account *account)
             create_zero_group();
             groupItem = findGroupItemByID(0);
         }
-        if (groupItem)
-        {
-            #if MS_VC6
-                Group_Info *group_info = (Group_Info*)(groupItem->data(0, Qt
-                    ::UserRole).toUInt());
-            #else
-                Group_Info *group_info = groupItem->data(0, Qt::UserRole).value
-                    < Group_Info * > ();
-            #endif
-            if (!group_info)
-            {
-                return ;
-            }
-            groupItem->removeChild(accountItem);
 
-            //if (groupItem->childCount() == 0)
-            if (group_info->online_no - 1 > 0)
-            {
-                groupItem->insertChild(group_info->online_no - 1, accountItem);
-            }
-            else
-            {
-                groupItem->insertChild(0, accountItem);
-            }
+        if (!groupItem)
+            return;
 
-            if (state)
-            {
-                group_info->online_no++;
-            }
-            else
-            {
-                group_info->online_no--;
-            }
+		int state = 0;
+		if (isOnlineStateChanged(old_online_state, ac_info->onlinestate, &state))
+		{
+#if MS_VC6
+			Group_Info *group_info = (Group_Info*)(groupItem->data(0, Qt
+						::UserRole).toUInt());
+#else
+			Group_Info *group_info = groupItem->data(0, Qt::UserRole).value
+				< Group_Info * > ();
+#endif
+			if (!group_info)
+			{
+				return ;
+			}
+			groupItem->removeChild(accountItem);
+
+			//if (groupItem->childCount() == 0)
+			if (group_info->online_no - 1 > 0)
+			{
+				groupItem->insertChild(group_info->online_no - 1, accountItem);
+			}
+			else
+			{
+				groupItem->insertChild(0, accountItem);
+			}
+
+			if (state)
+			{
+				group_info->online_no++;
+			}
+			else
+			{
+				group_info->online_no--;
+			}
 
 
-            #ifdef WIN32
-                char online[30];
-                _snprintf(online, sizeof(online) - 1, "(%d/%d)", group_info
-                          ->online_no, groupItem->childCount());
-                QString groupShowName = group_info->groupName + online;
-            #else
-                char *online = NULL;
-                asprintf(&online, "(%d/%d)", group_info->online_no, groupItem
-                         ->childCount());
-                QString groupShowName = group_info->groupName + online;
-                if (online)
-                {
-                    free(online);
-                }
-            #endif
+#ifdef WIN32
+			char online[30];
+			_snprintf(online, sizeof(online) - 1, "(%d/%d)", group_info
+					->online_no, groupItem->childCount());
+			QString groupShowName = group_info->groupName + online;
+#else
+			char *online = NULL;
+			asprintf(&online, "(%d/%d)", group_info->online_no, groupItem
+					->childCount());
+			QString groupShowName = group_info->groupName + online;
+			if (online)
+			{
+				free(online);
+			}
+#endif
 
-            groupItem->setText(0, groupShowName);
-        }
-    }
+			groupItem->setText(0, groupShowName);
+		}
+
+	if (!fx_is_auth_chat_by_account(account))
+	{
+		groupItem->removeChild(accountItem);
+		groupItem->insertChild(groupItem->childCount(), accountItem);
+	}
+
     printf("Updata new buddy.... \n");
 }
 
