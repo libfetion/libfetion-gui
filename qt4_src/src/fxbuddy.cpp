@@ -557,7 +557,7 @@ void BuddyOpt::addAccountToGroup(const Fetion_Account *account)
         create_zero_group();
     }
 
-    char *showname = fx_get_account_show_name_with_state(account, TRUE, TRUE);
+    char *showname = fx_get_account_show_name(account, TRUE);
     QString show_name = QString::fromUtf8(showname);
     int online_state = fx_get_online_status_by_account(account);
 
@@ -970,6 +970,29 @@ QTreeWidgetItem *BuddyOpt::findAccountItem(const Fetion_Account *account)
     return findAccountItemFromGroup(groupItem, account);
 }
 
+/**************************************************************************/
+/*                                                                        */
+/**************************************************************************/
+
+static bool isonline(int state)
+{
+    switch (state)
+    {
+        case 0:
+        case FX_STATUS_OFFLINE:
+        case FX_STATUS_WAITING_AUTH:
+        case FX_STATUS_REFUSE:
+        case FX_STATUS_BLACK:
+        case FX_STATUS_MOBILE:
+            case 0+MOBILE_LOGIN: case FX_STATUS_OFFLINE + MOBILE_LOGIN: case
+                FX_STATUS_WAITING_AUTH + MOBILE_LOGIN: case FX_STATUS_REFUSE +
+                MOBILE_LOGIN: case FX_STATUS_BLACK + MOBILE_LOGIN: case
+                FX_STATUS_MOBILE + MOBILE_LOGIN: return false;
+    }
+    return true;
+
+}
+
 //this function will add to libfetion impl...
 // return false should not changed
 // true should changed
@@ -982,11 +1005,10 @@ bool BuddyOpt::isOnlineStateChanged(int old_state, int new_state, int *state)
         return false;
     }
 
-
-    if (fx_is_online_status(old_state))
+    if (isonline(old_state))
     //old_state is online state
     {
-        if (!fx_is_online_status(new_state))
+        if (!isonline(new_state))
         {
             //new state is offline state
             *state = 0;
@@ -996,7 +1018,7 @@ bool BuddyOpt::isOnlineStateChanged(int old_state, int new_state, int *state)
     else
     {
         //old_state is offline state
-        if (fx_is_online_status(new_state))
+        if (isonline(new_state))
         {
             //new state is online state
             *state = 1;
@@ -1031,7 +1053,7 @@ void BuddyOpt::updateAccountInfo(const Fetion_Account *account)
     //update the account info
     setTipsOfAccount(accountItem, account);
 
-    char *showname = fx_get_account_show_name_with_state(account, TRUE, TRUE);
+    char *showname = fx_get_account_show_name(account, TRUE);
     QString show_name = QString::fromUtf8(showname);
     if (showname)
     {
