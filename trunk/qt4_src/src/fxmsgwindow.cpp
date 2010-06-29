@@ -668,41 +668,35 @@ void FxMsgWindow::addBuddy(qlonglong account_id)
 void FxMsgWindow::addAccount(qlonglong account_id, bool isSendSms)
 {
     FX_FUNCTION
-    // VerifiedAccount
-    if (fx_is_InBlacklist_by_id(account_id))
-    {
-        QMessageBox::information(this->parentWidget(),
-                                 tr("can't send mseeage to he"),
-                                 tr("it have be added in blacklist by you"));
-        return ;
-    }
 
-    int authed = fx_is_authed_by_id(account_id);
-
-    if (authed == AUTH_WAIT)
-    {
-        #if 0
-            QMessageBox::information(this->parentWidget(),
-                                     tr("can't send mseeage to he"),
-                                     tr("wait auth to add friend"));
-        #else
-            addBuddy(account_id);
-        #endif
-        return ;
-    }
-
-    if (authed == AUTH_REFUS)
-    {
-        #if 0
-            QMessageBox::information(this->parentWidget(),
-                                     tr("can't send mseeage to he"),
-                                     tr("was refused to add friend"));
-        #else
-            addBuddy(account_id);
-        #endif
-        return ;
-    }
-
+	const Fetion_Account *account = fx_get_account_by_id(account_id);
+	//check the account could chat or not.
+	if (!fx_is_auth_chat_by_account(account))
+	{
+		int status = fx_get_online_status_by_account(account);
+		switch (status)
+		{
+		case FX_STATUS_BLACK:
+			QMessageBox::information(this->parentWidget(),
+					tr("can't send mseeage to he"),
+					tr("it have be added in blacklist by you"));
+	        return;
+		case FX_STATUS_WAITING_AUTH:
+		case FX_STATUS_REFUSE:
+			addBuddy(account_id);
+			return;
+		case FX_STATUS_CLOSE_FETION_SERIVCE:
+			QMessageBox::information(this->parentWidget(),
+					tr("can't send mseeage to he"),
+					tr("he have closed the fetion server"));
+	        return;
+		case FX_STATUS_MOBILE_OUT_OF_SERIVCE:
+			QMessageBox::information(this->parentWidget(),
+					tr("can't send mseeage to he"),
+					tr("his mobile have out of server"));
+	        return;
+		}
+	}
     //first find is have the instance of the account_id, if have show it, and return.
     //then create a new instance of this account_id, and add to the tabwidget.
     AccountTab *accountTab = findFromMsgWindow(tabWidget, account_id);
