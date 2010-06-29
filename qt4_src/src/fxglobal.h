@@ -52,8 +52,6 @@
     #define MS_VC6 0
 #endif //#ifdef WIN32
 
-#define MOBILE_LOGIN 0x011
-
 #define NO_SET  0
 #define NET_ERR 1
 #define NEW_MSG 2

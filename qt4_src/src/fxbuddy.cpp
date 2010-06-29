@@ -623,16 +623,7 @@ void BuddyOpt::addAccountToGroup(const Fetion_Account *account, QString &name,
 		}
 	}
 
-
-    if (fx_islogin_by_mobile(account))
-    //mobile login
-    {
-        ac_info->onlinestate = online_state + MOBILE_LOGIN;
-    }
-    else
-    {
-        ac_info->onlinestate = online_state;
-    }
+    ac_info->onlinestate = online_state;
 
     QTreeWidgetItem *accountItem = new QTreeWidgetItem;
 
@@ -1052,17 +1043,7 @@ void BuddyOpt::updateAccountInfo(const Fetion_Account *account)
     ac_info->accountName = show_name;
 
     int old_online_state = ac_info->onlinestate;
-    int new_online_state = fx_get_online_status_by_account(account);
-
-    if (fx_islogin_by_mobile(account))
-    //mobile login
-    {
-        ac_info->onlinestate = new_online_state + MOBILE_LOGIN;
-    }
-    else
-    {
-        ac_info->onlinestate = new_online_state;
-    }
+    ac_info->onlinestate = fx_get_online_status_by_account(account);
 
     accountItem->setText(0, show_name);
     accountItem->setIcon(0, getOnlineStatusIcon(ac_info->onlinestate));
