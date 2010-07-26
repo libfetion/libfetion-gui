@@ -26,6 +26,7 @@
 
 #include "ui_login_window.h"
 #include "fxproxy.h"
+#include "fxauthcode.h"
 #include "fxwidget.h"
 
 #include "fxdebug.h"
@@ -58,14 +59,14 @@ class FxLoginWindow : public FxWidget, public Ui::Fetion_Login
     private slots:
         void BT_Login_clicked();
         void slots_enableLonginBT();
-        void slots_Login_Message(int);
+        void slots_Login_Message(int, qlonglong, unsigned long);
         void Setting(const QString &);
         void login_timer();
 
         void login();
 
     signals:
-        void signal_Login_Message(int);
+        void signal_Login_Message(int, qlonglong, unsigned long);
         void signal_LoginOK();
         void signal_enableLoginBT();
 
@@ -78,6 +79,7 @@ class FxLoginWindow : public FxWidget, public Ui::Fetion_Login
         char *user_id;
         char *user_pwd;
         FxProxy *proxy;
+        FxAuthCode *authcode;
         QTimer loginTimer;
         bool willLogin;
         QShortcut *m_loginShortcut;
