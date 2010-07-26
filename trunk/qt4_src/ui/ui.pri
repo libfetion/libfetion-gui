@@ -12,4 +12,6 @@ FORMS = $$PWD/contactinfo.ui \
     $$PWD/scheduleSms/scheduleSMS.ui \
     $$PWD/scheduleSms/scheduleSMSManage.ui \
     $$PWD/refusesms.ui \
-    $$PWD/configdia.ui
+    $$PWD/configdia.ui \
+    $$PWD/auth_code.ui
+
