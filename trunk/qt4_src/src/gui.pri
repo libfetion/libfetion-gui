@@ -37,7 +37,8 @@ HEADERS = $$PWD/fxglobal.h \
     $$PWD/fxusertree.h \
     $$PWD/fxeditablelabel.h \
     $$PWD/sqlite/sqlite3.h \
-    $$PWD/fxlocationparser.h
+    $$PWD/fxlocationparser.h \
+    $$PWD/fxauthcode.h
 SOURCES = $$PWD/main.cpp \
     $$PWD/fxmain.cpp \
     $$PWD/fxloginwindow.cpp \
@@ -69,4 +70,5 @@ SOURCES = $$PWD/main.cpp \
     $$PWD/qlayoutengine.cpp \
     $$PWD/qwidgetresizehandler.cpp \
     $$PWD/sqlite/sqlite3.c \
-    $$PWD/fxlocationparser.cpp
+    $$PWD/fxlocationparser.cpp \
+    $$PWD/fxauthcode.cpp
