@@ -28,6 +28,7 @@ FxLoginWindow::FxLoginWindow(QWidget *parent):
         user_id(NULL),
         user_pwd(NULL),
         proxy(NULL),
+        authcode(NULL),
         willLogin(true)
 {
     FX_FUNCTION
@@ -65,6 +66,7 @@ FxLoginWindow::~FxLoginWindow()
         delete m_loginShortcut;
     } 
     proxy->proxy_destroy();
+	authcode->authcode_destroy();
 }
 
 /**************************************************************************/
@@ -162,10 +164,10 @@ void FxLoginWindow::handleFx_Login_Event(int message, WPARAM wParam, LPARAM
 {
     Q_UNUSED(wParam);
     Q_UNUSED(lParam);
-    emit signal_Login_Message((int)message);
+    emit signal_Login_Message((int)message, qlonglong(wParam), (unsigned long)lParam);
 }
 
-void FxLoginWindow::slots_Login_Message(int message)
+void FxLoginWindow::slots_Login_Message(int message, qlonglong wParam, unsigned long /* lParam */)
 {
     switch (message)
     {
@@ -245,6 +247,14 @@ void FxLoginWindow::slots_Login_Message(int message)
             FX_DEBUG("FX_LOGIN_GP_FAIL");
             Login_State->setText(QObject::tr("get account info fail"));
             enableLoginBT();
+            break;
+
+        case FX_LOGIN_NEED_AUTH_CODE:
+            FX_DEBUG("FX_LOGIN_NEED_AUTH_CODE");
+            Login_State->setText(QObject::tr(""));
+            enableLoginBT();
+			authcode->reset((char*)(wParam));
+			authcode->show();
             break;
 
         case FX_LOGIN_OK:
@@ -430,6 +440,9 @@ void FxLoginWindow::init()
     proxy = new FxProxy(this);
     proxy->hide();
 
+    authcode = new FxAuthCode(this);
+    authcode->hide();
+
     this->installEventFilter(this);
 
     QRegExp rx_port("[0-9]{0,11}");
@@ -439,8 +452,8 @@ void FxLoginWindow::init()
     set_login_button_state(true);
 
     //Login_State->setText("test version for v 0.2.0");
-    connect(this, SIGNAL(signal_Login_Message(int)),
-            this, SLOT(slots_Login_Message(int)));
+    connect(this, SIGNAL(signal_Login_Message(int, qlonglong, unsigned long)),
+            this, SLOT(slots_Login_Message(int, qlonglong, unsigned long)));
     connect(BT_Login_Ok, SIGNAL(clicked()),
             this, SLOT(BT_Login_clicked()));
     connect(this, SIGNAL(signal_enableLoginBT()),
