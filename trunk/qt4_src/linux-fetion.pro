@@ -14,9 +14,12 @@ win32 {
     TARGET = LibFx
     CONFIG += static
     QTPLUGIN += qgif
+    QTPLUGIN += qjpeg
     RC_FILE = ./misc/libfetion.rc
-    LIBS += qgif.lib \
-        ./libfetion/lib/libcurl_imp.lib
+    LIBS += qgif.lib qjpeg.lib \
+        ./libfetion/lib/libcurl_imp.lib \
+        ./libfetion/lib/libeay32.lib \
+        ./libfetion/lib/ssleay32.lib
 }
 
 unix { 
