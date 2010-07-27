@@ -43,6 +43,7 @@
 
 
 #ifdef WIN32
+  Q_IMPORT_PLUGIN(qjpeg)
   Q_IMPORT_PLUGIN(qgif)
 #else
   #ifdef Q_OS_MAC
