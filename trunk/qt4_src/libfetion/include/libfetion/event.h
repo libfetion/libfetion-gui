@@ -192,6 +192,13 @@ extern "C" {
 */
 #define FX_LOGIN_GSML_FAIL       FX_EVENT_SPARE  + 0x0005
 
+/**
+* \def FX_LOGIN_NEED_AUTH_CODE
+* \brief login state is the user need to input the AUTH code
+* 
+*/
+#define FX_LOGIN_NEED_AUTH_CODE  FX_EVENT_SPARE  + 0x0006
+
 /** @} end of login_event */
 
 	
@@ -487,6 +494,91 @@ extern "C" {
 *
 */
 #define FX_STATUS_SMSEXTENED  FX_EVENT_BASE + 0x004F
+
+/**
+* \def FX_STATUS_REFUSE_SMS
+* \brief the user refuse/couldn't receive SMS.
+*
+*/
+#define FX_STATUS_REFUSE_SMS  FX_EVENT_SPARE + 0x0040
+
+/**
+* \def FX_STATUS_MOBILE_OUT_OF_SERIVCE
+* \brief the user mobile is out of service  of sms extend is chagend.
+*
+*/
+#define FX_STATUS_MOBILE_OUT_OF_SERIVCE  FX_EVENT_SPARE + 0x0041
+
+/**
+* \def FX_STATUS_CLOSE_FETION_SERIVCE
+* \brief the user have closed the fetion service.
+*
+*/
+#define FX_STATUS_CLOSE_FETION_SERIVCE  FX_EVENT_SPARE + 0x0042
+
+/**
+* \def FX_STATUS_MOBILE_ONLINE
+* \brief user status is online and login by mobile.
+*
+*/
+#define FX_STATUS_MOBILE_ONLINE          FX_EVENT_SPARE + 1 + 0x0042   //在线
+
+/**
+* \def FX_STATUS_MOBILE_BUSY
+* \brief user status is busy and login by mobile.
+*
+*/
+#define FX_STATUS_MOBILE_BUSY            FX_EVENT_SPARE + 1 + 0x0043   //忙碌
+
+/**
+* \def FX_STATUS_OFFLINE
+* \brief user status is offline.
+*
+* #define FX_STATUS_OFFLINE        FX_EVENT_BASE + 0x0044    //not used...
+*/
+
+/**
+* \def FX_STATUS_MOBILE_AWAY
+* \brief user status is away login by mobile.
+*
+*/
+#define FX_STATUS_MOBILE_AWAY            FX_EVENT_SPARE + 1 + 0x0045   //马上回来
+
+/**
+* \def FX_STATUS_MOBILE_MEETING
+* \brief user status is meeting login by mobile.
+*
+*/
+#define FX_STATUS_MOBILE_MEETING         FX_EVENT_SPARE + 1 + 0x0046   //会议中
+
+/**
+* \def FX_STATUS_MOBILE_PHONE
+* \brief user status is phone login by mobile.
+*
+*/
+#define FX_STATUS_MOBILE_PHONE           FX_EVENT_SPARE + 1 + 0x0047   //电话中
+
+/**
+* \def FX_STATUS_MOBILE_DINNER
+* \brief user status is dinner login by mobile.
+*
+*/
+#define FX_STATUS_MOBILE_DINNER          FX_EVENT_SPARE + 1 + 0x0048   //外出用餐
+
+/**
+* \def FX_STATUS_MOBILE_EXTENDED_AWAY 
+* \brief user status is extended away login by mobile.
+*
+*/
+#define FX_STATUS_MOBILE_EXTENDED_AWAY   FX_EVENT_SPARE + 1 + 0x0049   //离开 
+
+/**
+* \def FX_STATUS_MOBILE_NUM_PRIMITIVES
+* \brief user status is primitives num login by mobile.
+*
+*/
+#define FX_STATUS_MOBILE_NUM_PRIMITIVES  FX_EVENT_SPARE + 1 + 0x004A   //自定义
+
 /** @} end of online_event */
 
 
@@ -608,6 +700,14 @@ extern "C" {
 *
 */
 #define FX_ADD_BUDDY_OK   FX_EVENT_BASE + 0x005E   //
+
+
+/**
+* \def FX_ADD_BUDDY_DAY_LIMIT
+* \brief fetion add account fail due to day limit.
+*
+*/
+#define FX_ADD_BUDDY_DAY_LIMIT   FX_EVENT_BASE + 0x005F   //
 	
 
 /**

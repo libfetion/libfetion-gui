@@ -223,33 +223,6 @@ FX_EXPORT BOOL fx_close_network();
  */
 
 /**
- * \addtogroup  simple_fetion_login  
- * @{
- */
-
-/**
-  * \fn BOOL fs_login(const char *uid, const char *password)
-  * \brief login fetion.
-  *
-  * This function contain all the fetion login operates. 
-  * and without callback function, when it return show login is finished.  
-  * this function implement login,  get contact list and get presence operates.
-  *
-  * \param uid The login info of the usr fetion uid or mobile_no .
-  * \param password The login info of the usr password.
-  *
-  * \return TRUE if login successfully, otherwise return FALSE.fx_get_error();...
-  *
-  * \sa fx_login
-  */
-FX_EXPORT BOOL fs_login(const char *uid, const char *password);
-
-
-
-/** @} end of  simple_fetion_login */
-
-
-/**
  * \addtogroup  generic_fetion_login_functions  
  * @{
  */
@@ -261,8 +234,6 @@ FX_EXPORT BOOL fs_login(const char *uid, const char *password);
   * This function will set the user login status. 
   *
   * \param login_status The login status of you want to set.
-  *
-  * \sa fs_login
   */
 FX_EXPORT void fx_set_login_status(int longin_status);
 
@@ -293,8 +264,6 @@ FX_EXPORT void fx_cancel_login();
   *
   * \sa EventListener 
   *
-  *
-  * \sa fs_login
   */
 FX_EXPORT int fx_login(const char *uid, const char *password, EventListener func, void *args);
 
@@ -314,6 +283,33 @@ FX_EXPORT int fx_relogin(EventListener func, void *args, const char* uid, const 
   * \sa fx_login
 */
 FX_EXPORT void fx_loginout();
+
+/**
+  * \fn Fetion_Verfy *fx_get_auth_code()
+  * \brief get the verfy info.
+  *
+  * This function will get all the verfy info. 
+  *
+  * \param guid The guid of the wanted Fetion_Verfy.
+  *
+  * \sa Fetion_Verfy
+  * \sa fx_set_auth_code
+*/
+FX_EXPORT Fetion_Verfy *fx_get_auth_code(char* guid);
+
+/**
+  * \fn int fx_set_auth_code(const char* authcode)
+  * \brief set the auth code to libfetion.
+  *
+  * This function will set the auth code to libfetion. 
+  * \param authcode The auth code valut of setting.
+  * \param verfy The opted Fetion_Verfy.
+  *
+  * \sa Fetion_Verfy
+  * \sa fx_set_auth_code
+*/
+FX_EXPORT int fx_set_auth_code(const char* authcode, Fetion_Verfy *verfy);
+
 
 #if 0
 /**
@@ -1151,6 +1147,33 @@ FX_EXPORT BOOL fx_is_on_line_by_account(const Fetion_Account *account);
 FX_EXPORT int fx_get_online_status_by_id(const long uid);
 
 /**
+  * \fn BOOL fx_is_online_status(int online_status)
+  * \brief judge the status is online or not.  
+  *
+  * \return TRUE when it is online status, or return FALSE.
+*/
+FX_EXPORT BOOL fx_is_online_status(int online_status);
+
+/**
+  * \fn BOOL fx_is_receive_sms_by_account(const Fetion_Account *account)
+  * \brief judge this account could receive SMS or not
+  *
+  * \return FALSE if this account couldn't sms or return TRUE.
+*/
+FX_EXPORT BOOL fx_is_receive_sms_by_account(const Fetion_Account *account);
+
+/**
+  * \fn BOOL fx_is_auth_chat_by_account(const Fetion_Account *account)
+  * \brief judge this account could char or not
+  *
+  * \return FALSE if this account couldn't char or return TRUE.
+*/
+FX_EXPORT BOOL fx_is_auth_chat_by_account(const Fetion_Account *account);
+
+
+
+
+/**
   * \fn int fx_get_online_status_by_account(const Fetion_Account * account)
   * \brief return fetion account's online status.  
   *
@@ -1197,10 +1220,28 @@ FX_EXPORT void fx_update_account_info_by_id(long id);
   * \param needImpresa Is need the impresa in showname 
   *
   * \sa Fetion_Account
+  * \sa fx_get_account_show_name_with_state
   *
   * \return the show name of account
 */
 FX_EXPORT char *fx_get_account_show_name(const Fetion_Account *account, BOOL needImpresa);
+
+/**
+  * \fn char *fx_get_account_show_name_with_state(const Fetion_Account *account, BOOL needImpresa, BOOL needSState)
+  * \brief get the show name of the account
+  *
+  * note: this function maybe modify at late version....
+  *
+  * \param account The Fetion_Account which you want to get showname. 
+  * \param needImpresa Is need the impresa in showname 
+  * \param needAccountStatue Is need the AccountStatue in showname 
+  *
+  * \sa Fetion_Account
+  * \sa fx_get_account_show_name
+  *
+  * \return the show name of account
+*/
+FX_EXPORT char *fx_get_account_show_name_with_state(const Fetion_Account *account, BOOL needImpresa, BOOL needSState);
 
 /**
   * \fn char *fx_get_qun_show_name(Fetion_Qun *qun)

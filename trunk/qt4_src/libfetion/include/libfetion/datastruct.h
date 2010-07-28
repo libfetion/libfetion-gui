@@ -276,6 +276,9 @@ typedef enum
 		int match_enabled;
 		/** 0 accept sms  other show refuse sms days... */
 		int refuse_sms_day; 
+
+		int basic_service_status; //add since v4
+		int score_level;
 	}Fetion_Personal;
 
 /**
@@ -319,6 +322,10 @@ typedef enum
 		Fetion_Personal *personal;
 		Ftion_USER_TYPE usr_type; //PC or moblie
         char *device_type; //device_type: "PC" or mobile
+		unsigned long user_id; // add by V4 2010
+		char *carrier; //  CMCC
+		int carrierStatus; // 
+		int serviceStatus; // 
 	}Fetion_Account;
 
 /**
@@ -327,12 +334,12 @@ typedef enum
  * \sa fx_get_blacklist
  */
 	typedef struct _fetion_black  {  
-    /** account id. */
-		long uid;             
     /** account uri. */
 		char *uri;         
     /** account local_name. */
 		char *local_name;
+
+		unsigned long user_id; // add by V4 2010
 	}Fetion_Black;
 
 	typedef struct _fetion_qun_member Fetion_QunMember;
@@ -400,6 +407,22 @@ typedef struct _fetion_blist {
 	/** amount accounts. */
 	int account_count;
 }Fetion_BList;
+
+typedef struct _fetion_verifiy Fetion_Verfy;
+
+struct _fetion_verifiy
+{   
+	char* algorithm;
+	char* type;
+	char* text;
+	char* tips;
+
+	char* guid;
+	char* code;
+
+	unsigned char* pic;
+	long pic_len;
+};
 
 	void free_fetion_personal(Fetion_Personal *personal);
 	void free_fetion_account(Fetion_Account *account);
