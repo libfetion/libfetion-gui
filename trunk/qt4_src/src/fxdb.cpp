@@ -26,7 +26,7 @@
 #include "fxResource.h"
 
 #define AUTOLG   "autologin021"
-#define SERVERADD   "cacheserveradd"
+#define SERVERADD   "cacheserveradd200"
 #define PROXY   "proxy"
 #define ACINFO   "acinfo"
 
