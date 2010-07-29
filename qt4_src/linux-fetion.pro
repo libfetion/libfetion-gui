@@ -26,7 +26,7 @@ unix {
     message ("UNIX build start...")
     TARGET = linux-fetion
     LIBS += -lcurl \
-        -lssl \
+        -lssl -ldl -lcrypto\
         ./libfetion/lib/libfetion_32.a
 }
 mac { 
