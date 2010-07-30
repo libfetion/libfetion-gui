@@ -670,6 +670,9 @@ void FxMsgWindow::addAccount(qlonglong account_id, bool isSendSms)
     FX_FUNCTION
 
 	const Fetion_Account *account = fx_get_account_by_id(account_id);
+	
+	if (!account)
+		return;
 	//check the account could chat or not.
 	if (!fx_is_auth_chat_by_account(account))
 	{
