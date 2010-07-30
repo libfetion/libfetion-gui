@@ -129,8 +129,9 @@ bool init_db()
                 "create table %s(flag, id, len_id, pwd, len_pwd, login_state)",
                 AUTOLG);
         sqlite3_exec(pdb, sql, 0, 0, &perrmsg);
-    }
-    sqlite3_free_table(result);
+    } else {
+		sqlite3_free_table(result);
+	}
 
     // Are there DBTABLE ? if not, create it.
     memset(sql, 0, SQL_MAXLEN);
@@ -142,9 +143,9 @@ bool init_db()
         memset(sql, 0, SQL_MAXLEN);
         sprintf(sql, "create table %s(id,proxy)", SERVERADD);
         sqlite3_exec(pdb, sql, 0, 0, &perrmsg);
-    }
-
-    sqlite3_free_table(result);
+    } else {
+		sqlite3_free_table(result);
+	}
 
     // Are there PROXY ? if not, create it.
     memset(sql, 0, SQL_MAXLEN);
@@ -156,8 +157,9 @@ bool init_db()
         memset(sql, 0, SQL_MAXLEN);
         sprintf(sql, "create table %s(type, host, port, name, pwd)", PROXY);
         sqlite3_exec(pdb, sql, 0, 0, &perrmsg);
-    }
-    sqlite3_free_table(result);
+    } else {
+		sqlite3_free_table(result);
+	}
 
     return true;
 }
@@ -545,7 +547,10 @@ BOOL init_histroy_db(long usr)
             sqlite3_free_table(result);
         }
 
-    }
+	} else {
+		sqlite3_free_table(result);
+	}
+
     have_init = TRUE;
     return TRUE;
 }
@@ -896,9 +901,9 @@ BOOL init_storeAccountInfo_db(long usr)
 		memset(sql, 0, SQL_MAXLEN);
 		sprintf(sql, "create index uid_index on fxACINFO%ldusr(uid)", usr);
 		sqlite3_exec(pdb, sql, 0, 0, &perrmsg);
+	} else {
+		sqlite3_free_table(result);
 	}
-
-    sqlite3_free_table(result);
 
     have_init = TRUE;
     return TRUE;
@@ -977,6 +982,7 @@ void UpdateAccountToDB(const Fetion_Account *account)
     ret = sqlite3_get_table(pdb, sql, &result, &nrow, &ncol, &perrmsg);
     if (ret != SQLITE_OK)
         return;
+    sqlite3_free_table(result);
 
     if (nrow)
 		isAccountExist = true;
