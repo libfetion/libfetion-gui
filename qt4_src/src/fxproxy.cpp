@@ -74,6 +74,7 @@ FxProxy::~FxProxy()
     if (proxy_item)
     {
         free_proxt_struct(proxy_item);
+        proxy_item = NULL;
     }
 }
 
@@ -116,6 +117,11 @@ void FxProxy::free_proxt_struct(PROXY_ITEM *p_item)
 void FxProxy::proxy_destroy()
 {
     FX_FUNCTION
+    if (proxy_item)
+    {
+        free_proxt_struct(proxy_item);
+        proxy_item = NULL;
+    }
     isQuit = true;
     close();
 }
