@@ -82,7 +82,8 @@ class FxLoginWindow : public FxWidget, public Ui::Fetion_Login
         FxAuthCode *authcode;
         QTimer loginTimer;
         bool willLogin;
-        QShortcut *m_loginShortcut;
+        QShortcut *m_loginShortcut_1;
+        QShortcut *m_loginShortcut_2;
 };
 
 #endif
