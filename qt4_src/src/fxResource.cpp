@@ -21,6 +21,7 @@
 #include <QFile>
 #include <QDir>
 #include <QDebug>
+#include <QApplication>
 
 #include "fxResource.h"
 #include "fxskinmanage.h"
@@ -126,7 +127,7 @@ QString getXMLRes(QString item, QString defValue)
 QString defaultResPath()
 {
     #ifdef WIN32
-        return "./resource";
+        return QCoreApplication::applicationDirPath() + "./resource";
     #else //linux
         static QString defaultResPath;
         static bool init = false;
