@@ -51,6 +51,16 @@ BuddyOpt::BuddyOpt(QTreeWidget *widget, bool isMainView)
 
     }
 
+	QList<qlonglong>* list = db_GetRecentlyContactAccountFromDB();
+	if (!list)
+		return;
+
+	QList<qlonglong>::iterator iter;
+
+	for(iter = list->begin(); iter != list->end(); iter++)
+		addAccountToRecentlyContactGroup(fx_get_account_by_id(*iter));
+
+	delete list;
     //expandTree();
 }
 
@@ -1025,6 +1035,42 @@ void BuddyOpt::updateAccountInfo_RecentlyContactGroup(const Fetion_Account *acco
 
     accountItem->setText(0, show_name);
     accountItem->setIcon(0, getOnlineStatusIcon(ac_info->onlinestate));
+}
+
+void BuddyOpt::SaveRecentlyContactAccountToDB()
+{
+    int group_no = recently_contact_group_no;
+
+	QTreeWidgetItem *groupItem = findGroupItemByID(group_no);
+    if (!groupItem)
+        return;
+
+    int itemCounts = groupItem->childCount();
+	if (!itemCounts)
+		return;
+	QList <qlonglong> *list = new QList <qlonglong>;
+    for (int i = 0; i < itemCounts; i++)
+    {
+		QTreeWidgetItem *tmpItem = groupItem->child(i);
+        if (!tmpItem)
+            continue;
+
+        #if MS_VC6
+		Account_Info *ac_info = (Account_Info*)(tmpItem->data(0, Qt
+					::UserRole).toUInt());
+        #else
+		Account_Info *ac_info = tmpItem->data(0, Qt::UserRole).value <
+			Account_Info * > ();
+        #endif
+
+        if (ac_info && ac_info->accountID)
+			list->append(ac_info->accountID);
+    }
+
+	db_SaveRecentlyContactAccountToDB(list);
+
+	if (list)
+		delete list;
 }
 
 /**************************************************************************/
