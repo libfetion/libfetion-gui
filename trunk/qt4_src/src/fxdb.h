@@ -79,6 +79,9 @@ bool selectSystemMsg(long usr, long uid, const char* msg);
 bool GetAccountInfoFromDB(long uid, QString& nicename, QString& impresa);
 void UpdateAccountToDB(const Fetion_Account *account);
 
-QList<QTreeWidgetItem *> *searchAccountInfo(char * keyword);
+QList<qlonglong>* db_GetRecentlyContactAccountFromDB();
+void db_SaveRecentlyContactAccountToDB(QList<qlonglong>*);
+
+QList<QTreeWidgetItem *> *searchAccountInfo(char *keyword);
 
 #endif

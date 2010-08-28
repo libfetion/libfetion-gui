@@ -1049,16 +1049,108 @@ void UpdateAccountToDB(const Fetion_Account *account)
     }
 }
 
+static BOOL init_RecentlyContactAccountInfo_db(long usr)
+{
+    static BOOL have_init = FALSE;
+    if (have_init)
+        return TRUE;
+
+    if (!init_db())
+        return FALSE;
+
+    char *perrmsg;
+    char **result;
+    int nrow, ncol;
+
+	// Are there fxACINFO%ldusr ? if not, create it.
+	memset(sql, 0, SQL_MAXLEN);
+	sprintf(sql, "select * from fxRCGACINFO%ldusr  limit 1", usr);
+	if (sqlite3_get_table(pdb, sql, &result, &nrow, &ncol, &perrmsg) !=
+			SQLITE_OK)
+	{
+		//create the table
+		memset(sql, 0, SQL_MAXLEN);
+		sprintf(sql, "create table fxRCGACINFO%ldusr(uid)", usr);
+		//exec the create table sql
+		if (sqlite3_exec(pdb, sql, 0, 0, &perrmsg) != SQLITE_OK)
+		{
+			printf("exel create table %s\n", sql);
+			return FALSE;
+		}
+	} else {
+		sqlite3_free_table(result);
+	}
+
+    have_init = TRUE;
+    return TRUE;
+}
+
+QList<qlonglong>* db_GetRecentlyContactAccountFromDB()
+{
+    long usr = (qlonglong)strtol(fx_get_usr_uid(), NULL, 10);
+	if (!init_RecentlyContactAccountInfo_db(usr))
+		return NULL;
+
+    QList <qlonglong> *items = new QList <qlonglong>;
+
+    int ret, nrow, ncol;
+    char *perrmsg;
+    char **result;
+
+    sprintf(sql, "select * from fxRCGACINFO%ldusr", usr);
+
+    ret = sqlite3_get_table(pdb, sql, &result, &nrow, &ncol, &perrmsg);
+    if (ret != SQLITE_OK)
+    {
+        printf("slecet flag  table error!, the sql is...%s\n", sql);
+        return NULL;
+    }
+
+    int index = ncol;
+    for (int i = 0; i < nrow; i++)
+    {
+        items->append(atol(result[index]));
+        index = index + ncol;
+	}
+    sqlite3_free_table(result);
+
+	return items;
+}
+
+void db_SaveRecentlyContactAccountToDB(QList<qlonglong> *list)
+{
+    long usr = (qlonglong)strtol(fx_get_usr_uid(), NULL, 10);
+	if (!list || !init_RecentlyContactAccountInfo_db(usr))
+		return;
+
+    memset(sql, 0, SQL_MAXLEN);
+    sprintf(sql, "delete from fxRCGACINFO%ldusr", usr);
+    //exec the delete table sql
+    sqlite3_exec(pdb, sql, 0, 0, 0);
+
+	QList<qlonglong>::iterator iter;
+
+	for(iter = list->begin(); iter != list->end(); iter++)
+	{
+		// insert data to databse
+		memset(sql, 0, SQL_MAXLEN);
+		sprintf(sql, "insert into fxRCGACINFO%ldusr values(\"%ld\")", 
+				usr, (*iter));
+		sqlite3_exec(pdb, sql, 0, 0, 0);
+	}
+}
+
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
 
-void create_search_result(QList < QTreeWidgetItem * >  * items, char **result,
+void create_search_result(QList<QTreeWidgetItem*> *items, char **result,
                           int nrow, int ncol);
-QList < QTreeWidgetItem * >  * searchAccountInfo(char *keyword)
+
+QList<QTreeWidgetItem*> *searchAccountInfo(char *keyword)
 {
     long usr = (qlonglong)strtol(fx_get_usr_uid(), NULL, 10);
-    QList < QTreeWidgetItem * >  * items = new QList < QTreeWidgetItem * > ;
+    QList<QTreeWidgetItem*>  * items = new QList<QTreeWidgetItem*> ;
 
 	if (!init_storeAccountInfo_db(usr))
         return items;
