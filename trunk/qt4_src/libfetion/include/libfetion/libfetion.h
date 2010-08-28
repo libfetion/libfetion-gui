@@ -345,6 +345,29 @@ FX_EXPORT int fs_keep_alive();
 */
 FX_EXPORT void fx_set_system_msg_cb(EventListener func, void* args);
 
+/**
+  * \fn void fx_enable_emit_receive_msg()
+  * \brief enable to libfetion to send out new chat message. 
+  *
+  * This function will enable to libfetion to send out new chat message..
+  * like ....
+  *
+  * \sa ...
+*/
+FX_EXPORT void fx_enable_emit_receive_msg();
+
+/**
+  * \fn void fx_disable_emit_receive_msg()
+  * \brief disable emit the new chat message . 
+  *
+  * This function will let libfetio don't emit the new chat message, those message will be stored
+  * and send out after enable the emit_receive_msg.
+  * like ....
+  *
+  * \sa ...
+*/
+FX_EXPORT void fx_disable_emit_receive_msg();
+
 /** @} end of system_msg_cb */
 
 /**
@@ -515,53 +538,6 @@ FX_EXPORT void fx_set_longsms(BOOL bl);
  * \addtogroup send_dialog_fetion_functions  
  * @{
  */
-
-/**
- * \addtogroup simple_send_dialog_fetion_functions  
- * @{
- */
-
-/**
-  * \fn BOOL fs_begin_dialog(long who)
-  * \brief begin the dialog function
-  *
-  * if you want to have a dialog with somebody. invoke this function first,
-  * of course, if you not invoke this function to send a dialog, it will invoked by itself.
-  * if you will not have a dialog with somebody, you should invoke fetion_end_dialog
-  * advise: invoke this function before send a dialog to somebody,
-  * \sa fetion_end_dialog
-  *
-  * \param who The somebody who you want to have a dialog
-  *
-  * \return non zero if init successfully, otherwise if fail return 0.( this function will not return 0)
-  *
-*/
-FX_EXPORT BOOL fs_begin_dialog(long who);
-
-
-/**
-  * \fn BOOL fs_dialog_send(long who, const char *message)
-  * \brief send a message to somebody in a dialog 
-  *
-  * \param who The somebody who you want to send
-  * \param message The content which you want to send.
-  *
-  * \return TRUE if init successfully, otherwise return FALSE..
-*/
-FX_EXPORT BOOL fs_dialog_send(long who, const char *message);
-
-/**
-  * \fn void fs_end_dialog(long who)
-  * \brief end a dialog with somebody
-  *
-  * if you will not have a dialog with somebody, you should invoke this function
-  *
-  * \param who The somebody who you want to end a dialog
-  *
-*/
-void fs_end_dialog(long who);
-
-/** @} end of simple_send_dialog_fetion_functions */
 
 /**
  * \addtogroup generic_send_dialog_fetion_functions 
