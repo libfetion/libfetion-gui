@@ -49,6 +49,7 @@ BuddyMge::BuddyMge(QTreeWidget *widget, FxMainWindow *wind)
 BuddyMge::~BuddyMge()
 {
     FX_FUNCTION
+    buddyopt->SaveRecentlyContactAccountToDB();
 }
 
 void BuddyMge::initAllActions()
