@@ -60,6 +60,7 @@ class BuddyOpt: public QObject
 
         void addAccountToRecentlyContactGroup(const Fetion_Account *account);
         void updateAccountInfo_RecentlyContactGroup(const Fetion_Account *account);
+		void SaveRecentlyContactAccountToDB();
 
         Account_Info *fetchNoUpdateAccount();
         void updateAccountInfo(const Fetion_Account *account);
