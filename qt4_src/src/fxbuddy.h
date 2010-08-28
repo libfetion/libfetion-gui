@@ -58,6 +58,9 @@ class BuddyOpt: public QObject
                 int online_state,
                 int group);
 
+        void addAccountToRecentlyContactGroup(const Fetion_Account *account);
+        void updateAccountInfo_RecentlyContactGroup(const Fetion_Account *account);
+
         Account_Info *fetchNoUpdateAccount();
         void updateAccountInfo(const Fetion_Account *account);
         QString createAccountTipsInfo(const Fetion_Account *account);
@@ -81,9 +84,11 @@ class BuddyOpt: public QObject
         QTreeWidgetItem* findAccountItemFromGroup(QTreeWidgetItem *groupItem,
                 const Fetion_Account *account);
         void create_zero_group();
+        void create_recently_contact_group();
         QTreeWidget *treeWidget;
         QTreeWidgetItem *QunItem;
         bool have_zero_group;
+        bool have_recently_contact_group;
         bool isOnlineStateChanged(int old_state, int new_state, int* state);
         bool m_isMainView; //two mode: just main view and group sms send view
 };
