@@ -1462,6 +1462,13 @@ void FxMainWindow::init_slot_signal()
 
     connect(this, SIGNAL(signal_update_scheduleList()),
             scheduleSmsManager, SLOT(slot_update_scheduleList()));
+
+    if (msgwin)
+    {
+    // this connect must be run after msgwin have been init.
+    connect(msgwin, SIGNAL(signal_AddAccountToRecentlyContactGroup(qlonglong)),
+            buddyMge, SLOT(addAccountToRecentlyContactGroup(qlonglong)));
+    }
 }
 
 /**************************************************************************/

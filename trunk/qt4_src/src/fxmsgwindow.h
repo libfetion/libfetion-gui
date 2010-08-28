@@ -54,6 +54,7 @@ public:
 	void showFaces();
 	void msg_exit();
 
+	void AddAccountToRecentlyContactGroup(qlonglong account_id);
 	void nudge_shake();
     void addAccount(qlonglong account_id,
                     bool isSendSms = false);
@@ -98,6 +99,7 @@ public slots:
 	void slot_receive_nudge(qlonglong);
 
 signals:
+	void signal_AddAccountToRecentlyContactGroup(qlonglong);
 
 private:
 	void init();
