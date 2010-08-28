@@ -405,6 +405,8 @@ void FxLoginWindow::login()
                 fx_set_login_status(FX_STATUS_ONLINE);
             }
 
+    fx_disable_emit_receive_msg();
+
     set_login_button_state(false);
 
     //	fx_set_proxy("221.130.46.144:8080");
