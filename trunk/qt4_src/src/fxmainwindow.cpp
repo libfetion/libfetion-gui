@@ -86,14 +86,22 @@ FxMainWindow::FxMainWindow(QWidget *parent): FxWidget(parent), trayIcon(NULL),
 FxMainWindow::~FxMainWindow()
 {
     FX_FUNCTION
+    clear_quit();
+}
+
+void FxMainWindow::clear_quit()
+{
     checkSkinsTimer.stop();
     if (buddyMge)
     {
         delete buddyMge;
+        buddyMge = NULL;
     }
     if (msgwin)
     {
+        msgwin->msg_exit();
         delete msgwin;
+        msgwin = NULL;
     }
 }
 
@@ -917,7 +925,7 @@ void FxMainWindow::closeEvent(QCloseEvent *event)
         {
             trayIcon->hide();
         }
-        msgwin->msg_exit();
+        clear_quit();
 
         QApplication::quit();
 

@@ -83,7 +83,7 @@ protected:
 
 	void createSkinMenu(QMenu *skinMenu);		
 
-
+	void clear_quit();
 signals:
 	void signal_Current_Version(int);
 	void signal_AddAccountApp(char*, char*);
