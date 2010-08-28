@@ -553,6 +553,7 @@ void FxMsgWindow::slot_haveNewMessage(qlonglong account_id)
     else
     {
         addMessage(parseReceivedMsg(fxMsg), account_id, true);
+        AddAccountToRecentlyContactGroup(account_id);
     }
 
     fx_destroy_msg(fxMsg);
@@ -790,6 +791,11 @@ void FxMsgWindow::nudge_shake()
     m_isNudgeShake = true;
 }
 
+
+void FxMsgWindow::AddAccountToRecentlyContactGroup(qlonglong account_id)
+{
+	emit signal_AddAccountToRecentlyContactGroup(account_id);
+}
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/

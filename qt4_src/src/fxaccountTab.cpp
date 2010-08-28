@@ -278,8 +278,10 @@ void AccountTab::SendNudge()
     if (fx_send_nudge(account_id))
     {
         str = tr("send nudge ok");
-		if (msgWind)
-			msgWind->nudge_shake();;
+		if (msgWind) {
+			msgWind->nudge_shake();
+			msgWind->AddAccountToRecentlyContactGroup(account_id);
+		}
     }
     else
     {
@@ -379,6 +381,8 @@ void AccountTab::SendMsg()
                    show_msg.toUtf8().data(), NULL);
     //clean the send edit
     msgSend->MsgEdit->setText("");
+    if (msgWind)
+        msgWind->AddAccountToRecentlyContactGroup(account_id);
 }
 
 /**************************************************************************/
