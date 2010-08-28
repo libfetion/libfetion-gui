@@ -427,6 +427,15 @@ void BuddyMge::updateAccountInfo(qlonglong account_id)
 	UpdateAccountToDB(account);
 }
 
+void BuddyMge::addAccountToRecentlyContactGroup(qlonglong account_id)
+{
+    const Fetion_Account *account = fx_get_account_by_id(account_id);
+    if (!account)
+        return ;
+	/* update the account list view */
+    buddyopt->addAccountToRecentlyContactGroup(account);
+}
+
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/

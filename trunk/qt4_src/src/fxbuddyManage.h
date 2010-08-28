@@ -79,6 +79,8 @@ public slots:
 	void slot_accountPressed (QTreeWidgetItem * item, int column );
 	void moveGroupMenutriggered(QAction *action);
 	void updateAccountInfo (qlonglong account_id);
+	void addAccountToRecentlyContactGroup (qlonglong account_id);
+	
 
 	void slot_MoveGroup(qlonglong account_id, unsigned long group_id); 
 

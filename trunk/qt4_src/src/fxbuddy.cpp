@@ -22,6 +22,8 @@
 #include "fxsendGroupSMS.h"
 #include "fxlocationparser.h"
 
+#define recently_contact_group_no -3
+
 BuddyOpt::BuddyOpt(QTreeWidget *widget, bool isMainView)
 {
     FX_FUNCTION
@@ -29,6 +31,7 @@ BuddyOpt::BuddyOpt(QTreeWidget *widget, bool isMainView)
 
     QunItem = NULL;
     have_zero_group = false;
+    have_recently_contact_group = false;
     markedCount = 0;
 
     assert(widget);
@@ -896,6 +899,134 @@ void BuddyOpt::create_zero_group()
     have_zero_group = true;
 }
 
+void BuddyOpt::create_recently_contact_group()
+{
+    int group_no = recently_contact_group_no;
+
+    if (have_recently_contact_group)
+    {
+        return ;
+    }
+
+    QTreeWidgetItem *item;
+    item = new QTreeWidgetItem(treeWidget);
+
+    if (!m_isMainView)
+    {
+        item->setCheckState(0, Qt::Unchecked);
+    }
+
+    QString str = tr("recently contact group");
+
+    Group_Info *groupinfo = new Group_Info;
+    groupinfo->groupName = str;
+    groupinfo->groupID = group_no;
+    groupinfo->online_no = 0;
+
+    item->setText(0, str);
+    #if MS_VC6
+        QVariant Var((uint)groupinfo);
+    #else
+        QVariant Var;
+        Var.setValue(groupinfo);
+    #endif
+    item->setData(0, Qt::UserRole, Var);
+
+    have_recently_contact_group = true;
+}
+
+void BuddyOpt::addAccountToRecentlyContactGroup(const Fetion_Account *account)
+{
+	create_recently_contact_group();
+    int group_no = recently_contact_group_no;
+
+    if (!account)
+        return;
+
+	if (account->id == strtol(fx_get_usr_uid(), NULL, 10))
+		return;
+
+	QTreeWidgetItem *groupItem = findGroupItemByID(group_no);
+    if (!groupItem)
+        return;
+
+    QTreeWidgetItem *accountItem = findAccountItemFromGroup(groupItem, account);
+	if (accountItem) {
+		groupItem->removeChild(accountItem);
+		groupItem->insertChild(0, accountItem);
+		return;
+	}
+
+    char *showname = fx_get_account_show_name_with_state(account, TRUE, TRUE);
+    QString show_name = QString::fromUtf8(showname);
+    int online_state = fx_get_online_status_by_account(account);
+
+    addAccountToGroup(account, show_name, online_state, group_no);
+
+    if (showname)
+        free(showname);
+
+#if MS_VC6
+	Group_Info *group_info = (Group_Info*)(groupItem->data(0, Qt
+				::UserRole).toUInt());
+#else
+	Group_Info *group_info = groupItem->data(0, Qt::UserRole).value
+		< Group_Info * > ();
+#endif
+	if (!group_info)
+		return;
+
+    groupItem->setText(0, group_info->groupName);
+}
+
+void BuddyOpt::updateAccountInfo_RecentlyContactGroup(const Fetion_Account *account)
+{
+    int group_no = recently_contact_group_no;
+	if (!have_recently_contact_group)
+		return;
+
+    if (!account)
+        return;
+
+	if (account->id == strtol(fx_get_usr_uid(), NULL, 10))
+		return;
+
+	QTreeWidgetItem *groupItem = findGroupItemByID(group_no);
+    if (!groupItem)
+        return;
+
+    QTreeWidgetItem *accountItem = findAccountItemFromGroup(groupItem, account);
+	if (!accountItem)
+        return;
+	
+    //update the account info
+    setTipsOfAccount(accountItem, account);
+
+    char *showname = fx_get_account_show_name_with_state(account, TRUE, TRUE);
+    QString show_name = QString::fromUtf8(showname);
+    if (showname)
+    {
+        free(showname);
+    }
+
+    #if MS_VC6
+        Account_Info *ac_info = (Account_Info*)(accountItem->data(0, Qt
+                                 ::UserRole).toUInt());
+    #else
+        Account_Info *ac_info = accountItem->data(0, Qt::UserRole).value <
+            Account_Info * > ();
+    #endif
+    if (!ac_info)
+    {
+        return ;
+    }
+    ac_info->accountName = show_name;
+    ac_info->onlinestate = fx_get_online_status_by_account(account);
+
+    accountItem->setText(0, show_name);
+    accountItem->setIcon(0, getOnlineStatusIcon(ac_info->onlinestate));
+}
+
 /**************************************************************************/
 /*                                                                        */
 /**************************************************************************/
@@ -956,7 +1087,6 @@ QTreeWidgetItem *BuddyOpt::findAccountItem(const Fetion_Account *account)
     return findAccountItemFromGroup(groupItem, account);
 }
 
-//this function will add to libfetion impl...
 // return false should not changed
 // true should changed
 // state is 0 sub the online number
@@ -999,10 +1129,10 @@ bool BuddyOpt::isOnlineStateChanged(int old_state, int new_state, int *state)
 void BuddyOpt::updateAccountInfo(const Fetion_Account *account)
 {
     if (!account)
-        return ;
+        return;
 
 	if (account->id == strtol(fx_get_usr_uid(), NULL, 10))
-		return ;
+		return;
 
     QTreeWidgetItem *accountItem = findAccountItem(account);
 
@@ -1013,6 +1143,8 @@ void BuddyOpt::updateAccountInfo(const Fetion_Account *account)
         addAccountToGroup(account);
         return ;
     }
+
+	updateAccountInfo_RecentlyContactGroup(account);
 
     //update the account info
     setTipsOfAccount(accountItem, account);
