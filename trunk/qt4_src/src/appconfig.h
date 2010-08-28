@@ -20,9 +20,9 @@
 #ifndef FXAPPCONFIG_H 
 #define FXAPPCONFIG_H 
 
-#define BUILD_DATE 20091228
-#define CURRENT_VERSION 130
-#define VERSION_NO "v1.3"
+#define BUILD_DATE 20100829
+#define CURRENT_VERSION 205
+#define VERSION_NO "v2.0 beta5"
 
 #define DefaultSkinCatalog "Fx_Kieteay"
 #define DefaultSkinName "Fx_Kieteay"
