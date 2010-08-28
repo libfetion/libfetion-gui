@@ -66,6 +66,7 @@ FxMainWindow::FxMainWindow(QWidget *parent): FxWidget(parent), trayIcon(NULL),
 
     //set the fetion system msg call back function
     fx_set_system_msg_cb(Sys_EventListener, this);
+    fx_enable_emit_receive_msg();
 
     #ifdef HAVE_GUI_DEBUG_ENABLED
         QTreeWidgetItem *tm = new QTreeWidgetItem(view, 0);
@@ -530,6 +531,7 @@ void FxMainWindow::slots_Relogin_Event(int message)
 
             //set the fetion system msg call back function
             fx_set_system_msg_cb(Sys_EventListener, this);
+			fx_enable_emit_receive_msg();
             break;
     }
 }
@@ -677,6 +679,8 @@ void FxMainWindow::slot_SystemNetErr(int err)
 {
     FX_FUNCTION
     Q_UNUSED(err);
+
+    fx_disable_emit_receive_msg();
     relogin_fetion();
 
     if (fx_status == SYS_RELOGIN)
