@@ -23,6 +23,7 @@
 #include "fxlocationparser.h"
 
 #define recently_contact_group_no -3
+#define MaxNum_recently_contact_group 10
 
 BuddyOpt::BuddyOpt(QTreeWidget *widget, bool isMainView)
 {
@@ -945,6 +946,29 @@ void BuddyOpt::create_recently_contact_group()
     have_recently_contact_group = true;
 }
 
+void BuddyOpt::adjustRecentlyContactGroupNum(QTreeWidgetItem *groupItem)
+{
+    if (!groupItem)
+        return;
+
+	int Numb = groupItem->childCount();
+
+	if (Numb < MaxNum_recently_contact_group)
+        return;
+
+    QTreeWidgetItem *tmpItem = groupItem->child(Numb - 1);
+
+#if MS_VC6
+	Account_Info *ac_info = (Account_Info*)(tmpItem->data(0, Qt
+				::UserRole).toUInt());
+#else
+	Account_Info *ac_info = tmpItem->data(0, Qt::UserRole).value <
+		Account_Info * > ();
+#endif
+	if (ac_info && ac_info->accountID)
+		delAccountRecentlyContactGroup(ac_info->accountID);
+}
+
 void BuddyOpt::addAccountToRecentlyContactGroup(const Fetion_Account *account)
 {
 	create_recently_contact_group();
@@ -959,6 +983,8 @@ void BuddyOpt::addAccountToRecentlyContactGroup(const Fetion_Account *account)
 	QTreeWidgetItem *groupItem = findGroupItemByID(group_no);
     if (!groupItem)
         return;
+	
+	adjustRecentlyContactGroupNum(groupItem);
 
     QTreeWidgetItem *accountItem = findAccountItemFromGroup(groupItem, account);
 	if (accountItem) {
