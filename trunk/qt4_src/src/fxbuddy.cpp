@@ -975,18 +975,6 @@ void BuddyOpt::addAccountToRecentlyContactGroup(const Fetion_Account *account)
 
     if (showname)
         free(showname);
-
-#if MS_VC6
-	Group_Info *group_info = (Group_Info*)(groupItem->data(0, Qt
-				::UserRole).toUInt());
-#else
-	Group_Info *group_info = groupItem->data(0, Qt::UserRole).value
-		< Group_Info * > ();
-#endif
-	if (!group_info)
-		return;
-
-    groupItem->setText(0, group_info->groupName);
 }
 
 void BuddyOpt::updateAccountInfo_RecentlyContactGroup(const Fetion_Account *account)
@@ -1031,10 +1019,55 @@ void BuddyOpt::updateAccountInfo_RecentlyContactGroup(const Fetion_Account *acco
         return ;
     }
     ac_info->accountName = show_name;
+    int old_online_state = ac_info->onlinestate;
     ac_info->onlinestate = fx_get_online_status_by_account(account);
 
     accountItem->setText(0, show_name);
     accountItem->setIcon(0, getOnlineStatusIcon(ac_info->onlinestate));
+
+	int state = 0;
+	if (isOnlineStateChanged(old_online_state, ac_info->onlinestate, &state))
+	{
+#if MS_VC6
+		Group_Info *group_info = (Group_Info*)(groupItem->data(0, Qt
+					::UserRole).toUInt());
+#else
+		Group_Info *group_info = groupItem->data(0, Qt::UserRole).value
+			< Group_Info * > ();
+#endif
+		if (!group_info)
+		{
+			return ;
+		}
+
+		if (state)
+		{
+			group_info->online_no++;
+		}
+		else
+		{
+			group_info->online_no--;
+		}
+
+
+#ifdef WIN32
+		char online[30];
+		_snprintf(online, sizeof(online) - 1, "(%d/%d)", group_info
+				->online_no, groupItem->childCount());
+		QString groupShowName = group_info->groupName + online;
+#else
+		char *online = NULL;
+		asprintf(&online, "(%d/%d)", group_info->online_no, groupItem
+				->childCount());
+		QString groupShowName = group_info->groupName + online;
+		if (online)
+		{
+			free(online);
+		}
+#endif
+
+		groupItem->setText(0, groupShowName);
+	}
 }
 
 void BuddyOpt::SaveRecentlyContactAccountToDB()
