@@ -59,6 +59,7 @@ class BuddyOpt: public QObject
                 int group);
 
         void addAccountToRecentlyContactGroup(const Fetion_Account *account);
+        void adjustRecentlyContactGroupNum(QTreeWidgetItem *groupItem);
         void delAccountRecentlyContactGroup(qlonglong uid);
         void updateAccountInfo_RecentlyContactGroup(const Fetion_Account *account);
 		void SaveRecentlyContactAccountToDB();
