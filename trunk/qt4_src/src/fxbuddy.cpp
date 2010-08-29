@@ -975,6 +975,68 @@ void BuddyOpt::addAccountToRecentlyContactGroup(const Fetion_Account *account)
 
     if (showname)
         free(showname);
+
+	/* add just the pos due to addAccountToGroup will always
+	 * put the offline user under online */
+    accountItem = findAccountItemFromGroup(groupItem, account);
+	if (accountItem) {
+		groupItem->removeChild(accountItem);
+		groupItem->insertChild(0, accountItem);
+	}
+}
+
+void BuddyOpt::delAccountRecentlyContactGroup(qlonglong uid)
+{
+    int group_no = recently_contact_group_no;
+    const Fetion_Account *account = fx_get_account_by_id(uid);
+    if (!account)
+    {
+        return ;
+    }
+
+	QTreeWidgetItem *groupItem = findGroupItemByID(group_no);
+    if (!groupItem)
+        return;
+
+    QTreeWidgetItem *accountItem = findAccountItemFromGroup(groupItem, account);
+	if (!accountItem)
+		return;
+
+    groupItem->removeChild(accountItem);
+
+    {
+        #if MS_VC6
+            Group_Info *group_info = (Group_Info*)(groupItem->data(0, Qt
+                                      ::UserRole).toUInt());
+        #else
+            Group_Info *group_info = groupItem->data(0, Qt::UserRole).value <
+                Group_Info * > ();
+        #endif
+        if (!group_info)
+            return ;
+
+        if (fx_is_on_line_by_account(account))
+        {
+            group_info->online_no--;
+        }
+
+        #ifdef WIN32
+            char online[30];
+            _snprintf(online, sizeof(online) - 1, "(%d/%d)", group_info
+                      ->online_no, groupItem->childCount());
+            QString groupShowName = group_info->groupName + online;
+        #else
+            char *online = NULL;
+            asprintf(&online, "(%d/%d)", group_info->online_no, groupItem
+                     ->childCount());
+            QString groupShowName = group_info->groupName + online;
+            if (online)
+            {
+                free(online);
+            }
+        #endif
+        groupItem->setText(0, groupShowName);
+    }
 }
 
 void BuddyOpt::updateAccountInfo_RecentlyContactGroup(const Fetion_Account *account)

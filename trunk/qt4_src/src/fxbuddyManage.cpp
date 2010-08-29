@@ -850,6 +850,7 @@ void BuddyMge::slot_add_buddy(int, unsigned long, qlonglong id)
 void BuddyMge::slot_del_buddy(int, unsigned long, qlonglong id)
 {
     buddyopt->delAccount(id);
+    buddyopt->delAccountRecentlyContactGroup(id);
 }
 
 /**************************************************************************/
