@@ -482,6 +482,7 @@ void FxMainWindow::relogin_fetion()
     if (isHaveTray)
     {
         trayIcon->setContextMenu(reloginTrayMenu);
+        trayIcon->setToolTip(tr("libfetion auto relogin..."));
     }
 
     this->hide();
@@ -531,6 +532,18 @@ void FxMainWindow::slots_Relogin_Event(int message)
             {
                 trayIcon->setContextMenu(trayIconMenu);
                 trayIcon->setIcon(getSysTrayIcon(fx_get_user_state()));
+#if WIN32
+				trayIcon->setToolTip(
+						QString::fromUtf8(fx_get_usr_show_name()) + " Win Fetion");
+#else
+#ifdef Q_OS_MAC
+				trayIcon->setToolTip(
+						QString::fromUtf8(fx_get_usr_show_name()) + " Mac Fetion");
+#else
+				trayIcon->setToolTip(
+						QString::fromUtf8(fx_get_usr_show_name()) + " Linux Fetion");
+#endif
+#endif
             }
             if (reloginTimer.isActive())
             {
