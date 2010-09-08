@@ -1114,12 +1114,12 @@ background-color:rgb(246,243,243);
         <translation type="obsolete">Linux Fetion</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="1565"/>
+        <location filename="../src/fxmainwindow.cpp" line="1578"/>
         <source>About Menu</source>
         <translation>About Menu</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="1567"/>
+        <location filename="../src/fxmainwindow.cpp" line="1580"/>
         <source>The &lt;b&gt;Menu&lt;/b&gt; example shows how to create menu-bar menus and context menus.</source>
         <translation>The &lt;b&gt;Menu&lt;/b&gt; example shows how to create menu-bar menus and context menus.</translation>
     </message>
@@ -1129,12 +1129,12 @@ background-color:rgb(246,243,243);
         <translation type="obsolete">退出程序</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="1184"/>
+        <location filename="../src/fxmainwindow.cpp" line="1197"/>
         <source>Ctrl+Q</source>
         <translation>Ctrl+Q</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="1185"/>
+        <location filename="../src/fxmainwindow.cpp" line="1198"/>
         <source>Exit the application</source>
         <translation>退出程序</translation>
     </message>
@@ -1144,7 +1144,7 @@ background-color:rgb(246,243,243);
         <translation type="obsolete">&amp;About</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="523"/>
+        <location filename="../src/fxmainwindow.cpp" line="524"/>
         <source>connect break off</source>
         <translation>连接中断</translation>
     </message>
@@ -1154,12 +1154,12 @@ background-color:rgb(246,243,243);
         <translation type="obsolete">与服务器断开连接，请重新登录libfetion</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="994"/>
+        <location filename="../src/fxmainwindow.cpp" line="1007"/>
         <source>relogin</source>
         <translation>重复登录</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="995"/>
+        <location filename="../src/fxmainwindow.cpp" line="1008"/>
         <source>you have login in other pc, libfetion will quit</source>
         <translation>你已经在其它终端登录fetion，libfetion将退出</translation>
     </message>
@@ -1194,12 +1194,12 @@ background-color:rgb(246,243,243);
         <translation type="obsolete">删除联系人</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="1696"/>
+        <location filename="../src/fxmainwindow.cpp" line="1709"/>
         <source>LibFetion</source>
         <translation>LibFetion</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="1172"/>
+        <location filename="../src/fxmainwindow.cpp" line="1185"/>
         <source>send sms to self</source>
         <translation>给自己发短信</translation>
     </message>
@@ -1229,37 +1229,37 @@ background-color:rgb(246,243,243);
         <translation type="obsolete">确定删除联系人</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="1127"/>
+        <location filename="../src/fxmainwindow.cpp" line="1140"/>
         <source>online</source>
         <translation>在线</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="1132"/>
+        <location filename="../src/fxmainwindow.cpp" line="1145"/>
         <source>offline</source>
         <translation>隐身</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="1137"/>
+        <location filename="../src/fxmainwindow.cpp" line="1150"/>
         <source>busy</source>
         <translation>繁忙</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="1142"/>
+        <location filename="../src/fxmainwindow.cpp" line="1155"/>
         <source>away</source>
         <translation>离开</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="1122"/>
+        <location filename="../src/fxmainwindow.cpp" line="1135"/>
         <source>schedule sms</source>
         <translation>定时短信</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="1191"/>
+        <location filename="../src/fxmainwindow.cpp" line="1204"/>
         <source>personalInfo</source>
         <translation>查看个人信息</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="1336"/>
+        <location filename="../src/fxmainwindow.cpp" line="1349"/>
         <source>change online status</source>
         <translation>更改在线状态</translation>
     </message>
@@ -1284,7 +1284,7 @@ background-color:rgb(246,243,243);
         <translation type="obsolete">请输入联系人本地名称</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="1183"/>
+        <location filename="../src/fxmainwindow.cpp" line="1196"/>
         <source>Exit</source>
         <translation>退出程序</translation>
     </message>
@@ -1354,7 +1354,7 @@ background-color:rgb(246,243,243);
         <translation type="obsolete">加入黑名单</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="1166"/>
+        <location filename="../src/fxmainwindow.cpp" line="1179"/>
         <source>add friend</source>
         <translation>添加好友</translation>
     </message>
@@ -1449,17 +1449,17 @@ background-color:rgb(246,243,243);
         <translation type="obsolete">群公告:</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="1719"/>
+        <location filename="../src/fxmainwindow.cpp" line="1732"/>
         <source>About LibFetion</source>
         <translation>关于 LibFetion</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="1717"/>
+        <location filename="../src/fxmainwindow.cpp" line="1730"/>
         <source>&lt;br&gt;This application is based on LibFetion library to writing, for more infomation access&lt;a href=&quot;http://www.libfetion.cn&quot;&gt; www.libfetion.cn &lt;/a&gt; &lt;br&gt;Copyright @ 2009 &lt;b&gt; &lt;a href=&quot;mailto:dedodong@163.com&quot;&gt;DDD&lt;/a&gt; (dedodong@163.com)&lt;/b&gt;. All Rights reserved.</source>
         <translation> &lt;br&gt;本应用程序基于LibFetion库编写, 了解更多请访问&lt;a href=&quot;http://www.libfetion.org&quot;&gt; www.libfetion.org &lt;/a&gt;&lt;br&gt;Copyright @ 2008-2010 &lt;b&gt; &lt;a href=&quot;mailto:dedodong@163.com&quot;&gt;DDD&lt;/a&gt; (dedodong@163.com)&lt;/b&gt;.&lt;br&gt; All Rights Reserved.</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="1741"/>
+        <location filename="../src/fxmainwindow.cpp" line="1754"/>
         <source>About CHINA Mobile</source>
         <translation>关于中国移动飞信</translation>
     </message>
@@ -1469,22 +1469,22 @@ background-color:rgb(246,243,243);
         <translation type="obsolete">&lt;a href=&quot;http://www.fetion.com.cn&quot;&gt;中国移动飞信&lt;/a&gt;是中国移动推出的“综合通信服务”，即融合语音（IVR）、GPRS、短信等多种通信方式，覆盖三种不同形态（完全实时、准实时和非实时）的客户通信需求，实现互联网和移动网间的无缝通信服务。&lt;br&gt; 飞信不但可以免费从PC给发手机短信，而且不受任何限制，能够随时随地与好友开始语聊，并享受超低语聊资费。&lt;br&gt;飞信实现无缝链接的多端信息接收，MP3、图片和普通OFFICE文件都能随时随地任意传输，让您随时随地都可与好友保持畅快有效的沟通，工作效率高，快乐齐分享！&lt;br&gt;飞信还具备防骚扰功能，只有对方被您授权为好友时，才能与您进行通话和短信，安全又方便。</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="1209"/>
+        <location filename="../src/fxmainwindow.cpp" line="1222"/>
         <source>aboutLibFetion</source>
         <translation>关于LibFetion</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="1215"/>
+        <location filename="../src/fxmainwindow.cpp" line="1228"/>
         <source>aboutChinaMobile</source>
         <translation>关于中国移动飞信</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="1742"/>
+        <location filename="../src/fxmainwindow.cpp" line="1755"/>
         <source>&lt;a href=&quot;http://www.fetion.com.cn&quot;&gt; China Mobile Fetion&lt;/a&gt;China Mobile Fetion introduce</source>
         <translation>&lt;a href=&quot;http://www.fetion.com.cn&quot;&gt;中国移动飞信&lt;/a&gt;是中国移动推出的“综合通信服务“，可以免费从PC给发手机短信，而且不受任何限制，实现互联网和移动网间的无缝通信服务</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="1230"/>
+        <location filename="../src/fxmainwindow.cpp" line="1243"/>
         <source>autologin</source>
         <translation>记住密码</translation>
     </message>
@@ -1504,7 +1504,7 @@ background-color:rgb(246,243,243);
         <translation type="obsolete">移动到组</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="1234"/>
+        <location filename="../src/fxmainwindow.cpp" line="1247"/>
         <source>mute</source>
         <translation>静音</translation>
     </message>
@@ -1529,9 +1529,9 @@ background-color:rgb(246,243,243);
         <translation type="obsolete">系统消息</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="1689"/>
+        <location filename="../src/fxmainwindow.cpp" line="1702"/>
         <source>LibFetion Have New Version,access http://www.libfetion.cn for more infomation</source>
-        <translation type="unfinished">LibFetion有新版本啦,访问 http://www.libfetion.org 了解更多信息</translation>
+        <translation>LibFetion有新版本啦,访问 http://www.libfetion.org 了解更多信息</translation>
     </message>
     <message>
         <location filename="src/fxmainwindow.cpp" line="1660"/>
@@ -1549,87 +1549,87 @@ background-color:rgb(246,243,243);
         <translation type="obsolete">重登录成功</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="524"/>
+        <location filename="../src/fxmainwindow.cpp" line="525"/>
         <source>disconnect from fetion server, will relogin fetion</source>
         <translation>与服务器断开联系，将自动重登录</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="1577"/>
+        <location filename="../src/fxmainwindow.cpp" line="1590"/>
         <source>setImpresa</source>
         <translation>个人心情</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="1578"/>
+        <location filename="../src/fxmainwindow.cpp" line="1591"/>
         <source>please input newImpresa</source>
         <translation>设置心情短语</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="1261"/>
+        <location filename="../src/fxmainwindow.cpp" line="1274"/>
         <source>autoshowmsg</source>
         <translation>弹出消息窗口</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="1291"/>
+        <location filename="../src/fxmainwindow.cpp" line="1304"/>
         <source>moresettings</source>
         <translation>更多设置</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="1347"/>
+        <location filename="../src/fxmainwindow.cpp" line="1360"/>
         <source>send sms</source>
         <translation>发送短信</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="1782"/>
+        <location filename="../src/fxmainwindow.cpp" line="1795"/>
         <source>saveMsgHistroy</source>
         <translation>导出消息历史记录</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="1814"/>
+        <location filename="../src/fxmainwindow.cpp" line="1827"/>
         <source>please input password</source>
         <translation>请输入密码</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="1784"/>
+        <location filename="../src/fxmainwindow.cpp" line="1797"/>
         <source>Text Files (*.htm)</source>
         <translation>Text Files (*.htm)</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="1792"/>
+        <location filename="../src/fxmainwindow.cpp" line="1805"/>
         <source>save file error</source>
         <translation>保存文件错误</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="1793"/>
+        <location filename="../src/fxmainwindow.cpp" line="1806"/>
         <source>the path of file can&apos;t write</source>
         <translation>你选择的目录不可写</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="1826"/>
+        <location filename="../src/fxmainwindow.cpp" line="1839"/>
         <source>error</source>
         <translation>LibFetion错误</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="1826"/>
+        <location filename="../src/fxmainwindow.cpp" line="1839"/>
         <source>the password error</source>
         <translation>你输入的密码错误</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="1813"/>
+        <location filename="../src/fxmainwindow.cpp" line="1826"/>
         <source>cleanMsgHistroy</source>
         <translation>删除消息历史记录</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="1279"/>
+        <location filename="../src/fxmainwindow.cpp" line="1292"/>
         <source>savemsghistroy</source>
         <translation>导出消息历史记录</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="1285"/>
+        <location filename="../src/fxmainwindow.cpp" line="1298"/>
         <source>cleanmsghistroy</source>
         <translation>删除消息历史记录</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="1365"/>
+        <location filename="../src/fxmainwindow.cpp" line="1378"/>
         <source>msghistroy</source>
         <translation>消息历史记录</translation>
     </message>
@@ -1639,12 +1639,12 @@ background-color:rgb(246,243,243);
         <translation type="obsolete"> &lt;br&gt;本应用程序基于LibFetion库编写, 了解更多请访问&lt;a href=&quot;http://www.libfetion.cn&quot;&gt; www.libfetion.cn &lt;/a&gt;&lt;br&gt;Copyright @ 2008 &lt;b&gt; &lt;a href=&quot;mailto:dedodong@163.com&quot;&gt;DDD&lt;/a&gt; (dedodong@163.com)&lt;/b&gt;.&lt;br&gt; All Rights Reserved. </translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="1716"/>
+        <location filename="../src/fxmainwindow.cpp" line="1729"/>
         <source>Application Current Version</source>
         <translation>当前版本 </translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="1092"/>
+        <location filename="../src/fxmainwindow.cpp" line="1105"/>
         <source>search friends...</source>
         <translation>找人...</translation>
     </message>
@@ -1664,37 +1664,37 @@ background-color:rgb(246,243,243);
         <translation type="obsolete">支持闪屏</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="1274"/>
+        <location filename="../src/fxmainwindow.cpp" line="1287"/>
         <source>catsms</source>
         <translation>支持长短信</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="1147"/>
+        <location filename="../src/fxmainwindow.cpp" line="1160"/>
         <source>accept SMS</source>
         <translation>注销登录后，通过短信接收信息</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="1150"/>
+        <location filename="../src/fxmainwindow.cpp" line="1163"/>
         <source>refuse SMS</source>
         <translation>不接收短信</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="1693"/>
+        <location filename="../src/fxmainwindow.cpp" line="1706"/>
         <source>the current Version is the new Version</source>
         <translation>当前版本已经是最新版本</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="1197"/>
+        <location filename="../src/fxmainwindow.cpp" line="1210"/>
         <source>checkNewVersion</source>
         <translation>检测新版本</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="1203"/>
+        <location filename="../src/fxmainwindow.cpp" line="1216"/>
         <source>reportBugAct</source>
         <translation>意见反馈</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="1178"/>
+        <location filename="../src/fxmainwindow.cpp" line="1191"/>
         <source>send group sms</source>
         <translation>群发短信</translation>
     </message>
@@ -1704,7 +1704,7 @@ background-color:rgb(246,243,243);
         <translation type="obsolete">更多设置</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="1361"/>
+        <location filename="../src/fxmainwindow.cpp" line="1374"/>
         <source>skins</source>
         <translation>更换皮肤</translation>
     </message>
@@ -1719,39 +1719,44 @@ background-color:rgb(246,243,243);
         <translation type="obsolete">定时短信</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="1305"/>
+        <location filename="../src/fxmainwindow.cpp" line="1318"/>
         <source>buddy</source>
         <translation>操作</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="1306"/>
+        <location filename="../src/fxmainwindow.cpp" line="1319"/>
         <source>settings</source>
         <translation>设置</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="1307"/>
+        <location filename="../src/fxmainwindow.cpp" line="1320"/>
         <source>about</source>
         <translation>帮助</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="663"/>
+        <location filename="../src/fxmainwindow.cpp" line="676"/>
         <source>LibFetion Have New Version,click to download the new version...</source>
         <translation type="unfinished">LibFetion 有新版本拉，&lt;a href=&quot;http://www.libfetion.org/demoapp_download.html&quot;&gt;点击下载 &lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="1722"/>
+        <location filename="../src/fxmainwindow.cpp" line="1735"/>
         <source>Author Info</source>
         <translation>作者信息</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="850"/>
+        <location filename="../src/fxmainwindow.cpp" line="863"/>
         <source>Lib Changing SKins</source>
         <translation>更改皮肤</translation>
     </message>
     <message>
-        <location filename="../src/fxmainwindow.cpp" line="851"/>
+        <location filename="../src/fxmainwindow.cpp" line="864"/>
         <source>Restart APP to apply the new skins</source>
         <translation>请重启程序让新皮肤生效</translation>
+    </message>
+    <message>
+        <location filename="../src/fxmainwindow.cpp" line="485"/>
+        <source>libfetion auto relogin...</source>
+        <translation>自动重登录中...</translation>
     </message>
 </context>
 <context>
@@ -2788,11 +2793,6 @@ background-color:rgb(246,243,243);
         <location filename="../src/fxloginwindow.cpp" line="88"/>
         <source>cancel login</source>
         <translation>取消登录</translation>
-    </message>
-    <message>
-        <location filename="../src/fxloginwindow.cpp" line="261"/>
-        <source></source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
