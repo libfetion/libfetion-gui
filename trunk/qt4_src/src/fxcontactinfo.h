@@ -40,7 +40,7 @@ class FxContactInfo : public QDialog, public Ui::ContactInfo
         void chang_localname();
 
     private:
-        QString htmlStyledValueString(QString data = NULL);
+        QString htmlStyledValueString(QString data = "");
         QString htmlStyledNewline();
 
     private:
